@@ -32,7 +32,7 @@
 
         .newspaper {
             background: var(--paper);
-            max-width: 920px;
+            max-width: 720px;
             width: 100%;
             box-shadow:
                 2px 2px 0 var(--paper-edge),
@@ -45,8 +45,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1;
         }
@@ -61,7 +60,6 @@
         .masthead-top {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
             font-family: 'IM Fell English', serif;
             font-size: 0.7rem;
             color: var(--ink-faded);
@@ -70,16 +68,15 @@
 
         .masthead h1 {
             font-family: 'UnifrakturMaguntia', cursive;
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            font-size: clamp(2.4rem, 7vw, 3.8rem);
             font-weight: 400;
             line-height: 1;
-            color: var(--ink);
         }
 
         .masthead-motto {
             font-family: 'IM Fell English', serif;
             font-style: italic;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--ink-faded);
             margin-top: 0.15rem;
         }
@@ -87,309 +84,146 @@
         .masthead-bar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             font-family: 'Old Standard TT', serif;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: var(--ink-faded);
             margin-top: 0.4rem;
             padding-top: 0.4rem;
             border-top: 1px solid var(--rule);
         }
 
-        /* ─── CONTENT ─── */
-        .content {
-            padding: 1rem 1.5rem 1.5rem;
+        .masthead-bar a { color: var(--red); text-decoration: none; }
+        .masthead-bar a:hover { text-decoration: underline; }
+
+        /* ─── EDITIONS LIST ─── */
+        .editions {
+            padding: 0 1.5rem 1rem;
         }
 
-        /* ─── LEAD ─── */
-        .lead {
-            padding-bottom: 1.2rem;
-            margin-bottom: 1.2rem;
+        /* ─── SINGLE EDITION ─── */
+        .edition {
             border-bottom: 3px double var(--rule);
+            padding: 1.2rem 0 1rem;
         }
 
-        .lead-kicker {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--red);
-            text-align: center;
-            margin-bottom: 0.3rem;
+        .edition:last-child { border-bottom: none; }
+
+        .edition-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.6rem;
         }
 
-        .lead-headline {
+        .edition-date {
             font-family: 'Old Standard TT', serif;
             font-weight: 700;
-            font-size: clamp(1.7rem, 4.5vw, 2.5rem);
-            line-height: 1.12;
-            text-align: center;
-            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
 
-        .lead-deck {
+        .edition-link {
+            font-family: 'IM Fell English', serif;
+            font-size: 0.72rem;
+            font-style: italic;
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .edition-link:hover { text-decoration: underline; }
+
+        .edition-count {
+            font-family: 'IM Fell English', serif;
+            font-size: 0.68rem;
+            color: var(--ink-faded);
+            font-style: italic;
+        }
+
+        /* Lead headline */
+        .edition-lead {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+            border-bottom: 1px solid var(--rule-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .edition-lead a {
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .edition-lead a:hover { color: var(--red); }
+
+        .edition-lead-deck {
             font-family: 'IM Fell English', serif;
             font-style: italic;
-            font-size: 1.05rem;
-            text-align: center;
-            color: var(--ink-light);
-            line-height: 1.5;
-            max-width: 650px;
-            margin: 0 auto 0.8rem;
-        }
-
-        .lead-columns {
-            column-count: 2;
-            column-gap: 1.5rem;
-            column-rule: 1px solid var(--rule-light);
-            font-family: 'Libre Baskerville', serif;
             font-size: 0.82rem;
-            line-height: 1.7;
-            text-align: justify;
-            hyphens: auto;
+            color: var(--ink-light);
+            line-height: 1.45;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--rule-light);
         }
 
-        .read-more {
-            font-family: 'Old Standard TT', serif;
-            font-style: italic;
-            font-size: 0.75rem;
-        }
-
-        .read-more a {
-            color: var(--red);
-            text-decoration: none;
-        }
-
-        .read-more a:hover { text-decoration: underline; }
-
-        @media (max-width: 580px) {
-            .lead-columns { column-count: 1; }
-        }
-
-        /* ─── ARTICLE ROW ─── */
-        .article-row {
+        /* Story list */
+        .edition-stories {
+            list-style: none;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            margin-bottom: 1.2rem;
+            gap: 0.1rem 1.2rem;
         }
 
-        @media (max-width: 580px) {
-            .article-row { grid-template-columns: 1fr; }
-            .article-item { border-right: none !important; }
+        @media (max-width: 500px) {
+            .edition-stories { grid-template-columns: 1fr; }
         }
 
-        .article-item {
-            padding: 1rem 1.2rem;
-            border-top: 2px solid var(--ink);
-        }
-
-        .article-item:nth-child(odd) {
-            border-right: 1px solid var(--rule-light);
-            padding-left: 0;
-        }
-
-        .article-item:nth-child(even) {
-            padding-right: 0;
-        }
-
-        @media (max-width: 580px) {
-            .article-item:nth-child(odd) { padding-left: 0; padding-right: 0; }
-            .article-item:nth-child(even) { padding-left: 0; padding-right: 0; }
-        }
-
-        .article-kicker {
+        .edition-stories li {
             font-family: 'Old Standard TT', serif;
-            font-size: 0.58rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--red);
-            margin-bottom: 0.15rem;
+            font-size: 0.8rem;
+            line-height: 1.35;
+            padding: 0.25rem 0 0.25rem 0.9rem;
+            position: relative;
         }
 
-        .article-headline {
-            font-family: 'Old Standard TT', serif;
-            font-weight: 700;
-            font-size: 1.15rem;
-            line-height: 1.2;
-            margin-bottom: 0.4rem;
+        .edition-stories li::before {
+            content: '\2014';
+            position: absolute;
+            left: 0;
+            color: var(--rule);
+            font-size: 0.7rem;
         }
 
-        .article-text {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 0.78rem;
-            line-height: 1.65;
+        .edition-stories a {
             color: var(--ink-light);
-        }
-
-        .article-text a {
-            color: var(--red);
             text-decoration: none;
-            font-style: italic;
         }
 
-        .article-text a:hover { text-decoration: underline; }
+        .edition-stories a:hover { color: var(--red); }
 
-        /* ─── FULL WIDTH ARTICLE ─── */
-        .article-full {
-            padding: 1rem 0;
-            border-top: 2px solid var(--ink);
-            margin-bottom: 1.2rem;
-        }
-
-        .article-full .article-headline {
-            font-size: 1.3rem;
-        }
-
-        .article-full .article-text {
-            column-count: 2;
-            column-gap: 1.5rem;
-            column-rule: 1px solid var(--rule-light);
-        }
-
-        @media (max-width: 580px) {
-            .article-full .article-text { column-count: 1; }
-        }
-
-        /* ─── BRIEFS ─── */
-        .briefs-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.6rem;
+        .edition-stories .cat {
+            font-size: 0.55rem;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--ink-faded);
-            text-align: center;
-            padding: 0.3rem 0;
-            border-top: 2px solid var(--ink);
-            border-bottom: 1px solid var(--rule);
-            margin-bottom: 0;
-        }
-
-        .briefs {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            border-bottom: 3px double var(--ink);
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 580px) {
-            .briefs { grid-template-columns: 1fr; }
-            .brief { border-right: none !important; border-bottom: 1px solid var(--rule-light); }
-            .brief:last-child { border-bottom: none; }
-        }
-
-        .brief {
-            padding: 0.8rem 0.9rem;
-            border-right: 1px solid var(--rule-light);
-        }
-
-        .brief:last-child { border-right: none; }
-
-        .brief-num {
-            font-family: 'Old Standard TT', serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            line-height: 1;
-            color: var(--rule-light);
-            float: left;
-            margin-right: 0.5rem;
-            margin-top: -0.1rem;
-        }
-
-        .brief-headline {
-            font-family: 'Old Standard TT', serif;
-            font-weight: 700;
-            font-size: 0.88rem;
-            line-height: 1.25;
-            margin-bottom: 0.3rem;
-        }
-
-        .brief-text {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 0.72rem;
-            line-height: 1.55;
-            color: var(--ink-light);
-            clear: both;
-        }
-
-        .brief-text a {
+            letter-spacing: 0.12em;
             color: var(--red);
-            text-decoration: none;
-            font-style: italic;
         }
-
-        .brief-text a:hover { text-decoration: underline; }
 
         /* ─── FOOTER ─── */
         .paper-footer {
-            padding: 0.6rem 1.5rem 1rem;
+            border-top: 2px solid var(--ink);
+            padding: 0.6rem 1.5rem 0.8rem;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
             font-family: 'IM Fell English', serif;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             color: var(--ink-faded);
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
-        .paper-footer a {
-            color: var(--red);
-            text-decoration: none;
-        }
-
+        .paper-footer a { color: var(--red); text-decoration: none; }
         .paper-footer a:hover { text-decoration: underline; }
-
-        /* ─── EDITION DIVIDER ─── */
-        .edition-divider {
-            text-align: center;
-            padding: 1.5rem 0;
-            position: relative;
-        }
-
-        .edition-divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            background: var(--rule);
-        }
-
-        .edition-divider span {
-            position: relative;
-            background: var(--paper);
-            padding: 0 1rem;
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-faded);
-        }
-
-        .edition-date-header {
-            font-family: 'Old Standard TT', serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--ink);
-            margin-bottom: 0.3rem;
-            padding-bottom: 0.3rem;
-            border-bottom: 2px solid var(--ink);
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .edition-date-header a {
-            font-family: 'IM Fell English', serif;
-            font-size: 0.75rem;
-            font-weight: 400;
-            font-style: italic;
-            color: var(--red);
-            text-decoration: none;
-        }
-
-        .edition-date-header a:hover { text-decoration: underline; }
 
         a { color: inherit; }
 
@@ -411,189 +245,74 @@
         <h1>AI News Magazin</h1>
         <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
         <div class="masthead-bar">
-            <span>3 Ausgaben</span>
-            <span>14 Quellen</span>
-            <span><a href="about.html" style="color:var(--red);text-decoration:none">Wie wir arbeiten &rarr;</a></span>
+            <span>3 Ausgaben &middot; 14 Quellen</span>
+            <a href="about.html">Wie wir arbeiten &rarr;</a>
         </div>
     </header>
 
-    <div class="content">
+    <div class="editions">
 
-        <div class="edition-date-header">
-            <span>Dienstag, 18. M&auml;rz 2026</span>
-            <a href="editions/2026-03-18.html">Vollausgabe &rarr;</a>
+        <!-- ═══ 18. MÄRZ ═══ -->
+        <div class="edition">
+            <div class="edition-head">
+                <span class="edition-date">Dienstag, 18. M&auml;rz 2026</span>
+                <a href="editions/2026-03-18.html" class="edition-link">Vollausgabe &rarr;</a>
+            </div>
+            <div class="edition-lead"><a href="editions/2026-03-18.html#art-1">Pentagon erkl&auml;rt Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</a></div>
+            <div class="edition-lead-deck">Verteidigungsministerium bef&uuml;rchtet, KI-Firma k&ouml;nnte Technologie in Kampfoperationen abschalten &mdash; erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft</div>
+            <ul class="edition-stories">
+                <li><span class="cat">Politik</span> <a href="editions/2026-03-18.html#art-2">Pentagon plant KI-Training mit Geheimdaten</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-18.html#art-3">Mistral lanciert Forge f&uuml;r Enterprise-KI</a></li>
+                <li><span class="cat">Tech</span> <a href="editions/2026-03-18.html#art-4">NVIDIA DLSS 5: &bdquo;M&uuml;ll-KI-Filter&ldquo;</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-18.html#art-5">Google &ouml;ffnet Personal Intelligence</a></li>
+                <li><span class="cat">Forschung</span> <a href="editions/2026-03-18.html#art-6">DeepMind stellt AGI-Messframework vor</a></li>
+                <li><span class="cat">Community</span> <a href="editions/2026-03-18.html#art-7">Garry Tans Claude-Setup geht viral</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-18.html#art-8">Mastercard baut Foundation-Modell</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-18.html#art-9">Microsoft &uuml;bernimmt Cove-Team</a></li>
+            </ul>
         </div>
 
-        <!-- ═══ LEAD ═══ -->
-        <article class="lead">
-            <div class="lead-kicker">Politik &amp; Regulierung</div>
-            <h2 class="lead-headline">Pentagon erkl&auml;rt Anthropic zum<br>&bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</h2>
-            <p class="lead-deck">Verteidigungsministerium bef&uuml;rchtet, KI-Firma k&ouml;nnte Technologie in Kampfoperationen abschalten &mdash; erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft</p>
-            <div class="lead-columns">
-                <p><b>WASHINGTON.</b> In einer beispiellosen Eskalation hat das US-Verteidigungsministerium erkl&auml;rt, Anthropic stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien von CEO Dario Amodei: keine Massen&uuml;berwachung von US-B&uuml;rgern, keine autonomen Waffen.</p>
-                <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic unzuverl&auml;ssig. Das Unternehmen k&ouml;nnte seine Technologie mitten in Kampfoperationen deaktivieren. Die Einstufung durch Minister Hegseth ist historisch ohne Pr&auml;zedenz. <span class="read-more"><a href="editions/2026-03-18.html#art-1">Weiter auf S.&thinsp;1 &rarr;</a></span></p>
+        <!-- ═══ 17. MÄRZ ═══ -->
+        <div class="edition">
+            <div class="edition-head">
+                <span class="edition-date">Montag, 17. M&auml;rz 2026</span>
+                <a href="editions/2026-03-17.html" class="edition-link">Vollausgabe &rarr;</a>
             </div>
-        </article>
-
-        <!-- ═══ ROW 1: Politik + Industrie ═══ -->
-        <div class="article-row">
-            <article class="article-item">
-                <div class="article-kicker">Politik &amp; Regulierung</div>
-                <h3 class="article-headline">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h3>
-                <p class="article-text"><b>WASHINGTON.</b> Sichere Rechenzentren sollen KI-Firmen erstmals erlauben, Modelle direkt mit Geheimdaten zu trainieren. Vereinbarungen mit OpenAI und xAI bestehen bereits. Senatorin Warren fordert eine &Uuml;berpr&uuml;fung. <a href="editions/2026-03-18.html#art-2">Weiter &rarr;</a></p>
-            </article>
-            <article class="article-item">
-                <div class="article-kicker">Industrie</div>
-                <h3 class="article-headline">Mistral lanciert Forge &mdash; ma&szlig;geschneiderte KI f&uuml;r Unternehmen</h3>
-                <p class="article-text"><b>SAN JOSE.</b> Auf der Nvidia GTC vorgestellt: Forge erlaubt vollst&auml;ndiges Training eigener Modelle statt Feintuning. Partner: ASML, Ericsson, ESA. CEO Mensch peilt 1&thinsp;Mrd. Dollar Umsatz an. <a href="editions/2026-03-18.html#art-3">Weiter &rarr;</a></p>
-            </article>
+            <div class="edition-lead"><a href="editions/2026-03-17.html#art-1">Pentagon plant KI-Training mit klassifizierten Geheimdaten</a></div>
+            <div class="edition-lead-deck">Sichere Rechenzentren sollen KI-Firmen erstmals erlauben, Modelle direkt mit Geheimdaten zu trainieren &mdash; Vereinbarungen mit OpenAI und xAI bestehen bereits</div>
+            <ul class="edition-stories">
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-17.html#art-2">Mistral lanciert Forge f&uuml;r Enterprise-KI</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-17.html#art-3">OpenAI ver&ouml;ffentlicht GPT-5.4 mini und nano</a></li>
+                <li><span class="cat">Industrie</span> <a href="editions/2026-03-17.html#art-4">Google &ouml;ffnet Personal Intelligence</a></li>
+                <li><span class="cat">Forschung</span> <a href="editions/2026-03-17.html#art-5">DeepMind stellt AGI-Messframework vor</a></li>
+                <li><span class="cat">Tech</span> <a href="editions/2026-03-17.html#art-6">DLSS 5: Erste Reaktionen vernichtend</a></li>
+                <li><span class="cat">Sicherheit</span> <a href="editions/2026-03-17.html#art-7">Sears legt 3,7 Mio. Chatbot-Gespr&auml;che offen</a></li>
+                <li><span class="cat">Community</span> <a href="editions/2026-03-17.html#art-8">Garry Tans Claude-Setup geht viral</a></li>
+            </ul>
         </div>
 
-        <!-- ═══ FULL WIDTH: DLSS 5 ═══ -->
-        <article class="article-full">
-            <div class="article-kicker">Technologie</div>
-            <h3 class="article-headline">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse: &bdquo;Das ist nur ein M&uuml;ll-KI-Filter&ldquo;</h3>
-            <div class="article-text">
-                <p><b>SAN JOSE.</b> Statt Frames zu optimieren, schreibt DLSS 5 sie komplett um &mdash; ein neuronales Rendering-Modell ersetzt Beleuchtung, Texturen und Materialien durch KI-generierte Alternativen. Spieler kritisieren k&uuml;nstlich versch&ouml;nerte Gesichter: ein 15-j&auml;hriger Hogwarts-Legacy-Charakter wirkt pl&ouml;tzlich erwachsen. &bdquo;Die Tiefe, der Kontrast, die W&auml;rme &mdash; alles ist weg&ldquo;, klagt ein Nutzer. Ein Respawn-Ingenieur spricht von einem &bdquo;&uuml;bertriebenen Airbrush-Filter&ldquo;. Jensen Huang kontert: Kritiker seien &bdquo;komplett falsch&ldquo;, Entwickler beh&auml;lten volle k&uuml;nstlerische Kontrolle. DLSS 5 ist inzwischen zur ergiebigen Meme-Quelle geworden. <a href="editions/2026-03-18.html#art-4">Weiter &rarr;</a></p>
+        <!-- ═══ 16. MÄRZ ═══ -->
+        <div class="edition">
+            <div class="edition-head">
+                <span class="edition-date">Sonntag, 16. M&auml;rz 2026</span>
+                <a href="editions/2026-03-16.html" class="edition-link">Vollausgabe &rarr;</a>
             </div>
-        </article>
-
-        <!-- ═══ ROW 2: Google + DeepMind ═══ -->
-        <div class="article-row">
-            <article class="article-item">
-                <div class="article-kicker">Industrie</div>
-                <h3 class="article-headline">Google &ouml;ffnet Personal Intelligence f&uuml;r alle US-Nutzer</h3>
-                <p class="article-text"><b>MOUNTAIN VIEW.</b> Im Januar noch Premium-Feature, jetzt kostenlos: Gemini greift auf Gmail, Photos und YouTube zu. Google spielt seinen &Ouml;kosystem-Vorteil aus. Strikt Opt-in, standardm&auml;&szlig;ig deaktiviert. <a href="editions/2026-03-18.html#art-5">Weiter &rarr;</a></p>
-            </article>
-            <article class="article-item">
-                <div class="article-kicker">Forschung</div>
-                <h3 class="article-headline">DeepMind stellt Framework zur Messung des AGI-Fortschritts vor</h3>
-                <p class="article-text"><b>LONDON.</b> Zehn kognitive Kernf&auml;higkeiten sollen AGI-Fortschritt messbar machen. Ein Kaggle-Hackathon mit $200.000 Preispool sucht Evaluierungen f&uuml;r die gr&ouml;&szlig;ten L&uuml;cken. <a href="editions/2026-03-18.html#art-6">Weiter &rarr;</a></p>
-            </article>
-        </div>
-
-        <!-- ═══ BRIEFS ═══ -->
-        <div class="briefs-label">Kurzmeldungen</div>
-
-        <div class="briefs">
-            <div class="brief">
-                <span class="brief-num">7</span>
-                <h4 class="brief-headline">Garry Tans Claude-Setup geht viral</h4>
-                <p class="brief-text">YC-CEO ver&ouml;ffentlicht &bdquo;gstack&ldquo; auf GitHub: 10 rollenbasierte KI-Skills. 20.000 Stars in wenigen Tagen. Ein CTO nennt es &bdquo;God Mode&ldquo; &mdash; Kritiker sehen Hype. <a href="editions/2026-03-18.html#art-7">S.&thinsp;7</a></p>
-            </div>
-            <div class="brief">
-                <span class="brief-num">8</span>
-                <h4 class="brief-headline">Mastercard baut Foundation-Modell</h4>
-                <p class="brief-text">Ein &bdquo;Large Tabular Model&ldquo; statt LLM: trainiert auf Milliarden Transaktionen f&uuml;r Betrugserkennung. Zeigt: Foundation Models gehen weit &uuml;ber Text hinaus. <a href="editions/2026-03-18.html#art-8">S.&thinsp;8</a></p>
-            </div>
-            <div class="brief">
-                <span class="brief-num">9</span>
-                <h4 class="brief-headline">Microsoft &uuml;bernimmt Cove-Team</h4>
-                <p class="brief-text">Acqui-Hire des Sequoia-finanzierten KI-Startups. Cove verwandelte Chats in visuelle Workspaces. Dienst endet 1.&thinsp;April. <a href="editions/2026-03-18.html#art-9">S.&thinsp;9</a></p>
-            </div>
-        </div>
-
-        <!-- ═══════════════════════════════════════ -->
-        <!-- ═══ 17. MÄRZ 2026 ═══ -->
-        <!-- ═══════════════════════════════════════ -->
-        <div class="edition-divider"><span>&Auml;ltere Ausgaben</span></div>
-
-        <div class="edition-date-header">
-            <span>Montag, 17. M&auml;rz 2026</span>
-            <a href="editions/2026-03-17.html">Vollausgabe &rarr;</a>
-        </div>
-
-        <article class="lead">
-            <div class="lead-kicker">Politik &amp; Regulierung</div>
-            <h2 class="lead-headline">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h2>
-            <p class="lead-deck">Sichere Rechenzentren sollen KI-Firmen erstmals erlauben, Modelle direkt mit Geheimdaten zu trainieren &mdash; Vereinbarungen mit OpenAI und xAI bestehen bereits</p>
-            <div class="lead-columns">
-                <p><b>WASHINGTON.</b> Das US-Verteidigungsministerium will einen entscheidenden Schritt weitergehen: KI-Unternehmen sollen milit&auml;rspezifische Versionen ihrer Modelle direkt mit klassifizierten Daten trainieren k&ouml;nnen. Bisher werden vortrainierte Modelle nur in sicheren Netzwerken betrieben.</p>
-                <p>Das Risiko: Wenn Geheimdaten in die Modellgewichte eingebettet werden, k&ouml;nnten sie theoretisch durch geschickte Abfragen extrahiert werden. Senatorin Warren fordert eine &Uuml;berpr&uuml;fung. <span class="read-more"><a href="editions/2026-03-17.html#art-1">Weiter &rarr;</a></span></p>
-            </div>
-        </article>
-
-        <div class="article-row">
-            <article class="article-item">
-                <div class="article-kicker">Industrie</div>
-                <h3 class="article-headline">Mistral lanciert Forge f&uuml;r Enterprise-KI</h3>
-                <p class="article-text"><b>SAN JOSE.</b> Auf der GTC vorgestellt: Forge erlaubt vollst&auml;ndiges Training eigener Modelle. Partner: ASML, Ericsson, ESA. CEO Mensch peilt 1&thinsp;Mrd. Dollar an. <a href="editions/2026-03-17.html#art-2">Weiter &rarr;</a></p>
-            </article>
-            <article class="article-item">
-                <div class="article-kicker">Industrie</div>
-                <h3 class="article-headline">OpenAI ver&ouml;ffentlicht GPT-5.4 mini und nano</h3>
-                <p class="article-text">Die neuen Small-Modelle bringen GPT-5.4-Leistung in schnellere Formate. Mini wird f&uuml;r kostenlose ChatGPT-Nutzer verf&uuml;gbar. Nano kostet $0,20/1M Input-Tokens. <a href="editions/2026-03-17.html#art-3">Weiter &rarr;</a></p>
-            </article>
-        </div>
-
-        <div class="briefs-label">Kurzmeldungen</div>
-        <div class="briefs">
-            <div class="brief">
-                <h4 class="brief-headline">Google &ouml;ffnet Personal Intelligence</h4>
-                <p class="brief-text">Gemini darf auf Gmail, Photos, YouTube zugreifen &mdash; kostenlos f&uuml;r alle US-Nutzer. <a href="editions/2026-03-17.html#art-4">S.&thinsp;4</a></p>
-            </div>
-            <div class="brief">
-                <h4 class="brief-headline">DeepMind misst AGI-Fortschritt</h4>
-                <p class="brief-text">Kognitives Framework mit 10 F&auml;higkeiten. Kaggle-Hackathon mit $200K Preispool. <a href="editions/2026-03-17.html#art-5">S.&thinsp;5</a></p>
-            </div>
-            <div class="brief">
-                <h4 class="brief-headline">Sears legt 3,7 Mio. Chatbot-Gespr&auml;che offen</h4>
-                <p class="brief-text">Ungesicherte Datenbanken mit Chat-Protokollen und Audiodateien im Netz. <a href="editions/2026-03-17.html#art-7">S.&thinsp;7</a></p>
-            </div>
-        </div>
-
-        <!-- ═══════════════════════════════════════ -->
-        <!-- ═══ 16. MÄRZ 2026 ═══ -->
-        <!-- ═══════════════════════════════════════ -->
-        <div class="edition-date-header" style="margin-top: 0.5rem;">
-            <span>Sonntag, 16. M&auml;rz 2026</span>
-            <a href="editions/2026-03-16.html">Vollausgabe &rarr;</a>
-        </div>
-
-        <article class="lead">
-            <div class="lead-kicker">Industrie</div>
-            <h2 class="lead-headline">NVIDIA enth&uuml;llt Vera Rubin &mdash;<br>und peilt eine Billion Dollar Umsatz an</h2>
-            <p class="lead-deck">Jensen Huang pr&auml;sentiert auf der GTC 2026 eine neue &Auml;ra der KI-Infrastruktur mit sieben neuen Chips und dem Anspruch, die Billionen-Dollar-Marke bei Bestellungen bis 2027 zu knacken</p>
-            <div class="lead-columns">
-                <p><b>SAN JOSE.</b> NVIDIA hat auf der GTC 2026 die Vera-Rubin-Plattform vorgestellt &mdash; sieben neue Chips, darunter die erste eigene CPU mit 88 Olympus-Kernen. Zehnmal mehr Leistung pro Watt als Grace Blackwell.</p>
-                <p>Jensen Huang erh&ouml;hte die Verkaufsprognose auf eine Billion Dollar bis 2027: &bdquo;KI ist endlich in der Lage, produktive Arbeit zu leisten. Der Wendepunkt der Inferenz ist erreicht.&ldquo; <span class="read-more"><a href="editions/2026-03-16.html#art-1">Weiter &rarr;</a></span></p>
-            </div>
-        </article>
-
-        <div class="article-row">
-            <article class="article-item">
-                <div class="article-kicker">Technologie</div>
-                <h3 class="article-headline">NVIDIA DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</h3>
-                <p class="article-text">Auf der GTC enth&uuml;llt: Ein KI-Modell, das Spielegrafik mit fotorealistischer Beleuchtung anreichert. Exklusiv f&uuml;r RTX 50. Erste Reaktionen sind gespalten. <a href="editions/2026-03-16.html#art-2">Weiter &rarr;</a></p>
-            </article>
-            <article class="article-item">
-                <div class="article-kicker">Politik &amp; Regulierung</div>
-                <h3 class="article-headline">Teenager verklagen xAI &mdash; Grok soll CSAM erzeugt haben</h3>
-                <p class="article-text">Drei Jugendliche aus Tennessee klagen: Groks Bildgenerator habe ihre Schulfotos in kinderpornografisches Material verwandelt. Sammelklage k&ouml;nnte Tausende umfassen. <a href="editions/2026-03-16.html#art-3">Weiter &rarr;</a></p>
-            </article>
-        </div>
-
-        <div class="briefs-label">Kurzmeldungen</div>
-        <div class="briefs">
-            <div class="brief">
-                <h4 class="brief-headline">Britannica verklagt OpenAI</h4>
-                <p class="brief-text">100.000 Artikel angeblich ohne Genehmigung zum Training genutzt. Neuer Vorwurf: Halluzinationen als Markenrechtsverletzung. <a href="editions/2026-03-16.html#art-4">S.&thinsp;4</a></p>
-            </div>
-            <div class="brief">
-                <h4 class="brief-headline">Warren hinterfragt xAI-Zugang</h4>
-                <p class="brief-text">Warum bekommt Musks xAI Zugang zu Geheimnetzwerken, w&auml;hrend Anthropic ausgeschlossen wird? <a href="editions/2026-03-16.html#art-5">S.&thinsp;5</a></p>
-            </div>
-            <div class="brief">
-                <h4 class="brief-headline">Netanyahu im Deepfake-Labyrinth</h4>
-                <p class="brief-text">Grok markiert echtes Video als &bdquo;100% Deepfake&ldquo;. Bizarre Authentizit&auml;tskrise um Israels Premier. <a href="editions/2026-03-16.html#art-6">S.&thinsp;6</a></p>
-            </div>
+            <div class="edition-lead"><a href="editions/2026-03-16.html#art-1">NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</a></div>
+            <div class="edition-lead-deck">Jensen Huang pr&auml;sentiert auf der GTC 2026 sieben neue Chips und erh&ouml;ht die Verkaufsprognose auf eine Billion Dollar bis 2027</div>
+            <ul class="edition-stories">
+                <li><span class="cat">Tech</span> <a href="editions/2026-03-16.html#art-2">DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</a></li>
+                <li><span class="cat">Politik</span> <a href="editions/2026-03-16.html#art-3">Teenager verklagen xAI &mdash; Grok soll CSAM erzeugt haben</a></li>
+                <li><span class="cat">Politik</span> <a href="editions/2026-03-16.html#art-4">Britannica und Merriam-Webster verklagen OpenAI</a></li>
+                <li><span class="cat">Politik</span> <a href="editions/2026-03-16.html#art-5">Warren fordert &Uuml;berpr&uuml;fung des xAI-Zugangs</a></li>
+                <li><span class="cat">Vermischtes</span> <a href="editions/2026-03-16.html#art-6">Netanyahu im Deepfake-Labyrinth</a></li>
+            </ul>
         </div>
 
     </div>
 
     <footer class="paper-footer">
         <span>&copy; 2026 AI News Magazin</span>
-        <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
+        <span style="font-style:italic">Recherchiert mit KI-Unterst&uuml;tzung</span>
         <a href="about.html">So funktioniert&rsquo;s</a>
     </footer>
 
