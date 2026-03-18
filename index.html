@@ -30,7 +30,6 @@
             padding: 1.5rem 0.5rem;
         }
 
-        /* ─── THE NEWSPAPER ─── */
         .newspaper {
             background: var(--paper);
             max-width: 920px;
@@ -42,7 +41,6 @@
             position: relative;
         }
 
-        /* Paper texture */
         .newspaper::before {
             content: '';
             position: absolute;
@@ -57,7 +55,7 @@
         .masthead {
             text-align: center;
             padding: 1.2rem 1.5rem 0.6rem;
-            border-bottom: 3px double var(--ink);
+            border-bottom: 4px double var(--ink);
         }
 
         .masthead-top {
@@ -76,7 +74,6 @@
             font-weight: 400;
             line-height: 1;
             color: var(--ink);
-            letter-spacing: 0.02em;
         }
 
         .masthead-motto {
@@ -99,37 +96,46 @@
             border-top: 1px solid var(--rule);
         }
 
-        /* ─── CONTENT AREA ─── */
+        /* ─── CONTENT ─── */
         .content {
-            padding: 0.8rem 1.5rem 1.5rem;
+            padding: 1rem 1.5rem 1.5rem;
         }
 
-        /* ─── LEAD STORY ─── */
+        /* ─── LEAD ─── */
         .lead {
-            border-bottom: 2px solid var(--ink);
-            padding-bottom: 0.8rem;
-            margin-bottom: 0.8rem;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 3px double var(--rule);
+        }
+
+        .lead-kicker {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--red);
+            text-align: center;
+            margin-bottom: 0.3rem;
         }
 
         .lead-headline {
             font-family: 'Old Standard TT', serif;
             font-weight: 700;
-            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
-            line-height: 1.15;
+            font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+            line-height: 1.12;
             text-align: center;
-            margin-bottom: 0.4rem;
-            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
         }
 
         .lead-deck {
             font-family: 'IM Fell English', serif;
             font-style: italic;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-align: center;
             color: var(--ink-light);
             line-height: 1.5;
             max-width: 650px;
-            margin: 0 auto 0.6rem;
+            margin: 0 auto 0.8rem;
         }
 
         .lead-columns {
@@ -143,162 +149,175 @@
             hyphens: auto;
         }
 
-        .lead-columns .read-more {
+        .read-more {
             font-family: 'Old Standard TT', serif;
             font-style: italic;
             font-size: 0.75rem;
         }
 
-        .lead-columns .read-more a {
+        .read-more a {
             color: var(--red);
             text-decoration: none;
         }
 
-        .lead-columns .read-more a:hover { text-decoration: underline; }
+        .read-more a:hover { text-decoration: underline; }
 
         @media (max-width: 580px) {
             .lead-columns { column-count: 1; }
         }
 
-        /* ─── SECONDARY STORIES (2-col) ─── */
-        .secondary {
+        /* ─── ARTICLE ROW ─── */
+        .article-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border-bottom: 1px solid var(--rule);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
         }
 
         @media (max-width: 580px) {
-            .secondary { grid-template-columns: 1fr; }
+            .article-row { grid-template-columns: 1fr; }
+            .article-item { border-right: none !important; }
         }
 
-        .secondary-story {
-            padding: 0.8rem 0;
-            border-top: 1px solid var(--rule);
+        .article-item {
+            padding: 1rem 1.2rem;
+            border-top: 2px solid var(--ink);
         }
 
-        .secondary-story:nth-child(odd) {
-            padding-right: 1rem;
+        .article-item:nth-child(odd) {
             border-right: 1px solid var(--rule-light);
+            padding-left: 0;
         }
 
-        .secondary-story:nth-child(even) {
-            padding-left: 1rem;
+        .article-item:nth-child(even) {
+            padding-right: 0;
         }
 
         @media (max-width: 580px) {
-            .secondary-story:nth-child(odd) { padding-right: 0; border-right: none; }
-            .secondary-story:nth-child(even) { padding-left: 0; }
+            .article-item:nth-child(odd) { padding-left: 0; padding-right: 0; }
+            .article-item:nth-child(even) { padding-left: 0; padding-right: 0; }
         }
 
-        .secondary-headline {
+        .article-kicker {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--red);
+            margin-bottom: 0.15rem;
+        }
+
+        .article-headline {
             font-family: 'Old Standard TT', serif;
             font-weight: 700;
-            font-size: 1.05rem;
-            line-height: 1.25;
-            margin-bottom: 0.3rem;
+            font-size: 1.15rem;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
         }
 
-        .secondary-category {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-faded);
-            margin-bottom: 0.2rem;
-        }
-
-        .secondary-text {
+        .article-text {
             font-family: 'Libre Baskerville', serif;
             font-size: 0.78rem;
             line-height: 1.65;
             color: var(--ink-light);
-            text-align: justify;
-            hyphens: auto;
         }
 
-        .story-link {
-            display: inline;
-            font-family: 'Old Standard TT', serif;
-            font-style: italic;
-            font-size: 0.72rem;
+        .article-text a {
             color: var(--red);
             text-decoration: none;
+            font-style: italic;
         }
 
-        .story-link:hover { text-decoration: underline; }
+        .article-text a:hover { text-decoration: underline; }
 
-        /* ─── BRIEFS (3-col) ─── */
-        .briefs-header {
+        /* ─── FULL WIDTH ARTICLE ─── */
+        .article-full {
+            padding: 1rem 0;
+            border-top: 2px solid var(--ink);
+            margin-bottom: 1.2rem;
+        }
+
+        .article-full .article-headline {
+            font-size: 1.3rem;
+        }
+
+        .article-full .article-text {
+            column-count: 2;
+            column-gap: 1.5rem;
+            column-rule: 1px solid var(--rule-light);
+        }
+
+        @media (max-width: 580px) {
+            .article-full .article-text { column-count: 1; }
+        }
+
+        /* ─── BRIEFS ─── */
+        .briefs-label {
             font-family: 'Old Standard TT', serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             color: var(--ink-faded);
             text-align: center;
-            margin-bottom: 0.6rem;
-            position: relative;
+            padding: 0.3rem 0;
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 0;
         }
-
-        .briefs-header::before,
-        .briefs-header::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: calc(50% - 5rem);
-            height: 1px;
-            background: var(--rule-light);
-        }
-
-        .briefs-header::before { left: 0; }
-        .briefs-header::after { right: 0; }
 
         .briefs {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 0;
-            border-top: 1px solid var(--rule);
-            border-bottom: 2px solid var(--ink);
-            margin-bottom: 0.8rem;
+            border-bottom: 3px double var(--ink);
+            margin-bottom: 1rem;
         }
 
         @media (max-width: 580px) {
             .briefs { grid-template-columns: 1fr; }
-            .brief { border-right: none !important; }
+            .brief { border-right: none !important; border-bottom: 1px solid var(--rule-light); }
+            .brief:last-child { border-bottom: none; }
         }
 
         .brief {
-            padding: 0.7rem 0.8rem;
+            padding: 0.8rem 0.9rem;
             border-right: 1px solid var(--rule-light);
         }
 
         .brief:last-child { border-right: none; }
 
+        .brief-num {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: var(--rule-light);
+            float: left;
+            margin-right: 0.5rem;
+            margin-top: -0.1rem;
+        }
+
         .brief-headline {
             font-family: 'Old Standard TT', serif;
             font-weight: 700;
-            font-size: 0.85rem;
-            line-height: 1.3;
-            margin-bottom: 0.25rem;
+            font-size: 0.88rem;
+            line-height: 1.25;
+            margin-bottom: 0.3rem;
         }
 
         .brief-text {
             font-family: 'Libre Baskerville', serif;
             font-size: 0.72rem;
-            line-height: 1.6;
+            line-height: 1.55;
             color: var(--ink-light);
+            clear: both;
         }
 
-        .brief-link {
-            font-family: 'Old Standard TT', serif;
-            font-style: italic;
-            font-size: 0.68rem;
+        .brief-text a {
             color: var(--red);
             text-decoration: none;
+            font-style: italic;
         }
 
-        .brief-link:hover { text-decoration: underline; }
+        .brief-text a:hover { text-decoration: underline; }
 
         /* ─── FOOTER ─── */
         .paper-footer {
@@ -320,10 +339,8 @@
 
         .paper-footer a:hover { text-decoration: underline; }
 
-        /* ─── GENERAL ─── */
         a { color: inherit; }
 
-        /* ─── PRINT ─── */
         @media print {
             body { background: white; padding: 0; }
             .newspaper { box-shadow: none; }
@@ -334,7 +351,6 @@
 
 <div class="newspaper">
 
-    <!-- ═══ MASTHEAD ═══ -->
     <header class="masthead">
         <div class="masthead-top">
             <span>Gegr. 2026</span>
@@ -349,78 +365,79 @@
         </div>
     </header>
 
-    <!-- ═══ CONTENT ═══ -->
     <div class="content">
 
-        <!-- ═══ LEAD STORY ═══ -->
+        <!-- ═══ LEAD ═══ -->
         <article class="lead">
+            <div class="lead-kicker">Politik &amp; Regulierung</div>
             <h2 class="lead-headline">Pentagon erkl&auml;rt Anthropic zum<br>&bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</h2>
             <p class="lead-deck">Verteidigungsministerium bef&uuml;rchtet, KI-Firma k&ouml;nnte Technologie in Kampfoperationen abschalten &mdash; erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft</p>
             <div class="lead-columns">
-                <p><b>WASHINGTON.</b> In einer beispiellosen Eskalation hat das US-Verteidigungsministerium in seiner ersten Gerichtsantwort auf Anthropics Klage erkl&auml;rt, das KI-Unternehmen stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien, die Anthropic-CEO Dario Amodei gezogen hat: keine Massen&uuml;berwachung von US-B&uuml;rgern, keine autonomen Waffen.</p>
-                <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic zu einem unzuverl&auml;ssigen Partner. Die Bef&uuml;rchtung: Das Unternehmen k&ouml;nnte seine Technologie mitten in laufenden Kampfoperationen deaktivieren. Die Einstufung als Supply-Chain-Risk durch Verteidigungsminister Hegseth ist in ihrer Anwendung auf ein US-Unternehmen historisch ohne Pr&auml;zedenz. <span class="read-more"><a href="editions/2026-03-18.html#art-1">Weiter auf S. 1 &rarr;</a></span></p>
+                <p><b>WASHINGTON.</b> In einer beispiellosen Eskalation hat das US-Verteidigungsministerium erkl&auml;rt, Anthropic stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien von CEO Dario Amodei: keine Massen&uuml;berwachung von US-B&uuml;rgern, keine autonomen Waffen.</p>
+                <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic unzuverl&auml;ssig. Das Unternehmen k&ouml;nnte seine Technologie mitten in Kampfoperationen deaktivieren. Die Einstufung durch Minister Hegseth ist historisch ohne Pr&auml;zedenz. <span class="read-more"><a href="editions/2026-03-18.html#art-1">Weiter auf S.&thinsp;1 &rarr;</a></span></p>
             </div>
         </article>
 
-        <!-- ═══ SECONDARY STORIES ═══ -->
-        <div class="secondary">
-
-            <article class="secondary-story">
-                <div class="secondary-category">Politik &amp; Regulierung</div>
-                <h3 class="secondary-headline">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h3>
-                <p class="secondary-text"><b>WASHINGTON.</b> Das US-Verteidigungsministerium will sichere Rechenzentren einrichten, in denen KI-Unternehmen erstmals militärspezifische Modelle direkt mit Geheimdaten trainieren k&ouml;nnen. Vereinbarungen mit OpenAI und xAI bestehen bereits. Senatorin Warren fordert eine &Uuml;berpr&uuml;fung. <a href="editions/2026-03-18.html#art-2" class="story-link">Weiter &rarr;</a></p>
+        <!-- ═══ ROW 1: Politik + Industrie ═══ -->
+        <div class="article-row">
+            <article class="article-item">
+                <div class="article-kicker">Politik &amp; Regulierung</div>
+                <h3 class="article-headline">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h3>
+                <p class="article-text"><b>WASHINGTON.</b> Sichere Rechenzentren sollen KI-Firmen erstmals erlauben, Modelle direkt mit Geheimdaten zu trainieren. Vereinbarungen mit OpenAI und xAI bestehen bereits. Senatorin Warren fordert eine &Uuml;berpr&uuml;fung. <a href="editions/2026-03-18.html#art-2">Weiter &rarr;</a></p>
             </article>
-
-            <article class="secondary-story">
-                <div class="secondary-category">Industrie</div>
-                <h3 class="secondary-headline">Mistral lanciert Forge &mdash; Ma&szlig;geschneiderte KI f&uuml;r Unternehmen</h3>
-                <p class="secondary-text"><b>SAN JOSE.</b> Auf der Nvidia GTC vorgestellt: Die Forge-Plattform erlaubt vollst&auml;ndiges Training eigener Modelle statt blo&szlig;em Feintuning. Launch-Partner: ASML, Ericsson, ESA. CEO Mensch peilt 1 Mrd. Dollar Jahresumsatz an. <a href="editions/2026-03-18.html#art-3" class="story-link">Weiter &rarr;</a></p>
+            <article class="article-item">
+                <div class="article-kicker">Industrie</div>
+                <h3 class="article-headline">Mistral lanciert Forge &mdash; ma&szlig;geschneiderte KI f&uuml;r Unternehmen</h3>
+                <p class="article-text"><b>SAN JOSE.</b> Auf der Nvidia GTC vorgestellt: Forge erlaubt vollst&auml;ndiges Training eigener Modelle statt Feintuning. Partner: ASML, Ericsson, ESA. CEO Mensch peilt 1&thinsp;Mrd. Dollar Umsatz an. <a href="editions/2026-03-18.html#art-3">Weiter &rarr;</a></p>
             </article>
+        </div>
 
-            <article class="secondary-story">
-                <div class="secondary-category">Technologie</div>
-                <h3 class="secondary-headline">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse: &bdquo;M&uuml;ll-KI-Filter&ldquo;</h3>
-                <p class="secondary-text"><b>SAN JOSE.</b> Statt Frames zu optimieren, schreibt DLSS 5 sie komplett um. Spieler kritisieren k&uuml;nstlich versch&ouml;nerte Gesichter und verlorene Beleuchtung. Jensen Huang kontert: Kritiker seien &bdquo;komplett falsch.&ldquo; Die Technologie ist zur Meme-Quelle geworden. <a href="editions/2026-03-18.html#art-4" class="story-link">Weiter &rarr;</a></p>
+        <!-- ═══ FULL WIDTH: DLSS 5 ═══ -->
+        <article class="article-full">
+            <div class="article-kicker">Technologie</div>
+            <h3 class="article-headline">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse: &bdquo;Das ist nur ein M&uuml;ll-KI-Filter&ldquo;</h3>
+            <div class="article-text">
+                <p><b>SAN JOSE.</b> Statt Frames zu optimieren, schreibt DLSS 5 sie komplett um &mdash; ein neuronales Rendering-Modell ersetzt Beleuchtung, Texturen und Materialien durch KI-generierte Alternativen. Spieler kritisieren k&uuml;nstlich versch&ouml;nerte Gesichter: ein 15-j&auml;hriger Hogwarts-Legacy-Charakter wirkt pl&ouml;tzlich erwachsen. &bdquo;Die Tiefe, der Kontrast, die W&auml;rme &mdash; alles ist weg&ldquo;, klagt ein Nutzer. Ein Respawn-Ingenieur spricht von einem &bdquo;&uuml;bertriebenen Airbrush-Filter&ldquo;. Jensen Huang kontert: Kritiker seien &bdquo;komplett falsch&ldquo;, Entwickler beh&auml;lten volle k&uuml;nstlerische Kontrolle. DLSS 5 ist inzwischen zur ergiebigen Meme-Quelle geworden. <a href="editions/2026-03-18.html#art-4">Weiter &rarr;</a></p>
+            </div>
+        </article>
+
+        <!-- ═══ ROW 2: Google + DeepMind ═══ -->
+        <div class="article-row">
+            <article class="article-item">
+                <div class="article-kicker">Industrie</div>
+                <h3 class="article-headline">Google &ouml;ffnet Personal Intelligence f&uuml;r alle US-Nutzer</h3>
+                <p class="article-text"><b>MOUNTAIN VIEW.</b> Im Januar noch Premium-Feature, jetzt kostenlos: Gemini greift auf Gmail, Photos und YouTube zu. Google spielt seinen &Ouml;kosystem-Vorteil aus. Strikt Opt-in, standardm&auml;&szlig;ig deaktiviert. <a href="editions/2026-03-18.html#art-5">Weiter &rarr;</a></p>
             </article>
-
-            <article class="secondary-story">
-                <div class="secondary-category">Industrie</div>
-                <h3 class="secondary-headline">Google &ouml;ffnet Personal Intelligence f&uuml;r alle US-Nutzer</h3>
-                <p class="secondary-text"><b>MOUNTAIN VIEW.</b> Im Januar noch hinter einer Bezahlschranke, jetzt kostenlos: Gemini darf auf Gmail, Photos und YouTube zugreifen. Google spielt seinen &Ouml;kosystem-Vorteil im KI-Wettbewerb aus. Strikt Opt-in. <a href="editions/2026-03-18.html#art-5" class="story-link">Weiter &rarr;</a></p>
+            <article class="article-item">
+                <div class="article-kicker">Forschung</div>
+                <h3 class="article-headline">DeepMind stellt Framework zur Messung des AGI-Fortschritts vor</h3>
+                <p class="article-text"><b>LONDON.</b> Zehn kognitive Kernf&auml;higkeiten sollen AGI-Fortschritt messbar machen. Ein Kaggle-Hackathon mit $200.000 Preispool sucht Evaluierungen f&uuml;r die gr&ouml;&szlig;ten L&uuml;cken. <a href="editions/2026-03-18.html#art-6">Weiter &rarr;</a></p>
             </article>
-
         </div>
 
         <!-- ═══ BRIEFS ═══ -->
-        <div class="briefs-header">Kurzmeldungen</div>
+        <div class="briefs-label">Kurzmeldungen</div>
 
         <div class="briefs">
-
             <div class="brief">
-                <h4 class="brief-headline">DeepMind stellt AGI-Messframework vor</h4>
-                <p class="brief-text">Zehn kognitive Kernf&auml;higkeiten sollen Fortschritt messbar machen. Kaggle-Hackathon mit $200.000 Preispool gestartet. <a href="editions/2026-03-18.html#art-6" class="brief-link">Weiter &rarr;</a></p>
-            </div>
-
-            <div class="brief">
+                <span class="brief-num">7</span>
                 <h4 class="brief-headline">Garry Tans Claude-Setup geht viral</h4>
-                <p class="brief-text">YC-CEO ver&ouml;ffentlicht &bdquo;gstack&ldquo;: 10 rollenbasierte KI-Skills f&uuml;r Claude Code. 20.000 GitHub-Stars, viel Lob und Kritik. <a href="editions/2026-03-18.html#art-7" class="brief-link">Weiter &rarr;</a></p>
+                <p class="brief-text">YC-CEO ver&ouml;ffentlicht &bdquo;gstack&ldquo; auf GitHub: 10 rollenbasierte KI-Skills. 20.000 Stars in wenigen Tagen. Ein CTO nennt es &bdquo;God Mode&ldquo; &mdash; Kritiker sehen Hype. <a href="editions/2026-03-18.html#art-7">S.&thinsp;7</a></p>
             </div>
-
             <div class="brief">
+                <span class="brief-num">8</span>
                 <h4 class="brief-headline">Mastercard baut Foundation-Modell</h4>
-                <p class="brief-text">Ein &bdquo;Large Tabular Model&ldquo; statt LLM, trainiert auf Milliarden Transaktionen. Erster Fokus: Cybersicherheit und Betrugserkennung. <a href="editions/2026-03-18.html#art-8" class="brief-link">Weiter &rarr;</a></p>
+                <p class="brief-text">Ein &bdquo;Large Tabular Model&ldquo; statt LLM: trainiert auf Milliarden Transaktionen f&uuml;r Betrugserkennung. Zeigt: Foundation Models gehen weit &uuml;ber Text hinaus. <a href="editions/2026-03-18.html#art-8">S.&thinsp;8</a></p>
             </div>
-
-        </div>
-
-        <!-- ═══ SMALL NOTICE ═══ -->
-        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.5rem;font-family:'IM Fell English',serif;font-size:0.78rem;color:var(--ink-faded);">
-            <span><b style="color:var(--ink-light)">Microsoft &uuml;bernimmt KI-Startup Cove.</b> Acqui-Hire des Sequoia-finanzierten Teams. Dienst endet 1. April. <a href="editions/2026-03-18.html#art-9" class="story-link">S. 9</a></span>
+            <div class="brief">
+                <span class="brief-num">9</span>
+                <h4 class="brief-headline">Microsoft &uuml;bernimmt Cove-Team</h4>
+                <p class="brief-text">Acqui-Hire des Sequoia-finanzierten KI-Startups. Cove verwandelte Chats in visuelle Workspaces. Dienst endet 1.&thinsp;April. <a href="editions/2026-03-18.html#art-9">S.&thinsp;9</a></p>
+            </div>
         </div>
 
     </div>
 
-    <!-- ═══ FOOTER ═══ -->
     <footer class="paper-footer">
         <span>&copy; 2026 AI News Magazin</span>
         <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
