@@ -5,680 +5,429 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI News Magazin</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
 
         :root {
-            --sky-top: #1a0a2e;
-            --sky-mid: #2d1b4e;
-            --sky-bot: #16213e;
-            --ground: #1a2f1a;
-            --ground-light: #2a4a2a;
-            --ui-bg: #0a0a1a;
-            --ui-border: #4a6a8a;
-            --ui-border-bright: #7aaacc;
-            --ui-inner: #0d1a2d;
-            --text: #c8dce8;
-            --text-bright: #e8f4ff;
-            --text-dim: #5a7a8a;
-            --highlight: #ffcc00;
-            --highlight-dim: #aa8800;
-            --red: #e84040;
-            --green: #40c840;
-            --blue: #4080e8;
-            --purple: #a050d0;
-            --orange: #e89040;
-            --cyan: #40c8c8;
-            --politik: #e84040;
-            --industrie: #4080e8;
-            --tech: #a050d0;
-            --forschung: #e89040;
-            --community: #40c840;
+            --paper: #f2e8d0;
+            --paper-dark: #e8d9b8;
+            --paper-edge: #d4c5a0;
+            --ink: #1a1008;
+            --ink-light: #3a2a18;
+            --ink-faded: #6a5a48;
+            --rule: #8a7a60;
+            --rule-light: #b8a880;
+            --red: #8b1a1a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'VT323', monospace;
-            background: var(--sky-top);
-            color: var(--text);
-            font-size: 18px;
-            line-height: 1.5;
+            background: #c8b898;
+            color: var(--ink);
             min-height: 100vh;
-            image-rendering: pixelated;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 0.5rem;
         }
 
-        /* ─── STARFIELD ─── */
-        .stars {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
+        /* ─── THE NEWSPAPER ─── */
+        .newspaper {
+            background: var(--paper);
+            max-width: 920px;
+            width: 100%;
+            box-shadow:
+                2px 2px 0 var(--paper-edge),
+                4px 4px 0 var(--paper-dark),
+                6px 6px 15px rgba(30, 20, 5, 0.3);
+            position: relative;
         }
 
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-        }
-
-        .star--dim { opacity: 0.3; }
-        .star--mid { opacity: 0.5; width: 2px; height: 2px; }
-        .star--bright { opacity: 0.9; width: 2px; height: 2px; box-shadow: 0 0 4px rgba(255,255,255,0.5); }
-
-        .star--blink {
-            animation: blink 3s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-
-        /* ─── CRT OVERLAY ─── */
-        body::after {
+        /* Paper texture */
+        .newspaper::before {
             content: '';
-            position: fixed;
+            position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.08) 0px,
-                rgba(0, 0, 0, 0.08) 1px,
-                transparent 1px,
-                transparent 3px
-            );
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
-            z-index: 9999;
+            z-index: 1;
         }
 
-        /* ─── HEADER / TITLE SCREEN ─── */
-        .title-screen {
-            position: relative;
-            z-index: 1;
+        /* ─── MASTHEAD ─── */
+        .masthead {
             text-align: center;
-            padding: 3rem 1rem 2rem;
-            background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 60%, var(--sky-bot) 100%);
-            border-bottom: 4px solid var(--ui-border);
+            padding: 1.2rem 1.5rem 0.6rem;
+            border-bottom: 3px double var(--ink);
         }
 
-        .title-screen h1 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: clamp(1rem, 3.5vw, 1.6rem);
-            color: var(--highlight);
-            text-shadow: 3px 3px 0 #553300, 0 0 20px rgba(255, 204, 0, 0.3);
-            letter-spacing: 0.05em;
-            line-height: 1.8;
-        }
-
-        .title-sub {
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-top: 0.8rem;
-            letter-spacing: 0.15em;
-        }
-
-        .title-blink {
-            display: inline-block;
-            margin-top: 1rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.55rem;
-            color: var(--text);
-            animation: title-blink 1.5s step-end infinite;
-            letter-spacing: 0.08em;
-        }
-
-        @keyframes title-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* ─── NAV BAR ─── */
-        .nav-bar {
-            position: relative;
-            z-index: 1;
-            background: var(--ui-bg);
-            border-bottom: 2px solid var(--ui-border);
-            padding: 0.4rem 1rem;
+        .masthead-top {
             display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            font-family: 'VT323', monospace;
-            font-size: 1.1rem;
-            overflow-x: auto;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.7rem;
+            color: var(--ink-faded);
+            margin-bottom: 0.3rem;
         }
 
-        .nav-item {
-            color: var(--text-dim);
-            text-decoration: none;
-            white-space: nowrap;
-            transition: color 0.15s;
-            padding: 0.2rem 0;
+        .masthead h1 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--ink);
+            letter-spacing: 0.02em;
         }
 
-        .nav-item:hover { color: var(--highlight); }
-        .nav-item--active { color: var(--highlight); }
-
-        .nav-separator {
-            color: var(--ui-border);
-            user-select: none;
-        }
-
-        /* ─── STATUS BAR ─── */
-        .status-bar {
-            position: relative;
-            z-index: 1;
-            background: var(--ui-inner);
-            border-bottom: 2px solid var(--ui-border);
-            padding: 0.3rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .stat-icon {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 1px;
-        }
-
-        .stat-label { color: var(--text-dim); }
-        .stat-value { color: var(--text-bright); }
-
-        /* ─── MAIN CONTENT ─── */
-        .content {
-            position: relative;
-            z-index: 1;
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 1.5rem 1rem 3rem;
-        }
-
-        /* ─── EDITION SECTION ─── */
-        .edition {
-            margin-bottom: 2.5rem;
-        }
-
-        .edition-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px dashed var(--ui-border);
-        }
-
-        .edition-icon {
-            width: 20px;
-            height: 20px;
-            background: var(--highlight);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            flex-shrink: 0;
-        }
-
-        .edition-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.65rem;
-            color: var(--highlight);
-            letter-spacing: 0.05em;
-        }
-
-        .edition-link {
-            margin-left: auto;
-            font-size: 1rem;
-            color: var(--cyan);
-            text-decoration: none;
-            border: 1px solid var(--cyan);
-            padding: 0.1rem 0.6rem;
-            transition: all 0.15s;
-        }
-
-        .edition-link:hover {
-            background: var(--cyan);
-            color: var(--ui-bg);
-        }
-
-        /* ─── NEWS CARDS (DIALOG BOXES) ─── */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 0;
-        }
-
-        .news-card {
-            background: var(--ui-inner);
-            border: 2px solid var(--ui-border);
-            margin: -1px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card:hover {
-            border-color: var(--ui-border-bright);
-            z-index: 2;
-        }
-
-        .news-card-header {
-            background: var(--ui-bg);
-            border-bottom: 2px solid var(--ui-border);
-            padding: 0.35rem 0.7rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .news-card-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 1px;
-            flex-shrink: 0;
-        }
-
-        .news-card-category {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .news-card-num {
-            margin-left: auto;
+        .masthead-motto {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
             font-size: 0.8rem;
-            color: var(--text-dim);
+            color: var(--ink-faded);
+            margin-top: 0.15rem;
         }
 
-        .news-card-body {
-            padding: 0.8rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-card-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.5rem;
-            line-height: 1.8;
-            color: var(--text-bright);
-            margin-bottom: 0.6rem;
-        }
-
-        .news-card-teaser {
-            font-size: 1rem;
-            color: var(--text);
-            line-height: 1.45;
-            flex: 1;
-        }
-
-        .news-card-footer {
-            border-top: 1px dashed var(--ui-border);
-            padding: 0.4rem 0.8rem;
+        .masthead-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.85rem;
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.72rem;
+            color: var(--ink-faded);
+            margin-top: 0.4rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid var(--rule);
         }
 
-        .news-card-source { color: var(--text-dim); }
+        /* ─── CONTENT AREA ─── */
+        .content {
+            padding: 0.8rem 1.5rem 1.5rem;
+        }
 
-        .news-card-action {
-            color: var(--cyan);
+        /* ─── LEAD STORY ─── */
+        .lead {
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .lead-headline {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            line-height: 1.15;
+            text-align: center;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .lead-deck {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--ink-light);
+            line-height: 1.5;
+            max-width: 650px;
+            margin: 0 auto 0.6rem;
+        }
+
+        .lead-columns {
+            column-count: 2;
+            column-gap: 1.5rem;
+            column-rule: 1px solid var(--rule-light);
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .lead-columns .read-more {
+            font-family: 'Old Standard TT', serif;
+            font-style: italic;
+            font-size: 0.75rem;
+        }
+
+        .lead-columns .read-more a {
+            color: var(--red);
             text-decoration: none;
-            transition: color 0.15s;
         }
 
-        .news-card-action:hover { color: var(--highlight); }
+        .lead-columns .read-more a:hover { text-decoration: underline; }
 
-        /* ─── TICKER ─── */
-        .ticker {
+        @media (max-width: 580px) {
+            .lead-columns { column-count: 1; }
+        }
+
+        /* ─── SECONDARY STORIES (2-col) ─── */
+        .secondary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 0.8rem;
+        }
+
+        @media (max-width: 580px) {
+            .secondary { grid-template-columns: 1fr; }
+        }
+
+        .secondary-story {
+            padding: 0.8rem 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .secondary-story:nth-child(odd) {
+            padding-right: 1rem;
+            border-right: 1px solid var(--rule-light);
+        }
+
+        .secondary-story:nth-child(even) {
+            padding-left: 1rem;
+        }
+
+        @media (max-width: 580px) {
+            .secondary-story:nth-child(odd) { padding-right: 0; border-right: none; }
+            .secondary-story:nth-child(even) { padding-left: 0; }
+        }
+
+        .secondary-headline {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            line-height: 1.25;
+            margin-bottom: 0.3rem;
+        }
+
+        .secondary-category {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-faded);
+            margin-bottom: 0.2rem;
+        }
+
+        .secondary-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.78rem;
+            line-height: 1.65;
+            color: var(--ink-light);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .story-link {
+            display: inline;
+            font-family: 'Old Standard TT', serif;
+            font-style: italic;
+            font-size: 0.72rem;
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .story-link:hover { text-decoration: underline; }
+
+        /* ─── BRIEFS (3-col) ─── */
+        .briefs-header {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ink-faded);
+            text-align: center;
+            margin-bottom: 0.6rem;
             position: relative;
-            z-index: 1;
-            background: var(--ui-bg);
-            border-top: 2px solid var(--ui-border);
-            border-bottom: 2px solid var(--ui-border);
-            padding: 0.3rem 0;
-            overflow: hidden;
-            white-space: nowrap;
         }
 
-        .ticker-track {
-            display: inline-block;
-            animation: scroll-ticker 45s linear infinite;
-            font-size: 0.95rem;
-            color: var(--text-dim);
+        .briefs-header::before,
+        .briefs-header::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 5rem);
+            height: 1px;
+            background: var(--rule-light);
         }
 
-        .ticker-track span { color: var(--highlight); margin: 0 0.3rem; }
+        .briefs-header::before { left: 0; }
+        .briefs-header::after { right: 0; }
 
-        @keyframes scroll-ticker {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
+        .briefs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border-top: 1px solid var(--rule);
+            border-bottom: 2px solid var(--ink);
+            margin-bottom: 0.8rem;
         }
+
+        @media (max-width: 580px) {
+            .briefs { grid-template-columns: 1fr; }
+            .brief { border-right: none !important; }
+        }
+
+        .brief {
+            padding: 0.7rem 0.8rem;
+            border-right: 1px solid var(--rule-light);
+        }
+
+        .brief:last-child { border-right: none; }
+
+        .brief-headline {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            margin-bottom: 0.25rem;
+        }
+
+        .brief-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.72rem;
+            line-height: 1.6;
+            color: var(--ink-light);
+        }
+
+        .brief-link {
+            font-family: 'Old Standard TT', serif;
+            font-style: italic;
+            font-size: 0.68rem;
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .brief-link:hover { text-decoration: underline; }
 
         /* ─── FOOTER ─── */
-        .game-footer {
-            position: relative;
-            z-index: 1;
-            background: var(--ui-bg);
-            border-top: 2px solid var(--ui-border);
-            padding: 1.5rem 1rem;
-            text-align: center;
+        .paper-footer {
+            padding: 0.6rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.7rem;
+            color: var(--ink-faded);
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .footer-text {
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-        .footer-text a {
-            color: var(--cyan);
+        .paper-footer a {
+            color: var(--red);
             text-decoration: none;
         }
 
-        .footer-text a:hover { color: var(--highlight); }
+        .paper-footer a:hover { text-decoration: underline; }
 
-        .footer-copy {
-            margin-top: 0.6rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.4rem;
-            color: var(--ui-border);
-            letter-spacing: 0.1em;
-        }
+        /* ─── GENERAL ─── */
+        a { color: inherit; }
 
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 600px) {
-            .news-grid { grid-template-columns: 1fr; }
-            .title-screen { padding: 2rem 0.8rem 1.5rem; }
-            .content { padding: 1rem 0.6rem 2rem; }
-            .status-bar { gap: 0.8rem; }
-        }
-
-        /* ─── ANIMATIONS ─── */
-        .news-card {
-            animation: card-pop 0.3s ease-out both;
-        }
-        .news-card:nth-child(1) { animation-delay: 0.05s; }
-        .news-card:nth-child(2) { animation-delay: 0.1s; }
-        .news-card:nth-child(3) { animation-delay: 0.15s; }
-        .news-card:nth-child(4) { animation-delay: 0.2s; }
-        .news-card:nth-child(5) { animation-delay: 0.25s; }
-        .news-card:nth-child(6) { animation-delay: 0.3s; }
-        .news-card:nth-child(7) { animation-delay: 0.35s; }
-        .news-card:nth-child(8) { animation-delay: 0.4s; }
-        .news-card:nth-child(9) { animation-delay: 0.45s; }
-
-        @keyframes card-pop {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        /* ─── PRINT ─── */
+        @media print {
+            body { background: white; padding: 0; }
+            .newspaper { box-shadow: none; }
         }
     </style>
 </head>
 <body>
 
-<!-- ═══ STARFIELD ═══ -->
-<div class="stars">
-    <div class="star star--dim" style="top:5%;left:12%"></div>
-    <div class="star star--mid" style="top:8%;left:45%"></div>
-    <div class="star star--bright star--blink" style="top:3%;left:78%"></div>
-    <div class="star star--dim" style="top:12%;left:23%"></div>
-    <div class="star star--mid" style="top:15%;left:67%"></div>
-    <div class="star star--dim" style="top:6%;left:91%"></div>
-    <div class="star star--bright" style="top:18%;left:34%"></div>
-    <div class="star star--dim" style="top:10%;left:56%"></div>
-    <div class="star star--mid star--blink" style="top:2%;left:38%;animation-delay:1s"></div>
-    <div class="star star--dim" style="top:20%;left:82%"></div>
-    <div class="star star--bright star--blink" style="top:7%;left:5%;animation-delay:2s"></div>
-    <div class="star star--dim" style="top:14%;left:95%"></div>
-    <div class="star star--mid" style="top:22%;left:15%"></div>
-    <div class="star star--dim" style="top:25%;left:50%"></div>
-    <div class="star star--bright" style="top:4%;left:62%"></div>
-    <div class="star star--dim" style="top:16%;left:73%"></div>
-    <div class="star star--mid star--blink" style="top:9%;left:28%;animation-delay:0.5s"></div>
-    <div class="star star--dim" style="top:21%;left:41%"></div>
-</div>
+<div class="newspaper">
 
-<!-- ═══ TITLE SCREEN ═══ -->
-<header class="title-screen">
-    <h1>AI NEWS MAGAZIN</h1>
-    <div class="title-sub">/// NACHRICHTENTERMINAL v2.6 ///</div>
-    <div class="title-blink">SCROLL DOWN TO READ</div>
-</header>
+    <!-- ═══ MASTHEAD ═══ -->
+    <header class="masthead">
+        <div class="masthead-top">
+            <span>Gegr. 2026</span>
+            <span>Preis: Gratis</span>
+        </div>
+        <h1>AI News Magazin</h1>
+        <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
+        <div class="masthead-bar">
+            <span>Dienstag, 18. M&auml;rz 2026</span>
+            <span>14 Quellen &middot; 9 Meldungen</span>
+            <span><a href="about.html" style="color:var(--red);text-decoration:none">Wie wir arbeiten &rarr;</a></span>
+        </div>
+    </header>
 
-<!-- ═══ NAV BAR ═══ -->
-<nav class="nav-bar">
-    <a class="nav-item nav-item--active" href="#">EDITIONEN</a>
-    <span class="nav-separator">|</span>
-    <a class="nav-item" href="about.html">SYSTEM-INFO</a>
-    <span class="nav-separator">|</span>
-    <span class="nav-item" style="color: var(--green);">STATUS: ONLINE</span>
-</nav>
+    <!-- ═══ CONTENT ═══ -->
+    <div class="content">
 
-<!-- ═══ TICKER ═══ -->
-<div class="ticker">
-    <div class="ticker-track">
-        +++ <span>ANTHROPIC</span> vom Pentagon als Sicherheitsrisiko eingestuft +++ <span>MISTRAL FORGE</span> auf GTC 2026 vorgestellt +++ <span>NVIDIA DLSS 5</span> erntet Kritik und Memes +++ <span>GOOGLE</span> oeffnet Personal Intelligence fuer alle +++ <span>DEEPMIND</span> misst AGI-Fortschritt +++ <span>GARRY TAN</span> gstack mit 20K GitHub Stars +++ <span>MASTERCARD</span> baut Large Tabular Model +++ <span>MICROSOFT</span> uebernimmt Cove-Team +++&nbsp;&nbsp;&nbsp;
-        +++ <span>ANTHROPIC</span> vom Pentagon als Sicherheitsrisiko eingestuft +++ <span>MISTRAL FORGE</span> auf GTC 2026 vorgestellt +++ <span>NVIDIA DLSS 5</span> erntet Kritik und Memes +++ <span>GOOGLE</span> oeffnet Personal Intelligence fuer alle +++ <span>DEEPMIND</span> misst AGI-Fortschritt +++ <span>GARRY TAN</span> gstack mit 20K GitHub Stars +++ <span>MASTERCARD</span> baut Large Tabular Model +++ <span>MICROSOFT</span> uebernimmt Cove-Team +++&nbsp;&nbsp;&nbsp;
-    </div>
-</div>
+        <!-- ═══ LEAD STORY ═══ -->
+        <article class="lead">
+            <h2 class="lead-headline">Pentagon erkl&auml;rt Anthropic zum<br>&bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</h2>
+            <p class="lead-deck">Verteidigungsministerium bef&uuml;rchtet, KI-Firma k&ouml;nnte Technologie in Kampfoperationen abschalten &mdash; erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft</p>
+            <div class="lead-columns">
+                <p><b>WASHINGTON.</b> In einer beispiellosen Eskalation hat das US-Verteidigungsministerium in seiner ersten Gerichtsantwort auf Anthropics Klage erkl&auml;rt, das KI-Unternehmen stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien, die Anthropic-CEO Dario Amodei gezogen hat: keine Massen&uuml;berwachung von US-B&uuml;rgern, keine autonomen Waffen.</p>
+                <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic zu einem unzuverl&auml;ssigen Partner. Die Bef&uuml;rchtung: Das Unternehmen k&ouml;nnte seine Technologie mitten in laufenden Kampfoperationen deaktivieren. Die Einstufung als Supply-Chain-Risk durch Verteidigungsminister Hegseth ist in ihrer Anwendung auf ein US-Unternehmen historisch ohne Pr&auml;zedenz. <span class="read-more"><a href="editions/2026-03-18.html#art-1">Weiter auf S. 1 &rarr;</a></span></p>
+            </div>
+        </article>
 
-<!-- ═══ STATUS BAR ═══ -->
-<div class="status-bar">
-    <div class="stat">
-        <span class="stat-icon" style="background:var(--green)"></span>
-        <span class="stat-label">QUELLEN:</span>
-        <span class="stat-value">14</span>
-    </div>
-    <div class="stat">
-        <span class="stat-icon" style="background:var(--blue)"></span>
-        <span class="stat-label">EDITIONEN:</span>
-        <span class="stat-value">1</span>
-    </div>
-    <div class="stat">
-        <span class="stat-icon" style="background:var(--highlight)"></span>
-        <span class="stat-label">ARTIKEL HEUTE:</span>
-        <span class="stat-value">9</span>
-    </div>
-    <div class="stat">
-        <span class="stat-icon" style="background:var(--red)"></span>
-        <span class="stat-label">LETZT. UPDATE:</span>
-        <span class="stat-value">18.03.2026</span>
-    </div>
-</div>
+        <!-- ═══ SECONDARY STORIES ═══ -->
+        <div class="secondary">
 
-<!-- ═══ MAIN CONTENT ═══ -->
-<main class="content">
+            <article class="secondary-story">
+                <div class="secondary-category">Politik &amp; Regulierung</div>
+                <h3 class="secondary-headline">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h3>
+                <p class="secondary-text"><b>WASHINGTON.</b> Das US-Verteidigungsministerium will sichere Rechenzentren einrichten, in denen KI-Unternehmen erstmals militärspezifische Modelle direkt mit Geheimdaten trainieren k&ouml;nnen. Vereinbarungen mit OpenAI und xAI bestehen bereits. Senatorin Warren fordert eine &Uuml;berpr&uuml;fung. <a href="editions/2026-03-18.html#art-2" class="story-link">Weiter &rarr;</a></p>
+            </article>
 
-    <!-- ═══ EDITION: 18. MÄRZ 2026 ═══ -->
-    <section class="edition">
-        <div class="edition-header">
-            <div class="edition-icon"></div>
-            <span class="edition-title">AUSGABE 18. MAERZ 2026</span>
-            <a href="editions/2026-03-18.html" class="edition-link">VOLLAUSGABE LESEN &gt;</a>
+            <article class="secondary-story">
+                <div class="secondary-category">Industrie</div>
+                <h3 class="secondary-headline">Mistral lanciert Forge &mdash; Ma&szlig;geschneiderte KI f&uuml;r Unternehmen</h3>
+                <p class="secondary-text"><b>SAN JOSE.</b> Auf der Nvidia GTC vorgestellt: Die Forge-Plattform erlaubt vollst&auml;ndiges Training eigener Modelle statt blo&szlig;em Feintuning. Launch-Partner: ASML, Ericsson, ESA. CEO Mensch peilt 1 Mrd. Dollar Jahresumsatz an. <a href="editions/2026-03-18.html#art-3" class="story-link">Weiter &rarr;</a></p>
+            </article>
+
+            <article class="secondary-story">
+                <div class="secondary-category">Technologie</div>
+                <h3 class="secondary-headline">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse: &bdquo;M&uuml;ll-KI-Filter&ldquo;</h3>
+                <p class="secondary-text"><b>SAN JOSE.</b> Statt Frames zu optimieren, schreibt DLSS 5 sie komplett um. Spieler kritisieren k&uuml;nstlich versch&ouml;nerte Gesichter und verlorene Beleuchtung. Jensen Huang kontert: Kritiker seien &bdquo;komplett falsch.&ldquo; Die Technologie ist zur Meme-Quelle geworden. <a href="editions/2026-03-18.html#art-4" class="story-link">Weiter &rarr;</a></p>
+            </article>
+
+            <article class="secondary-story">
+                <div class="secondary-category">Industrie</div>
+                <h3 class="secondary-headline">Google &ouml;ffnet Personal Intelligence f&uuml;r alle US-Nutzer</h3>
+                <p class="secondary-text"><b>MOUNTAIN VIEW.</b> Im Januar noch hinter einer Bezahlschranke, jetzt kostenlos: Gemini darf auf Gmail, Photos und YouTube zugreifen. Google spielt seinen &Ouml;kosystem-Vorteil im KI-Wettbewerb aus. Strikt Opt-in. <a href="editions/2026-03-18.html#art-5" class="story-link">Weiter &rarr;</a></p>
+            </article>
+
         </div>
 
-        <div class="news-grid">
+        <!-- ═══ BRIEFS ═══ -->
+        <div class="briefs-header">Kurzmeldungen</div>
 
-            <!-- Card 1 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--politik)"></span>
-                    <span class="news-card-category" style="color:var(--politik)">POLITIK</span>
-                    <span class="news-card-num">#01</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Pentagon erklaert Anthropic zum Sicherheitsrisiko</div>
-                    <div class="news-card-teaser">Das DOD bezeichnet Anthropics ethische Grenzen als &bdquo;inakzeptables Risiko fuer die nationale Sicherheit&ldquo;. Das Unternehmen koennte seine KI in Kampfoperationen deaktivieren, warnt das Militaer. Erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">TechCrunch, Wired, CNN</span>
-                    <a href="editions/2026-03-18.html#art-1" class="news-card-action">[LESEN]</a>
-                </div>
+        <div class="briefs">
+
+            <div class="brief">
+                <h4 class="brief-headline">DeepMind stellt AGI-Messframework vor</h4>
+                <p class="brief-text">Zehn kognitive Kernf&auml;higkeiten sollen Fortschritt messbar machen. Kaggle-Hackathon mit $200.000 Preispool gestartet. <a href="editions/2026-03-18.html#art-6" class="brief-link">Weiter &rarr;</a></p>
             </div>
 
-            <!-- Card 2 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--politik)"></span>
-                    <span class="news-card-category" style="color:var(--politik)">POLITIK</span>
-                    <span class="news-card-num">#02</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Pentagon plant KI-Training mit Geheimdaten</div>
-                    <div class="news-card-teaser">Sichere Rechenzentren sollen KI-Unternehmen erstmals erlauben, Modelle direkt mit klassifizierten Militaerdaten zu trainieren. Vereinbarungen mit OpenAI und xAI bestehen bereits. Senatorin Warren fordert eine Ueberpruefung.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">MIT Tech Review</span>
-                    <a href="editions/2026-03-18.html#art-2" class="news-card-action">[LESEN]</a>
-                </div>
+            <div class="brief">
+                <h4 class="brief-headline">Garry Tans Claude-Setup geht viral</h4>
+                <p class="brief-text">YC-CEO ver&ouml;ffentlicht &bdquo;gstack&ldquo;: 10 rollenbasierte KI-Skills f&uuml;r Claude Code. 20.000 GitHub-Stars, viel Lob und Kritik. <a href="editions/2026-03-18.html#art-7" class="brief-link">Weiter &rarr;</a></p>
             </div>
 
-            <!-- Card 3 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--industrie)"></span>
-                    <span class="news-card-category" style="color:var(--industrie)">INDUSTRIE</span>
-                    <span class="news-card-num">#03</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Mistral lanciert Forge fuer Enterprise-KI</div>
-                    <div class="news-card-teaser">Auf der Nvidia GTC vorgestellt: Forge erlaubt Unternehmen, eigene KI-Modelle von Grund auf zu trainieren. Launch-Partner: ASML, Ericsson, ESA. Mistral peilt 1 Mrd. Dollar Jahresumsatz an.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">TechCrunch, VentureBeat</span>
-                    <a href="editions/2026-03-18.html#art-3" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--tech)"></span>
-                    <span class="news-card-category" style="color:var(--tech)">TECH</span>
-                    <span class="news-card-num">#04</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">NVIDIA DLSS 5 sorgt fuer Kontroverse</div>
-                    <div class="news-card-teaser">Statt Frames zu optimieren, schreibt DLSS 5 sie komplett um. Spieler und Entwickler kritisieren &bdquo;yassified&ldquo; Charaktere und verlorene Beleuchtung. Jensen Huang: Kritiker sind &bdquo;komplett falsch&ldquo;.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">The Verge, Tom's HW</span>
-                    <a href="editions/2026-03-18.html#art-4" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--industrie)"></span>
-                    <span class="news-card-category" style="color:var(--industrie)">INDUSTRIE</span>
-                    <span class="news-card-num">#05</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Google oeffnet Personal Intelligence fuer alle</div>
-                    <div class="news-card-teaser">Gemini darf jetzt auf Gmail, Photos, YouTube zugreifen — fuer alle US-Nutzer kostenlos. Im Januar noch hinter Paywall, jetzt Googles Trumpfkarte im KI-Wettbewerb. Strikt Opt-in.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">TechCrunch, The Verge</span>
-                    <a href="editions/2026-03-18.html#art-5" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--forschung)"></span>
-                    <span class="news-card-category" style="color:var(--forschung)">FORSCHUNG</span>
-                    <span class="news-card-num">#06</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">DeepMind stellt AGI-Messframework vor</div>
-                    <div class="news-card-teaser">10 kognitive Kernfaehigkeiten sollen AGI-Fortschritt messbar machen. Kaggle-Hackathon mit 200.000 Dollar Preispool gestartet. Fokus: Lernen, Metakognition, soziale Kognition.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">Google DeepMind</span>
-                    <a href="editions/2026-03-18.html#art-6" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--community)"></span>
-                    <span class="news-card-category" style="color:var(--community)">COMMUNITY</span>
-                    <span class="news-card-num">#07</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Garry Tans Claude-Code-Setup geht viral</div>
-                    <div class="news-card-teaser">Der YC-CEO veroeffentlicht sein &bdquo;gstack&ldquo; auf GitHub: 10 rollenbasierte KI-Skills. 20K Stars, 2200 Forks. Ein CTO nennt es &bdquo;God Mode&ldquo; — Kritiker sehen Hype ohne Substanz.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">TechCrunch, GitHub</span>
-                    <a href="editions/2026-03-18.html#art-7" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--industrie)"></span>
-                    <span class="news-card-category" style="color:var(--industrie)">INDUSTRIE</span>
-                    <span class="news-card-num">#08</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Mastercard baut Foundation-Modell fuer Betrug</div>
-                    <div class="news-card-teaser">Ein &bdquo;Large Tabular Model&ldquo; statt LLM: trainiert auf Milliarden Transaktionen. Erster Fokus Cybersicherheit. Zeigt: Foundation Models funktionieren weit ueber Text hinaus.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">Mastercard, PYMNTS</span>
-                    <a href="editions/2026-03-18.html#art-8" class="news-card-action">[LESEN]</a>
-                </div>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="news-card">
-                <div class="news-card-header">
-                    <span class="news-card-dot" style="background:var(--industrie)"></span>
-                    <span class="news-card-category" style="color:var(--industrie)">INDUSTRIE</span>
-                    <span class="news-card-num">#09</span>
-                </div>
-                <div class="news-card-body">
-                    <div class="news-card-title">Microsoft uebernimmt KI-Startup Cove</div>
-                    <div class="news-card-teaser">Acqui-Hire des Sequoia-finanzierten Teams. Cove verwandelte KI-Chats in visuelle Workspaces. Dienst endet 1. April. Weiterer Baustein fuer Microsofts Copilot-Strategie.</div>
-                </div>
-                <div class="news-card-footer">
-                    <span class="news-card-source">TechCrunch, GeekWire</span>
-                    <a href="editions/2026-03-18.html#art-9" class="news-card-action">[LESEN]</a>
-                </div>
+            <div class="brief">
+                <h4 class="brief-headline">Mastercard baut Foundation-Modell</h4>
+                <p class="brief-text">Ein &bdquo;Large Tabular Model&ldquo; statt LLM, trainiert auf Milliarden Transaktionen. Erster Fokus: Cybersicherheit und Betrugserkennung. <a href="editions/2026-03-18.html#art-8" class="brief-link">Weiter &rarr;</a></p>
             </div>
 
         </div>
-    </section>
 
-</main>
+        <!-- ═══ SMALL NOTICE ═══ -->
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.5rem;font-family:'IM Fell English',serif;font-size:0.78rem;color:var(--ink-faded);">
+            <span><b style="color:var(--ink-light)">Microsoft &uuml;bernimmt KI-Startup Cove.</b> Acqui-Hire des Sequoia-finanzierten Teams. Dienst endet 1. April. <a href="editions/2026-03-18.html#art-9" class="story-link">S. 9</a></span>
+        </div>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="game-footer">
-    <div class="footer-text">
-        KI-gestuetzte Recherche und Verifikation aus 14 Quellen.
-        <br>Alle Fakten aus mindestens 2 unabhaengigen Quellen geprueft.
-        <br><a href="about.html">Wie funktioniert das?</a>
     </div>
-    <div class="footer-copy">(C) 2026 AI NEWS MAGAZIN TERMINAL</div>
-</footer>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="paper-footer">
+        <span>&copy; 2026 AI News Magazin</span>
+        <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
+        <a href="about.html">So funktioniert&rsquo;s</a>
+    </footer>
+
+</div>
 
 </body>
 </html>
