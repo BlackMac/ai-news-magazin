@@ -31,17 +31,21 @@
         }
 
         .newspaper {
-            background: var(--paper);
             max-width: 720px;
             width: 100%;
+        }
+
+        .paper-sheet {
+            background: var(--paper);
             box-shadow:
                 2px 2px 0 var(--paper-edge),
                 4px 4px 0 var(--paper-dark),
                 6px 6px 15px rgba(30, 20, 5, 0.3);
             position: relative;
+            margin-bottom: 1.5rem;
         }
 
-        .newspaper::before {
+        .paper-sheet::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -97,16 +101,13 @@
 
         /* ─── EDITIONS LIST ─── */
         .editions {
-            padding: 0 1.5rem 1rem;
+            padding: 0;
         }
 
         /* ─── SINGLE EDITION ─── */
         .edition {
-            border-bottom: 3px double var(--rule);
-            padding: 1.2rem 0 1rem;
+            padding: 1rem 1.5rem 1.2rem;
         }
-
-        .edition:last-child { border-bottom: none; }
 
         .edition-head {
             display: flex;
@@ -237,6 +238,7 @@
 
 <div class="newspaper">
 
+    <div class="paper-sheet">
     <header class="masthead">
         <div class="masthead-top">
             <span>Gegr. 2026</span>
@@ -249,10 +251,12 @@
             <a href="about.html">Wie wir arbeiten &rarr;</a>
         </div>
     </header>
+    </div>
 
     <div class="editions">
 
         <!-- ═══ 18. MÄRZ ═══ -->
+        <div class="paper-sheet">
         <div class="edition">
             <div class="edition-head">
                 <span class="edition-date">Dienstag, 18. M&auml;rz 2026</span>
@@ -271,8 +275,10 @@
                 <li><span class="cat">Industrie</span> <a href="editions/2026-03-18.html#art-9">Microsoft &uuml;bernimmt Cove-Team</a></li>
             </ul>
         </div>
+        </div>
 
         <!-- ═══ 17. MÄRZ ═══ -->
+        <div class="paper-sheet">
         <div class="edition">
             <div class="edition-head">
                 <span class="edition-date">Montag, 17. M&auml;rz 2026</span>
@@ -290,8 +296,10 @@
                 <li><span class="cat">Community</span> <a href="editions/2026-03-17.html#art-8">Garry Tans Claude-Setup geht viral</a></li>
             </ul>
         </div>
+        </div>
 
         <!-- ═══ 16. MÄRZ ═══ -->
+        <div class="paper-sheet">
         <div class="edition">
             <div class="edition-head">
                 <span class="edition-date">Sonntag, 16. M&auml;rz 2026</span>
@@ -307,14 +315,17 @@
                 <li><span class="cat">Vermischtes</span> <a href="editions/2026-03-16.html#art-6">Netanyahu im Deepfake-Labyrinth</a></li>
             </ul>
         </div>
+        </div>
 
     </div>
 
+    <div class="paper-sheet">
     <footer class="paper-footer">
         <span>&copy; 2026 AI News Magazin</span>
         <span style="font-style:italic">Recherchiert mit KI-Unterst&uuml;tzung</span>
         <a href="about.html">So funktioniert&rsquo;s</a>
     </footer>
+    </div>
 
 </div>
 
