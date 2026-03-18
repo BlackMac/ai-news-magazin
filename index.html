@@ -3,870 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KI-Magazin -- Ausgabe 18. M&auml;rz 2026</title>
+    <title>AI News Magazin — Archiv</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #e94560;
-            --accent-light: #ff6b81;
-            --bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --text: #2d3436;
-            --text-light: #636e72;
-            --border: #dfe6e9;
-            --tag-news: #0984e3;
-            --tag-lab: #6c5ce7;
-            --tag-community: #00b894;
-            --tag-research: #fdcb6e;
+            --ink: #1a1310;
+            --paper: #f5f0e8;
+            --cream: #faf7f2;
+            --rule: #c8b8a0;
+            --rule-light: #e0d6c8;
+            --accent: #b8252a;
+            --muted: #7a6e5f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
+            font-family: 'Source Serif 4', 'Georgia', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.75;
+            font-size: 17px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 3rem 1.5rem 2.5rem;
+        .masthead {
+            background: var(--ink);
+            color: var(--paper);
             text-align: center;
-            border-bottom: 4px solid var(--accent);
+            padding: 2.5rem 1.5rem 2rem;
+            border-bottom: 3px solid var(--accent);
         }
 
-        header h1 {
-            font-size: 2.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 0.3rem;
-            font-weight: 700;
+        .masthead-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: 0 auto 0.8rem;
         }
 
-        header .edition {
-            font-size: 1.1rem;
-            color: #b2bec3;
-            margin-bottom: 1rem;
-            font-style: italic;
+        .masthead h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            line-height: 1.1;
         }
 
-        header .editorial-note {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 0.95rem;
-            color: #dfe6e9;
-            line-height: 1.6;
+        .masthead-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rule);
+            margin-top: 0.5rem;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 820px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 2.5rem 1.5rem;
+            flex: 1;
         }
 
-        /* Table of Contents */
-        nav.toc {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 960px;
-        }
-
-        nav.toc h2 {
-            font-size: 1.4rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 1px solid var(--rule-light);
         }
 
-        nav.toc ol {
-            padding-left: 1.5rem;
-        }
-
-        nav.toc li {
-            margin-bottom: 0.6rem;
-            font-size: 1rem;
-        }
-
-        nav.toc a {
-            color: var(--secondary);
+        .edition-card {
+            display: block;
+            background: var(--cream);
+            border: 1px solid var(--rule-light);
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.2rem;
             text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        nav.toc a:hover {
-            color: var(--accent);
-        }
-
-        nav.toc .toc-source {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            font-style: italic;
-        }
-
-        /* Articles */
-        article {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin: 2rem auto;
-            max-width: 960px;
-            overflow: hidden;
-        }
-
-        article .article-header {
-            padding: 2rem 2rem 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        article h2 {
-            font-size: 1.7rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .meta-line {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .tag-news { background: var(--tag-news); }
-        .tag-lab { background: var(--tag-lab); }
-        .tag-community { background: var(--tag-community); }
-        .tag-research { background: var(--tag-research); color: #2d3436; }
-
-        .teaser {
-            padding: 1.5rem 2rem;
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
-            background: #fafbfc;
-        }
-
-        .article-body {
-            padding: 1.5rem 2rem 2rem;
-        }
-
-        .article-body h3 {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin: 1.5rem 0 0.8rem;
-            font-weight: 700;
-        }
-
-        .article-body h3:first-child {
-            margin-top: 0;
-        }
-
-        .article-body p {
-            margin-bottom: 1rem;
-            text-align: justify;
-            hyphens: auto;
-        }
-
-        .sources-list {
-            background: #f1f2f6;
-            border-radius: 6px;
-            padding: 1rem 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .sources-list h4 {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .sources-list ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sources-list li {
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-            padding-left: 1rem;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
             position: relative;
         }
 
-        .sources-list li::before {
-            content: "\25B8";
+        .edition-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 12px rgba(26, 19, 16, 0.08);
+        }
+
+        .edition-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .edition-card:hover::before {
+            opacity: 1;
+        }
+
+        .edition-date {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .edition-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .edition-highlights {
+            list-style: none;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .edition-highlights li {
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.2rem;
+        }
+
+        .edition-highlights li::before {
+            content: '—';
             position: absolute;
             left: 0;
             color: var(--accent);
         }
 
-        .sources-list a {
-            color: var(--tag-news);
-            text-decoration: none;
-            word-break: break-all;
-        }
-
-        .sources-list a:hover {
-            text-decoration: underline;
-        }
-
-        .editorial-warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 0.8rem 1.2rem;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-            border-radius: 0 4px 4px 0;
-        }
-
-        /* Footer */
         footer {
-            background: var(--primary);
-            color: #b2bec3;
+            background: var(--ink);
+            color: var(--rule);
             padding: 2rem 1.5rem;
             text-align: center;
-            margin-top: 3rem;
-            font-size: 0.85rem;
-            line-height: 1.8;
         }
 
-        footer strong {
-            color: var(--accent-light);
+        .footer-rule {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin: 0 auto 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 700px) {
-            header h1 { font-size: 1.8rem; }
-            article h2 { font-size: 1.3rem; }
-            .article-header, .teaser, .article-body { padding-left: 1.2rem; padding-right: 1.2rem; }
-            nav.toc { padding: 1.2rem; }
+        footer p {
+            font-size: 0.78rem;
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        /* Print */
-        @media print {
-            header { background: white; color: black; border-bottom: 2px solid black; }
-            article { break-inside: avoid; border: 1px solid #ccc; }
-            .tag { border: 1px solid #999; color: #333; background: white; }
+        @media (max-width: 600px) {
+            .container { padding: 1.5rem 1rem; }
+            .edition-card { padding: 1.3rem 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>KI-MAGAZIN</h1>
-    <div class="edition">Ausgabe vom 18. M&auml;rz 2026 &mdash; Die wichtigsten Entwicklungen der letzten 24 Stunden</div>
-    <p class="editorial-note">
-        Das heutige Magazin wird dominiert vom eskalierenden Konflikt zwischen dem US-Verteidigungsministerium und Anthropic,
-        NVIDIAs umstrittenem DLSS 5, und gleich mehreren strategischen Wendepunkten in der KI-Branche.
-        Insgesamt wurden 421 Artikel aus 14 Quellen aggregiert und die zehn bedeutendsten Geschichten f&uuml;r Sie recherchiert.
-    </p>
+<header class="masthead">
+    <div class="masthead-rule"></div>
+    <h1>AI News Magazin</h1>
+    <div class="masthead-sub">Deutschsprachiges Nachrichtenmagazin für Künstliche Intelligenz</div>
 </header>
 
-<nav class="toc">
-    <div class="container">
-        <h2>Inhaltsverzeichnis</h2>
-        <ol>
-            <li><a href="#art1">Pentagon nennt Anthropics Sicherheitsgrenzen &bdquo;inakzeptables Risiko f&uuml;r nationale Sicherheit&ldquo;</a> <span class="toc-source">&mdash; TechCrunch, Wired, CNN</span></li>
-            <li><a href="#art2">Pentagon plant Training von KI-Modellen mit geheimen Milit&auml;rdaten</a> <span class="toc-source">&mdash; MIT Technology Review</span></li>
-            <li><a href="#art3">OpenAI expandiert in den Regierungssektor mit AWS-Deal</a> <span class="toc-source">&mdash; TechCrunch, The Information</span></li>
-            <li><a href="#art4">Mistral Forge: Eigene KI-Modelle f&uuml;r Unternehmen auf der GTC vorgestellt</a> <span class="toc-source">&mdash; TechCrunch, VentureBeat</span></li>
-            <li><a href="#art5">NVIDIA DLSS 5: Revolution oder KI-Schminke? Massive Kritik an Neural Rendering</a> <span class="toc-source">&mdash; The Verge, PC Gamer</span></li>
-            <li><a href="#art6">Google macht &bdquo;Personal Intelligence&ldquo; f&uuml;r alle US-Nutzer kostenlos</a> <span class="toc-source">&mdash; The Verge, TechCrunch</span></li>
-            <li><a href="#art7">DeepMind stellt kognitives Framework zur AGI-Messung vor</a> <span class="toc-source">&mdash; Google DeepMind</span></li>
-            <li><a href="#art8">Garry Tans &bdquo;gstack&ldquo; spaltet die Entwickler-Community</a> <span class="toc-source">&mdash; TechCrunch</span></li>
-            <li><a href="#art9">Meta stellt vier MTIA-Chip-Generationen f&uuml;r KI-Inferenz vor</a> <span class="toc-source">&mdash; Meta AI Blog, CNBC</span></li>
-            <li><a href="#art10">BuzzFeed pr&auml;sentiert KI-Apps auf der SXSW &mdash; Publikum reagiert verhalten</a> <span class="toc-source">&mdash; TechCrunch, Futurism</span></li>
-        </ol>
-    </div>
-</nav>
+<main class="container">
+    <div class="section-label">Alle Ausgaben</div>
 
-<!-- ARTIKEL 1 -->
-<article id="art1">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>Pentagon nennt Anthropics Sicherheitsgrenzen &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo;</h2>
-        <div class="meta-line">18. M&auml;rz 2026 &bull; Quellen: TechCrunch, Wired, CNN, NPR, Washington Post</div>
-    </div>
-    <div class="teaser">
-        In einer 40-seitigen Gerichtsakte argumentiert das US-Verteidigungsministerium, dass Anthropics Weigerung, den Einsatz
-        seiner KI-Technologie im Kampfeinsatz ohne Einschr&auml;nkungen zuzulassen, ein inakzeptables Sicherheitsrisiko darstelle.
-        Es ist die bislang sch&auml;rfste Eskalation im Konflikt zwischen Silicon Valley und dem Pentagon.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Der Konflikt zwischen dem US-Verteidigungsministerium (DoD) und dem KI-Unternehmen Anthropic hat eine neue, dramatische
-            Eskalationsstufe erreicht. Am Dienstagabend ver&ouml;ffentlichte das Pentagon seine erste offizielle Erwiderung auf
-            Anthropics Klage vom 9. M&auml;rz, in der das Unternehmen die Einstufung als &bdquo;Lieferkettenrisiko&ldquo; durch
-            Verteidigungsminister Pete Hegseth angefochten hatte.
-        </p>
-        <p>
-            Im Kern geht es um zwei rote Linien, die Anthropic bei Vertragsverhandlungen gezogen hatte: Erstens solle die
-            Claude-KI nicht f&uuml;r die Massen&uuml;berwachung von US-B&uuml;rgern eingesetzt werden, und zweitens nicht
-            f&uuml;r autonome Waffensysteme. Das Pentagon besteht jedoch darauf, die Technologie &bdquo;f&uuml;r alle legalen
-            Zwecke&ldquo; nutzen zu k&ouml;nnen, und argumentiert, dass es einem privaten Unternehmen nicht erlaubt sein d&uuml;rfe,
-            dem Milit&auml;r vorzuschreiben, wie es seine Werkzeuge in einem nationalen Sicherheitsnotfall einsetzt.
-        </p>
-        <p>
-            Das Kernargument der 40-seitigen Akte des DoD dreht sich um die Bef&uuml;rchtung, Anthropic k&ouml;nnte
-            &bdquo;versuchen, seine Technologie zu deaktivieren oder das Verhalten seines Modells pr&auml;ventiv zu ver&auml;ndern&ldquo;,
-            wenn das Unternehmen der Meinung sei, seine &bdquo;roten Linien&ldquo; w&uuml;rden &uuml;berschritten &mdash; und
-            zwar potenziell w&auml;hrend laufender Kampfoperationen. Dieses Szenario, so die Regierung, mache Anthropic zu
-            einem untragbaren Risikofaktor in der milit&auml;rischen Lieferkette.
-        </p>
-        <p>
-            Anthropic hatte am 9. M&auml;rz Klage in einem kalifornischen Bundesgericht eingereicht und dem DoD vorgeworfen,
-            gegen die Redefreiheit des Ersten Verfassungszusatzes zu versto&szlig;en und das Unternehmen aus ideologischen
-            Gr&uuml;nden zu bestrafen. Laut CNN und NPR hat ein internes Pentagon-Memo milit&auml;rische Befehlshaber
-            angewiesen, Anthropic-Technologie aus Schl&uuml;sselsystemen zu entfernen.
-        </p>
-        <p>
-            Die n&auml;chste Anh&ouml;rung zum Antrag auf eine einstweilige Verf&uuml;gung ist f&uuml;r kommenden Dienstag
-            angesetzt. Der Ausgang k&ouml;nnte pr&auml;zedenzschaffend daf&uuml;r sein, inwieweit KI-Unternehmen ethische
-            Grenzen f&uuml;r den Einsatz ihrer Technologie durch staatliche Akteure ziehen d&uuml;rfen. Bemerkenswert ist
-            der zeitliche Kontext: Anthropic hatte erst am 24. Februar sein &bdquo;Responsible Scaling Policy&ldquo;
-            in Version 3.0 aktualisiert, wobei Kritiker bem&auml;ngelten, dass harte Sicherheitsgrenzen
-            zugunsten weicherer Formulierungen aufgegeben wurden.
-        </p>
+    <a href="editions/2026-03-18.html" class="edition-card">
+        <div class="edition-date">18. März 2026</div>
+        <div class="edition-meta">9 Artikel · Politik · Industrie · Technologie · Forschung · Community</div>
+        <ul class="edition-highlights">
+            <li>Pentagon erklärt Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</li>
+            <li>Pentagon plant KI-Training mit klassifizierten Geheimdaten</li>
+            <li>Mistral lanciert Forge — Maßgeschneiderte KI für Unternehmen</li>
+        </ul>
+    </a>
 
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://techcrunch.com/2026/03/18/dod-says-anthropics-red-lines-make-it-an-unacceptable-risk-to-national-security/">TechCrunch: DOD says Anthropic's 'red lines' make it an 'unacceptable risk to national security'</a></li>
-                <li><a href="https://www.wired.com/story/department-of-defense-responds-to-anthropic-lawsuit/">Wired: Justice Department Says Anthropic Can't Be Trusted With Warfighting Systems</a></li>
-                <li><a href="https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon">CNN: Anthropic sues the Trump administration after it was designated a supply chain risk</a></li>
-                <li><a href="https://www.npr.org/2026/03/09/nx-s1-5742548/anthropic-pentagon-lawsuit-amodai-hegseth">NPR: Anthropic sues the Trump administration over 'supply chain risk' label</a></li>
-                <li><a href="https://www.washingtonpost.com/technology/2026/03/09/anthropic-lawsuit-pentagon/">Washington Post: Anthropic sues Pentagon over being labeled a national security risk</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 2 -->
-<article id="art2">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>Pentagon plant Training von KI-Modellen mit geheimen Milit&auml;rdaten</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: MIT Technology Review, Engadget</div>
-    </div>
-    <div class="teaser">
-        Das US-Verteidigungsministerium er&ouml;rtert Pl&auml;ne, sichere Umgebungen einzurichten, in denen KI-Unternehmen
-        milit&auml;rspezifische Versionen ihrer Modelle mit klassifizierten Daten trainieren k&ouml;nnen &mdash; ein
-        qualitativer Sprung gegen&uuml;ber der bisherigen Praxis.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Bislang werden KI-Modelle wie Anthropics Claude bereits in klassifizierten Umgebungen eingesetzt, um Fragen
-            zu beantworten &mdash; unter anderem bei der Analyse von Zielen im Iran, wie MIT Technology Review berichtet.
-            Dabei arbeiten die Modelle jedoch nur mit den ihnen vorgelegten Daten, ohne auf klassifizierte Informationen
-            trainiert worden zu sein. Die neuen Pl&auml;ne gehen einen entscheidenden Schritt weiter.
-        </p>
-        <p>
-            Das Training w&uuml;rde in akkreditierten sicheren Rechenzentren stattfinden, in denen eine Kopie eines
-            KI-Modells mit klassifizierten Daten gekoppelt wird. Das Verteidigungsministerium bliebe Eigent&uuml;mer
-            der Daten, doch Personal der KI-Unternehmen k&ouml;nnte in seltenen F&auml;llen &mdash; mit entsprechender
-            Sicherheitsfreigabe &mdash; Zugang erhalten.
-        </p>
-        <p>
-            Bef&uuml;rworter argumentieren, dass auf klassifizierten Daten trainierte Modelle bei bestimmten
-            milit&auml;rischen Aufgaben deutlich pr&auml;ziser und effektiver arbeiten w&uuml;rden. Kritiker warnen
-            jedoch vor erheblichen Sicherheitsrisiken: Sensible Geheimdienstinformationen wie &Uuml;berwachungsberichte
-            oder Gefechtslagebeurteilungen k&ouml;nnten in die Modelle selbst eingebettet werden und m&ouml;glicherweise
-            extrahiert werden.
-        </p>
-        <p>
-            Das Pentagon hat bereits Vereinbarungen mit OpenAI und Elon Musks xAI getroffen, ihre Modelle in
-            klassifizierten Umgebungen zu betreiben. Die Initiative ist Teil einer neuen Agenda, die darauf abzielt,
-            die US-Streitkr&auml;fte zu einer &bdquo;KI-first&ldquo;-Kampftruppe zu transformieren, w&auml;hrend sich
-            der Konflikt mit dem Iran versch&auml;rft.
-        </p>
-        <p>
-            In Verbindung mit dem Anthropic-Konflikt (siehe Artikel 1) zeichnet sich ein Bild ab, in dem das Pentagon
-            zunehmend auf KI-Unternehmen setzt, die bereit sind, ohne ethische Einschr&auml;nkungen zu kooperieren,
-            w&auml;hrend Unternehmen mit strengeren Sicherheitsrichtlinien ausgeschlossen werden.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://www.technologyreview.com/2026/03/17/1134351/the-pentagon-is-planning-for-ai-companies-to-train-on-classified-data-defense-official-says/">MIT Technology Review: The Pentagon is making plans for AI companies to train on classified data</a></li>
-                <li><a href="https://www.engadget.com/ai/the-defense-department-reportedly-plans-to-train-ai-models-on-classified-military-data-120332113.html">Engadget: The Defense Department reportedly plans to train AI models on classified military data</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 3 -->
-<article id="art3">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>OpenAI expandiert in den Regierungssektor mit AWS-Deal</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: TechCrunch, The Information, PYMNTS</div>
-    </div>
-    <div class="teaser">
-        OpenAI hat eine Partnerschaft mit Amazon Web Services geschlossen, um seine KI-Systeme &uuml;ber die bestehende
-        AWS-Infrastruktur an US-Regierungsbeh&ouml;rden zu verkaufen &mdash; sowohl f&uuml;r klassifizierte als auch
-        nicht-klassifizierte Arbeit.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Die Partnerschaft zwischen OpenAI und AWS markiert eine erhebliche Ausweitung von OpenAIs Pr&auml;senz im
-            US-Regierungssektor. AWS, einer der gr&ouml;&szlig;ten Cloud-Anbieter f&uuml;r US-Beh&ouml;rden, wird
-            OpenAI-Produkte &uuml;ber seine gesamte Infrastruktur im &ouml;ffentlichen Sektor vertreiben, einschlie&szlig;lich
-            Amazon Bedrock in Regierungs-Cloud-Umgebungen wie AWS GovCloud und den klassifizierten AWS-Regionen f&uuml;r
-            Arbeitslasten der Geheimhaltungsstufen Secret und Top Secret.
-        </p>
-        <p>
-            Der Zeitpunkt ist strategisch bedeutsam: Der Deal kommt inmitten des eskalierenden Konflikts zwischen dem
-            Pentagon und Anthropic. W&auml;hrend Anthropic wegen seiner ethischen Sicherheitsgrenzen aus der
-            milit&auml;rischen Lieferkette ausgeschlossen wird, positioniert sich OpenAI als bereitwilliger Partner.
-            OpenAI hat bereits einen Vertrag mit dem Pentagon geschlossen, der dem Milit&auml;r die Nutzung seiner
-            Modelle im klassifizierten Netzwerk erlaubt.
-        </p>
-        <p>
-            Allerdings beh&auml;lt sich OpenAI laut einem Unternehmenssprecher eine gewisse Kontrolle vor: Das Unternehmen
-            entscheidet, welche Modelle verf&uuml;gbar gemacht werden, und AWS muss vor der Freischaltung f&uuml;r besonders
-            sensible Beh&ouml;rden &mdash; einschlie&szlig;lich Geheimdienst-Kunden &mdash; eine Vorabbenachrichtigung erteilen.
-        </p>
-        <p>
-            Die Entwicklung verdeutlicht einen breiteren Trend: KI-Unternehmen konkurrieren zunehmend um lukrative
-            Regierungsvertr&auml;ge, wobei die Bereitschaft zur Kooperation ohne ethische Vorbehalte zum Wettbewerbsvorteil
-            wird. F&uuml;r OpenAI, das sich auf einen m&ouml;glichen B&ouml;rsengang vorbereitet, stellt der wachsende
-            Regierungssektor eine wichtige Einnahmequelle dar.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://techcrunch.com/2026/03/17/openai-expands-government-footprint-with-aws-deal/">TechCrunch: OpenAI expands government footprint with AWS deal</a></li>
-                <li><a href="https://www.theinformation.com/articles/openai-clinches-aws-deal-bid-win-government-contracts">The Information: OpenAI Clinches AWS Deal in Bid to Win Government Contracts</a></li>
-                <li><a href="https://www.pymnts.com/artificial-intelligence-2/2026/openai-teams-with-aws-to-strengthen-government-partnerships/">PYMNTS: OpenAI Teams With AWS to Strengthen Government Partnerships</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 4 -->
-<article id="art4">
-    <div class="article-header">
-        <span class="tag tag-lab">Lab-Ank&uuml;ndigung</span>
-        <h2>Mistral Forge: Eigene KI-Modelle f&uuml;r Unternehmen auf der GTC vorgestellt</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: TechCrunch, VentureBeat, Hacker News</div>
-    </div>
-    <div class="teaser">
-        Das franz&ouml;sische KI-Unternehmen Mistral hat auf NVIDIAs GTC-Konferenz &bdquo;Forge&ldquo; vorgestellt &mdash;
-        eine Plattform, mit der Unternehmen eigene KI-Modelle von Grund auf mit ihren eigenen Daten trainieren k&ouml;nnen.
-        630 Upvotes auf Hacker News zeigen das enorme Interesse.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Mistral AI, das in Paris ans&auml;ssige KI-Unternehmen um CEO Arthur Mensch, setzt mit Forge auf eine
-            differenzierte Marktpositionierung. W&auml;hrend OpenAI und Anthropic prim&auml;r auf Fine-Tuning und
-            Retrieval-basierte Ans&auml;tze setzen, erm&ouml;glicht Forge das vollst&auml;ndige Training eigener
-            Modelle auf unternehmenseigenen Daten. Das zielt auf Branchen, in denen dom&auml;nenspezifisches Wissen
-            und nicht-englische Sprachen zentral sind.
-        </p>
-        <p>
-            Forge-Kunden k&ouml;nnen auf Mistrals Bibliothek offener Modelle aufbauen, darunter das k&uuml;rzlich
-            eingef&uuml;hrte Mistral Small 4. Begleitet wird die Plattform von einem Team sogenannter
-            &bdquo;Forward-Deployed Engineers&ldquo;, die direkt bei Kunden eingesetzt werden &mdash; ein Modell,
-            das an Palantir und IBM erinnert.
-        </p>
-        <p>
-            Zu den ersten Partnern geh&ouml;ren Ericsson, die Europ&auml;ische Weltraumorganisation (ESA), das
-            italienische Beratungsunternehmen Reply sowie die singapurischen Beh&ouml;rden DSO und HTX. Diese
-            Partnerschaften signalisieren, dass Forge besonders f&uuml;r Regierungen und hochregulierte Branchen
-            attraktiv ist.
-        </p>
-        <p>
-            Laut CEO Mensch ist Mistral auf dem Weg, in diesem Jahr einen j&auml;hrlich wiederkehrenden Umsatz
-            von &uuml;ber einer Milliarde Dollar zu &uuml;berschreiten. Damit w&auml;re das erst 2023 gegr&uuml;ndete
-            Unternehmen eines der am schnellsten wachsenden KI-Startups weltweit. Die Fokussierung auf den Enterprise-Markt
-            anstatt auf Endverbraucher unterscheidet Mistral fundamental von Konkurrenten wie OpenAI.
-        </p>
-        <p>
-            Die Ank&uuml;ndigung auf der GTC &mdash; NVIDIAs j&auml;hrlicher Technologiekonferenz &mdash; unterstreicht
-            die enge Partnerschaft zwischen den beiden Unternehmen und Mistrals Strategie, sich als europäische
-            Alternative im KI-Enterprise-Markt zu etablieren.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://techcrunch.com/2026/03/17/mistral-forge-nvidia-gtc-build-your-own-ai-enterprise/">TechCrunch: Mistral bets on 'build-your-own AI' as it takes on OpenAI, Anthropic</a></li>
-                <li><a href="https://venturebeat.com/infrastructure/mistral-ai-launches-forge-to-help-companies-build-proprietary-ai-models">VentureBeat: Mistral AI launches Forge to help companies build proprietary AI models</a></li>
-                <li><a href="https://mistral.ai/news/forge">Mistral AI: Forge Announcement</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 5 -->
-<article id="art5">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>NVIDIA DLSS 5: Revolution oder KI-Schminke? Massive Kritik an Neural Rendering</h2>
-        <div class="meta-line">17.&ndash;18. M&auml;rz 2026 &bull; Quellen: The Verge, PC Gamer, Tom's Hardware, Futurism</div>
-    </div>
-    <div class="teaser">
-        NVIDIAs neue Grafiktechnologie DLSS 5 nutzt ein neuronales Netzwerk, um Spielegrafik in Echtzeit fotorealistischer
-        zu machen. Doch die Gaming-Community und Spieleentwickler reagieren mit scharfer Kritik: Die KI ver&auml;ndere
-        k&uuml;nstlerische Visionen und dr&uuml;cke Charakteren einheitliche Sch&ouml;nheitsideale auf.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            DLSS (Deep Learning Super Sampling) ist NVIDIAs KI-gest&uuml;tzte Upscaling-Technologie, die seit ihrer
-            Einf&uuml;hrung 2018 Spiele mit h&ouml;herer Aufl&ouml;sung bei geringerem Leistungsverbrauch darstellen
-            kann. DLSS 5, vorgestellt auf der GTC 2026, geht jedoch weit &uuml;ber Upscaling hinaus: Ein
-            &bdquo;3D-gesteuertes neuronales Rendering-Modell&ldquo; analysiert Farbe und Bewegungsvektoren jedes
-            Frames und &uuml;berlagert die Szene mit fotorealistischer Beleuchtung und Materialien.
-        </p>
-        <p>
-            Die Kontroverse entz&uuml;ndete sich an zwei Hauptkritikpunkten. Erstens scheint die KI Spielfiguren in
-            Richtung eines einheitlichen Sch&ouml;nheitsideals zu ver&auml;ndern: In Demonstrationen erhielt eine
-            Figur vollere Lippen und sch&auml;rfere Wangenknochen, w&auml;hrend eine 15-j&auml;hrige Sch&uuml;lerfigur
-            deutlich &auml;lter wirkte. Kritiker sprechen von &bdquo;KI-Sch&ouml;nheitsstandards&ldquo;, die
-            Charaktere ohne R&uuml;cksicht auf die k&uuml;nstlerische Intention &uuml;berschreiben.
-        </p>
-        <p>
-            Zweitens sehen Spieleentwickler eine Bedrohung ihrer k&uuml;nstlerischen Vision. Jon Ingold,
-            Narrative Director und Mitgr&uuml;nder von Inkle, zeigte anhand seines Spiels &bdquo;Heaven's Vault&ldquo;,
-            dass DLSS 5 die Identit&auml;t der Hauptfigur zerst&ouml;ren w&uuml;rde &mdash; eines Spiels, das sich
-            um Arch&auml;ologie und kulturelle Bewahrung dreht. Ein Entwickler kommentierte: &bdquo;Schlechtes Ende:
-            Jetzt ist jedes Spiel Slop.&ldquo; Die Technologie wurde auf Social Media als &bdquo;Sloptracing&ldquo;
-            und &bdquo;Yassification&ldquo; verspottet.
-        </p>
-        <p>
-            NVIDIA und Partner-Studios verteidigten die Technologie. Bethesda betonte, dies sei ein &bdquo;sehr fr&uuml;her
-            Einblick&ldquo; und die K&uuml;nstler-Teams w&uuml;rden die Beleuchtung und den finalen Effekt weiter
-            anpassen. Die Funktion werde vollst&auml;ndig unter der Kontrolle der K&uuml;nstler stehen und f&uuml;r
-            Spieler optional sein. DLSS 5 soll im Herbst 2026 verf&ouml;ffentlicht werden.
-        </p>
-        <p>
-            Zu den best&auml;tigten Unterst&uuml;tzern geh&ouml;ren Bethesda, CAPCOM, Ubisoft und Warner Bros. Games.
-            Die Technologie l&auml;uft in Echtzeit bei bis zu 4K-Aufl&ouml;sung. Ob die finale Version die
-            k&uuml;nstlerischen Bedenken ausreichend adressieren kann, bleibt abzuwarten.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://www.theverge.com/games/896518/nvidia-dlss-5-ai-3d-rendering">The Verge: DLSS 5 &mdash; Has Nvidia's AI graphics technology gone too far?</a></li>
-                <li><a href="https://www.pcgamer.com/software/ai/dlss-5-clearly-overwrites-game-characters-with-ai-beauty-standards-but-nvidia-says-devs-have-artistic-control/">PC Gamer: DLSS 5 clearly overwrites game characters with AI beauty standards</a></li>
-                <li><a href="https://futurism.com/artificial-intelligence/nvidia-ridiculed-yassify-video-games">Futurism: Nvidia Ridiculed for "Sloptracing" Feature</a></li>
-                <li><a href="https://www.tomshardware.com/pc-components/gpus/we-got-a-first-look-at-nvidias-dlss-5-and-the-future-of-neural-rendering-at-gtc-the-results-can-be-impressive-but-theres-work-to-do">Tom's Hardware: First look at DLSS 5 and the future of neural rendering</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 6 -->
-<article id="art6">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>Google macht &bdquo;Personal Intelligence&ldquo; f&uuml;r alle US-Nutzer kostenlos</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: The Verge, TechCrunch, Google Blog</div>
-    </div>
-    <div class="teaser">
-        Googles &bdquo;Personal Intelligence&ldquo;-Funktion, die bislang zahlenden Gemini-Nutzern vorbehalten war,
-        wird ab sofort f&uuml;r alle US-Nutzer freigeschaltet. Die KI kann auf Gmail, Google Fotos, YouTube und
-        weitere Google-Dienste zugreifen, um personalisierte Antworten zu liefern.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Personal Intelligence ist Googles Antwort auf die zunehmende Nachfrage nach KI-Assistenten, die den
-            pers&ouml;nlichen Kontext eines Nutzers verstehen. Die Funktion erlaubt es Gemini, auf verbundene
-            Google-Apps zuzugreifen &mdash; etwa Gmail f&uuml;r E-Mails, Google Fotos f&uuml;r Bilder oder YouTube
-            f&uuml;r Videoverlauf &mdash; um kontextbezogene und individualisierte Antworten zu generieren.
-        </p>
-        <p>
-            Die Expansion umfasst drei Plattformen: den KI-Modus in der Google-Suche, die Gemini-App und Gemini
-            in Chrome. Nutzer k&ouml;nnen selbst entscheiden, welche Apps sie verbinden, und diese Verbindungen
-            jederzeit ein- oder ausschalten. Die Funktion ist derzeit nur f&uuml;r pers&ouml;nliche Google-Konten
-            verf&uuml;gbar, nicht f&uuml;r Workspace-Konten im Unternehmens- oder Bildungsbereich.
-        </p>
-        <p>
-            Datenschutzbedenken sind vorhersehbar: Mit Personal Intelligence erh&auml;lt Googles KI potenziellen
-            Zugang zu einem immensen Datenschatz &uuml;ber jeden einzelnen Nutzer. Google betont zwar, dass Nutzer
-            die volle Kontrolle behalten, doch die Gratisverf&uuml;gbarkeit k&ouml;nnte als Strategie gedeutet
-            werden, m&ouml;glichst viele Nutzer zum Teilen ihrer Daten zu bewegen und so die Modelle mit
-            pers&ouml;nlichen Daten zu verbessern.
-        </p>
-        <p>
-            Im Wettbewerbsumfeld positioniert sich Google damit gegen OpenAIs ChatGPT und Anthropics Claude,
-            die bislang keinen vergleichbar tiefen Zugriff auf das digitale Leben ihrer Nutzer bieten. Der
-            Vorteil liegt in Googles bereits existierendem &Ouml;kosystem: Milliarden von Menschen nutzen Gmail,
-            Google Fotos und YouTube t&auml;glich, was Google einen einzigartigen Datenvorteil verschafft.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://www.theverge.com/ai-artificial-intelligence/896107/google-expands-personal-intelligence">The Verge: Now everyone in the US is getting Google's personalized Gemini AI</a></li>
-                <li><a href="https://techcrunch.com/2026/03/17/googles-personal-intelligence-feature-is-expanding-to-all-us-users/">TechCrunch: Google's Personal Intelligence feature is expanding to all US users</a></li>
-                <li><a href="https://blog.google/products-and-platforms/products/search/personal-intelligence-expansion/">Google Blog: Personal Intelligence Expands Across AI Mode</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 7 -->
-<article id="art7">
-    <div class="article-header">
-        <span class="tag tag-research">Forschung</span>
-        <h2>DeepMind stellt kognitives Framework zur AGI-Messung vor</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: Google DeepMind Blog, Kaggle</div>
-    </div>
-    <div class="teaser">
-        Google DeepMind ver&ouml;ffentlicht ein wissenschaftliches Framework, das Fortschritte in Richtung
-        k&uuml;nstlicher allgemeiner Intelligenz (AGI) messbar machen soll &mdash; basierend auf zehn
-        kognitiven F&auml;higkeiten aus Psychologie und Neurowissenschaft.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Trotz der allgegenw&auml;rtigen Diskussion &uuml;ber AGI fehlt bislang ein anerkanntes Framework,
-            um Fortschritte dorthin objektiv zu messen. Dies f&uuml;hrt zu subjektiven Behauptungen, erschwert
-            die Nachverfolgung des Fortschritts und behindert eine verantwortungsvolle Regulierung. DeepMinds
-            neues Paper &bdquo;Measuring Progress Toward AGI: A Cognitive Taxonomy&ldquo; adressiert genau dieses
-            Problem.
-        </p>
-        <p>
-            Das Framework st&uuml;tzt sich auf Jahrzehnte der Forschung in Psychologie, Neurowissenschaft und
-            Kognitionswissenschaft und identifiziert zehn Schl&uuml;sselfakult&auml;ten allgemeiner Intelligenz:
-            Wahrnehmung, Generierung, Aufmerksamkeit, Lernen, Ged&auml;chtnis, Schlussfolgern, Metakognition,
-            exekutive Funktionen, Probleml&ouml;sung und soziale Kognition.
-        </p>
-        <p>
-            F&uuml;r jede dieser F&auml;higkeiten schl&auml;gt das Framework ein rigoroses Evaluationsprotokoll
-            vor: Die Leistung eines Systems wird &uuml;ber eine Reihe gezielter kognitiver Aufgaben gemessen,
-            was ein &bdquo;kognitives Profil&ldquo; ergibt. Dieses Profil zeigt St&auml;rken und Schw&auml;chen
-            eines Systems systematisch auf &mdash; im Gegensatz zu einzelnen Benchmarks, die oft nur schmale
-            F&auml;higkeiten testen.
-        </p>
-        <p>
-            Bemerkenswert ist die begleitende Community-Initiative: DeepMind kooperiert mit Kaggle f&uuml;r einen
-            Hackathon mit einem Preispool von 200.000 Dollar. Teilnehmer sollen Evaluationen f&uuml;r f&uuml;nf
-            besonders schwer messbare F&auml;higkeiten entwickeln: Lernen, Metakognition, Aufmerksamkeit, exekutive
-            Funktionen und soziale Kognition. Einreichungen sind vom 17. M&auml;rz bis 16. April m&ouml;glich,
-            Ergebnisse werden am 1. Juni bekannt gegeben.
-        </p>
-        <p>
-            Das Framework baut auf DeepMinds fr&uuml;herem Paper &bdquo;Levels of AGI&ldquo; aus dem Jahr 2023 auf,
-            das erstmals eine Taxonomie verschiedener AGI-Stufen vorschlug. W&auml;hrend jenes Paper
-            definierte, <em>was</em> AGI bedeutet, liefert das neue Framework Werkzeuge, um zu messen,
-            <em>wie weit</em> aktuelle Systeme davon entfernt sind.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/">Google DeepMind Blog: Measuring progress toward AGI: A cognitive framework</a></li>
-                <li><a href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf">DeepMind Paper (PDF)</a></li>
-                <li><a href="https://x.com/kaggle/status/2033940908639408488">Kaggle: Hackathon-Ank&uuml;ndigung</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 8 -->
-<article id="art8">
-    <div class="article-header">
-        <span class="tag tag-community">Community</span>
-        <h2>Garry Tans &bdquo;gstack&ldquo; spaltet die Entwickler-Community</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: TechCrunch, GitHub, Dev.to</div>
-    </div>
-    <div class="teaser">
-        Y-Combinator-CEO Garry Tan hat sein Claude-Code-Setup als Open Source ver&ouml;ffentlicht.
-        Mit 20.000 GitHub-Stars und ebenso viel Kritik hat &bdquo;gstack&ldquo; eine hitzige Debatte
-        &uuml;ber KI-gest&uuml;tztes Programmieren ausgel&ouml;st.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Garry Tan, CEO des renommierten Startup-Accelerators Y Combinator, ver&ouml;ffentlichte am 12. M&auml;rz
-            2026 sein pers&ouml;nliches Claude-Code-Setup unter dem Namen &bdquo;gstack&ldquo; als Open-Source-Projekt
-            auf GitHub (MIT-Lizenz). Das Repository sammelte innerhalb weniger Tage fast 20.000 Stars und &uuml;ber
-            2.200 Forks.
-        </p>
-        <p>
-            Gstack ist eine Sammlung von &bdquo;Skills&ldquo; &mdash; wiederverwendbare Prompts f&uuml;r Anthropics
-            Claude Code &mdash; die die KI strukturieren, um wie verschiedene Mitglieder eines Software-Teams zu agieren:
-            CEO, Ingenieur, Release Manager, QA-Tester und Dokumentationsautor. Aktuell umfasst das Repository 13 Skills.
-        </p>
-        <p>
-            Die Begeisterung und die Kritik waren gleicherma&szlig;en laut. Ein CTO nannte das Setup &bdquo;God Mode&ldquo;,
-            das sofort einen Cross-Site-Scripting-Angriff entdeckt habe. Auf der anderen Seite argumentierten Kritiker,
-            dass viele Entwickler &auml;hnliche Prompt-Sammlungen privat erstellt h&auml;tten und Tans Prominenz als
-            YC-CEO dem Projekt unverh&auml;ltnism&auml;&szlig;ige Aufmerksamkeit verschafft habe.
-        </p>
-        <p>
-            Besondere Aufmerksamkeit erregte Tans Aussage auf der SXSW, er leide an &bdquo;Cyber-Psychose&ldquo; und
-            schlafe nur noch vier Stunden pro Nacht, weil ihn die Arbeit mit KI-Agenten so begeistere. In den letzten
-            60 Tagen habe er &uuml;ber 600.000 Zeilen Produktionscode geschrieben &mdash; 35 Prozent davon Tests &mdash;
-            mit durchschnittlich 10.000 bis 20.000 nutzbaren Zeilen pro Tag, w&auml;hrend er gleichzeitig als YC-CEO
-            fungiere.
-        </p>
-        <div class="editorial-warning">
-            <strong>Redaktionelle Anmerkung:</strong> Die Angaben von 600.000 Zeilen Code in 60 Tagen wurden von
-            mehreren Beobachtern angezweifelt. Es ist unklar, welcher Anteil davon von der KI generiert und welcher
-            von Tan selbst geschrieben oder &uuml;berpr&uuml;ft wurde. Auch die Aussage zur &bdquo;Cyber-Psychose&ldquo;
-            wurde kontrovers diskutiert.
-        </div>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://techcrunch.com/2026/03/17/why-garry-tans-claude-code-setup-has-gotten-so-much-love-and-hate/">TechCrunch: Why Garry Tan's Claude Code setup has gotten so much love, and hate</a></li>
-                <li><a href="https://github.com/garrytan/gstack">GitHub: garrytan/gstack</a></li>
-                <li><a href="https://dev.to/createitv/a-cto-called-it-god-mode-garry-tan-just-open-sourced-how-he-ships-10000-lines-of-code-per-week-1ck7">Dev.to: A CTO Called It "God Mode"</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 9 -->
-<article id="art9">
-    <div class="article-header">
-        <span class="tag tag-lab">Lab-Ank&uuml;ndigung</span>
-        <h2>Meta stellt vier MTIA-Chip-Generationen f&uuml;r KI-Inferenz vor</h2>
-        <div class="meta-line">M&auml;rz 2026 &bull; Quellen: Meta AI Blog, CNBC, Tom's Hardware</div>
-    </div>
-    <div class="teaser">
-        Meta k&uuml;ndigt vier neue Generationen seiner MTIA-Chips an, die innerhalb von zwei Jahren
-        erscheinen sollen &mdash; ein aggressiver Entwicklungstakt, der Metas Abh&auml;ngigkeit von
-        NVIDIA-GPUs reduzieren soll.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            Meta verfolgt eine ambitionierte Strategie zur Entwicklung eigener KI-Chips unter dem Namen
-            MTIA (Meta Training and Inference Accelerator). Die vier neuen Generationen &mdash; MTIA 300,
-            400, 450 und 500 &mdash; sollen innerhalb von nur zwei Jahren auf den Markt kommen, mit einem
-            Entwicklungstakt von etwa sechs Monaten pro Generation.
-        </p>
-        <p>
-            MTIA 300 ist bereits in der Produktion f&uuml;r Ranking- und Empfehlungssysteme im Einsatz,
-            w&auml;hrend MTIA 400 derzeit in Labortests vor der Rechenzentrums-Bereitstellung ist. Die
-            Chips 450 und 500 sind speziell f&uuml;r generative KI-Inferenz optimiert und sollen Anfang
-            bzw. Ende 2027 massenhaft eingesetzt werden.
-        </p>
-        <p>
-            Die Leistungssteigerungen sind beachtlich: Von MTIA 300 bis 500 erh&ouml;ht sich die
-            HBM-Bandbreite um das 4,5-fache und die Rechenleistung (FLOPs) um das 25-fache. Meta
-            setzt derzeit Hunderttausende MTIA-Chips f&uuml;r Inferenz-Workloads ein &mdash; sowohl
-            f&uuml;r organische Inhalte als auch f&uuml;r Werbung in seinen Apps.
-        </p>
-        <p>
-            Der Zeitpunkt der Ank&uuml;ndigung ist bemerkenswert: Er folgt nur Wochen nach massiven
-            Bestellungen bei NVIDIA und AMD. Meta verfolgt damit eine Doppelstrategie: kurzfristige
-            Versorgung durch externe Chiplieferanten bei gleichzeitigem Aufbau einer eigenen
-            Silizium-Pipeline f&uuml;r langfristige Unabh&auml;ngigkeit. Dies erinnert an &auml;hnliche
-            Bestrebungen von Google (TPU) und Amazon (Trainium/Inferentia).
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/">Meta AI Blog: Four MTIA Chips in Two Years</a></li>
-                <li><a href="https://www.cnbc.com/2026/03/11/meta-ai-mtia-chip-data-center.html">CNBC: Meta rolls out in-house AI chips weeks after massive Nvidia, AMD deals</a></li>
-                <li><a href="https://www.tomshardware.com/tech-industry/semiconductors/meta-reveals-four-new-mtia-chips-built-for-ai-inference">Tom's Hardware: Meta reveals four new MTIA chips built for AI inference</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
-
-<!-- ARTIKEL 10 -->
-<article id="art10">
-    <div class="article-header">
-        <span class="tag tag-news">Nachrichten</span>
-        <h2>BuzzFeed pr&auml;sentiert KI-Apps auf der SXSW &mdash; Publikum reagiert verhalten</h2>
-        <div class="meta-line">17. M&auml;rz 2026 &bull; Quellen: TechCrunch, Futurism, MediaPost</div>
-    </div>
-    <div class="teaser">
-        Das angeschlagene Medienunternehmen BuzzFeed hat auf der SXSW neue KI-basierte Social Apps vorgestellt,
-        darunter &bdquo;BF Island&ldquo; und &bdquo;Conjure&ldquo;. Die Demos stie&szlig;en auf
-        &bdquo;unbehagliches Lachen&ldquo; im Publikum.
-    </div>
-    <div class="article-body">
-        <h3>Hintergrund &amp; Analyse</h3>
-        <p>
-            BuzzFeed enth&uuml;llte auf der SXSW &bdquo;Branch Office&ldquo;, ein Spin-off-Unternehmen, das
-            heimlich eine Reihe von KI-Apps entwickelt hat. Die Vorstellung umfasste drei Apps: BF Island,
-            eine Gruppen-Chat-Plattform mit KI-Fotobearbeitung und einer von einem Redaktionsteam kuratierten
-            Bibliothek von Internet-Trends und Memes; Conjure, eine an BeReal erinnernde App, die Nutzer
-            t&auml;glich zum Fotografieren von Dingen (au&szlig;er sich selbst) auffordert; und Quiz Party,
-            eine soziale App f&uuml;r gemeinsames BuzzFeed-Quiz-Spielen.
-        </p>
-        <p>
-            Die Reaktion des Publikums war ern&uuml;chternd. TechCrunch beschrieb die Demos als mit einem
-            &bdquo;dumpfen Aufschlag&ldquo; gelandet, w&auml;hrend Futurism von &bdquo;unbehaglichem Lachen&ldquo;
-            berichtete. Das Publikum schien verwirrt und unbeeindruckt.
-        </p>
-        <p>
-            Der finanzielle Kontext macht die Lage noch dramatischer: BuzzFeed hatte erst wenige Tage zuvor
-            &ouml;ffentlich &bdquo;erhebliche Zweifel&ldquo; an seiner F&auml;higkeit ge&auml;u&szlig;ert,
-            als Unternehmen fortbestehen zu k&ouml;nnen. Im vergangenen Jahr verzeichnete das Unternehmen
-            einen Nettoverlust von 57,3 Millionen Dollar. Die neuen KI-Apps und das Studio-IP-Gesch&auml;ft
-            sollen nun die Rettung bringen.
-        </p>
-        <p>
-            BuzzFeeds KI-Strategie steht damit exemplarisch f&uuml;r ein breiteres Ph&auml;nomen: Unternehmen,
-            die unter finanziellem Druck stehen, setzen auf KI als vermeintlichen Ausweg, selbst wenn das
-            Kernprodukt unklar bleibt und die Marktreaktion skeptisch ausf&auml;llt. Der Begriff &bdquo;AI Slop&ldquo;
-            &mdash; den TechCrunch bezeichnenderweise bereits in die &Uuml;berschrift aufnahm &mdash; hat sich
-            als Kritikbegriff f&uuml;r minderwertige KI-generierte Inhalte etabliert.
-        </p>
-
-        <div class="sources-list">
-            <h4>Quellen</h4>
-            <ul>
-                <li><a href="https://techcrunch.com/2026/03/17/buzzfeed-ai-slop-apps-sxsw-bf-island-conjure/">TechCrunch: BuzzFeed debuts AI slop apps in bid for new revenue</a></li>
-                <li><a href="https://futurism.com/artificial-intelligence/reaction-buzzfeed-new-ai-apps">Futurism: Crowd's Reaction to BuzzFeed's New AI App: Uncomfortable Laughter</a></li>
-                <li><a href="https://www.mediapost.com/publications/article/413561/buzzfeed-looks-to-avoid-bankruptcy-with-anti-slop.html">MediaPost: BuzzFeed Looks To Avoid Bankruptcy With Anti-Slop AI Apps</a></li>
-            </ul>
-        </div>
-    </div>
-</article>
+</main>
 
 <footer>
-    <div class="container">
-        <p><strong>KI-Magazin</strong> &mdash; Ausgabe vom 18. M&auml;rz 2026</p>
-        <p>
-            Dieses Magazin wurde KI-gest&uuml;tzt recherchiert und erstellt. Alle Fakten wurden anhand
-            mehrerer unabh&auml;ngiger Quellen gegen&uuml;bergepr&uuml;ft. Die Hintergrundanalysen basieren
-            auf &ouml;ffentlich zug&auml;nglichen Berichten der jeweils angegebenen Quellen.
-        </p>
-        <p>
-            Datengrundlage: 421 Artikel aus 14 Quellen, aggregiert am 18.03.2026.
-            Davon 27 nicht-akademische Artikel und 394 arXiv-Preprints (nicht im Magazin).
-        </p>
-        <p>
-            Generiert mit Claude Opus 4.6 (Anthropic) &bull; Keine Gew&auml;hr f&uuml;r Vollst&auml;ndigkeit oder Richtigkeit
-        </p>
-    </div>
+    <div class="footer-rule"></div>
+    <p>AI News Magazin — Recherchiert und erstellt mit Unterstützung von KI-Technologie. Alle Fakten aus mehreren unabhängigen Quellen verifiziert.</p>
 </footer>
 
 </body>
