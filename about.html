@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Magazin — So funktioniert's</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300&display=swap');
+
+        :root {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-raised: #1a2332;
+            --line: #1e3a5f;
+            --line-bright: #2d5a8a;
+            --text: #c8d6e5;
+            --text-dim: #5a7a9a;
+            --text-bright: #e8f0f8;
+            --accent: #3b82f6;
+            --accent-glow: #60a5fa;
+            --signal-green: #22c55e;
+            --signal-amber: #f59e0b;
+            --signal-red: #ef4444;
+            --blueprint: #0d2847;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 14px;
+            overflow-x: hidden;
+        }
+
+        /* ─── GRID BACKGROUND ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── HEADER ─── */
+        .header {
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid var(--line);
+            padding: 2rem 2rem 1.5rem;
+        }
+
+        .header-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .header-logo {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-glow);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px var(--accent); }
+            50% { box-shadow: 0 0 20px var(--accent-glow), 0 0 40px rgba(59, 130, 246, 0.2); }
+        }
+
+        .header-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            letter-spacing: 0.02em;
+        }
+
+        .header-nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover { color: var(--accent); }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem 3rem;
+        }
+
+        .hero-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: var(--text-bright);
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-sub {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            max-width: 560px;
+            line-height: 1.8;
+        }
+
+        /* ─── PIPELINE ─── */
+        .pipeline {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .pipeline-connector {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--line-bright), var(--line));
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .pipeline-connector::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: -3px;
+            width: 7px;
+            height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ─── STAGE ─── */
+        .stage {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            margin-bottom: 0;
+            overflow: hidden;
+            animation: stage-in 0.6s ease-out both;
+        }
+
+        .stage:nth-child(3) { animation-delay: 0.1s; }
+        .stage:nth-child(5) { animation-delay: 0.2s; }
+        .stage:nth-child(7) { animation-delay: 0.3s; }
+        .stage:nth-child(9) { animation-delay: 0.4s; }
+        .stage:nth-child(11) { animation-delay: 0.5s; }
+
+        @keyframes stage-in {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--line);
+            background: var(--surface-raised);
+        }
+
+        .stage-num {
+            font-family: 'Fraunces', serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent);
+            min-width: 2rem;
+        }
+
+        .stage-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-bright);
+        }
+
+        .stage-status {
+            margin-left: auto;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--signal-green);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .stage-body {
+            padding: 1.5rem;
+        }
+
+        .stage-body p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .stage-body p:last-child { margin-bottom: 0; }
+
+        /* ─── SOURCE TABLE ─── */
+        .source-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 500px) {
+            .source-grid { grid-template-columns: 1fr; }
+        }
+
+        .source-item {
+            background: var(--surface);
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .source-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-rss { background: var(--signal-green); box-shadow: 0 0 6px rgba(34, 197, 94, 0.4); }
+        .dot-web { background: var(--signal-amber); box-shadow: 0 0 6px rgba(245, 158, 11, 0.4); }
+
+        .source-name { color: var(--text-bright); flex: 1; }
+
+        .source-type {
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* ─── FLOW DIAGRAM ─── */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 1.2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            background: var(--blueprint);
+            border: 1px solid var(--line-bright);
+            padding: 0.5rem 0.9rem;
+            font-size: 0.72rem;
+            color: var(--accent-glow);
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .flow-arrow {
+            color: var(--line-bright);
+            padding: 0 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        /* ─── CODE BLOCK ─── */
+        .code-block {
+            background: #080e1a;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.78rem;
+            line-height: 1.6;
+        }
+
+        .code-block .comment { color: var(--text-dim); }
+        .code-block .cmd { color: var(--signal-green); }
+        .code-block .flag { color: var(--signal-amber); }
+        .code-block .arg { color: var(--accent-glow); }
+
+        /* ─── TIER LABEL ─── */
+        .tier-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: 1rem 0 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px dashed var(--line);
+        }
+
+        /* ─── DETAIL LIST ─── */
+        .detail-list {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .detail-list li {
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            position: relative;
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .detail-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* ─── HIGHLIGHT ─── */
+        .hl { color: var(--accent-glow); }
+        .hl-green { color: var(--signal-green); }
+        .hl-amber { color: var(--signal-amber); }
+        .hl-bright { color: var(--text-bright); }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--line);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover { text-decoration: underline; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            .hero { padding: 2.5rem 1.2rem 2rem; }
+            .pipeline { padding: 0 1.2rem 3rem; }
+            .stage-header { padding: 0.8rem 1rem; }
+            .stage-body { padding: 1rem; }
+            .flow { gap: 0.3rem; }
+            .flow-arrow { padding: 0 0.2rem; }
+            .header-inner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="header-brand">
+            <div class="header-logo"></div>
+            <div class="header-title">AI News Magazin</div>
+        </div>
+        <nav class="header-nav">
+            <a href="index.html">← Alle Ausgaben</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-label">Systemarchitektur</div>
+    <h1>So entsteht jede Ausgabe</h1>
+    <p class="hero-sub">Vom RSS-Feed zum fertigen Magazin — ein Blick in die Pipeline, die täglich hunderte KI-Nachrichtenquellen aggregiert, verifiziert und aufbereitet.</p>
+</section>
+
+<section class="pipeline">
+
+    <!-- ═══ STAGE 1: AGGREGATION ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">01</span>
+            <span class="stage-title">News-Aggregation</span>
+            <span class="stage-status">Automatisiert</span>
+        </div>
+        <div class="stage-body">
+            <p>Ein Python-Script (<span class="hl">ai_news_agent.py</span>) durchsucht <span class="hl-bright">14 Quellen</span> nach KI-Nachrichten der letzten 24 Stunden. Dabei kommen zwei Strategien zum Einsatz:</p>
+
+            <div class="tier-label">Tier 1 — Redaktionelle Nachrichtenquellen (RSS)</div>
+            <div class="source-grid">
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">MIT Technology Review</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">TechCrunch AI</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">VentureBeat AI</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Ars Technica</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">The Verge</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Wired AI</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">AI News</span><span class="source-type">RSS</span></div>
+            </div>
+
+            <div class="tier-label">Tier 2 — Lab-Blogs & Ankündigungen</div>
+            <div class="source-grid">
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">OpenAI Blog</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Google DeepMind</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-web"></span><span class="source-name">Anthropic Blog</span><span class="source-type">Web</span></div>
+                <div class="source-item"><span class="source-dot dot-web"></span><span class="source-name">Meta AI Blog</span><span class="source-type">Web</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">NVIDIA Blog</span><span class="source-type">RSS</span></div>
+            </div>
+
+            <div class="tier-label">Tier 3 & 4 — Research & Community</div>
+            <div class="source-grid">
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">arXiv cs.AI</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Hacker News AI</span><span class="source-type">RSS</span></div>
+            </div>
+
+            <p style="margin-top: 1.2rem;">Quellen mit <span class="hl-green">grünem</span> Indikator liefern strukturierte RSS-Feeds. Quellen mit <span class="hl-amber">gelbem</span> Indikator werden per Web-Scraping erfasst — sie liefern oft kein Veröffentlichungsdatum, das dann im nächsten Schritt nachrecherchiert wird.</p>
+
+            <div class="code-block"><span class="comment"># Ausführung</span>
+<span class="cmd">python3</span> <span class="arg">ai_news_agent.py</span> <span class="flag">--format json</span> <span class="flag">--output</span> <span class="arg">/tmp/news-raw.json</span></div>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 2: FETCH ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">02</span>
+            <span class="stage-title">Fetch & Fallback</span>
+            <span class="stage-status">Automatisiert</span>
+        </div>
+        <div class="stage-body">
+            <p>Jede Quelle wird mit einem zweistufigen Fetch-Mechanismus abgerufen:</p>
+
+            <div class="flow">
+                <span class="flow-box">HTTP Request</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Status 200?</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Ja: Parsen</span>
+            </div>
+            <div class="flow">
+                <span class="flow-box" style="opacity: 0; pointer-events: none;">HTTP Request</span>
+                <span class="flow-arrow" style="opacity: 0;">→</span>
+                <span class="flow-box" style="border-color: var(--signal-amber);">Nein: curl Fallback</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Parsen</span>
+            </div>
+
+            <p style="margin-top: 0.8rem;">Der Fallback über <span class="hl">curl</span> umgeht häufige Probleme mit Bot-Detection und Rate-Limiting. Jeder Artikel wird auf sein Veröffentlichungsdatum geprüft — nur Artikel der letzten <span class="hl-bright">24 Stunden</span> werden aufgenommen.</p>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 3: DATE VERIFICATION ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">03</span>
+            <span class="stage-title">Datumsverifizierung</span>
+            <span class="stage-status">KI-gestützt</span>
+        </div>
+        <div class="stage-body">
+            <p>Manche Quellen — insbesondere Meta AI und Anthropic — liefern auf ihren Übersichtsseiten kein Veröffentlichungsdatum. Diese Artikel werden mit <span class="hl">published: null</span> markiert.</p>
+            <p>Für jeden dieser Artikel wird parallel ein <span class="hl-bright">KI-Agent</span> gestartet, der per Web-Suche das tatsächliche Veröffentlichungsdatum recherchiert. Artikel, die älter als 24 Stunden sind, werden herausgefiltert.</p>
+
+            <div class="flow">
+                <span class="flow-box">Artikel ohne Datum</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Parallele Agents</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">WebSearch</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Datum bestätigt?</span>
+            </div>
+
+            <ul class="detail-list">
+                <li>Agents suchen nach Artikeltitel + Quelle + Datum</li>
+                <li>Ergebnis: verifiziertes Datum oder Ausschluss des Artikels</li>
+                <li>Verhindert, dass alte Artikel als neu erscheinen</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 4: DEDUP ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">04</span>
+            <span class="stage-title">Deduplizierung & Ranking</span>
+            <span class="stage-status">Automatisiert</span>
+        </div>
+        <div class="stage-body">
+            <p>Dieselbe Nachricht taucht oft in mehreren Quellen auf. Die Pipeline entfernt Duplikate anhand von:</p>
+            <ul class="detail-list">
+                <li><span class="hl-bright">URL-Normalisierung</span> — identische Links werden zusammengeführt</li>
+                <li><span class="hl-bright">Titel-Matching</span> — gleiche Headlines über Quellen hinweg</li>
+            </ul>
+            <p>Die verbleibenden Artikel werden nach Veröffentlichungsdatum sortiert. Typisch bleiben aus ~400 Rohartikeln (davon ~394 arXiv-Papers) rund <span class="hl-bright">15–25 redaktionelle Artikel</span> übrig.</p>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 5: RESEARCH ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">05</span>
+            <span class="stage-title">Recherche & Fact-Checking</span>
+            <span class="stage-status">KI-gestützt</span>
+        </div>
+        <div class="stage-body">
+            <p>Für die <span class="hl-bright">8–10 wichtigsten Artikel</span> startet eine tiefgehende Recherche-Phase. Parallel laufende Agents verifizieren und erweitern jeden Artikel:</p>
+            <ul class="detail-list">
+                <li>Kernaussagen werden aus mindestens <span class="hl-bright">2 unabhängigen Quellen</span> verifiziert</li>
+                <li>Hintergrundrecherche: Wer sind die Akteure? Was führte dazu? Was sind die Auswirkungen?</li>
+                <li>Jeder Artikel erhält einen ausführlichen Analyse-Abschnitt (3–5 Absätze)</li>
+                <li>Nicht bestätigte Informationen werden als solche markiert</li>
+            </ul>
+            <p>Die Recherche nutzt Web-Suche und den Zugriff auf Originalquellen, um über die Meldung hinaus Kontext und Einordnung zu liefern.</p>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 6: DESIGN ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">06</span>
+            <span class="stage-title">Edition erstellen & publizieren</span>
+            <span class="stage-status">KI-gestützt</span>
+        </div>
+        <div class="stage-body">
+            <p>Die recherchierten Artikel werden zu einer Magazin-Ausgabe zusammengestellt — als selbstständige HTML-Datei mit eingebettetem CSS, ohne externe Abhängigkeiten.</p>
+            <ul class="detail-list">
+                <li>Professionelles Editorial-Design mit Inhaltsverzeichnis</li>
+                <li>Jeder Artikel: Headline, Teaser, Hintergrund-Analyse, Quellenangaben</li>
+                <li>Kategorisierung: Politik, Industrie, Technologie, Forschung, Community</li>
+                <li>Responsive — funktioniert auf Desktop und Mobilgeräten</li>
+            </ul>
+
+            <p style="margin-top: 0.8rem;">Die fertige Edition wird als <span class="hl">editions/YYYY-MM-DD.html</span> gespeichert und zusammen mit der aktualisierten Homepage auf <span class="hl-bright">GitHub Pages</span> publiziert.</p>
+
+            <div class="flow" style="margin-top: 1rem;">
+                <span class="flow-box">Recherche-Daten</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">HTML generieren</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">GitHub Pages</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box" style="border-color: var(--signal-green); color: var(--signal-green);">Live</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <p><a href="index.html">AI News Magazin</a> · Vollständig KI-gestützte Recherche, Verifikation und Aufbereitung · Alle Fakten aus mindestens zwei unabhängigen Quellen verifiziert</p>
+    </div>
+</footer>
+
+</body>
+</html>
