@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Magazin — 16. März 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+        :root {
+            --paper: #f2e8d0;
+            --paper-dark: #e8d9b8;
+            --paper-edge: #d4c5a0;
+            --ink: #1a1008;
+            --ink-light: #3a2a18;
+            --ink-faded: #6a5a48;
+            --rule: #8a7a60;
+            --rule-light: #b8a880;
+            --red: #8b1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #c8b898;
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 0.5rem;
+        }
+
+        .newspaper {
+            background: var(--paper);
+            max-width: 920px;
+            width: 100%;
+            box-shadow:
+                2px 2px 0 var(--paper-edge),
+                4px 4px 0 var(--paper-dark),
+                6px 6px 15px rgba(30, 20, 5, 0.3);
+            position: relative;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ─── MASTHEAD ─── */
+        .masthead {
+            text-align: center;
+            padding: 1.2rem 1.5rem 0.6rem;
+            border-bottom: 4px double var(--ink);
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.7rem;
+            color: var(--ink-faded);
+            margin-bottom: 0.3rem;
+        }
+
+        .masthead h1 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .masthead-motto {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 0.8rem;
+            color: var(--ink-faded);
+            margin-top: 0.15rem;
+        }
+
+        .masthead-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.72rem;
+            color: var(--ink-faded);
+            margin-top: 0.4rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .masthead-bar a {
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .masthead-bar a:hover { text-decoration: underline; }
+
+        /* ─── CONTENT ─── */
+        .content {
+            padding: 1rem 1.5rem 1.5rem;
+        }
+
+        /* ─── TABLE OF CONTENTS ─── */
+        .toc {
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .toc-label {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--ink-faded);
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            column-count: 2;
+            column-gap: 1.5rem;
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.82rem;
+            line-height: 1.8;
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .toc-list li::before {
+            content: attr(data-num) '.';
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .toc-list a {
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        .toc-list a:hover { color: var(--red); }
+
+        .toc-cat {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink-faded);
+        }
+
+        @media (max-width: 580px) {
+            .toc-list { column-count: 1; }
+        }
+
+        /* ─── ARTICLE ─── */
+        .article {
+            padding: 1.2rem 0;
+            border-top: 2px solid var(--ink);
+        }
+
+        .article-kicker {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--red);
+            margin-bottom: 0.2rem;
+        }
+
+        .article h2 {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: clamp(1.2rem, 3vw, 1.55rem);
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
+
+        .article-meta {
+            font-family: 'IM Fell English', serif;
+            font-size: 0.72rem;
+            color: var(--ink-faded);
+            font-style: italic;
+            margin-bottom: 0.6rem;
+        }
+
+        .article-teaser {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--ink-light);
+            line-height: 1.55;
+            margin-bottom: 0.8rem;
+            border-left: 2px solid var(--rule-light);
+            padding-left: 0.8rem;
+        }
+
+        /* ─── ANALYSIS ─── */
+        .analysis-label {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ink-faded);
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--rule-light);
+        }
+
+        .analysis-body {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.82rem;
+            line-height: 1.75;
+            column-count: 2;
+            column-gap: 1.5rem;
+            column-rule: 1px solid var(--rule-light);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .analysis-body p { margin-bottom: 0.7rem; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        @media (max-width: 640px) {
+            .analysis-body { column-count: 1; }
+        }
+
+        /* ─── SOURCES ─── */
+        .sources {
+            margin-top: 0.8rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--rule-light);
+        }
+
+        .sources-label {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-faded);
+            margin-bottom: 0.2rem;
+        }
+
+        .sources ul {
+            list-style: none;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.72rem;
+            color: var(--ink-faded);
+            line-height: 1.6;
+        }
+
+        .sources a {
+            color: var(--ink-faded);
+            text-decoration: none;
+            border-bottom: 1px solid var(--rule-light);
+        }
+
+        .sources a:hover { color: var(--red); border-color: var(--red); }
+
+        /* ─── LEAD (first article, bigger) ─── */
+        .article--lead h2 {
+            font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .article--lead .article-kicker {
+            text-align: center;
+        }
+
+        .article--lead .article-meta {
+            text-align: center;
+        }
+
+        .article--lead .article-teaser {
+            border-left: none;
+            padding-left: 0;
+            text-align: center;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.05rem;
+        }
+
+        /* ─── FOOTER ─── */
+        .paper-footer {
+            border-top: 3px double var(--ink);
+            padding: 0.8rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.7rem;
+            color: var(--ink-faded);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .paper-footer a {
+            color: var(--red);
+            text-decoration: none;
+        }
+
+        .paper-footer a:hover { text-decoration: underline; }
+
+        a { color: inherit; }
+
+        @media (max-width: 580px) {
+            .content { padding: 0.8rem 1rem 1rem; }
+            .masthead { padding: 0.8rem 1rem 0.5rem; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .newspaper { box-shadow: none; }
+            .article { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="newspaper">
+
+    <header class="masthead" id="top">
+        <div class="masthead-top">
+            <span>Gegr. 2026</span>
+            <span>Preis: Gratis</span>
+        </div>
+        <h1>AI News Magazin</h1>
+        <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
+        <div class="masthead-bar">
+            <span>Sonntag, 16. M&auml;rz 2026</span>
+            <span>6 Artikel</span>
+            <span><a href="../index.html">&larr; Alle Ausgaben</a></span>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- ═══ TOC ═══ -->
+        <nav class="toc">
+            <div class="toc-label">Inhalt dieser Ausgabe</div>
+            <ol class="toc-list">
+                <li data-num="1"><a href="#art-1">NVIDIA enth&uuml;llt Vera Rubin</a> <span class="toc-cat">&middot; Industrie</span></li>
+                <li data-num="2"><a href="#art-2">NVIDIA DLSS 5 spaltet die Gaming-Welt</a> <span class="toc-cat">&middot; Technologie</span></li>
+                <li data-num="3"><a href="#art-3">Teenager verklagen Musks xAI wegen Grok</a> <span class="toc-cat">&middot; Politik</span></li>
+                <li data-num="4"><a href="#art-4">Britannica und Merriam-Webster verklagen OpenAI</a> <span class="toc-cat">&middot; Politik</span></li>
+                <li data-num="5"><a href="#art-5">Warren fordert &Uuml;berpr&uuml;fung von xAI-Zugang</a> <span class="toc-cat">&middot; Politik</span></li>
+                <li data-num="6"><a href="#art-6">Netanyahu im Deepfake-Labyrinth</a> <span class="toc-cat">&middot; Vermischtes</span></li>
+            </ol>
+        </nav>
+
+        <!-- ═══ ART 1: LEAD ═══ -->
+        <article class="article article--lead" id="art-1">
+            <div class="article-kicker">Industrie</div>
+            <h2>NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; CNBC, TechCrunch, Tom's Hardware</div>
+            <p class="article-teaser">Auf der GTC 2026 pr&auml;sentiert Jensen Huang eine neue &Auml;ra der KI-Infrastruktur: Die Vera-Rubin-Plattform vereint sieben neue Chips, ein eigenes CPU-Design und den Anspruch, die Billionen-Dollar-Marke bei Bestellungen bis 2027 zu knacken.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>NVIDIA hat auf der GTC 2026 die Vera-Rubin-Plattform vorgestellt &mdash; ein vertikal integriertes System aus sieben neuen Chips: Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU, Spectrum-6 Ethernet Switch und der neu integrierten Groq 3 LPU. Alle befinden sich laut NVIDIA bereits in Serienproduktion.</p>
+                <p>Die Vera CPU ist NVIDIAs erstes eigenes CPU-Design mit 88 Olympus-Kernen, Spatial Multithreading und LPDDR5X-Speicher mit bis zu 1,2 TB/s Bandbreite. NVIDIA verspricht 50% mehr Leistung und doppelte Effizienz gegen&uuml;ber herk&ouml;mmlichen Rack-CPUs. &Uuml;ber NVLink-C2C erreicht die Verbindung zur Rubin GPU 1,8 TB/s koh&auml;rente Bandbreite.</p>
+                <p>Jensen Huang hob die Verkaufsprognosen auf ein neues Niveau: Nachdem er im Vorjahr 500 Milliarden Dollar Umsatz durch Blackwell und Rubin bis 2026 prognostiziert hatte, erh&ouml;hte er die Projektion auf eine Billion Dollar bis 2027. &bdquo;KI ist endlich in der Lage, produktive Arbeit zu leisten&ldquo;, erkl&auml;rte Huang. &bdquo;Der Wendepunkt der Inferenz ist erreicht.&ldquo; Und: &bdquo;Wir werden zu wenig haben. Ich bin sicher, dass die Nachfrage nach Rechenleistung deutlich h&ouml;her sein wird.&ldquo;</p>
+                <p>Das Vera-Rubin-System besteht aus 1,3 Millionen Komponenten und soll zehnmal mehr Leistung pro Watt als sein Vorg&auml;nger Grace Blackwell liefern. Partner-Verf&uuml;gbarkeit beginnt in der zweiten Jahresh&auml;lfte 2026. NVIDIA stellte zudem ein Vera Rubin Space Module vor &mdash; f&uuml;r orbitale Rechenzentren mit bis zu 25-fachem KI-Compute gegen&uuml;ber H100.</p>
+                <p>Die GTC 2026 machte deutlich: NVIDIA positioniert sich nicht mehr nur als Chiplieferant, sondern als Architekt einer kompletten KI-Infrastruktur vom Rechenzentrum bis ins Weltall. Die Frage ist nicht mehr ob, sondern wie schnell die Branche diese Systeme absorbieren kann.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>CNBC</li>
+                    <li>TechCrunch</li>
+                    <li>Tom's Hardware</li>
+                    <li>NVIDIA Newsroom</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- ═══ ART 2 ═══ -->
+        <article class="article" id="art-2">
+            <div class="article-kicker">Technologie</div>
+            <h2>NVIDIA DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; The Verge, PC Gamer, Tom's Hardware</div>
+            <p class="article-teaser">Ebenfalls auf der GTC vorgestellt: DLSS 5 soll den gr&ouml;&szlig;ten Durchbruch in der Computergrafik seit Echtzeit-Raytracing darstellen. Doch die ersten Reaktionen sind gespalten.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>NVIDIA hat auf der GTC 2026 DLSS 5 enth&uuml;llt &mdash; ein neuronales Rendering-Modell, das laut NVIDIA &bdquo;den bedeutendsten Durchbruch in der Computergrafik seit dem Deb&uuml;t von Echtzeit-Raytracing 2018&ldquo; darstellt. Anders als bisherige DLSS-Versionen nutzt DLSS 5 ein KI-Modell, um Szenen mit fotorealistischer Beleuchtung und Materialien anzureichern &mdash; verankert am 3D-Quellmaterial und konsistent von Frame zu Frame.</p>
+                <p>DLSS 5 wird zun&auml;chst exklusiv f&uuml;r RTX-50-Series-GPUs verf&uuml;gbar sein und soll im Herbst 2026 erscheinen. Gro&szlig;e Publisher haben bereits Unterst&uuml;tzung zugesagt: Bethesda, Capcom, Ubisoft, Warner Bros. Games, Tencent und weitere.</p>
+                <p>Die Reaktionen sind gemischt. W&auml;hrend die Technologie das Potenzial hat, fotorealistisches Niveau in PC-Spiele zu bringen, besteht die offensichtlichere Gefahr, dass sie Spielgrafik homogenisiert &mdash; insbesondere Charaktere, weit &uuml;ber die urspr&uuml;nglichen Intentionen der K&uuml;nstler hinaus. Die kommenden Tage sollten zeigen, wie heftig die Debatte noch werden w&uuml;rde.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>The Verge</li>
+                    <li>PC Gamer</li>
+                    <li>Tom's Hardware</li>
+                    <li>NVIDIA</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- ═══ ART 3 ═══ -->
+        <article class="article" id="art-3">
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2>Teenager verklagen Musks xAI &mdash; Grok soll sexualisierte Bilder von Minderj&auml;hrigen erzeugt haben</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; Washington Post, NPR, Engadget</div>
+            <p class="article-teaser">Drei Jugendliche aus Tennessee haben eine Sammelklage gegen xAI eingereicht. Der Vorwurf: Groks Bildgenerator habe ihre Schulfotos in kinderpornografisches Material verwandelt.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>Drei Teenagerinnen aus Tennessee &mdash; in der Klageschrift als Jane Doe 1, 2 und 3 bezeichnet &mdash; haben vor einem Bundesgericht in Kalifornien eine Sammelklage gegen Elon Musks xAI eingereicht. Der Vorwurf wiegt schwer: xAIs KI-Tool Grok habe Fotos der bekleideten Minderj&auml;hrigen in sexualisierte und nackte Bilder verwandelt. Zwei der Kl&auml;gerinnen sind noch minderj&auml;hrig.</p>
+                <p>Laut Klageschrift wurde eine der Teenagerinnen im Dezember 2025 darauf aufmerksam, dass jemand KI-generierte Bilder und Videos von ihr und anderen Minderj&auml;hrigen teilte &mdash; &bdquo;in Settings, die ihr vertraut waren, aber in sexuell explizite Posen morphed.&ldquo; Das Material wurde angeblich auf Discord, Telegram und anderen Plattformen verbreitet und als &bdquo;Tauschmittel&ldquo; f&uuml;r weiteres CSAM-Material verwendet.</p>
+                <p>Die Klage beschuldigt xAI der Verbreitung, des Besitzes und der Produktion von Kinderpornografie mit der Absicht der Verbreitung. Obwohl aktuell drei Kl&auml;gerinnen benannt sind, k&ouml;nnte die Sammelklage laut Klageschrift &bdquo;mindestens Tausende von Minderj&auml;hrigen&ldquo; umfassen, deren Fotos ebenfalls von Grok in sexualisierte Bilder umgewandelt wurden.</p>
+                <p>Der Fall unterstreicht ein wachsendes Problem der KI-Branche: Die F&auml;higkeit von Bildgeneratoren, aus harmlosen Fotos explizites Material zu erzeugen, stellt bestehende Kinderschutzgesetze vor neue Herausforderungen. Die Klage ist eine der ersten, die direkt den Hersteller eines KI-Tools f&uuml;r den Missbrauch seiner Technologie verantwortlich macht.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>Washington Post</li>
+                    <li>NPR</li>
+                    <li>Engadget</li>
+                    <li>The Hill</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- ═══ ART 4 ═══ -->
+        <article class="article" id="art-4">
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2>Encyclopedia Britannica und Merriam-Webster verklagen OpenAI</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; TechCrunch, Engadget, The Verge</div>
+            <p class="article-teaser">N&auml;chste Runde im Urheberrechtsstreit: Die Herausgeber der ber&uuml;hmtesten Enzyklop&auml;die der Welt werfen OpenAI &bdquo;massiven Urheberrechtsversto&szlig;&ldquo; vor &mdash; und berufen sich dabei auf ein bisher wenig genutztes Argument.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>Encyclopedia Britannica und Merriam-Webster haben am 13. M&auml;rz in New York Klage gegen OpenAI eingereicht. Der Vorwurf: OpenAI habe fast 100.000 Online-Artikel von Britannica ohne Genehmigung zum Training seiner Sprachmodelle verwendet. Besonders brisant ist ein zus&auml;tzlicher Vorwurf: OpenAI verletze auch das Markenrecht (Lanham Act), wenn es halluzinierte Falschinformationen generiert und diese f&auml;lschlicherweise Britannica zuschreibt.</p>
+                <p>OpenAI verteidigte sich mit dem bekannten Argument: Die Modelle f&ouml;rderten Innovation und w&uuml;rden auf Basis von &bdquo;&ouml;ffentlich verf&uuml;gbaren Daten&ldquo; trainiert, die unter &bdquo;Fair Use&ldquo;-Standards fielen. Doch die Klageschrift greift dieses Argument direkt an: Wenn ChatGPT auf Nutzeranfragen w&ouml;rtliche oder nahezu w&ouml;rtliche Reproduktionen von Britannica-Inhalten ausgibt, gehe das &uuml;ber Fair Use hinaus.</p>
+                <p>Die Klage reiht sich in eine wachsende Liste ein: Die New York Times, Ziff Davis und &uuml;ber ein Dutzend Zeitungen haben bereits &auml;hnliche Klagen eingereicht. Doch der Markenrechts-Aspekt &mdash; Halluzinationen, die einer renommierten Quelle zugeschrieben werden &mdash; er&ouml;ffnet eine neue juristische Front, die f&uuml;r OpenAI besonders unangenehm werden k&ouml;nnte.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>TechCrunch</li>
+                    <li>Engadget</li>
+                    <li>Gizmodo</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- ═══ ART 5 ═══ -->
+        <article class="article" id="art-5">
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2>Warren fordert &Uuml;berpr&uuml;fung: Warum bekommt xAI Zugang zu Geheimnetzwerken?</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; TechCrunch</div>
+            <p class="article-teaser">Senatorin Elizabeth Warren hat das Pentagon aufgefordert, seine Entscheidung zu erkl&auml;ren, Elon Musks xAI Zugang zu klassifizierten Netzwerken zu gew&auml;hren &mdash; w&auml;hrend Anthropic gleichzeitig als Sicherheitsrisiko eingestuft wird.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>Die demokratische Senatorin Elizabeth Warren hat das US-Verteidigungsministerium in einem formellen Schreiben aufgefordert, seine Entscheidung zu rechtfertigen, xAI &mdash; Elon Musks KI-Unternehmen &mdash; Zugang zu klassifizierten Milit&auml;rnetzwerken zu gew&auml;hren. Die Anfrage kommt zu einem Zeitpunkt, an dem das Pentagon gleichzeitig Anthropic als &bdquo;Supply Chain Risk&ldquo; einstuft.</p>
+                <p>Warren stellt die offensichtliche Frage: Warum wird ein Unternehmen, dessen CEO gleichzeitig SpaceX, Tesla und eine Regierungsbeh&ouml;rde (DOGE) leitet, als vertrauensw&uuml;rdiger eingestuft als Anthropic, das lediglich ethische Bedingungen f&uuml;r den milit&auml;rischen Einsatz seiner KI stellt? Die potenziellen Interessenkonflikte bei xAI liegen auf der Hand.</p>
+                <p>Die Anfrage ist Teil eines gr&ouml;&szlig;eren Musters: Warren hat sich wiederholt kritisch zur Rolle von Tech-Milliard&auml;ren in der Trump-Administration ge&auml;u&szlig;ert. Der Fall xAI vs. Anthropic wird zunehmend als Lackmustest daf&uuml;r gesehen, ob die Vergabe von Milit&auml;rauftr&auml;gen nach Leistung oder nach politischer N&auml;he erfolgt.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>TechCrunch</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- ═══ ART 6 ═══ -->
+        <article class="article" id="art-6">
+            <div class="article-kicker">Vermischtes</div>
+            <h2>Netanyahu im Deepfake-Labyrinth &mdash; Wenn KI die Realit&auml;t aufl&ouml;st</h2>
+            <div class="article-meta">16. M&auml;rz 2026 &middot; The Verge, Euronews, IBTimes</div>
+            <p class="article-teaser">Ist Israels Premierminister am Leben oder eine KI-F&auml;lschung? Ein viral gegangenes Caf&eacute;-Video l&ouml;st eine bizarre Authentizit&auml;tskrise aus, die zeigt, wie KI-Tools das Vertrauen in visuelle Medien untergraben.</p>
+            <div class="analysis-label">Hintergrund &amp; Analyse</div>
+            <div class="analysis-body">
+                <p>Seit Beginn der US-israelischen Milit&auml;rkampagne gegen den Iran verbreiten iranische Staatsmedien Falschmeldungen &uuml;ber den Tod Netanyahus. Am 15. M&auml;rz ging ein beil&auml;ufig gefilmter Clip des Premiers beim Kaffeetrinken im Jerusalemer Caf&eacute; &bdquo;The Sataf&ldquo; viral &mdash; gedacht als ironische Antwort auf die Todesmeldungen. Stattdessen l&ouml;ste das Video eine globale &bdquo;Wahrheitskrise&ldquo; aus.</p>
+                <p>Elon Musks KI-Chatbot Grok kennzeichnete das Video als &bdquo;100% Deepfake&ldquo;. Nutzer analysierten das Material Frame f&uuml;r Frame und berichteten von einem &bdquo;zus&auml;tzlichen Finger&ldquo; und statischem Kaffee-Pegel. Netanyahu sah sich zu einer beispiellosen digitalen Gegenoffensive gezwungen, um zu beweisen, dass er am Leben ist. Forensische Analysen fanden allerdings keine Belege f&uuml;r eine KI-Generierung &mdash; die vermeintlichen Anomalien lie&szlig;en sich durch Bewegungsunsch&auml;rfe und Kompressions-Artefakte erkl&auml;ren.</p>
+                <p>Der Fall illustriert ein fundamentales Problem des KI-Zeitalters: Wenn KI-Tools selbst echte Videos als F&auml;lschungen markieren, entsteht ein Vertrauensvakuum, das von staatlichen Akteuren instrumentalisiert werden kann. Die Grenze zwischen Desinformation und Gegendesinformation verschwimmt &mdash; und die Technologie, die F&auml;lschungen erkennen soll, kann selbst zur Quelle von Desinformation werden.</p>
+            </div>
+            <div class="sources">
+                <div class="sources-label">Quellen</div>
+                <ul>
+                    <li>The Verge</li>
+                    <li>Euronews</li>
+                    <li>IBTimes</li>
+                </ul>
+            </div>
+        </article>
+
+    </div>
+
+    <footer class="paper-footer">
+        <span>&copy; 2026 AI News Magazin</span>
+        <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
+        <a href="#top">&uarr; Nach oben</a>
+    </footer>
+
+</div>
+
+</body>
+</html>
