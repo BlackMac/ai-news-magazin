@@ -445,9 +445,9 @@
             <span class="stage-status">Automatisiert</span>
         </div>
         <div class="stage-body">
-            <p>Ein Python-Script (<span class="hl">ai_news_agent.py</span>) durchsucht <span class="hl-bright">14 Quellen</span> nach KI-Nachrichten der letzten 24 Stunden. Dabei kommen zwei Strategien zum Einsatz:</p>
+            <p>Ein Python-Script (<span class="hl">ai_news_agent.py</span>) durchsucht <span class="hl-bright">22 Quellen</span> nach KI-Nachrichten der letzten 24 Stunden. Dabei kommen zwei Strategien zum Einsatz:</p>
 
-            <div class="tier-label">Tier 1 — Redaktionelle Nachrichtenquellen (RSS)</div>
+            <div class="tier-label">Tier 1a — Internationale Nachrichtenquellen (RSS)</div>
             <div class="source-grid">
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">MIT Technology Review</span><span class="source-type">RSS</span></div>
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">TechCrunch AI</span><span class="source-type">RSS</span></div>
@@ -456,6 +456,16 @@
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">The Verge</span><span class="source-type">RSS</span></div>
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Wired AI</span><span class="source-type">RSS</span></div>
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">AI News</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Reuters AI</span><span class="source-type">RSS</span></div>
+            </div>
+
+            <div class="tier-label">Tier 1b — Deutschsprachige Nachrichtenquellen (RSS)</div>
+            <div class="source-grid">
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">heise online</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Golem.de</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">t3n</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Spiegel Netzwelt</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Netzpolitik.org</span><span class="source-type">RSS</span></div>
             </div>
 
             <div class="tier-label">Tier 2 — Lab-Blogs & Ankündigungen</div>
@@ -465,6 +475,7 @@
                 <div class="source-item"><span class="source-dot dot-web"></span><span class="source-name">Anthropic Blog</span><span class="source-type">Web</span></div>
                 <div class="source-item"><span class="source-dot dot-web"></span><span class="source-name">Meta AI Blog</span><span class="source-type">Web</span></div>
                 <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">NVIDIA Blog</span><span class="source-type">RSS</span></div>
+                <div class="source-item"><span class="source-dot dot-rss"></span><span class="source-name">Hugging Face Blog</span><span class="source-type">RSS</span></div>
             </div>
 
             <div class="tier-label">Tier 3 & 4 — Research & Community</div>
@@ -552,12 +563,13 @@
             <span class="stage-status">Automatisiert</span>
         </div>
         <div class="stage-body">
-            <p>Dieselbe Nachricht taucht oft in mehreren Quellen auf. Die Pipeline entfernt Duplikate anhand von:</p>
+            <p>Dieselbe Nachricht taucht oft in mehreren Quellen auf. Die Pipeline entfernt Duplikate auf zwei Ebenen:</p>
             <ul class="detail-list">
                 <li><span class="hl-bright">URL-Normalisierung</span> — identische Links werden zusammengeführt</li>
                 <li><span class="hl-bright">Titel-Matching</span> — gleiche Headlines über Quellen hinweg</li>
+                <li><span class="hl-bright">Themen-Tracking</span> — eine Datei (<span class="hl">published-topics.md</span>) protokolliert alle publizierten Themen. Exakt dasselbe Ereignis wird nicht wiederholt, aber neue Entwicklungen zu einem bekannten Thema werden aufgenommen und auf die frühere Berichterstattung verlinkt</li>
             </ul>
-            <p>Die verbleibenden Artikel werden nach Veröffentlichungsdatum sortiert. Typisch bleiben aus ~400 Rohartikeln (davon ~394 arXiv-Papers) rund <span class="hl-bright">15–25 redaktionelle Artikel</span> übrig.</p>
+            <p>Die verbleibenden Artikel werden nach Veröffentlichungsdatum sortiert. Typisch bleiben aus ~400 Rohartikeln (davon ~394 arXiv-Papers) rund <span class="hl-bright">10–15 redaktionelle Artikel</span> übrig.</p>
         </div>
     </div>
 
@@ -584,23 +596,75 @@
 
     <div class="pipeline-connector"></div>
 
-    <!-- ═══ STAGE 6: DESIGN ═══ -->
+    <!-- ═══ STAGE 6: YOUTUBE ═══ -->
     <div class="stage">
         <div class="stage-header">
             <span class="stage-num">06</span>
+            <span class="stage-title">YouTube-Tutorials kuratieren</span>
+            <span class="stage-status">KI-gestützt</span>
+        </div>
+        <div class="stage-body">
+            <p>Täglich werden <span class="hl-bright">2 aktuelle YouTube-Tutorials</span> zum Thema KI recherchiert und in die Rubrik „Aus der Werkstatt" aufgenommen.</p>
+            <ul class="detail-list">
+                <li>Nur technische Inhalte: Coding, Training, Fine-Tuning, Architektur, Agents</li>
+                <li>Kein Hype-Content, keine Bild-Generierung, kein Prompt-Engineering</li>
+                <li>Nur Creator mit relevanter Reichweite (ab ~10.000 Subscriber)</li>
+                <li>Nur Videos vom selben Tag</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 7: REPORTAGE ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">07</span>
+            <span class="stage-title">In-Depth-Reportage</span>
+            <span class="stage-status">KI-gestützt</span>
+        </div>
+        <div class="stage-body">
+            <p>Jede Ausgabe enthält eine ausführliche Reportage (800–1.500 Wörter) zu einem aktuellen KI-Thema — mit eigener Seite und Teaser in der Edition.</p>
+            <ul class="detail-list">
+                <li>Themen aus einer redaktionellen Wunschliste (<span class="hl">reportage-themen.md</span>)</li>
+                <li>Falls leer: Thema wird passend zur Nachrichtenlage gewählt</li>
+                <li>Gründliche Recherche aus mindestens 5–8 Quellen</li>
+                <li>Fokus auf aktuelle Entwicklungen (2025/2026), nicht historische Rückblicke</li>
+            </ul>
+
+            <div class="flow" style="margin-top: 1rem;">
+                <span class="flow-box">Wunschliste</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Deep Research</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Reportage schreiben</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-box">Eigene Seite</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="pipeline-connector"></div>
+
+    <!-- ═══ STAGE 8: DESIGN ═══ -->
+    <div class="stage">
+        <div class="stage-header">
+            <span class="stage-num">08</span>
             <span class="stage-title">Edition erstellen & publizieren</span>
             <span class="stage-status">KI-gestützt</span>
         </div>
         <div class="stage-body">
-            <p>Die recherchierten Artikel werden zu einer Magazin-Ausgabe zusammengestellt — als selbstständige HTML-Datei mit eingebettetem CSS, ohne externe Abhängigkeiten.</p>
+            <p>Die recherchierten Artikel, die Reportage und die YouTube-Empfehlungen werden zu einer Magazin-Ausgabe zusammengestellt — als selbstständige HTML-Datei mit eingebettetem CSS, ohne externe Abhängigkeiten.</p>
             <ul class="detail-list">
                 <li>Professionelles Editorial-Design mit Inhaltsverzeichnis</li>
                 <li>Jeder Artikel: Headline, Teaser, Hintergrund-Analyse, Quellenangaben</li>
                 <li>Kategorisierung: Politik, Industrie, Technologie, Forschung, Community</li>
+                <li>Reportage-Teaser mit Link auf die eigene Reportage-Seite (<span class="hl">editions/reportagen/</span>)</li>
+                <li>„Aus der Werkstatt"-Sektion mit YouTube-Tutorial-Empfehlungen</li>
                 <li>Responsive — funktioniert auf Desktop und Mobilgeräten</li>
             </ul>
 
-            <p style="margin-top: 0.8rem;">Die fertige Edition wird als <span class="hl">editions/YYYY-MM-DD.html</span> gespeichert und zusammen mit der aktualisierten Homepage auf <span class="hl-bright">GitHub Pages</span> publiziert.</p>
+            <p style="margin-top: 0.8rem;">Die fertige Edition wird als <span class="hl">editions/YYYY-MM-DD.html</span> gespeichert, die Reportage als <span class="hl">editions/reportagen/YYYY-MM-DD.html</span>, und alles zusammen mit der aktualisierten Homepage auf <span class="hl-bright">GitHub Pages</span> publiziert. Abschließend wird <span class="hl">published-topics.md</span> aktualisiert.</p>
 
             <div class="flow" style="margin-top: 1rem;">
                 <span class="flow-box">Recherche-Daten</span>
