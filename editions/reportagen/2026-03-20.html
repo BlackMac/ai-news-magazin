@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Der KI-Chip-Krieg &mdash; AI News Magazin, 20. M&auml;rz 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+        :root {
+            --paper: #f2e8d0;
+            --paper-dark: #e8d9b8;
+            --paper-edge: #d4c5a0;
+            --ink: #1a1008;
+            --ink-light: #3a2a18;
+            --ink-faded: #5a4a38;
+            --rule: #8a7a60;
+            --rule-light: #b8a880;
+            --red: #8b1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #c8b898;
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 0.5rem;
+        }
+
+        .newspaper {
+            background: var(--paper);
+            max-width: 920px;
+            width: 100%;
+            box-shadow: 2px 2px 0 var(--paper-edge), 4px 4px 0 var(--paper-dark), 6px 6px 15px rgba(30,20,5,0.3);
+            position: relative;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .masthead {
+            text-align: center;
+            padding: 1.2rem 1.5rem 0.6rem;
+            border-bottom: 4px double var(--ink);
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.78rem;
+            color: var(--ink-faded);
+            margin-bottom: 0.3rem;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            line-height: 1;
+        }
+
+        .masthead-motto {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 0.88rem;
+            color: var(--ink-faded);
+            margin-top: 0.15rem;
+        }
+
+        .masthead-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.8rem;
+            color: var(--ink-faded);
+            margin-top: 0.4rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .masthead-bar a { color: var(--red); text-decoration: none; }
+        .masthead-bar a:hover { text-decoration: underline; }
+
+        .content { padding: 1.5rem; }
+
+        .reportage-kicker {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--red);
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .reportage-title {
+            font-family: 'Old Standard TT', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .reportage-subtitle {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .reportage-body {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            column-count: 2;
+            column-gap: 1.5rem;
+            column-rule: 1px solid var(--rule-light);
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        .reportage-body p { margin-bottom: 0.8rem; }
+
+        .reportage-body h3 {
+            font-family: 'Old Standard TT', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 1.2rem 0 0.5rem;
+            column-span: all;
+            border-bottom: 1px solid var(--rule-light);
+            padding-bottom: 0.3rem;
+        }
+
+        .reportage-body .pull-quote {
+            column-span: all;
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--ink-light);
+            text-align: center;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            border-top: 2px solid var(--rule);
+            border-bottom: 2px solid var(--rule);
+        }
+
+        .sources {
+            margin-top: 1.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--rule-light);
+        }
+
+        .sources-label {
+            font-family: 'Old Standard TT', serif;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-faded);
+            margin-bottom: 0.3rem;
+        }
+
+        .sources ul {
+            list-style: none;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.82rem;
+            color: var(--ink-faded);
+            line-height: 1.6;
+            column-count: 2;
+            column-gap: 1.5rem;
+        }
+
+        .sources a { color: var(--ink-faded); text-decoration: none; border-bottom: 1px solid var(--rule-light); }
+        .sources a:hover { color: var(--red); border-color: var(--red); }
+
+        .paper-footer {
+            border-top: 3px double var(--ink);
+            padding: 0.8rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: 'IM Fell English', serif;
+            font-size: 0.78rem;
+            color: var(--ink-faded);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .paper-footer a { color: var(--red); text-decoration: none; }
+        .paper-footer a:hover { text-decoration: underline; }
+        a { color: inherit; }
+
+        @media (max-width: 640px) {
+            .reportage-body { column-count: 1; }
+            .sources ul { column-count: 1; }
+        }
+
+        @media (max-width: 580px) {
+            .content { padding: 0.8rem 1rem 1rem; }
+            .masthead { padding: 0.8rem 1rem 0.5rem; }
+            .masthead-bar { flex-direction: column; align-items: center; gap: 0.2rem; }
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .newspaper { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="newspaper">
+
+    <header class="masthead" id="top">
+        <div class="masthead-top">
+            <span>Gegr. 2026</span>
+            <span>Preis: Gratis</span>
+        </div>
+        <h1>AI News Magazin</h1>
+        <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
+        <div class="masthead-bar">
+            <span><a href="../2026-03-20.html">&larr; Zur&uuml;ck zur Ausgabe</a></span>
+            <span>Reportage &middot; 20. M&auml;rz 2026</span>
+            <span><a href="../../index.html">Alle Ausgaben</a></span>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <div class="reportage-kicker">Reportage</div>
+        <h2 class="reportage-title">Der KI-Chip-Krieg: NVIDIA gegen den Rest der Welt</h2>
+        <div class="reportage-subtitle">Warum Unternehmen 2026 vor der wichtigsten Infrastruktur-Entscheidung seit der Cloud-Migration stehen &mdash; und warum es keine einfache Antwort gibt</div>
+
+        <div class="reportage-body">
+
+            <p>Als Jensen Huang am 16. M&auml;rz auf der GTC 2026 in San Jos&eacute; die B&uuml;hne betrat, trug er seine ber&uuml;hmte Lederjacke und ein Versprechen im Gep&auml;ck: &bdquo;Tokens are the new commodity. AI factories are the infrastructure that produces them.&ldquo; Mit der Vera-Rubin-Plattform stellte er sieben neue Chips vor &mdash; darunter den Rubin-GPU mit 336 Milliarden Transistoren und 50 Petaflops Inferenz-Leistung. Der Saal tobte. Die Aktie stieg. Und hinter den Kulissen fragten sich CTOs weltweit: K&ouml;nnen wir uns das leisten &mdash; und m&uuml;ssen wir?</p>
+
+            <p>Die Antwort auf diese Frage war noch nie so komplex wie Anfang 2026. NVIDIAs Dominanz im KI-Chip-Markt &mdash; gesch&auml;tzt rund 75 Prozent bei Beschleunigern, herunter von 87 Prozent im Jahr 2024 &mdash; wird erstmals von allen Seiten gleichzeitig angegriffen: AMD liefert mit der MI400-Serie eine ernst zu nehmende Alternative, Google und Amazon bauen eigene Chips in noch nie dagewesener Geschwindigkeit, und sogar Meta hat in zwei Jahren vier Generationen hauseigener Chips auf den Markt gebracht.</p>
+
+            <h3>NVIDIA: Die Billionen-Dollar-Maschine</h3>
+
+            <p>Die Vera-Rubin-Plattform ist NVIDIAs Antwort auf den wachsenden Wettbewerb &mdash; und sie ist beeindruckend. Der Rubin-GPU, gefertigt bei TSMC im 3-Nanometer-Verfahren, bietet 288 Gigabyte HBM4-Speicher mit 22 Terabyte pro Sekunde Bandbreite. Ein einzelnes NVL72-Rack &mdash; 72 GPUs und 36 CPUs, fl&uuml;ssigkeitsgek&uuml;hlt &mdash; erreicht 3,6 Exaflops. Zum Vergleich: Das w&auml;re vor f&uuml;nf Jahren die Leistung der schnellsten Supercomputer der Welt gewesen.</p>
+
+            <p>NVIDIA verspricht, dass Vera Rubin mit einem Viertel der GPUs trainieren kann, was Blackwell brauchte, und dabei zehnmal mehr Inferenz-Durchsatz pro Watt liefert. Jensen Huang prognostiziert bis 2027 &bdquo;mindestens eine Billion Dollar&ldquo; an Bestellungen f&uuml;r Blackwell und Vera Rubin zusammen. Erste Einheiten sollen ab August 2026 ausgeliefert werden.</p>
+
+            <p>Doch NVIDIAs gr&ouml;&szlig;ter Vorteil ist nicht die Hardware &mdash; es ist CUDA. Das Software-&Ouml;kosystem, das seit 2007 aufgebaut wurde, bindet Entwickler und Unternehmen in einem Ma&szlig;e, das selbst technisch &uuml;berlegene Alternativen schwer &uuml;berwindbar macht. Wer heute KI-Modelle trainiert, denkt in CUDA. Umzulernen kostet Zeit, Geld und birgt Risiken.</p>
+
+            <div class="pull-quote">&bdquo;Die Hardware ist nur das sichtbare Drittel des Eisbergs. CUDA, die Treiber, die Bibliotheken &mdash; das ist der unsichtbare Lock-in, der NVIDIA sch&uuml;tzt.&ldquo;</div>
+
+            <h3>AMD: Vom Underdog zum Duopol-Partner</h3>
+
+            <p>AMD hat mit der MI400-Serie &bdquo;Vulkan&ldquo; einen echten Konkurrenten geschaffen. Die Zahlen lesen sich beeindruckend: 432 Gigabyte HBM4, 40 Petaflops FP4, und laut AMD bis zu 40 Prozent mehr Tokens pro Dollar als vergleichbare NVIDIA-Hardware bei bestimmten Workloads. Noch wichtiger: OpenAI hat einen Sechs-Gigawatt-Deal mit AMD geschlossen, beginnend mit MI450-Deployments in 2026.</p>
+
+            <p>Doch AMDs Marktanteil liegt weiter bei gesch&auml;tzt f&uuml;nf bis acht Prozent. Das Problem ist weniger die Hardware als das &Ouml;kosystem: ROCm, AMDs Software-Stack, hat gegen&uuml;ber CUDA aufgeholt, ist aber noch nicht gleichwertig. F&uuml;r Unternehmen bedeutet das: AMD ist eine glaubw&uuml;rdige Zweitquelle, aber kein Ersatz. Wer auf AMD setzt, braucht Entwickler, die mit der Plattform vertraut sind &mdash; und die sind rar.</p>
+
+            <h3>Die Hyperscaler bauen selbst</h3>
+
+            <p>Die spannendste Entwicklung spielt sich bei den Cloud-Anbietern ab. Google, Amazon und Meta investieren Milliarden in eigene KI-Chips &mdash; nicht um NVIDIA zu ersetzen, sondern um die Abh&auml;ngigkeit zu reduzieren und Kosten zu senken.</p>
+
+            <p><strong>Googles TPU-Programm</strong> ist am weitesten fortgeschritten. Die sechste Generation &bdquo;Trillium&ldquo; liefert 4,7-fache Rechenleistung pro Chip gegen&uuml;ber dem Vorg&auml;nger. Im November 2025 schloss Anthropic den gr&ouml;&szlig;ten TPU-Deal in Googles Geschichte &mdash; Hunderttausende Trillium-Chips, skalierend auf eine Million bis 2027. Google erzielt gesch&auml;tzt einen vier- bis sechsfachen Kostenvorteil pro Compute-Einheit gegen&uuml;ber NVIDIA-GPU-K&auml;ufern. Die siebte Generation &bdquo;Ironwood&ldquo; ist der erste TPU, der explizit f&uuml;r Inferenz im gro&szlig;en Ma&szlig;stab designt wurde &mdash; mit Pods aus 9.216 Chips und 42,5 Exaflops FP8.</p>
+
+            <p><strong>Amazons Trainium 3</strong>, der erste 3-Nanometer-KI-Chip des Unternehmens, bietet 2,52 Petaflops FP8 und 144 Gigabyte HBM3e. Bis zu eine Million Chips k&ouml;nnen vernetzt werden. Der Clou: Die bereits angek&uuml;ndigte n&auml;chste Generation Trainium 4 wird NVIDIAs NVLink Fusion unterst&uuml;tzen &mdash; ein bemerkenswertes Signal, dass selbst die gr&ouml;&szlig;ten Custom-Silicon-Hersteller keine vollst&auml;ndige Abkopplung von NVIDIA anstreben.</p>
+
+            <p><strong>Meta hat in zwei Jahren vier Chip-Generationen</strong> vorgestellt &mdash; ein Entwicklungstempo, das in der Branche ungew&ouml;hnlich ist. Der MTIA 500 Superchip, mit 1.700 Watt TDP und 30 Petaflops MX4, basiert auf einer eigenen RISC-V-Architektur &mdash; weder NVIDIA, AMD, Intel noch ARM. Metas Strategie ist klar auf Inferenz ausgerichtet: Die Milliarden Nutzer auf Facebook, Instagram und WhatsApp erzeugen einen enormen Inferenz-Bedarf, den eigene Chips kosteneffizienter bedienen k&ouml;nnen als zugekaufte GPUs.</p>
+
+            <h3>Die geopolitische Dimension</h3>
+
+            <p>Der KI-Chip-Krieg ist auch ein geopolitischer Konflikt. Die USA haben ihre Exportbeschr&auml;nkungen f&uuml;r China Anfang 2026 teilweise gelockert &mdash; NVIDIA H200 und &auml;quivalente AMD-Chips d&uuml;rfen wieder verkauft werden. Gleichzeitig liegt im Kongress der &uuml;berparteiliche &bdquo;AI OVERWATCH Act&ldquo;, der Halbleiter-Exporte wie Waffenverk&auml;ufe behandeln und NVIDIA-Blackwell-Verk&auml;ufe an &bdquo;Foreign Entities of Concern&ldquo; f&uuml;r zwei Jahre verbieten w&uuml;rde.</p>
+
+            <p>Chinas Antwort hei&szlig;t Huawei Ascend. Der 910C erreicht ungef&auml;hr die Leistung eines NVIDIA H100 &mdash; respektabel, aber eine Generation hinter dem aktuellen Stand. Die Ausbeute hat sich von 20 auf fast 40 Prozent verdoppelt, zum ersten Mal ist die Produktion profitabel. Baidu, ByteDance und Tencent sind Kunden. Der Ascend 910D, der Blackwell und Rubin herausfordern soll, ist in Entwicklung. Die Performance-L&uuml;cke bleibt, aber sie schrumpft.</p>
+
+            <p>Das gr&ouml;&szlig;te Risiko f&uuml;r die gesamte Branche tr&auml;gt einen Namen: TSMC. Der taiwanesische Chipfertiger kontrolliert &uuml;ber 90 Prozent der Advanced-Node-Produktion. Bloomberg Economics sch&auml;tzt die Kosten eines Taiwan-Konflikts auf zehn Billionen Dollar &mdash; rund zehn Prozent des globalen BIP. Eine Diversifizierung der Fertigung ist kurzfristig nicht machbar.</p>
+
+            <h3>Was bedeutet das f&uuml;r Unternehmen?</h3>
+
+            <p>CTOs und Tech Leads stehen 2026 vor einer Infrastruktur-Entscheidung, die ihre Kosten und ihre Flexibilit&auml;t f&uuml;r Jahre pr&auml;gen wird. Drei Strategien kristallisieren sich heraus:</p>
+
+            <p><strong>Strategie 1: All-in NVIDIA.</strong> Maximale Flexibilit&auml;t dank CUDA, gr&ouml;&szlig;tes Entwickler-&Ouml;kosystem, beste Tool-Unterst&uuml;tzung. Aber auch h&ouml;chste Kosten und Abh&auml;ngigkeit von einem einzelnen Anbieter. F&uuml;r Unternehmen, die Modelle trainieren und maximale Kontrolle brauchen.</p>
+
+            <p><strong>Strategie 2: Cloud-native mit Custom Silicon.</strong> Google TPU, AWS Trainium oder Azure-Infrastruktur nutzen. Beste Kosteneffizienz bei Skalierung, besonders f&uuml;r Inferenz. Aber Vendor-Lock-in und weniger Kontrolle &uuml;ber die Hardware. F&uuml;r Unternehmen, die Modelle prim&auml;r nutzen statt trainieren.</p>
+
+            <p><strong>Strategie 3: Multi-Chip, Multi-Cloud.</strong> Zunehmend praktikabler durch Standards wie NVLink Fusion und verbesserte ROCm-Kompatibilit&auml;t. Komplexer zu managen, aber resilient gegen Lieferengp&auml;sse und Preiserh&ouml;hungen. F&uuml;r gro&szlig;e Unternehmen mit dedizierten Infrastruktur-Teams.</p>
+
+            <p>Samsung hat gerade angek&uuml;ndigt, 74 Milliarden Dollar in Chipfertigung und Forschung zu investieren &mdash; 22 Prozent mehr als im Vorjahr. HBM4 ist bereits in Massenproduktion. Das Signal ist eindeutig: Der KI-Chip-Markt w&auml;chst auf &uuml;ber 200 Milliarden Dollar, und jeder gro&szlig;e Akteur will ein St&uuml;ck davon. F&uuml;r Entscheider hei&szlig;t das: Die Auswahl wird besser, die Preise werden langfristig sinken &mdash; aber die Komplexit&auml;t der Entscheidung steigt. Wer heute die falsche Plattform w&auml;hlt, zahlt morgen den Preis in Migrationskosten und verlorener Entwicklerproduktivit&auml;t.</p>
+
+        </div>
+
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform">NVIDIA Newsroom: Vera Rubin Platform</a></li>
+                <li><a href="https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html">CNBC: Jensen Huang Keynote GTC 2026</a></li>
+                <li><a href="https://wccftech.com/amd-to-battle-nvidia-ai-dominance-instinct-mi400-accelerators-2026-mi500-2027/">WCCFtech: AMD MI400 Accelerators</a></li>
+                <li><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/">Google Blog: Ironwood TPU</a></li>
+                <li><a href="https://techcrunch.com/2025/12/02/amazon-releases-an-impressive-new-ai-chip-and-teases-a-nvidia-friendly-roadmap/">TechCrunch: Amazon Trainium 3</a></li>
+                <li><a href="https://about.fb.com/news/2026/03/expanding-metas-custom-silicon-to-power-our-ai-workloads/">Meta: Custom Silicon Roadmap</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-19/samsung-to-spend-73-billion-on-chip-expansion-research-in-2026">Bloomberg: Samsung $73B Investment</a></li>
+                <li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/huawei-ascend-ai-910d-processor-designed-to-take-on-nvidias-blackwell-and-rubin-gpus">Tom&rsquo;s Hardware: Huawei Ascend 910D</a></li>
+                <li><a href="https://eastasiaforum.org/2026/03/11/us-chip-export-controls-have-cooled-down/">East Asia Forum: US Chip Export Controls</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer class="paper-footer">
+        <span>&copy; 2026 AI News Magazin &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+        <a href="#top">&uarr; Nach oben</a>
+    </footer>
+
+</div>
+
+</body>
+</html>
