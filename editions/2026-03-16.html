@@ -3,515 +3,1042 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI News Magazin — 16. März 2026</title>
+    <title>AI News Magazin &mdash; 16. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
 
         :root {
-            --paper: #f2e8d0;
-            --paper-dark: #e8d9b8;
-            --paper-edge: #d4c5a0;
-            --ink: #1a1008;
-            --ink-light: #3a2a18;
-            --ink-faded: #5a4a38;
-            --rule: #8a7a60;
-            --rule-light: #b8a880;
-            --red: #8b1a1a;
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
 
         body {
-            background: #c8b898;
-            color: var(--ink);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 1.5rem 0.5rem;
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
         }
 
-        .newspaper {
-            background: var(--paper);
-            max-width: 920px;
-            width: 100%;
-            box-shadow:
-                2px 2px 0 var(--paper-edge),
-                4px 4px 0 var(--paper-dark),
-                6px 6px 15px rgba(30, 20, 5, 0.3);
-            position: relative;
-        }
-
-        .newspaper::before {
-            content: '';
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
             position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
         }
 
-        /* ─── MASTHEAD ─── */
-        .masthead {
-            text-align: center;
-            padding: 1.2rem 1.5rem 0.6rem;
-            border-bottom: 4px double var(--ink);
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .masthead-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.78rem;
-            color: var(--ink-faded);
-            margin-bottom: 0.3rem;
-        }
-
-        .masthead h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
-            line-height: 1;
-        }
-
-        .masthead-motto {
-            font-family: 'IM Fell English', serif;
-            font-style: italic;
-            font-size: 0.88rem;
-            color: var(--ink-faded);
-            margin-top: 0.15rem;
-        }
-
-        .masthead-bar {
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.8rem;
-            color: var(--ink-faded);
-            margin-top: 0.4rem;
-            padding-top: 0.4rem;
-            border-top: 1px solid var(--rule);
+            flex-wrap: wrap;
+            gap: var(--space-3);
         }
 
-        .masthead-bar a {
-            color: var(--red);
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
             text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
         }
 
-        .masthead-bar a:hover { text-decoration: underline; }
-
-        /* ─── CONTENT ─── */
-        .content {
-            padding: 1rem 1.5rem 1.5rem;
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
         }
 
-        /* ─── TABLE OF CONTENTS ─── */
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
         .toc {
-            border-bottom: 2px solid var(--ink);
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.2rem;
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .toc-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.7rem;
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--ink-faded);
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
         }
 
         .toc-list {
             list-style: none;
+            padding: 0;
+            margin: 0;
             column-count: 2;
-            column-gap: 1.5rem;
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.9rem;
-            line-height: 1.8;
+            column-gap: var(--space-8);
         }
 
         .toc-list li {
             break-inside: avoid;
-            padding-left: 1.2rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
             position: relative;
+            margin-bottom: var(--space-3);
         }
 
-        .toc-list li::before {
-            content: attr(data-num) '.';
+        .toc-num {
             position: absolute;
             left: 0;
-            color: var(--red);
+            top: 0.35rem;
             font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
         }
 
         .toc-list a {
-            color: var(--ink);
+            display: block;
+            color: var(--text-body);
             text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
         }
-
-        .toc-list a:hover { color: var(--red); }
 
         .toc-cat {
+            display: block;
             font-size: 0.7rem;
+            color: var(--text-faint);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--ink-faded);
+            line-height: 1.3;
+            margin-bottom: 1px;
         }
 
-        @media (max-width: 580px) {
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
             .toc-list { column-count: 1; }
             .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
         }
 
-        /* ─── ARTICLE ─── */
+        /* ── Article ───────────────────────────────── */
         .article {
-            padding: 1.2rem 0;
-            border-top: 2px solid var(--ink);
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
         }
+        .article:last-of-type { border-bottom: none; }
 
         .article-kicker {
-            font-family: 'Old Standard TT', serif;
+            font-family: var(--font-sans);
             font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.22em;
-            color: var(--red);
-            margin-bottom: 0.2rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
         }
 
         .article h2 {
-            font-family: 'Old Standard TT', serif;
+            font-family: var(--font-sans);
             font-weight: 700;
-            font-size: clamp(1.2rem, 3vw, 1.55rem);
+            font-size: var(--text-2xl);
             line-height: 1.2;
-            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+            max-width: 40ch;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+            max-width: 30ch;
         }
 
         .article-meta {
-            font-family: 'IM Fell English', serif;
-            font-size: 0.82rem;
-            color: var(--ink-faded);
-            font-style: italic;
-            margin-bottom: 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
         }
 
         .article-teaser {
-            font-family: 'IM Fell English', serif;
+            font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.05rem;
-            color: var(--ink-light);
+            font-size: var(--text-lg);
+            color: var(--text-muted);
             line-height: 1.65;
-            margin-bottom: 0.8rem;
-            border-left: 2px solid var(--rule-light);
-            padding-left: 0.8rem;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
         }
 
-        /* ─── ANALYSIS ─── */
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
         .analysis-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-faded);
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid var(--rule-light);
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
         }
 
         .analysis-body {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            column-count: 2;
-            column-gap: 1.5rem;
-            column-rule: 1px solid var(--rule-light);
-            text-align: justify;
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
             hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
         }
 
-        .analysis-body p { margin-bottom: 0.7rem; }
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
         .analysis-body p:last-child { margin-bottom: 0; }
 
-        @media (max-width: 640px) {
-            .analysis-body { column-count: 1; }
-        }
-
-        /* ─── SOURCES ─── */
+        /* ── Sources ───────────────────────────────── */
         .sources {
-            margin-top: 0.8rem;
-            padding-top: 0.5rem;
-            border-top: 1px dashed var(--rule-light);
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
         }
 
         .sources-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.68rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-faded);
-            margin-bottom: 0.2rem;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
         }
 
         .sources ul {
             list-style: none;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.82rem;
-            color: var(--ink-faded);
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
             line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
         }
 
         .sources a {
-            color: var(--ink-faded);
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
             text-decoration: none;
-            border-bottom: 1px solid var(--rule-light);
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
         }
 
-        .sources a:hover { color: var(--red); border-color: var(--red); }
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
 
-        /* ─── LEAD (first article, bigger) ─── */
-        .article--lead h2 {
-            font-size: clamp(1.6rem, 4.5vw, 2.3rem);
-            text-align: center;
-            margin-bottom: 0.4rem;
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
         }
 
-        .article--lead .article-kicker {
-            text-align: center;
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
         }
 
-        .article--lead .article-meta {
-            text-align: center;
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
         }
 
-        .article--lead .article-teaser {
-            border-left: none;
-            padding-left: 0;
-            text-align: center;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.1rem;
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
         }
 
-        /* ─── FOOTER ─── */
-        .paper-footer {
-            border-top: 3px double var(--ink);
-            padding: 0.8rem 1.5rem 1rem;
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.78rem;
-            color: var(--ink-faded);
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
         }
 
-        .paper-footer a {
-            color: var(--red);
-            text-decoration: none;
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
         }
 
-        .paper-footer a:hover { text-decoration: underline; }
-
-        a { color: inherit; }
-
-        @media (max-width: 580px) {
-            .content { padding: 0.8rem 1rem 1rem; }
-            .masthead { padding: 0.8rem 1rem 0.5rem; }
-            .masthead-bar {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.2rem;
-            }
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
         }
 
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
         @media print {
-            body { background: white; padding: 0; }
-            .newspaper { box-shadow: none; }
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
             .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
         }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
     </style>
 </head>
 <body>
 
-<div class="newspaper">
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
 
-    <header class="masthead" id="top">
-        <div class="masthead-top">
-            <span>Gegr. 2026</span>
-            <span>Preis: Gratis</span>
-        </div>
-        <h1>AI News Magazin</h1>
-        <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
-        <div class="masthead-bar">
-            <span>Sonntag, 16. M&auml;rz 2026</span>
-            <span>6 Artikel</span>
-            <span><a href="../index.html">&larr; Alle Ausgaben</a></span>
-        </div>
-    </header>
-
-    <div class="content">
-
-        <!-- ═══ TOC ═══ -->
-        <nav class="toc">
-            <div class="toc-label">Inhalt dieser Ausgabe</div>
-            <ol class="toc-list">
-                <li data-num="1"><a href="#art-1">NVIDIA enth&uuml;llt Vera Rubin</a> <span class="toc-cat">&middot; Industrie</span></li>
-                <li data-num="2"><a href="#art-2">NVIDIA DLSS 5 spaltet die Gaming-Welt</a> <span class="toc-cat">&middot; Technologie</span></li>
-                <li data-num="3"><a href="#art-3">Teenager verklagen Musks xAI wegen Grok</a> <span class="toc-cat">&middot; Politik</span></li>
-                <li data-num="4"><a href="#art-4">Britannica und Merriam-Webster verklagen OpenAI</a> <span class="toc-cat">&middot; Politik</span></li>
-                <li data-num="5"><a href="#art-5">Warren fordert &Uuml;berpr&uuml;fung von xAI-Zugang</a> <span class="toc-cat">&middot; Politik</span></li>
-                <li data-num="6"><a href="#art-6">Netanyahu im Deepfake-Labyrinth</a> <span class="toc-cat">&middot; Vermischtes</span></li>
-            </ol>
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">AI News Magazin</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
         </nav>
-
-        <!-- ═══ ART 1: LEAD ═══ -->
-        <article class="article article--lead" id="art-1">
-            <div class="article-kicker">Industrie</div>
-            <h2>NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; CNBC, TechCrunch, Tom's Hardware</div>
-            <p class="article-teaser">Auf der GTC 2026 pr&auml;sentiert Jensen Huang eine neue &Auml;ra der KI-Infrastruktur: Die Vera-Rubin-Plattform vereint sieben neue Chips, ein eigenes CPU-Design und den Anspruch, die Billionen-Dollar-Marke bei Bestellungen bis 2027 zu knacken.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>NVIDIA hat auf der GTC 2026 die Vera-Rubin-Plattform vorgestellt &mdash; ein vertikal integriertes System aus sieben neuen Chips: Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU, Spectrum-6 Ethernet Switch und der neu integrierten Groq 3 LPU. Alle befinden sich laut NVIDIA bereits in Serienproduktion.</p>
-                <p>Die Vera CPU ist NVIDIAs erstes eigenes CPU-Design mit 88 Olympus-Kernen, Spatial Multithreading und LPDDR5X-Speicher mit bis zu 1,2 TB/s Bandbreite. NVIDIA verspricht 50% mehr Leistung und doppelte Effizienz gegen&uuml;ber herk&ouml;mmlichen Rack-CPUs. &Uuml;ber NVLink-C2C erreicht die Verbindung zur Rubin GPU 1,8 TB/s koh&auml;rente Bandbreite.</p>
-                <p>Jensen Huang hob die Verkaufsprognosen auf ein neues Niveau: Nachdem er im Vorjahr 500 Milliarden Dollar Umsatz durch Blackwell und Rubin bis 2026 prognostiziert hatte, erh&ouml;hte er die Projektion auf eine Billion Dollar bis 2027. &bdquo;KI ist endlich in der Lage, produktive Arbeit zu leisten&ldquo;, erkl&auml;rte Huang. &bdquo;Der Wendepunkt der Inferenz ist erreicht.&ldquo; Und: &bdquo;Wir werden zu wenig haben. Ich bin sicher, dass die Nachfrage nach Rechenleistung deutlich h&ouml;her sein wird.&ldquo;</p>
-                <p>Das Vera-Rubin-System besteht aus 1,3 Millionen Komponenten und soll zehnmal mehr Leistung pro Watt als sein Vorg&auml;nger Grace Blackwell liefern. Partner-Verf&uuml;gbarkeit beginnt in der zweiten Jahresh&auml;lfte 2026. NVIDIA stellte zudem ein Vera Rubin Space Module vor &mdash; f&uuml;r orbitale Rechenzentren mit bis zu 25-fachem KI-Compute gegen&uuml;ber H100.</p>
-                <p>Die GTC 2026 machte deutlich: NVIDIA positioniert sich nicht mehr nur als Chiplieferant, sondern als Architekt einer kompletten KI-Infrastruktur vom Rechenzentrum bis ins Weltall. Die Frage ist nicht mehr ob, sondern wie schnell die Branche diese Systeme absorbieren kann.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>CNBC</li>
-                    <li>TechCrunch</li>
-                    <li>Tom's Hardware</li>
-                    <li>NVIDIA Newsroom</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 2 ═══ -->
-        <article class="article" id="art-2">
-            <div class="article-kicker">Technologie</div>
-            <h2>NVIDIA DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; The Verge, PC Gamer, Tom's Hardware</div>
-            <p class="article-teaser">Ebenfalls auf der GTC vorgestellt: DLSS 5 soll den gr&ouml;&szlig;ten Durchbruch in der Computergrafik seit Echtzeit-Raytracing darstellen. Doch die ersten Reaktionen sind gespalten.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>NVIDIA hat auf der GTC 2026 DLSS 5 enth&uuml;llt &mdash; ein neuronales Rendering-Modell, das laut NVIDIA &bdquo;den bedeutendsten Durchbruch in der Computergrafik seit dem Deb&uuml;t von Echtzeit-Raytracing 2018&ldquo; darstellt. Anders als bisherige DLSS-Versionen nutzt DLSS 5 ein KI-Modell, um Szenen mit fotorealistischer Beleuchtung und Materialien anzureichern &mdash; verankert am 3D-Quellmaterial und konsistent von Frame zu Frame.</p>
-                <p>DLSS 5 wird zun&auml;chst exklusiv f&uuml;r RTX-50-Series-GPUs verf&uuml;gbar sein und soll im Herbst 2026 erscheinen. Gro&szlig;e Publisher haben bereits Unterst&uuml;tzung zugesagt: Bethesda, Capcom, Ubisoft, Warner Bros. Games, Tencent und weitere.</p>
-                <p>Die Reaktionen sind gemischt. W&auml;hrend die Technologie das Potenzial hat, fotorealistisches Niveau in PC-Spiele zu bringen, besteht die offensichtlichere Gefahr, dass sie Spielgrafik homogenisiert &mdash; insbesondere Charaktere, weit &uuml;ber die urspr&uuml;nglichen Intentionen der K&uuml;nstler hinaus. Die kommenden Tage sollten zeigen, wie heftig die Debatte noch werden w&uuml;rde.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>The Verge</li>
-                    <li>PC Gamer</li>
-                    <li>Tom's Hardware</li>
-                    <li>NVIDIA</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 3 ═══ -->
-        <article class="article" id="art-3">
-            <div class="article-kicker">Politik &amp; Regulierung</div>
-            <h2>Teenager verklagen Musks xAI &mdash; Grok soll sexualisierte Bilder von Minderj&auml;hrigen erzeugt haben</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; Washington Post, NPR, Engadget</div>
-            <p class="article-teaser">Drei Jugendliche aus Tennessee haben eine Sammelklage gegen xAI eingereicht. Der Vorwurf: Groks Bildgenerator habe ihre Schulfotos in kinderpornografisches Material verwandelt.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Drei Teenagerinnen aus Tennessee &mdash; in der Klageschrift als Jane Doe 1, 2 und 3 bezeichnet &mdash; haben vor einem Bundesgericht in Kalifornien eine Sammelklage gegen Elon Musks xAI eingereicht. Der Vorwurf wiegt schwer: xAIs KI-Tool Grok habe Fotos der bekleideten Minderj&auml;hrigen in sexualisierte und nackte Bilder verwandelt. Zwei der Kl&auml;gerinnen sind noch minderj&auml;hrig.</p>
-                <p>Laut Klageschrift wurde eine der Teenagerinnen im Dezember 2025 darauf aufmerksam, dass jemand KI-generierte Bilder und Videos von ihr und anderen Minderj&auml;hrigen teilte &mdash; &bdquo;in Settings, die ihr vertraut waren, aber in sexuell explizite Posen morphed.&ldquo; Das Material wurde angeblich auf Discord, Telegram und anderen Plattformen verbreitet und als &bdquo;Tauschmittel&ldquo; f&uuml;r weiteres CSAM-Material verwendet.</p>
-                <p>Die Klage beschuldigt xAI der Verbreitung, des Besitzes und der Produktion von Kinderpornografie mit der Absicht der Verbreitung. Obwohl aktuell drei Kl&auml;gerinnen benannt sind, k&ouml;nnte die Sammelklage laut Klageschrift &bdquo;mindestens Tausende von Minderj&auml;hrigen&ldquo; umfassen, deren Fotos ebenfalls von Grok in sexualisierte Bilder umgewandelt wurden.</p>
-                <p>Der Fall unterstreicht ein wachsendes Problem der KI-Branche: Die F&auml;higkeit von Bildgeneratoren, aus harmlosen Fotos explizites Material zu erzeugen, stellt bestehende Kinderschutzgesetze vor neue Herausforderungen. Die Klage ist eine der ersten, die direkt den Hersteller eines KI-Tools f&uuml;r den Missbrauch seiner Technologie verantwortlich macht.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>Washington Post</li>
-                    <li>NPR</li>
-                    <li>Engadget</li>
-                    <li>The Hill</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 4 ═══ -->
-        <article class="article" id="art-4">
-            <div class="article-kicker">Politik &amp; Regulierung</div>
-            <h2>Encyclopedia Britannica und Merriam-Webster verklagen OpenAI</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; TechCrunch, Engadget, The Verge</div>
-            <p class="article-teaser">N&auml;chste Runde im Urheberrechtsstreit: Die Herausgeber der ber&uuml;hmtesten Enzyklop&auml;die der Welt werfen OpenAI &bdquo;massiven Urheberrechtsversto&szlig;&ldquo; vor &mdash; und berufen sich dabei auf ein bisher wenig genutztes Argument.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Encyclopedia Britannica und Merriam-Webster haben am 13. M&auml;rz in New York Klage gegen OpenAI eingereicht. Der Vorwurf: OpenAI habe fast 100.000 Online-Artikel von Britannica ohne Genehmigung zum Training seiner Sprachmodelle verwendet. Besonders brisant ist ein zus&auml;tzlicher Vorwurf: OpenAI verletze auch das Markenrecht (Lanham Act), wenn es halluzinierte Falschinformationen generiert und diese f&auml;lschlicherweise Britannica zuschreibt.</p>
-                <p>OpenAI verteidigte sich mit dem bekannten Argument: Die Modelle f&ouml;rderten Innovation und w&uuml;rden auf Basis von &bdquo;&ouml;ffentlich verf&uuml;gbaren Daten&ldquo; trainiert, die unter &bdquo;Fair Use&ldquo;-Standards fielen. Doch die Klageschrift greift dieses Argument direkt an: Wenn ChatGPT auf Nutzeranfragen w&ouml;rtliche oder nahezu w&ouml;rtliche Reproduktionen von Britannica-Inhalten ausgibt, gehe das &uuml;ber Fair Use hinaus.</p>
-                <p>Die Klage reiht sich in eine wachsende Liste ein: Die New York Times, Ziff Davis und &uuml;ber ein Dutzend Zeitungen haben bereits &auml;hnliche Klagen eingereicht. Doch der Markenrechts-Aspekt &mdash; Halluzinationen, die einer renommierten Quelle zugeschrieben werden &mdash; er&ouml;ffnet eine neue juristische Front, die f&uuml;r OpenAI besonders unangenehm werden k&ouml;nnte.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>TechCrunch</li>
-                    <li>Engadget</li>
-                    <li>Gizmodo</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 5 ═══ -->
-        <article class="article" id="art-5">
-            <div class="article-kicker">Politik &amp; Regulierung</div>
-            <h2>Warren fordert &Uuml;berpr&uuml;fung: Warum bekommt xAI Zugang zu Geheimnetzwerken?</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; TechCrunch</div>
-            <p class="article-teaser">Senatorin Elizabeth Warren hat das Pentagon aufgefordert, seine Entscheidung zu erkl&auml;ren, Elon Musks xAI Zugang zu klassifizierten Netzwerken zu gew&auml;hren &mdash; w&auml;hrend Anthropic gleichzeitig als Sicherheitsrisiko eingestuft wird.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Die demokratische Senatorin Elizabeth Warren hat das US-Verteidigungsministerium in einem formellen Schreiben aufgefordert, seine Entscheidung zu rechtfertigen, xAI &mdash; Elon Musks KI-Unternehmen &mdash; Zugang zu klassifizierten Milit&auml;rnetzwerken zu gew&auml;hren. Die Anfrage kommt zu einem Zeitpunkt, an dem das Pentagon gleichzeitig Anthropic als &bdquo;Supply Chain Risk&ldquo; einstuft.</p>
-                <p>Warren stellt die offensichtliche Frage: Warum wird ein Unternehmen, dessen CEO gleichzeitig SpaceX, Tesla und eine Regierungsbeh&ouml;rde (DOGE) leitet, als vertrauensw&uuml;rdiger eingestuft als Anthropic, das lediglich ethische Bedingungen f&uuml;r den milit&auml;rischen Einsatz seiner KI stellt? Die potenziellen Interessenkonflikte bei xAI liegen auf der Hand.</p>
-                <p>Die Anfrage ist Teil eines gr&ouml;&szlig;eren Musters: Warren hat sich wiederholt kritisch zur Rolle von Tech-Milliard&auml;ren in der Trump-Administration ge&auml;u&szlig;ert. Der Fall xAI vs. Anthropic wird zunehmend als Lackmustest daf&uuml;r gesehen, ob die Vergabe von Milit&auml;rauftr&auml;gen nach Leistung oder nach politischer N&auml;he erfolgt.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>TechCrunch</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 6 ═══ -->
-        <article class="article" id="art-6">
-            <div class="article-kicker">Vermischtes</div>
-            <h2>Netanyahu im Deepfake-Labyrinth &mdash; Wenn KI die Realit&auml;t aufl&ouml;st</h2>
-            <div class="article-meta">16. M&auml;rz 2026 &middot; The Verge, Euronews, IBTimes</div>
-            <p class="article-teaser">Ist Israels Premierminister am Leben oder eine KI-F&auml;lschung? Ein viral gegangenes Caf&eacute;-Video l&ouml;st eine bizarre Authentizit&auml;tskrise aus, die zeigt, wie KI-Tools das Vertrauen in visuelle Medien untergraben.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Seit Beginn der US-israelischen Milit&auml;rkampagne gegen den Iran verbreiten iranische Staatsmedien Falschmeldungen &uuml;ber den Tod Netanyahus. Am 15. M&auml;rz ging ein beil&auml;ufig gefilmter Clip des Premiers beim Kaffeetrinken im Jerusalemer Caf&eacute; &bdquo;The Sataf&ldquo; viral &mdash; gedacht als ironische Antwort auf die Todesmeldungen. Stattdessen l&ouml;ste das Video eine globale &bdquo;Wahrheitskrise&ldquo; aus.</p>
-                <p>Elon Musks KI-Chatbot Grok kennzeichnete das Video als &bdquo;100% Deepfake&ldquo;. Nutzer analysierten das Material Frame f&uuml;r Frame und berichteten von einem &bdquo;zus&auml;tzlichen Finger&ldquo; und statischem Kaffee-Pegel. Netanyahu sah sich zu einer beispiellosen digitalen Gegenoffensive gezwungen, um zu beweisen, dass er am Leben ist. Forensische Analysen fanden allerdings keine Belege f&uuml;r eine KI-Generierung &mdash; die vermeintlichen Anomalien lie&szlig;en sich durch Bewegungsunsch&auml;rfe und Kompressions-Artefakte erkl&auml;ren.</p>
-                <p>Der Fall illustriert ein fundamentales Problem des KI-Zeitalters: Wenn KI-Tools selbst echte Videos als F&auml;lschungen markieren, entsteht ein Vertrauensvakuum, das von staatlichen Akteuren instrumentalisiert werden kann. Die Grenze zwischen Desinformation und Gegendesinformation verschwimmt &mdash; und die Technologie, die F&auml;lschungen erkennen soll, kann selbst zur Quelle von Desinformation werden.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li>The Verge</li>
-                    <li>Euronews</li>
-                    <li>IBTimes</li>
-                </ul>
-            </div>
-        </article>
-
     </div>
+</header>
 
-    <footer class="paper-footer">
-        <span>&copy; 2026 AI News Magazin</span>
-        <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
-        <a href="#top">&uarr; Nach oben</a>
-    </footer>
-
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-03-16">Sonntag, 16. M&auml;rz 2026</time> &middot; 6 Artikel
+    </div>
+    <h1 class="edition-title">Ausgabe vom 16. M&auml;rz 2026</h1>
+    <p class="edition-subtitle">Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt.</p>
 </div>
 
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Industrie</span><span class="toc-title">NVIDIA enth&uuml;llt Vera Rubin</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Technologie</span><span class="toc-title">NVIDIA DLSS 5 spaltet die Gaming-Welt</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Politik</span><span class="toc-title">Teenager verklagen Musks xAI wegen Grok</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Politik</span><span class="toc-title">Britannica und Merriam-Webster verklagen OpenAI</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Politik</span><span class="toc-title">Warren fordert &Uuml;berpr&uuml;fung von xAI-Zugang</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Vermischtes</span><span class="toc-title">Netanyahu im Deepfake-Labyrinth</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Industrie</div>
+            <h2 id="art-1-h">NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: CNBC, TechCrunch, Tom's Hardware</div>
+        </header>
+        <p class="article-teaser">Auf der GTC 2026 pr&auml;sentiert Jensen Huang eine neue &Auml;ra der KI-Infrastruktur: Die Vera-Rubin-Plattform vereint sieben neue Chips, ein eigenes CPU-Design und den Anspruch, die Billionen-Dollar-Marke bei Bestellungen bis 2027 zu knacken.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>NVIDIA hat auf der GTC 2026 die Vera-Rubin-Plattform vorgestellt &mdash; ein vertikal integriertes System aus sieben neuen Chips: Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU, Spectrum-6 Ethernet Switch und der neu integrierten Groq 3 LPU. Alle befinden sich laut NVIDIA bereits in Serienproduktion.</p>
+            <p>Die Vera CPU ist NVIDIAs erstes eigenes CPU-Design mit 88 Olympus-Kernen, Spatial Multithreading und LPDDR5X-Speicher mit bis zu 1,2 TB/s Bandbreite. NVIDIA verspricht 50% mehr Leistung und doppelte Effizienz gegen&uuml;ber herk&ouml;mmlichen Rack-CPUs. &Uuml;ber NVLink-C2C erreicht die Verbindung zur Rubin GPU 1,8 TB/s koh&auml;rente Bandbreite.</p>
+            <p>Jensen Huang hob die Verkaufsprognosen auf ein neues Niveau: Nachdem er im Vorjahr 500 Milliarden Dollar Umsatz durch Blackwell und Rubin bis 2026 prognostiziert hatte, erh&ouml;hte er die Projektion auf eine Billion Dollar bis 2027. &bdquo;KI ist endlich in der Lage, produktive Arbeit zu leisten&ldquo;, erkl&auml;rte Huang. &bdquo;Der Wendepunkt der Inferenz ist erreicht.&ldquo; Und: &bdquo;Wir werden zu wenig haben. Ich bin sicher, dass die Nachfrage nach Rechenleistung deutlich h&ouml;her sein wird.&ldquo;</p>
+            <p>Das Vera-Rubin-System besteht aus 1,3 Millionen Komponenten und soll zehnmal mehr Leistung pro Watt als sein Vorg&auml;nger Grace Blackwell liefern. Partner-Verf&uuml;gbarkeit beginnt in der zweiten Jahresh&auml;lfte 2026. NVIDIA stellte zudem ein Vera Rubin Space Module vor &mdash; f&uuml;r orbitale Rechenzentren mit bis zu 25-fachem KI-Compute gegen&uuml;ber H100.</p>
+            <p>Die GTC 2026 machte deutlich: NVIDIA positioniert sich nicht mehr nur als Chiplieferant, sondern als Architekt einer kompletten KI-Infrastruktur vom Rechenzentrum bis ins Weltall. Die Frage ist nicht mehr ob, sondern wie schnell die Branche diese Systeme absorbieren kann.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>CNBC</li>
+                <li>TechCrunch</li>
+                <li>Tom's Hardware</li>
+                <li>NVIDIA Newsroom</li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Technologie</div>
+            <h2 id="art-2-h">NVIDIA DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: The Verge, PC Gamer, Tom's Hardware</div>
+        </header>
+        <p class="article-teaser">Ebenfalls auf der GTC vorgestellt: DLSS 5 soll den gr&ouml;&szlig;ten Durchbruch in der Computergrafik seit Echtzeit-Raytracing darstellen. Doch die ersten Reaktionen sind gespalten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>NVIDIA hat auf der GTC 2026 DLSS 5 enth&uuml;llt &mdash; ein neuronales Rendering-Modell, das laut NVIDIA &bdquo;den bedeutendsten Durchbruch in der Computergrafik seit dem Deb&uuml;t von Echtzeit-Raytracing 2018&ldquo; darstellt. Anders als bisherige DLSS-Versionen nutzt DLSS 5 ein KI-Modell, um Szenen mit fotorealistischer Beleuchtung und Materialien anzureichern &mdash; verankert am 3D-Quellmaterial und konsistent von Frame zu Frame.</p>
+            <p>DLSS 5 wird zun&auml;chst exklusiv f&uuml;r RTX-50-Series-GPUs verf&uuml;gbar sein und soll im Herbst 2026 erscheinen. Gro&szlig;e Publisher haben bereits Unterst&uuml;tzung zugesagt: Bethesda, Capcom, Ubisoft, Warner Bros. Games, Tencent und weitere.</p>
+            <p>Die Reaktionen sind gemischt. W&auml;hrend die Technologie das Potenzial hat, fotorealistisches Niveau in PC-Spiele zu bringen, besteht die offensichtlichere Gefahr, dass sie Spielgrafik homogenisiert &mdash; insbesondere Charaktere, weit &uuml;ber die urspr&uuml;nglichen Intentionen der K&uuml;nstler hinaus. Die kommenden Tage sollten zeigen, wie heftig die Debatte noch werden w&uuml;rde.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>The Verge</li>
+                <li>PC Gamer</li>
+                <li>Tom's Hardware</li>
+                <li>NVIDIA</li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2 id="art-3-h">Teenager verklagen Musks xAI &mdash; Grok soll sexualisierte Bilder von Minderj&auml;hrigen erzeugt haben</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: Washington Post, NPR, Engadget</div>
+        </header>
+        <p class="article-teaser">Drei Jugendliche aus Tennessee haben eine Sammelklage gegen xAI eingereicht. Der Vorwurf: Groks Bildgenerator habe ihre Schulfotos in kinderpornografisches Material verwandelt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Drei Teenagerinnen aus Tennessee &mdash; in der Klageschrift als Jane Doe 1, 2 und 3 bezeichnet &mdash; haben vor einem Bundesgericht in Kalifornien eine Sammelklage gegen Elon Musks xAI eingereicht. Der Vorwurf wiegt schwer: xAIs KI-Tool Grok habe Fotos der bekleideten Minderj&auml;hrigen in sexualisierte und nackte Bilder verwandelt. Zwei der Kl&auml;gerinnen sind noch minderj&auml;hrig.</p>
+            <p>Laut Klageschrift wurde eine der Teenagerinnen im Dezember 2025 darauf aufmerksam, dass jemand KI-generierte Bilder und Videos von ihr und anderen Minderj&auml;hrigen teilte &mdash; &bdquo;in Settings, die ihr vertraut waren, aber in sexuell explizite Posen morphed.&ldquo; Das Material wurde angeblich auf Discord, Telegram und anderen Plattformen verbreitet und als &bdquo;Tauschmittel&ldquo; f&uuml;r weiteres CSAM-Material verwendet.</p>
+            <p>Die Klage beschuldigt xAI der Verbreitung, des Besitzes und der Produktion von Kinderpornografie mit der Absicht der Verbreitung. Obwohl aktuell drei Kl&auml;gerinnen benannt sind, k&ouml;nnte die Sammelklage laut Klageschrift &bdquo;mindestens Tausende von Minderj&auml;hrigen&ldquo; umfassen, deren Fotos ebenfalls von Grok in sexualisierte Bilder umgewandelt wurden.</p>
+            <p>Der Fall unterstreicht ein wachsendes Problem der KI-Branche: Die F&auml;higkeit von Bildgeneratoren, aus harmlosen Fotos explizites Material zu erzeugen, stellt bestehende Kinderschutzgesetze vor neue Herausforderungen. Die Klage ist eine der ersten, die direkt den Hersteller eines KI-Tools f&uuml;r den Missbrauch seiner Technologie verantwortlich macht.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>Washington Post</li>
+                <li>NPR</li>
+                <li>Engadget</li>
+                <li>The Hill</li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2 id="art-4-h">Encyclopedia Britannica und Merriam-Webster verklagen OpenAI</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, Engadget, The Verge</div>
+        </header>
+        <p class="article-teaser">N&auml;chste Runde im Urheberrechtsstreit: Die Herausgeber der ber&uuml;hmtesten Enzyklop&auml;die der Welt werfen OpenAI &bdquo;massiven Urheberrechtsversto&szlig;&ldquo; vor &mdash; und berufen sich dabei auf ein bisher wenig genutztes Argument.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Encyclopedia Britannica und Merriam-Webster haben am 13. M&auml;rz in New York Klage gegen OpenAI eingereicht. Der Vorwurf: OpenAI habe fast 100.000 Online-Artikel von Britannica ohne Genehmigung zum Training seiner Sprachmodelle verwendet. Besonders brisant ist ein zus&auml;tzlicher Vorwurf: OpenAI verletze auch das Markenrecht (Lanham Act), wenn es halluzinierte Falschinformationen generiert und diese f&auml;lschlicherweise Britannica zuschreibt.</p>
+            <p>OpenAI verteidigte sich mit dem bekannten Argument: Die Modelle f&ouml;rderten Innovation und w&uuml;rden auf Basis von &bdquo;&ouml;ffentlich verf&uuml;gbaren Daten&ldquo; trainiert, die unter &bdquo;Fair Use&ldquo;-Standards fielen. Doch die Klageschrift greift dieses Argument direkt an: Wenn ChatGPT auf Nutzeranfragen w&ouml;rtliche oder nahezu w&ouml;rtliche Reproduktionen von Britannica-Inhalten ausgibt, gehe das &uuml;ber Fair Use hinaus.</p>
+            <p>Die Klage reiht sich in eine wachsende Liste ein: Die New York Times, Ziff Davis und &uuml;ber ein Dutzend Zeitungen haben bereits &auml;hnliche Klagen eingereicht. Doch der Markenrechts-Aspekt &mdash; Halluzinationen, die einer renommierten Quelle zugeschrieben werden &mdash; er&ouml;ffnet eine neue juristische Front, die f&uuml;r OpenAI besonders unangenehm werden k&ouml;nnte.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>TechCrunch</li>
+                <li>Engadget</li>
+                <li>Gizmodo</li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2 id="art-5-h">Warren fordert &Uuml;berpr&uuml;fung: Warum bekommt xAI Zugang zu Geheimnetzwerken?</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: TechCrunch</div>
+        </header>
+        <p class="article-teaser">Senatorin Elizabeth Warren hat das Pentagon aufgefordert, seine Entscheidung zu erkl&auml;ren, Elon Musks xAI Zugang zu klassifizierten Netzwerken zu gew&auml;hren &mdash; w&auml;hrend Anthropic gleichzeitig als Sicherheitsrisiko eingestuft wird.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die demokratische Senatorin Elizabeth Warren hat das US-Verteidigungsministerium in einem formellen Schreiben aufgefordert, seine Entscheidung zu rechtfertigen, xAI &mdash; Elon Musks KI-Unternehmen &mdash; Zugang zu klassifizierten Milit&auml;rnetzwerken zu gew&auml;hren. Die Anfrage kommt zu einem Zeitpunkt, an dem das Pentagon gleichzeitig Anthropic als &bdquo;Supply Chain Risk&ldquo; einstuft.</p>
+            <p>Warren stellt die offensichtliche Frage: Warum wird ein Unternehmen, dessen CEO gleichzeitig SpaceX, Tesla und eine Regierungsbeh&ouml;rde (DOGE) leitet, als vertrauensw&uuml;rdiger eingestuft als Anthropic, das lediglich ethische Bedingungen f&uuml;r den milit&auml;rischen Einsatz seiner KI stellt? Die potenziellen Interessenkonflikte bei xAI liegen auf der Hand.</p>
+            <p>Die Anfrage ist Teil eines gr&ouml;&szlig;eren Musters: Warren hat sich wiederholt kritisch zur Rolle von Tech-Milliard&auml;ren in der Trump-Administration ge&auml;u&szlig;ert. Der Fall xAI vs. Anthropic wird zunehmend als Lackmustest daf&uuml;r gesehen, ob die Vergabe von Milit&auml;rauftr&auml;gen nach Leistung oder nach politischer N&auml;he erfolgt.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>TechCrunch</li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Vermischtes</div>
+            <h2 id="art-6-h">Netanyahu im Deepfake-Labyrinth &mdash; Wenn KI die Realit&auml;t aufl&ouml;st</h2>
+            <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: The Verge, Euronews, IBTimes</div>
+        </header>
+        <p class="article-teaser">Ist Israels Premierminister am Leben oder eine KI-F&auml;lschung? Ein viral gegangenes Caf&eacute;-Video l&ouml;st eine bizarre Authentizit&auml;tskrise aus, die zeigt, wie KI-Tools das Vertrauen in visuelle Medien untergraben.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Seit Beginn der US-israelischen Milit&auml;rkampagne gegen den Iran verbreiten iranische Staatsmedien Falschmeldungen &uuml;ber den Tod Netanyahus. Am 15. M&auml;rz ging ein beil&auml;ufig gefilmter Clip des Premiers beim Kaffeetrinken im Jerusalemer Caf&eacute; &bdquo;The Sataf&ldquo; viral &mdash; gedacht als ironische Antwort auf die Todesmeldungen. Stattdessen l&ouml;ste das Video eine globale &bdquo;Wahrheitskrise&ldquo; aus.</p>
+            <p>Elon Musks KI-Chatbot Grok kennzeichnete das Video als &bdquo;100% Deepfake&ldquo;. Nutzer analysierten das Material Frame f&uuml;r Frame und berichteten von einem &bdquo;zus&auml;tzlichen Finger&ldquo; und statischem Kaffee-Pegel. Netanyahu sah sich zu einer beispiellosen digitalen Gegenoffensive gezwungen, um zu beweisen, dass er am Leben ist. Forensische Analysen fanden allerdings keine Belege f&uuml;r eine KI-Generierung &mdash; die vermeintlichen Anomalien lie&szlig;en sich durch Bewegungsunsch&auml;rfe und Kompressions-Artefakte erkl&auml;ren.</p>
+            <p>Der Fall illustriert ein fundamentales Problem des KI-Zeitalters: Wenn KI-Tools selbst echte Videos als F&auml;lschungen markieren, entsteht ein Vertrauensvakuum, das von staatlichen Akteuren instrumentalisiert werden kann. Die Grenze zwischen Desinformation und Gegendesinformation verschwimmt &mdash; und die Technologie, die F&auml;lschungen erkennen soll, kann selbst zur Quelle von Desinformation werden.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li>The Verge</li>
+                <li>Euronews</li>
+                <li>IBTimes</li>
+            </ul>
+        </footer>
+    </article>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 AI News Magazin &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    // Init: stored preference > system preference
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
 </body>
 </html>

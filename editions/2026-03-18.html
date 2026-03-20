@@ -3,578 +3,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI News Magazin — 18. März 2026</title>
+    <title>AI News Magazin &mdash; 18. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
-
         :root {
-            --paper: #f2e8d0;
-            --paper-dark: #e8d9b8;
-            --paper-edge: #d4c5a0;
-            --ink: #1a1008;
-            --ink-light: #3a2a18;
-            --ink-faded: #5a4a38;
-            --rule: #8a7a60;
-            --rule-light: #b8a880;
-            --red: #8b1a1a;
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem; --text-sm: 0.875rem; --text-base: 1.125rem; --text-lg: 1.25rem;
+            --text-xl: 1.5rem; --text-2xl: 1.875rem; --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+            --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+            --width-article: 68ch; --width-content: 800px; --width-site: 1100px;
+            --bg: #faf9f6; --bg-surface: #f0eee8; --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a; --text-body: #2d2d2d; --text-muted: #5a5a5a; --text-faint: #8a8a8a;
+            --border: #d8d5cc; --border-strong: #b0ada4;
+            --accent: #b91c1c; --accent-hover: #991b1b;
+            --link: #1d4ed8; --link-visited: #6d28d9; --link-hover: #1e40af;
+            color-scheme: light dark;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: #c8b898;
-            color: var(--ink);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 1.5rem 0.5rem;
+        [data-theme="dark"] {
+            --bg: #121212; --bg-surface: #1e1e1e; --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0; --text-body: #d0cec8; --text-muted: #9a9890; --text-faint: #6a6860;
+            --border: #333330; --border-strong: #4a4844;
+            --accent: #ef5350; --accent-hover: #f87171;
+            --link: #93c5fd; --link-visited: #c4b5fd; --link-hover: #bfdbfe;
         }
-
-        .newspaper {
-            background: var(--paper);
-            max-width: 920px;
-            width: 100%;
-            box-shadow:
-                2px 2px 0 var(--paper-edge),
-                4px 4px 0 var(--paper-dark),
-                6px 6px 15px rgba(30, 20, 5, 0.3);
-            position: relative;
-        }
-
-        .newspaper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* ─── MASTHEAD ─── */
-        .masthead {
-            text-align: center;
-            padding: 1.2rem 1.5rem 0.6rem;
-            border-bottom: 4px double var(--ink);
-        }
-
-        .masthead-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.78rem;
-            color: var(--ink-faded);
-            margin-bottom: 0.3rem;
-        }
-
-        .masthead h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
-            line-height: 1;
-        }
-
-        .masthead-motto {
-            font-family: 'IM Fell English', serif;
-            font-style: italic;
-            font-size: 0.88rem;
-            color: var(--ink-faded);
-            margin-top: 0.15rem;
-        }
-
-        .masthead-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.8rem;
-            color: var(--ink-faded);
-            margin-top: 0.4rem;
-            padding-top: 0.4rem;
-            border-top: 1px solid var(--rule);
-        }
-
-        .masthead-bar a {
-            color: var(--red);
-            text-decoration: none;
-        }
-
-        .masthead-bar a:hover { text-decoration: underline; }
-
-        /* ─── CONTENT ─── */
-        .content {
-            padding: 1rem 1.5rem 1.5rem;
-        }
-
-        /* ─── TABLE OF CONTENTS ─── */
-        .toc {
-            border-bottom: 2px solid var(--ink);
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .toc-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--ink-faded);
-            margin-bottom: 0.5rem;
-        }
-
-        .toc-list {
-            list-style: none;
-            column-count: 2;
-            column-gap: 1.5rem;
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-
-        .toc-list li {
-            break-inside: avoid;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-
-        .toc-list li::before {
-            content: attr(data-num) '.';
-            position: absolute;
-            left: 0;
-            color: var(--red);
-            font-weight: 700;
-        }
-
-        .toc-list a {
-            color: var(--ink);
-            text-decoration: none;
-        }
-
-        .toc-list a:hover { color: var(--red); }
-
-        .toc-cat {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--ink-faded);
-        }
-
-        @media (max-width: 580px) {
-            .toc-list { column-count: 1; }
-            .toc-cat { display: none; }
-        }
-
-        /* ─── ARTICLE ─── */
-        .article {
-            padding: 1.2rem 0;
-            border-top: 2px solid var(--ink);
-        }
-
-        .article-kicker {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.22em;
-            color: var(--red);
-            margin-bottom: 0.2rem;
-        }
-
-        .article h2 {
-            font-family: 'Old Standard TT', serif;
-            font-weight: 700;
-            font-size: clamp(1.2rem, 3vw, 1.55rem);
-            line-height: 1.2;
-            margin-bottom: 0.2rem;
-        }
-
-        .article-meta {
-            font-family: 'IM Fell English', serif;
-            font-size: 0.82rem;
-            color: var(--ink-faded);
-            font-style: italic;
-            margin-bottom: 0.6rem;
-        }
-
-        .article-teaser {
-            font-family: 'IM Fell English', serif;
-            font-style: italic;
-            font-size: 1.05rem;
-            color: var(--ink-light);
-            line-height: 1.65;
-            margin-bottom: 0.8rem;
-            border-left: 2px solid var(--rule-light);
-            padding-left: 0.8rem;
-        }
-
-        /* ─── ANALYSIS ─── */
-        .analysis-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--ink-faded);
-            margin-bottom: 0.5rem;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .analysis-body {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            column-count: 2;
-            column-gap: 1.5rem;
-            column-rule: 1px solid var(--rule-light);
-            text-align: justify;
-            hyphens: auto;
-        }
-
-        .analysis-body p { margin-bottom: 0.7rem; }
-        .analysis-body p:last-child { margin-bottom: 0; }
-
-        @media (max-width: 640px) {
-            .analysis-body { column-count: 1; }
-        }
-
-        /* ─── SOURCES ─── */
-        .sources {
-            margin-top: 0.8rem;
-            padding-top: 0.5rem;
-            border-top: 1px dashed var(--rule-light);
-        }
-
-        .sources-label {
-            font-family: 'Old Standard TT', serif;
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--ink-faded);
-            margin-bottom: 0.2rem;
-        }
-
-        .sources ul {
-            list-style: none;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.82rem;
-            color: var(--ink-faded);
-            line-height: 1.6;
-        }
-
-        .sources a {
-            color: var(--ink-faded);
-            text-decoration: none;
-            border-bottom: 1px solid var(--rule-light);
-        }
-
-        .sources a:hover { color: var(--red); border-color: var(--red); }
-
-        /* ─── LEAD (first article, bigger) ─── */
-        .article--lead h2 {
-            font-size: clamp(1.6rem, 4.5vw, 2.3rem);
-            text-align: center;
-            margin-bottom: 0.4rem;
-        }
-
-        .article--lead .article-kicker {
-            text-align: center;
-        }
-
-        .article--lead .article-meta {
-            text-align: center;
-        }
-
-        .article--lead .article-teaser {
-            border-left: none;
-            padding-left: 0;
-            text-align: center;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.1rem;
-        }
-
-        /* ─── FOOTER ─── */
-        .paper-footer {
-            border-top: 3px double var(--ink);
-            padding: 0.8rem 1.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-family: 'IM Fell English', serif;
-            font-size: 0.78rem;
-            color: var(--ink-faded);
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .paper-footer a {
-            color: var(--red);
-            text-decoration: none;
-        }
-
-        .paper-footer a:hover { text-decoration: underline; }
-
-        a { color: inherit; }
-
-        @media (max-width: 580px) {
-            .content { padding: 0.8rem 1rem 1rem; }
-            .masthead { padding: 0.8rem 1rem 0.5rem; }
-            .masthead-bar {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.2rem;
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212; --bg-surface: #1e1e1e; --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0; --text-body: #d0cec8; --text-muted: #9a9890; --text-faint: #6a6860;
+                --border: #333330; --border-strong: #4a4844;
+                --accent: #ef5350; --accent-hover: #f87171;
+                --link: #93c5fd; --link-visited: #c4b5fd; --link-hover: #bfdbfe;
             }
         }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .newspaper { box-shadow: none; }
-            .article { page-break-inside: avoid; }
-        }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+        body { font-family: var(--font-serif); font-size: var(--text-base); line-height: 1.75; color: var(--text-body); background: var(--bg); margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-optical-sizing: auto; }
+        .skip-link { position: absolute; top: -200%; left: 0; padding: 0.75rem 1.5rem; background: var(--accent); color: #fff; font-family: var(--font-sans); font-size: 1rem; font-weight: 600; text-decoration: none; z-index: 9999; border-radius: 0 0 6px 0; }
+        .skip-link:focus { top: 0; }
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+        a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color 0.15s ease, text-decoration-color 0.15s ease; }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+        .site-header { border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100; }
+        .site-header-inner { max-width: var(--width-content); margin: 0 auto; padding: var(--space-4) var(--space-6); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-3); }
+        .site-title { font-family: var(--font-sans); font-weight: 800; font-size: 1.35rem; color: var(--text-primary); text-decoration: none; letter-spacing: -0.02em; }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+        .site-nav { display: flex; gap: var(--space-6); font-family: var(--font-sans); font-size: var(--text-sm); }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.6rem; font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted); cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; line-height: 1; }
+        .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
+        .edition-header { max-width: var(--width-content); margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 1px solid var(--border); }
+        .edition-meta { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-2); }
+        .edition-title { font-family: var(--font-sans); font-weight: 800; font-size: var(--text-4xl); line-height: 1.15; color: var(--text-primary); margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+        .edition-subtitle { font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg); color: var(--text-muted); margin-top: var(--space-3); max-width: 55ch; }
+        .site-main { max-width: var(--width-content); margin: 0 auto; padding: 0 var(--space-6); }
+        .toc { padding: var(--space-8) 0; border-bottom: 1px solid var(--border); }
+        .toc-heading { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin: 0 0 var(--space-6); }
+        .toc-list { list-style: none; padding: 0; margin: 0; column-count: 2; column-gap: var(--space-8); }
+        .toc-list li { break-inside: avoid; font-family: var(--font-sans); font-size: var(--text-sm); padding-left: 2rem; position: relative; margin-bottom: var(--space-3); }
+        .toc-num { position: absolute; left: 0; top: 0.35rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; font-size: var(--text-sm); user-select: none; }
+        .toc-list a { display: block; color: var(--text-body); text-decoration: none; padding: var(--space-1) 0; border-radius: 3px; }
+        .toc-cat { display: block; font-size: 0.7rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.3; margin-bottom: 1px; }
+        .toc-title { display: block; line-height: 1.4; color: var(--text-body); }
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .toc-list a.toc-active .toc-title { color: var(--accent); font-weight: 600; }
+        .toc-separator { column-span: all; border-top: 1px solid var(--border); margin: var(--space-4) 0 var(--space-3); list-style: none; }
+        .toc-specials-row { column-span: all; display: flex; gap: var(--space-4); list-style: none; padding: 0; margin: 0; }
+        .toc-special { flex: 1; border-left: 3px solid var(--accent); padding-left: var(--space-4) !important; }
+        .toc-special .toc-cat { font-weight: 700; color: var(--accent); }
+        .toc-special .toc-title { color: var(--text-body); }
+        @media (max-width: 600px) { .toc-list { column-count: 1; } .toc-cat { display: none; } .toc-special .toc-cat { display: block; } .toc-specials-row { flex-direction: column; } }
+        .article { padding: var(--space-12) 0; border-bottom: 1px solid var(--border); }
+        .article:last-of-type { border-bottom: none; }
+        .article-kicker { font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: var(--space-2); }
+        .article h2 { font-family: var(--font-sans); font-weight: 700; font-size: var(--text-2xl); line-height: 1.2; color: var(--text-primary); margin: 0 0 var(--space-3); text-wrap: balance; letter-spacing: -0.01em; max-width: 40ch; }
+        .article--lead h2 { font-size: var(--text-3xl); max-width: 30ch; }
+        .article-meta { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-6); }
+        .article-teaser { font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg); color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-8); max-width: var(--width-article); border-left: 3px solid var(--border-strong); padding-left: var(--space-6); }
+        .article--lead .article-teaser { border-left: 3px solid var(--accent); }
+        .analysis-label { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--border); max-width: var(--width-article); }
+        .analysis-body { font-family: var(--font-serif); font-size: var(--text-base); line-height: 1.75; max-width: var(--width-article); color: var(--text-body); hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 6 3 2; hyphenate-limit-lines: 2; overflow-wrap: break-word; }
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+        .sources { margin-top: var(--space-8); padding-top: var(--space-4); border-top: 1px solid var(--border); max-width: var(--width-article); }
+        .sources-label { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: var(--space-2); }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li { font-family: var(--font-sans); font-size: var(--text-sm); line-height: 1.6; padding: var(--space-1) 0; color: var(--text-muted); }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+        .section-break { padding: var(--space-12) 0; border-bottom: 1px solid var(--border); }
+        .section-heading { font-family: var(--font-sans); font-weight: 800; font-size: var(--text-2xl); color: var(--text-primary); margin: 0 0 var(--space-2); letter-spacing: -0.01em; }
+        .section-subheading { font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-8); }
+        .reportage-teaser { background: var(--bg-surface); border-radius: 8px; padding: var(--space-8); }
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+        .reportage-teaser .article-teaser { border-left-color: var(--accent); }
+        .reportage-link { display: inline-block; font-family: var(--font-sans); font-size: var(--text-sm); font-weight: 600; color: var(--accent); text-decoration: none; margin-top: var(--space-4); }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+        .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-4); }
+        .tool-card { background: var(--bg-surface); border-radius: 8px; padding: var(--space-6); display: flex; gap: var(--space-4); align-items: flex-start; transition: background 0.15s ease; }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+        .tool-card img { width: 40px; height: 40px; flex-shrink: 0; border-radius: 8px; }
+        .tool-card-body { flex: 1; min-width: 0; }
+        .tool-card-name { font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); margin-bottom: var(--space-1); }
+        .tool-card-name a { color: var(--text-primary); } .tool-card-name a:hover { color: var(--accent); }
+        .tool-card-desc { font-family: var(--font-serif); font-size: var(--text-sm); line-height: 1.6; color: var(--text-body); }
+        .tool-card-meta { font-family: var(--font-sans); font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-2); line-height: 1.5; }
+        .yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-6); }
+        .yt-card { background: var(--bg-surface); border-radius: 8px; overflow: hidden; transition: background 0.15s ease; }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+        .yt-card img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+        .yt-card-body { padding: var(--space-4) var(--space-6) var(--space-6); }
+        .yt-card-label { font-family: var(--font-sans); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: var(--space-2); }
+        .yt-card-title { font-family: var(--font-sans); font-weight: 700; font-size: var(--text-base); line-height: 1.3; margin-bottom: var(--space-2); }
+        .yt-card-title a { color: var(--text-primary); } .yt-card-title a:hover { color: var(--accent); }
+        .yt-card-channel { font-family: var(--font-sans); font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-3); }
+        .yt-card-desc { font-family: var(--font-serif); font-size: var(--text-sm); line-height: 1.6; color: var(--text-body); }
+        .yt-card--trending { border: 2px solid var(--accent); }
+        .yt-card--full { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) { .yt-card--full { grid-template-columns: 1fr; } }
+        .site-footer { max-width: var(--width-content); margin: 0 auto; padding: var(--space-8) var(--space-6); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-4); font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted); }
+        .site-footer a { color: var(--text-muted); } .site-footer a:hover { color: var(--text-primary); }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        [id] { scroll-margin-top: 4.5rem; }
+        @media (max-width: 600px) { .site-header-inner { padding: var(--space-3) var(--space-4); } .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); } .site-main { padding: 0 var(--space-4); } .article h2 { font-size: var(--text-xl); } .article--lead h2 { font-size: var(--text-2xl); } .reportage-teaser { padding: var(--space-6); } .site-footer { padding: var(--space-6) var(--space-4); } .tool-grid { grid-template-columns: 1fr; } .yt-grid { grid-template-columns: 1fr; } .toc-list { grid-template-columns: 1fr; } }
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+        @media print { .site-header, .skip-link, .site-nav { display: none; } body { background: #fff; color: #000; font-size: 11pt; } a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; } .article { page-break-inside: avoid; } p { orphans: 3; widows: 3; } }
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
     </style>
 </head>
 <body>
 
-<div class="newspaper">
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
 
-    <header class="masthead" id="top">
-        <div class="masthead-top">
-            <span>Gegr. 2026</span>
-            <span>Preis: Gratis</span>
-        </div>
-        <h1>AI News Magazin</h1>
-        <div class="masthead-motto">&bdquo;Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt&ldquo;</div>
-        <div class="masthead-bar">
-            <span>Dienstag, 18. M&auml;rz 2026</span>
-            <span>9 Artikel</span>
-            <span><a href="../index.html">&larr; Alle Ausgaben</a></span>
-        </div>
-    </header>
-
-    <div class="content">
-
-        <!-- ═══ TOC ═══ -->
-        <nav class="toc">
-            <div class="toc-label">Inhalt dieser Ausgabe</div>
-            <ol class="toc-list">
-                <li data-num="1"><a href="#art-1">Pentagon erkl&auml;rt Anthropic zum Sicherheitsrisiko</a> <span class="toc-cat">&middot; Politik</span></li>
-                <li data-num="2"><a href="#art-2">Pentagon plant KI-Training mit Geheimdaten</a> <span class="toc-cat">&middot; Politik</span></li>
-                <li data-num="3"><a href="#art-3">Mistral lanciert Forge f&uuml;r Enterprise-KI</a> <span class="toc-cat">&middot; Industrie</span></li>
-                <li data-num="4"><a href="#art-4">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse</a> <span class="toc-cat">&middot; Technologie</span></li>
-                <li data-num="5"><a href="#art-5">Google &ouml;ffnet Personal Intelligence f&uuml;r alle</a> <span class="toc-cat">&middot; Industrie</span></li>
-                <li data-num="6"><a href="#art-6">DeepMind stellt AGI-Messframework vor</a> <span class="toc-cat">&middot; Forschung</span></li>
-                <li data-num="7"><a href="#art-7">Garry Tans Claude-Code-Setup geht viral</a> <span class="toc-cat">&middot; Community</span></li>
-                <li data-num="8"><a href="#art-8">Mastercard baut Foundation-Modell f&uuml;r Betrug</a> <span class="toc-cat">&middot; Industrie</span></li>
-                <li data-num="9"><a href="#art-9">Microsoft &uuml;bernimmt KI-Startup Cove</a> <span class="toc-cat">&middot; Industrie</span></li>
-            </ol>
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">AI News Magazin</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
         </nav>
-
-        <!-- ═══ ART 1: LEAD ═══ -->
-        <article class="article article--lead" id="art-1">
-            <div class="article-kicker">Politik &amp; Regulierung</div>
-            <h2>Pentagon erkl&auml;rt Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</h2>
-            <div class="article-meta">18. M&auml;rz 2026 &middot; TechCrunch, Wired, CNN, CNBC, NPR</div>
-            <p class="article-teaser">In einer beispiellosen Eskalation im Verh&auml;ltnis zwischen US-Milit&auml;r und Silicon Valley hat das Verteidigungsministerium erstmals ein amerikanisches Technologieunternehmen als Bedrohung f&uuml;r die nationale Sicherheit eingestuft &mdash; weil es ethische Grenzen f&uuml;r den Einsatz seiner KI ziehen will.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Das US-Verteidigungsministerium (DOD) hat in seiner ersten Gerichtsantwort auf Anthropics Klage erkl&auml;rt, das KI-Unternehmen stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien, die Anthropic-CEO Dario Amodei gezogen hat: Die KI-Modelle des Unternehmens d&uuml;rfen nicht f&uuml;r die Massen&uuml;berwachung von US-B&uuml;rgern eingesetzt werden und nicht in autonomen Waffensystemen zum Einsatz kommen.</p>
-                <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic zu einem unzuverl&auml;ssigen Partner. Die Bef&uuml;rchtung: Das Unternehmen k&ouml;nnte &bdquo;versuchen, seine Technologie zu deaktivieren oder das Verhalten seines Modells pr&auml;ventiv zu &auml;ndern&ldquo;, wenn es der Ansicht ist, dass seine ethischen Grunds&auml;tze verletzt werden &mdash; und zwar m&ouml;glicherweise mitten in laufenden &bdquo;Kampfoperationen&ldquo;. Ein KI-System, das in kritischen Momenten den Dienst verweigern k&ouml;nnte, sei ein Risiko, das sich das Milit&auml;r nicht leisten k&ouml;nne.</p>
-                <p>Die Einstufung als &bdquo;Supply Chain Risk&ldquo; wurde Ende Februar von Verteidigungsminister Pete Hegseth angeordnet und ist in ihrer Anwendung auf ein US-Unternehmen historisch beispiellos. Bisher wurde diese Kategorie ausschlie&szlig;lich f&uuml;r Firmen mit Verbindungen zu ausl&auml;ndischen Gegnern verwendet. Die praktischen Folgen sind gravierend: Nicht nur das Pentagon selbst, sondern auch s&auml;mtliche Milit&auml;rauftragnehmer d&uuml;rfen keine Gesch&auml;ftsbeziehungen mit Anthropic unterhalten.</p>
-                <p>Die Ironie der Situation ist nicht zu &uuml;bersehen: Anthropics Claude-Modelle wurden zuvor bereits in klassifizierten Umgebungen des Milit&auml;rs eingesetzt, unter anderem f&uuml;r Zielanalysen im Iran-Konflikt. Das Unternehmen war also ein gesch&auml;tzter Partner &mdash; bis es Bedingungen stellte. Anthropic hat gegen die Einstufung Klage eingereicht und argumentiert, sie sei rechtswidrig.</p>
-                <p>Der Konflikt wirft eine fundamentale Frage auf, die weit &uuml;ber den konkreten Fall hinausgeht: In einer Welt, in der KI-Systeme zunehmend in milit&auml;rische Entscheidungsketten integriert werden, wer bestimmt dann die Grenzen ihres Einsatzes &mdash; die Entwickler, die das Risikopotenzial verstehen, oder die Anwender, die Operationsf&auml;higkeit ben&ouml;tigen?</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://techcrunch.com/2026/03/18/dod-says-anthropics-red-lines-make-it-an-unacceptable-risk-to-national-security/">TechCrunch &mdash; DOD says Anthropic's 'red lines' make it an 'unacceptable risk'</a></li>
-                    <li><a href="https://www.wired.com/story/department-of-defense-responds-to-anthropic-lawsuit/">Wired &mdash; Justice Department Says Anthropic Can't Be Trusted</a></li>
-                    <li><a href="https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon">CNN &mdash; Anthropic sues the Trump administration</a></li>
-                    <li><a href="https://www.cnbc.com/2026/03/09/anthropic-was-the-pentagons-choice-for-ai-now-its-banned-and-experts-are-worried.html">CNBC &mdash; Anthropic was the Pentagon's choice for AI. Now it's banned.</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 2 ═══ -->
-        <article class="article" id="art-2">
-            <div class="article-kicker">Politik &amp; Regulierung</div>
-            <h2>Pentagon plant KI-Training mit klassifizierten Geheimdaten</h2>
-            <div class="article-meta">17. M&auml;rz 2026 &middot; MIT Technology Review, Engadget</div>
-            <p class="article-teaser">Das US-Verteidigungsministerium will sichere Umgebungen schaffen, in denen KI-Unternehmen ihre Modelle erstmals direkt mit geheimen Milit&auml;rdaten trainieren k&ouml;nnen &mdash; ein fundamentaler Paradigmenwechsel mit erheblichen Sicherheitsrisiken.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>KI-Modelle werden bereits in klassifizierten Umgebungen eingesetzt &mdash; etwa f&uuml;r Zielanalysen im Iran-Konflikt. Doch bisher handelt es sich um vortrainierte Modelle, die lediglich in sicheren Netzwerken betrieben werden. Das Pentagon diskutiert nun Pl&auml;ne, einen entscheidenden Schritt weiterzugehen: KI-Unternehmen sollen milit&auml;rspezifische Versionen ihrer Modelle direkt mit klassifizierten Daten trainieren k&ouml;nnen.</p>
-                <p>Konkret w&uuml;rde das Training in sicheren Rechenzentren stattfinden, die f&uuml;r die Verarbeitung klassifizierter Projekte zertifiziert sind. Dabei w&uuml;rde das DOD Eigent&uuml;mer der Daten bleiben; Mitarbeiter der KI-Unternehmen k&ouml;nnten in seltenen F&auml;llen mit entsprechender Sicherheitsfreigabe Zugang erhalten.</p>
-                <p>Vereinbarungen bestehen bereits mit OpenAI und Elon Musks xAI. Senatorin Elizabeth Warren hat die Entscheidung, xAI Zugang zu klassifizierten Netzwerken zu gew&auml;hren, &ouml;ffentlich kritisiert. Das Risiko: Wenn sensible Geheimdienstdaten in die Modellgewichte eingebettet werden, k&ouml;nnten sie theoretisch durch geschickte Abfragen extrahiert werden.</p>
-                <p>Das Pentagon verfolgt eine Doppelstrategie: Einerseits wird Anthropic wegen seiner ethischen Einschr&auml;nkungen ausgeschlossen, andererseits werden willigere Partner noch tiefer in die Milit&auml;rinfrastruktur integriert.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://www.technologyreview.com/2026/03/17/1134351/the-pentagon-is-planning-for-ai-companies-to-train-on-classified-data-defense-official-says/">MIT Technology Review &mdash; Pentagon plans for AI companies to train on classified data</a></li>
-                    <li><a href="https://www.engadget.com/ai/the-defense-department-reportedly-plans-to-train-ai-models-on-classified-military-data-120332113.html">Engadget &mdash; DOD plans to train AI models on classified military data</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 3 ═══ -->
-        <article class="article" id="art-3">
-            <div class="article-kicker">Industrie</div>
-            <h2>Mistral lanciert Forge &mdash; Ma&szlig;geschneiderte KI-Modelle f&uuml;r Unternehmen</h2>
-            <div class="article-meta">17. M&auml;rz 2026 &middot; TechCrunch, VentureBeat, Dataconomy</div>
-            <p class="article-teaser">Mit der neuen Forge-Plattform bietet Mistral Unternehmen die M&ouml;glichkeit, eigene KI-Modelle von Grund auf zu trainieren &mdash; ein frontaler Angriff auf die Feintuning-Strategien von OpenAI und Anthropic.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Auf der Nvidia GTC 2026 hat das franz&ouml;sische KI-Unternehmen Mistral seine neue Plattform &bdquo;Forge&ldquo; vorgestellt. W&auml;hrend OpenAI und Anthropic auf Feintuning bestehender Modelle oder RAG setzen, erm&ouml;glicht Forge das vollst&auml;ndige Training eigener Modelle mit unternehmenseigenen Daten.</p>
-                <p>Der Vorteil: Unternehmen k&ouml;nnen Modelle entwickeln, die nicht-englische Sprachen oder hochspezialisierte Fachdom&auml;nen deutlich besser beherrschen. Zudem erm&ouml;glicht Forge das Training agentenbasierter Systeme mit Reinforcement Learning.</p>
-                <p>Mistral verfolgt eine Strategie, die an klassische Beratungsunternehmen erinnert: &bdquo;Forward-deployed Engineers&ldquo; arbeiten direkt bei den Kunden, bauen synthetische Datenpipelines auf und optimieren Modelle gegen gesch&auml;ftliche KPIs. Die Launch-Partner: ASML, Ericsson, die Europ&auml;ische Weltraumorganisation und Singapurs DSO.</p>
-                <p>CEO Arthur Mensch gibt sich selbstbewusst: Mistral sei auf dem Weg, in diesem Jahr die Marke von einer Milliarde Dollar Jahresumsatz zu &uuml;berschreiten.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://techcrunch.com/2026/03/17/mistral-forge-nvidia-gtc-build-your-own-ai-enterprise/">TechCrunch &mdash; Mistral bets on 'build-your-own AI'</a></li>
-                    <li><a href="https://venturebeat.com/infrastructure/mistral-ai-launches-forge-to-help-companies-build-proprietary-ai-models">VentureBeat &mdash; Mistral AI launches Forge</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 4 ═══ -->
-        <article class="article" id="art-4">
-            <div class="article-kicker">Technologie</div>
-            <h2>NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse &mdash; &bdquo;Das ist nur ein M&uuml;ll-KI-Filter&ldquo;</h2>
-            <div class="article-meta">17.&ndash;18. M&auml;rz 2026 &middot; The Verge, Tom's Hardware, PC Gamer, TechRadar</div>
-            <p class="article-teaser">Nvidias neueste Grafiktechnologie verspricht revolution&auml;res neuronales Rendering &mdash; und erntet stattdessen einen Sturm der Entr&uuml;stung. Spieler und Branchenprofis kritisieren, dass DLSS 5 Spielegrafik nicht verbessert, sondern verf&auml;lscht.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>DLSS war bisher eine Erfolgsgeschichte: neuronale Netze, um Spielegrafik hochzuskalieren und zus&auml;tzliche Frames zu generieren. DLSS 5 geht nun einen radikal anderen Weg: Statt Frames zu optimieren, schreibt das System sie komplett um. Ein &bdquo;3D-gesteuertes neuronales Rendering-Modell&ldquo; ersetzt Beleuchtung, Texturen und Materialeigenschaften durch KI-generierte Alternativen.</p>
-                <p>Die Reaktion war vernichtend. In Demonstrationen mit Hogwarts Legacy zeigte sich, dass DLSS 5 Spielcharaktere systematisch ver&auml;ndert: Gesichter werden gegl&auml;ttet und versch&ouml;nert, ein 15-j&auml;hriger Schulcharakter wirkt pl&ouml;tzlich wie ein Erwachsener. Spieler sprechen von &bdquo;yassified, looks-maxed freaks&ldquo;.</p>
-                <p>Auch aus der Branche kommt scharfe Kritik. Ein Rendering-Ingenieur bei Respawn Entertainment beschreibt DLSS 5 als &bdquo;&uuml;bertriebenen Kontrast-, Sch&auml;rfe- und Airbrush-Filter&ldquo;, Konzeptk&uuml;nstler Jeff Talbot stellt klar: &bdquo;Das ist NICHT die Richtung, in die Spiele gehen sollten.&ldquo;</p>
-                <p>Nvidia-CEO Jensen Huang reagierte: Die Kritiker seien &bdquo;komplett falsch&ldquo;. DLSS 5 verschmelze die Kontrollierbarkeit von Geometrie und Texturen mit generativer KI, und Entwickler beh&auml;lten die volle k&uuml;nstlerische Kontrolle. DLSS 5 ist inzwischen zur ergiebigen Meme-Quelle geworden.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://www.theverge.com/games/896518/nvidia-dlss-5-ai-3d-rendering">The Verge &mdash; Has Nvidia's AI graphics technology gone too far?</a></li>
-                    <li><a href="https://www.tomshardware.com/pc-components/gpus/jensen-huang-says-gamers-are-completely-wrong-about-dlss-5-nvidia-ceo-responds-to-dlss-5-backlash">Tom's Hardware &mdash; Jensen Huang says gamers are 'completely wrong'</a></li>
-                    <li><a href="https://www.pcgamer.com/software/ai/dlss-5-clearly-overwrites-game-characters-with-ai-beauty-standards-but-nvidia-says-devs-have-artistic-control/">PC Gamer &mdash; DLSS 5 overwrites game characters with AI beauty standards</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 5 ═══ -->
-        <article class="article" id="art-5">
-            <div class="article-kicker">Industrie</div>
-            <h2>Google &ouml;ffnet &bdquo;Personal Intelligence&ldquo; f&uuml;r alle US-Nutzer</h2>
-            <div class="article-meta">17. M&auml;rz 2026 &middot; TechCrunch, The Verge, Google Blog</div>
-            <p class="article-teaser">Was im Januar noch Premium-Nutzern vorbehalten war, wird nun kostenlos: Google erlaubt allen US-Nutzern, Gemini mit ihren pers&ouml;nlichen Daten aus Gmail, Google Photos und weiteren Apps zu f&uuml;ttern.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Google hat angek&uuml;ndigt, seine &bdquo;Personal Intelligence&ldquo;-Funktion f&uuml;r alle Nutzer in den USA freizugeben. Das Feature erlaubt Gemini, auf Gmail, Google Photos, YouTube und weitere Apps zuzugreifen, um kontextuell relevantere und personalisierte Antworten zu liefern.</p>
-                <p>Die strategische Logik ist klar: Google besitzt ein unvergleichliches &Ouml;kosystem an Nutzerdaten. W&auml;hrend Konkurrenten ihre KI-Assistenten weitgehend kontextfrei betreiben m&uuml;ssen, kann Gemini auf Jahre an E-Mails, Fotos und Suchverl&auml;ufen zugreifen. Die kostenlose Verf&uuml;gbarmachung deutet darauf hin, dass Google bereit ist, auf direkte Monetarisierung zu verzichten, um den Datenvorsprung auszubauen.</p>
-                <p>Google betont die Datenschutz-Aspekte: standardm&auml;&szlig;ig deaktiviert, strikt Opt-in, Zugriff jederzeit widerrufbar. Nur f&uuml;r pers&ouml;nliche Konten, nicht f&uuml;r Workspace. Die Erfahrung zeigt jedoch, dass Bequemlichkeit in der Regel &uuml;ber Datenschutzbedenken siegt.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://techcrunch.com/2026/03/17/googles-personal-intelligence-feature-is-expanding-to-all-us-users/">TechCrunch &mdash; Google's Personal Intelligence expanding to all US users</a></li>
-                    <li><a href="https://www.theverge.com/ai-artificial-intelligence/896107/google-expands-personal-intelligence">The Verge &mdash; Now everyone in the US is getting Google's personalized Gemini AI</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 6 ═══ -->
-        <article class="article" id="art-6">
-            <div class="article-kicker">Forschung</div>
-            <h2>DeepMind stellt Framework zur Messung des AGI-Fortschritts vor</h2>
-            <div class="article-meta">17. M&auml;rz 2026 &middot; Google DeepMind Blog, Kaggle</div>
-            <p class="article-teaser">Wie nah sind wir an Artificial General Intelligence? DeepMind will diese Frage mit einem wissenschaftlich fundierten Framework beantworten &mdash; und l&auml;dt die Community ein, die fehlenden Evaluierungen zu entwickeln.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Google DeepMind hat ein kognitives Framework vorgestellt, das den Fortschritt in Richtung AGI erstmals systematisch messbar machen soll. Der Ansatz zerlegt &bdquo;allgemeine Intelligenz&ldquo; in zehn kognitive Kernf&auml;higkeiten: Wahrnehmung, Generierung, Aufmerksamkeit, Lernen, Ged&auml;chtnis, Schlussfolgern, Metakognition, Exekutivfunktionen, Probleml&ouml;sung und soziale Kognition.</p>
-                <p>Das Evaluierungsprotokoll erstellt &bdquo;kognitive Profile&ldquo; &mdash; eine differenzierte Darstellung der St&auml;rken und Schw&auml;chen eines Systems, die deutlich informativer ist als einzelne Benchmark-Ergebnisse.</p>
-                <p>DeepMind hat einen Kaggle-Hackathon gestartet, der sich auf die f&uuml;nf F&auml;higkeiten mit der gr&ouml;&szlig;ten Evaluierungsl&uuml;cke konzentriert: Lernen, Metakognition, Aufmerksamkeit, Exekutivfunktionen und soziale Kognition. Preispool: 200.000 US-Dollar, Einreichungen bis 16. April.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/">Google DeepMind Blog &mdash; Measuring progress toward AGI</a></li>
-                    <li><a href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf">DeepMind &mdash; Research Paper (PDF)</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 7 ═══ -->
-        <article class="article" id="art-7">
-            <div class="article-kicker">Community &amp; Entwickler</div>
-            <h2>Garry Tans Claude-Code-Setup geht viral &mdash; Geliebt und gehasst zugleich</h2>
-            <div class="article-meta">17. M&auml;rz 2026 &middot; TechCrunch, GitHub, Dev.to</div>
-            <p class="article-teaser">Der Y-Combinator-CEO hat sein KI-Coding-Setup auf GitHub ver&ouml;ffentlicht und damit eine hitzige Debatte &uuml;ber die Zukunft der Softwareentwicklung mit KI-Agenten ausgel&ouml;st.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Am 12. M&auml;rz ver&ouml;ffentlichte Y-Combinator-CEO Garry Tan sein &bdquo;gstack&ldquo;-Setup f&uuml;r Claude Code auf GitHub &mdash; eine Sammlung von zehn &bdquo;Skills&ldquo;, also wiederverwendbaren Prompt-Vorlagen. Die KI schl&uuml;pft in verschiedene Rollen eines Softwareteams: CEO, Ingenieur, Code-Reviewer, Designer, QA-Tester.</p>
-                <p>Fast 20.000 GitHub-Stars und 2.200 Forks innerhalb weniger Tage. Ein CTO-Freund nannte es &bdquo;God Mode&ldquo; und berichtete, damit sofort eine Sicherheitsl&uuml;cke im eigenen Code gefunden zu haben.</p>
-                <p>Die Kritik kommt aus verschiedenen Richtungen: Viele Entwickler weisen darauf hin, dass sie privat l&auml;ngst &auml;hnliche Prompt-Sets erstellt haben. Andere halten die Produktivit&auml;tsversprechen f&uuml;r &uuml;bertrieben. Die Debatte spiegelt eine tiefere Unsicherheit wider: Wie ver&auml;ndert KI-gest&uuml;tztes Coding tats&auml;chlich die Arbeit?</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://techcrunch.com/2026/03/17/why-garry-tans-claude-code-setup-has-gotten-so-much-love-and-hate/">TechCrunch &mdash; Why Garry Tan's Claude Code setup has gotten so much love, and hate</a></li>
-                    <li><a href="https://github.com/garrytan/gstack">GitHub &mdash; garrytan/gstack</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 8 ═══ -->
-        <article class="article" id="art-8">
-            <div class="article-kicker">Industrie</div>
-            <h2>Mastercard entwickelt Foundation-Modell f&uuml;r Betrugserkennung</h2>
-            <div class="article-meta">18. M&auml;rz 2026 &middot; Mastercard, PYMNTS, AI News</div>
-            <p class="article-teaser">Keine Texte, keine Bilder &mdash; Mastercards neues &bdquo;Large Tabular Model&ldquo; ist ein Foundation-Modell, das auf Milliarden von Transaktionsdaten trainiert wird.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Mastercard hat ein &bdquo;Large Tabular Model&ldquo; (LTM) entwickelt &mdash; ein Foundation-Modell, das nicht auf Text, sondern auf strukturierten Transaktionsdaten trainiert wird. Die Trainingsdaten umfassen Milliarden anonymisierter Transaktionen: H&auml;ndlerstandorte, Betrugsmuster, Autorisierungsdaten, R&uuml;ckbuchungen und Treueprogramm-Daten.</p>
-                <p>Der erste Anwendungsbereich ist Cybersicherheit: hybride Systeme aus bestehenden KI-Modellen und dem neuen LTM. Das Foundation-Modell soll Muster erkennen, die spezialisierten Systemen entgehen.</p>
-                <p>Der Ansatz zeigt, dass die Foundation-Model-Architektur nicht auf nat&uuml;rliche Sprache beschr&auml;nkt ist. Mastercard entwickelt bereits APIs und Toolkits, damit interne Teams auf dem LTM aufbauen k&ouml;nnen.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://www.mastercard.com/us/en/news-and-trends/stories/2026/mastercard-new-generative-ai-model.html">Mastercard &mdash; Inside Mastercard's new gen AI engine</a></li>
-                    <li><a href="https://www.pymnts.com/artificial-intelligence-2/2026/mastercard-unveils-gen-ai-model-as-insights-engine-for-commerce/">PYMNTS &mdash; Mastercard Expands Gen AI Push</a></li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- ═══ ART 9 ═══ -->
-        <article class="article" id="art-9">
-            <div class="article-kicker">Industrie</div>
-            <h2>Microsoft &uuml;bernimmt Team von KI-Startup Cove</h2>
-            <div class="article-meta">18. M&auml;rz 2026 &middot; TechCrunch, GeekWire</div>
-            <p class="article-teaser">Ein weiterer Acqui-Hire in der KI-Branche: Das Team des von Sequoia Capital finanzierten Startups Cove wechselt geschlossen zu Microsoft. Der Dienst wird am 1. April eingestellt.</p>
-            <div class="analysis-label">Hintergrund &amp; Analyse</div>
-            <div class="analysis-body">
-                <p>Das KI-Collaboration-Startup Cove hat angek&uuml;ndigt, dass sein Team zu Microsoft wechselt. Cove hatte 2024 eine Seed-Runde &uuml;ber 6 Millionen Dollar von Sequoia Capital eingesammelt und Software entwickelt, die Single-Thread-Chats mit KI-Agenten in einen visuellen, kollaborativen Workspace verwandelte.</p>
-                <p>Das Gr&uuml;nderteam bringt Erfahrung von Uber Eats und Google Maps mit. Der Dienst endet am 1. April, Kundendaten werden gel&ouml;scht. Die &Uuml;bernahme reiht sich in eine Serie von KI-Acqui-Hires durch Microsoft ein &mdash; Anfang des Jahres wurde bereits das Robin-AI-Team &uuml;bernommen.</p>
-            </div>
-            <div class="sources">
-                <div class="sources-label">Quellen</div>
-                <ul>
-                    <li><a href="https://techcrunch.com/2026/03/18/microsoft-hires-the-team-of-sequioa-backed-ai-collaboration-platform-cove/">TechCrunch &mdash; Microsoft hires the team of Sequoia-backed Cove</a></li>
-                    <li><a href="https://www.geekwire.com/2026/microsoft-hires-employees-from-cove-a-small-sequoia-backed-ai-startup-that-helps-teams-collaborate/">GeekWire &mdash; Microsoft hires employees from Cove</a></li>
-                </ul>
-            </div>
-        </article>
-
     </div>
+</header>
 
-    <footer class="paper-footer">
-        <span>&copy; 2026 AI News Magazin</span>
-        <span style="font-style:italic">Recherchiert mit Unterst&uuml;tzung k&uuml;nstlicher Intelligenz</span>
-        <a href="#top">&uarr; Nach oben</a>
-    </footer>
-
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-03-18">Dienstag, 18. M&auml;rz 2026</time> &middot; 9 Artikel
+    </div>
+    <h1 class="edition-title">Ausgabe vom 18. M&auml;rz 2026</h1>
+    <p class="edition-subtitle">Alle Nachrichten, die ein Algorithmus f&uuml;r relevant h&auml;lt.</p>
 </div>
 
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li><span class="toc-num" aria-hidden="true">1.</span><a href="#art-1"><span class="toc-cat">Politik</span><span class="toc-title">Pentagon erkl&auml;rt Anthropic zum Sicherheitsrisiko</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">2.</span><a href="#art-2"><span class="toc-cat">Politik</span><span class="toc-title">Pentagon plant KI-Training mit Geheimdaten</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">3.</span><a href="#art-3"><span class="toc-cat">Industrie</span><span class="toc-title">Mistral lanciert Forge f&uuml;r Enterprise-KI</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">4.</span><a href="#art-4"><span class="toc-cat">Technologie</span><span class="toc-title">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">5.</span><a href="#art-5"><span class="toc-cat">Industrie</span><span class="toc-title">Google &ouml;ffnet Personal Intelligence f&uuml;r alle</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">6.</span><a href="#art-6"><span class="toc-cat">Forschung</span><span class="toc-title">DeepMind stellt AGI-Messframework vor</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">7.</span><a href="#art-7"><span class="toc-cat">Community</span><span class="toc-title">Garry Tans Claude-Code-Setup geht viral</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">8.</span><a href="#art-8"><span class="toc-cat">Industrie</span><span class="toc-title">Mastercard baut Foundation-Modell f&uuml;r Betrug</span></a></li>
+            <li><span class="toc-num" aria-hidden="true">9.</span><a href="#art-9"><span class="toc-cat">Industrie</span><span class="toc-title">Microsoft &uuml;bernimmt KI-Startup Cove</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2 id="art-1-h">Pentagon erkl&auml;rt Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-03-18">18. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, Wired, CNN, CNBC, NPR</div>
+        </header>
+        <p class="article-teaser">In einer beispiellosen Eskalation im Verh&auml;ltnis zwischen US-Milit&auml;r und Silicon Valley hat das Verteidigungsministerium erstmals ein amerikanisches Technologieunternehmen als Bedrohung f&uuml;r die nationale Sicherheit eingestuft &mdash; weil es ethische Grenzen f&uuml;r den Einsatz seiner KI ziehen will.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das US-Verteidigungsministerium (DOD) hat in seiner ersten Gerichtsantwort auf Anthropics Klage erkl&auml;rt, das KI-Unternehmen stelle ein &bdquo;inakzeptables Risiko f&uuml;r die nationale Sicherheit&ldquo; dar. Im Kern des Streits stehen zwei rote Linien, die Anthropic-CEO Dario Amodei gezogen hat: Die KI-Modelle des Unternehmens d&uuml;rfen nicht f&uuml;r die Massen&uuml;berwachung von US-B&uuml;rgern eingesetzt werden und nicht in autonomen Waffensystemen zum Einsatz kommen.</p>
+            <p>Das DOD argumentiert, genau diese Einschr&auml;nkungen machten Anthropic zu einem unzuverl&auml;ssigen Partner. Die Bef&uuml;rchtung: Das Unternehmen k&ouml;nnte &bdquo;versuchen, seine Technologie zu deaktivieren oder das Verhalten seines Modells pr&auml;ventiv zu &auml;ndern&ldquo;, wenn es der Ansicht ist, dass seine ethischen Grunds&auml;tze verletzt werden &mdash; und zwar m&ouml;glicherweise mitten in laufenden &bdquo;Kampfoperationen&ldquo;. Ein KI-System, das in kritischen Momenten den Dienst verweigern k&ouml;nnte, sei ein Risiko, das sich das Milit&auml;r nicht leisten k&ouml;nne.</p>
+            <p>Die Einstufung als &bdquo;Supply Chain Risk&ldquo; wurde Ende Februar von Verteidigungsminister Pete Hegseth angeordnet und ist in ihrer Anwendung auf ein US-Unternehmen historisch beispiellos. Bisher wurde diese Kategorie ausschlie&szlig;lich f&uuml;r Firmen mit Verbindungen zu ausl&auml;ndischen Gegnern verwendet. Die praktischen Folgen sind gravierend: Nicht nur das Pentagon selbst, sondern auch s&auml;mtliche Milit&auml;rauftragnehmer d&uuml;rfen keine Gesch&auml;ftsbeziehungen mit Anthropic unterhalten.</p>
+            <p>Die Ironie der Situation ist nicht zu &uuml;bersehen: Anthropics Claude-Modelle wurden zuvor bereits in klassifizierten Umgebungen des Milit&auml;rs eingesetzt, unter anderem f&uuml;r Zielanalysen im Iran-Konflikt. Das Unternehmen war also ein gesch&auml;tzter Partner &mdash; bis es Bedingungen stellte. Anthropic hat gegen die Einstufung Klage eingereicht und argumentiert, sie sei rechtswidrig.</p>
+            <p>Der Konflikt wirft eine fundamentale Frage auf, die weit &uuml;ber den konkreten Fall hinausgeht: In einer Welt, in der KI-Systeme zunehmend in milit&auml;rische Entscheidungsketten integriert werden, wer bestimmt dann die Grenzen ihres Einsatzes &mdash; die Entwickler, die das Risikopotenzial verstehen, oder die Anwender, die Operationsf&auml;higkeit ben&ouml;tigen?</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/18/dod-says-anthropics-red-lines-make-it-an-unacceptable-risk-to-national-security/" rel="noopener noreferrer external">TechCrunch &mdash; DOD says Anthropic's 'red lines' make it an 'unacceptable risk'</a></li>
+                <li><a href="https://www.wired.com/story/department-of-defense-responds-to-anthropic-lawsuit/" rel="noopener noreferrer external">Wired &mdash; Justice Department Says Anthropic Can't Be Trusted</a></li>
+                <li><a href="https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon" rel="noopener noreferrer external">CNN &mdash; Anthropic sues the Trump administration</a></li>
+                <li><a href="https://www.cnbc.com/2026/03/09/anthropic-was-the-pentagons-choice-for-ai-now-its-banned-and-experts-are-worried.html" rel="noopener noreferrer external">CNBC &mdash; Anthropic was the Pentagon's choice for AI. Now it's banned.</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Politik &amp; Regulierung</div>
+            <h2 id="art-2-h">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h2>
+            <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: MIT Technology Review, Engadget</div>
+        </header>
+        <p class="article-teaser">Das US-Verteidigungsministerium will sichere Umgebungen schaffen, in denen KI-Unternehmen ihre Modelle erstmals direkt mit geheimen Milit&auml;rdaten trainieren k&ouml;nnen &mdash; ein fundamentaler Paradigmenwechsel mit erheblichen Sicherheitsrisiken.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>KI-Modelle werden bereits in klassifizierten Umgebungen eingesetzt &mdash; etwa f&uuml;r Zielanalysen im Iran-Konflikt. Doch bisher handelt es sich um vortrainierte Modelle, die lediglich in sicheren Netzwerken betrieben werden. Das Pentagon diskutiert nun Pl&auml;ne, einen entscheidenden Schritt weiterzugehen: KI-Unternehmen sollen milit&auml;rspezifische Versionen ihrer Modelle direkt mit klassifizierten Daten trainieren k&ouml;nnen.</p>
+            <p>Konkret w&uuml;rde das Training in sicheren Rechenzentren stattfinden, die f&uuml;r die Verarbeitung klassifizierter Projekte zertifiziert sind. Dabei w&uuml;rde das DOD Eigent&uuml;mer der Daten bleiben; Mitarbeiter der KI-Unternehmen k&ouml;nnten in seltenen F&auml;llen mit entsprechender Sicherheitsfreigabe Zugang erhalten.</p>
+            <p>Vereinbarungen bestehen bereits mit OpenAI und Elon Musks xAI. Senatorin Elizabeth Warren hat die Entscheidung, xAI Zugang zu klassifizierten Netzwerken zu gew&auml;hren, &ouml;ffentlich kritisiert. Das Risiko: Wenn sensible Geheimdienstdaten in die Modellgewichte eingebettet werden, k&ouml;nnten sie theoretisch durch geschickte Abfragen extrahiert werden.</p>
+            <p>Das Pentagon verfolgt eine Doppelstrategie: Einerseits wird Anthropic wegen seiner ethischen Einschr&auml;nkungen ausgeschlossen, andererseits werden willigere Partner noch tiefer in die Milit&auml;rinfrastruktur integriert.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.technologyreview.com/2026/03/17/1134351/the-pentagon-is-planning-for-ai-companies-to-train-on-classified-data-defense-official-says/" rel="noopener noreferrer external">MIT Technology Review &mdash; Pentagon plans for AI companies to train on classified data</a></li>
+                <li><a href="https://www.engadget.com/ai/the-defense-department-reportedly-plans-to-train-ai-models-on-classified-military-data-120332113.html" rel="noopener noreferrer external">Engadget &mdash; DOD plans to train AI models on classified military data</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Industrie</div>
+            <h2 id="art-3-h">Mistral lanciert Forge &mdash; Ma&szlig;geschneiderte KI-Modelle f&uuml;r Unternehmen</h2>
+            <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, VentureBeat, Dataconomy</div>
+        </header>
+        <p class="article-teaser">Mit der neuen Forge-Plattform bietet Mistral Unternehmen die M&ouml;glichkeit, eigene KI-Modelle von Grund auf zu trainieren &mdash; ein frontaler Angriff auf die Feintuning-Strategien von OpenAI und Anthropic.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Auf der Nvidia GTC 2026 hat das franz&ouml;sische KI-Unternehmen Mistral seine neue Plattform &bdquo;Forge&ldquo; vorgestellt. W&auml;hrend OpenAI und Anthropic auf Feintuning bestehender Modelle oder RAG setzen, erm&ouml;glicht Forge das vollst&auml;ndige Training eigener Modelle mit unternehmenseigenen Daten.</p>
+            <p>Der Vorteil: Unternehmen k&ouml;nnen Modelle entwickeln, die nicht-englische Sprachen oder hochspezialisierte Fachdom&auml;nen deutlich besser beherrschen. Zudem erm&ouml;glicht Forge das Training agentenbasierter Systeme mit Reinforcement Learning.</p>
+            <p>Mistral verfolgt eine Strategie, die an klassische Beratungsunternehmen erinnert: &bdquo;Forward-deployed Engineers&ldquo; arbeiten direkt bei den Kunden, bauen synthetische Datenpipelines auf und optimieren Modelle gegen gesch&auml;ftliche KPIs. Die Launch-Partner: ASML, Ericsson, die Europ&auml;ische Weltraumorganisation und Singapurs DSO.</p>
+            <p>CEO Arthur Mensch gibt sich selbstbewusst: Mistral sei auf dem Weg, in diesem Jahr die Marke von einer Milliarde Dollar Jahresumsatz zu &uuml;berschreiten.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/17/mistral-forge-nvidia-gtc-build-your-own-ai-enterprise/" rel="noopener noreferrer external">TechCrunch &mdash; Mistral bets on 'build-your-own AI'</a></li>
+                <li><a href="https://venturebeat.com/infrastructure/mistral-ai-launches-forge-to-help-companies-build-proprietary-ai-models" rel="noopener noreferrer external">VentureBeat &mdash; Mistral AI launches Forge</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Technologie</div>
+            <h2 id="art-4-h">NVIDIA DLSS 5 sorgt f&uuml;r Kontroverse &mdash; &bdquo;Das ist nur ein M&uuml;ll-KI-Filter&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-03-18">17.&ndash;18. M&auml;rz 2026</time> &middot; Quellen: The Verge, Tom's Hardware, PC Gamer, TechRadar</div>
+        </header>
+        <p class="article-teaser">Nvidias neueste Grafiktechnologie verspricht revolution&auml;res neuronales Rendering &mdash; und erntet stattdessen einen Sturm der Entr&uuml;stung. Spieler und Branchenprofis kritisieren, dass DLSS 5 Spielegrafik nicht verbessert, sondern verf&auml;lscht.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>DLSS war bisher eine Erfolgsgeschichte: neuronale Netze, um Spielegrafik hochzuskalieren und zus&auml;tzliche Frames zu generieren. DLSS 5 geht nun einen radikal anderen Weg: Statt Frames zu optimieren, schreibt das System sie komplett um. Ein &bdquo;3D-gesteuertes neuronales Rendering-Modell&ldquo; ersetzt Beleuchtung, Texturen und Materialeigenschaften durch KI-generierte Alternativen.</p>
+            <p>Die Reaktion war vernichtend. In Demonstrationen mit Hogwarts Legacy zeigte sich, dass DLSS 5 Spielcharaktere systematisch ver&auml;ndert: Gesichter werden gegl&auml;ttet und versch&ouml;nert, ein 15-j&auml;hriger Schulcharakter wirkt pl&ouml;tzlich wie ein Erwachsener. Spieler sprechen von &bdquo;yassified, looks-maxed freaks&ldquo;.</p>
+            <p>Auch aus der Branche kommt scharfe Kritik. Ein Rendering-Ingenieur bei Respawn Entertainment beschreibt DLSS 5 als &bdquo;&uuml;bertriebenen Kontrast-, Sch&auml;rfe- und Airbrush-Filter&ldquo;, Konzeptk&uuml;nstler Jeff Talbot stellt klar: &bdquo;Das ist NICHT die Richtung, in die Spiele gehen sollten.&ldquo;</p>
+            <p>Nvidia-CEO Jensen Huang reagierte: Die Kritiker seien &bdquo;komplett falsch&ldquo;. DLSS 5 verschmelze die Kontrollierbarkeit von Geometrie und Texturen mit generativer KI, und Entwickler beh&auml;lten die volle k&uuml;nstlerische Kontrolle. DLSS 5 ist inzwischen zur ergiebigen Meme-Quelle geworden.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theverge.com/games/896518/nvidia-dlss-5-ai-3d-rendering" rel="noopener noreferrer external">The Verge &mdash; Has Nvidia's AI graphics technology gone too far?</a></li>
+                <li><a href="https://www.tomshardware.com/pc-components/gpus/jensen-huang-says-gamers-are-completely-wrong-about-dlss-5-nvidia-ceo-responds-to-dlss-5-backlash" rel="noopener noreferrer external">Tom's Hardware &mdash; Jensen Huang says gamers are 'completely wrong'</a></li>
+                <li><a href="https://www.pcgamer.com/software/ai/dlss-5-clearly-overwrites-game-characters-with-ai-beauty-standards-but-nvidia-says-devs-have-artistic-control/" rel="noopener noreferrer external">PC Gamer &mdash; DLSS 5 overwrites game characters with AI beauty standards</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Industrie</div>
+            <h2 id="art-5-h">Google &ouml;ffnet &bdquo;Personal Intelligence&ldquo; f&uuml;r alle US-Nutzer</h2>
+            <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, The Verge, Google Blog</div>
+        </header>
+        <p class="article-teaser">Was im Januar noch Premium-Nutzern vorbehalten war, wird nun kostenlos: Google erlaubt allen US-Nutzern, Gemini mit ihren pers&ouml;nlichen Daten aus Gmail, Google Photos und weiteren Apps zu f&uuml;ttern.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Google hat angek&uuml;ndigt, seine &bdquo;Personal Intelligence&ldquo;-Funktion f&uuml;r alle Nutzer in den USA freizugeben. Das Feature erlaubt Gemini, auf Gmail, Google Photos, YouTube und weitere Apps zuzugreifen, um kontextuell relevantere und personalisierte Antworten zu liefern.</p>
+            <p>Die strategische Logik ist klar: Google besitzt ein unvergleichliches &Ouml;kosystem an Nutzerdaten. W&auml;hrend Konkurrenten ihre KI-Assistenten weitgehend kontextfrei betreiben m&uuml;ssen, kann Gemini auf Jahre an E-Mails, Fotos und Suchverl&auml;ufen zugreifen. Die kostenlose Verf&uuml;gbarmachung deutet darauf hin, dass Google bereit ist, auf direkte Monetarisierung zu verzichten, um den Datenvorsprung auszubauen.</p>
+            <p>Google betont die Datenschutz-Aspekte: standardm&auml;&szlig;ig deaktiviert, strikt Opt-in, Zugriff jederzeit widerrufbar. Nur f&uuml;r pers&ouml;nliche Konten, nicht f&uuml;r Workspace. Die Erfahrung zeigt jedoch, dass Bequemlichkeit in der Regel &uuml;ber Datenschutzbedenken siegt.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/17/googles-personal-intelligence-feature-is-expanding-to-all-us-users/" rel="noopener noreferrer external">TechCrunch &mdash; Google's Personal Intelligence expanding to all US users</a></li>
+                <li><a href="https://www.theverge.com/ai-artificial-intelligence/896107/google-expands-personal-intelligence" rel="noopener noreferrer external">The Verge &mdash; Now everyone in the US is getting Google's personalized Gemini AI</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Forschung</div>
+            <h2 id="art-6-h">DeepMind stellt Framework zur Messung des AGI-Fortschritts vor</h2>
+            <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: Google DeepMind Blog, Kaggle</div>
+        </header>
+        <p class="article-teaser">Wie nah sind wir an Artificial General Intelligence? DeepMind will diese Frage mit einem wissenschaftlich fundierten Framework beantworten &mdash; und l&auml;dt die Community ein, die fehlenden Evaluierungen zu entwickeln.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Google DeepMind hat ein kognitives Framework vorgestellt, das den Fortschritt in Richtung AGI erstmals systematisch messbar machen soll. Der Ansatz zerlegt &bdquo;allgemeine Intelligenz&ldquo; in zehn kognitive Kernf&auml;higkeiten: Wahrnehmung, Generierung, Aufmerksamkeit, Lernen, Ged&auml;chtnis, Schlussfolgern, Metakognition, Exekutivfunktionen, Probleml&ouml;sung und soziale Kognition.</p>
+            <p>Das Evaluierungsprotokoll erstellt &bdquo;kognitive Profile&ldquo; &mdash; eine differenzierte Darstellung der St&auml;rken und Schw&auml;chen eines Systems, die deutlich informativer ist als einzelne Benchmark-Ergebnisse.</p>
+            <p>DeepMind hat einen Kaggle-Hackathon gestartet, der sich auf die f&uuml;nf F&auml;higkeiten mit der gr&ouml;&szlig;ten Evaluierungsl&uuml;cke konzentriert: Lernen, Metakognition, Aufmerksamkeit, Exekutivfunktionen und soziale Kognition. Preispool: 200.000 US-Dollar, Einreichungen bis 16. April.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://deepmind.google/blog/measuring-progress-toward-agi-a-cognitive-framework/" rel="noopener noreferrer external">Google DeepMind Blog &mdash; Measuring progress toward AGI</a></li>
+                <li><a href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf" rel="noopener noreferrer external">DeepMind &mdash; Research Paper (PDF)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 7 ═══ -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Community &amp; Entwickler</div>
+            <h2 id="art-7-h">Garry Tans Claude-Code-Setup geht viral &mdash; Geliebt und gehasst zugleich</h2>
+            <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, GitHub, Dev.to</div>
+        </header>
+        <p class="article-teaser">Der Y-Combinator-CEO hat sein KI-Coding-Setup auf GitHub ver&ouml;ffentlicht und damit eine hitzige Debatte &uuml;ber die Zukunft der Softwareentwicklung mit KI-Agenten ausgel&ouml;st.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 12. M&auml;rz ver&ouml;ffentlichte Y-Combinator-CEO Garry Tan sein &bdquo;gstack&ldquo;-Setup f&uuml;r Claude Code auf GitHub &mdash; eine Sammlung von zehn &bdquo;Skills&ldquo;, also wiederverwendbaren Prompt-Vorlagen. Die KI schl&uuml;pft in verschiedene Rollen eines Softwareteams: CEO, Ingenieur, Code-Reviewer, Designer, QA-Tester.</p>
+            <p>Fast 20.000 GitHub-Stars und 2.200 Forks innerhalb weniger Tage. Ein CTO-Freund nannte es &bdquo;God Mode&ldquo; und berichtete, damit sofort eine Sicherheitsl&uuml;cke im eigenen Code gefunden zu haben.</p>
+            <p>Die Kritik kommt aus verschiedenen Richtungen: Viele Entwickler weisen darauf hin, dass sie privat l&auml;ngst &auml;hnliche Prompt-Sets erstellt haben. Andere halten die Produktivit&auml;tsversprechen f&uuml;r &uuml;bertrieben. Die Debatte spiegelt eine tiefere Unsicherheit wider: Wie ver&auml;ndert KI-gest&uuml;tztes Coding tats&auml;chlich die Arbeit?</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/17/why-garry-tans-claude-code-setup-has-gotten-so-much-love-and-hate/" rel="noopener noreferrer external">TechCrunch &mdash; Why Garry Tan's Claude Code setup has gotten so much love, and hate</a></li>
+                <li><a href="https://github.com/garrytan/gstack" rel="noopener noreferrer external">GitHub &mdash; garrytan/gstack</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 8 ═══ -->
+    <article class="article" id="art-8" aria-labelledby="art-8-h">
+        <header>
+            <div class="article-kicker">Industrie</div>
+            <h2 id="art-8-h">Mastercard entwickelt Foundation-Modell f&uuml;r Betrugserkennung</h2>
+            <div class="article-meta"><time datetime="2026-03-18">18. M&auml;rz 2026</time> &middot; Quellen: Mastercard, PYMNTS, AI News</div>
+        </header>
+        <p class="article-teaser">Keine Texte, keine Bilder &mdash; Mastercards neues &bdquo;Large Tabular Model&ldquo; ist ein Foundation-Modell, das auf Milliarden von Transaktionsdaten trainiert wird.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Mastercard hat ein &bdquo;Large Tabular Model&ldquo; (LTM) entwickelt &mdash; ein Foundation-Modell, das nicht auf Text, sondern auf strukturierten Transaktionsdaten trainiert wird. Die Trainingsdaten umfassen Milliarden anonymisierter Transaktionen: H&auml;ndlerstandorte, Betrugsmuster, Autorisierungsdaten, R&uuml;ckbuchungen und Treueprogramm-Daten.</p>
+            <p>Der erste Anwendungsbereich ist Cybersicherheit: hybride Systeme aus bestehenden KI-Modellen und dem neuen LTM. Das Foundation-Modell soll Muster erkennen, die spezialisierten Systemen entgehen.</p>
+            <p>Der Ansatz zeigt, dass die Foundation-Model-Architektur nicht auf nat&uuml;rliche Sprache beschr&auml;nkt ist. Mastercard entwickelt bereits APIs und Toolkits, damit interne Teams auf dem LTM aufbauen k&ouml;nnen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.mastercard.com/us/en/news-and-trends/stories/2026/mastercard-new-generative-ai-model.html" rel="noopener noreferrer external">Mastercard &mdash; Inside Mastercard's new gen AI engine</a></li>
+                <li><a href="https://www.pymnts.com/artificial-intelligence-2/2026/mastercard-unveils-gen-ai-model-as-insights-engine-for-commerce/" rel="noopener noreferrer external">PYMNTS &mdash; Mastercard Expands Gen AI Push</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 9 ═══ -->
+    <article class="article" id="art-9" aria-labelledby="art-9-h">
+        <header>
+            <div class="article-kicker">Industrie</div>
+            <h2 id="art-9-h">Microsoft &uuml;bernimmt Team von KI-Startup Cove</h2>
+            <div class="article-meta"><time datetime="2026-03-18">18. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, GeekWire</div>
+        </header>
+        <p class="article-teaser">Ein weiterer Acqui-Hire in der KI-Branche: Das Team des von Sequoia Capital finanzierten Startups Cove wechselt geschlossen zu Microsoft. Der Dienst wird am 1. April eingestellt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das KI-Collaboration-Startup Cove hat angek&uuml;ndigt, dass sein Team zu Microsoft wechselt. Cove hatte 2024 eine Seed-Runde &uuml;ber 6 Millionen Dollar von Sequoia Capital eingesammelt und Software entwickelt, die Single-Thread-Chats mit KI-Agenten in einen visuellen, kollaborativen Workspace verwandelte.</p>
+            <p>Das Gr&uuml;nderteam bringt Erfahrung von Uber Eats und Google Maps mit. Der Dienst endet am 1. April, Kundendaten werden gel&ouml;scht. Die &Uuml;bernahme reiht sich in eine Serie von KI-Acqui-Hires durch Microsoft ein &mdash; Anfang des Jahres wurde bereits das Robin-AI-Team &uuml;bernommen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/18/microsoft-hires-the-team-of-sequioa-backed-ai-collaboration-platform-cove/" rel="noopener noreferrer external">TechCrunch &mdash; Microsoft hires the team of Sequoia-backed Cove</a></li>
+                <li><a href="https://www.geekwire.com/2026/microsoft-hires-employees-from-cove-a-small-sequoia-backed-ai-startup-that-helps-teams-collaborate/" rel="noopener noreferrer external">GeekWire &mdash; Microsoft hires employees from Cove</a></li>
+            </ul>
+        </footer>
+    </article>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 AI News Magazin &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) { setTheme(stored); } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
 </body>
 </html>
