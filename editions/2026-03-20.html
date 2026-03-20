@@ -409,12 +409,12 @@
             margin: 0 0 var(--space-3);
             text-wrap: balance;
             letter-spacing: -0.01em;
-            max-width: 40ch;
+            
         }
 
         .article--lead h2 {
             font-size: var(--text-3xl);
-            max-width: 30ch;
+            
         }
 
         .article-meta {
@@ -438,6 +438,43 @@
 
         .article--lead .article-teaser {
             border-left: 3px solid var(--accent);
+        }
+
+        /* ── Lead Article Image (Newspaper B&W) ───── */
+        .article-figure {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0 0 var(--space-8);
+            border-radius: 4px;
+        }
+
+        .article-figure img {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.4) brightness(1.05);
+        }
+
+        .article-figure figcaption {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-faint);
+            margin-top: var(--space-2);
+            text-align: right;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .article-figure img {
+                filter: grayscale(1) contrast(1.2) brightness(0.9);
+            }
+        }
+
+        [data-theme="dark"] .article-figure img {
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
         }
 
         /* ── Analysis Body ─────────────────────────── */
@@ -851,6 +888,9 @@
             <h2 id="art-1-h">OpenAI plant Desktop-&bdquo;Superapp&ldquo;: ChatGPT, Browser und Codex werden eins</h2>
             <div class="article-meta"><time datetime="2026-03-19">19. M&auml;rz 2026</time> &middot; Quellen: CNBC, Bloomberg, The Information</div>
         </header>
+        <figure class="article-figure">
+            <img src="https://picsum.photos/seed/openai-superapp/480/320" alt="Symbolbild: Digitale Plattform-Konvergenz" loading="lazy" decoding="async">
+        </figure>
         <p class="article-teaser">OpenAI will seine drei Desktop-Produkte &mdash; ChatGPT, den Atlas-Browser und den Codex-Coding-Agenten &mdash; in einer einzigen Anwendung zusammenf&uuml;hren. Fidji Simo, CEO of Applications, spricht intern von einem &bdquo;Command Center&ldquo; f&uuml;r die KI-Zukunft.</p>
 
         <div class="analysis-label">Hintergrund &amp; Analyse</div>

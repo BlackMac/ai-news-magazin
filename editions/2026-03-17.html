@@ -344,10 +344,10 @@
             margin: 0 0 var(--space-3);
             text-wrap: balance;
             letter-spacing: -0.01em;
-            max-width: 40ch;
+            
         }
 
-        .article--lead h2 { font-size: var(--text-3xl); max-width: 30ch; }
+        .article--lead h2 { font-size: var(--text-3xl);  }
 
         .article-meta {
             font-family: var(--font-sans);
@@ -369,6 +369,43 @@
         }
 
         .article--lead .article-teaser { border-left: 3px solid var(--accent); }
+
+        /* ── Lead Article Image (Newspaper B&W) ───── */
+        .article-figure {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0 0 var(--space-8);
+            border-radius: 4px;
+        }
+
+        .article-figure img {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.4) brightness(1.05);
+        }
+
+        .article-figure figcaption {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-faint);
+            margin-top: var(--space-2);
+            text-align: right;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .article-figure img {
+                filter: grayscale(1) contrast(1.2) brightness(0.9);
+            }
+        }
+
+        [data-theme="dark"] .article-figure img {
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
+        }
 
         .analysis-label {
             font-family: var(--font-sans);
@@ -584,6 +621,9 @@
             <h2 id="art-1-h">Pentagon plant KI-Training mit klassifizierten Geheimdaten</h2>
             <div class="article-meta"><time datetime="2026-03-17">17. M&auml;rz 2026</time> &middot; Quellen: MIT Technology Review, Engadget</div>
         </header>
+        <figure class="article-figure">
+            <img src="https://picsum.photos/seed/pentagon-ai/480/320" alt="Symbolbild: Milit&auml;rische Geheimhaltung und K&uuml;nstliche Intelligenz" loading="lazy" decoding="async">
+        </figure>
         <p class="article-teaser">Das US-Verteidigungsministerium will sichere Umgebungen schaffen, in denen KI-Unternehmen ihre Modelle erstmals direkt mit geheimen Milit&auml;rdaten trainieren k&ouml;nnen &mdash; ein fundamentaler Paradigmenwechsel mit erheblichen Sicherheitsrisiken.</p>
 
         <div class="analysis-label">Hintergrund &amp; Analyse</div>

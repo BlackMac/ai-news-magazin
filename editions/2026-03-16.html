@@ -409,12 +409,12 @@
             margin: 0 0 var(--space-3);
             text-wrap: balance;
             letter-spacing: -0.01em;
-            max-width: 40ch;
+            
         }
 
         .article--lead h2 {
             font-size: var(--text-3xl);
-            max-width: 30ch;
+            
         }
 
         .article-meta {
@@ -438,6 +438,43 @@
 
         .article--lead .article-teaser {
             border-left: 3px solid var(--accent);
+        }
+
+        /* ── Lead Article Image (Newspaper B&W) ───── */
+        .article-figure {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0 0 var(--space-8);
+            border-radius: 4px;
+        }
+
+        .article-figure img {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.4) brightness(1.05);
+        }
+
+        .article-figure figcaption {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-faint);
+            margin-top: var(--space-2);
+            text-align: right;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .article-figure img {
+                filter: grayscale(1) contrast(1.2) brightness(0.9);
+            }
+        }
+
+        [data-theme="dark"] .article-figure img {
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
         }
 
         /* ── Analysis Body ─────────────────────────── */
@@ -821,6 +858,9 @@
             <h2 id="art-1-h">NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</h2>
             <div class="article-meta"><time datetime="2026-03-16">16. M&auml;rz 2026</time> &middot; Quellen: CNBC, TechCrunch, Tom's Hardware</div>
         </header>
+        <figure class="article-figure">
+            <img src="https://picsum.photos/seed/nvidia-chip/480/320" alt="Symbolbild: KI-Chiparchitektur und Hochleistungsrechner" loading="lazy" decoding="async">
+        </figure>
         <p class="article-teaser">Auf der GTC 2026 pr&auml;sentiert Jensen Huang eine neue &Auml;ra der KI-Infrastruktur: Die Vera-Rubin-Plattform vereint sieben neue Chips, ein eigenes CPU-Design und den Anspruch, die Billionen-Dollar-Marke bei Bestellungen bis 2027 zu knacken.</p>
 
         <div class="analysis-label">Hintergrund &amp; Analyse</div>
