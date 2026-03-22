@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; Hardware-Guide: KI-Inferenz f&uuml;r Zuhause</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            --budget-low: #16a34a;
+            --budget-mid: #d97706;
+            --budget-high: #dc2626;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+            --budget-low: #4ade80;
+            --budget-mid: #fbbf24;
+            --budget-high: #f87171;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+                --budget-low: #4ade80;
+                --budget-mid: #fbbf24;
+                --budget-high: #f87171;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header ─────────────────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+        .site-nav a.active {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Page Header ─────────────────────────────── */
+        .page-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+        .page-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+        .page-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+        .page-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ────────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ───────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-3);
+        }
+        .toc-list a {
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            display: block;
+        }
+        .toc-list a:hover { color: var(--accent); }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+        }
+
+        /* ── Sections ────────────────────────────────── */
+        .guide-section {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .guide-section:last-of-type { border-bottom: none; }
+
+        .section-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+        .guide-section h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+        .section-intro {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+        }
+        .guide-section h3 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-8) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .guide-section h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .body-text {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            overflow-wrap: break-word;
+        }
+        .body-text p { margin: 0 0 1.2em; }
+        .body-text p:last-child { margin-bottom: 0; }
+
+        /* ── Tables ──────────────────────────────────── */
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: var(--space-6) 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            white-space: nowrap;
+        }
+        thead {
+            background: var(--bg-surface);
+            position: sticky;
+            top: 0;
+        }
+        th {
+            font-weight: 700;
+            text-align: left;
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 2px solid var(--border-strong);
+            color: var(--text-primary);
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover { color: var(--accent); }
+        th .sort-arrow { font-size: 0.7em; margin-left: 0.3em; opacity: 0.4; }
+        th.sorted .sort-arrow { opacity: 1; }
+        td {
+            padding: var(--space-3) var(--space-4);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-body);
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--bg-surface-hover); }
+
+        .tier-budget { color: var(--budget-low); font-weight: 600; }
+        .tier-mid { color: var(--budget-mid); font-weight: 600; }
+        .tier-high { color: var(--budget-high); font-weight: 600; }
+
+        .hw-note {
+            font-size: var(--text-xs);
+            color: var(--text-faint);
+            display: block;
+            white-space: normal;
+            max-width: 20ch;
+        }
+
+        /* ── Budget Cards ────────────────────────────── */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+            margin: var(--space-8) 0;
+        }
+        .budget-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6) var(--space-8);
+        }
+        .budget-card h3 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-xl);
+            margin: 0 0 var(--space-2);
+            color: var(--text-primary);
+        }
+        .budget-card .budget-range {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: var(--space-4);
+        }
+        .budget-card .body-text {
+            font-size: var(--text-sm);
+            line-height: 1.7;
+        }
+        .budget-card ul {
+            padding-left: 1.2em;
+            margin: var(--space-2) 0;
+        }
+        .budget-card li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            margin-bottom: var(--space-2);
+            color: var(--text-body);
+        }
+        .hw-highlight {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ── Verdict Box ─────────────────────────────── */
+        .verdict-box {
+            background: var(--bg-surface);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: var(--space-6) var(--space-8);
+            margin: var(--space-8) 0;
+        }
+        .verdict-box h4 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            color: var(--accent);
+            margin: 0 0 var(--space-3);
+        }
+        .verdict-box p {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.7;
+            color: var(--text-body);
+            margin: 0;
+        }
+
+        /* ── Software Cards ──────────────────────────── */
+        .sw-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+        .sw-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+        }
+        .sw-card h4 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+        }
+        .sw-card .sw-tag {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-3);
+        }
+        .sw-card p {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+            margin: 0;
+        }
+
+        /* ── Footer ──────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .page-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .guide-section h2 { font-size: var(--text-xl); }
+            .budget-card { padding: var(--space-4) var(--space-6); }
+            .sw-grid { grid-template-columns: 1fr; }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .guide-section { page-break-inside: avoid; }
+            .table-wrap { overflow: visible; }
+            table { white-space: normal; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="index.html">Alle Ausgaben</a>
+            <a href="hardware-guide.html" class="active">Hardware-Guide</a>
+            <a href="about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<div class="page-header">
+    <div class="page-meta">
+        <time datetime="2026-03-22">Zuletzt aktualisiert: 22. M&auml;rz 2026</time>
+    </div>
+    <h1 class="page-title">Inferenz-Hardware f&uuml;r Zuhause</h1>
+    <p class="page-subtitle">Welche Hardware braucht man, um große Sprachmodelle lokal laufen zu lassen? Ein umfassender Guide zu GPUs, Apple Silicon, spezialisierten Ger&auml;ten &mdash; mit aktuellen Benchmarks und Preisen.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading">Inhalt</h2>
+        <ul class="toc-list">
+            <li><a href="#quick-ref">Quick-Reference-Tabelle</a></li>
+            <li><a href="#budget">Kaufberatung nach Budget</a></li>
+            <li><a href="#nvidia">NVIDIA-GPUs im Detail</a></li>
+            <li><a href="#apple">Apple Silicon im Detail</a></li>
+            <li><a href="#amd">AMD-GPUs</a></li>
+            <li><a href="#special">Spezialisierte Hardware</a></li>
+            <li><a href="#models">Modell-Kompatibilit&auml;t</a></li>
+            <li><a href="#quant">Quantisierung erkl&auml;rt</a></li>
+            <li><a href="#software">Software-Stack</a></li>
+            <li><a href="#methodik">Methodik &amp; Quellen</a></li>
+        </ul>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Quick-Reference-Tabelle              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="quick-ref" aria-labelledby="quick-ref-h">
+        <div class="section-kicker">&Uuml;berblick</div>
+        <h2 id="quick-ref-h">Quick-Reference-Tabelle</h2>
+        <p class="section-intro">Alle aktuell relevanten Optionen auf einen Blick &mdash; sortierbar per Klick auf die Spalten&uuml;berschriften.</p>
+
+        <div class="table-wrap">
+            <table id="main-table" aria-label="Hardware-Vergleichstabelle">
+                <thead>
+                    <tr>
+                        <th data-sort="string">Hardware <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="number">VRAM / RAM <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="number">Bandbreite <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="number">8B Q4 tok/s <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="number">70B Q4 tok/s <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="number">ca. Preis &euro; <span class="sort-arrow">&udarr;</span></th>
+                        <th data-sort="string">Tier <span class="sort-arrow">&udarr;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RTX 5090</strong></td>
+                        <td>32 GB</td>
+                        <td>1.792 GB/s</td>
+                        <td>186</td>
+                        <td>&mdash;<span class="hw-note">Passt nicht in 32 GB</span></td>
+                        <td>3.600</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 5080</strong></td>
+                        <td>16 GB</td>
+                        <td>960 GB/s</td>
+                        <td>~140</td>
+                        <td>&mdash;</td>
+                        <td>1.300</td>
+                        <td class="tier-mid">Mittelklasse</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 5070 Ti</strong></td>
+                        <td>16 GB</td>
+                        <td>896 GB/s</td>
+                        <td>~130</td>
+                        <td>&mdash;</td>
+                        <td>957</td>
+                        <td class="tier-mid">Mittelklasse</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 5070</strong></td>
+                        <td>12 GB</td>
+                        <td>672 GB/s</td>
+                        <td>~100</td>
+                        <td>&mdash;</td>
+                        <td>590</td>
+                        <td class="tier-budget">Budget</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 5060 Ti 16GB</strong></td>
+                        <td>16 GB</td>
+                        <td>~448 GB/s</td>
+                        <td>~70</td>
+                        <td>&mdash;</td>
+                        <td>490</td>
+                        <td class="tier-budget">Budget</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 4090</strong> <span class="hw-note">Produktion eingestellt</span></td>
+                        <td>24 GB</td>
+                        <td>1.008 GB/s</td>
+                        <td>131</td>
+                        <td>&mdash;<span class="hw-note">Nur mit CPU-Offload</span></td>
+                        <td>2.300</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RTX 3090</strong> <span class="hw-note">Nur gebraucht</span></td>
+                        <td>24 GB</td>
+                        <td>936 GB/s</td>
+                        <td>~104</td>
+                        <td>&mdash;</td>
+                        <td>700&ndash;1.100</td>
+                        <td class="tier-budget">Budget</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RX 7900 XTX</strong> <span class="hw-note">AMD, ROCm/Linux</span></td>
+                        <td>24 GB</td>
+                        <td>960 GB/s</td>
+                        <td>~100</td>
+                        <td>&mdash;</td>
+                        <td>949&ndash;1.100</td>
+                        <td class="tier-mid">Mittelklasse</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mac Mini M4 Pro</strong> <span class="hw-note">48&ndash;64 GB Unified</span></td>
+                        <td>64 GB</td>
+                        <td>273 GB/s</td>
+                        <td>40&ndash;55</td>
+                        <td>~8&ndash;12</td>
+                        <td>ab 1.500</td>
+                        <td class="tier-mid">Mittelklasse</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MacBook Pro M5 Max</strong> <span class="hw-note">128 GB Unified</span></td>
+                        <td>128 GB</td>
+                        <td>614 GB/s</td>
+                        <td>80&ndash;100</td>
+                        <td>18&ndash;25</td>
+                        <td>ab 4.100</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mac Studio M4 Max</strong> <span class="hw-note">128 GB Unified</span></td>
+                        <td>128 GB</td>
+                        <td>546 GB/s</td>
+                        <td>80&ndash;100</td>
+                        <td>18&ndash;25</td>
+                        <td>ab 2.800</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mac Studio M3 Ultra</strong> <span class="hw-note">192 GB Unified</span></td>
+                        <td>192 GB</td>
+                        <td>819 GB/s</td>
+                        <td>~100</td>
+                        <td>~30</td>
+                        <td>ab 4.200</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ryzen AI Max+ 395</strong> <span class="hw-note">Mini-PC, 128 GB Unified</span></td>
+                        <td>128 GB</td>
+                        <td>~256 GB/s</td>
+                        <td>~60</td>
+                        <td>20&ndash;30</td>
+                        <td>ab 800</td>
+                        <td class="tier-mid">Mittelklasse</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NVIDIA DGX Spark</strong></td>
+                        <td>128 GB</td>
+                        <td>273 GB/s</td>
+                        <td>~80</td>
+                        <td>~5</td>
+                        <td>3.700</td>
+                        <td class="tier-high">High-End</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tinybox Red v2</strong> <span class="hw-note">6&times; RX 7900 XTX</span></td>
+                        <td>144 GB</td>
+                        <td>~5.760 GB/s</td>
+                        <td>&mdash;</td>
+                        <td>~60&ndash;80</td>
+                        <td>13.800</td>
+                        <td class="tier-high">Prosumer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Kaufberatung nach Budget              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="budget" aria-labelledby="budget-h">
+        <div class="section-kicker">Kaufberatung</div>
+        <h2 id="budget-h">Was bekommt man f&uuml;r sein Geld?</h2>
+        <p class="section-intro">F&uuml;nf Budget-Stufen &mdash; von der Einsteiger-GPU bis zum Profi-Setup. Die Empfehlungen gelten f&uuml;r M&auml;rz 2026.</p>
+
+        <div class="budget-grid">
+            <div class="budget-card">
+                <div class="budget-range">Unter 600 &euro;</div>
+                <h3>Einstieg</h3>
+                <div class="body-text">
+                    <ul>
+                        <li><span class="hw-highlight">RTX 5070</span> (~590 &euro;) &mdash; 12 GB GDDR7, 672 GB/s. Reicht f&uuml;r 7B&ndash;13B-Modelle in Q4-Quantisierung bei ~100 tok/s. Beste Preis-Leistung im Budget-Segment.</li>
+                        <li><span class="hw-highlight">RTX 5060 Ti 16GB</span> (~490 &euro;) &mdash; 16 GB, aber nur ~448 GB/s. Mehr VRAM, deutlich langsamer. Nur sinnvoll, wenn 14B-Modelle wichtiger sind als Geschwindigkeit.</li>
+                    </ul>
+                </div>
+                <div class="verdict-box">
+                    <h4>Empfehlung</h4>
+                    <p>RTX 5070 f&uuml;r maximale Geschwindigkeit bei 7&ndash;8B-Modellen. Wer 14B-Modelle braucht, greift zur 5060 Ti 16GB.</p>
+                </div>
+            </div>
+
+            <div class="budget-card">
+                <div class="budget-range">600 &ndash; 1.200 &euro;</div>
+                <h3>Goldener Mittelweg</h3>
+                <div class="body-text">
+                    <ul>
+                        <li><span class="hw-highlight">RTX 3090 (gebraucht)</span> (~700&ndash;900 &euro;) &mdash; 24 GB GDDR6X, 936 GB/s. Der &bdquo;Value King&ldquo; f&uuml;r lokale KI: meister VRAM pro Euro, hohe Bandbreite. Risiko: gebrauchte Hardware ohne Garantie.</li>
+                        <li><span class="hw-highlight">RTX 5070 Ti</span> (~957 &euro;) &mdash; 16 GB GDDR7, 896 GB/s. Neue Hardware mit zukunftssicherem GDDR7, aber nur 16 GB VRAM.</li>
+                        <li><span class="hw-highlight">RX 7900 XTX</span> (~949 &euro;) &mdash; 24 GB, 960 GB/s. Konkurrenzf&auml;hig zu NVIDIA &mdash; aber nur unter Linux mit ROCm zuverl&auml;ssig.</li>
+                    </ul>
+                </div>
+                <div class="verdict-box">
+                    <h4>Empfehlung</h4>
+                    <p>RTX 3090 gebraucht, wenn 24 GB VRAM Priorit&auml;t haben. RTX 5070 Ti f&uuml;r neue Hardware. AMD nur f&uuml;r erfahrene Linux-Nutzer.</p>
+                </div>
+            </div>
+
+            <div class="budget-card">
+                <div class="budget-range">1.200 &ndash; 3.000 &euro;</div>
+                <h3>Ernsthaft lokal</h3>
+                <div class="body-text">
+                    <ul>
+                        <li><span class="hw-highlight">Mac Mini M4 Pro (64 GB)</span> (~2.400 &euro;) &mdash; 64 GB Unified Memory, 273 GB/s. Kann 70B-Modelle in Q4 laden. Leise, stromsparend, hervorragendes Preis-Leistungs-Verh&auml;ltnis f&uuml;r gro&szlig;e Modelle.</li>
+                        <li><span class="hw-highlight">Mac Studio M4 Max (128 GB)</span> (ab ~2.800 &euro;) &mdash; 128 GB, 546 GB/s. L&auml;dt 70B bequem, 18&ndash;25 tok/s bei Q4.</li>
+                        <li><span class="hw-highlight">Ryzen AI Max+ 395 Mini-PC</span> (ab ~800 &euro;) &mdash; 128 GB Unified Memory. Laut AMD 2,2&times; schneller als RTX 4090 bei 70B-Modellen. Preisbrecher f&uuml;r gro&szlig;e Modelle.</li>
+                    </ul>
+                </div>
+                <div class="verdict-box">
+                    <h4>Empfehlung</h4>
+                    <p>F&uuml;r 70B-Modelle: Ryzen AI Max+ 395 als Preis-Leistungs-Sieger oder Mac Studio M4 Max f&uuml;r das reifere &Ouml;kosystem (MLX/Metal). F&uuml;r Modelle bis 32B: RTX 5080 oder 5070 Ti.</p>
+                </div>
+            </div>
+
+            <div class="budget-card">
+                <div class="budget-range">3.000 &ndash; 5.000 &euro;</div>
+                <h3>Maximum Consumer</h3>
+                <div class="body-text">
+                    <ul>
+                        <li><span class="hw-highlight">RTX 5090</span> (~3.600 &euro;) &mdash; 32 GB GDDR7, 1.792 GB/s. Schnellste Consumer-GPU &uuml;berhaupt: 186 tok/s bei 8B, 61 tok/s bei 32B. Aber nur 32 GB VRAM &mdash; 70B passt nicht rein.</li>
+                        <li><span class="hw-highlight">NVIDIA DGX Spark</span> (~3.700 &euro;) &mdash; 128 GB, Grace Blackwell Chip. Kompaktestes Ger&auml;t f&uuml;r 100B+-Modelle. Token-Generierung aber langsam wegen LPDDR5X-Bandbreite.</li>
+                        <li><span class="hw-highlight">Mac Studio M3 Ultra (192 GB)</span> (ab ~4.200 &euro;) &mdash; 192 GB, 819 GB/s. Kann 405B in Q4 laden. Schnellste Consumer-Plattform f&uuml;r gro&szlig;e Modelle.</li>
+                    </ul>
+                </div>
+                <div class="verdict-box">
+                    <h4>Empfehlung</h4>
+                    <p>RTX 5090 f&uuml;r maximale Geschwindigkeit bei Modellen bis 32B. Mac Studio M3 Ultra f&uuml;r 70B+ ohne Kompromisse. DGX Spark f&uuml;r CUDA-&Ouml;kosystem und Modelle &uuml;ber 100B.</p>
+                </div>
+            </div>
+
+            <div class="budget-card">
+                <div class="budget-range">&Uuml;ber 5.000 &euro;</div>
+                <h3>Prosumer &amp; Server</h3>
+                <div class="body-text">
+                    <ul>
+                        <li><span class="hw-highlight">Tinybox Red v2</span> (~13.800 &euro;) &mdash; 6&times; RX 7900 XTX, 144 GB gesamt. Multi-GPU-Cluster f&uuml;r Training und gro&szlig;e Modelle. L&auml;uft auf tinygrad/ROCm.</li>
+                        <li><span class="hw-highlight">Tinybox Green v2</span> (~23.000 &euro;) &mdash; 4&times; RTX 5090, 128 GB, ~7,2 TB/s aggregierte Bandbreite. H&ouml;chste Bandbreite im Consumer-Bereich.</li>
+                        <li><span class="hw-highlight">A100 80GB (gebraucht)</span> (~8.000&ndash;15.000 &euro;) &mdash; 80 GB HBM2e, 2.000 GB/s. Braucht Server-Infrastruktur, passive K&uuml;hlung. Nur f&uuml;r dedizierte Inference-Server.</li>
+                    </ul>
+                </div>
+                <div class="verdict-box">
+                    <h4>Empfehlung</h4>
+                    <p>Tinybox Red v2 als g&uuml;nstigstes Multi-GPU-System. H100/MI300X sind Enterprise-Hardware und f&uuml;r Zuhause nicht praktikabel &mdash; Cloud-Rental ist hier rationaler.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: NVIDIA-GPUs                          -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="nvidia" aria-labelledby="nvidia-h">
+        <div class="section-kicker">Diskrete GPUs</div>
+        <h2 id="nvidia-h">NVIDIA-GPUs im Detail</h2>
+        <p class="section-intro">NVIDIA dominiert das &Ouml;kosystem f&uuml;r lokale LLM-Inferenz &mdash; dank CUDA, dem breitesten Software-Support und der h&ouml;chsten Rohbandbreite pro Karte.</p>
+
+        <h3>RTX 50-Serie (Blackwell, 2025)</h3>
+        <div class="body-text">
+            <p>Die aktuelle Generation bringt GDDR7-Speicher mit deutlich h&ouml;herer Bandbreite. Die <strong>RTX 5090</strong> (32 GB, 1.792 GB/s) ist die schnellste Consumer-GPU f&uuml;r Inferenz, kostet aber aktuell ~3.600 &euro; bei eingeschr&auml;nkter Verf&uuml;gbarkeit (MSRP: ~2.160 &euro;).</p>
+            <p>Die <strong>RTX 5070 Ti</strong> (16 GB, 896 GB/s, ~957 &euro;) bietet das beste Preis-Leistungs-Verh&auml;ltnis bei neuer Hardware im 16-GB-Segment. Die <strong>RTX 5070</strong> (12 GB, 672 GB/s, ~590 &euro;) ist der Einstiegstipp.</p>
+        </div>
+
+        <div class="table-wrap">
+            <table aria-label="NVIDIA RTX 50-Serie">
+                <thead>
+                    <tr><th>Modell</th><th>VRAM</th><th>Bandbreite</th><th>TDP</th><th>Preis &euro;</th><th>8B Q4 tok/s</th><th>32B Q4 tok/s</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>RTX 5090</td><td>32 GB GDDR7</td><td>1.792 GB/s</td><td>575 W</td><td>~3.600</td><td>186</td><td>61</td></tr>
+                    <tr><td>RTX 5080</td><td>16 GB GDDR7</td><td>960 GB/s</td><td>360 W</td><td>~1.300</td><td>~140</td><td>&mdash;</td></tr>
+                    <tr><td>RTX 5070 Ti</td><td>16 GB GDDR7</td><td>896 GB/s</td><td>300 W</td><td>~957</td><td>~130</td><td>&mdash;</td></tr>
+                    <tr><td>RTX 5070</td><td>12 GB GDDR7</td><td>672 GB/s</td><td>250 W</td><td>~590</td><td>~100</td><td>&mdash;</td></tr>
+                    <tr><td>RTX 5060 Ti 16GB</td><td>16 GB GDDR7</td><td>~448 GB/s</td><td>~165 W</td><td>~490</td><td>~70</td><td>&mdash;</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>RTX 40-Serie &amp; 3090 (Vorg&auml;nger)</h3>
+        <div class="body-text">
+            <p>Die <strong>RTX 4090</strong> (24 GB, 1.008 GB/s) war der Goldstandard &mdash; Produktion wurde aber im Oktober 2024 eingestellt. Restbest&auml;nde kosten ~2.300 &euro;, gebraucht ~2.180 &euro;. Bei diesen Preisen ist die RTX 5090 die bessere Wahl.</p>
+            <p>Die <strong>RTX 3090</strong> (24 GB, 936 GB/s) bleibt gebraucht f&uuml;r ~700&ndash;1.100 &euro; der unangefochtene Preis-Leistungs-K&ouml;nig: 24 GB VRAM bei fast RTX-4090-Bandbreite zu einem Bruchteil des Preises. Risiken: keine Garantie, unbekannte thermische Historie.</p>
+            <p>Andere 40er-Karten (4080 Super, 4070 Ti Super, 4060 Ti 16GB) sind in M&auml;rz 2026 &uuml;berpreist &mdash; die 50er-Pendants bieten mehr Leistung f&uuml;r gleiches oder weniger Geld.</p>
+        </div>
+
+        <div class="table-wrap">
+            <table aria-label="NVIDIA RTX 40-Serie und 3090">
+                <thead>
+                    <tr><th>Modell</th><th>VRAM</th><th>Bandbreite</th><th>Preis &euro;</th><th>8B Q4 tok/s</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>RTX 4090</td><td>24 GB GDDR6X</td><td>1.008 GB/s</td><td>~2.300</td><td>131</td><td>&Uuml;berpreist</td></tr>
+                    <tr><td>RTX 3090 (gebraucht)</td><td>24 GB GDDR6X</td><td>936 GB/s</td><td>700&ndash;1.100</td><td>~104</td><td>Value King</td></tr>
+                    <tr><td>RTX 4080 Super</td><td>16 GB GDDR6X</td><td>736 GB/s</td><td>~1.359</td><td>~95</td><td>Nicht empfohlen</td></tr>
+                    <tr><td>RTX 4060 Ti 16GB</td><td>16 GB GDDR6</td><td>288 GB/s</td><td>~400</td><td>~50</td><td>Zu langsam</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Apple Silicon                        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="apple" aria-labelledby="apple-h">
+        <div class="section-kicker">Unified Memory</div>
+        <h2 id="apple-h">Apple Silicon im Detail</h2>
+        <p class="section-intro">Apples Unified-Memory-Architektur hat einen entscheidenden Vorteil: CPU und GPU teilen sich denselben Speicherpool. Ein Mac mit 128 GB RAM kann ein 70B-Modell komplett laden &mdash; keine diskrete GPU kann das.</p>
+
+        <div class="body-text">
+            <p><strong>Wichtig:</strong> Es gibt keinen M4 Ultra &mdash; Apple hat diese Chipvariante &uuml;bersprungen. Der Mac Studio 2025 nutzt M4 Max oder M3 Ultra. Die M5-Generation (M5 Pro/Max) ist seit M&auml;rz 2026 im MacBook Pro verf&uuml;gbar, M5 Ultra wird f&uuml;r Mitte 2026 erwartet.</p>
+            <p>Auf Apple Silicon liefert <strong>MLX</strong> (Apples ML-Framework) 30&ndash;80% h&ouml;heren Durchsatz als llama.cpp. LM Studio bietet MLX als w&auml;hlbares Backend &mdash; der einfachste Weg zu maximaler Performance auf dem Mac.</p>
+        </div>
+
+        <div class="table-wrap">
+            <table aria-label="Apple Silicon Vergleich">
+                <thead>
+                    <tr><th>Konfiguration</th><th>Unified Memory</th><th>Bandbreite</th><th>8B Q4 tok/s</th><th>70B Q4 tok/s</th><th>ca. Preis &euro;</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mac Mini M4 (Basis)</td><td>16&ndash;24 GB</td><td>120 GB/s</td><td>~25&ndash;35</td><td>&mdash;</td><td>ab 799</td></tr>
+                    <tr><td>Mac Mini M4 Pro</td><td>24&ndash;64 GB</td><td>273 GB/s</td><td>40&ndash;55</td><td>~8&ndash;12</td><td>ab 1.500</td></tr>
+                    <tr><td>MacBook Pro M5 Pro</td><td>bis 64 GB</td><td>307 GB/s</td><td>~50&ndash;65</td><td>~10&ndash;15</td><td>ab 2.300</td></tr>
+                    <tr><td>MacBook Pro M5 Max</td><td>bis 128 GB</td><td>614 GB/s</td><td>80&ndash;100</td><td>18&ndash;25</td><td>ab 4.100</td></tr>
+                    <tr><td>Mac Studio M4 Max</td><td>bis 128 GB</td><td>546 GB/s</td><td>80&ndash;100</td><td>18&ndash;25</td><td>ab 2.800</td></tr>
+                    <tr><td>Mac Studio M3 Ultra</td><td>bis 192 GB</td><td>819 GB/s</td><td>~100</td><td>~30</td><td>ab 4.200</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="verdict-box">
+            <h4>Wann Apple Silicon?</h4>
+            <p>Wenn gro&szlig;e Modelle (70B+) wichtig sind und man leise, stromsparende Hardware will. Die Geschwindigkeit pro Token liegt unter NVIDIA-GPUs gleicher Preisklasse &mdash; aber der riesige Speicherpool macht Modelle m&ouml;glich, die auf keiner einzelnen Consumer-GPU laufen.</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: AMD                                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="amd" aria-labelledby="amd-h">
+        <div class="section-kicker">Alternative</div>
+        <h2 id="amd-h">AMD-GPUs &amp; APUs</h2>
+        <p class="section-intro">AMD bietet mit der RX 7900 XTX eine konkurrenzf&auml;hige diskrete GPU und mit dem Ryzen AI Max+ 395 einen &uuml;berraschend starken Unified-Memory-Chip.</p>
+
+        <h3>RX 7900 XTX (RDNA 3)</h3>
+        <div class="body-text">
+            <p>24 GB GDDR6 bei 960 GB/s &mdash; auf dem Papier identisch zur RTX 5080. Der Preis (~949&ndash;1.100 &euro;) ist kompetitiv. <strong>Aber:</strong> ROCm-Support funktioniert zuverl&auml;ssig nur unter Linux. Windows-Support ist deutlich weniger stabil. AMD hat 2026 keine RDNA-4-Karte mit 24+ GB ver&ouml;ffentlicht &mdash; die 7900 XTX bleibt AMDs einzige ernstzunehmende Option f&uuml;r LLM-Inferenz.</p>
+        </div>
+
+        <h3>Ryzen AI Max+ 395 (Strix Halo)</h3>
+        <div class="body-text">
+            <p>Der &Uuml;berraschungskandidat: Ein Desktop-APU mit <strong>bis zu 128 GB Unified Memory</strong>, 40 RDNA-3.5-Compute-Units (iGPU auf RX-7700-XT-Niveau) und 50 TOPS NPU. Verf&uuml;gbar in Mini-PCs von Framework, Minisforum und ASUS ab ~800 &euro;.</p>
+            <p>AMD behauptet, der Chip sei bei Llama 3.3 70B <strong>2,2&times; schneller als eine RTX 4090</strong> &mdash; weil die 4090 das Modell nicht in ihre 24 GB laden kann und auf CPU-Offload angewiesen ist. Community-Benchmarks best&auml;tigen 20&ndash;30 tok/s bei 70B-Modellen und 60+ tok/s bei 8B.</p>
+        </div>
+        <div class="verdict-box">
+            <h4>Einsch&auml;tzung Ryzen AI Max+</h4>
+            <p>Einer der spannendsten Neuzug&auml;nge f&uuml;r Home-Inferenz. 128 GB Unified Memory f&uuml;r unter 2.000 &euro; schl&auml;gt jede diskrete GPU bei gro&szlig;en Modellen. Die iGPU &uuml;bernimmt die Arbeit &mdash; der integrierte NPU ist f&uuml;r LLMs aktuell irrelevant.</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Spezialisierte Hardware              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="special" aria-labelledby="special-h">
+        <div class="section-kicker">Spezialhardware</div>
+        <h2 id="special-h">Spezialisierte Inferenz-Hardware</h2>
+        <p class="section-intro">Jenseits von GPUs und Macs: Dedizierte KI-Beschleuniger, Cluster-L&ouml;sungen und warum die meisten davon f&uuml;r Endnutzer (noch) nicht relevant sind.</p>
+
+        <h3>NVIDIA DGX Spark</h3>
+        <div class="body-text">
+            <p>Das wichtigste neue Consumer-KI-Ger&auml;t des Jahres 2025: Ein Grace-Blackwell-Superchip im Format kleiner als ein Mac Mini (150 &times; 150 &times; 50 mm), seit Oktober 2025 f&uuml;r 3.999 USD (~3.700 &euro;) bei NVIDIA und Partnern (ASUS, Dell, Lenovo) erh&auml;ltlich.</p>
+            <p><strong>128 GB LPDDR5X</strong> Unified Memory erm&ouml;glichen Modelle bis ~200B Parameter. Der Haken: LPDDR5X liefert nur 273 GB/s Bandbreite &mdash; die Token-Generierung bei 70B liegt bei nur ~5 tok/s. Prompt-Verarbeitung (Prefill) ist dagegen stark. Der DGX Spark gl&auml;nzt bei Kapazit&auml;t, nicht bei Geschwindigkeit &mdash; und bietet vollen CUDA-Support.</p>
+        </div>
+
+        <h3>Tinybox (tiny corp)</h3>
+        <div class="body-text">
+            <p>Von George Hotz gegr&uuml;ndete (inzwischen ohne ihn weiterf&uuml;hrte) Firma, die Multi-GPU-Cluster als fertige Systeme verkauft. Der <strong>Tinybox Red v2</strong> (6&times; RX 7900 XTX, 144 GB, ~13.800 &euro;) und <strong>Tinybox Green v2</strong> (4&times; RTX 5090, 128 GB, ~23.000 &euro;) sind verf&uuml;gbar und liefern innerhalb einer Woche. Eher f&uuml;r Training als f&uuml;r Single-User-Inferenz optimiert.</p>
+        </div>
+
+        <h3>Hailo-10H / Raspberry Pi AI HAT+ 2</h3>
+        <div class="body-text">
+            <p>Der <strong>zug&auml;nglichste dedizierte Inferenz-Beschleuniger</strong>: 40 TOPS INT4, 8 GB LPDDR4X, als HAT f&uuml;r den Raspberry Pi 5 f&uuml;r 130 USD erh&auml;ltlich (seit Januar 2026). Kann kleine Modelle (Qwen2 1.5B: ~9,5 tok/s) lokal betreiben &mdash; ideal f&uuml;r Always-On-Chatbots oder Sprachassistenten auf dem Pi. F&uuml;r ernsthafte LLM-Arbeit zu klein.</p>
+        </div>
+
+        <h3>Laptop-NPUs: Intel, Qualcomm, AMD</h3>
+        <div class="body-text">
+            <p>Alle aktuellen &bdquo;Copilot+ PCs&ldquo; haben NPUs (45&ndash;50 TOPS). Die ernüchternde Realit&auml;t f&uuml;r LLM-Inferenz:</p>
+            <ul style="font-family: var(--font-sans); font-size: var(--text-sm);">
+                <li><strong>Intel Lunar Lake NPU:</strong> ~18 tok/s bei Llama 2 7B. Die iGPU ist meist schneller.</li>
+                <li><strong>Qualcomm Snapdragon X Elite NPU:</strong> ~2,6 tok/s bei llama.cpp &mdash; die <em>CPU</em> schafft ~26 tok/s. Die NPU ist hier faktisch nutzlos f&uuml;r LLMs.</li>
+                <li><strong>AMD Ryzen AI 300 NPU:</strong> Die iGPU schl&auml;gt auch hier die NPU. Aber: Die iGPU ist bis zu 27% schneller als Intels Lunar Lake.</li>
+            </ul>
+            <p><strong>Fazit:</strong> NPUs sind f&uuml;r vorinstallierte Copilot-Features gebaut, nicht f&uuml;r offene LLM-Inferenz. Kaufentscheidungen sollten sich an CPU/GPU-Leistung orientieren, nicht an der NPU.</p>
+        </div>
+
+        <h3>Nicht f&uuml;r Zuhause: Groq, Cerebras &amp; Co.</h3>
+        <div class="body-text">
+            <p><strong>Groq LPU</strong> und <strong>Cerebras CS-3</strong> sind die schnellsten LLM-Inferenz-Chips der Welt &mdash; aber reine Cloud/Enterprise-Produkte ohne jede Consumer-Verf&uuml;gbarkeit. Zugang gibt es nur &uuml;ber deren Cloud-APIs. FPGAs f&uuml;r LLMs sind ein Forschungsthema, kein Consumer-Produkt.</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Modell-Kompatibilit&auml;t           -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="models" aria-labelledby="models-h">
+        <div class="section-kicker">Kompatibilit&auml;t</div>
+        <h2 id="models-h">Welches Modell passt auf welche Hardware?</h2>
+        <p class="section-intro">VRAM ist der entscheidende Flaschenhals. Diese Matrix zeigt, wie viel Speicher aktuelle Modelle bei verschiedenen Quantisierungsstufen ben&ouml;tigen.</p>
+
+        <div class="table-wrap">
+            <table aria-label="VRAM-Anforderungen nach Modellgr&ouml;&szlig;e und Quantisierung">
+                <thead>
+                    <tr><th>Modellgr&ouml;&szlig;e</th><th>FP16</th><th>Q8_0</th><th>Q5_K_M</th><th>Q4_K_M</th><th>Q2_K</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>7&ndash;8B</strong> <span class="hw-note">Llama 3.1, Qwen3, Mistral</span></td><td>14&ndash;16 GB</td><td>7&ndash;9 GB</td><td>5&ndash;6 GB</td><td>4,5&ndash;5,5 GB</td><td>2,5&ndash;3 GB</td></tr>
+                    <tr><td><strong>13&ndash;14B</strong> <span class="hw-note">Qwen3, Phi-4</span></td><td>26&ndash;28 GB</td><td>13&ndash;14 GB</td><td>9,5&ndash;10,5 GB</td><td>8&ndash;9 GB</td><td>4&ndash;5 GB</td></tr>
+                    <tr><td><strong>27&ndash;34B</strong> <span class="hw-note">Gemma 3 27B, DeepSeek 33B</span></td><td>54&ndash;68 GB</td><td>27&ndash;34 GB</td><td>19&ndash;24 GB</td><td>15&ndash;20 GB</td><td>8&ndash;10 GB</td></tr>
+                    <tr><td><strong>70&ndash;72B</strong> <span class="hw-note">Llama 3.3, Qwen 2.5</span></td><td>140&ndash;144 GB</td><td>70&ndash;72 GB</td><td>50&ndash;55 GB</td><td>40&ndash;46 GB</td><td>22&ndash;25 GB</td></tr>
+                    <tr><td><strong>405B</strong> <span class="hw-note">Llama 3.1 405B</span></td><td>~810 GB</td><td>~405 GB</td><td>~290 GB</td><td>~230 GB</td><td>~120 GB</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="body-text">
+            <p><strong>Zus&auml;tzlich zum Modell selbst</strong> muss der KV-Cache im Speicher Platz finden. Bei 4K Kontextl&auml;nge ist das minimal (1&ndash;3 GB bei 8B-Modellen). Bei 128K Kontext kann der KV-Cache allein &uuml;ber 40 GB beanspruchen &mdash; Flash Attention und quantisierter KV-Cache (Q4/Q8) reduzieren das um das 2&ndash;4-fache.</p>
+        </div>
+
+        <h3>Praxisempfehlungen</h3>
+        <div class="table-wrap">
+            <table aria-label="Hardware-Empfehlungen nach Modellgr&ouml;&szlig;e">
+                <thead>
+                    <tr><th>VRAM</th><th>Was passt</th><th>Beispiel-Hardware</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>8&ndash;12 GB</td><td>7&ndash;8B in Q4&ndash;Q8</td><td>RTX 5060/5070</td></tr>
+                    <tr><td>16 GB</td><td>8B in Q8, 14B in Q4</td><td>RTX 5070 Ti, 5080</td></tr>
+                    <tr><td>24 GB</td><td>8&ndash;14B bequem, 32B knapp in Q3</td><td>RTX 4090, 3090, RX 7900 XTX</td></tr>
+                    <tr><td>32 GB</td><td>32B in Q4 bequem</td><td>RTX 5090</td></tr>
+                    <tr><td>48&ndash;64 GB</td><td>70B in Q3&ndash;Q4</td><td>Mac Mini M4 Pro, 2&times; RTX 3090</td></tr>
+                    <tr><td>128 GB</td><td>70B bequem, 405B in Q2</td><td>Mac Studio M4 Max, Ryzen AI Max+, DGX Spark</td></tr>
+                    <tr><td>192+ GB</td><td>405B in Q4</td><td>Mac Studio M3 Ultra</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Quantisierung                        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="quant" aria-labelledby="quant-h">
+        <div class="section-kicker">Grundlagen</div>
+        <h2 id="quant-h">Quantisierung erkl&auml;rt</h2>
+        <p class="section-intro">Quantisierung reduziert die Pr&auml;zision der Modellgewichte &mdash; weniger VRAM, schnellere Inferenz, aber potentieller Qualit&auml;tsverlust. Die gute Nachricht: Bei 4 Bit ist der Verlust erstaunlich gering.</p>
+
+        <h3>GGUF-Formate im Vergleich</h3>
+        <div class="body-text">
+            <p>GGUF ist das Standardformat f&uuml;r llama.cpp und Ollama. Die g&auml;ngigsten Varianten im Vergleich (gemessen an Llama 3.1 8B Instruct, Perplexity auf WikiText-2):</p>
+        </div>
+
+        <div class="table-wrap">
+            <table aria-label="Quantisierung: Qualit&auml;t und Gr&ouml;&szlig;e">
+                <thead>
+                    <tr><th>Format</th><th>Perplexity</th><th>Gr&ouml;&szlig;e vs. FP16</th><th>Qualit&auml;tsverlust</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>FP16</td><td>7,32 (Baseline)</td><td>100%</td><td>&mdash;</td></tr>
+                    <tr><td>Q8_0</td><td>7,33</td><td>53%</td><td>Unmerklich</td></tr>
+                    <tr><td>Q6_K</td><td>7,35</td><td>41%</td><td>Unmerklich</td></tr>
+                    <tr><td>Q5_K_M</td><td>~7,40</td><td>~37%</td><td>Minimal</td></tr>
+                    <tr><td>Q4_K_M</td><td>~7,55</td><td>~30%</td><td>Gering</td></tr>
+                    <tr><td>Q3_K_M</td><td>7,96</td><td>25%</td><td>Sp&uuml;rbar</td></tr>
+                    <tr><td>Q2_K</td><td>&gt;9,0</td><td>~18%</td><td>Deutlich</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="body-text">
+            <p><strong>Wichtigste Erkenntnis:</strong> Q4_K_M zeigt auf Downstream-Benchmarks (GSM8K, HellaSwag, MMLU, TruthfulQA) nur ~0,4% Gesamtverlust gegen&uuml;ber FP16. Der Cliff-Effekt tritt erst ab Q3 ein. Gr&ouml;&szlig;ere Modelle vertragen Quantisierung besser als kleinere &mdash; ein 70B in Q4 beh&auml;lt mehr F&auml;higkeit als ein 7B in Q4.</p>
+        </div>
+
+        <h3>Empfehlungen nach Anwendungsfall</h3>
+        <div class="table-wrap">
+            <table aria-label="Quantisierungsempfehlungen nach Anwendungsfall">
+                <thead>
+                    <tr><th>Anwendung</th><th>Empfohlene Quantisierung</th><th>Begr&uuml;ndung</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Alltagschat, kreatives Schreiben</td><td>Q4_K_M</td><td>Kein merklicher Qualit&auml;tsunterschied, 2&times; schneller als Q8</td></tr>
+                    <tr><td>Coding-Assistenz</td><td>Q5_K_M oder Q6_K</td><td>Logik/Mathe empfindlicher; 15% mehr VRAM lohnen sich</td></tr>
+                    <tr><td>Mathematisches Reasoning</td><td>Q8_0 oder Q6_K</td><td>Messbare GSM8K-Degradation bei Q4</td></tr>
+                    <tr><td>VRAM knapp</td><td>Q4_K_M (Minimum)</td><td>Unter Q4 wird Qualit&auml;tsverlust h&ouml;rbar</td></tr>
+                    <tr><td>Maximale Qualit&auml;t</td><td>Q8_0</td><td>Perplexity innerhalb 0,1% von FP16</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="verdict-box">
+            <h4>Community-Konsens (Stand M&auml;rz 2026)</h4>
+            <p><strong>Q4_K_M</strong> f&uuml;r allt&auml;gliche Nutzung, <strong>Q5_K_M</strong> f&uuml;r aufgabenkritische Anwendungen, <strong>Q8_0</strong> wenn VRAM keine Rolle spielt. Unter Q4 nur im Notfall.</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Software-Stack                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="software" aria-labelledby="software-h">
+        <div class="section-kicker">Software</div>
+        <h2 id="software-h">Software-Stack f&uuml;r lokale Inferenz</h2>
+        <p class="section-intro">Die richtige Software kann den Durchsatz um 30&ndash;80% ver&auml;ndern. Hier sind die wichtigsten Tools und wann man sie einsetzt.</p>
+
+        <div class="sw-grid">
+            <div class="sw-card">
+                <h4>llama.cpp</h4>
+                <div class="sw-tag">Engine &middot; Max. Performance</div>
+                <p>Die Basis f&uuml;r fast alles. C/C++ mit CUDA, Metal, Vulkan, ROCm. H&ouml;chste Rohleistung f&uuml;r Einzelnutzer (10&ndash;20% schneller als Ollama). Kein GUI, kein Model-Management &mdash; reines CLI-Tool.</p>
+            </div>
+            <div class="sw-card">
+                <h4>Ollama</h4>
+                <div class="sw-tag">CLI/API &middot; Entwickler-Favorit</div>
+                <p>Go-Wrapper um llama.cpp mit Model-Management, REST-API und Daemon. Ein Befehl zum Installieren und Starten von Modellen. OpenAI-kompatible API. 5&ndash;20% langsamer als raw llama.cpp, aber dramatisch einfacher.</p>
+            </div>
+            <div class="sw-card">
+                <h4>LM Studio</h4>
+                <div class="sw-tag">GUI &middot; Desktop-App</div>
+                <p>Polierte Desktop-App mit Hugging-Face-Browser, Chat-UI und lokalem API-Server. Unterst&uuml;tzt MLX als Backend auf macOS (30&ndash;50% schneller als GGUF). Beste Option f&uuml;r Einsteiger und Apple-Silicon-Nutzer.</p>
+            </div>
+            <div class="sw-card">
+                <h4>Jan</h4>
+                <div class="sw-tag">GUI &middot; Privacy-First</div>
+                <p>Open-Source-Desktop-App ohne Telemetrie. Schlanker als LM Studio, fokussiert auf Privatsph&auml;re. Kein MLX-Support (Stand M&auml;rz 2026). Ideal f&uuml;r datenschutzbewusste Nutzer.</p>
+            </div>
+            <div class="sw-card">
+                <h4>vLLM</h4>
+                <div class="sw-tag">Server &middot; Multi-User</div>
+                <p>Produktionsstandard f&uuml;r Multi-User-Serving: PagedAttention, Continuous Batching, Tensor-Parallelismus. Bei 64 gleichzeitigen Nutzern 35&times; schneller als llama.cpp. Overkill f&uuml;r Einzelnutzer.</p>
+            </div>
+            <div class="sw-card">
+                <h4>ExLlamaV2</h4>
+                <div class="sw-tag">Engine &middot; NVIDIA-Only</div>
+                <p>NVIDIA-exklusiv mit eigenem EXL2-Format (flexible Bit-Breiten wie 4,25-Bit). Schneller als llama.cpp bei Prompt-Verarbeitung. Eigenes Quantisierungs&ouml;kosystem &mdash; nicht kompatibel mit GGUF.</p>
+            </div>
+        </div>
+
+        <h3>Entscheidungshilfe</h3>
+        <div class="table-wrap">
+            <table aria-label="Software-Entscheidungsmatrix">
+                <thead>
+                    <tr><th>Szenario</th><th>Empfehlung</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Einzelnutzer, max. Speed, NVIDIA</td><td>ExLlamaV2 oder llama.cpp</td></tr>
+                    <tr><td>Einzelnutzer, einfache Nutzung</td><td>Ollama (CLI) oder LM Studio (GUI)</td></tr>
+                    <tr><td>Apple Silicon, max. Speed</td><td>LM Studio (MLX-Backend) oder mlx-lm</td></tr>
+                    <tr><td>Mehrere Nutzer gleichzeitig</td><td>vLLM</td></tr>
+                    <tr><td>Maximale Privatsph&auml;re</td><td>Jan (Desktop) oder llama.cpp (Server)</td></tr>
+                    <tr><td>Prototyping &amp; Entwicklung</td><td>Ollama</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECTION: Methodik                             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="guide-section" id="methodik" aria-labelledby="methodik-h">
+        <div class="section-kicker">Transparenz</div>
+        <h2 id="methodik-h">Methodik &amp; Quellen</h2>
+
+        <div class="body-text">
+            <p><strong>Benchmark-Daten</strong> stammen prim&auml;r von hardware-corner.net (Januar 2026, llama-bench, Ubuntu 24.04, CUDA 12.8, Q4_K_XL), erg&auml;nzt durch DatabaseMart Ollama-Benchmarks, Red Hat vLLM-Vergleiche und Community-Messungen aus r/LocalLLaMA.</p>
+            <p><strong>Preise</strong> beziehen sich auf den deutschen Markt (Amazon.de, Geizhals, eBay) im M&auml;rz 2026. GPU-Preise &auml;ndern sich t&auml;glich &mdash; die Angaben sind Richtwerte, keine garantierten Preise.</p>
+            <p><strong>Apple-Silicon-Benchmarks</strong> sind aus Community-Quellen (MacRumors, InsiderLLM, LinkedIn-Posts) aggregiert. MLX vs. llama.cpp-Unterschiede sind signifikant &mdash; die angegebenen tok/s beziehen sich auf das jeweils schnellere Framework.</p>
+            <p><strong>Quantisierungsdaten</strong> basieren auf der Studie &bdquo;Which Quantization Should I Use?&ldquo; (arxiv 2601.14277, Januar 2025) und r/LocalLLaMA-Konsens.</p>
+            <p><strong>Hinweis zur Vergleichbarkeit:</strong> Benchmarks aus verschiedenen Quellen nutzen unterschiedliche Modelle, Kontextl&auml;ngen und Software-Versionen. Die Zahlen sind richtungsweisend, aber nicht direkt zwischen Quellen vergleichbar.</p>
+        </div>
+
+        <div class="body-text" style="margin-top: var(--space-6);">
+            <p><strong>Ausgew&auml;hlte Quellen:</strong></p>
+            <ul style="font-family: var(--font-sans); font-size: var(--text-sm); line-height: 1.6; color: var(--text-muted);">
+                <li>hardware-corner.net &mdash; GPU LLM Benchmarks (Januar 2026)</li>
+                <li>bestvaluegpu.com &mdash; GPU-Preistracker EU (M&auml;rz 2026)</li>
+                <li>Apple Newsroom &mdash; M5 Pro/Max Specs (M&auml;rz 2026)</li>
+                <li>arxiv 2601.14277 &mdash; Quantization Evaluation (Januar 2025)</li>
+                <li>Red Hat Developer Blog &mdash; Ollama vs. vLLM Benchmarks (August 2025)</li>
+                <li>Tom&rsquo;s Hardware &mdash; RTX 50-Serie, Tinybox, DGX Spark Reviews</li>
+                <li>NVIDIA Developer Forums &mdash; DGX Spark Performance (Oktober 2025)</li>
+                <li>AMD Developer Resources &mdash; Ryzen AI Max+ LLM Performance</li>
+                <li>cnx-software.com &mdash; Raspberry Pi AI HAT+ 2 Review (Januar 2026)</li>
+            </ul>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <a href="#main-content">Nach oben &uarr;</a>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// Theme Toggle
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const stored = localStorage.getItem('theme');
+    if (stored) document.documentElement.setAttribute('data-theme', stored);
+
+    function updateIcon() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+            (!document.documentElement.getAttribute('data-theme') &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches);
+        toggle.textContent = isDark ? '☀' : '☾';
+    }
+    updateIcon();
+
+    toggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const isDark = current === 'dark' ||
+            (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const next = isDark ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon();
+    });
+})();
+
+// Simple table sort
+(function() {
+    const table = document.getElementById('main-table');
+    if (!table) return;
+    const headers = table.querySelectorAll('th[data-sort]');
+    let currentSort = { col: -1, asc: true };
+
+    headers.forEach(function(th, idx) {
+        th.addEventListener('click', function() {
+            const type = th.getAttribute('data-sort');
+            const asc = currentSort.col === idx ? !currentSort.asc : true;
+            currentSort = { col: idx, asc: asc };
+
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort(function(a, b) {
+                let aVal = a.children[idx].textContent.trim();
+                let bVal = b.children[idx].textContent.trim();
+
+                if (type === 'number') {
+                    aVal = parseFloat(aVal.replace(/[^0-9.,\-]/g, '').replace(',', '.')) || 0;
+                    bVal = parseFloat(bVal.replace(/[^0-9.,\-]/g, '').replace(',', '.')) || 0;
+                    return asc ? aVal - bVal : bVal - aVal;
+                }
+                return asc ? aVal.localeCompare(bVal, 'de') : bVal.localeCompare(aVal, 'de');
+            });
+
+            rows.forEach(function(row) { tbody.appendChild(row); });
+
+            headers.forEach(function(h) { h.classList.remove('sorted'); });
+            th.classList.add('sorted');
+            th.querySelector('.sort-arrow').textContent = asc ? '↑' : '↓';
+        });
+    });
+})();
+</script>
+
+</body>
+</html>
