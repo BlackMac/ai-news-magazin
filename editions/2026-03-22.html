@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 22. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-03-22">Sonntag, 22. M&auml;rz 2026</time> &middot; 9 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 22. M&auml;rz 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Hardware &middot; Open Source</span><span class="toc-title">Tinybox: KI-Computer f&uuml;r den Schreibtisch</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Kultur &middot; Urheberrecht</span><span class="toc-title">Hachette stoppt &bdquo;Shy Girl&ldquo; wegen KI</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Industrie &middot; Smartphones</span><span class="toc-title">Amazon plant KI-Handy &bdquo;Transformer&ldquo;</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Technologie &middot; Agenten</span><span class="toc-title">Gemini bestellt jetzt Essen f&uuml;r dich</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Netzpolitik &middot; Archivierung</span><span class="toc-title">Verlage blockieren das Internet Archive</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Politik &middot; Arbeitsmarkt</span><span class="toc-title">Digitalminister warnt vor KI-Jobverlusten</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">Medien &middot; Ethik</span><span class="toc-title">Journalist suspendiert wegen KI-Zitaten</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">8.</span>
+                <a href="#art-8"><span class="toc-cat">Recht &middot; Betrug</span><span class="toc-title">8-Millionen-Dollar-Betrug mit KI-Musik</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">9.</span>
+                <a href="#art-9"><span class="toc-cat">Daten &middot; Robotik</span><span class="toc-title">Pok&eacute;mon Go trainiert Lieferroboter</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Edge AI: Wenn KI das Rechenzentrum verl&auml;sst</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Open Source</div>
+            <h2 id="art-1-h">Tinybox: George Hotz&rsquo; Vision vom KI-Computer f&uuml;r jeden Schreibtisch</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: tinygrad.org, Tom&rsquo;s Hardware, Hacker News</div>
+        </header>
+        <p class="article-teaser">Ein 15.000-Dollar-Rechner, der Sprachmodelle mit 120 Milliarden Parametern lokal verarbeitet. Kein Cloud-Konto, kein Tracking, keine Abh&auml;ngigkeit. George Hotz, der als Teenager das iPhone hackte, will mit der Tinybox die KI demokratisieren &mdash; und trifft damit auf Hacker News einen Nerv: 390 Punkte und &uuml;ber 240 Kommentare an einem Tag.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>George Hotz, der als Teenager durch den ersten iPhone-Jailbreak und den Hack der PlayStation 3 ber&uuml;hmt wurde, verfolgt mit tiny corp eine ambitionierte Mission: den Petaflop demokratisieren. Das Unternehmen, das 5,1 Millionen Dollar Risikokapital eingesammelt hat, will mit der Tinybox einen bezahlbaren KI-Computer f&uuml;r jedermann bauen &mdash; einen, der ohne Cloud-Anbindung, ohne Benutzerkonto und ohne Tracking auskommt.</p>
+            <p>Die aktuelle Produktlinie umfasst mehrere Varianten. Die Red v2 f&uuml;r 12.000 Dollar setzt auf vier AMD Radeon 9070XT-Grafikkarten und bietet 778 Teraflops bei halbgenauer Berechnung mit 64 Gigabyte GPU-Speicher. Die Green v2 Blackwell f&uuml;r 65.000 Dollar nutzt vier NVIDIA RTX PRO 6000 Blackwell-GPUs mit 384 Gigabyte GPU-Speicher und erreicht &uuml;ber 3.000 Teraflops. Beide Ger&auml;te kommen mit vorinstalliertem tinygrad-Framework und PyTorch.</p>
+            <p>Das tinygrad-Framework selbst ist das Herzst&uuml;ck des &Ouml;kosystems. Es reduziert neuronale Netze auf drei grundlegende Operationstypen und erzielt durch dynamische Kompilierung und Kernel-Fusion Leistung, die in MLPerf-Benchmarks mit zehnmal teureren Systemen mithalten kann. Bereits heute treibt tinygrad das Fahrassistenzsystem openpilot auf Snapdragon-Chips an.</p>
+            <p>In der Hacker-News-Diskussion wurde allerdings Skepsis laut: Einige Kommentatoren merkten an, dass man f&uuml;r den gleichen Preis einen vergleichbaren Rechner selbst zusammenbauen k&ouml;nnte. Zudem wurde bezweifelt, dass ein 120-Milliarden-Parameter-Modell auf der Red v2 mit nur 64 GB GPU-Speicher sinnvoll l&auml;uft &mdash; die n&ouml;tige Quantisierung w&uuml;rde die Modellqualit&auml;t erheblich mindern. Die Green v2 mit ihren 384 GB w&auml;re f&uuml;r solche Modelle deutlich besser geeignet. Tiny corp best&auml;tigte auf X, dass OpenAIs gpt-oss-120b &bdquo;great&ldquo; auf der Green v2 laufe.</p>
+            <p>Das gr&ouml;&szlig;ere Bild: In einer Welt, in der KI zunehmend von wenigen Cloud-Anbietern kontrolliert wird, setzt Hotz bewusst auf Dezentralisierung und Datensouver&auml;nit&auml;t. Die Tinybox soll das &bdquo;Intelligenz-Zentrum&ldquo; jedes Haushalts werden &mdash; f&uuml;r lokale Inferenz, Training und k&uuml;nftig auch f&uuml;r Heimroboter. Ob diese Vision Realit&auml;t wird, h&auml;ngt davon ab, ob Hotz den Preispunkt noch weiter dr&uuml;cken kann. Die f&uuml;r 2027 angek&uuml;ndigte Exabox &mdash; ein Exaflop-System f&uuml;r rund 10 Millionen Dollar &mdash; zeigt die Richtung.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://tinygrad.org/" rel="noopener noreferrer external">tinygrad.org: Tinybox Produktseite</a></li>
+                <li><a href="https://news.ycombinator.com/item?id=47470773" rel="noopener noreferrer external">Hacker News: Tinybox &ndash; Offline AI device 120B parameters (390 Punkte)</a></li>
+                <li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/tinybox-packs-a-punch-with-six-of-amds-fastest-gaming-gpus-repurposed-for-ai-george-hotzs-new-box-uses-radeon-7900-xtx-and-retails-for-dollar15k-now-in-production" rel="noopener noreferrer external">Tom&rsquo;s Hardware: Tinybox im Detail</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Kultur &middot; Urheberrecht</div>
+            <h2 id="art-2-h">Hachette stoppt Horror-Roman &bdquo;Shy Girl&ldquo; &mdash; 78 Prozent KI-generiert?</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, The Bookseller, Futurism</div>
+        </header>
+        <p class="article-teaser">Erstmals hat einer der &bdquo;Big Five&ldquo;-Verlage einen Buchvertrag &ouml;ffentlich wegen des Verdachts auf KI-generierte Inhalte gek&uuml;ndigt. Hachette Book Group stoppt den Horror-Roman &bdquo;Shy Girl&ldquo; &mdash; nachdem eine Analyse ergab, dass 78 Prozent des Textes maschinell erzeugt wurden.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Mia Ballard hatte &bdquo;Shy Girl&ldquo; zun&auml;chst als Selfpublishing-Titel ver&ouml;ffentlicht, wo der Horror-Roman &uuml;ber BookTok &mdash; die literarische Community auf TikTok &mdash; gro&szlig;e Popularit&auml;t erlangte. Hachette erwarb daraufhin die Rechte f&uuml;r eine breitere Distribution. Die UK-Ausgabe erschien im Herbst 2025 und verkaufte 1.800 Exemplare, die US-Ausgabe &uuml;ber das Science-Fiction- und Fantasy-Imprint Orbit war f&uuml;r das Fr&uuml;hjahr 2026 geplant.</p>
+            <p>Die Hinweise auf KI-Nutzung kamen aus mehreren Richtungen: Ein anonymer Lektor &auml;u&szlig;erte auf Reddit Zweifel an der Authentizit&auml;t der Prosa, ein YouTube-Video-Essay analysierte &uuml;ber fast drei Stunden m&ouml;gliche KI-Generierung und erreichte 1,2 Millionen Aufrufe. Den entscheidenden Beleg lieferte die New York Times, die Hachette Ergebnisse von Pangram vorlegte &mdash; einem KI-Erkennungstool, das 78 Prozent des Textes als maschinell erzeugt einstufte. Beide Imprints f&uuml;hrten daraufhin wochenlange Untersuchungen durch.</p>
+            <p>Ballard weist die Vorw&uuml;rfe von sich und beschuldigt eine Person, die sie als Lektorin engagiert habe. Sie erkl&auml;rte, ihre psychische Gesundheit sei auf einem Tiefpunkt. Der Fall wirft grunds&auml;tzliche Fragen auf: Wie k&ouml;nnen Verlage KI-generierte Manuskripte erkennen? Wie zuverl&auml;ssig sind Erkennungstools? Und wer tr&auml;gt die Verantwortung, wenn ein Lektor oder Ghostwriter KI einsetzt?</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/21/publisher-pulls-horror-novel-shy-girl-over-ai-concerns/" rel="noopener noreferrer external">TechCrunch: Publisher pulls horror novel &lsquo;Shy Girl&rsquo; over AI concerns</a></li>
+                <li><a href="https://www.thebookseller.com/news/hachette-pulls-initially-self-published-horror-novel-over-suspected-ai-use" rel="noopener noreferrer external">The Bookseller: Hachette pulls novel over suspected AI use</a></li>
+                <li><a href="https://futurism.com/artificial-intelligence/novel-pulled-author-accused-ai" rel="noopener noreferrer external">Futurism: Novel pulled after author accused of AI</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Industrie &middot; Smartphones</div>
+            <h2 id="art-3-h">Projekt Transformer: Amazon wagt mit KI-Smartphone den zweiten Anlauf</h2>
+            <div class="article-meta"><time datetime="2026-03-20">20. M&auml;rz 2026</time> &middot; Quellen: Reuters, TechCrunch, GeekWire</div>
+        </header>
+        <p class="article-teaser">Mehr als ein Jahrzehnt nach dem spektakul&auml;ren Scheitern des Fire Phone arbeitet Amazon an einem neuen Smartphone. Diesmal setzt der Konzern nicht auf Hardware-Gimmicks, sondern auf KI: Alexa+ soll den klassischen App Store &uuml;berfl&uuml;ssig machen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Laut einem Reuters-Exklusivbericht arbeitet Amazon unter dem Codenamen &bdquo;Transformer&ldquo; an einem KI-Smartphone. Das Projekt wird von der neu gegr&uuml;ndeten Einheit ZeroOne vorangetrieben, geleitet von J Allard &mdash; einem ehemaligen Microsoft-Manager, der ma&szlig;geblich an der Entwicklung der Xbox beteiligt war. Im Zentrum des Ger&auml;ts steht Alexa+ als KI-Assistent, der so tief integriert sein soll, dass er den traditionellen App Store potenziell &uuml;berfl&uuml;ssig machen k&ouml;nnte.</p>
+            <p>Amazon erforscht zwei Varianten: ein vollwertiges Smartphone, das mit iPhone und Android-Ger&auml;ten konkurrieren soll, sowie ein bewusst reduziertes Ger&auml;t, das gegen Bildschirmsucht positioniert werden k&ouml;nnte. Beide Konzepte w&uuml;rden tief in Amazons &Ouml;kosystem eingebettet &mdash; von Prime Video &uuml;ber Musikstreaming bis zu Essensbestellungen &uuml;ber Grubhub.</p>
+            <p>Allerdings sind viele Fragen offen: Amazon hat noch keine Gespr&auml;che mit Mobilfunkanbietern aufgenommen, weder Zeitplan noch Budget sind definiert, und Insider betonen, dass das Projekt noch eingestellt werden k&ouml;nnte. Die Erinnerung an das Fire Phone &mdash; Amazon musste 170 Millionen Dollar abschreiben &mdash; d&uuml;rfte intern f&uuml;r Vorsicht sorgen. Die zentrale Frage bleibt: Kann ein KI-natives Betriebskonzept das etablierte App-Modell von Apple und Google tats&auml;chlich herausfordern?</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.usnews.com/news/top-news/articles/2026-03-20/exclusive-amazon-plans-smartphone-comeback-more-than-a-decade-after-fire-phone-flop" rel="noopener noreferrer external">Reuters/US News: Amazon plans smartphone comeback</a></li>
+                <li><a href="https://techcrunch.com/2026/03/20/amazon-working-on-new-smartphone-with-alexa-at-its-core-report-says/" rel="noopener noreferrer external">TechCrunch: Amazon working on new smartphone with Alexa at its core</a></li>
+                <li><a href="https://www.geekwire.com/2026/report-amazon-is-making-another-phone-this-time-for-the-ai-era/" rel="noopener noreferrer external">GeekWire: Amazon is making another phone for the AI era</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Technologie &middot; Agenten</div>
+            <h2 id="art-4-h">Gemini wird zum digitalen Butler: Googles KI bestellt Essen und bucht Fahrten</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: The Verge, 9to5Google, Android Authority</div>
+        </header>
+        <p class="article-teaser">Google macht mit Gemini einen bedeutenden Schritt vom Chatbot zum KI-Agenten. Die neue &bdquo;Screen Automation&ldquo;-Funktion auf dem Pixel 10 und Galaxy S26 kann Apps bedienen, w&auml;hrend der Nutzer sein Telefon f&uuml;r andere Dinge nutzt &mdash; aber finalisiert nie den Checkout.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Technisch l&auml;uft die Automatisierung in einer abgesicherten virtuellen Umgebung auf dem Ger&auml;t. Gemini &ouml;ffnet die jeweilige App, navigiert durch Men&uuml;s, w&auml;hlt Optionen und f&uuml;llt den Warenkorb. Entscheidend: Die KI schlie&szlig;t die Bestellung nie selbstst&auml;ndig ab. Wenn der Checkout erreicht ist, sendet Gemini eine Benachrichtigung und &uuml;bergibt die Kontrolle an den Nutzer. Ein &bdquo;Take Control&ldquo;-Button erlaubt jederzeit das manuelle Eingreifen.</p>
+            <p>Die Funktion ist vorerst auf die USA beschr&auml;nkt und umfasst sechs Apps: Lyft, Uber, Uber Eats, GrubHub, DoorDash und Starbucks. Je nach Abo-Stufe k&ouml;nnen Nutzer zwischen 5 (kostenlos) und 120 (Ultra) Anfragen pro Tag stellen. Google r&auml;umt allerdings ein, dass Screenshots der App-Interaktionen an Reviewer gesendet werden k&ouml;nnen &mdash; ein Datenschutzaspekt, der in Europa kritisch betrachtet werden d&uuml;rfte.</p>
+            <p>Im Vergleich zu Apples Intelligence-Funktionen, die sich st&auml;rker auf On-Device-Verarbeitung und Zusammenfassungen konzentrieren, geht Google mit der aktiven App-Steuerung einen aggressiveren Weg. Ob dieser Ansatz skaliert und ob Nutzer einer KI vertrauen, die in ihrem Namen Apps bedient und potenziell Zahlungsdaten sieht, bleibt abzuwarten. F&uuml;r Europa ist die Funktion noch nicht angek&uuml;ndigt.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theverge.com/tech/898282/gemini-task-automation-uber-doordash-hands-on" rel="noopener noreferrer external">The Verge: Gemini task automation is slow, clunky, and super impressive</a></li>
+                <li><a href="https://9to5google.com/2026/03/17/gemini-screen-automation-pixel/" rel="noopener noreferrer external">9to5Google: Gemini Screen Automation rolls out to Pixel 10</a></li>
+                <li><a href="https://www.androidauthority.com/gemini-screen-task-automation-pixel-10-rollout-3649980/" rel="noopener noreferrer external">Android Authority: Gemini Screen Task Automation Pixel 10 rollout</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Netzpolitik &middot; Archivierung</div>
+            <h2 id="art-5-h">Verlage blockieren das Internet Archive &mdash; und l&ouml;schen damit das Ged&auml;chtnis des Webs</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: EFF, Engadget, Techdirt</div>
+        </header>
+        <p class="article-teaser">505 Punkte auf Hacker News, 140 Kommentare: Die Electronic Frontier Foundation warnt, dass das Blockieren des Internet Archive die KI-Industrie nicht stoppt &mdash; aber das historische Ged&auml;chtnis des Internets unwiederbringlich zerst&ouml;rt. New York Times und Guardian haben bereits technische Ma&szlig;nahmen ergriffen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Verlage bef&uuml;rchten, dass KI-Unternehmen das Internet Archive als Zugang zu strukturierten Nachrichtendatenbanken nutzen k&ouml;nnten. Robert Hahn, Leiter f&uuml;r Gesch&auml;ftsangelegenheiten beim Guardian, formulierte es so: &bdquo;Viele KI-Unternehmen suchen nach leicht zug&auml;nglichen, strukturierten Inhaltsdatenbanken. Die API des Internet Archive w&auml;re ein offensichtlicher Ort gewesen.&ldquo; Mehrere Verlage verklagen bereits KI-Firmen wegen m&ouml;glicher Urheberrechtsverletzungen beim Modelltraining.</p>
+            <p>Die EFF h&auml;lt das f&uuml;r einen Fehlschluss. Das Internet Archive sei keine KI-Firma, sondern eine gemeinn&uuml;tzige Bibliothek, die seit fast 30 Jahren das Web konserviert. Die Wayback Machine enthalte &uuml;ber eine Billion archivierter Webseiten und diene Journalisten, Forschern, Gerichten und Wikipedia, das auf 2,6 Millionen konservierte Nachrichtenartikel in 249 Sprachen verlinkt. Suchindexierung und Archivierung seien zudem rechtlich gut abgesichert &mdash; das Google-Books-Urteil habe klar Fair Use festgestellt.</p>
+            <p>Die EFF argumentiert, dass die Verlage ihre Energie auf die tats&auml;chlichen KI-Firmen richten sollten, statt einen Kollateralschaden an der historischen Dokumentation in Kauf zu nehmen. Wenn gro&szlig;e Verlage die Archivierung blockieren, k&ouml;nnten ganze Jahrzehnte der Nachrichtenberichterstattung f&uuml;r k&uuml;nftige Generationen verloren gehen. Der Wayback-Machine-Direktor hat sich bereits im Februar gegen die Blocking-Welle ausgesprochen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.eff.org/deeplinks/2026/03/blocking-internet-archive-wont-stop-ai-it-will-erase-webs-historical-record" rel="noopener noreferrer external">EFF: Blocking Internet Archive Won&rsquo;t Stop AI</a></li>
+                <li><a href="https://www.engadget.com/ai/publishers-are-blocking-the-internet-archive-for-fear-ai-scrapers-can-use-it-as-a-workaround-204001754.html" rel="noopener noreferrer external">Engadget: Publishers are blocking the Internet Archive</a></li>
+                <li><a href="https://www.techdirt.com/2026/02/13/news-publishers-are-now-blocking-the-internet-archive-and-we-may-all-regret-it/" rel="noopener noreferrer external">Techdirt: News publishers are blocking the Internet Archive</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Politik &middot; Arbeitsmarkt</div>
+            <h2 id="art-6-h">&bdquo;Die Zeit der Jobmaschine geht zu Ende&ldquo; &mdash; Digitalminister fordert Grundeinkommen als Antwort auf KI</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: ZDF, Tagesspiegel, Presseportal</div>
+        </header>
+        <p class="article-teaser">Bundesdigitalminister Karsten Wildberger (CDU) warnt mit ungew&ouml;hnlich deutlichen Worten vor massiven Jobverlusten durch KI &mdash; und bringt als erster amtierender Bundesminister das bedingungslose Grundeinkommen als &bdquo;Teil der L&ouml;sung&ldquo; ins Spiel.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>In einem Interview mit der Neuen Osnabr&uuml;cker Zeitung erkl&auml;rte Wildberger, die &Auml;ra der Industrie als Jobmaschine gehe zu Ende. Besonders betroffen seien Berufe in der Informatik, Mathematik und anderen wissensbasierten Branchen. &bdquo;Wenn KI Informatikern, Mathematikern und vielen anderen die Arbeit wegnimmt, brauchen diese Menschen eine andere sinnstiftende T&auml;tigkeit,&ldquo; sagte er. Ausnahmen sieht er in Pflege, sozialen Berufen und Handwerk.</p>
+            <p>Wildberger verfolgt dabei keine technikfeindliche Linie. Im Gegenteil: Er betont, Deutschland m&uuml;sse alles tun, um &bdquo;als Gesellschaft von KI zu profitieren&ldquo;. Wenn das Land KI-Technologie f&uuml;hrend einsetze, sei die Wahrscheinlichkeit f&uuml;r deutlich &uuml;berdurchschnittliches Wirtschaftswachstum hoch. Dieses Wachstum wiederum sei n&ouml;tig, um &uuml;ber h&ouml;here Steuereinnahmen den Umbau des Arbeitsmarktes zu finanzieren.</p>
+            <p>Die Aussagen sind politisch brisant, da sie den partei&uuml;bergreifenden Konsens, dass KI vor allem Chancen bringe, mit einer deutlichen Warnung vor den Risiken erg&auml;nzen. Wildberger ruft Arbeitgeber, Gewerkschaften und Zivilgesellschaft zur Zusammenarbeit auf: &bdquo;Wir m&uuml;ssen uns zusammenraufen.&ldquo;</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.zdfheute.de/wirtschaft/wildberger-digitalminister-arbeitsmarkt-kuenstliche-intelligenz-jobverluste-grundeinkommen-100.html" rel="noopener noreferrer external">ZDF: Wildberger warnt vor KI-Jobverlusten</a></li>
+                <li><a href="https://www.tagesspiegel.de/wirtschaft/wir-mussen-uns-zusammenraufen-digitalminister-wildberger-erwartet-massive-jobverluste-durch-ki-15385483.html" rel="noopener noreferrer external">Tagesspiegel: Wildberger erwartet massive Jobverluste durch KI</a></li>
+                <li><a href="https://www.presseportal.de/pm/58964/6240363" rel="noopener noreferrer external">Presseportal: Neue Osnabr&uuml;cker Zeitung (Original-Interview)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 7 ═══ -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Medien &middot; Ethik</div>
+            <h2 id="art-7-h">Erfundene Zitate per ChatGPT: Mediahuis suspendiert ehemaligen Chefredakteur</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: The Guardian, Irish Times, NL Times</div>
+        </header>
+        <p class="article-teaser">Peter Vandermeersch, ehemaliger CEO von Mediahuis Ireland und hochrangiger europ&auml;ischer Journalist, nutzte ChatGPT und Perplexity, um Zitate in seinen Blog-Posts zu generieren &mdash; und gab sie als authentisch aus. Sieben zitierte Personen best&auml;tigten: Sie haben diese Aussagen nie gemacht.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Aufdeckung kam aus den eigenen Reihen: Ein Journalist der niederl&auml;ndischen Zeitung NRC, die ebenfalls zum Mediahuis-Konzern geh&ouml;rt, konnte bestimmte Zitate in Vandermeersch&rsquo; Texten nicht verifizieren. Eine systematische &Uuml;berpr&uuml;fung ergab, dass in 15 der 53 ver&ouml;ffentlichten Blog-Posts Zitate auftauchten, die in den angegebenen Originalquellen nicht zu finden waren. Dutzende Zitate wurden als falsch best&auml;tigt.</p>
+            <p>Vandermeersch r&auml;umte ein, KI-generierte Zusammenfassungen als verifizierte Zitate verwendet zu haben &mdash; er habe &bdquo;Menschen Worte in den Mund gelegt&ldquo;. In der journalistischen Praxis ist das Erfinden oder Verf&auml;lschen von Zitaten eines der schwersten Vergehen &uuml;berhaupt, vergleichbar mit dem Fall des Spiegel-Reporters Claas Relotius 2018. Acht Artikel wurden von independent.ie entfernt.</p>
+            <p>Der Fall wirft grunds&auml;tzliche Fragen auf: Wenn selbst erfahrene Medienprofis der Versuchung erliegen, KI-generierte Inhalte als eigene Recherche auszugeben &mdash; wie steht es um die Integrit&auml;t des Journalismus insgesamt? Mediahuis erkl&auml;rte, dies h&auml;tte &bdquo;nie passieren d&uuml;rfen&ldquo; und betonte das Engagement f&uuml;r zuverl&auml;ssigen Journalismus.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theguardian.com/technology/2026/mar/20/mediahuis-suspends-senior-journalist-over-ai-generated-quotes" rel="noopener noreferrer external">The Guardian: Mediahuis suspends senior journalist over AI-generated quotes</a></li>
+                <li><a href="https://www.irishtimes.com/ireland/2026/03/19/mediahuis-suspends-top-journalist-after-admission-of-using-false-ai-material/" rel="noopener noreferrer external">Irish Times: Mediahuis suspends top journalist</a></li>
+                <li><a href="https://nltimes.nl/2026/03/20/former-nrc-chief-editor-suspended-citing-ai-hallucinations" rel="noopener noreferrer external">NL Times: Former NRC chief editor suspended citing AI hallucinations</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 8 ═══ -->
+    <article class="article" id="art-8" aria-labelledby="art-8-h">
+        <header>
+            <div class="article-kicker">Recht &middot; Betrug</div>
+            <h2 id="art-8-h">Milliarden Fake-Streams: Mann gesteht 8-Millionen-Dollar-Betrug mit KI-Musik</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: The Record, Rolling Stone, Billboard</div>
+        </header>
+        <p class="article-teaser">Michael Smith, 54, aus North Carolina hat in einem Pr&auml;zedenzfall seine Schuld an einem millionenschweren Streaming-Betrug eingestanden. &Uuml;ber sieben Jahre lud er hunderttausende KI-generierte Songs auf alle gro&szlig;en Plattformen und bl&auml;hte deren Streams durch 10.000 Bot-Konten auf.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das Schema war raffiniert: Smith kaufte Fake-E-Mail-Adressen in gro&szlig;er Menge und lagerte die Kontoregistrierung an Fremdarbeiter aus. Bis zu 10.000 Bot-Konten liefen gleichzeitig, gesteuert durch automatisierte Software, die den Traffic &uuml;ber VPN-Netzwerke leitete, um Erkennungssysteme der Plattformen zu umgehen. Die k&uuml;nstlichen Streams verteilten sich &uuml;ber Tausende von Tracks, um nat&uuml;rliches H&ouml;rverhalten zu simulieren.</p>
+            <p>Smith arbeitete mit einem Mitverschwörer und dem CEO eines KI-Musikunternehmens zusammen, um die computergenerierten Tracks zu beschaffen. Zwischen 2017 und 2024 generierte das Netzwerk Milliarden von Streams und leitete &uuml;ber 8 Millionen Dollar an Tantiemen um &mdash; Geld, das eigentlich an legitime K&uuml;nstler und Songwriter gegangen w&auml;re. Betroffen waren Amazon Music, Apple Music, Spotify und YouTube Music.</p>
+            <p>Smith hat einem Verzicht auf die 8 Millionen Dollar zugestimmt und sieht einer H&ouml;chststrafe von f&uuml;nf Jahren Gef&auml;ngnis entgegen. Die Verurteilung ist f&uuml;r den 29. Juli 2026 angesetzt. Der Fall &mdash; der erste dieser Art in den USA &mdash; verdeutlicht, wie KI-generierte Inhalte die Monetarisierungssysteme der Musikindustrie unterwandern k&ouml;nnen &mdash; und dass die Plattformen jahrelang nicht in der Lage waren, den Betrug zu erkennen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://therecord.media/man-pleads-guilty-8-million-ai-music-scheme" rel="noopener noreferrer external">The Record: Man pleads guilty to $8M AI-generated music scheme</a></li>
+                <li><a href="https://www.rollingstone.com/music/music-news/mike-smith-guilty-ai-generated-music-streaming-fraud-1235534089/" rel="noopener noreferrer external">Rolling Stone: Mike Smith guilty &ndash; AI-generated music streaming fraud</a></li>
+                <li><a href="https://www.billboard.com/pro/ai-song-streaming-fraud-musician-pleads-guilty-stealing/" rel="noopener noreferrer external">Billboard: AI song streaming fraud &ndash; musician pleads guilty</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 9 ═══ -->
+    <article class="article" id="art-9" aria-labelledby="art-9-h">
+        <header>
+            <div class="article-kicker">Daten &middot; Robotik</div>
+            <h2 id="art-9-h">30 Milliarden Bilder: Wie Pok&eacute;mon-Go-Spieler unwissentlich Lieferroboter trainierten</h2>
+            <div class="article-meta"><time datetime="2026-03-21">21. M&auml;rz 2026</time> &middot; Quellen: MIT Technology Review, Fortune, PetaPixel</div>
+        </header>
+        <p class="article-teaser">Seit 2020 scannen Pok&eacute;mon-Go-Spieler reale Landmarken f&uuml;r In-Game-Belohnungen. Aus diesen 30 Milliarden Bildern hat Niantic Spatial ein Navigationssystem f&uuml;r Lieferroboter gebaut &mdash; und wirft damit Fragen zur Zweckentfremdung spielerisch erhobener Daten auf.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Niantic Spatial, die Enterprise-KI- und Mapping-Sparte des Pok&eacute;mon-Go-Entwicklers, nutzt die Spieldaten f&uuml;r ein Visual Positioning System (VPS). Statt auf Satellitensignale zu vertrauen, die in dichten Stadtgebieten durch Hochh&auml;user gest&ouml;rt werden, vergleicht das System Live-Kamerabilder eines Roboters in Echtzeit mit seiner riesigen Bilddatenbank. CTO Brian McClendon, Miterfinder von Google Earth, beschreibt die Spielerdaten als &bdquo;hochwertiges Bodentraining&ldquo; f&uuml;r die KI.</p>
+            <p>Erster Gro&szlig;kunde ist Coco Robotics, das etwa 1.000 Lieferroboter in St&auml;dten wie Los Angeles, Chicago, Miami und Helsinki betreibt. Die Sub-Meter-Pr&auml;zision des VPS l&ouml;st ein Problem, an dem GPS-basierte Systeme in Stra&szlig;enschluchten scheitern. CEO Zach Rash betont: Wenn ein Lieferroboter am falschen Ort parkt, ist das Kundenerlebnis ruiniert.</p>
+            <p>Datenschutzrechtlich wirft der Fall Fragen auf: Zwar waren die Scans opt-in &mdash; Spieler mussten aktiv Videos einreichen &mdash;, doch die Zweitverwendung der Daten f&uuml;r kommerzielle Robotik-Navigation war f&uuml;r die meisten Spieler kaum absehbar. Niantic-Gr&uuml;nder John Hanke spricht von einem &bdquo;gro&szlig;en geospatialen Modell als lebende Weltkarte, nativ f&uuml;r Roboter und KI&ldquo;. Es zeigt sich ein Muster: Spielerisch erhobene Daten werden zur Grundlage kommerzieller KI-Systeme.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.technologyreview.com/2026/03/10/1134099/how-pokemon-go-is-helping-robots-deliver-pizza-on-time/" rel="noopener noreferrer external">MIT Technology Review: How Pok&eacute;mon Go is helping robots deliver pizza</a></li>
+                <li><a href="https://fortune.com/2026/03/19/pokemon-go-30-billion-photos-map-coco-robots/" rel="noopener noreferrer external">Fortune: Pok&eacute;mon Go&rsquo;s 30 billion photos map for Coco robots</a></li>
+                <li><a href="https://petapixel.com/2026/03/16/pokemon-go-players-unknowingly-helped-build-a-30-billion-ar-image-map-of-the-world/" rel="noopener noreferrer external">PetaPixel: Pok&eacute;mon Go players unknowingly built a 30 billion image map</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE TEASER ═══ -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Edge AI: Wenn KI-Modelle das Rechenzentrum verlassen</h2>
+            <div class="article-meta">Ein 15.000-Dollar-Rechner verarbeitet 120 Milliarden Parameter &mdash; und 83 Prozent der Vorstandsetagen erkl&auml;ren Edge AI zur strategischen Priorit&auml;t</div>
+            <p class="article-teaser">Die Tinybox auf dem Schreibtisch, eine Smartwatch mit eigenem Neural Processing Unit, Lieferroboter mit Sub-Meter-Pr&auml;zision: K&uuml;nstliche Intelligenz wandert dorthin, wo die Daten entstehen. Warum Edge AI 2026 seinen Wendepunkt erreicht hat &mdash; und was das f&uuml;r Unternehmen bedeutet.</p>
+            <a href="reportagen/2026-03-22.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue &amp; trendende KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=claude.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.anthropic.com/news/cowork-research-preview" rel="noopener noreferrer external">Claude Dispatch</a></div>
+                    <div class="tool-card-desc">Fernsteuerung von Claude Cowork auf dem Desktop &uuml;ber die mobile Claude-App &mdash; Aufgaben vom Smartphone starten, &uuml;berwachen und steuern.</div>
+                    <div class="tool-card-meta">Erster &bdquo;Phone-to-Desktop&ldquo;-Workflow f&uuml;r KI-Agenten. Bei destruktiven Aktionen pausiert der Agent und sendet Push-Benachrichtigung. Anthropic, Research Preview.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=world.org&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://world.org/blog/announcements/now-available-agentkit-proof-of-human-for-the-agentic-web" rel="noopener noreferrer external">World AgentKit</a></div>
+                    <div class="tool-card-desc">Developer-Toolkit zur Verifizierung, dass ein echter Mensch hinter KI-Shopping-Agenten steht &mdash; &bdquo;Proof of Human&ldquo; f&uuml;r das Agenten-Web.</div>
+                    <div class="tool-card-meta">Verbindet World ID (Iris-Biometrie) mit Coinbases x402-Protokoll. Adressiert Betrugsschutz in der &Auml;ra autonomer Shopping-Agenten. World (Sam Altman), Beta.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=alibabagroup.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.alibabagroup.com/en-US/document-1971078136456019968" rel="noopener noreferrer external">Alibaba Wukong</a></div>
+                    <div class="tool-card-desc">Enterprise-KI-Agentenplattform f&uuml;r Dokumentenbearbeitung, Genehmigungen, Meeting-Transkription und Recherche &mdash; Chinas Antwort auf die Agent-Welle.</div>
+                    <div class="tool-card-meta">Basiert auf Alibabas Qwen-Modell, nativ in DingTalk (20+ Mio. Nutzer). Geplante Slack/Teams/WeChat-Integration. Alibaba Group, einladungsbasierte Beta.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/garrytan/gstack" rel="noopener noreferrer external">GStack</a></div>
+                    <div class="tool-card-desc">Open-Source-Toolkit, das Claude Code in ein virtuelles Software-Team verwandelt &mdash; mit 15 spezialisierten Skills f&uuml;r Review, QA und Shipping.</div>
+                    <div class="tool-card-meta">Von Y-Combinator-CEO Garry Tan, 8.500+ GitHub Stars in wenigen Tagen. Persistenter Headless-Chromium f&uuml;r Browser-Tests. Open Source (MIT).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openai.com/index/introducing-gpt-5-4-mini-and-nano/" rel="noopener noreferrer external">GPT-5.4 mini &amp; nano</a></div>
+                    <div class="tool-card-desc">Kleinste und schnellste GPT-5.4-Varianten &mdash; optimiert f&uuml;r Coding-Subagenten, Klassifikation und Datenextraktion bei minimalem Kostenaufwand.</div>
+                    <div class="tool-card-meta">Nano: $0,20/Mio. Input-Tokens, g&uuml;nstigstes OpenAI-Modell aller Zeiten. Mini: 2x schneller als GPT-5 mini. F&uuml;r die &bdquo;Subagent-&Auml;ra&ldquo; konzipiert. OpenAI.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=getbasis.ai&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.getbasis.ai/" rel="noopener noreferrer external">Basis</a></div>
+                    <div class="tool-card-desc">KI-Agenten f&uuml;r Buchhalter &mdash; komplexe Buchhaltungs-, Steuer- und Pr&uuml;fungsworkflows autonom end-to-end abarbeiten.</div>
+                    <div class="tool-card-meta">Erster Agent, der eine komplette 1065-Partnerschaftssteuererkl&auml;rung autonom erstellt. Unicorn ($1,15 Mrd.), 30% der Top-25-WP-Gesellschaften nutzen Basis. Accel, GV.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=1JeDsxnX1nY" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/1JeDsxnX1nY/mqdefault.jpg" alt="Claude Code Agent Teams Tutorial Video-Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 28 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=1JeDsxnX1nY" rel="noopener noreferrer external">Claude Code&rsquo;s New Agent Teams Are Insane (Opus 4.6)</a></div>
+                    <div class="yt-card-channel">John Kim (24K Subs) &middot; 21. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">Ehemaliger Meta-Staff-Engineer demonstriert die neuen Agent Teams in Claude Code mit Opus 4.6. Das Video zeigt, wie man mehrere KI-Agenten parallel arbeiten l&auml;sst, um komplexe Softwareprojekte zu bew&auml;ltigen &mdash; mit praktischen Workflows aus dem echten Entwickleralltag.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=OacXjz-vW5U" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/OacXjz-vW5U/mqdefault.jpg" alt="Google AI Studio 2.0 Video-Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 9 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=OacXjz-vW5U" rel="noopener noreferrer external">Google AI Studio 2.0: Neuer kostenloser autonomer Coding-Agent</a></div>
+                    <div class="yt-card-channel">WorldofAI (204K Subs) &middot; 21. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">WorldofAI pr&auml;sentiert Google AI Studio 2.0 mit dem neuen autonomen Coding-Agenten. Kompakter &Uuml;berblick, wie man kostenlos Full-Stack-Anwendungen erstellen kann &mdash; inklusive Antigravity-Integration und Firebase-Anbindung.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=9xPgDCXMJcY" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/9xPgDCXMJcY/mqdefault.jpg" alt="Google AI Studio Updates Video-Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 14 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=9xPgDCXMJcY" rel="noopener noreferrer external">The ALL NEW Google AI Studio has 7 INSANE UPDATES!</a></div>
+                    <div class="yt-card-channel">AI with Surya (14,2K Subs) &middot; 21. M&auml;rz 2026 &middot; 7.477 Views</div>
+                    <div class="yt-card-desc">Kleinerer Creator mit detailliertem &Uuml;berblick &uuml;ber sieben neue Features in Google AI Studio: Agenten-Modus, Full-Stack-Laufzeitumgebung und Firebase-Integration. Geht systematisch jedes Update durch mit praktischen Anwendungsbeispielen &mdash; ein fr&uuml;her Trendindikator f&uuml;r das breite Interesse am Google AI Studio 2.0 Update.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    // Init: stored preference > system preference
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

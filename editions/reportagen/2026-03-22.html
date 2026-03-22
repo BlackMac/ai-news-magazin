@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Edge AI &mdash; Die Inferenz, 22. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            align-items: center;
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            max-width: 55ch;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .article-body {
+            padding: var(--space-8) 0;
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p {
+            margin: 0 0 1.2em;
+        }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin: var(--space-8) 0;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- SITE HEADER -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-03-22.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Edge AI: Wenn KI-Modelle das Rechenzentrum verlassen</h1>
+    <p class="article-subtitle">Ein 15.000-Dollar-Rechner verarbeitet 120 Milliarden Parameter. Eine Smartwatch hat einen eigenen Neural Processing Unit. Und 83 Prozent der Vorstandsetagen erkl&auml;ren Edge AI zur strategischen Priorit&auml;t.</p>
+    <div class="article-meta"><time datetime="2026-03-22">Sonntag, 22. M&auml;rz 2026</time> &middot; 10 Quellen</div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content" class="site-main">
+
+    <div class="article-body">
+
+        <h2>Der Kasten, der alles &auml;ndert</h2>
+
+        <p>Anfang 2026 postete George Hotz, Gr&uuml;nder von tiny corp, auf X einen beil&auml;ufigen Satz: OpenAIs gpt-oss-120b, ein Open-Source-Modell mit 120 Milliarden Parametern, laufe &bdquo;great&ldquo; auf der Tinybox Green v2. Gemeint ist ein Ger&auml;t von der Gr&ouml;&szlig;e eines Umzugskartons mit vier NVIDIA RTX 5090 Grafikkarten, das f&uuml;r rund 15.000 Dollar zu haben ist. Zum Vergleich: Noch vor zwei Jahren h&auml;tte dieselbe Rechenleistung einen sechsstelligen Betrag und ein halbes Serverrack gekostet.</p>
+
+        <p>Die Tinybox ist kein Einzelfall &mdash; sie ist ein Symbol. Denn w&auml;hrend die Tech-Industrie jahrelang davon ausging, dass KI immer gr&ouml;&szlig;ere Rechenzentren braucht, zeichnet sich 2026 eine Gegenbewegung ab: Die Modelle werden kleiner, die Hardware wird leistungsf&auml;higer, und die Inferenz &mdash; also die eigentliche Anwendung trainierter Modelle &mdash; wandert zunehmend an den Rand des Netzwerks. Edge AI, das Ausf&uuml;hren von KI-Modellen direkt auf Endger&auml;ten oder lokaler Hardware, hat seinen Wendepunkt erreicht.</p>
+
+        <h2>F&uuml;nf Gr&uuml;nde, warum Edge AI jetzt durchstartet</h2>
+
+        <p><strong>Latenz:</strong> Jeder Cloud-Aufruf kostet hunderte Millisekunden Verz&ouml;gerung. F&uuml;r einen Chatbot ist das akzeptabel. F&uuml;r eine Qualit&auml;tskontrolle am Flie&szlig;band, die Ausschussteile in Echtzeit erkennen muss, oder f&uuml;r ein autonomes Fahrzeug ist es das nicht. Edge AI verarbeitet Daten dort, wo sie entstehen &mdash; in Millisekunden statt Sekunden.</p>
+
+        <p><strong>Datenschutz und DSGVO:</strong> Wenn Daten das Ger&auml;t nie verlassen, werden viele regulatorische Fragen obsolet. Edge AI entspricht dem DSGVO-Grundsatz der Datenminimierung: Es werden nur die Ergebnisse &uuml;bertragen, nicht die Rohdaten. F&uuml;r Branchen wie Gesundheitswesen, Finanzdienstleistungen oder &ouml;ffentliche Verwaltung ist das ein entscheidendes Argument.</p>
+
+        <p><strong>Kosten:</strong> Eine Lenovo-Studie beziffert den Kostenvorteil von On-Premise-Inferenz bei hoher Auslastung auf bis zu das 18-Fache gegen&uuml;ber Cloud-APIs pro Million verarbeiteter Tokens. Unternehmen, die monatlich 15.000 bis 50.000 Dollar f&uuml;r Cloud-KI ausgeben, k&ouml;nnten dieselbe Leistung mit einem einmaligen Investment von 30.000 bis 80.000 Dollar abdecken &mdash; mit Amortisation in vier bis zw&ouml;lf Monaten.</p>
+
+        <p><strong>Zuverl&auml;ssigkeit:</strong> Edge AI funktioniert ohne Internetverbindung. Das ist relevant f&uuml;r Offshore-Plattformen, Bergwerke, l&auml;ndliche Krankenh&auml;user oder Produktionsst&auml;tten mit instabiler Konnektivit&auml;t.</p>
+
+        <p><strong>Datensouver&auml;nit&auml;t:</strong> In einer Welt zunehmender geopolitischer Spannungen wollen Unternehmen kontrollieren, wo ihre Daten verarbeitet werden. Edge AI macht unabh&auml;ngig von ausl&auml;ndischen Cloud-Anbietern.</p>
+
+        <h2>Der Stand der Technik: Was 2026 m&ouml;glich ist</h2>
+
+        <p>Die Hardware-Landschaft hat sich dramatisch ver&auml;ndert. Auf der Consumer-Seite l&auml;uft AMDs Strix-Halo-Prozessor mit bis zu 128 Gigabyte vereinheitlichtem Speicher und verarbeitet 80-Milliarden-Parameter-Modelle mit 40 bis 60 Tokens pro Sekunde &mdash; auf einem Laptop-Chip. Intels Arc B580 liefert f&uuml;r 249 Dollar bereits 62 Tokens pro Sekunde bei 8-Milliarden-Parameter-Modellen. Die Software-Seite h&auml;lt mit: &Uuml;ber 42 Prozent der Entwickler f&uuml;hren ihre Sprachmodelle mittlerweile lokal aus, wobei Ollama mit &uuml;ber 100 quantisierten Modellen zum De-facto-Standard geworden ist.</p>
+
+        <p>Im Mobilbereich hat Qualcomm auf dem MWC 2026 den Snapdragon Wear Elite vorgestellt &mdash; den ersten Wearable-Chip mit dediziertem Neural Processing Unit, der Modelle mit zwei Milliarden Parametern bei zehn Tokens pro Sekunde ausf&uuml;hrt. Auf einer Smartwatch. Der Snapdragon X2 Plus f&uuml;r Laptops bringt es auf 80 TOPS (Tera Operations Per Second), der Snapdragon 8 Elite Gen 5 f&uuml;r Smartphones ist 37 Prozent schneller als sein Vorg&auml;nger.</p>
+
+        <div class="pull-quote">&bdquo;Wir betrachten die Spielerdaten als hochwertiges Bodentraining f&uuml;r schlechtere Datens&auml;tze.&ldquo; &mdash; Brian McClendon, CTO Niantic Spatial, Miterfinder von Google Earth</div>
+
+        <p>Apple setzt weiter konsequent auf On-Device-Verarbeitung: Apple Intelligence l&auml;uft prim&auml;r auf dem Ger&auml;t und nutzt nur bei komplexeren Anfragen die Private Cloud Compute. 2026 &ouml;ffnet Apple seine On-Device-Modelle erstmals f&uuml;r Drittentwickler. Im industriellen Bereich dominiert NVIDIAs Jetson-Plattform. Auf der GTC 2026 zeigte der Jetson Thor beeindruckende Anwendungen: Caterpillars KI-Assistent verarbeitet Sprache und Text lokal auf Baumaschinen. In der Medizintechnik f&uuml;hrt ein 130-Watt-Board Echtzeit-Erkennung von chirurgischen Instrumenten und Organsegmentierung durch.</p>
+
+        <h2>Wo Unternehmen Edge AI bereits einsetzen</h2>
+
+        <p>Die Einsatzgebiete lesen sich wie ein Querschnitt der Wirtschaft. In der Fertigung reduzieren Edge-AI-Systeme ungeplante Ausfallzeiten um 25 Prozent durch vorausschauende Wartung und verbessern die Qualit&auml;tskontrolle um 30 Prozent durch automatisierte visuelle Inspektion. Im Gesundheitswesen analysieren Wearables Vitalzeichen in Echtzeit, w&auml;hrend Bildgebungsger&auml;te sofortige Vorabdiagnosen liefern &mdash; ohne dass Patientendaten das Haus verlassen.</p>
+
+        <p>Im Einzelhandel zeigt ein Anwendungsfall besonders plastisch, wohin die Reise geht: Ein Unternehmen betreibt KI-gest&uuml;tzte Bilderkennung und konversationelle Sprachmodelle an hunderten Autowaschanlagen und plant die Skalierung auf 10.000 Standorte. Jede Anlage verarbeitet ihre Daten lokal, ohne Cloud-Abh&auml;ngigkeit. Laut einer aktuellen Umfrage liegen die f&uuml;hrenden Anwendungsf&auml;lle bei Customer Experience (45 Prozent), Computer Vision (45 Prozent), Echtzeit-Monitoring und Anomalieerkennung (41 Prozent), Energieoptimierung (40 Prozent) und vorausschauender Wartung (38 Prozent).</p>
+
+        <h2>Die Herausforderungen bleiben real</h2>
+
+        <p>So beeindruckend die Fortschritte sind &mdash; Edge AI ist kein Selbstl&auml;ufer. Die zentrale technische H&uuml;rde bleibt die Speicherbandbreite: Mobile Ger&auml;te bieten 50 bis 90 Gigabyte pro Sekunde, Rechenzentren-GPUs 2 bis 3 Terabyte &mdash; ein Faktor 30 bis 50. Das begrenzt, welche Modelle auf welcher Hardware sinnvoll laufen.</p>
+
+        <p>Quantisierung &mdash; das Reduzieren der Rechenpr&auml;zision &mdash; macht Modelle vier- bis achtmal kleiner, aber nicht ohne Kompromisse bei der Genauigkeit. Techniken wie SmoothQuant und OmniQuant minimieren den Verlust, eliminieren ihn aber nicht. Hinzu kommt die Komplexit&auml;t des Update-Managements: Tausende Edge-Ger&auml;te mit neuen Modellversionen zu versorgen, ist eine logistische Herausforderung. Sicherheit ist ein weiteres Thema &mdash; wenn KI-Modelle auf physisch zug&auml;nglichen Ger&auml;ten laufen, m&uuml;ssen sie vor Manipulation und Extraktion gesch&uuml;tzt werden.</p>
+
+        <p>Und schlie&szlig;lich der Stromverbrauch: Die Tinybox braucht zwei 1.600-Watt-Netzteile an separaten Stromkreisen. Das ist f&uuml;r ein B&uuml;ro machbar, f&uuml;r ein mobiles Einsatzszenario nicht.</p>
+
+        <h2>Der Ausblick: Hybrid ist das neue Normal</h2>
+
+        <p>Die Zukunft geh&ouml;rt nicht dem reinen Edge Computing und nicht der reinen Cloud &mdash; sondern der intelligenten Kombination. Hybride Architekturen, bei denen einfache Inferenz lokal l&auml;uft und komplexe Aufgaben in die Cloud delegiert werden, etablieren sich als Standard. Apple macht es mit Private Cloud Compute vor, und die Softwaretools folgen: Das EXO-Framework erm&ouml;glicht bereits heute das Poolen von Rechenleistung &uuml;ber heterogene Ger&auml;te &mdash; etwa ein Mac Studio und ein RTX-5090-PC teilen sich ein Modell, das keiner allein stemmen k&ouml;nnte.</p>
+
+        <p>Federated Learning, bei dem Modelle dezentral auf Endger&auml;ten trainiert werden, ohne dass Daten ausgetauscht werden, gewinnt in regulierten Branchen an Bedeutung. Und die Hardware-Entwicklung beschleunigt sich: Intels kommende &bdquo;Crescent Island&ldquo;-GPU mit 160 Gigabyte Speicher und Microsofts 3-Nanometer-Chip Maia 200 mit &uuml;ber 10 Petaflops zeigen, wohin die Reise geht.</p>
+
+        <p>F&uuml;r Unternehmen lautet die strategische Frage nicht mehr ob, sondern wo und wann Edge AI zum Einsatz kommt. Die Technik ist da. Die Kostenvorteile sind belegt. Und die Tinybox auf dem Schreibtisch beweist t&auml;glich, dass 120 Milliarden Parameter kein Rechenzentrum mehr brauchen.</p>
+
+    </div>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://www.n-ix.com/edge-ai-trends/" rel="noopener noreferrer external">N-iX: Key edge AI trends transforming enterprise tech in 2026</a></li>
+            <li><a href="https://siliconangle.com/2026/03/20/edge-ai-infrastructure-reaches-real-world-inflection-point-nvidiagtcai/" rel="noopener noreferrer external">SiliconANGLE: Edge AI infrastructure reaches inflection point</a></li>
+            <li><a href="https://www.edge-ai-vision.com/2026/01/on-device-llms-in-2026-what-changed-what-matters-whats-next/" rel="noopener noreferrer external">Edge AI and Vision Alliance: On-Device LLMs in 2026</a></li>
+            <li><a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/compute-power-ai.html" rel="noopener noreferrer external">Deloitte: Why AI&rsquo;s next phase demands more computational power</a></li>
+            <li><a href="https://lenovopress.lenovo.com/lp2368-on-premise-vs-cloud-generative-ai-total-cost-of-ownership-2026-edition" rel="noopener noreferrer external">Lenovo Press: On-Premise vs Cloud AI TCO 2026 Edition</a></li>
+            <li><a href="https://www.computerweekly.com/news/366640492/C-Suite-execs-flag-core-nature-of-Edge-AI-to-business-strategy" rel="noopener noreferrer external">Computer Weekly: C-Suite execs flag Edge AI as core to strategy</a></li>
+            <li><a href="https://tinygrad.org/" rel="noopener noreferrer external">tinygrad.org: Tinybox Produktseite</a></li>
+            <li><a href="https://www.qualcomm.com/news/releases/2026/03/qualcomm-powers-the-rise-of-personal-ai-with-new-snapdragon-wear" rel="noopener noreferrer external">Qualcomm: Snapdragon Wear Elite at MWC 2026</a></li>
+            <li><a href="https://www.sitepoint.com/definitive-guide-local-llms-2026-privacy-tools-hardware/" rel="noopener noreferrer external">SitePoint: Guide to Local LLMs in 2026</a></li>
+            <li><a href="https://www.techaheadcorp.com/blog/edge-ai-in-manufacturing-trends/" rel="noopener noreferrer external">TechAhead: Rise of Edge AI in Manufacturing 2026</a></li>
+        </ul>
+    </footer>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
