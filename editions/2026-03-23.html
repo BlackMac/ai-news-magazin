@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 23. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-03-23">Sonntag, 23. M&auml;rz 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 23. M&auml;rz 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Industrie &middot; Open Source</span><span class="toc-title">Cursors Coding-Modell basiert auf Kimi</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Hardware &middot; Chipfertigung</span><span class="toc-title">Musks Terafab: 25-Mrd.-Dollar-Chipfabrik</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Hardware &middot; Cloud</span><span class="toc-title">Amazons Trainium &uuml;berzeugt Anthropic und OpenAI</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Wirtschaft &middot; Energie</span><span class="toc-title">WTO warnt: Energiemangel bedroht KI-Boom</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Industrie &middot; Verg&uuml;tung</span><span class="toc-title">Nvidia: Tokens statt Gehaltserh&ouml;hung</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Gesch&auml;ftsmodell &middot; Werbung</span><span class="toc-title">ChatGPT-Werbung frustriert Partner</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">Enterprise &middot; Management</span><span class="toc-title">Token-Tracking: Firmen messen KI-Nutzung</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Voice AI: Der Stand der Sprach-KI</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Industrie &middot; Open Source</div>
+            <h2 id="art-1-h">Cursor gibt zu: Composer 2 basiert auf Moonshot AIs Kimi K2.5 aus China</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, Security Boulevard, DataStudios</div>
+        </header>
+        <p class="article-teaser">Das beliebteste KI-Coding-Tool der Welt hat ein Transparenzproblem. Cursor vermarktete Composer 2 als hauseigenes Modell &mdash; und verschwieg, dass die Basis ein Open-Source-Modell der chinesischen Firma Moonshot AI ist. Ein Entwickler fand die Wahrheit in der API-Konfiguration.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 19. M&auml;rz 2026 stellte Cursor &bdquo;Composer 2&ldquo; als hauseigenes Coding-Modell vor. Ein Entwickler namens Fynn entdeckte kurz darauf in der API-Konfiguration die Modell-ID <code>kimi-k2p5-rl-0317-s515-fast</code> &mdash; was direkt auf Kimi K2.5 von Moonshot AI verwies. Cursor, mit einer Bewertung von &uuml;ber 9 Milliarden Dollar eines der hei&szlig;esten KI-Startups im Silicon Valley, hatte die Herkunft des Basismodells in seinem Blog verschwiegen.</p>
+            <p>Co-Founder Aman Sanger r&auml;umte ein: &bdquo;It was a miss to not mention the Kimi base in our blog from the start.&ldquo; VP Lee Robinson erg&auml;nzte, dass nur etwa ein Viertel des Compute-Aufwands vom Basismodell stamme, der Rest komme aus Cursors eigenem Training. Moonshot AI, ein chinesisches Unternehmen mit einer Bewertung von rund 50 Milliarden Dollar und Unterst&uuml;tzung von Alibaba und HongShan (ehemals Sequoia China), reagierte vers&ouml;hnlich und sprach von einer &bdquo;authorized commercial partnership&ldquo; &uuml;ber Fireworks AI.</p>
+            <p>Besonders brisant ist die Lizenzfrage: Kimi K2.5 nutzt eine modifizierte MIT-Lizenz, die bei Produkten mit &uuml;ber 100 Millionen monatlich aktiven Nutzern oder mehr als 20 Millionen Dollar Monatsumsatz eine prominente &bdquo;Kimi K2.5&ldquo;-Nennung verlangt. Cursors annualisierter Umsatz liegt bei rund 2 Milliarden Dollar &mdash; die Schwelle ist l&auml;ngst &uuml;berschritten.</p>
+            <p>Die geopolitische Dimension ist nicht zu &uuml;bersehen: W&auml;hrend in Washington &uuml;ber Exportkontrollen f&uuml;r KI-Technologie nach China debattiert wird, zeigt dieser Fall, dass der Technologiefluss l&auml;ngst in beide Richtungen l&auml;uft. Ein US-Startup mit Milliardenbewertung baut sein Kernprodukt auf einem Modell aus Peking auf. Die eigentliche Frage bleibt: Wenn 75 Prozent des Compute-Aufwands von Cursor stammt, wie Cursor behauptet &mdash; ist Composer 2 dann ein eigenes Modell oder ein Fine-Tune? Die KI-Branche hat daf&uuml;r noch keine klaren Standards.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/22/cursor-admits-its-new-coding-model-was-built-on-top-of-moonshot-ais-kimi/" rel="noopener noreferrer external">TechCrunch: Cursor admits its new coding model was built on top of Moonshot AI&rsquo;s Kimi</a></li>
+                <li><a href="https://securityboulevard.com/2026/03/moonshot-ai-governance-breakdown-lessons-from-the-cursor-kimi-k2-5-incident/" rel="noopener noreferrer external">Security Boulevard: Moonshot AI governance breakdown &ndash; lessons from the Cursor/Kimi K2.5 incident</a></li>
+                <li><a href="https://www.datastudios.org/post/cursor-composer-2-and-kimi-k2-5-what-happened-what-cursor-later-admitted-and-why-the-controversy" rel="noopener noreferrer external">DataStudios: Cursor Composer 2 and Kimi K2.5 &ndash; Was ist passiert?</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Chipfertigung</div>
+            <h2 id="art-2-h">Terafab: Musks 25-Milliarden-Dollar-Chipfabrik zwischen Vision und Gr&ouml;&szlig;enwahn</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: Bloomberg, Tom&rsquo;s Hardware, Electrek, Fortune</div>
+        </header>
+        <p class="article-teaser">Elon Musk will die gr&ouml;&szlig;te Chipfabrik der Welt bauen &mdash; ohne je einen Chip gefertigt zu haben. Das Joint Venture von Tesla, SpaceX und xAI soll 2-Nanometer-Chips f&uuml;r KI-Inferenz und orbitale Rechenzentren produzieren. Nvidia-CEO Jensen Huang h&auml;lt das f&uuml;r &bdquo;virtually impossible&ldquo;.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 21. M&auml;rz 2026 pr&auml;sentierte Musk im ehemaligen Seaholm-Kraftwerk in Austin, Texas, das &bdquo;Terafab&ldquo;-Projekt. Die Kosten: 20 bis 25 Milliarden Dollar laut Musk, 35 bis 40 Milliarden laut Morgan-Stanley-Sch&auml;tzungen. Geplant ist ein Joint Venture von Tesla, SpaceX und xAI (das SpaceX k&uuml;rzlich in einem All-Stock-Deal &uuml;bernommen hat). Der Standort: der North Campus von Giga Texas.</p>
+            <p>Das Vorhaben ist ambitioniert bis an die Grenze des Absurden: Chipdesign, Lithographie, Fertigung im 2-Nanometer-Prozess, Speicherproduktion, Advanced Packaging und Testing &mdash; alles unter einem Dach. Zwei Chipkategorien sind geplant: Inferenz-Chips f&uuml;r Tesla-Fahrzeuge und Optimus-Roboter (AI4) sowie D3-Chips f&uuml;r orbitale KI-Satelliten. Einen Zeitplan nannte Musk nicht; Analysten sch&auml;tzen fr&uuml;hestens 2028.</p>
+            <p>Die Kritiker verweisen zu Recht auf das 4680-Batterieprogramm: F&uuml;nf Jahre nach dem Battery Day hat Tesla die versprochene Revolution der Batteriezellenfertigung nicht geliefert. Und Batteriezellen sind im Vergleich zur 2-nm-Chipfertigung ein vergleichsweise einfaches Unterfangen. Electrek spricht von &bdquo;Verzweiflung&ldquo; &mdash; angesichts sinkender Tesla-Verk&auml;ufe in Europa und China brauche Musk ein neues Narrativ f&uuml;r Investoren.</p>
+            <p>Jensen Huang bezeichnete es als &bdquo;virtually impossible&ldquo;, TSMCs F&auml;higkeiten zu replizieren. Eine einzelne 2-nm-Fab mit 50.000 Wafer-Starts pro Monat kostet rund 28 Milliarden Dollar. Dass die Finanzierung noch nicht einmal in Teslas Rekord-Investitionsplan f&uuml;r 2026 steht, l&auml;sst die Seriosit&auml;t der Ank&uuml;ndigung zus&auml;tzlich fraglich erscheinen. Interessant ist allerdings die strategische Logik: Die Abh&auml;ngigkeit von TSMC und Nvidia ist f&uuml;r Musks KI-Ambitionen ein reales Problem.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-22/elon-musk-says-tesla-xai-spacex-terafab-to-start-in-austin" rel="noopener noreferrer external">Bloomberg: Elon Musk Plans Terafab Chip Facility</a></li>
+                <li><a href="https://www.tomshardware.com/tech-industry/elon-musk-formally-launches-20-billion-terafab-chip-project" rel="noopener noreferrer external">Tom&rsquo;s Hardware: Elon Musk formally launches $20B Terafab project</a></li>
+                <li><a href="https://electrek.co/2026/03/22/tesla-spacex-terafab-chip-factory-ai-desperation/" rel="noopener noreferrer external">Electrek: Tesla and SpaceX announce $25B &lsquo;Terafab&rsquo; chip factory</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Cloud</div>
+            <h2 id="art-3-h">Im Trainium-Labor: Amazons KI-Chip &uuml;berzeugt Anthropic, OpenAI und Apple</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, SemiAnalysis, Data Centre Magazine</div>
+        </header>
+        <p class="article-teaser">W&auml;hrend alle auf Nvidia starren und Musks Terafab-Pl&auml;ne diskutieren, hat Amazon stillschweigend &uuml;ber eine Million eigener KI-Chips im Feld &mdash; und die wichtigsten KI-Unternehmen der Welt als Kunden gewonnen. Ein exklusiver Laborbesuch zeigt, warum.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Kurz nach Amazons 50-Milliarden-Dollar-Investitionsdeal mit OpenAI gew&auml;hrte Amazon einen exklusiven Einblick in das Trainium-Entwicklungslabor. Die Zahlen sind beeindruckend: 1,4 Millionen Trainium-Chips &uuml;ber alle drei Generationen deployed. Anthropic betreibt Claude auf &uuml;ber einer Million Trainium2-Chips &mdash; Project Rainier, einer der gr&ouml;&szlig;ten KI-Compute-Cluster weltweit, ging Ende 2025 mit 500.000 Chips live. OpenAI erh&auml;lt 2 Gigawatt Trainium-Rechenkapazit&auml;t, und selbst Apple testet die Chips f&uuml;r KI-Workloads.</p>
+            <p>Der kommende Trainium3 ist ein 3-nm-Chip mit 144 GB HBM3E pro Chip, der 362 FP8 Petaflops erreicht &mdash; viermal schneller als Trainium2 und 40 Prozent energieeffizienter. Pro Chip rund 1.000 Watt, verglichen mit Nvidias GB300 bei etwa 1.400 Watt. Amazon verspricht 30 Prozent bessere Gesamtbetriebskosten pro Leistungseinheit gegen&uuml;ber Nvidias GB300 NVL72 und bis zu 50 Prozent Kostenersparnis beim Training.</p>
+            <p>Besonders clever ist Amazons Strategie mit Trainium4: Der Chip wird Nvidias NVLink-Fusion-Interconnect unterst&uuml;tzen. Statt Nvidia frontal anzugreifen, positioniert sich Amazon als komplement&auml;rer Anbieter &mdash; Kunden k&ouml;nnen Nvidia- und Trainium-Chips im selben Rack betreiben. Das senkt die Wechselh&uuml;rde und macht den Lock-in-Effekt von Nvidias CUDA-&Ouml;kosystem weniger relevant.</p>
+            <p>Wie wir in unserer <a href="2026-03-20.html#art-1">Ausgabe vom 20. M&auml;rz berichteten</a>, tobt der KI-Chip-Krieg auf breiter Front. Amazons Trainium-Programm ist dabei die am meisten untersch&auml;tzte Geschichte: eine vertikale Integration vom Chip &uuml;ber die Cloud bis zum KI-Service &mdash; und Amazon liefert bereits, w&auml;hrend andere noch ank&uuml;ndigen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/22/an-exclusive-tour-of-amazons-trainium-lab-the-chip-thats-won-over-anthropic-openai-even-apple/" rel="noopener noreferrer external">TechCrunch: An exclusive tour of Amazon&rsquo;s Trainium lab</a></li>
+                <li><a href="https://newsletter.semianalysis.com/p/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion" rel="noopener noreferrer external">SemiAnalysis: Amazon&rsquo;s AI Resurgence &ndash; Multi-Gigawatt Trainium Expansion</a></li>
+                <li><a href="https://datacentremagazine.com/news/trainium3-new-aws-chip-promises-4x-performance-boost" rel="noopener noreferrer external">Data Centre Magazine: AWS Trainium3 Cuts AI Data Centre Power by 40%</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Wirtschaft &middot; Energie</div>
+            <h2 id="art-4-h">WTO-Alarm: Hohe Energiepreise k&ouml;nnten den KI-Boom beenden</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: WTO, heise online, Gizmodo, Computing.co.uk</div>
+        </header>
+        <p class="article-teaser">70 Prozent des nordamerikanischen Investitionswachstums h&auml;ngen an KI-G&uuml;tern. Die Welthandelsorganisation warnt: Steigende Energiepreise k&ouml;nnten diese Abh&auml;ngigkeit zum Problem machen &mdash; und das globale Handelswachstum auf gef&auml;hrliche 1,4 Prozent dr&uuml;cken.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der am 19. M&auml;rz ver&ouml;ffentlichte WTO-Bericht &bdquo;Global Trade Outlook and Statistics&ldquo; senkt die Prognose f&uuml;r das globale Warenhandelswachstum von 4,6 Prozent (2025) auf 1,9 Prozent (2026). WTO-Chef&ouml;konom Robert Staiger warnt, dass hohe Energiekosten die KI-Investitionen &bdquo;einklemmen&ldquo; werden, da massive Rechenleistung und Strom ben&ouml;tigt werden.</p>
+            <p>Im Szenario dauerhaft hoher Energiepreise schrumpft das Handelswachstum auf 1,4 Prozent &mdash; gef&auml;hrlich nahe an der Stagnation. Der geopolitische Kontext verst&auml;rkt die Sorge: Der Nahost-Konflikt treibt &Ouml;l- und LNG-Preise. Die KI-Branche ist auf eine physische, energieintensive Lieferkette angewiesen: Halbleiter, Server, Telekommunikationsger&auml;te, Spezialgase, Rohsilizium &mdash; alles energieabh&auml;ngig.</p>
+            <p>Dabei ist die Abh&auml;ngigkeit der KI-Branche von billiger Energie kein Geheimnis: Ein einzelnes gro&szlig;es Training kann den Stromverbrauch einer Kleinstadt f&uuml;r Monate verschlingen. W&auml;hrend Tech-Konzerne Milliardeninvestitionen in KI-Infrastruktur ank&uuml;ndigen, warnt die WTO, dass die energiepolitischen Grundlagen dieser Investitionen fragiler sind als angenommen.</p>
+            <p>F&uuml;r die KI-Branche bedeutet das: Die Suche nach alternativen Energiequellen &mdash; von Kernkraft &uuml;ber Geothermie bis zu Small Modular Reactors &mdash; ist nicht nur eine Nachhaltigkeitsfrage, sondern eine existenzielle Gesch&auml;ftsstrategie. Microsoft, Google und Amazon haben bereits langfristige Vertr&auml;ge mit Kernkraftbetreibern abgeschlossen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.wto.org/english/news_e/news26_e/stat_19mar26_329_e.htm" rel="noopener noreferrer external">WTO: Middle East conflict weighs on trade outlook</a></li>
+                <li><a href="https://www.heise.de/news/Energiehunger-bremst-Chip-Rausch-WTO-warnt-vor-Ende-des-KI-Booms-11220471.html" rel="noopener noreferrer external">heise online: WTO warnt vor Ende des KI-Booms wegen Energiemangel</a></li>
+                <li><a href="https://gizmodo.com/higher-oil-prices-from-trumps-iran-war-risk-killing-the-ai-boom-wto-says-2000735678" rel="noopener noreferrer external">Gizmodo: Higher Oil Prices Risk Killing the AI Boom, WTO Says</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Industrie &middot; Verg&uuml;tung</div>
+            <h2 id="art-5-h">Compute wird zur W&auml;hrung: Nvidia zahlt Ingenieuren KI-Tokens als Bonus</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: CNBC, Fortune, PYMNTS</div>
+        </header>
+        <p class="article-teaser">Jensen Huang setzt ein neues Signal f&uuml;r den Silicon-Valley-Arbeitsmarkt: Nvidia-Ingenieure erhalten k&uuml;nftig ein j&auml;hrliches &bdquo;Inference Budget&ldquo; im Wert von rund 50 Prozent ihres Grundgehalts &mdash; als interne KI-Compute-Credits.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Auf der GTC 2026 k&uuml;ndigte Huang an, dass Nvidia-Ingenieure zus&auml;tzlich zum Gehalt Token-Zuteilungen als interne KI-Compute-Credits erhalten. Die Tokens k&ouml;nnen genutzt werden, um KI-Agenten als Produktivit&auml;tsmultiplikatoren einzusetzen. Laut Huang werden Tokens &bdquo;one of the recruiting tools in Silicon Valley&ldquo;. Wichtig: Die Tokens ersetzen kein Gehalt, sondern kommen als zus&auml;tzlicher Benefit obendrauf.</p>
+            <p>Die Idee folgt einer bestechenden Logik: Wenn ein Ingenieur mit KI-Agenten die Produktivit&auml;t eines F&uuml;nfer-Teams erreichen kann, ist das Inference-Budget eine Investition, kein Kostenfaktor. Gleichzeitig wirft das Modell Fragen auf: Wer kontrolliert, wof&uuml;r die Tokens eingesetzt werden? Verfallen sie am Jahresende? K&ouml;nnen sie gehandelt werden?</p>
+            <p>Die Ironie entgeht niemandem: Der CEO des wertvollsten Chipunternehmens der Welt (4,5 Billionen Dollar Marktbewertung) verdient ein Grundgehalt von nur 2 Millionen Dollar &mdash; bei einem Nettoverm&ouml;gen von 154 Milliarden Dollar, fast vollst&auml;ndig in Nvidia-Aktien gebunden.</p>
+            <p>F&uuml;r die breitere Tech-Industrie ist das Signal eindeutig: Wer KI-Talente gewinnen will, muss nicht nur hohe Geh&auml;lter bieten, sondern auch Zugang zu erstklassiger Infrastruktur. Compute wird zum neuen Equity &mdash; neben Aktienoptionen und Boni wird der Zugang zu Rechenleistung zum Wettbewerbsinstrument im Kampf um Talente.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/03/20/nvidia-ai-agents-tokens-human-workers-engineer-jobs-unemployment-jensen-huang.html" rel="noopener noreferrer external">CNBC: Nvidia&rsquo;s Huang pitches AI tokens on top of salary</a></li>
+                <li><a href="https://www.pymnts.com/news/artificial-intelligence/2026/nvidia-ceo-jensen-huang-predicts-ai-tokens-will-become-a-standard-job-perk/" rel="noopener noreferrer external">PYMNTS: Nvidia CEO Predicts AI Tokens Will Become Standard Job Perk</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Gesch&auml;ftsmodell &middot; Werbung</div>
+            <h2 id="art-6-h">Klickrate 0,91 Prozent: ChatGPT-Werbung frustriert Partner</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: CNBC, Winbuzzer, t3n, Golem</div>
+        </header>
+        <p class="article-teaser">OpenAIs Werbeexperiment in ChatGPT entpuppt sich als Fehlstart: Die Klickrate liegt siebenmal niedriger als bei Google Search, ein Reporting-Bug verhindert die ROI-Berechnung, und die wertvollsten Nutzer sind f&uuml;r Werbetreibende unerreichbar.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Im Februar 2026 startete OpenAI Werbung in ChatGPT mit namhaften Partnern: WPP, Omnicom und Dentsu &mdash; drei der gr&ouml;&szlig;ten Werbeagenturen weltweit. Die bisherige Bilanz ist ern&uuml;chternd: Die Click-Through-Rate bei ChatGPT-Ads liegt bei nur 0,91 Prozent &mdash; verglichen mit 6,4 Prozent bei Google Search im gleichen Sektor (Daten von Adthena). Marken investierten 200.000 bis 250.000 Dollar pro Test, aber die Budgets werden voraussichtlich bis Ende M&auml;rz nicht vollst&auml;ndig ausgegeben.</p>
+            <p>Ein zus&auml;tzliches Problem: Ein Fehler in OpenAIs Ad Manager Tool verhindert, dass Werbetreibende ihre eigenen Kampagnendaten einsehen k&ouml;nnen &mdash; die ROI-Berechnung ist schlicht unm&ouml;glich. Wenn Marken 250.000 Dollar in einen Test investieren und nicht einmal sehen k&ouml;nnen, ob ihre Anzeigen funktionieren, ist das ein fundamentales Vertrauensproblem.</p>
+            <p>Das Grundproblem ist struktureller Natur: Premium-Nutzer (Plus, Pro, Business, Enterprise) sind von Werbung ausgeschlossen &mdash; die wertvollsten Nutzer sind f&uuml;r Werbetreibende unerreichbar. Der globale Rollout wurde auf unbestimmte Zeit verschoben, die Werbung bleibt vorerst auf die USA beschr&auml;nkt. OpenAI selbst gibt sich optimistisch und sagt, man sei &bdquo;encouraged by early signals&ldquo;.</p>
+            <p>F&uuml;r OpenAI steht viel auf dem Spiel: Das Unternehmen sucht dringend nach Einnahmequellen jenseits von Abonnements, um seine enormen Betriebskosten zu decken. Wenn Werbung in ChatGPT nicht funktioniert, bleibt die Frage: Wie soll das Unternehmen langfristig profitabel werden?</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/03/20/chatgpt-ads-testing-openai.html" rel="noopener noreferrer external">CNBC: ChatGPT&rsquo;s ad pilot has the industry frustrated</a></li>
+                <li><a href="https://winbuzzer.com/2026/03/22/openai-chatgpt-first-advertisers-cant-prove-ads-work-xcxwbn/" rel="noopener noreferrer external">Winbuzzer: ChatGPT&rsquo;s First Advertisers Can&rsquo;t Prove Ads Work</a></li>
+                <li><a href="https://t3n.de/news/openai-werbung-chatgpt-langsam-1735152/" rel="noopener noreferrer external">t3n: OpenAI-Partner frustriert &ndash; Werbung in ChatGPT nimmt nur langsam Fahrt auf</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 7 ═══ -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Enterprise &middot; Management</div>
+            <h2 id="art-7-h">Token-Tracking: Warum Unternehmen jetzt die KI-Nutzung ihrer Mitarbeiter messen</h2>
+            <div class="article-meta"><time datetime="2026-03-22">22. M&auml;rz 2026</time> &middot; Quellen: t3n, PYMNTS, Larridin</div>
+        </header>
+        <p class="article-teaser">Was als lockeres &bdquo;Probiert mal KI aus&ldquo; begann, wird zum kontrollierten Gesch&auml;ftsprozess. Unternehmen wie Zapier f&uuml;hren Dashboards zur &Uuml;berwachung des Token-Verbrauchs ein &mdash; und entdecken dabei eine Kluft zwischen Management-Euphorie und Mitarbeiter-Realit&auml;t.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Token-Tracking markiert den &Uuml;bergang von der Experimentierphase zur Industrialisierung der KI-Nutzung in Unternehmen. Zapier hat als eines der ersten Unternehmen ein Dashboard zur &Uuml;berwachung des Token-Verbrauchs seiner Mitarbeiter eingef&uuml;hrt. Wenn ein Mitarbeiter f&uuml;nfmal mehr Tokens verbraucht als Kollegen, wird genauer hingeschaut &mdash; entweder als Best Practice oder als Coaching-Bedarf.</p>
+            <p>Die Parallelen zur fr&uuml;hen Cloud-Adoption sind frappierend: Auch dort mussten Unternehmen schmerzlich lernen, dass unkontrollierter Verbrauch die Kosten explodieren l&auml;sst. Token-Budgets sind das KI-&Auml;quivalent zu Cloud-Spending-Alerts &mdash; ein notwendiges Werkzeug, aber mit der Gefahr, Innovation abzuw&uuml;rgen, wenn die Budgets zu eng gesetzt werden.</p>
+            <p>Besonders aufschlussreich ist die Kluft zwischen Management-Euphorie und Mitarbeiter-Realit&auml;t: Laut einer Umfrage von Section sind 75 Prozent der F&uuml;hrungskr&auml;fte begeistert von KI, w&auml;hrend 40 Prozent der Mitarbeiter berichten, dass KI keine messbare Zeitersparnis bringt. Das deutet darauf hin, dass viele Unternehmen KI-Tools eingef&uuml;hrt haben, ohne die Arbeitsprozesse anzupassen.</p>
+            <p>Die Warnung der Experten: Hoher Token-Verbrauch spiegelt oft ineffizientes Prompting oder &bdquo;agentic workflow leaks&ldquo; wider &mdash; nicht unbedingt Produktivit&auml;t. Token-Tracking als reines Verbrauchsmonitoring greift zu kurz. Unternehmen m&uuml;ssen den Output messen, nicht den Input: Ein Mitarbeiter, der mit 100 Tokens ein Problem l&ouml;st, ist produktiver als einer, der 10.000 Tokens f&uuml;r das gleiche Ergebnis verbraucht.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://t3n.de/news/token-tracking-unternehmen-messen-ki-nutzung-mitarbeitende-1734614/" rel="noopener noreferrer external">t3n: Token-Tracking &ndash; Warum Unternehmen die KI-Nutzung messen</a></li>
+                <li><a href="https://www.pymnts.com/artificial-intelligence-2/2026/ai-adoption-is-being-measured-in-tokens-but-the-metric-falls-short-experts-say/" rel="noopener noreferrer external">PYMNTS: AI Adoption Is Being Measured in Tokens, But the Metric Falls Short</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE TEASER ═══ -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Voice AI: Der aktuelle Stand von Sprach-KI</h2>
+            <div class="article-meta">320 Millisekunden Antwortzeit, 70 Prozent automatisch gel&ouml;ste Kundenanrufe und ein Markt, der 2026 die 22-Milliarden-Dollar-Marke &uuml;berschreitet</div>
+            <p class="article-teaser">Sprach-KI hat den Prototypen-Status verlassen und ver&auml;ndert, wie Unternehmen kommunizieren. Googles Gemini &uuml;bersetzt in Echtzeit in &uuml;ber 70 Sprachen, ElevenLabs braucht zehn Sekunden Audio f&uuml;r einen Stimmklon, und 78 Prozent der Top-50-Banken betreiben produktive Voice Agents. Unsere Reportage &uuml;ber den Stand der Technik, die Gesch&auml;ftschancen und die regulatorischen Fallstricke.</p>
+            <a href="reportagen/2026-03-23.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue &amp; trendende KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=openclaw.ai&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openclaw.ai/" rel="noopener noreferrer external">OpenClaw</a></div>
+                    <div class="tool-card-desc">Open-Source-KI-Agent, der lokal l&auml;uft und LLMs mit echter Software verbindet &mdash; Dateien lesen/schreiben, Shell-Befehle ausf&uuml;hren, APIs steuern.</div>
+                    <div class="tool-card-meta">&Uuml;ber 100.000 GitHub-Stars, 50+ Integrationen, persistenter Kontext. Von OpenAI &uuml;bernommen (Feb. 2026). Urspr&uuml;nglich von Peter Steinberger.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=getviktor.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://getviktor.com/" rel="noopener noreferrer external">Viktor</a></div>
+                    <div class="tool-card-desc">Autonomer KI-Mitarbeiter f&uuml;r Slack und Teams &mdash; verbindet sich mit &uuml;ber 3.000 Tools und f&uuml;hrt eigenst&auml;ndig Aufgaben aus, von Marketing-Audits bis App-Entwicklung.</div>
+                    <div class="tool-card-meta">Kein Chatbot, sondern echter &bdquo;Hire&ldquo; mit eigenem Cloud-Computer. Backed von Daniel Gross, Nat Friedman. 1.000+ Teams.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=lightricks.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/Lightricks/LTX-2" rel="noopener noreferrer external">LTX-2.3</a></div>
+                    <div class="tool-card-desc">Open-Source-Videogenerierung mit 22 Milliarden Parametern: Text-zu-Video bis 4K bei 24/48 FPS, inklusive nativer Audio-Generierung.</div>
+                    <div class="tool-card-meta">Apache 2.0, auf Consumer-Hardware lauff&auml;hig. 20-Sekunden-Clips mit Audio. Lightricks (Israel, bekannt f&uuml;r Facetune).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=picsart.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://picsart.com/" rel="noopener noreferrer external">Picsart AI Agents</a></div>
+                    <div class="tool-card-desc">Erster Agent-Marktplatz f&uuml;r Kreative: Spezialisierte KI-Agenten automatisieren Bild-Resizing, Shopify-Produktfoto-Optimierung und Trend-Analyse.</div>
+                    <div class="tool-card-meta">Vier Starter-Agenten mit einstellbaren Autonomie-Leveln. WhatsApp- und Telegram-Integration. Picsart (130+ Mio. Nutzer), gelauncht 16. M&auml;rz.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=querymemory.com&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.querymemory.com/" rel="noopener noreferrer external">Query Memory</a></div>
+                    <div class="tool-card-desc">API, die Dokumente, Websites und Dateien in sofort abfragbares Wissen f&uuml;r KI-Agenten verwandelt &mdash; Parsing, Chunking, Embeddings und Retrieval in einem Service.</div>
+                    <div class="tool-card-meta">L&ouml;st das RAG-Pipeline-Problem: Upload, und in Sekunden ist die Wissensbasis querybar. Indie-Startup, auf Product Hunt gelauncht (15. M&auml;rz).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=openmolt.dev&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openmolt.dev/" rel="noopener noreferrer external">OpenMolt</a></div>
+                    <div class="tool-card-desc">Open-Source Node.js/TypeScript-Library f&uuml;r programmatische KI-Agenten mit Multi-Provider-LLM-Support und persistentem Memory.</div>
+                    <div class="tool-card-meta">Agenten als Software, nicht als Chat: strukturierter Output via Zod-Schemas, Security-First. MIT-Lizenz, 30+ Integrationen. Indie-Entwickler aus Kanada.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=uwukPvnq2tM" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/uwukPvnq2tM/mqdefault.jpg" alt="Terafab AI Erkl&auml;rvideo Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Erkl&auml;rvideo &middot; 24 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=uwukPvnq2tM" rel="noopener noreferrer external">Elon Musk Just Dropped Terafab AI: The Future of AI Explained</a></div>
+                    <div class="yt-card-channel">TheAIGRID (391K Subs) &middot; 22. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">TheAIGRID analysiert Musks Terafab-Ank&uuml;ndigung: Wie unterscheiden sich zweckgebaute KI-Compute-Anlagen von traditionellen Rechenzentren? Was bedeutet das f&uuml;r gro&szlig;angelegtes Modelltraining und Inferenz? Eine n&uuml;chterne Einordnung jenseits des Hypes.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=NH0plIdqDMk" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/NH0plIdqDMk/mqdefault.jpg" alt="Agentic Security Runtime Video-Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 5 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=NH0plIdqDMk" rel="noopener noreferrer external">What is Agentic Security Runtime? Securing AI Agents</a></div>
+                    <div class="yt-card-channel">IBM Technology (1,6M Subs) &middot; 22. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">IBM Technology erkl&auml;rt das Konzept der Agentic Security Runtime &mdash; eine Sicherheitsschicht f&uuml;r autonom operierende KI-Agenten. Warum traditionelle Sicherheitsmodelle f&uuml;r Agenten versagen und wie Runtime-Level-Security in der Praxis aussieht.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=I2K81s0OQto" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/I2K81s0OQto/mqdefault.jpg" alt="Agent Skills Mathematik Video-Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 19 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=I2K81s0OQto" rel="noopener noreferrer external">Andrej Karpathy&rsquo;s Math Proves Agent Skills Will Fail. Here&rsquo;s What to Build Instead.</a></div>
+                    <div class="yt-card-channel">The AI Automators (48,6K Subs) &middot; 21. M&auml;rz 2026 &middot; 33.000 Views</div>
+                    <div class="yt-card-desc">Kleinerer Creator mit starker Traktion: Bricht Andrej Karpathys Analyse der Compound-Reliability in mehrstufigen Agent-Workflows herunter. Zeigt mathematisch, warum Ketten von Agent-Skills mit jeweils 95% Genauigkeit in der Praxis scheitern &mdash; und schl&auml;gt alternative Architekturen vor. Hochrelevant f&uuml;r alle, die produktive Agent-Systeme bauen.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
