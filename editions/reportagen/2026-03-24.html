@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Agentic Coding &mdash; Die Inferenz, 24. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            max-width: 55ch;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .article-body {
+            padding: var(--space-8) 0;
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p {
+            margin: 0 0 1.2em;
+        }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-body .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin: var(--space-8) 0;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- SITE HEADER -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-03-24.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <a href="../../hardware-guide.html">Hardware-Guide</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Agentic Coding: Wenn KI-Agenten den Code schreiben</h1>
+    <p class="article-subtitle">92,6 Prozent der Entwickler nutzen KI-Tools, 41 Prozent allen Codes ist KI-generiert &mdash; aber kontrollierte Studien zeigen: Entwickler werden 19 Prozent langsamer. &Uuml;ber das Versprechen, das Paradox und die Realit&auml;t von Agentic Coding im Jahr 2026.</p>
+    <div class="article-meta"><time datetime="2026-03-24">Dienstag, 24. M&auml;rz 2026</time> &middot; 12 Quellen</div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content" class="site-main">
+
+    <div class="article-body">
+
+        <h2>Vom Autocomplete zum autonomen Agenten</h2>
+
+        <p>Im Februar 2025 pr&auml;gte Andrej Karpathy den Begriff &bdquo;Vibe Coding&ldquo; &mdash; das Programmieren per nat&uuml;rlichsprachlicher Beschreibung, bei dem man &bdquo;die Vibes akzeptiert&ldquo; und den Code nicht mehr Zeile f&uuml;r Zeile versteht. Ein Jahr sp&auml;ter, im Februar 2026, aktualisierte er den Begriff zu &bdquo;Agentic Engineering&ldquo;: eine strukturierte Mensch-KI-Kollaboration, bei der KI-Agenten die Implementierung &uuml;bernehmen, w&auml;hrend Menschen Architektur, Review und Qualit&auml;tssicherung liefern.</p>
+
+        <p>Der Unterschied zwischen den heutigen Coding-Agenten und dem Autocomplete von 2023 ist fundamental. Autocomplete &mdash; denken Sie an die ersten Versionen von GitHub Copilot &mdash; sagt die n&auml;chsten Zeichen oder Zeilen vorher. Es reagiert auf das, was Sie gerade tippen. Agentic Coding dreht das Verh&auml;ltnis um: Sie geben dem Agenten ein Ziel, und er plant, f&uuml;hrt aus, testet und iteriert eigenst&auml;ndig &uuml;ber mehrere Dateien und Kommandos hinweg. Er hat ein Arbeitsged&auml;chtnis, kann Module verstehen und Entscheidungen &uuml;ber Sessions hinweg speichern. Eine Aufgabe, die einen Entwickler zwei bis vier Stunden kostet, braucht oft zehn bis zwanzig Minuten Agent-Zeit plus f&uuml;nfzehn Minuten menschliches Review.</p>
+
+        <h2>Die Werkzeuge: Sechs Ans&auml;tze, ein Ziel</h2>
+
+        <p>Der Markt f&uuml;r Coding-Agenten ist 2026 auf gesch&auml;tzte 4,7 Milliarden Dollar angewachsen und hat sich in spezialisierte Nischen ausdifferenziert. Die wichtigsten Akteure unterscheiden sich nicht nur in der Technologie, sondern in der grundlegenden Philosophie, wie Mensch und Maschine zusammenarbeiten sollten.</p>
+
+        <p><strong>Claude Code</strong> von Anthropic lebt im Terminal und h&auml;lt den aktuellen Rekord auf dem SWE-bench-Verified-Benchmark mit 80,9 Prozent. Der Agent versteht die gesamte Codebase, editiert Dateien, f&uuml;hrt Kommandos aus und kann mehrere Sub-Agenten parallel orchestrieren. &Uuml;ber das Model Context Protocol (MCP) &mdash; einen offenen Standard f&uuml;r Tool-Integrationen &mdash; verbindet er sich mit Google Drive, Jira, Slack und beliebigen eigenen Systemen.</p>
+
+        <p><strong>Cursor</strong> hat sich mit Version 2.0 von einem Code-Editor zu einer &bdquo;Agent Workbench&ldquo; gewandelt &mdash; &bdquo;ein Agent Workbench, der zuf&auml;llig auch ein Editor ist&ldquo;, wie das Team es formuliert. Der Agent Mode f&uuml;hrt Terminal-Kommandos aus, installiert Packages, l&auml;uft Tests und iteriert bei Fehlern &mdash; alles innerhalb der IDE. Mit einem ARR von rund 2 Milliarden Dollar und der k&uuml;rzlich aufgedeckten Nutzung von Moonshot AIs Kimi K2.5 als Basismodell f&uuml;r Composer 2 steht Cursor allerdings auch im Zentrum einer Debatte &uuml;ber Transparenz.</p>
+
+        <p><strong>Devin</strong> von Cognition AI positioniert sich als &bdquo;AI Software Engineer&ldquo; &mdash; ein vollst&auml;ndig autonomer Cloud-Agent. Die PR-Merge-Rate hat sich von 34 auf 67 Prozent verdoppelt, und die &Uuml;bernahme von Windsurf f&uuml;r 250 Millionen Dollar zeigt Ambition. Doch unabh&auml;ngige Tests zeichnen ein differenzierteres Bild: Von 20 realen Aufgaben scheiterte Devin bei 14, war bei 3 erfolgreich und bei 3 unklar. Die Einsch&auml;tzung der Community: &bdquo;Senior-Level beim Codebase-Verst&auml;ndnis, Junior bei der Ausf&uuml;hrung.&ldquo;</p>
+
+        <p><strong>GitHub Copilot</strong> hat mit dem Agent Mode nachgezogen und bietet inzwischen Multi-Model-Support: Entwickler k&ouml;nnen je nach Aufgabe zwischen GPT-5.1, Claude Opus 4.5 und Gemini 2.0 Flash w&auml;hlen. <strong>OpenAIs Codex</strong> z&auml;hlt &uuml;ber zwei Millionen w&ouml;chentlich aktive Nutzer und hat mit Codex Security im M&auml;rz 2026 einen spezialisierten Agenten f&uuml;r Application Security nachgelegt. <strong>Googles Jules</strong>, powered by Gemini 3 Pro, arbeitet asynchron in einer Cloud-VM und bietet mit 15 kostenlosen Tasks pro Tag eine niedrige Einstiegsschwelle.</p>
+
+        <div class="pull-quote">87 Prozent der Fortune 500 nutzen mindestens ein Vibe-Coding-Tool. Die Frage ist nicht mehr ob, sondern wie produktiv.</div>
+
+        <h2>Das Produktivit&auml;ts-Paradox</h2>
+
+        <p>Die Adoptionszahlen sind &uuml;berw&auml;ltigend: 92,6 Prozent der professionellen Entwickler nutzen einen KI-Coding-Assistenten mindestens monatlich. 41 Prozent allen 2025 geschriebenen Codes waren KI-generiert &mdash; 256 Milliarden Zeilen. Selbstberichtete Produktivit&auml;tssteigerungen liegen bei durchschnittlich 31 Prozent, und Entwickler sparen im Schnitt 3,6 Stunden pro Woche. Die Zahlen klingen nach Revolution.</p>
+
+        <p>Doch dann kam die METR-Studie, und sie ist ein Weckruf. Im Juli 2025 ver&ouml;ffentlichte das Forschungsinstitut METR die Ergebnisse eines randomisierten, kontrollierten Experiments: 16 erfahrene Open-Source-Entwickler bearbeiteten 246 echte Issues aus ihren eigenen Projekten &mdash; die H&auml;lfte mit KI-Tools, die H&auml;lfte ohne. Das Ergebnis: Die Entwickler waren mit KI <strong>19 Prozent langsamer</strong> (Konfidenzintervall: +2 bis +39 Prozent langsamer).</p>
+
+        <p>Die Wahrnehmungsl&uuml;cke ist ebenso aufschlussreich wie das Ergebnis selbst: Die Entwickler <em>glaubten</em>, 20 Prozent schneller zu sein &mdash; w&auml;hrend sie objektiv langsamer arbeiteten. Ein Follow-up von Anfang 2026 zeigt leichte Verbesserungen: Der Effekt bewegt sich jetzt im Bereich von -18 Prozent langsamer bis +9 Prozent schneller &mdash; m&ouml;glicherweise neutral, aber definitiv nicht die Revolution, die die Branche verspricht.</p>
+
+        <p>Erg&auml;nzend dazu: Pull Requests mit KI-generiertem Code produzieren laut einer Analyse von Faros AI 1,7-mal mehr Issues als rein menschlicher Code. Die Adoption von KI-Tools korreliert mit 9 Prozent mehr Bugs pro Entwickler und einer 154-prozentigen Zunahme der durchschnittlichen PR-Gr&ouml;&szlig;e. Mehr Code hei&szlig;t nicht besserer Code.</p>
+
+        <h2>Wo es funktioniert &mdash; und wo nicht</h2>
+
+        <p>Die Praxis zeigt klare Muster. Agentic Coding funktioniert hervorragend bei gut definierten, verifizierbaren Aufgaben: Migrationen (8- bis 12-fache Beschleunigung), Boilerplate-Generierung, Test-Erstellung, Refactoring mit klaren Regeln und die Analyse gro&szlig;er Codebases. Rakuten berichtet, dass Claude Code eine komplexe Extraction-Aufgabe &uuml;ber eine 12,5-Millionen-Zeilen-Codebase in sieben Stunden mit 99,9 Prozent Genauigkeit l&ouml;ste. Zapier hat 800 interne Agenten im Einsatz und eine KI-Adoption von 89 Prozent.</p>
+
+        <p>Agenten scheitern hingegen zuverl&auml;ssig bei vagen Anforderungen, bei Aufgaben, die tiefes Dom&auml;nenwissen erfordern, und bei Entscheidungen, die menschliches Urteilsverm&ouml;gen ben&ouml;tigen. Sie produzieren plausibel aussehenden, aber subtil fehlerhaften Code &mdash; besonders gef&auml;hrlich, weil er beim fl&uuml;chtigen Review nicht auff&auml;llt. Ein kompromittierter Agent kann laut einer Analyse von Galileo AI 87 Prozent der Downstream-Entscheidungen innerhalb von vier Stunden vergiften.</p>
+
+        <h2>Die Sicherheitsfrage</h2>
+
+        <p>48 Prozent der Cybersecurity-Experten sehen Agentic AI als den gr&ouml;&szlig;ten Angriffsvektor 2026 &mdash; noch vor Deepfakes, Ransomware und Supply-Chain-Angriffen. Die OWASP hat bereits eine Top-10-Liste f&uuml;r Agentic Applications ver&ouml;ffentlicht: Prompt Injection, Tool Misuse, Privilege Escalation, Memory Poisoning und Supply-Chain-Angriffe sind die f&uuml;hrenden Risiken. Eine Analyse von &uuml;ber 30.000 Skills und Extensions ergab, dass mehr als ein Viertel mindestens eine Schwachstelle enthielt. Dennoch haben nur 34 Prozent der Unternehmen KI-spezifische Security Controls implementiert.</p>
+
+        <h2>Was das f&uuml;r Unternehmen bedeutet</h2>
+
+        <p>Die Rolle des Entwicklers verschiebt sich: vom Code-Schreiben zum Orchestrieren von Agenten. Die besten Entwickler im Jahr 2026 sind nicht die schnellsten Tipper &mdash; sie sind die besten darin, Probleme in klar definierte, verifizierbare Tasks zu zerlegen, die Agenten parallel ausf&uuml;hren k&ouml;nnen. F&uuml;r F&uuml;hrungskr&auml;fte in Tech-Unternehmen ergeben sich drei Handlungsfelder.</p>
+
+        <p><strong>Erstens: Erwartungen kalibrieren.</strong> Die Produktivit&auml;tssteigerungen sind real, aber sie liegen bei 10 bis 30 Prozent &mdash; nicht beim F&uuml;nf- bis Zehnfachen, das Marketingmaterial suggeriert. Die METR-Studie zeigt, dass erfahrene Entwickler mit tiefer Codebase-Kenntnis weniger von KI-Tools profitieren als Generalisten oder Einsteiger. Investieren Sie in Schulung und Workflows, nicht nur in Lizenzen.</p>
+
+        <p><strong>Zweitens: Qualit&auml;tssicherung verst&auml;rken.</strong> Wenn 41 Prozent des Codes von KI stammt und dieser Code 1,7-mal mehr Issues produziert, wird Code Review zum gesch&auml;ftskritischen Prozess. Etablieren Sie klare Richtlinien, welche Aufgaben Agenten autonom &uuml;bernehmen d&uuml;rfen und wo menschliches Review zwingend erforderlich ist.</p>
+
+        <p><strong>Drittens: Security proaktiv angehen.</strong> Agentic Coding erweitert die Angriffsfl&auml;che erheblich. Implementieren Sie KI-spezifische Security Controls, bevor ein Vorfall sie dazu zwingt. Die OWASP-Top-10 f&uuml;r Agentic Applications sind ein guter Startpunkt.</p>
+
+        <p>Agentic Coding ist keine Zukunftsvision mehr &mdash; es ist der Status quo. 87 Prozent der Fortune 500 sind bereits dabei. Die Frage f&uuml;r 2026 lautet nicht, ob Sie KI-Coding-Tools einsetzen, sondern ob Sie sie richtig einsetzen: mit kalibrierten Erwartungen, robusten Qualit&auml;tsprozessen und einer Sicherheitsarchitektur, die dem Tempo der Technologie standh&auml;lt.</p>
+
+    </div>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" rel="noopener noreferrer external">METR: Early 2025 AI Experienced OS Dev Study (Juli 2025)</a></li>
+            <li><a href="https://metr.org/blog/2026-02-24-uplift-update/" rel="noopener noreferrer external">METR: 2026 Uplift Update (Februar 2026)</a></li>
+            <li><a href="https://www.faros.ai/blog/ai-software-engineering" rel="noopener noreferrer external">Faros AI: The AI Software Engineering Productivity Paradox</a></li>
+            <li><a href="https://code.claude.com/docs/en/overview" rel="noopener noreferrer external">Claude Code: Overview &amp; Documentation</a></li>
+            <li><a href="https://cursor.com/features" rel="noopener noreferrer external">Cursor: Features &amp; Agent Mode</a></li>
+            <li><a href="https://cognition.ai/blog/devin-annual-performance-review-2025" rel="noopener noreferrer external">Cognition AI: Devin&rsquo;s 2025 Performance Review</a></li>
+            <li><a href="https://www.getpanto.ai/blog/ai-coding-productivity-statistics" rel="noopener noreferrer external">Panto: AI Coding Productivity Statistics 2026</a></li>
+            <li><a href="https://resources.anthropic.com/2026-agentic-coding-trends-report" rel="noopener noreferrer external">Anthropic: 2026 Agentic Coding Trends Report</a></li>
+            <li><a href="https://thenewstack.io/vibe-coding-is-passe/" rel="noopener noreferrer external">The New Stack: Vibe Coding Is Pass&eacute; &mdash; Karpathy Has a New Name</a></li>
+            <li><a href="https://www.darkreading.com/application-security/coders-adopt-ai-agents-security-pitfalls-lurk-2026" rel="noopener noreferrer external">Dark Reading: As Coders Adopt AI Agents, Security Pitfalls Lurk (2026)</a></li>
+            <li><a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" rel="noopener noreferrer external">OWASP: Top 10 for Agentic Applications 2026</a></li>
+            <li><a href="https://www.idlen.io/blog/devin-ai-engineer-review-limits-2026/" rel="noopener noreferrer external">Idlen: Devin AI Review 2026 &mdash; Limits &amp; Real-World Tests</a></li>
+        </ul>
+    </footer>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
