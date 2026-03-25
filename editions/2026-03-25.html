@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 25. M&auml;rz 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-03-25">Mittwoch, 25. M&auml;rz 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 25. M&auml;rz 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Produkt &middot; Video-KI</span><span class="toc-title">OpenAI stellt Sora ein, Disney-Deal platzt</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Politik &middot; Verteidigung</span><span class="toc-title">Richterin: Pentagon-Sperre gegen Anthropic &bdquo;beunruhigend&ldquo;</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Produkt &middot; KI-Agenten</span><span class="toc-title">Claude Code kann jetzt den Mac steuern</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Hardware &middot; Halbleiter</span><span class="toc-title">Arm baut erstmals eigenen Chip &mdash; f&uuml;r Meta</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Venture Capital &middot; KI</span><span class="toc-title">Kleiner Perkins: 3,5 Milliarden All-in auf KI</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Recht &middot; Deepfakes</span><span class="toc-title">Deepfake-Gesetz: Erstellung wird strafbar</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">Musik &middot; KI-Slop</span><span class="toc-title">Spotify gibt K&uuml;nstlern Kontrolle &uuml;ber KI-Spam</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Strategie wird Infrastruktur</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Produkt &middot; Video-KI</div>
+            <h2 id="art-1-h">OpenAI stellt Sora ein und verliert den Milliarden-Deal mit Disney</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: Bloomberg, Variety, The Verge, TechCrunch</div>
+        </header>
+        <p class="article-teaser">Nur sechs Monate nach dem Start schaltet OpenAI sein KI-Videotool Sora ab. Disney zieht sich aus dem geplanten Milliarden-Investment zur&uuml;ck. Es ist das Ende eines ambitionierten Experiments &mdash; und ein strategischer Kurswechsel.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>OpenAI hat am 24. M&auml;rz 2026 angek&uuml;ndigt, den KI-Videogenerator Sora einzustellen. Die iOS-App, die API und die Sora.com-Plattform werden heruntergefahren &mdash; ein genauer Zeitplan steht noch aus. Es ist das erste Mal, dass OpenAI ein Kernprodukt so kurz nach dem Launch aufgibt.</p>
+            <p>Unmittelbar betroffen ist der geplante Deal mit Walt Disney: Der Unterhaltungskonzern hatte zugesagt, ikonische Figuren wie Mickey Mouse und Cinderella f&uuml;r die Nutzung auf Sora zu lizenzieren und eine Milliarde Dollar in OpenAI zu investieren. Laut Deadline ist &bdquo;kein Geld geflossen&ldquo; und &bdquo;der Deal geht nicht weiter&ldquo;. Disney hatte Sora als Plattform f&uuml;r neue Formen von Unterhaltungs-Content gesehen; ohne das Produkt fehlt die Grundlage.</p>
+            <p>OpenAI begr&uuml;ndet den R&uuml;ckzug mit einer strategischen Neuausrichtung: Das Unternehmen konzentriere sich auf &bdquo;Kapital, Chips und Enterprise-Produkte&ldquo; statt auf experimentelle Wetten. Soras Forschungsteam soll weiter an &bdquo;Weltsimulationsforschung f&uuml;r Robotik&ldquo; arbeiten. Die Botschaft: Video-Generierung f&uuml;r Endnutzer hat keine Priorit&auml;t mehr; physische KI und B2B-Anwendungen schon.</p>
+            <p>Die Einstellung kommt zu einem Zeitpunkt, an dem der Wettbewerb in der Video-KI intensiver denn je ist. Google, Meta, Runway und Kling bieten vergleichbare oder &uuml;berlegene Modelle. OpenAI scheint erkannt zu haben, dass Sora weder die technische F&uuml;hrungsposition noch ein tragf&auml;higes Gesch&auml;ftsmodell erreichen konnte. F&uuml;r das Unternehmen, das gerade seine Umwandlung in eine For-Profit-Struktur vorantreibt, ist der R&uuml;ckzug ein Zeichen daf&uuml;r, dass Fokus &uuml;ber Expansion geht.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-24/openai-plans-to-discontinue-support-for-sora-ai-video-generator" rel="noopener noreferrer external">Bloomberg: OpenAI Discontinues Support for Sora</a></li>
+                <li><a href="https://variety.com/2026/digital/news/openai-shutting-down-sora-video-disney-1236698277/" rel="noopener noreferrer external">Variety: OpenAI Will Shut Down Sora Video App; Disney Drops $1B Investment</a></li>
+                <li><a href="https://www.theverge.com/ai-artificial-intelligence/899850/openai-sora-ai-chatgpt" rel="noopener noreferrer external">The Verge: OpenAI just gave up on Sora and its billion-dollar Disney deal</a></li>
+                <li><a href="https://deadline.com/2026/03/sora-shut-down-disney-investment-1236764689/" rel="noopener noreferrer external">Deadline: Disney&rsquo;s $1B Investment DOA As Sam Altman Pulls Sora Plug</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Politik &middot; Verteidigung</div>
+            <h2 id="art-2-h">Richterin: Pentagon-Vorgehen gegen Anthropic sieht aus wie &bdquo;Versuch, das Unternehmen zu zerst&ouml;ren&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: NPR, CBS News, CNBC, Axios</div>
+        </header>
+        <p class="article-teaser">Eine Bundesrichterin stellt das Pentagon bei der Anh&ouml;rung hart infrage. Drei Ma&szlig;nahmen der Trump-Regierung gegen Anthropic seien &bdquo;beunruhigend&ldquo; und nicht verh&auml;ltnism&auml;&szlig;ig. Eine Entscheidung wird in den n&auml;chsten Tagen erwartet.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Wie wir in unseren Ausgaben vom <a href="2026-03-19.html#art-1-h">19. M&auml;rz</a>, <a href="2026-03-21.html#art-1-h">21. M&auml;rz</a> und <a href="2026-03-24.html#art-2-h">24. M&auml;rz</a> berichteten, hat das Pentagon Anthropic als &bdquo;Supply-Chain-Risiko&ldquo; eingestuft, nachdem das Unternehmen sich weigerte, Claude f&uuml;r autonome Waffen und Massen&uuml;berwachung bereitzustellen. Am Dienstag fand die entscheidende Anh&ouml;rung &uuml;ber Anthropics Antrag auf einstweilige Verf&uuml;gung statt.</p>
+            <p>US-Bezirksrichterin Rita Lin lie&szlig; in der Verhandlung wenig Zweifel an ihrer Einsch&auml;tzung: Die drei Ma&szlig;nahmen der Trump-Regierung &mdash; ein pr&auml;sidiales Verbot, Verteidigungsminister Hegseths Anweisung an Pentagon-Vertragspartner, alle Gesch&auml;ftsbeziehungen mit Anthropic zu kappen, und die Supply-Chain-Risiko-Einstufung &mdash; seien &bdquo;beunruhigend&ldquo; und s&auml;hen aus wie &bdquo;ein Versuch, Anthropic zu zerst&ouml;ren&ldquo;.</p>
+            <p>Die Richterin stellte die Verh&auml;ltnism&auml;&szlig;igkeit infrage: Wenn die Sorge des Pentagons die Integrit&auml;t der operativen Befehlskette sei, k&ouml;nne man einfach aufh&ouml;ren, Claude zu nutzen. Stattdessen habe man Schritte unternommen, die weit dar&uuml;ber hinausgehen. Sie &auml;u&szlig;erte den Verdacht, dass Anthropic &bdquo;daf&uuml;r bestraft wird, die Vertragsposition der Regierung &ouml;ffentlich kritisiert zu haben&ldquo;.</p>
+            <p>Fortune titelte &bdquo;versuchter Unternehmensmord&ldquo;. Die Richterin k&uuml;ndigte an, in den n&auml;chsten Tagen eine Entscheidung zu f&auml;llen. Anthropic hatte um eine Frist bis zum 26. M&auml;rz gebeten. Ein Urteil zugunsten von Anthropic k&ouml;nnte weitreichende Pr&auml;zedenzwirkung haben &mdash; f&uuml;r die Frage, ob KI-Unternehmen f&uuml;r ethische Selbstbeschr&auml;nkungen bestraft werden d&uuml;rfen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.npr.org/2026/03/24/nx-s1-5759276/anthropic-pentagon-claude-preliminary-injunction-hearing" rel="noopener noreferrer external">NPR: Judge says government&rsquo;s Anthropic ban looks like punishment</a></li>
+                <li><a href="https://www.cbsnews.com/news/pentagon-anthropic-hearing-judge-troubling/" rel="noopener noreferrer external">CBS News: Judge calls Pentagon&rsquo;s moves &ldquo;troubling&rdquo;</a></li>
+                <li><a href="https://www.cnbc.com/2026/03/24/anthropic-lawsuit-pentagon-supply-chain-risk-claude.html" rel="noopener noreferrer external">CNBC: Judge presses DOD on Anthropic blacklist</a></li>
+                <li><a href="https://fortune.com/2026/03/24/anthropic-hegseth-trump-risk-ai-court-ruling/" rel="noopener noreferrer external">Fortune: &lsquo;Attempted corporate murder&rsquo; &mdash; Judge calls for explanation</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Produkt &middot; KI-Agenten</div>
+            <h2 id="art-3-h">Claude Code und Cowork k&ouml;nnen jetzt den Mac steuern</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: CNBC, MacRumors, heise online, The Verge</div>
+        </header>
+        <p class="article-teaser">Anthropic bringt Computer Use in seine Desktop-Produkte: Claude kann nun Anwendungen &ouml;ffnen, klicken und navigieren wie ein Mensch &mdash; vorerst nur auf macOS und mit Sicherheitsabfragen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Anthropic hat am 24. M&auml;rz eine neue Funktion f&uuml;r Claude Code und Claude Cowork vorgestellt: Computer Use. Wenn Claude keinen direkten Connector f&uuml;r eine bestimmte Anwendung hat, kann es nun auf den Bildschirm zugreifen und die Maus und Tastatur steuern &mdash; also klicken, tippen und navigieren wie ein menschlicher Nutzer. Die Einrichtung erfordert keinen zus&auml;tzlichen Setup.</p>
+            <p>Konkret bedeutet das: Claude kann Dateien &ouml;ffnen, den Browser bedienen, Entwicklertools starten und Aufgaben in Anwendungen erledigen, f&uuml;r die es keine API-Anbindung gibt &mdash; etwa Slack, Google Calendar oder Figma. In Kombination mit dem letzte Woche vorgestellten Dispatch kann man Claude Aufgaben vom iPhone zuweisen und auf dem Desktop fertige Ergebnisse vorfinden.</p>
+            <p>Das Feature ist derzeit exklusiv f&uuml;r Claude Pro und Claude Max auf macOS verf&uuml;gbar und als &bdquo;Research Preview&ldquo; gekennzeichnet. Windows-x64-Support soll folgen. Anthropic betont, dass Claude vor dem Zugriff auf neue Apps immer um Erlaubnis fragt &mdash; ein Sicherheitsmechanismus, der verhindern soll, dass der Agent unkontrolliert handelt.</p>
+            <p>Im Vergleich zu OpenAIs Operator und Googles Project Mariner verfolgt Anthropic einen pragmatischen Ansatz: Statt einen eigenst&auml;ndigen Browser-Agenten zu bauen, erweitert Anthropic seine bestehenden Entwicklertools um Bildschirmsteuerung. Das k&ouml;nnte sich als kl&uuml;ger erweisen &mdash; denn Entwickler sind die zahlungsbereiteste Zielgruppe f&uuml;r KI-Agenten.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html" rel="noopener noreferrer external">CNBC: Anthropic says Claude can now use your computer to finish tasks</a></li>
+                <li><a href="https://www.macrumors.com/2026/03/24/claude-use-mac-remotely-iphone/" rel="noopener noreferrer external">MacRumors: Claude AI Can Now Use Your Mac While You&rsquo;re Away</a></li>
+                <li><a href="https://www.heise.de/news/Claudes-Computer-Use-kommt-in-Cowork-und-Code-11222192.html" rel="noopener noreferrer external">heise online: Claudes Computer Use kommt in Cowork und Code</a></li>
+                <li><a href="https://techcrunch.com/2026/03/24/anthropic-hands-claude-code-more-control-but-keeps-it-on-a-leash/" rel="noopener noreferrer external">TechCrunch: Anthropic hands Claude Code more control</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Halbleiter</div>
+            <h2 id="art-4-h">Arm baut erstmals in 35 Jahren einen eigenen Chip &mdash; und Meta ist der erste Kunde</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: CNBC, Tom&rsquo;s Hardware, Wired, TechCrunch</div>
+        </header>
+        <p class="article-teaser">Der britische Chipdesigner Arm ver&auml;ndert sein Gesch&auml;ftsmodell fundamental: Statt nur IP zu lizenzieren, liefert das Unternehmen jetzt eigenes Silizium. Ein 136-Kern-Prozessor f&uuml;r KI-Inferenz soll in der zweiten Jahresh&auml;lfte in die Massenproduktion gehen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Arm hat am 24. M&auml;rz 2026 seinen ersten eigenen Prozessor vorgestellt: den AGI CPU. In 35 Jahren Firmengeschichte hat Arm ausschlie&szlig;lich Chip-Designs lizenziert &mdash; Hersteller wie Qualcomm, Apple und Samsung bauten darauf eigene Produkte. Jetzt betritt Arm selbst den Markt f&uuml;r Datacenter-Silizium.</p>
+            <p>Die Spezifikationen sind beeindruckend: Bis zu 136 Neoverse-V3-Kerne, gefertigt im 3-nm-Verfahren bei TSMC, mit Taktraten von bis zu 3,7 GHz und einem TDP von 300 Watt. Der Chip unterst&uuml;tzt 12 DDR5-Kan&auml;le bei bis zu 8.800 MT/s. Arm behauptet, die doppelte Leistung pro Watt im Vergleich zu x86-Racks zu liefern &mdash; eine direkte Kampfansage an Intel und AMD.</p>
+            <p>Meta ist der erste Kunde und hat den Chip mitentwickelt. Sieben weitere Abnehmer stehen bereits fest, darunter OpenAI, Cloudflare und SAP. Die Partnerschaft mit Meta ist strategisch: Der Konzern investiert massiv in eigene KI-Infrastruktur und sucht nach Alternativen zu Nvidias GPU-Dominanz bei der Inferenz. Arm positioniert seinen Chip gezielt f&uuml;r KI-Inferenz &mdash; nicht f&uuml;r Training, sondern f&uuml;r den kosteneffizienten Betrieb von Modellen.</p>
+            <p>F&uuml;r die Halbleiterbranche ist dies ein tektonischer Moment: Wenn Arm beginnt, mit seinen eigenen Kunden zu konkurrieren, k&ouml;nnte das das Lizenzmodell destabilisieren, auf dem das gesamte Arm-&Ouml;kosystem aufgebaut ist. Die Massenproduktion soll in der zweiten Jahresh&auml;lfte 2026 starten.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" rel="noopener noreferrer external">CNBC: Arm releases first in-house chip, with Meta as debut customer</a></li>
+                <li><a href="https://www.tomshardware.com/tech-industry/semiconductors/arm-launches-its-first-data-center-cpu" rel="noopener noreferrer external">Tom&rsquo;s Hardware: Arm launches its first data center CPU</a></li>
+                <li><a href="https://www.wired.com/story/chip-design-firm-arm-is-making-its-own-ai-cpu/" rel="noopener noreferrer external">Wired: Arm Is Now Making Its Own Chips</a></li>
+                <li><a href="https://newsroom.arm.com/news/arm-agi-cpu-launch" rel="noopener noreferrer external">Arm Newsroom: AGI CPU Launch</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Venture Capital &middot; KI</div>
+            <h2 id="art-5-h">Kleiner Perkins sammelt 3,5 Milliarden Dollar &mdash; alles f&uuml;r KI</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: Bloomberg, TechCrunch, Crunchbase News</div>
+        </header>
+        <p class="article-teaser">Die legendäre VC-Firma sammelt ihren größten Fonds seit 50 Jahren Firmengeschichte ein. 1 Milliarde für Frühphasen-Startups, 2,5 Milliarden für Wachstumsunternehmen &mdash; mit einem klaren Fokus auf KI in Gesundheit, Transport und Software.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Kleiner Perkins, die seit einem halben Jahrhundert bestehende Wagniskapitalfirma aus dem Silicon Valley, hat 3,5 Milliarden Dollar an frischem Kapital eingesammelt &mdash; vollst&auml;ndig ausgerichtet auf KI-Startups. Die Mittel verteilen sich auf zwei Vehikel: KP22, ein Fr&uuml;hphasen-Fonds mit 1 Milliarde Dollar, und 2,5 Milliarden in Wachstumsfonds f&uuml;r sp&auml;tere Finanzierungsrunden.</p>
+            <p>Die Investmentthese ist klar: KP investiert breit in das gesamte KI-&Ouml;kosystem &mdash; von Gr&uuml;ndern, die neue Produkte und Plattformen bauen, bis zu Breakout-Unternehmen, bei denen die Firma ihre &Uuml;berzeugung vertieft. Zu den j&uuml;ngsten Erfolgen geh&ouml;ren fr&uuml;he Beteiligungen an Together AI, Harvey und OpenEvidence. KP ist zudem Investor bei Anthropic und SpaceX, die beide in diesem Jahr an die B&ouml;rse gehen k&ouml;nnten.</p>
+            <p>Der Fonds signalisiert das enorme Kapitalvolumen, das in KI flie&szlig;t: VCs haben 2025 insgesamt 258,7 Milliarden Dollar in KI-Unternehmen investiert &mdash; 61 Prozent aller globalen VC-Investments. F&uuml;r Kleiner Perkins ist es gleichzeitig ein Comeback: Unter Managing Partner Mamoon Hamid hat sich die Firma nach einer langen Durststrecke zur&uuml;ck an die Spitze gearbeitet, nicht zuletzt dank der starken Performance beim Figma-B&ouml;rsengang 2025.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-24/kleiner-perkins-raises-3-5-billion-to-invest-in-the-ai-boom" rel="noopener noreferrer external">Bloomberg: Kleiner Perkins Raises $3.5 Billion to Invest in the AI Boom</a></li>
+                <li><a href="https://techcrunch.com/2026/03/24/with-3-5b-in-fresh-capital-kleiner-perkins-is-going-all-in-on-ai/" rel="noopener noreferrer external">TechCrunch: With $3.5B in fresh capital, Kleiner Perkins is going all in on AI</a></li>
+                <li><a href="https://www.kleinerperkins.com/perspectives/our-new-funds-kp22-select-iv-flex/" rel="noopener noreferrer external">Kleiner Perkins: Our New Funds &mdash; KP22 and KP Select IV</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Recht &middot; Deepfakes</div>
+            <h2 id="art-6-h">Deutschland will Deepfakes kriminalisieren: Schon die Erstellung soll strafbar werden</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: Netzpolitik.org, heise online, Cybernews</div>
+        </header>
+        <p class="article-teaser">Bundesjustizministerin Hubig will eine empfindliche L&uuml;cke im Strafrecht schlie&szlig;en: Nicht erst die Verbreitung, sondern bereits die Erstellung sexualisierter Deepfakes soll k&uuml;nftig eine Straftat sein.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Wie wir in unserer <a href="2026-03-24.html#art-10-h">Ausgabe vom 24. M&auml;rz</a> berichteten, hatten 250 prominente Frauen einen Zehn-Punkte-Plan gegen sexualisierte Deepfakes und Nudify-Apps gefordert, ausgel&ouml;st durch den Fall der Moderatorin Collien Fernandes. Nun reagiert die Politik: Bundesjustizministerin Stefanie Hubig (SPD) hat einen Gesetzentwurf angek&uuml;ndigt, der die strafrechtliche Verfolgung erheblich ausweiten soll.</p>
+            <p>Der Kernpunkt: Bereits die Erstellung sexualisierter Deepfakes soll strafbar werden, nicht erst die Verbreitung. Damit w&uuml;rden auch Erwerb und Besitz solcher Inhalte unter Strafe gestellt &mdash; &auml;hnlich wie bei realer Kinderpornografie. Der bisherige Rechtsrahmen bot kaum Handhabe: Solange Deepfakes nur erstellt, aber nicht ver&ouml;ffentlicht wurden, bestand in der Regel keine Strafbarkeit.</p>
+            <p>Das Gesetz geht &uuml;ber Deepfakes hinaus: Es soll auch den Schutz von Stalking-Opfern vor dem Missbrauch von Tracking-Ger&auml;ten st&auml;rken und nicht-einvernehmliche sexualisierte Aufnahmen im &ouml;ffentlichen Raum explizit verbieten. Gerichte sollen zudem Online-Konten von T&auml;tern sperren oder einschr&auml;nken k&ouml;nnen &mdash; eine Ma&szlig;nahme, die bisher im deutschen Strafrecht so nicht vorgesehen war.</p>
+            <p>Die Initiative erg&auml;nzt die EU-Ebene, wo der Ausschuss f&uuml;r b&uuml;rgerliche Freiheiten (LIBE/IMCO) Anfang M&auml;rz f&uuml;r ein Verbot nicht-einvernehmlicher sexualisierter Deepfakes im Rahmen des AI Act gestimmt hatte. Deutschland w&auml;re mit dem nationalen Gesetz einer der ersten EU-Staaten mit einem eigenst&auml;ndigen Straftatbestand f&uuml;r Deepfakes.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://netzpolitik.org/2026/gesetz-gegen-digitale-gewalt-diese-deepfakes-sollen-kuenftig-strafbar-sein/" rel="noopener noreferrer external">Netzpolitik.org: Diese Deepfakes sollen k&uuml;nftig strafbar sein</a></li>
+                <li><a href="https://www.heise.de/news/Rechtslage-Deepfakes-Warum-der-Straftatbestand-kommen-soll-11223118.html" rel="noopener noreferrer external">heise online: Rechtslage Deepfakes: Es ist kompliziert</a></li>
+                <li><a href="https://germanpolicy.com/2026/03/20/germany-moves-to-criminalize-sexualized-deepfakes-and-strengthen-digital-violence-protections/" rel="noopener noreferrer external">GermanPolicy: Germany moves to criminalize sexualized deepfakes</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 7 ═══ -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Musik &middot; KI-Slop</div>
+            <h2 id="art-7-h">Spotify testet Artist Profile Protection gegen KI-Spam</h2>
+            <div class="article-meta"><time datetime="2026-03-24">24. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, Music Week, TechRadar</div>
+        </header>
+        <p class="article-teaser">K&uuml;nstler sollen k&uuml;nftig Releases genehmigen k&ouml;nnen, bevor sie auf ihrem Profil erscheinen. Ein neuer Spam-Filter soll KI-generierte Massenveröffentlichungen erkennen und aus den Empfehlungen entfernen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Spotify hat ein neues Feature in der Beta-Phase: &bdquo;Artist Profile Protection&ldquo; gibt K&uuml;nstlern die M&ouml;glichkeit, Releases zu pr&uuml;fen und zu genehmigen, bevor sie auf ihrem Profil erscheinen. Damit reagiert die Plattform auf ein wachsendes Problem: KI-generierte Songs, die unter dem Namen realer K&uuml;nstler hochgeladen werden.</p>
+            <p>Das Problem hat Ausma&szlig;e angenommen, die &uuml;ber Einzelf&auml;lle hinausgehen. Wie wir in unserer <a href="2026-03-22.html#art-8-h">Ausgabe vom 22. M&auml;rz</a> berichteten, hat Michael Smith aus North Carolina gestanden, mit KI-generierter Musik und 10.000 Bot-Konten 8 Millionen Dollar auf Streaming-Plattformen ergaunert zu haben. Spotifys Identit&auml;tsschutz f&uuml;r K&uuml;nstler ist eine direkte Antwort auf solche F&auml;lle.</p>
+            <p>Der Ansatz unterscheidet sich bewusst von Apple Music, das auf &bdquo;Transparency Tags&ldquo; setzt &mdash; Labels m&uuml;ssen dort KI-Nutzung offenlegen. Spotify geht einen Schritt weiter und gibt den K&uuml;nstlern selbst die Kontrolle. Zus&auml;tzlich rollt Spotify einen neuen Spam-Filter aus, der Uploader und Tracks identifiziert, die Spam-Taktiken einsetzen, und sie aus den Empfehlungsalgorithmen entfernt.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/24/spotify-tests-new-tool-to-stop-ai-slop-from-being-attributed-to-real-artists/" rel="noopener noreferrer external">TechCrunch: Spotify tests new tool to stop AI slop from being attributed to real artists</a></li>
+                <li><a href="https://www.techradar.com/audio/spotify/spotify-takes-its-first-major-step-in-tackling-ai-slop-now-artists-can-review-and-approve-what-music-appears-on-their-profile" rel="noopener noreferrer external">TechRadar: Spotify takes its first major step in tackling AI slop</a></li>
+                <li><a href="https://www.musicweek.com/digital/read/amid-concerns-about-ai-fakes-spotify-trials-artist-profile-protection-feature/093828" rel="noopener noreferrer external">Music Week: Spotify trials Artist Profile Protection feature</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE TEASER ═══ -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Strategie wird Infrastruktur: Wie KI Gesch&auml;ftsmodelle fundamental ver&auml;ndert</h2>
+            <div class="article-meta">78 Prozent der Unternehmen setzen KI ein, aber nur ein Drittel transformiert damit das Gesch&auml;ftsmodell &mdash; zwischen Klarnas verdreifachtem Umsatz pro Mitarbeiter und 37 Morningstar-Moat-Downgrades</div>
+            <p class="article-teaser">KI hat aufgeh&ouml;rt, ein Innovationsthema f&uuml;r Labore und Pilotprojekte zu sein. Sie ist zur strategischen Infrastruktur geworden &mdash; so grundlegend wie Cloud Computing vor zehn Jahren. Klarna zeigt, wie radikal die Gewinner umbauen. Morningstar zeigt, wie schnell die Verlierer ihren Burggraben verlieren. Unsere Reportage &uuml;ber die Skalierungsl&uuml;cke und f&uuml;nf Handlungsfelder f&uuml;r Tech-Leader.</p>
+            <a href="reportagen/2026-03-25.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue &amp; trendende KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=github.com/mozilla-ai/cq&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/mozilla-ai/cq" rel="noopener noreferrer external">Mozilla cq</a></div>
+                    <div class="tool-card-desc">&bdquo;Stack Overflow f&uuml;r KI-Agenten&ldquo;: Open-Source-Plattform, auf der Coding-Agenten kollektives Wissen teilen, statt dieselben Fehler immer wieder neu zu l&ouml;sen.</div>
+                    <div class="tool-card-meta">Am 23. M&auml;rz ver&ouml;ffentlicht. Plug-ins f&uuml;r Claude Code und OpenCode. Mozilla AI (Open Source, Python).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=talat.app&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://talat.app/" rel="noopener noreferrer external">Talat</a></div>
+                    <div class="tool-card-desc">Meeting-Notizen, die auf dem Mac bleiben: Echtzeit-Transkription und Zusammenfassung komplett lokal, ohne Cloud &mdash; mit MCP-Server und Obsidian-Export.</div>
+                    <div class="tool-card-meta">Am 24. M&auml;rz auf TechCrunch vorgestellt. Einmalkauf ab $49, nutzt Qwen3-4B on-device. Indie-Startup (Bootstrapped).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=github.com/t8/hypura&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/t8/hypura" rel="noopener noreferrer external">Hypura</a></div>
+                    <div class="tool-card-desc">Storage-Tier-Aware LLM Inference Scheduler: Verteilt Modell-Tensoren intelligent &uuml;ber GPU, RAM und NVMe &mdash; damit Modelle laufen, die gr&ouml;&szlig;er als der Arbeitsspeicher sind.</div>
+                    <div class="tool-card-meta">Im M&auml;rz auf Hacker News getrended. L&auml;sst Mixtral 8x7B (31 GB) auf 32-GB-Mac laufen. Open Source (GitHub).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=proofshot.argil.io&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://proofshot.argil.io/" rel="noopener noreferrer external">ProofShot</a></div>
+                    <div class="tool-card-desc">Gibt KI-Coding-Agenten &bdquo;Augen&ldquo;: Zeichnet Screenshots, Video und Logs auf, w&auml;hrend der Agent UI baut &mdash; und erstellt automatisch einen visuellen Proof-Bericht.</div>
+                    <div class="tool-card-meta">Am 24. M&auml;rz als Show HN vorgestellt. Visual-Regression gegen Baseline, GitHub-PR-Integration. Argil (Open Source).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=hark.app&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://hark.app/" rel="noopener noreferrer external">Hark</a></div>
+                    <div class="tool-card-desc">Multimodale KI-Schnittstelle vom ehemaligen iPhone-Air-Designer: Proaktive, personalisierte KI, die &uuml;ber Sprache, Vision und Ged&auml;chtnis mit Menschen interagiert.</div>
+                    <div class="tool-card-meta">Am 24. M&auml;rz auf TechCrunch vorgestellt. $100M Eigenfinanzierung, 30 Engineers von Apple/Meta/Google. Brett Adcock (Figure AI).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="https://www.google.com/s2/favicons?domain=maestri.dev&sz=64" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.producthunt.com/posts/maestri" rel="noopener noreferrer external">Maestri</a></div>
+                    <div class="tool-card-desc">Infinite Canvas f&uuml;r Multi-Agent-Coding: Mehrere KI-Agenten arbeiten gleichzeitig an verschiedenen Teilen eines Projekts &mdash; mit visueller Nachverfolgbarkeit.</div>
+                    <div class="tool-card-meta">Am 25. M&auml;rz auf Product Hunt gelauncht. Fokus auf Traceability und Agent-Koordination. Maestri (Startup).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=DmtoVnTkQnM" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/DmtoVnTkQnM/mqdefault.jpg" alt="DeepSeek Two Minute Papers Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Erkl&auml;rung &middot; 10 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=DmtoVnTkQnM" rel="noopener noreferrer external">DeepSeek Just Fixed One Of The Biggest Problems With AI</a></div>
+                    <div class="yt-card-channel">Two Minute Papers (1,79M Subs) &middot; 24. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">K&aacute;roly Zsolnai-Feh&eacute;r erkl&auml;rt anschaulich, welches fundamentale Problem DeepSeek mit seinem neuen Ansatz gel&ouml;st hat. Wie gewohnt verst&auml;ndlich aufbereitet, mit visuellen Vergleichen und Benchmarks &mdash; ideal f&uuml;r alle, die Forschungsergebnisse ohne Paper-Lekt&uuml;re verstehen wollen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=81FbpXpfxTc" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/81FbpXpfxTc/mqdefault.jpg" alt="IBM AI Models as a Service Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Architektur &middot; 11 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=81FbpXpfxTc" rel="noopener noreferrer external">AI Models as a Service: Powering Agentic AI, Privacy, &amp; RAG</a></div>
+                    <div class="yt-card-channel">IBM Technology (1,62M Subs) &middot; 24. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">IBM Technology erkl&auml;rt das Konzept &bdquo;Models as a Service&ldquo; und warum es f&uuml;r agentenbasierte KI, Datenschutz und Retrieval Augmented Generation (RAG) relevant wird. Klare Einordnung, welche Architekturentscheidungen Unternehmen jetzt treffen m&uuml;ssen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=pvxNcQTcIy4" rel="noopener noreferrer external"><img src="https://i.ytimg.com/vi/pvxNcQTcIy4/mqdefault.jpg" alt="Agent Skills vs MCP Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 10 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=pvxNcQTcIy4" rel="noopener noreferrer external">Agent Skills or MCP in the era of Claude Code?</a></div>
+                    <div class="yt-card-channel">Confluent Developer (53,5K Subs) &middot; 10. M&auml;rz 2026 &middot; 106.000+ Views</div>
+                    <div class="yt-card-desc">Disproportionales Engagement f&uuml;r einen Kanal dieser Gr&ouml;&szlig;e: &Uuml;ber 106.000 Views bei 53.500 Subscribern. Das Video vergleicht die beiden dominanten Ans&auml;tze f&uuml;r Tool-Integration in KI-Agenten &mdash; Agent Skills vs. Model Context Protocol (MCP) &mdash; und gibt praktische Empfehlungen, wann welcher Ansatz sinnvoll ist.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <a href="#top">&uarr; Nach oben</a>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
