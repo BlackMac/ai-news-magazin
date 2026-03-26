@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; Datenschutzerkl&auml;rung</title>
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #a0a0a0;
+            --text-faint: #707070;
+            --border: #333;
+            --border-strong: #555;
+            --accent: #ef5350;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #60a5fa;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #a0a0a0;
+                --text-faint: #707070;
+                --border: #333;
+                --border-strong: #555;
+                --accent: #ef5350;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #60a5fa;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); }
+
+        .skip-link {
+            position: absolute; top: -100%; left: 1rem; padding: 0.5rem 1rem;
+            background: var(--accent); color: #fff; z-index: 1000; border-radius: 0 0 4px 4px;
+        }
+        .skip-link:focus { top: 0; }
+
+        .site-header {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+        }
+        .site-header-inner {
+            max-width: var(--width-content); margin: 0 auto;
+            padding: var(--space-3) var(--space-4);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .site-title {
+            font-family: var(--font-sans); font-weight: 800; font-size: var(--text-lg);
+            color: var(--text-primary); text-decoration: none;
+        }
+        .site-nav {
+            display: flex; gap: var(--space-4); align-items: center;
+            font-family: var(--font-sans); font-size: var(--text-sm);
+        }
+        .site-nav a { color: var(--text-muted); text-decoration: none; }
+        .site-nav a:hover { color: var(--text-primary); }
+        .theme-toggle {
+            background: none; border: 1px solid var(--border); border-radius: 4px;
+            padding: var(--space-1) var(--space-2); cursor: pointer;
+            font-size: 1.1rem; color: var(--text-muted); line-height: 1;
+        }
+
+        main {
+            max-width: var(--width-content); margin: 0 auto;
+            padding: var(--space-12) var(--space-4) var(--space-24);
+        }
+
+        h1 {
+            font-family: var(--font-sans); font-weight: 700; font-size: var(--text-2xl);
+            color: var(--text-primary); margin-bottom: var(--space-8);
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-family: var(--font-sans); font-weight: 700; font-size: var(--text-xl);
+            color: var(--text-primary); margin-top: var(--space-8); margin-bottom: var(--space-4);
+        }
+
+        h3 {
+            font-family: var(--font-sans); font-weight: 600; font-size: var(--text-lg);
+            color: var(--text-primary); margin-top: var(--space-6); margin-bottom: var(--space-3);
+        }
+
+        p, ul { margin-bottom: var(--space-4); max-width: var(--width-article); }
+        ul { padding-left: var(--space-6); }
+        li { margin-bottom: var(--space-2); }
+
+        .site-footer {
+            max-width: var(--width-content); margin: 0 auto;
+            padding: var(--space-6) var(--space-4);
+            border-top: 1px solid var(--border);
+            font-family: var(--font-sans); font-size: var(--text-sm); color: var(--text-muted);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-4);
+        }
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+        @media print {
+            .site-header, .theme-toggle { display: none; }
+            body { font-size: 11pt; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="index.html">Alle Ausgaben</a>
+            <a href="hardware-guide.html">Hardware-Guide</a>
+            <a href="about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<main id="main-content">
+    <h1>Datenschutzerkl&auml;rung</h1>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+        Stefan Lange-Hegermann<br>
+        Sedanstr. 3<br>
+        40217 D&uuml;sseldorf<br>
+        E-Mail: <a href="mailto:inferenz@p5t.de">inferenz@p5t.de</a>
+    </p>
+
+    <h2>2. &Uuml;berblick der Datenverarbeitung</h2>
+    <p>
+        Diese Website erhebt <strong>keine personenbezogenen Daten</strong> durch eigene Mechanismen.
+        Es werden keine Cookies gesetzt, kein Tracking eingesetzt und keine Analysedienste verwendet.
+        Alle Schriftarten, Bilder und sonstigen Ressourcen werden direkt von diesem Server ausgeliefert &mdash;
+        es finden keine Anfragen an Drittanbieter-Server durch Ihren Browser statt.
+    </p>
+
+    <h2>3. Hosting</h2>
+    <p>
+        Diese Website wird &uuml;ber <strong>GitHub Pages</strong> gehostet, einen Dienst der GitHub Inc.,
+        88 Colin P Kelly Jr St, San Francisco, CA 94107, USA (ein Unternehmen der Microsoft Corporation).
+    </p>
+    <p>
+        Beim Aufruf dieser Website erhebt GitHub in sogenannten Server-Logfiles automatisch Informationen,
+        die Ihr Browser &uuml;bermittelt. Dazu geh&ouml;ren:
+    </p>
+    <ul>
+        <li>IP-Adresse des anfragenden Rechners</li>
+        <li>Datum und Uhrzeit der Anfrage</li>
+        <li>Aufgerufene URL</li>
+        <li>Referrer-URL (zuvor besuchte Seite)</li>
+        <li>Browsertyp und -version</li>
+        <li>Betriebssystem</li>
+    </ul>
+    <p>
+        Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+        Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und Auslieferung seiner Website.
+    </p>
+    <p>
+        Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer external">Datenschutzerkl&auml;rung von GitHub</a>.
+    </p>
+    <p>
+        Die Daten&uuml;bermittlung in die USA wird auf Basis des EU-US Data Privacy Framework gest&uuml;tzt.
+        Microsoft/GitHub ist unter dem Data Privacy Framework zertifiziert.
+    </p>
+
+    <h2>4. Selbst gehostete Ressourcen</h2>
+    <p>
+        Alle auf dieser Website verwendeten Ressourcen werden direkt von diesem Server ausgeliefert:
+    </p>
+    <ul>
+        <li><strong>Schriftarten</strong> (Inter, Source Serif 4, DM Mono, Fraunces) &mdash; lokal gehostet, keine Verbindung zu Google Fonts</li>
+        <li><strong>Bilder und Icons</strong> (YouTube-Vorschaubilder, Tool-Favicons) &mdash; lokal gespeicherte Kopien, keine Verbindung zu externen Bildservern</li>
+    </ul>
+    <p>
+        Durch das lokale Hosting dieser Ressourcen werden beim Besuch dieser Website <strong>keine Daten an Google, YouTube oder andere Drittanbieter &uuml;bermittelt</strong>.
+    </p>
+
+    <h2>5. Externe Links</h2>
+    <p>
+        Diese Website enth&auml;lt Links zu externen Websites (z.&nbsp;B. Nachrichtenquellen, YouTube-Videos, Tool-Websites).
+        Erst wenn Sie einen solchen Link aktiv anklicken, werden Daten an den jeweiligen Drittanbieter &uuml;bermittelt.
+        F&uuml;r die Datenverarbeitung durch diese Drittanbieter sind deren jeweilige Datenschutzerkl&auml;rungen ma&szlig;geblich.
+    </p>
+
+    <h2>6. Lokale Speicherung (localStorage)</h2>
+    <p>
+        Diese Website speichert Ihre Farbschema-Pr&auml;ferenz (hell/dunkel) im <code>localStorage</code> Ihres Browsers.
+        Diese Information verl&auml;sst Ihren Browser nicht und wird ausschlie&szlig;lich lokal verwendet,
+        um Ihre Einstellung beim n&auml;chsten Besuch wiederherzustellen.
+        Sie k&ouml;nnen diese Daten jederzeit &uuml;ber die Einstellungen Ihres Browsers l&ouml;schen.
+    </p>
+
+    <h2>7. Ihre Rechte</h2>
+    <p>Sie haben nach der DSGVO folgende Rechte:</p>
+    <ul>
+        <li><strong>Auskunftsrecht</strong> (Art. 15 DSGVO) &mdash; Sie k&ouml;nnen Auskunft &uuml;ber Ihre verarbeiteten personenbezogenen Daten verlangen.</li>
+        <li><strong>Recht auf Berichtigung</strong> (Art. 16 DSGVO) &mdash; Sie k&ouml;nnen die Berichtigung unrichtiger Daten verlangen.</li>
+        <li><strong>Recht auf L&ouml;schung</strong> (Art. 17 DSGVO) &mdash; Sie k&ouml;nnen die L&ouml;schung Ihrer Daten verlangen.</li>
+        <li><strong>Recht auf Einschr&auml;nkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+        <li><strong>Widerspruchsrecht</strong> (Art. 21 DSGVO) &mdash; Sie k&ouml;nnen der Verarbeitung Ihrer Daten widersprechen.</li>
+        <li><strong>Beschwerderecht</strong> &mdash; Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbeh&ouml;rde zu beschweren.</li>
+    </ul>
+    <p>
+        Die zust&auml;ndige Aufsichtsbeh&ouml;rde ist die Landesbeauftragte f&uuml;r Datenschutz und Informationsfreiheit Nordrhein-Westfalen,
+        Kavalleriestr. 2&ndash;4, 40213 D&uuml;sseldorf.
+    </p>
+
+    <h2>8. Aktualit&auml;t dieser Erkl&auml;rung</h2>
+    <p>
+        Stand: M&auml;rz 2026. Wir behalten uns vor, diese Datenschutzerkl&auml;rung bei &Auml;nderungen an der Website oder
+        bei ge&auml;nderten rechtlichen Anforderungen anzupassen.
+    </p>
+</main>
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="#main-content">Nach oben &uarr;</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const stored = localStorage.getItem('theme');
+    if (stored) document.documentElement.setAttribute('data-theme', stored);
+
+    function updateIcon() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+            (!document.documentElement.getAttribute('data-theme') &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches);
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    updateIcon();
+
+    toggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const isDark = current === 'dark' ||
+            (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const next = isDark ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon();
+    });
+})();
+</script>
+
+</body>
+</html>
