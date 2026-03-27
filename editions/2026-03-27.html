@@ -1153,19 +1153,11 @@
         <p class="section-subheading">Version 2.1.85 &mdash; 26. M&auml;rz 2026</p>
 
         <div class="analysis-body">
-            <p><strong>Hooks k&ouml;nnen jetzt filtern, wann sie laufen.</strong> Neues <code>if</code>-Feld in der Hook-Konfiguration, das die gleiche Syntax wie Permission-Regeln nutzt (z.&thinsp;B. <code>Bash(git *)</code>). Damit m&uuml;ssen Hooks nicht mehr bei jedem Tool-Aufruf starten und prüfen, ob sie relevant sind &mdash; das spart sp&uuml;rbar Overhead.</p>
+            <p><strong>Bedingte Hooks.</strong> Neues <code>if</code>-Feld in der Hook-Konfiguration &mdash; nutzt die gleiche Syntax wie Permission-Regeln (z.&thinsp;B. <code>Bash(git *)</code>). Hooks laufen damit nur noch, wenn sie wirklich relevant sind.</p>
 
-            <p><strong><code>/compact</code> funktioniert wieder bei sehr gro&szlig;en Sessions.</strong> Wenn die Konversation so lang wurde, dass der Compact-Request selbst nicht mehr ins Kontextfenster passte, schlug <code>/compact</code> bisher mit &bdquo;context exceeded&ldquo; fehl. Jetzt behoben.</p>
+            <p><strong>Org-Policy f&uuml;r Plugins.</strong> Plugins, die per <code>managed-settings.json</code> gesperrt sind, lassen sich nicht mehr installieren und verschwinden aus dem Marketplace.</p>
 
-            <p><strong>Kein kaputtes Terminal mehr nach dem Beenden.</strong> In Ghostty, Kitty, WezTerm und anderen Terminals, die das Kitty-Keyboard-Protokoll unterst&uuml;tzen, konnte es passieren, dass nach dem Beenden von Claude Code <code>Ctrl+C</code> und <code>Ctrl+D</code> nicht mehr funktionierten. Der Enhanced-Keyboard-Modus wird jetzt sauber zur&uuml;ckgesetzt.</p>
-
-            <p><strong>Shift+Enter f&uuml;gt wieder Zeilenumbr&uuml;che ein.</strong> Typeahead-Vorschl&auml;ge haben bisher <code>Shift+Enter</code> und <code>Meta+Enter</code> abgefangen, statt sie als Newline durchzulassen. Behoben.</p>
-
-            <p><strong>Bessere Performance bei <code>@</code>-Autocomplete.</strong> Dateivervollst&auml;ndigung &uuml;ber <code>@</code>-Mentions ist in gro&szlig;en Repositories jetzt deutlich schneller.</p>
-
-            <p><strong>Fl&uuml;ssigeres Scrollen in langen Sessions.</strong> Die Layout-Engine wurde von einer WASM-basierten L&ouml;sung auf eine reine TypeScript-Implementierung umgestellt. Ergebnis: weniger UI-Ruckler, besonders bei langen Transcripts und w&auml;hrend Compaction.</p>
-
-            <p><strong>Deep Links bis 5.000 Zeichen.</strong> <code>claude-cli://open?q=...</code> akzeptiert jetzt deutlich l&auml;ngere Prompts. Bei besonders langen Texten erscheint ein Hinweis, den Inhalt vor dem Absenden zu pr&uuml;fen.</p>
+            <p><strong>Deep Links bis 5.000 Zeichen.</strong> <code>claude-cli://open?q=...</code> akzeptiert jetzt deutlich l&auml;ngere Prompts.</p>
         </div>
 
         <div class="sources">
