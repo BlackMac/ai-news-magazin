@@ -48,8 +48,25 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Accio Work (2026-03-26)
 - Tracium.ai (2026-03-26)
 - AutoResearchClaw (2026-03-26)
+- Dreamina Seedance 2.0 (2026-03-27)
+- MAI-Image-2 (2026-03-27)
+- Lightfield CRM (2026-03-27)
+- Maritime (2026-03-27)
+- Autonoma.pro (2026-03-27)
+- Luzo (2026-03-27)
 
 ---
+
+## 2026-03-27
+- Anthropic gewinnt einstweilige Verfügung gegen Pentagon/Trump-Administration — Richterin Rita Lin blockiert "Supply Chain Risk"-Einstufung, nennt es "orwellsche" Vergeltung für Redefreiheit
+- David Sacks tritt als White House AI & Crypto Czar ab — 130-Tage-Frist als SGE erreicht, wechselt zu PCAST-Co-Vorsitz mit Jensen Huang und Zuckerberg, kein Nachfolger geplant
+- Wikipedia verbietet KI-generierte Artikel — englischsprachige Wikipedia 44:2, deutschsprachige 208:108, nur Lektorat und Übersetzung noch erlaubt
+- EU-Parlament verbietet Nudifier-Apps (569:45) und lehnt Chatkontrolle-Verlängerung ab (311:228) — niederländisches Gericht verbietet Grok-Nacktbilder (100.000€/Tag Strafe)
+- Apple plant Siri-Öffnung für Drittanbieter-Chatbots (Claude, Gemini) in iOS 27 — OpenAI verliert Exklusivität
+- Google Gemini lanciert "Switching Tools" — Memory Transfer und Chat-History-Import aus anderen Chatbots
+- Mistral veröffentlicht Voxtral TTS — 4B-Parameter Open-Source TTS, 9 Sprachen, 90ms Latenz, Voice-Cloning aus 3-5 Sekunden
+- Cohere veröffentlicht Transcribe — 2B-Parameter Open-Source ASR, 14 Sprachen, 5.42 WER, 525 Min. Audio/Minute
+- Reportage: Open Source vs. Closed Source AI — 76% nutzen Open-Source-Modelle, Lücke schrumpft, Modellschicht wird Commodity
 
 ## 2026-03-26
 - Google TurboQuant: Kompressionsalgorithmus reduziert LLM-KV-Cache auf 3 Bit (6x Reduktion), 8x Speedup auf H100, ICLR 2026 — Speicherchip-Aktien fallen
