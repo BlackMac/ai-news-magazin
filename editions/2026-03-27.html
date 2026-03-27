@@ -828,6 +828,9 @@
                 <div class="toc-special">
                     <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
                 </div>
+                <div class="toc-special">
+                    <a href="#claude-code"><span class="toc-cat">Claude Code</span><span class="toc-title">Was ist neu in v2.1.85</span></a>
+                </div>
             </li>
         </ul>
     </nav>
@@ -1141,6 +1144,35 @@
                     <div class="yt-card-desc">Ein Kanal mit 51.000 Abonnenten, der in zwei Tagen &uuml;ber 71.000 Views generiert &mdash; ein klarer Fr&uuml;hindikator. The AI Automators analysiert Anthropics neues &bdquo;Blueprint&ldquo; f&uuml;r lang laufende AI-Agenten: State Management, Tool Use Patterns und Failure Recovery. Pflichtlekt&uuml;re f&uuml;r alle, die autonome Agenten bauen.</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ═══ WAS IST NEU IN CLAUDE CODE ═══ -->
+    <section class="section-break" id="claude-code" aria-labelledby="claude-code-h">
+        <h2 class="section-heading" id="claude-code-h">Was ist neu in Claude Code</h2>
+        <p class="section-subheading">Version 2.1.85 &mdash; 26. M&auml;rz 2026</p>
+
+        <div class="analysis-body">
+            <p><strong>Hooks k&ouml;nnen jetzt filtern, wann sie laufen.</strong> Neues <code>if</code>-Feld in der Hook-Konfiguration, das die gleiche Syntax wie Permission-Regeln nutzt (z.&thinsp;B. <code>Bash(git *)</code>). Damit m&uuml;ssen Hooks nicht mehr bei jedem Tool-Aufruf starten und prüfen, ob sie relevant sind &mdash; das spart sp&uuml;rbar Overhead.</p>
+
+            <p><strong><code>/compact</code> funktioniert wieder bei sehr gro&szlig;en Sessions.</strong> Wenn die Konversation so lang wurde, dass der Compact-Request selbst nicht mehr ins Kontextfenster passte, schlug <code>/compact</code> bisher mit &bdquo;context exceeded&ldquo; fehl. Jetzt behoben.</p>
+
+            <p><strong>Kein kaputtes Terminal mehr nach dem Beenden.</strong> In Ghostty, Kitty, WezTerm und anderen Terminals, die das Kitty-Keyboard-Protokoll unterst&uuml;tzen, konnte es passieren, dass nach dem Beenden von Claude Code <code>Ctrl+C</code> und <code>Ctrl+D</code> nicht mehr funktionierten. Der Enhanced-Keyboard-Modus wird jetzt sauber zur&uuml;ckgesetzt.</p>
+
+            <p><strong>Shift+Enter f&uuml;gt wieder Zeilenumbr&uuml;che ein.</strong> Typeahead-Vorschl&auml;ge haben bisher <code>Shift+Enter</code> und <code>Meta+Enter</code> abgefangen, statt sie als Newline durchzulassen. Behoben.</p>
+
+            <p><strong>Bessere Performance bei <code>@</code>-Autocomplete.</strong> Dateivervollst&auml;ndigung &uuml;ber <code>@</code>-Mentions ist in gro&szlig;en Repositories jetzt deutlich schneller.</p>
+
+            <p><strong>Fl&uuml;ssigeres Scrollen in langen Sessions.</strong> Die Layout-Engine wurde von einer WASM-basierten L&ouml;sung auf eine reine TypeScript-Implementierung umgestellt. Ergebnis: weniger UI-Ruckler, besonders bei langen Transcripts und w&auml;hrend Compaction.</p>
+
+            <p><strong>Deep Links bis 5.000 Zeichen.</strong> <code>claude-cli://open?q=...</code> akzeptiert jetzt deutlich l&auml;ngere Prompts. Bei besonders langen Texten erscheint ein Hinweis, den Inhalt vor dem Absenden zu pr&uuml;fen.</p>
+        </div>
+
+        <div class="sources">
+            <div class="sources-label">Quelle</div>
+            <ul>
+                <li><a href="https://docs.anthropic.com/en/docs/claude-code/changelog" rel="noopener noreferrer external">Claude Code Changelog</a></li>
+            </ul>
         </div>
     </section>
 
