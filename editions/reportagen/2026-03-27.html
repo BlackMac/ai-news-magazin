@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Open Source vs. Closed Source AI &mdash; Die Inferenz, 27. M&auml;rz 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 55ch;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-4);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p {
+            margin: 0 0 1.2em;
+        }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+        }
+
+        .article-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- SITE HEADER -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-03-27.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <a href="../../hardware-guide.html">Hardware-Guide</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Open Source vs. Closed Source AI &mdash; Wer gewinnt den Kampf um die Zukunft der KI?</h1>
+    <p class="article-subtitle">Llama, Mistral und Qwen jagen GPT und Claude. Die Modellschicht wird zur Commodity &mdash; und das ver&auml;ndert die gesamte KI-Branche.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-03-27">Freitag, 27. M&auml;rz 2026</time> &middot; 7 Quellen</div>
+</div>
+
+<!-- MAIN -->
+<main id="main-content" class="site-main">
+
+    <div class="article-body">
+
+        <h2>Die neue Parit&auml;t</h2>
+
+        <p>76 Prozent der Unternehmen, die gro&szlig;e Sprachmodelle einsetzen, nutzen Open-Source-Modelle &mdash; h&auml;ufig parallel zu propriet&auml;ren Alternativen. Das zeigt: Die Frage ist l&auml;ngst nicht mehr &bdquo;ob&ldquo;, sondern &bdquo;wie&ldquo;. Was vor zw&ouml;lf Monaten ein globales Top-5-Modell gewesen w&auml;re, gibt es heute als Open-Weight-Download. Alibabas Qwen 3.5 mit 9 Milliarden Parametern schl&auml;gt auf mehreren Benchmarks OpenAIs GPT-oss-120B &mdash; und l&auml;uft auf einem handels&uuml;blichen Laptop. Xiaomis MiMo-V2-Pro, erst letzte Woche vorgestellt, erreicht mit einer Billion Parametern und 42 Milliarden aktiven Parametern einen ClawEval-Score von 61,5 &mdash; nahe an Claude Opus 4.6. Die Kosten: ein Siebtel westlicher Modelle.</p>
+
+        <p>Doch &bdquo;nahe dran&ldquo; ist nicht &bdquo;gleichauf&ldquo;. Auf dem Intelligence Index von LM Council f&uuml;hren propriet&auml;re Modelle weiterhin: Gemini 3.1 Pro und GPT-5.4 erreichen 57 Punkte, das beste Open-Weight-Modell (GLM-5 Reasoning) kommt auf 50. Beim SWE-Bench, dem wichtigsten Coding-Benchmark, h&auml;lt Claude Opus 4.5 mit 80,9 Prozent den Rekord. Die L&uuml;cke schrumpft &mdash; aber sie existiert, besonders bei den anspruchsvollsten Aufgaben.</p>
+
+        <h2>Was &bdquo;Open Source&ldquo; wirklich bedeutet</h2>
+
+        <p>Der Begriff &bdquo;Open Source&ldquo; ist in der KI-Welt zum Kampfbegriff geworden. Die Open Source Initiative (OSI) hat im Oktober 2024 eine formale Definition ver&ouml;ffentlicht: Echte Open-Source-KI erfordert Dateninformationen, vollst&auml;ndigen Quellcode UND offene Gewichte. Nach dieser Definition sind Metas Llama-Modelle &mdash; die bekanntesten &bdquo;Open-Source&ldquo;-Modelle &mdash; streng genommen nicht Open Source.</p>
+
+        <p>Llamas Lizenz verbietet die Nutzung durch Unternehmen mit &uuml;ber 700 Millionen monatlich aktiven Nutzern ohne Metas Genehmigung. Die Free Software Foundation stufte Llama 3.1 im Januar 2025 als &bdquo;nicht frei&ldquo; ein. Auf der anderen Seite stehen Alibabas Qwen-Modelle und die geplante DeepSeek-V4-Ver&ouml;ffentlichung unter Apache 2.0 &mdash; einer echten Open-Source-Lizenz, die volle kommerzielle Nutzung, Modifikation und Weiterverbreitung erlaubt.</p>
+
+        <p>F&uuml;r Unternehmen ist diese Unterscheidung alles andere als akademisch. Wer Llama in ein Produkt einbaut, braucht eine juristische Pr&uuml;fung. Wer Apache-2.0-Modelle nutzt, hat Rechtssicherheit. In einer Branche, in der KI-Modelle zunehmend Kernbestandteile von Produkten werden, kann die Lizenzfrage &uuml;ber die Architektur entscheiden.</p>
+
+        <h2>Die Kostenrechnung &mdash; komplizierter als gedacht</h2>
+
+        <p>Die naive Annahme &bdquo;Open Source ist kostenlos&ldquo; h&auml;lt der Praxis nicht stand. Ein &bdquo;kostenloses&ldquo; Open-Source-Modell kann Unternehmen &uuml;ber 500.000 Dollar pro Jahr an Engineering-Aufwand kosten &mdash; f&uuml;r Infrastruktur, Feinabstimmung, Monitoring und Updates. Bei geringem Tokenvolumen sind APIs schlicht g&uuml;nstiger: GPT-5-mini kostet 0,125 Dollar pro Million Input-Tokens, und der Engineering-Overhead entf&auml;llt.</p>
+
+        <p>Die Rechnung kippt bei hohem Volumen. Organisationen, die &uuml;ber 100 Millionen Tokens pro Tag verarbeiten, k&ouml;nnen durch Self-Hosting zwischen 5 und 50 Millionen Dollar j&auml;hrlich sparen. Der Break-even-Punkt liegt typischerweise bei 5 bis 10 Millionen Tokens pro Monat f&uuml;r Premium-Modelle, oder ab 50.000 t&auml;glichen Anfragen.</p>
+
+        <p>Doch der wichtigste Kostenfaktor ist nicht der Token-Preis: Es ist die Datensouver&auml;nit&auml;t. F&uuml;r europ&auml;ische Unternehmen unter der DSGVO kann Self-Hosting die einzige Option sein, wenn sensible Daten verarbeitet werden. Gestern erst ver&ouml;ffentlichten Mistral (Voxtral TTS, Text-to-Speech) und Cohere (Transcribe, Spracherkennung) Open-Source-Modelle, die explizit f&uuml;r den datenschutzkonformen Einsatz auf eigener Infrastruktur konzipiert sind &mdash; beide laufen auf Consumer-Hardware.</p>
+
+        <h2>Warum Big Tech verschenkt</h2>
+
+        <p>Jeder der gro&szlig;en Open-Source-Anbieter hat eine andere strategische Motivation. Meta finanziert die KI-Entwicklung aus Werbeeinnahmen und &bdquo;sozialisiert&ldquo; die Kosten mit der Community. Llama treibt das Meta-AI-&Ouml;kosystem (WhatsApp AI, Instagram AI) und lenkt Deployments auf Metas Cloud-Partnerschaften.</p>
+
+        <p>Alibaba verkn&uuml;pft Qwen direkt mit der Alibaba-Cloud-Expansion &mdash; wer Qwen nutzt, landet h&auml;ufig auf Alibaba-Cloud-Infrastruktur. Mistral positioniert sich als europ&auml;ischer KI-Champion, der mit EU-Datensouver&auml;nit&auml;t und Enterprise-Services Geld verdient.</p>
+
+        <p>Die gemeinsame Logik: Die Modellschicht wird zur Commodity. Wer sie verschenkt, gewinnt Einfluss auf die Schichten dar&uuml;ber (Orchestrierung, Anwendungen, &Ouml;kosystem) oder darunter (Compute, Hardware). Stanfords HAI AI Index 2026 best&auml;tigt: Jedes Mal, wenn ein starkes Open-Source-Modell erscheint, fallen die API-Preise der propriet&auml;ren Anbieter innerhalb von Wochen.</p>
+
+        <h2>Was das f&uuml;r Entscheider bedeutet</h2>
+
+        <p>Die Koexistenz-These hat sich durchgesetzt &mdash; es wird keinen einzelnen Gewinner geben. F&uuml;r Unternehmen ergeben sich daraus drei pragmatische Leitlinien:</p>
+
+        <p><strong>Erstens: Hybrid-Architektur ist der Standard.</strong> Sensible Workloads auf selbst gehosteten Open-Source-Modellen, weniger kritische Aufgaben &uuml;ber propriet&auml;re APIs. Das bietet Datensouver&auml;nit&auml;t, wo n&ouml;tig, und Spitzenqualit&auml;t, wo verf&uuml;gbar.</p>
+
+        <p><strong>Zweitens: Die Modellwahl ist keine langfristige Entscheidung mehr.</strong> Modelle werden austauschbar, der Wettbewerbsvorteil liegt in den Daten, der Orchestrierungsschicht und den dom&auml;nenspezifischen Feinabstimmungen. Wer sich auf ein einziges Modell festlegt, baut auf Sand.</p>
+
+        <p><strong>Drittens: Europa hat durch Open Source eine einmalige Chance.</strong> Mistral, Qwen und die kommende DeepSeek-V4-Generation unter Apache 2.0 erm&ouml;glichen es europ&auml;ischen Unternehmen, erstklassige KI einzusetzen, ohne Daten an US-Cloud-Anbieter zu senden. Die partiellen Ausnahmen des EU AI Act f&uuml;r Open-Source-Modelle verst&auml;rken diesen Vorteil.</p>
+
+        <p>Die KI-Industrie folgt einem bekannten Muster: Wie einst bei Betriebssystemen (Linux vs. Windows) oder Datenbanken (PostgreSQL vs. Oracle) wird Open Source die Basisschicht dominieren &mdash; w&auml;hrend propriet&auml;re Anbieter sich &uuml;ber Qualit&auml;t, Integration und Service differenzieren. Der echte Wettbewerb findet nicht zwischen Modellen statt, sondern zwischen den &Ouml;kosystemen, die auf ihnen aufgebaut werden.</p>
+
+    </div>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li>a16z Enterprise AI 2025/2026 Report</li>
+            <li>Stanford HAI AI Index 2026</li>
+            <li>OSI Open Source AI Definition</li>
+            <li>Trensee Deep Dive: Open Source AI Business Models</li>
+            <li>Brookings: From Open Internet to Open Intelligence</li>
+            <li>LM Council Intelligence Benchmarks</li>
+            <li>Artificial Analysis Leaderboards</li>
+        </ul>
+    </footer>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
