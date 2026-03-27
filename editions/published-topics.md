@@ -66,6 +66,7 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Google Gemini lanciert "Switching Tools" — Memory Transfer und Chat-History-Import aus anderen Chatbots
 - Mistral veröffentlicht Voxtral TTS — 4B-Parameter Open-Source TTS, 9 Sprachen, 90ms Latenz, Voice-Cloning aus 3-5 Sekunden
 - Cohere veröffentlicht Transcribe — 2B-Parameter Open-Source ASR, 14 Sprachen, 5.42 WER, 525 Min. Audio/Minute
+- Anthropic-Datenleck enthüllt "Claude Mythos" (Codename: Capybara) — neue Tier über Opus, "step change", überragende Cyber-Fähigkeiten, CMS-Konfigurationsfehler exponierte ~3.000 Assets, Fortune-Exklusiv, IPO ab Oktober 2026 laut Bloomberg
 - Reportage: Open Source vs. Closed Source AI — 76% nutzen Open-Source-Modelle, Lücke schrumpft, Modellschicht wird Commodity
 
 ## 2026-03-26
