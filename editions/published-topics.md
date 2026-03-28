@@ -54,8 +54,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Maritime (2026-03-27)
 - Autonoma.pro (2026-03-27)
 - Luzo (2026-03-27)
+- BotBoard (2026-03-28)
+- CronBox (2026-03-28)
+- AlphaClaw Apex (2026-03-28)
+- Agentation (2026-03-28)
+- SuperTurtle (2026-03-28)
+- Shopify Agentic Storefronts (2026-03-28)
 
 ---
+
+## 2026-03-28
+- GitHub ändert Datenschutzrichtlinie: Copilot-Interaktionsdaten (Free/Pro/Pro+) werden ab 24. April zum KI-Training verwendet, Opt-out erforderlich
+- SAP übernimmt Reltio (Master Data Management) für KI-fähige Business Data Cloud, Bewertung ca. 1,7 Mrd. Dollar
+- SoftBank sichert sich 40-Milliarden-Dollar-Brückenkredit (JPMorgan, Goldman Sachs) für OpenAI-Investment, 12-Monats-Laufzeit deutet auf IPO 2026
+- Rossmann testet UBTech Walker S2 humanoiden Roboter im Logistikzentrum Burgwedel, Partnerschaft mit Terra Robotics
+- Google Search Live (multimodale Kamera+Sprach-Suche) weltweit in 200+ Ländern verfügbar, basiert auf Gemini 3.1 Flash Live
+- OpenAI startet Safety Bug Bounty via Bugcrowd: Belohnungen für Prompt Injection, Datenexfiltration und Missbrauchsrisiken in agentischen Produkten
+- Reportage: AI Regulation weltweit — EU AI Act Stichtag August 2026 (nur 8/27 Staaten bereit), Trump-Deregulierung vs. 700+ Staatsgesetze, Chinas Pflicht-Kennzeichnung
 
 ## 2026-03-27
 - Anthropic gewinnt einstweilige Verfügung gegen Pentagon/Trump-Administration — Richterin Rita Lin blockiert "Supply Chain Risk"-Einstufung, nennt es "orwellsche" Vergeltung für Redefreiheit
