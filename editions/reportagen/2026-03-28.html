@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: AI Regulation weltweit &mdash; Die Inferenz, 28. M&auml;rz 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 55ch;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-4);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-03-28.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>AI Regulation weltweit &mdash; Der globale Flickenteppich und was das f&uuml;r Entwickler bedeutet</h1>
+    <p class="article-subtitle">EU AI Act, US Executive Orders, Chinas Sicherheitsstandards: Wer KI-Produkte baut, muss drei Rechtssysteme gleichzeitig navigieren. Ein Wegweiser durch das regulatorische Chaos.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-03-28">Samstag, 28. M&auml;rz 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <h2>Der 132-Tage-Countdown</h2>
+
+        <p>Am 2. August 2026 wird der EU AI Act scharf gestellt &mdash; und nur 8 von 27 EU-Mitgliedstaaten haben bisher &uuml;berhaupt eine zust&auml;ndige Aufsichtsbeh&ouml;rde benannt. Gleichzeitig hat die Trump-Administration am 20. M&auml;rz 2026 einen Gesetzgebungsentwurf vorgelegt, der einzelstaatliche AI-Regulierung in den USA aktiv unterdr&uuml;cken will. Und China hat zum Jahreswechsel neue Pflicht-Standards f&uuml;r generative KI in Kraft gesetzt, inklusive verpflichtender Kennzeichnung aller KI-generierten Inhalte.</p>
+
+        <p>F&uuml;r jedes Unternehmen, das AI-Produkte entwickelt oder einsetzt, bedeutet das: Drei Wirtschaftsr&auml;ume, drei fundamental verschiedene Regulierungsphilosophien &mdash; und keines der drei Systeme ist fertig. Wer heute ein AI-Feature shipped, trifft Compliance-Entscheidungen unter maximaler Unsicherheit. Dieser Text sortiert, was Stand M&auml;rz 2026 gilt, was kommt und was das konkret f&uuml;r Produkt- und Engineering-Teams bedeutet.</p>
+
+        <h2>EU: Das ambitionierteste Regelwerk der Welt &mdash; mit Versp&auml;tung</h2>
+
+        <p>Der EU AI Act ist das weltweit erste umfassende KI-Gesetz. Sein Kernprinzip: Risikobasierte Regulierung. AI-Systeme werden in vier Kategorien eingeteilt &mdash; von &bdquo;minimales Risiko&ldquo; (ein Spam-Filter) &uuml;ber &bdquo;begrenztes Risiko&ldquo; (ein Chatbot, der sich als KI zu erkennen geben muss) und &bdquo;hohes Risiko&ldquo; (AI in der Personalauswahl oder Kreditvergabe) bis &bdquo;inakzeptables Risiko&ldquo; (Social Scoring, biometrische Echtzeit-&Uuml;berwachung). Verbotene Praktiken gelten bereits seit Februar 2025. Die Regeln f&uuml;r General-Purpose-AI-Modelle wie GPT oder Claude sind seit August 2025 in Kraft.</p>
+
+        <p>Der gro&szlig;e Stichtag ist der 2. August 2026: Ab dann gelten die Pflichten f&uuml;r Hochrisiko-AI-Systeme und die Transparenzvorschriften nach Artikel 50. Unternehmen brauchen dann Qualit&auml;tsmanagementsysteme, Risikobewertungen, technische Dokumentation und Konformit&auml;tsbewertungen. Wer das nicht hat, riskiert Geldbu&szlig;en von bis zu 7 Prozent des globalen Jahresumsatzes.</p>
+
+        <p>Doch die Realit&auml;t ist chaotischer als der Zeitplan suggeriert. Die europ&auml;ischen Normungsorganisationen CEN und CENELEC haben die f&uuml;r 2025 geplanten technischen Standards nicht rechtzeitig fertiggestellt &mdash; sie sollen nun Ende 2026 kommen. Ohne diese Standards wissen Unternehmen nicht genau, wie Compliance konkret aussieht. Die Europ&auml;ische Kommission hat deshalb im November 2025 das &bdquo;Digital Omnibus&ldquo;-Paket vorgeschlagen, das die Hochrisiko-Pflichten auf Dezember 2027 verschieben w&uuml;rde. Am 18. M&auml;rz 2026 hat der zust&auml;ndige Parlamentsausschuss mit deutlicher Mehrheit (101 zu 9) zugestimmt. Die finale Verabschiedung erfordert aber noch eine Einigung zwischen Parlament, Rat und Kommission.</p>
+
+        <div class="pull-quote">Wichtig f&uuml;r Nicht-EU-Unternehmen: Der AI Act hat extraterritoriale Wirkung &mdash; genau wie die DSGVO. Jedes Unternehmen, das AI-Systeme anbietet, die in der EU genutzt werden oder EU-B&uuml;rger betreffen, f&auml;llt unter die Regulierung.</div>
+
+        <h2>USA: Innovation first &mdash; und Bundesstaaten unter Druck</h2>
+
+        <p>Die USA gehen den entgegengesetzten Weg. Statt eines umfassenden Bundesgesetzes setzt die Trump-Administration auf maximale Deregulierung auf Bundesebene bei gleichzeitigem Zur&uuml;ckdr&auml;ngen einzelstaatlicher Regulierung.</p>
+
+        <p>Am 11. Dezember 2025 unterzeichnete Pr&auml;sident Trump eine Executive Order mit dem Titel &bdquo;Ensuring a National Policy Framework for Artificial Intelligence&ldquo;. Das Kernst&uuml;ck: Eine &bdquo;AI Litigation Task Force&ldquo; im Justizministerium, die seit Januar 2026 aktiv einzelstaatliche AI-Gesetze vor Bundesgerichten anficht &mdash; mit dem Argument, sie behinderten den zwischenstaatlichen Handel verfassungswidrig. Zus&auml;tzlich wurde das Handelsministerium angewiesen, 42 Milliarden Dollar an Breitband-F&ouml;rdermitteln an die Bedingung zu kn&uuml;pfen, dass Bundesstaaten &bdquo;belastende&ldquo; AI-Regulierung zur&uuml;cknehmen.</p>
+
+        <p>Das Problem: W&auml;hrend Washington bremst, regulieren die Bundesstaaten l&auml;ngst. Allein 2025 wurden &uuml;ber 700 einzelstaatliche AI-Gesetzesvorlagen eingebracht. Kaliforniens Transparenzgesetze gelten seit Januar 2026. Colorados AI Act &mdash; der Schutz vor algorithmischer Diskriminierung bei Hochrisiko-Systemen vorschreibt &mdash; tritt im Juni 2026 in Kraft. F&uuml;r Unternehmen entsteht ein regulatorischer Albtraum: Wer AI-gest&uuml;tzte Einstellungstools in f&uuml;nf Bundesstaaten einsetzt, muss f&uuml;nf verschiedene Definitionen von algorithmischer Diskriminierung beachten.</p>
+
+        <h2>China: Kontrolle als Ordnungsprinzip</h2>
+
+        <p>Chinas Regulierungsansatz ist der am wenigsten bekannte &mdash; und f&uuml;r westliche Unternehmen der am schwersten zu navigierende. Statt eines einzelnen Gesetzes reguliert China durch ein B&uuml;ndel sektorspezifischer Vorschriften, die alle ein gemeinsames Ziel verfolgen: staatliche Kontrolle &uuml;ber KI-Systeme bei gleichzeitiger F&ouml;rderung der nationalen KI-Industrie.</p>
+
+        <p>Seit September 2025 gelten verpflichtende Kennzeichnungsregeln f&uuml;r alle KI-generierten Inhalte &mdash; sowohl sichtbare als auch unsichtbare Wasserzeichen. Seit November 2025 sind drei nationale Sicherheitsstandards f&uuml;r generative KI in Kraft. Und im Oktober 2025 hat China KI erstmals in sein Cybersicherheitsgesetz aufgenommen.</p>
+
+        <p>Besonders bemerkenswert: Ende 2025 ver&ouml;ffentlichte China einen Entwurf zur Regulierung von KI-Companions und Chatbots, der Suchtpr&auml;vention in den Mittelpunkt stellt. KI-Companion-Apps m&uuml;ssten regelm&auml;&szlig;ige Pop-up-Warnungen anzeigen, nach zwei Stunden zur Pause auffordern und emotionale Abh&auml;ngigkeit erkennen und melden. Das zeigt eine Regulierungsrichtung, die in EU und USA noch kaum diskutiert wird.</p>
+
+        <h2>Gro&szlig;britannien: Der Dritte Weg &mdash; noch ohne Gesetz</h2>
+
+        <p>Gro&szlig;britannien hat sich nach dem Brexit bewusst gegen ein AI-Gesetz nach EU-Vorbild entschieden. Stattdessen setzt die Regierung auf einen &bdquo;Pro-Innovation&ldquo;-Ansatz: Bestehende Regulierungsbeh&ouml;rden (Finanzaufsicht, Datenschutzbeh&ouml;rde, Wettbewerbsaufsicht) sollen f&uuml;nf nicht-bindende Prinzipien in ihren jeweiligen Bereichen anwenden &mdash; Sicherheit, Transparenz, Fairness, Verantwortlichkeit und Anfechtbarkeit.</p>
+
+        <p>Im Oktober 2025 k&uuml;ndigte die Regierung ein &bdquo;AI Growth Lab&ldquo; an: eine branchen&uuml;bergreifende Sandbox, in der Unternehmen AI-Produkte unter erleichterten regulatorischen Bedingungen testen k&ouml;nnen. Ein echtes AI-Gesetz wird fr&uuml;hestens in der zweiten H&auml;lfte 2026 erwartet. F&uuml;r internationale Unternehmen ist der britische Markt damit aktuell der regulatorisch einfachste &mdash; aber auch der unsicherste.</p>
+
+        <h2>Was das f&uuml;r Ihr Unternehmen bedeutet</h2>
+
+        <p>Die globale AI-Regulierungslandschaft 2026 l&auml;sst sich auf eine unbequeme Formel bringen: Maximale Divergenz bei minimaler Reife. Kein Regelwerk ist fertig, aber alle verlangen bereits Handeln. Drei Empfehlungen:</p>
+
+        <p><strong>Erstens: AI-Inventar jetzt aufbauen.</strong> Egal ob der EU-Stichtag August 2026 oder Dezember 2027 wird &mdash; wer nicht wei&szlig;, welche AI-Systeme im Einsatz sind und welche Risikoklasse sie haben, kann keine Compliance-Strategie entwickeln. &Uuml;ber die H&auml;lfte der Organisationen haben das laut Analysten noch nicht getan.</p>
+
+        <p><strong>Zweitens: Auf den strengsten Standard designen.</strong> Transparenzpflichten, Dokumentationspflichten und menschliche Aufsicht bei Hochrisiko-Entscheidungen werden in allen drei gro&szlig;en M&auml;rkten verlangt &mdash; nur in unterschiedlicher Auspr&auml;gung. Wer diese Anforderungen in die Produktarchitektur einbaut, statt sie nachzur&uuml;sten, spart langfristig.</p>
+
+        <p><strong>Drittens: Regulatorisches Monitoring institutionalisieren.</strong> Die n&auml;chsten 12 Monate bringen mehr regulatorische &Auml;nderungen als die letzten f&uuml;nf Jahre zusammen. Das Digital Omnibus, die US-Preemption-Klagen, Chinas neue Cybersecurity-Regeln, S&uuml;dkoreas AI Basic Act, Japans AI Promotion Act &mdash; die Schlagzahl ist enorm. Ohne dediziertes regulatorisches Monitoring fliegt man blind.</p>
+
+        <p>Die gute Nachricht: Die internationale Koordination nimmt Fahrt auf. Die UN hat einen &bdquo;Global Dialogue on AI Governance&ldquo; gegr&uuml;ndet. Die OECD-AI-Prinzipien gelten in 44 L&auml;ndern als Orientierungsrahmen. Bindende internationale Standards gibt es noch nicht &mdash; aber der Druck w&auml;chst. Wer heute eine saubere, dokumentierte, transparente AI-Architektur baut, wird in zwei Jahren nicht bereuen, zu fr&uuml;h angefangen zu haben.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" rel="noopener noreferrer external">European Commission: AI Act Regulatory Framework</a></li>
+            <li><a href="https://artificialintelligenceact.eu/implementation-timeline/" rel="noopener noreferrer external">EU AI Act Implementation Timeline</a></li>
+            <li><a href="https://ppc.land/eu-parliament-committee-backs-ai-act-delay-with-fixed-2027-deadline/" rel="noopener noreferrer external">EU Parliament Committee backs AI Act delay</a></li>
+            <li><a href="https://worldreporter.com/eu-ai-act-august-2026-deadline-only-8-of-27-eu-states-ready-what-it-means-for-global-ai-compliance/" rel="noopener noreferrer external">Only 8 of 27 EU States Ready for AI Act</a></li>
+            <li><a href="https://www.sullcrom.com/insights/memo/2026/March/White-House-Releases-National-Policy-Framework-AI" rel="noopener noreferrer external">White House: National AI Policy Framework Blueprint</a></li>
+            <li><a href="https://www.kslaw.com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption" rel="noopener noreferrer external">King &amp; Spalding: New State AI Laws 2026</a></li>
+            <li><a href="https://iapp.org/resources/article/global-ai-governance-china" rel="noopener noreferrer external">IAPP: Global AI Governance &mdash; China</a></li>
+            <li><a href="https://carnegieendowment.org/russia-eurasia/research/2026/02/china-is-worried-about-ai-companions-heres-what-its-doing-about-them" rel="noopener noreferrer external">Carnegie: China AI Companions Regulation</a></li>
+            <li><a href="https://www.twobirds.com/en/insights/2026/uk/ai-regulation-in-the-uk-the-role-of-the-regulators" rel="noopener noreferrer external">Bird &amp; Bird: AI Regulation in the UK</a></li>
+            <li><a href="https://www.onetrust.com/blog/where-ai-regulation-is-heading-in-2026-a-global-outlook/" rel="noopener noreferrer external">OneTrust: Where AI Regulation is Heading in 2026</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) { setTheme(stored); }
+    else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
