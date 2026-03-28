@@ -166,6 +166,7 @@ pip install feedparser requests beautifulsoup4 python-dateutil lxml
 6. **YouTube-Tutorials**: Via `yt-dlp` (ist installiert) recherchieren:
    - 2 aktuelle, technische KI-Tutorials von etablierten Creatorn
    - 1 **Trending Topic**: Video von einem kleineren Creator (< 100K Subs), das überproportional viele Views hat (mindestens 3x Subscriber-Count oder viral gehend). Kleinere Creator sind oft Frühindikatoren für Trends.
+   - **Duplikat-Check PFLICHT für YouTube**: Vor Aufnahme jedes Videos (insbesondere Trending Topics) gegen die Liste "YouTube — Bereits empfohlene Videos" in `editions/published-topics.md` prüfen. Kein Video (gleiche Video-ID) darf ein zweites Mal erscheinen.
    - **Maximale Videolänge**: Alle empfohlenen Videos sollten unter 60 Minuten sein — idealerweise 10–30 Min. Keine Livestreams oder Mehrstunden-Kurse.
    - Recherche-Methode: `yt-dlp --flat-playlist --print "%(id)s|%(title)s|%(channel)s" "ytsearch20:SUCHBEGRIFF"` für Suche, dann `yt-dlp --print "%(id)s|%(title)s|%(channel)s|%(upload_date)s|%(duration_string)s|%(view_count)s|%(channel_follower_count)s" --skip-download URL` für Details inkl. Subscriber-Count
    - Thumbnails **lokal speichern**: `curl -sL "https://i.ytimg.com/vi/VIDEO_ID/mqdefault.jpg" -o assets/images/thumbs/VIDEO_ID.jpg`. Im HTML dann `assets/images/thumbs/VIDEO_ID.jpg` (bzw. relativer Pfad) referenzieren. Keine externen Bild-URLs im HTML!
@@ -178,7 +179,7 @@ pip install feedparser requests beautifulsoup4 python-dateutil lxml
    - Homepage-Storyliste muss Reportage, Tool-Radar und Werkstatt verlinken
    - **Reportagen-Archiv**: Neue Reportage in die `<ul class="reportagen-list">` Sektion einfügen (chronologisch absteigend, neueste oben)
 10. **Publizieren**: Änderungen committen und pushen (Source-Code und Pages leben im selben Repo)
-11. **Themen-Tracking**: `published-topics.md` aktualisieren (Artikel UND Tool-Radar-Tools in die jeweilige Sektion eintragen), Reportage-Thema aus Wunschliste löschen
+11. **Themen-Tracking**: `published-topics.md` aktualisieren (Artikel, Tool-Radar-Tools UND YouTube-Videos in die jeweilige Sektion eintragen), Reportage-Thema aus Wunschliste löschen
 
 ## Sprache
 

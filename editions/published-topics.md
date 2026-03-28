@@ -6,6 +6,37 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 
 ---
 
+## YouTube — Bereits empfohlene Videos
+
+- CxErCGVo-oo — The Only OpenClaw Tutorial You'll Ever Need (Alex Finn, 2026-03-19)
+- nxHKBq5ZU9U — I've Used Claude Code for 2,000+ Hours (Cole Medin, 2026-03-19)
+- Wf1auel_-LQ — Day 150 — Vibe Coding an App Until I Make $1,000,000 (BridgeMind, 2026-03-19)
+- BAlSzHFmmwU — MIT, Anthropic und neue Benchmarks enthüllen KI-Codings größte Grenzen (devsplate, 2026-03-20)
+- EKix32vioss — Stitch 2.0 + Claude Code: KI-Coding-Workflow (AICodeKing, 2026-03-20)
+- qb2-wq9MKss — MiniMax M2.7: Beats Opus 4.6 and 50x Cheaper (WorldofAI, 2026-03-20)
+- flC3iteQk8A — Google AI Studio 2.0: Full Stack Vibe Coding (Universe of AI, 2026-03-21)
+- OacXjz-vW5U — Google AI Studio 2.0: Kostenloser autonomer Coding-Agent (WorldofAI, 2026-03-21)
+- WCuwYLVE6j8 — Master 80% of Claude Code in 26 Minutes (Skill Leap AI, 2026-03-21)
+- 1JeDsxnX1nY — Claude Code's New Agent Teams Are Insane (John Kim, 2026-03-22)
+- 9xPgDCXMJcY — The ALL NEW Google AI Studio has 7 INSANE UPDATES (AI with Surya, 2026-03-22)
+- I2K81s0OQto — Andrej Karpathy's Math Proves Agent Skills Will Fail (The AI Automators, 2026-03-23)
+- NH0plIdqDMk — What is Agentic Security Runtime? (IBM Technology, 2026-03-23)
+- uwukPvnq2tM — Elon Musk Just Dropped Terafab AI (TheAIGRID, 2026-03-23)
+- gHB4JFG9i3k — Claude Code: Build Your First AI Agent (Teacher's Tech, 2026-03-24)
+- RkzCAaIV_cQ — This Shouldn't Be Able to Run 120B Locally (Alex Ziskind, 2026-03-24)
+- XFmYkJJxsr8 — Build Your First App with Claude Code (Code with Beto, 2026-03-24)
+- 81FbpXpfxTc — AI Models as a Service: Powering Agentic AI (IBM Technology, 2026-03-25)
+- DmtoVnTkQnM — DeepSeek Just Fixed One Of The Biggest Problems With AI (Two Minute Papers, 2026-03-25)
+- pvxNcQTcIy4 — Agent Skills or MCP in the era of Claude Code? (Confluent Developer, 2026-03-25)
+- IuyVVtr1uhY — Claude Code Tutorial — Build Apps 10x Faster (Programming with Mosh, 2026-03-26)
+- MOtYzidUZHI — How to Build Full-Stack Apps With Verdent AI (Jon Law, 2026-03-26)
+- 9d5bzxVsocw — Anthropic Just Dropped the New Blueprint for Long-Running AI Agents (The AI Automators, 2026-03-27)
+- XV5bhkDpL7U — Building Voice Agents with Gemini 3 (Google for Developers, 2026-03-27)
+- Io_GqmbNBbY — DeepMind's New AI Just Changed Science Forever (Two Minute Papers, 2026-03-28)
+- k2ZLQC8P7dc — François Chollet: Why Scaling Alone Isn't Enough for AGI (Y Combinator, 2026-03-28)
+
+---
+
 ## Tool-Radar — Bereits empfohlene Tools
 
 Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer Tools gegen diese Liste prüfen.
