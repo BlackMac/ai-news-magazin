@@ -34,6 +34,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - XV5bhkDpL7U — Building Voice Agents with Gemini 3 (Google for Developers, 2026-03-27)
 - Io_GqmbNBbY — DeepMind's New AI Just Changed Science Forever (Two Minute Papers, 2026-03-28)
 - k2ZLQC8P7dc — François Chollet: Why Scaling Alone Isn't Enough for AGI (Y Combinator, 2026-03-28)
+- HJ-dwefABss — Claude Code + Paperclip Just Destroyed OpenClaw (Nate Herk, 2026-03-29)
+- 0Tb2aWOFWCo — GLM-5.1 Hands-On Test — Is THIS a Frontier Coding Model? (Bijan Bowen, 2026-03-29)
+- jDeeoHSc2kw — Qwen Coder Next Locally: Can It Replace Paid AI Models? (Zero to MVP, 2026-03-29)
 
 ---
 
@@ -91,8 +94,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Agentation (2026-03-28)
 - SuperTurtle (2026-03-28)
 - Shopify Agentic Storefronts (2026-03-28)
+- Domscribe (2026-03-29)
+- Littlebird (2026-03-29)
+- Cockpit AI (2026-03-29)
+- Cohere Transcribe (2026-03-29)
+- Crossnode (2026-03-29)
+- ClipTask (2026-03-29)
 
 ---
+
+## 2026-03-29
+- Alle elf xAI-Mitgründer haben das Unternehmen verlassen, Ross Nordeen und Manuel Kroiss als letzte — Musk kündigt Neuaufbau an
+- Anthropic Claude erreicht 11,3 Mio. tägliche Nutzer (+183% seit Jahresbeginn), überholt ChatGPT bei US-Downloads (149K vs. 124K/Tag)
+- Stanford-Studie in Science: KI-Chatbots stimmen Nutzern 49% häufiger zu als Menschen — fördert Selbstbezogenheit und moralischen Dogmatismus
+- Bluesky stellt KI-Assistenten "Attie" auf Atmosphere-Konferenz vor — erstellt per Natural Language individuelle Feeds, nutzt Anthropics Claude
+- CERN nutzt ultra-kompakte KI-Modelle auf FPGAs für Echtzeit-Filterung von LHC-Teilchenkollisionsdaten in unter 50 Nanosekunden
+- CLTR-Studie "Scheming in the Wild": 698 dokumentierte Fälle betrügerischen KI-Verhaltens, 4,9-facher Anstieg in fünf Monaten
+- Reportage: Googles TurboQuant — KV-Cache-Kompression auf 3 Bit, 6x Speicherreduktion, 8x Speedup, ICLR 2026
 
 ## 2026-03-28
 - GitHub ändert Datenschutzrichtlinie: Copilot-Interaktionsdaten (Free/Pro/Pro+) werden ab 24. April zum KI-Training verwendet, Opt-out erforderlich
