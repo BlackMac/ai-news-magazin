@@ -37,6 +37,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - HJ-dwefABss — Claude Code + Paperclip Just Destroyed OpenClaw (Nate Herk, 2026-03-29)
 - 0Tb2aWOFWCo — GLM-5.1 Hands-On Test — Is THIS a Frontier Coding Model? (Bijan Bowen, 2026-03-29)
 - jDeeoHSc2kw — Qwen Coder Next Locally: Can It Replace Paid AI Models? (Zero to MVP, 2026-03-29)
+- gmaHRwijOXs — Everything You Thought About Building AI Agents is Wrong (Cole Medin, 2026-03-30)
+- 6SnFH43qPAw — 5 Open Source Repos That Make Claude Code UNSTOPPABLE (Chase AI, 2026-03-30)
+- F_i_s0L2aWY — Claude Code Just Got 10X Powerful (The AI Growth Lab with Tom, 2026-03-30)
 
 ---
 
@@ -100,8 +103,20 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Cohere Transcribe (2026-03-29)
 - Crossnode (2026-03-29)
 - ClipTask (2026-03-29)
+- Hermes Agent v0.5 (2026-03-30)
+- Pensieve (2026-03-30)
+- OpenCode v1.3.5 (2026-03-30)
+- imgcmd (2026-03-30)
 
 ---
+
+## 2026-03-30
+- OpenAI Sora: Neue Finanzzahlen — 15 Mio. Dollar tägliche Inferenzkosten bei nur 2,1 Mio. Dollar Gesamteinnahmen, 0% Retention nach 60 Tagen, Disney erfuhr weniger als eine Stunde vor Ankündigung
+- "Agents of Chaos"-Studie (Northeastern, Harvard, MIT, Stanford, Carnegie Mellon): 6 KI-Agenten in Discord-Server deployed, 10 schwerwiegende Sicherheitsvorfälle in 2 Wochen, Sozialversicherungsnummern preisgegeben
+- EU Digital Omnibus: Bundesrat kritisiert geplante DSGVO-Aufweichung bei pseudonymisierten Daten, geleakter Ratskompromiss streicht Kernänderung komplett
+- Digitalminister Wildberger (BamS/NOZ): Benennt erstmals konkrete Berufsgruppen — Programmierer und Callcenter-Agenten — als direkt von KI-Ersetzung betroffen
+- China zeigt koordinierte Roboterhund-Kampfschwärme in CCTV-Doku "Unmanned Competition": Shadow (Aufklärung), Bloody (Bewaffnung), Polar (Logistik) als vernetztes Wolfsrudel
+- Reportage: Multimodale KI — Der Weg zum Omni-Modell, GPT-4o, Gemini 3.1, Markt 42 Mrd. Dollar bis 2034, Deloitte: nur 20% Talent-Readiness
 
 ## 2026-03-29
 - Alle elf xAI-Mitgründer haben das Unternehmen verlassen, Ross Nordeen und Manuel Kroiss als letzte — Musk kündigt Neuaufbau an
