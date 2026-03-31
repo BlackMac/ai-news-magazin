@@ -40,6 +40,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - gmaHRwijOXs — Everything You Thought About Building AI Agents is Wrong (Cole Medin, 2026-03-30)
 - 6SnFH43qPAw — 5 Open Source Repos That Make Claude Code UNSTOPPABLE (Chase AI, 2026-03-30)
 - F_i_s0L2aWY — Claude Code Just Got 10X Powerful (The AI Growth Lab with Tom, 2026-03-30)
+- M30gp1315Y4 — One Agent Is NOT ENOUGH: Agentic Coding BEYOND Claude Code (IndyDevDan, 2026-03-31)
+- jWDCnJKouhw — Are Your AI Agents Flying Blind? The Truth About AgentOps (IBM Technology, 2026-03-31)
+- zyjfngV4Fho — How to Run TurboQuant — "Lossless" Quantization for Local AI TESTED (xCreate, 2026-03-31)
 
 ---
 
@@ -107,8 +110,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Pensieve (2026-03-30)
 - OpenCode v1.3.5 (2026-03-30)
 - imgcmd (2026-03-30)
+- Copilot Cowork (2026-03-31)
+- Fin Apex 1.0 (2026-03-31)
+- Sanas Language Translation (2026-03-31)
+- Glia CoPilot & Banker (2026-03-31)
+- Ramp CLI (2026-03-31)
+- Altimate Code (2026-03-31)
 
 ---
+
+## 2026-03-31
+- Microsoft integriert Anthropics Claude in Copilot-Ökosystem: Copilot Cowork nutzt Claude für agentenbasiertes Reasoning, neues E7-Tier für 99 USD/User/Monat
+- Mistral AI beschafft 830 Mio. Dollar Fremdkapital für Rechenzentrum bei Paris (Bruyères-le-Châtel): 13.800 NVIDIA GB300 GPUs, 44 MW, Q2 2026
+- Rebellions (Südkorea) sammelt 400 Mio. Dollar Pre-IPO bei 2,34 Mrd. Bewertung: Inferenz-Chips als NVIDIA-Alternative, Börsengang H2 2026
+- MIT Technology Review: Pentagons Kulturkampf gegen Anthropic gescheitert — Richterin Lin blockiert Supply-Chain-Risk-Einstufung dauerhaft als "rechtswidrige Vergeltung"
+- Warhorse Studios entlässt Übersetzer Max Hejtmanek zugunsten von KI-Übersetzung bei Kingdom Come 2, Community-Aufschrei
+- Starcloud sammelt 170 Mio. Dollar Serie A für Rechenzentren im Weltraum: Bewertung 1,1 Mrd., erstes LLM-Training im Orbit demonstriert
+- Reportage: Synthetic Data — NVIDIA kauft Gretel für 320 Mio., Model Collapse (Shumailov et al.), EU AI Act Artikel 50
 
 ## 2026-03-30
 - OpenAI Sora: Neue Finanzzahlen — 15 Mio. Dollar tägliche Inferenzkosten bei nur 2,1 Mio. Dollar Gesamteinnahmen, 0% Retention nach 60 Tagen, Disney erfuhr weniger als eine Stunde vor Ankündigung
