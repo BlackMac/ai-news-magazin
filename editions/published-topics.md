@@ -40,6 +40,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - gmaHRwijOXs — Everything You Thought About Building AI Agents is Wrong (Cole Medin, 2026-03-30)
 - 6SnFH43qPAw — 5 Open Source Repos That Make Claude Code UNSTOPPABLE (Chase AI, 2026-03-30)
 - F_i_s0L2aWY — Claude Code Just Got 10X Powerful (The AI Growth Lab with Tom, 2026-03-30)
+- tf_KmDNZXzI — Claude Cowork - Full Course for Beginners (Tech With Tim, 2026-04-01)
+- wIXr22QTEHg — LLM Compression Explained: Build Faster, Efficient AI Models (IBM Technology, 2026-04-01)
+- eT1F2BAZJ64 — 2026 The Year of Agent Orchestration (MLOps.community, 2026-04-01)
 - M30gp1315Y4 — One Agent Is NOT ENOUGH: Agentic Coding BEYOND Claude Code (IndyDevDan, 2026-03-31)
 - jWDCnJKouhw — Are Your AI Agents Flying Blind? The Truth About AgentOps (IBM Technology, 2026-03-31)
 - zyjfngV4Fho — How to Run TurboQuant — "Lossless" Quantization for Local AI TESTED (xCreate, 2026-03-31)
@@ -116,8 +119,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Glia CoPilot & Banker (2026-03-31)
 - Ramp CLI (2026-03-31)
 - Altimate Code (2026-03-31)
+- Parallel Code (2026-04-01)
+- Klaviyo Composer (2026-04-01)
+- Windmill AI Sandboxes (2026-04-01)
+- Coro MCP Integration (2026-04-01)
+- Cisco Webex AI Agent (2026-04-01)
+- 9fin AI Platform (2026-04-01)
 
 ---
+
+## 2026-04-01
+- OpenAI schließt 122-Mrd.-Dollar-Finanzierungsrunde ab, 3 Mrd. von Kleinanlegern, Bewertung 852 Mrd., IPO Q4 2026 erwartet
+- Claude Code Quellcode-Leak via npm Source-Map: 512.000 Zeilen TypeScript, Tamagotchi-Buddy-System, KAIROS Always-On-Agent, 44 Feature-Flags, Anti-Distillation-Maßnahmen
+- NVIDIA investiert 2 Mrd. Dollar in Marvell, öffnet NVLink für Custom-ASICs via "NVLink Fusion", gemeinsame Silicon-Photonics-Entwicklung
+- Penguin Random House (Bertelsmann) verklagt OpenAI vor LG München wegen Kinderbuchserie "Drache Kokosnuss" — erste deutsche Buchverlags-Klage gegen KI-Firma
+- GitHub Copilot injizierte "Agent Tips"-Werbung (Raycast, VS Code etc.) in über 1,5 Mio. Pull Requests — Microsoft nennt es Bug, entfernt Feature
+- Google Quantum AI: RSA-2048 brechbar mit <1 Mio. physischen Qubits (vs. 20 Mio. in 2019), rein algorithmische Verbesserungen, Q-Day-Deadline 2029
+- Reportage: KI in der Kreativbranche — Suno 20 Mio. Nutzer/7 Mio. Songs pro Tag, Sora eingestellt, Warner-Suno-Lizenzdeal, SAG-AFTRA "Tilly Tax", Agentur-Layoffs
 
 ## 2026-03-31
 - Microsoft integriert Anthropics Claude in Copilot-Ökosystem: Copilot Cowork nutzt Claude für agentenbasiertes Reasoning, neues E7-Tier für 99 USD/User/Monat
