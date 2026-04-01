@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 1. April 2026</title>    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-01">Mittwoch, 1. April 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 1. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Finanzierung &middot; OpenAI</span><span class="toc-title">122 Milliarden Dollar: OpenAI holt erstmals Kleinanleger an Bord</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Sicherheit &middot; Anthropic</span><span class="toc-title">Claude Code: Quellcode-Leak enth&uuml;llt Tamagotchi-Pet und Always-On-Agent</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Chips &middot; NVIDIA</span><span class="toc-title">NVIDIA investiert 2 Milliarden Dollar in Marvell &mdash; und &ouml;ffnet NVLink</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Urheberrecht &middot; Deutschland</span><span class="toc-title">Drache Kokosnuss vs. OpenAI: Erster deutscher Verlag klagt</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Developer &middot; GitHub</span><span class="toc-title">Copilot schleuste Werbung in 1,5 Millionen Pull Requests</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Quantencomputing &middot; Google</span><span class="toc-title">Quantencomputer brauchen 20-mal weniger Ressourcen zum Brechen von Verschl&uuml;sselung</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">KI in der Kreativbranche</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Finanzierung &middot; OpenAI</div>
+            <h2 id="art-1-h">122 Milliarden Dollar: OpenAI holt erstmals Kleinanleger an Bord &mdash; und bereitet den B&ouml;rsengang vor</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: TechCrunch, CNBC, Bloomberg</div>
+        </header>
+        <p class="article-teaser">OpenAI schlie&szlig;t die gr&ouml;&szlig;te private Finanzierungsrunde der Geschichte ab &mdash; 122 Milliarden Dollar bei einer Bewertung von 852 Milliarden. Erstmals d&uuml;rfen auch Kleinanleger &uuml;ber Bankenkan&auml;le investieren. Die Branche liest das als Signal: Der B&ouml;rsengang kommt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Zahlen sprengen jede Dimension: SoftBank f&uuml;hrt die Runde mit 30 Milliarden Dollar an, gefolgt von NVIDIA mit ebenfalls 30 Milliarden und Amazon mit bis zu 50 Milliarden. Dazu kommen Andreessen Horowitz, D.E. Shaw Ventures, MGX, TPG und T. Rowe Price Associates. Wie wir in unserer <a href="2026-03-28.html#art-3">Ausgabe vom 28. M&auml;rz</a> berichteten, hatte sich SoftBank daf&uuml;r einen 40-Milliarden-Dollar-Br&uuml;ckenkredit bei JPMorgan und Goldman Sachs gesichert &mdash; die 12-Monats-Laufzeit passt zum erwarteten IPO-Zeitplan f&uuml;r das vierte Quartal 2026.</p>
+            <p>Das wirklich Ungew&ouml;hnliche: Drei Milliarden Dollar kommen von Kleinanlegern, die &uuml;ber Bankenkan&auml;le Zugang erhielten. Normalerweise sind solche Runden institutionellen Investoren vorbehalten. Die &Ouml;ffnung f&uuml;r Privatanleger &auml;hnelt eher einer Vor-IPO-Platzierung als klassischem Venture Capital &mdash; ein klares Signal, dass OpenAI den Boden f&uuml;r den B&ouml;rsengang bereitet.</p>
+            <p>Die Bewertung von 852 Milliarden Dollar w&uuml;rde OpenAI beim IPO in die Top-10 der wertvollsten Unternehmen weltweit katapultieren &mdash; noch vor TSMC oder Broadcom. Vor nur zwei Jahren lag die Bewertung bei 80 Milliarden Dollar. Unterf&uuml;ttert wird die astronomische Bewertung durch beeindruckendes Wachstum: OpenAI generiert nach eigenen Angaben 2 Milliarden Dollar Umsatz pro Monat, hat &uuml;ber 900 Millionen w&ouml;chentliche Nutzer und 50 Millionen zahlende Abonnenten.</p>
+            <p>F&uuml;r die KI-Branche setzt diese Runde ein Signal: Die Phase der spekulativen Bewertungen ohne Umsatzunterbau ist vorbei. OpenAI hat echte Umsatzzahlen &mdash; und Investoren wetten, dass das erst der Anfang ist. Die Frage bleibt, ob ein Unternehmen, das 2025 noch Milliardenverluste schrieb, die Erwartungen erf&uuml;llen kann, die eine 852-Milliarden-Bewertung impliziert.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/03/31/openai-not-yet-public-raises-3b-from-retail-investors-in-monster-122b-fund-raise/" rel="noopener noreferrer external">TechCrunch: OpenAI raises $3B from retail investors in $122B fund raise</a></li>
+                <li><a href="https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html" rel="noopener noreferrer external">CNBC: OpenAI closes record-breaking $122 billion funding round</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-31/openai-valued-at-852-billion-after-completing-122-billion-round" rel="noopener noreferrer external">Bloomberg: OpenAI Valued at $852 Billion</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Sicherheit &middot; Anthropic</div>
+            <h2 id="art-2-h">Claude Code: Quellcode-Leak enth&uuml;llt Tamagotchi-Pet, Always-On-Agent und 44 Feature-Flags</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: The Verge, Fortune, The Register, heise, VentureBeat</div>
+        </header>
+        <p class="article-teaser">Eine vergessene Source-Map-Datei im npm-Paket von Claude Code legt 512.000 Zeilen TypeScript-Quellcode offen. Die Funde sind brisant: Ein virtuelles Begleiter-Haustier, ein unver&ouml;ffentlichter autonomer Always-On-Agent namens KAIROS und Anti-Distillation-Ma&szlig;nahmen gegen Konkurrenten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Leak passierte denkbar simpel: Sicherheitsforscher Chaofan Shou entdeckte, dass Version 2.1.88 des npm-Pakets <code>@anthropic-ai/claude-code</code> eine 59,8 MB gro&szlig;e Source-Map-Datei (.map) enthielt &mdash; ein klassischer Fehler in der <code>.npmignore</code>-Konfiguration. Innerhalb von Stunden wurde der Code &uuml;ber 41.500 Mal auf GitHub geforkt.</p>
+            <p>Die spektakul&auml;rste Entdeckung ist KAIROS &mdash; ein unver&ouml;ffentlichter Always-On-Agent-Modus. Der Code zeigt einen /dream-Skill f&uuml;r n&auml;chtliche Memory-Destillation, t&auml;gliches Append-only-Logging, GitHub-Webhook-Integrationen, Background-Daemon-Worker und 5-Minuten-Cron-Zyklen. KAIROS ist hinter Feature-Flags versteckt und offenbar noch in Entwicklung &mdash; aber die Architektur zeigt, wohin Anthropic mit Claude Code will: ein Agent, der permanent im Hintergrund arbeitet.</p>
+            <p>Ebenfalls bemerkenswert: ein Tamagotchi-artiges &bdquo;Buddy&ldquo;-System mit 18 Spezies, Seltenheitsstufen und einer einprozentigen Chance auf &bdquo;Shiny&ldquo;-Varianten. Claude schreibt beim ersten &bdquo;Schl&uuml;pfen&ldquo; eine &bdquo;Soul Description&ldquo;. Geplant war ein Teaser f&uuml;r den 1.&ndash;7. April, mit vollem Launch im Mai 2026. Interne Codenames wurden ebenfalls sichtbar: Capybara f&uuml;r eine Claude-4.6-Variante, Fennec f&uuml;r Opus 4.6, Numbat f&uuml;r ein noch in der Testphase befindliches Modell.</p>
+            <p>F&uuml;r Anthropic ist es der zweite Sicherheitsvorfall innerhalb weniger Tage: Wie wir in unserer <a href="2026-03-27.html#art-1">Ausgabe vom 27. M&auml;rz</a> berichteten, hatte ein CMS-Konfigurationsfehler das &bdquo;Claude Mythos&ldquo;-Projekt exponiert. Die technischen Details &mdash; insbesondere die Anti-Distillation-Ma&szlig;nahmen, bei denen Fake-Tools injiziert werden, um kompetitives Model-Training zu vergiften &mdash; d&uuml;rften in der KI-Branche f&uuml;r Diskussionen sorgen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/" rel="noopener noreferrer external">Alex Kim: The Claude Code Source Leak</a></li>
+                <li><a href="https://fortune.com/2026/03/31/anthropic-source-code-claude-code-data-leak-second-security-lapse-days-after-accidentally-revealing-mythos/" rel="noopener noreferrer external">Fortune: Anthropic leaks Claude Code source code</a></li>
+                <li><a href="https://www.theregister.com/2026/03/31/anthropic_claude_code_source_code/" rel="noopener noreferrer external">The Register: Anthropic accidentally exposes Claude Code source code</a></li>
+                <li><a href="https://www.heise.de/news/Anthropics-Claude-Code-Kompletter-Quellcode-im-Netz-11242012.html" rel="noopener noreferrer external">heise: Anthropics Claude Code: Kompletter Quellcode im Netz</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Chips &middot; NVIDIA</div>
+            <h2 id="art-3-h">NVIDIA investiert 2 Milliarden Dollar in Marvell &mdash; und &ouml;ffnet NVLink f&uuml;r fremde Chips</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: Bloomberg, CNBC, SiliconANGLE, Marvell IR</div>
+        </header>
+        <p class="article-teaser">NVIDIA beteiligt sich mit 2 Milliarden Dollar an Marvell Technology &mdash; und &ouml;ffnet sein Hochgeschwindigkeits-Interconnect NVLink f&uuml;r Marvells Custom-ASICs. Ein Paradigmenwechsel: Bisher war NVLink ein geschlossenes &Ouml;kosystem nur f&uuml;r NVIDIA-eigene GPUs.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Partnerschaft &bdquo;NVLink Fusion&ldquo; ist strategisch klug: Cloud-Hyperscaler wie Amazon, Google und Microsoft wollen zunehmend eigene, spezialisierte Inferenz-Chips einsetzen. Bisher mussten sie daf&uuml;r auf NVIDIAs schnellen NVLink-Interconnect verzichten und langsamere Alternativen nutzen. Durch die &Ouml;ffnung k&ouml;nnen Marvells Custom-ASICs k&uuml;nftig direkt &uuml;ber NVLink mit NVIDIA-GPUs kommunizieren &mdash; ein Best-of-Both-Worlds f&uuml;r Rechenzentren.</p>
+            <p>F&uuml;r NVIDIA ist das ein Verteidigungszug gegen die wachsende Custom-Silicon-Bewegung. Statt zu riskieren, dass Kunden komplett auf eigene Chips und Interconnects wechseln, macht NVIDIA seine Plattform zum unverzichtbaren R&uuml;ckgrat &mdash; auch f&uuml;r Konkurrenzchips. Die gemeinsame Entwicklung von Silicon Photonics (Licht&uuml;bertragung statt Kupferkabel) zeigt, wie tief die technische Integration gehen soll.</p>
+            <p>Marvells Aktie stieg nach der Ank&uuml;ndigung um 13 Prozent. Die Investition reiht sich in NVIDIAs Serie strategischer Beteiligungen ein: In den vergangenen Monaten flossen jeweils 2 Milliarden Dollar in Synopsys, CoreWeave, Coherent, Lumentum und die Nebius Group. NVIDIA sichert damit systematisch seine Lieferkette und sein Partner-&Ouml;kosystem ab.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-31/nvidia-invests-2-billion-in-marvell-announces-partnership" rel="noopener noreferrer external">Bloomberg: Nvidia Invests $2 Billion in Marvell</a></li>
+                <li><a href="https://www.cnbc.com/2026/03/31/here-is-why-nvidias-partnership-and-investment-in-marvell-is-such-a-big-deal.html" rel="noopener noreferrer external">CNBC: Why Nvidia&rsquo;s partnership with Marvell is such a big deal</a></li>
+                <li><a href="https://siliconangle.com/2026/03/31/nvidia-invests-2b-marvell-part-new-interconnect-partnership/" rel="noopener noreferrer external">SiliconANGLE: Nvidia invests $2B in Marvell</a></li>
+                <li><a href="https://investor.marvell.com/news-events/press-releases/detail/1019/nvidia-ai-ecosystem-expands-as-marvell-joins-forces-through-nvlink-fusion" rel="noopener noreferrer external">Marvell IR: NVLink Fusion Partnership</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Urheberrecht &middot; Deutschland</div>
+            <h2 id="art-4-h">Drache Kokosnuss vs. OpenAI: Erster deutscher Buchverlag verklagt KI-Firma</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: t3n, meedia, B&ouml;rsenblatt, buchmarkt.de</div>
+        </header>
+        <p class="article-teaser">Penguin Random House (Bertelsmann) verklagt OpenAI vor dem Landgericht M&uuml;nchen. Der Vorwurf: ChatGPT reproduziert Texte und Illustrationen der Kinderbuchserie &bdquo;Der kleine Drache Kokosnuss&ldquo; &mdash; und liefert gleich eine Anleitung zur Ver&ouml;ffentlichung auf Self-Publishing-Plattformen mit.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Klage, eingereicht am 27. M&auml;rz gegen OpenAI Ireland Ltd., ist die erste eines gro&szlig;en Buchverlags gegen einen KI-Anbieter in Deutschland. Der Fall ist strategisch gew&auml;hlt: &bdquo;Der kleine Drache Kokosnuss&ldquo; von Ingo Siegner &mdash; 33 B&auml;nde seit 2002, regelm&auml;&szlig;iger Bestseller &mdash; geh&ouml;rt zu den bekanntesten deutschen Kinderbuchmarken.</p>
+            <p>Die Vorw&uuml;rfe gehen &uuml;ber bisherige KI-Urheberrechtsklagen hinaus: ChatGPT gibt nicht nur Inhalte in erkennbarer Form aus, sondern erzeugt auch Illustrationen, die dem Original &bdquo;zum Verwechseln &auml;hneln&ldquo;, und macht eigeninitiativ Vorschl&auml;ge f&uuml;r druckfertige Manuskripte mit verletzenden Covern und Klappentexten. Penguin Random House sieht darin &bdquo;klare Indizien&ldquo; f&uuml;r eine unrechtm&auml;&szlig;ige Nutzung der Werke zum KI-Training &mdash; eine sogenannte Memorisierung im Modell. OpenAI reagierte laut Klageschrift trotz Fristsetzung nicht auf Abmahn- und Auskunftsforderungen.</p>
+            <p>International w&auml;chst der Druck auf KI-Firmen: Wie wir in unserer <a href="2026-03-19.html#art-1">Ausgabe vom 19. M&auml;rz</a> berichteten, hat BMG Anthropic wegen 493 Songtexten verklagt. In den USA laufen parallele Klagen von Encyclopedia Britannica und Merriam-Webster gegen OpenAI. Die Frage, ob KI-Training mit urheberrechtlich gesch&uuml;tzten Werken eine Rechtsverletzung darstellt, wird fr&uuml;her oder sp&auml;ter h&ouml;chstrichterlich gekl&auml;rt werden m&uuml;ssen &mdash; sowohl in Deutschland als auch auf EU-Ebene, wo der AI Act ab August 2026 neue Transparenzpflichten f&uuml;r Trainingsdaten vorsieht.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://t3n.de/news/kokosnuss-openai-klage-1736775/" rel="noopener noreferrer external">t3n: Drache Kokosnuss versus OpenAI &mdash; Erster Verlag verklagt KI-Firma in Deutschland</a></li>
+                <li><a href="http://meedia.de/news/beitrag/21477-chatgpt-kopiert-quot-drache-kokosnuss-quot-penguin-random-house-verklagt-openai.html" rel="noopener noreferrer external">meedia: ChatGPT kopiert &bdquo;Drache Kokosnuss&ldquo;</a></li>
+                <li><a href="https://www.boersenblatt.net/news/penguin-random-house-verlagsgruppe-klagt-gegen-openai-417763" rel="noopener noreferrer external">B&ouml;rsenblatt: Penguin Random House klagt gegen OpenAI</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Developer &middot; GitHub</div>
+            <h2 id="art-5-h">Copilot schleuste Werbung in 1,5 Millionen Pull Requests &mdash; Microsoft nennt es einen Bug</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: The Register, WinBuzzer, Windows Central, Neowin</div>
+        </header>
+        <p class="article-teaser">GitHub Copilot injizierte sogenannte &bdquo;Agent Tips&ldquo; in &uuml;ber 1,5 Millionen Pull Requests &mdash; darunter Empfehlungen f&uuml;r Raycast, VS Code und Slack-Integrationen. Microsoft bezeichnet den Vorfall als Programmierfehler. Die Entwickler-Community ist skeptisch.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Vorfall trifft einen Nerv: Die &bdquo;Agent Tips&ldquo; waren laut Microsoft eigentlich nur f&uuml;r Pull Requests gedacht, die Copilot selbst erstellt hatte. Durch einen &bdquo;Programming Logic Issue&ldquo; tauchten sie jedoch auch in menschlich erstellten PRs auf, sobald Copilot zur Bearbeitung hinzugezogen wurde. Eine GitHub-Code-Suche fand die injizierte Phrase in &uuml;ber 11.000 Pull Requests quer durch tausende Repositories.</p>
+            <p>Besonders problematisch: Die &bdquo;Tipps&ldquo; empfahlen neben Microsoft-eigenen Produkten wie VS Code und Visual Studio auch Drittanbieter wie Raycast &mdash; was den Verdacht n&auml;hrt, dass die Einbettungen als Monetarisierungsstrategie geplant waren. Microsoft hat die Agent Tips inzwischen aus PR-Kommentaren entfernt, doch bereits betroffene PR-Beschreibungen k&ouml;nnen nicht automatisch zur&uuml;ckgerollt werden. Open-Source-Maintainer m&uuml;ssen die injizierten Inhalte manuell entfernen.</p>
+            <p>Der Vorfall f&auml;llt in eine Zeit wachsenden Misstrauens gegen&uuml;ber GitHubs KI-Strategie. Wie wir in unserer <a href="2026-03-28.html#art-1">Ausgabe vom 28. M&auml;rz</a> berichteten, &auml;nderte GitHub seine Datenschutzrichtlinie: Ab dem 24. April werden Copilot-Interaktionsdaten zum KI-Training verwendet, sofern Nutzer nicht aktiv widersprechen. Der Werbeskandal verst&auml;rkt die Sorge, dass GitHub die Open-Source-Community zunehmend als Ressource statt als Partner betrachtet.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theregister.com/2026/03/30/github_copilot_ads_pull_requests/" rel="noopener noreferrer external">The Register: GitHub backs down, kills Copilot pull-request ads</a></li>
+                <li><a href="https://winbuzzer.com/2026/03/31/github-copilot-injected-ads-pull-requests-xcxwbn/" rel="noopener noreferrer external">WinBuzzer: GitHub Copilot Injected Ads Into 1.5 Million PRs</a></li>
+                <li><a href="https://www.windowscentral.com/software-apps/microsofts-ai-slop-is-infecting-github-copilot-is-now-injecting-ads-into-pull-requests" rel="noopener noreferrer external">Windows Central: Copilot is now injecting ads into PRs</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Quantencomputing &middot; Google</div>
+            <h2 id="art-6-h">Quantencomputer brauchen 20-mal weniger Ressourcen als gedacht, um Verschl&uuml;sselung zu brechen</h2>
+            <div class="article-meta"><time datetime="2026-03-31">31. M&auml;rz 2026</time> &middot; Quellen: Google Blog, SecurityWeek, The Quantum Insider, Bloomberg</div>
+        </header>
+        <p class="article-teaser">Google Quantum AI ver&ouml;ffentlicht ein Paper, das die gesch&auml;tzten Ressourcen zum Brechen von RSA-2048 auf unter eine Million physische Qubits senkt &mdash; 2019 ging man noch von 20 Millionen aus. Die Post-Quantum-Migration wird dringender denn je.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Googles Forscher Craig Gidney zeigt in seinem Paper, dass RSA-2048 &mdash; die Verschl&uuml;sselung, die einen Gro&szlig;teil des Internets sch&uuml;tzt &mdash; mit weniger als einer Million physischen Qubits in unter einer Woche gebrochen werden k&ouml;nnte. Noch 2019 lag die Sch&auml;tzung bei 20 Millionen Qubits. In den letzten zwei Jahrzehnten sind die gesch&auml;tzten Ressourcen f&uuml;r Shors Algorithmus um f&uuml;nf Gr&ouml;&szlig;enordnungen gefallen: von rund einer Milliarde physischen Qubits im Jahr 2012 auf unter eine Million heute.</p>
+            <p>Entscheidend: Es handelt sich um rein algorithmische und architektonische Verbesserungen &mdash; keinen Hardware-Durchbruch. Die Methoden &bdquo;Approximate Residue Arithmetic&ldquo; und &bdquo;Yoked Surface Codes&ldquo; optimieren, wie Quantenfehlerkorrektur und arithmetische Operationen auf bestehender Hardware implementiert werden. Das Paper betrifft auch Elliptic Curve Cryptography (ECC), das R&uuml;ckgrat der Blockchain-Sicherheit &mdash; was Auswirkungen auf rund 1,7 Millionen Bitcoin in Wallets mit exponierten Public Keys haben k&ouml;nnte.</p>
+            <p>Wie wir in unserer <a href="2026-03-26.html#art-1">Ausgabe vom 26. M&auml;rz</a> berichteten, hat Google seine interne Q-Day-Deadline bereits auf 2029 vorgezogen und ML-DSA in Android 17 integriert. Das neue Paper unterstreicht: Die Post-Quantum-Migration ist nicht mehr optional. Unternehmen und Regierungen m&uuml;ssen quantenresistente Kryptografie innerhalb der n&auml;chsten drei bis f&uuml;nf Jahre implementieren. Google ver&ouml;ffentlichte die konkreten Quantenschaltkreise bewusst nicht, sondern bietet stattdessen einen Zero-Knowledge-Proof zur unabh&auml;ngigen Verifizierung an.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://blog.google/innovation-and-ai/technology/safety-security/the-quantum-era-is-coming-are-we-ready-to-secure-it/" rel="noopener noreferrer external">Google Blog: The quantum era is coming</a></li>
+                <li><a href="https://www.securityweek.com/google-slashes-quantum-resource-requirements-for-breaking-cryptocurrency-encryption/" rel="noopener noreferrer external">SecurityWeek: Google Slashes Quantum Resource Requirements</a></li>
+                <li><a href="https://thequantuminsider.com/2026/03/31/q-day-just-got-closer-three-papers-in-three-months-are-rewriting-the-quantum-threat-timeline/" rel="noopener noreferrer external">The Quantum Insider: Q-Day Just Got Closer</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-31/google-paper-warns-crypto-on-quantum-risk-ahead-of-2029-timeline" rel="noopener noreferrer external">Bloomberg: Google Paper Warns Crypto on Quantum Risk</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE-TEASER ═══ -->
+    <section class="article section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">KI in der Kreativbranche &mdash; Musik, Film, Werbung: Zwischen Produktivit&auml;tsboost und Existenzangst</h2>
+            <p class="article-teaser">Suno generiert 7 Millionen Songs am Tag, Sora ist gescheitert, Agenturen bauen tausende Stellen ab. Die Kreativbranche erlebt den radikalsten Umbruch seit der Digitalisierung &mdash; und die Frage ist nicht mehr ob, sondern wie schnell KI kreative Berufe ver&auml;ndert.</p>
+            <a href="reportagen/2026-04-01.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">6 neue KI-Tools, die diese Woche aufgefallen sind</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/parallelcode.dev.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://parallelcode.dev/" rel="noopener noreferrer external">Parallel Code</a></div>
+                    <div class="tool-card-desc">Open-Source-CLI-Tool, das bis zu 10 KI-Coding-Agenten gleichzeitig in isolierten Git-Worktrees ausf&uuml;hrt. Man vergleicht die Ergebnisse und beh&auml;lt den besten Branch &mdash; ohne Merge-Konflikte.</div>
+                    <div class="tool-card-meta">30. M&auml;rz 2026. Open Source (MIT-Lizenz), Community-Projekt.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/klaviyo.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.klaviyo.com/composer" rel="noopener noreferrer external">Klaviyo Composer</a></div>
+                    <div class="tool-card-desc">KI-Agent, der aus einem einzigen Prompt komplette Marketing-Kampagnen generiert &mdash; inklusive Zielgruppen-Segmentierung, Copy, Bilder und Versandlogik. Basiert auf 14+ Jahren Klaviyo-Performance-Daten.</div>
+                    <div class="tool-card-meta">24. M&auml;rz 2026. Klaviyo (NYSE: KVYO), Private Beta.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/windmill.dev.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.windmill.dev/" rel="noopener noreferrer external">Windmill AI Sandboxes</a></div>
+                    <div class="tool-card-desc">Isolierte, persistente Sandbox-Umgebungen f&uuml;r KI-Coding-Agenten in Produktions-Workflows. Agenten sind vom Host abgeschottet, behalten aber persistenten Speicher zwischen Runs.</div>
+                    <div class="tool-card-meta">30. M&auml;rz 2026. Windmill (Open Source, YC-backed).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/coro.net.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.coro.net/" rel="noopener noreferrer external">Coro MCP Integration</a></div>
+                    <div class="tool-card-desc">Erste Security-Plattform, die Cybersecurity-Operationen via Model Context Protocol direkt in KI-Tools wie ChatGPT und Claude bringt. Sicherheitsdaten abfragen und Aktionen per Konversation ausl&ouml;sen.</div>
+                    <div class="tool-card-meta">30. M&auml;rz 2026. Coro (Cybersecurity, &gt;$300M Funding).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/webex.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.webex.com/" rel="noopener noreferrer external">Cisco Webex AI Agent</a></div>
+                    <div class="tool-card-desc">Self-Service-KI-Agent f&uuml;r Kundenservice im Webex Contact Center. Unternehmen w&auml;hlen zwischen autonomen Agenten mit dynamischer Konversation und skriptgesteuerten Agenten mit vorkonfigurierten Antworten.</div>
+                    <div class="tool-card-meta">31. M&auml;rz 2026. Cisco (NASDAQ: CSCO), GA.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/9fin.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.9fin.com/" rel="noopener noreferrer external">9fin AI Platform</a></div>
+                    <div class="tool-card-desc">KI-native Plattform f&uuml;r globale Kreditm&auml;rkte: Deal Intelligence, Risiko-Monitoring und Covenant-Analyse. Prognostiziert Deals Monate im Voraus und liefert Fr&uuml;hwarnsignale f&uuml;r Restrukturierungen.</div>
+                    <div class="tool-card-meta">31. M&auml;rz 2026. 9fin (London/NYC, $170M Serie C, Unicorn).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=tf_KmDNZXzI" rel="noopener noreferrer external"><img src="../assets/images/thumbs/tf_KmDNZXzI.jpg" alt="Tech With Tim Claude Cowork Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 24 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=tf_KmDNZXzI" rel="noopener noreferrer external">Claude Cowork &mdash; Full Course for Beginners</a></div>
+                    <div class="yt-card-channel">Tech With Tim (1,98M Subs) &middot; 31. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">Tech With Tim f&uuml;hrt durch Anthropics neues Claude Cowork von der Einrichtung bis zum produktiven Einsatz. Das Tutorial zeigt, wie man Cowork-Projekte anlegt, spezialisierte Agent-Teams zusammenstellt und kollaborative Multi-Agent-Workflows f&uuml;r komplexe Aufgaben baut.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=wIXr22QTEHg" rel="noopener noreferrer external"><img src="../assets/images/thumbs/wIXr22QTEHg.jpg" alt="IBM Technology LLM Compression Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 11 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=wIXr22QTEHg" rel="noopener noreferrer external">LLM Compression Explained: Build Faster, Efficient AI Models</a></div>
+                    <div class="yt-card-channel">IBM Technology (1,63M Subs) &middot; 31. M&auml;rz 2026</div>
+                    <div class="yt-card-desc">IBM Technology erkl&auml;rt die drei Schl&uuml;sseltechniken zur LLM-Kompression: Quantisierung, Pruning und Knowledge Distillation. Ein kompakter &Uuml;berblick &uuml;ber Trade-offs bei Modellgr&ouml;&szlig;e, Geschwindigkeit und Qualit&auml;t &mdash; besonders relevant f&uuml;r Teams, die LLMs mit begrenztem Compute-Budget deployen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=eT1F2BAZJ64" rel="noopener noreferrer external"><img src="../assets/images/thumbs/eT1F2BAZJ64.jpg" alt="MLOps.community Agent Orchestration Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 28 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=eT1F2BAZJ64" rel="noopener noreferrer external">2026: The Year of Agent Orchestration</a></div>
+                    <div class="yt-card-channel">MLOps.community (35.800 Subs) &middot; 31. M&auml;rz 2026 &middot; 4.700+ Views</div>
+                    <div class="yt-card-desc">MLOps.community analysiert, warum 2026 das Durchbruchsjahr f&uuml;r Multi-Agent-Orchestrierung in Produktionsumgebungen wird. Das Video untersucht praktische Patterns f&uuml;r die Koordination mehrerer KI-Agenten &mdash; von A2A-Protokollen &uuml;ber MCP-Integration bis zu realen Deployment-Herausforderungen. Mit 4.700+ Views in unter 24 Stunden auf einem 35K-Kanal ein klares Signal f&uuml;r das starke Interesse an Agent-Orchestrierung in der MLOps-Community.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

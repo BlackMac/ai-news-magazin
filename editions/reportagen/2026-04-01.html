@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: KI in der Kreativbranche &mdash; Die Inferenz, 1. April 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0; padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute; top: -200%; left: 0;
+            padding: 0.75rem 1.5rem; background: var(--accent); color: #fff;
+            font-family: var(--font-sans); font-size: 1rem; font-weight: 600;
+            text-decoration: none; z-index: 9999; border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color 0.15s ease; }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header { border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 100; }
+        .site-header-inner {
+            max-width: var(--width-content); margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-3);
+        }
+        .site-title { font-family: var(--font-sans); font-weight: 800; font-size: 1.35rem; color: var(--text-primary); text-decoration: none; letter-spacing: -0.02em; }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav { display: flex; gap: var(--space-6); font-family: var(--font-sans); font-size: var(--text-sm); }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none; border: 1px solid var(--border); border-radius: 6px;
+            padding: 0.4rem 0.6rem; font-family: var(--font-sans); font-size: var(--text-sm);
+            color: var(--text-muted); cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 55ch;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-4);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .article-body h3 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: var(--text-lg);
+            color: var(--text-primary);
+            margin: var(--space-8) 0 var(--space-3);
+            text-wrap: balance;
+        }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-01.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>KI in der Kreativbranche &mdash; Zwischen Produktivit&auml;tsboost und Existenzangst</h1>
+    <p class="article-subtitle">Suno generiert 7&nbsp;Millionen Songs am Tag, OpenAI hat Sora eingestellt, und Werbeagenturen bauen tausende Stellen ab. Die Kreativbranche erlebt den radikalsten Umbruch seit der Digitalisierung.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-01">Mittwoch, 1. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <h2>Die neue Kreativmaschine</h2>
+
+        <p>Wenn Suno, das Musik-KI-Startup aus Cambridge, Massachusetts, jeden Tag 7&nbsp;Millionen Songs generiert, dann ist das mehr als die gesamte Musikindustrie in einem Jahr produziert. Das Unternehmen, das 2023 noch kaum jemandem bekannt war, hat inzwischen &uuml;ber 20&nbsp;Millionen Nutzer, wird mit 2,45&nbsp;Milliarden Dollar bewertet und erzielte im November 2025 einen Jahresumsatz von 200&nbsp;Millionen Dollar. Parallel ist Google mit Lyria&nbsp;3&nbsp;Pro eingestiegen: seit dem 25.&nbsp;M&auml;rz 2026 k&ouml;nnen Nutzer komplette Tracks mit Intro, Strophen, Refrain und Bridges generieren &mdash; inklusive SynthID-Wasserzeichen zur Kennzeichnung.</p>
+
+        <p>Die Zahlen klingen beeindruckend. Doch sie erz&auml;hlen nur die halbe Geschichte. Denn w&auml;hrend KI-Tools in Musik, Film und Werbung beispiellose neue M&ouml;glichkeiten er&ouml;ffnen, l&ouml;sen sie gleichzeitig eine Welle der Verunsicherung aus, die ganze Berufsgruppen erfasst.</p>
+
+        <h2>Musik: Vom Kl&auml;ger zum Lizenznehmer</h2>
+
+        <p>Die Musikindustrie hat in weniger als 18&nbsp;Monaten eine bemerkenswerte Kehrtwende vollzogen. Universal, Sony und Warner verklagten 2024 gemeinsam Suno und Udio wegen Copyright-Verletzungen. Doch statt auf einen Gerichtsentscheid zu warten, schloss Warner&nbsp;Music im November 2025 einen historischen Lizenzdeal mit Suno &mdash; die erste Partnerschaft eines Major-Labels mit einer KI-Musikplattform. Universal einigte sich kurz darauf mit Udio. Sony hingegen klagt weiter.</p>
+
+        <p>Die Deals sehen vor, dass K&uuml;nstler ihre Werke per Opt-in f&uuml;r KI-Training lizenzieren k&ouml;nnen. Eine neue Abo-Plattform soll 2026 starten. Die Logik dahinter: Lieber die Bedingungen mitgestalten als die Kontrolle verlieren. Google setzt mit Lyria&nbsp;3&nbsp;Pro bewusst auf ein anderes Modell &mdash; Training ausschlie&szlig;lich auf lizenzierten Daten, klare Abgrenzung von Suno und Udio. F&uuml;r die Branche zeichnet sich damit ein zweigleisiges System ab: lizenzierte KI-Generierung auf der einen, umstrittenes Scraping auf der anderen Seite.</p>
+
+        <h2>Film: Der teuerste Flop der KI-Geschichte</h2>
+
+        <p>Nichts illustriert die Fallstricke der KI-Videogenerierung besser als OpenAIs Sora. Wie wir in unserer <a href="../2026-03-25.html#art-1">Ausgabe vom 25.&nbsp;M&auml;rz</a> berichteten, stellte OpenAI seinen Videogenerator nach nur sechs Monaten ein &mdash; bei Inferenzkosten von gesch&auml;tzten 15&nbsp;Millionen Dollar pro Tag und gerade einmal 2,1&nbsp;Millionen Dollar Gesamtumsatz &uuml;ber die gesamte Lebensdauer. Eine geplante Milliarden-Dollar-Partnerschaft mit Disney platzte.</p>
+
+        <div class="pull-quote">Sora war der teuerste Proof of Concept der KI-Geschichte: 15&nbsp;Millionen Dollar t&auml;gliche Kosten bei 2,1&nbsp;Millionen Dollar Gesamtumsatz. Die Lektion: Faszinierende Demos allein machen noch kein Gesch&auml;ftsmodell.</div>
+
+        <p>Die Konkurrenz profitiert: Runway hat sich mit Gen-4 als Werkzeug f&uuml;r professionelle Filmemacher etabliert, mit granularer Kontrolle &uuml;ber Kamerabewegung und narrativer Kontinuit&auml;t. Kuaishous Kling hat aus China heraus &uuml;ber 60&nbsp;Millionen Creator erreicht und mehr als 600&nbsp;Millionen Videos generiert &mdash; bei einem Preis von nur 0,07&nbsp;Dollar pro Sekunde. Pika bedient Einsteiger, Google setzt auf h&ouml;here Qualit&auml;t mit Veo&nbsp;3.1. Die KI-Videogenerierung ist nicht gescheitert &mdash; nur Soras Gesch&auml;ftsmodell war es.</p>
+
+        <p>In Hollywood stehen derweil die n&auml;chsten Verhandlungen an. Die 2023 erkn&uuml;pften Vertr&auml;ge der WGA (Drehbuchautoren) und SAG-AFTRA (Schauspieler, 160.000&nbsp;Mitglieder) laufen 2026 aus. SAG-AFTRA fordert unter anderem eine &bdquo;Tilly Tax&ldquo; &mdash; eine Abgabe, wenn Studios menschliche Darsteller durch digitale Klone ersetzen. Die WGA verlangt st&auml;rkere Leitplanken gegen KI-Einsatz bei der Drehbuchentwicklung. Die Studios erw&auml;gen F&uuml;nf-Jahres-Vertr&auml;ge, um Planungssicherheit zu schaffen.</p>
+
+        <h2>Werbung: Die stille Revolution</h2>
+
+        <p>In der Werbebranche vollzieht sich der Umbruch weniger spektakul&auml;r, aber nicht minder tiefgreifend. Nach McKinsey nutzen 78&nbsp;Prozent aller Organisationen KI in mindestens einer Gesch&auml;ftsfunktion &mdash; &uuml;ber 60&nbsp;Prozent der Marketingleiter setzen generative KI f&uuml;r Content-Erstellung ein. Coca-Cola hat mit &bdquo;Project Fizzion&ldquo; zusammen mit Adobe ein Design-Intelligence-System aufgebaut, das lokalisierte Kampagnenvarianten zehnmal schneller erstellt als traditionelle Workflows.</p>
+
+        <p>Die Kehrseite zeigt sich in den Personalzahlen. Dentsu hat 3.400&nbsp;Jobs gestrichen, WPP 7.000, Interpublic 3.200, Omnicom 3.000. Forrester beziffert den R&uuml;ckgang der Agentur-Belegschaften auf 8&nbsp;Prozent in 2025. Das Beratungsunternehmen Challenger, Gray &amp; Christmas sch&auml;tzt, dass KI allein in den USA f&uuml;r &uuml;ber 100.000 Jobstreichungen im Jahr 2025 verantwortlich war &mdash; in den ersten Monaten 2026 kamen bereits &uuml;ber 31.000 hinzu.</p>
+
+        <p>Die Holdinggesellschaften bauen sich um KI herum um: WPP&nbsp;Open&nbsp;Pro, Publicis&nbsp;CoreAI, Omnicom&nbsp;Omni&nbsp;Assist hei&szlig;en die neuen Plattformen. Das Muster ist &uuml;berall gleich: Weniger Junior-Positionen f&uuml;r Ausf&uuml;hrung, mehr Senior-Rollen f&uuml;r Strategie und KI-Orchestrierung. Horizon Media strich im M&auml;rz 2026 50&nbsp;Stellen &mdash; und schrieb gleichzeitig &uuml;ber 100 neue Positionen in Data, Tech und KI aus.</p>
+
+        <h2>Die Existenzfrage</h2>
+
+        <p>Der World Economic Forum prognostiziert in seinem &bdquo;Future of Jobs Report 2025&ldquo;, dass bis 2030 weltweit 92&nbsp;Millionen Jobs eliminiert, aber 170&nbsp;Millionen neue geschaffen werden &mdash; netto ein Plus von 78&nbsp;Millionen. McKinsey sch&auml;tzt, dass generative KI 60 bis 70&nbsp;Prozent der aktuellen Arbeitst&auml;tigkeiten vor 2030 automatisieren k&ouml;nnte, was &auml;quivalent zu 300&nbsp;Millionen Vollzeitstellen w&auml;re.</p>
+
+        <p>Doch die Gesamtzahlen verdecken eine unbequeme Wahrheit: Die Menschen, die ihren Job verlieren, sind selten dieselben, die die neuen Stellen besetzen k&ouml;nnen. Ein Grafiker, der Layouts f&uuml;r Social-Media-Posts erstellt hat, wird nicht &uuml;ber Nacht zum KI-Workflow-Designer. Ein Stockfotograf hat andere Kompetenzen als ein Prompt Engineer. In der Kreativbranche zeichnet sich ein Muster ab, das man aus fr&uuml;heren Automatisierungswellen kennt: KI ersetzt nicht alle kreative Arbeit, aber sie komprimiert dramatisch die Nachfrage auf der Ausf&uuml;hrungsebene. Ein Senior Creative Director mit KI-Tools kann den Output von f&uuml;nf Junior-Designern ersetzen.</p>
+
+        <h2>Zwischen Regulierung und Realit&auml;t</h2>
+
+        <p>Der EU&nbsp;AI&nbsp;Act tritt am 2.&nbsp;August 2026 f&uuml;r Hochrisiko-KI-Systeme in Kraft. Alle Anbieter gro&szlig;er KI-Modelle m&uuml;ssen dann eine strukturierte &ouml;ffentliche Zusammenfassung ihrer Trainingsdaten ver&ouml;ffentlichen und Copyright-Opt-outs respektieren. Europ&auml;ische Kreativverb&auml;nde, darunter die European Composer and Songwriter Alliance, kritisieren allerdings, der AI Act sch&uuml;tze Kreative nicht ausreichend &mdash; es fehle ein klarer Weg zu Verg&uuml;tung f&uuml;r die Nutzung ihrer Werke.</p>
+
+        <p>In den USA fehlt ein vergleichbares Bundesgesetz. Stattdessen setzen die Label-Deals mit Suno und Udio ein Marktmodell: Opt-in-Lizenzierung statt pauschaler Nutzung. Ob sich dieses Modell auch auf andere Kreativbereiche &mdash; Texte, Bilder, Video &mdash; &uuml;bertragen l&auml;sst, ist offen.</p>
+
+        <p>Die Kreativbranche steht an einem Scheideweg. Die Technologie ist da, die wirtschaftlichen Anreize sind gewaltig, und die Regulierung hinkt hinterher. F&uuml;r Unternehmen, die KI-Tools einsetzen, stellt sich nicht mehr die Frage ob, sondern wie &mdash; und wie sie sicherstellen, dass der Produktivit&auml;tsboost nicht auf Kosten der kreativen Substanz geht, von der ihr Gesch&auml;ft letztlich lebt. Denn eines zeigt das Sora-Debakel: Faszinierende Demos und nachhaltige Gesch&auml;ftsmodelle sind zwei sehr verschiedene Dinge.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://www.trendingtopics.eu/ai-musik-startup-suno-sammelt-250-millionen-dollar-ein-trotz-klagen-der-musikindustrie/" rel="noopener noreferrer external">TrendingTopics: Suno sammelt 250 Millionen Dollar ein</a></li>
+            <li><a href="https://techcrunch.com/2025/11/19/warner-music-settles-copyright-lawsuit-with-udio-signs-deal-for-ai-music-platform/" rel="noopener noreferrer external">TechCrunch: Warner Music settles with Udio, signs AI music deal</a></li>
+            <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/lyria-3-developers/" rel="noopener noreferrer external">Google: Lyria 3 Pro f&uuml;r Entwickler</a></li>
+            <li><a href="https://nerdleveltech.com/openai-sora-shutdown-lessons-from-ais-most-expensive-failure" rel="noopener noreferrer external">Nerd Level Tech: Sora Shutdown &mdash; Lessons from AI&rsquo;s Most Expensive Failure</a></li>
+            <li><a href="https://nofilmschool.com/2026-wga-contract-negotiations" rel="noopener noreferrer external">No Film School: 2026 WGA Contract Negotiations</a></li>
+            <li><a href="https://www.hollywoodreporter.com/business/business-news/sag-aftra-2026-negotiation-dates-revealed-1236454630/" rel="noopener noreferrer external">Hollywood Reporter: SAG-AFTRA 2026 Negotiation Dates</a></li>
+            <li><a href="https://almcorp.com/blog/how-coca-cola-uses-ai-in-marketing-and-product-development/" rel="noopener noreferrer external">ALM Corp: Coca-Cola und KI im Marketing</a></li>
+            <li><a href="https://digiday.com/marketing/as-industry-layoffs-become-the-new-normal-so-does-fear-of-ais-impact-on-adlands-job-market/" rel="noopener noreferrer external">Digiday: Layoffs und KI-Angst in der Werbebranche</a></li>
+            <li><a href="https://www.storyboard18.com/brand-marketing/companies-that-cited-ai-for-layoffs-slash-tens-of-thousands-of-jobs-in-2025-86856.htm" rel="noopener noreferrer external">Storyboard18: KI-bedingte Layoffs 2025</a></li>
+            <li><a href="https://blog.theinterviewguys.com/the-state-of-ai-in-the-workplace-in-2025/" rel="noopener noreferrer external">WEF Future of Jobs Report 2025: 170 Mio. neue Jobs</a></li>
+            <li><a href="https://scalevise.com/resources/eu-ai-act-2026-changes/" rel="noopener noreferrer external">Scalevise: EU AI Act 2026 Changes</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script></body>
+</html>
