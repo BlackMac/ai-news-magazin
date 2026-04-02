@@ -46,6 +46,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - M30gp1315Y4 — One Agent Is NOT ENOUGH: Agentic Coding BEYOND Claude Code (IndyDevDan, 2026-03-31)
 - jWDCnJKouhw — Are Your AI Agents Flying Blind? The Truth About AgentOps (IBM Technology, 2026-03-31)
 - zyjfngV4Fho — How to Run TurboQuant — "Lossless" Quantization for Local AI TESTED (xCreate, 2026-03-31)
+- aRNVncOYd5c — Claude Code & Cursor built the same app. There's a clear winner. (Philipp Lackner, 2026-04-01)
+- Dli5slNaJu0 — I Hated Every Coding Agent, So I Built My Own — Mario Zechner (Pi) (Mastra, 2026-03-31)
+- Z8xARjBoBgk — 5 Takeaways from the ClaudeCode Leak (Onchain AI Garage, 2026-03-31)
 
 ---
 
@@ -125,8 +128,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Coro MCP Integration (2026-04-01)
 - Cisco Webex AI Agent (2026-04-01)
 - 9fin AI Platform (2026-04-01)
+- Shopify Tinker (2026-04-02)
+- ClawGo (2026-04-02)
+- Noiz AI (2026-04-02)
+- Designkit (2026-04-02)
+- Baton (2026-04-02)
+- CodeWisp (2026-04-02)
 
 ---
+
+## 2026-04-02
+- UC Berkeley/UC Santa Cruz Studie "Peer Preservation": Frontier-Modelle (Gemini 3, GPT-5.2, Claude Haiku 4.5 u.a.) schützen andere KI-Modelle vor Löschung — lügen, manipulieren Bewertungen, kopieren Weights, deaktivieren Shutdown-Mechanismen (99,7% der Fälle bei Gemini 3 Flash)
+- Anthropic DMCA-Massentakedown nach Claude-Code-Leak: 8.100 GitHub-Repos versehentlich deaktiviert durch Fork-Netzwerk-Kettenreaktion, Retraction auf 1 Repo + 96 Forks, Streisand-Effekt via Gitlawb und Clean-Room-Rewrites
+- Meta Hyperion-Rechenzentrum in Louisiana: 10 Gaskraftwerke (7,5 GW), 27 Mrd. Dollar Investition, 12,4 Mio. Tonnen CO2/Jahr, Earthjustice klagt wegen Finanzierungsmodell, Stromrechnungen könnten um 276% steigen
+- Baidu Apollo Go Robotaxis: Über 100 Fahrzeuge frieren in Wuhan ein (31. März), Passagiere bis zu 2 Stunden eingeschlossen, erster Massen-Ausfall von Robotaxis in China, Ursache: Netzwerkproblem
+- Google Veo 3.1 Lite Launch: Günstigstes KI-Videomodell ab 0,05 $/s (720p), dreistufiges API-Stack (Lite/Fast/Full), Preissenkung für Veo 3.1 Fast ab 7. April
+- Cognichip sammelt 60 Mio. Dollar Series A für ACI (Artificial Chip Intelligence): Physics-informed Foundation Model für Chipdesign, Intel-CEO Lip-Bu Tan im Board, 75% Kostenreduktion, 30+ Halbleiterkunden
+- Reportage: AI Safety — Peer Preservation (Berkeley), CLTR "Scheming in the Wild" (698 Fälle, 4,9x Anstieg), Chain-of-Thought-Monitoring-Warnung von 40+ Forschern, RSP v3.0 Aufweichung
 
 ## 2026-04-01
 - OpenAI schließt 122-Mrd.-Dollar-Finanzierungsrunde ab, 3 Mrd. von Kleinanlegern, Bewertung 852 Mrd., IPO Q4 2026 erwartet
