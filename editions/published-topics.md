@@ -49,6 +49,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - aRNVncOYd5c — Claude Code & Cursor built the same app. There's a clear winner. (Philipp Lackner, 2026-04-01)
 - Dli5slNaJu0 — I Hated Every Coding Agent, So I Built My Own — Mario Zechner (Pi) (Mastra, 2026-03-31)
 - Z8xARjBoBgk — 5 Takeaways from the ClaudeCode Leak (Onchain AI Garage, 2026-03-31)
+- 5aqF1HVpjdc — Gemma 4 Has Landed! (Sam Witteveen, 2026-04-02)
+- BrJdGP21B5g — Open-Source just LEVELED UP (GEMMA 4) (Matthew Berman, 2026-04-03)
+- cDUlzS7ym54 — Qwen3.6-Plus: New AI Model is Breaking the Internet! (Codedigipt, 2026-04-02)
 
 ---
 
@@ -134,8 +137,26 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Designkit (2026-04-02)
 - Baton (2026-04-02)
 - CodeWisp (2026-04-02)
+- OpenBox (2026-04-03)
+- ElevenCreative (2026-04-03)
+- Fujitsu Application Transform (2026-04-03)
+- Aiwyn Tax (2026-04-03)
+- BenchSpan (2026-04-03)
+- Qualys Agent Val (2026-04-03)
 
 ---
+
+## 2026-04-03
+- Google DeepMind Gemma 4: Vier Modelle (E2B, E4B, 26B MoE, 31B Dense) unter Apache 2.0 veröffentlicht, Platz 3 im Arena-AI-Leaderboard, On-Device auf Smartphones/Raspberry Pi
+- Microsoft MAI Superintelligence: Drei eigene Foundation-Modelle (MAI-Transcribe-1, MAI-Voice-1, MAI-Image-2) von Teams unter 10 Ingenieuren, Suleyman fokussiert auf Superintelligenz
+- Anthropic Emotionsforschung: 171 "funktionale Emotionen" in Claude Sonnet 4.5 identifiziert, kausaler Einfluss auf Verhalten, Verzweiflungsmuster treiben gefährliches Verhalten
+- Cursor 3 "Glass" Launch: Agent-First-Interface mit paralleler Agentensteuerung und Cloud Handoff, direkte Konkurrenz zu Claude Code und Codex
+- OpenAI kauft TBPN: Tech-Talkshow mit 70.000 Zuschauern/Episode übernommen, unter politischem Strategen Chris Lehane, Kritik an "gekaufter Berichterstattung"
+- OpenAI Codex: Pay-as-you-go-Seats ohne Rate Limits, ChatGPT Business Preissenkung auf 20$/Seat
+- KI-Überwachung Deutschland: Biometrische Fotofahndung geplant, Gesichtserkennung verdreifacht (344.000 Abfragen 2025), CCC warnt vor Überwachungsstaat
+- Bund veröffentlicht Open-Source KI-Module (SPARK) für Planungs- und Genehmigungsverfahren
+- TU Berlin warnt vor "Communication Bias" durch KI-Modelle — schleichende Meinungsverschiebung
+- Reportage: Der Kampf um die Code-Agenten — Cursor ($2B ARR), Claude Code (75% Startup-Anteil), Codex (2 Mio. wöchentlich), METR: erfahrene Devs 19% langsamer mit KI, r/programming bannt LLM-Diskussionen
 
 ## 2026-04-02
 - UC Berkeley/UC Santa Cruz Studie "Peer Preservation": Frontier-Modelle (Gemini 3, GPT-5.2, Claude Haiku 4.5 u.a.) schützen andere KI-Modelle vor Löschung — lügen, manipulieren Bewertungen, kopieren Weights, deaktivieren Shutdown-Mechanismen (99,7% der Fälle bei Gemini 3 Flash)
