@@ -52,6 +52,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - 5aqF1HVpjdc — Gemma 4 Has Landed! (Sam Witteveen, 2026-04-02)
 - BrJdGP21B5g — Open-Source just LEVELED UP (GEMMA 4) (Matthew Berman, 2026-04-03)
 - cDUlzS7ym54 — Qwen3.6-Plus: New AI Model is Breaking the Internet! (Codedigipt, 2026-04-02)
+- FuUISGqIC3k — Qwen 3.6 Plus: GREATEST Opensource AI Model EVER! (WorldofAI, 2026-04-03)
+- NB9zRquoeI0 — Gemma 4 E4B + Ollama + OpenClaw (Fahd Mirza, 2026-04-03)
+- LTYF2UNXG2M — First Look at Google's Gemma 4: Architecture Breakdown (Onchain AI Garage, 2026-04-02)
 
 ---
 
@@ -143,8 +146,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Aiwyn Tax (2026-04-03)
 - BenchSpan (2026-04-03)
 - Qualys Agent Val (2026-04-03)
+- Numos (2026-04-04)
+- UPDF 2.5 (2026-04-04)
+- EdgeRunner WarClaw (2026-04-04)
+- Retell AI (2026-04-04)
+- Smartly x ChatGPT Ads (2026-04-04)
+- x402 Protocol (2026-04-04)
 
 ---
+
+## 2026-04-04
+- Anthropic kauft Coefficient Bio für 400 Mio. Dollar: Biotech-Startup mit <10 Mitarbeitern, Gründer von Genentech Prescient Design, Integration in Healthcare-Sparte
+- OpenAI Führungswechsel: Fidji Simo (AGI-CEO) medizinischer Urlaub (POTS), Brad Lightcap (COO) zu Special Projects/PE-JVs, Kate Rouch (CMO) tritt wegen Krebsbehandlung zurück, Greg Brockman übernimmt Produktverantwortung
+- Mercor-Datenleck via LiteLLM Supply-Chain-Attack: 4 TB gestohlen (Lapsus$), betrifft OpenAI/Anthropic/Meta Trainingsdaten, Meta pausiert Zusammenarbeit
+- US-Regierung legt Berufung gegen Anthropic-Sanktionsblock ein: DOJ geht zum Ninth Circuit, Frist 30. April, einstweilige Verfügung bleibt in Kraft
+- Anthropic gründet AnthroPAC: Mitarbeiterspenden-finanziert, überparteilich, plus 20 Mio. Dollar an Public Action First für KI-Regulierung
+- Utah KI-Psychopharmaka-Pilot: Legion Health (YC), 19$/Monat, 15 Medikamente, nur Rezeptverlängerungen, 500.000 Unterversorgte
+- Reportage: KI in der Wirkstoffforschung — 173 Wirkstoffe in klinischen Studien, Insilico Rentosertib Phase IIa erfolgreich, Anthropic kauft Coefficient Bio, Markt 5 Mrd. → 10 Mrd. bis 2031
 
 ## 2026-04-03
 - Google DeepMind Gemma 4: Vier Modelle (E2B, E4B, 26B MoE, 31B Dense) unter Apache 2.0 veröffentlicht, Platz 3 im Arena-AI-Leaderboard, On-Device auf Smartphones/Raspberry Pi
