@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: KI in der Wirkstoffforschung &mdash; Die Inferenz, 4. April 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: var(--width-article);
+            line-height: 1.6;
+            margin: 0 0 var(--space-4);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .article-body h3 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: var(--text-lg);
+            color: var(--text-primary);
+            margin: var(--space-8) 0 var(--space-3);
+            text-wrap: balance;
+        }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-04.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>KI in der Wirkstoffforschung: Wie Foundation Models die Pharmabranche umkrempeln</h1>
+    <p class="article-subtitle">173 KI-entdeckte Wirkstoffe in klinischen Studien, Milliarden-Deals zwischen Tech-Giganten und Pharma, und ein erstes KI-designtes Medikament kurz vor der Zulassung. Doch die Branche warnt: 90&nbsp;Prozent aller Kandidaten scheitern weiterhin. Warum 2026 das Jahr der Wahrheit wird.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-04">Samstag, 4. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <h2>400 Millionen f&uuml;r zehn K&ouml;pfe</h2>
+
+        <p>Als Anthropic am 3.&nbsp;April den Kauf von Coefficient Bio f&uuml;r 400&nbsp;Millionen Dollar bekannt gab, war die Reaktion in der KI-Branche einhellig: Warum zahlt ein Chatbot-Unternehmen eine solche Summe f&uuml;r ein acht Monate altes Startup mit weniger als zehn Mitarbeitern? Die Antwort liegt in einem der gr&ouml;&szlig;ten Paradigmenwechsel der Pharmabranche &mdash; einem Wandel, bei dem nicht mehr Chemiker am Labortisch, sondern Foundation Models am GPU-Cluster den n&auml;chsten Wirkstoffkandidaten identifizieren.</p>
+
+        <p>Coefficient Bios Gr&uuml;nder, Samuel Stanton und Nathan C. Frey, kommen von Genentechs Prescient Design &mdash; jener Einheit, die Computational Drug Discovery f&uuml;r einen der gr&ouml;&szlig;ten Pharmakonzerne der Welt betreibt. Frey gewann 2024 den Outstanding Paper Award der ICLR f&uuml;r seine Arbeit an Protein-Entdeckung mit neuartigen Sampling-Methoden. Was Anthropic mit ihnen kauft, ist nicht eine Plattform oder ein Patent, sondern die seltene Kombination aus tiefem KI-Wissen und pharmazeutischer Praxiserfahrung.</p>
+
+        <h2>Der Stand der Technik: Von QSAR zu Foundation Models</h2>
+
+        <p>Um zu verstehen, warum die Branche so aufgeregt ist, hilft ein Blick auf die Entwicklung. Noch vor f&uuml;nf Jahren dominierte klassisches Machine Learning die computergest&uuml;tzte Wirkstoffforschung: QSAR-Modelle (Quantitative Struktur-Aktivit&auml;ts-Beziehungen), die aus bekannten Molek&uuml;l-Wirksamkeits-Paaren lernen. Diese Modelle brauchten gro&szlig;e, saubere Datens&auml;tze f&uuml;r jedes neue Target &mdash; und solche Daten sind in der Pharma notorisch knapp und teuer.</p>
+
+        <p>Foundation Models &auml;ndern die Spielregeln fundamental. Vortrainiert auf Milliarden von Molek&uuml;lstrukturen, Proteinsequenzen und biomedizinischen Texten, k&ouml;nnen sie mit minimalen zus&auml;tzlichen Daten auf neue Targets feinabgestimmt werden. Chai Discovery, ein Startup bewertet mit 1,3&nbsp;Milliarden Dollar, hat mit seinem Chai-2-Modell Trefferraten von 16 bis 20&nbsp;Prozent beim De-novo-Antik&ouml;rper-Design erreicht &mdash; eine Verbesserung um den Faktor 100 gegen&uuml;ber fr&uuml;heren Methoden. Ein Antik&ouml;rper-Problem, das traditionell 5&nbsp;Millionen Dollar an Forschungskosten verschlang, l&ouml;ste das Modell in Stunden.</p>
+
+        <div class="pull-quote">173 KI-entdeckte Wirkstoffe befinden sich derzeit in klinischen Studien &mdash; rund 94 in Phase&nbsp;I, 56 in Phase&nbsp;II und 15 in Phase&nbsp;III. Eine erste Zulassung wird f&uuml;r 2026 oder 2027 erwartet.</div>
+
+        <h2>Die Spieler: Ein Wettlauf der Giganten</h2>
+
+        <p><strong>Isomorphic Labs</strong>, Googles Biotech-Tochter unter DeepMind-F&uuml;hrung, hat 17 aktive Wirkstoffprogramme in Onkologie, Immunologie und Herz-Kreislauf-Erkrankungen. Die Partnerschaften mit Eli&nbsp;Lilly, Novartis und Johnson&nbsp;&amp;&nbsp;Johnson belaufen sich auf fast 3&nbsp;Milliarden Dollar. Die hauseigene Drug Design Engine (IsoDDE), vorgestellt im Februar 2026, verdoppelt AlphaFold&nbsp;3s Genauigkeit bei schwierigen Protein-Targets. Ein erstes KI-designtes Krebsmedikament soll bis Ende 2026 in Phase-I-Studien eintreten.</p>
+
+        <p><strong>Insilico Medicine</strong> liefert die bislang &uuml;berzeugendsten klinischen Ergebnisse: Rentosertib (ISM001-055) gegen idiopathische Lungenfibrose &mdash; das erste Medikament, bei dem <em>sowohl</em> das Target als auch das Molek&uuml;l von KI entdeckt wurden. Die Phase-IIa-Ergebnisse, publiziert in Nature Medicine im Juni 2025, zeigten eine Verbesserung der Lungenkapazit&auml;t um 98,4&nbsp;ml gegen&uuml;ber einem R&uuml;ckgang von 62,3&nbsp;ml unter Placebo.</p>
+
+        <p><strong>Recursion Pharmaceuticals</strong>, nach der Fusion mit Exscientia das gr&ouml;&szlig;te reine KI-Pharma-Unternehmen, f&uuml;hrt 2,2&nbsp;Millionen Experimente pro Woche durch und verf&uuml;gt &uuml;ber 60 Petabyte propriet&auml;rer Daten. Gemeinsam mit NVIDIA haben sie BioHive-2 gebaut, einen der gr&ouml;&szlig;ten KI-Supercomputer der Pharmaindustrie. Allerdings musste Recursion mehrere klinische Programme einstellen &mdash; ein Hinweis darauf, dass auch KI-entdeckte Molek&uuml;le an den gleichen klinischen H&uuml;rden scheitern k&ouml;nnen wie traditionelle Kandidaten.</p>
+
+        <h2>Was das f&uuml;r Unternehmen bedeutet</h2>
+
+        <p>F&uuml;r Tech-Unternehmen er&ouml;ffnet die Verschmelzung von KI und Pharma ein Milliardengesch&auml;ft jenseits des API-Marktes. Eli&nbsp;Lilly und NVIDIA haben im Januar 2026 ein gemeinsames KI-Innovationslabor f&uuml;r 1&nbsp;Milliarde Dollar gestartet. Der Markt f&uuml;r KI in der Wirkstoffforschung soll von rund 5&nbsp;Milliarden Dollar in 2026 auf &uuml;ber 10&nbsp;Milliarden bis 2031 wachsen &mdash; bei einer j&auml;hrlichen Wachstumsrate von 27&nbsp;Prozent. Optimistischere Prognosen sehen bis 2035 sogar 160&nbsp;Milliarden Dollar.</p>
+
+        <p>Die Kostenreduktionen sind real, aber nicht revolution&auml;r: 30 bis 70&nbsp;Prozent Einsparungen in der pr&auml;klinischen Phase, 25 bis 40&nbsp;Prozent insgesamt. Die Entwicklungszeiten schrumpfen von 10 bis 15 Jahren auf 3 bis 6 Jahre. Die pr&auml;klinische Kandidatenentwicklung sinkt von 3 bis 4 Jahren auf 13 bis 18 Monate. F&uuml;r Unternehmen, die &uuml;berlegen, ob sie in KI-Bio-Kompetenz investieren sollen, sind das handfeste Argumente.</p>
+
+        <p>Der Engpass ist Talent. KI-Forscher mit biologischer Expertise sind die seltenste Ressource der Branche. Anthropics 400-Millionen-Dollar-Deal f&uuml;r weniger als zehn K&ouml;pfe illustriert, welche Preise der Markt bereit ist zu zahlen. Big-Tech-Unternehmen bieten Gehaltspaketevon bis zu 300&nbsp;Millionen Dollar &uuml;ber vier Jahre, mit Retention-Boni von bis zu 1,5&nbsp;Millionen.</p>
+
+        <h2>Die unbequeme Wahrheit</h2>
+
+        <p>Trotz des Hypes bleibt die klinische Ausfallrate bei rund 90&nbsp;Prozent &mdash; auch f&uuml;r KI-entdeckte Wirkstoffe. Ein namentlich nicht genannter CEO brachte es auf den Punkt: &bdquo;KI hat uns im letzten Jahrzehnt bei der Wirkstoffforschung wirklich entt&auml;uscht &mdash; wir haben einfach nur Misserfolg um Misserfolg gesehen.&ldquo; BenevolentAI musste massiv restrukturieren. Recursion stellte mehrere Programme ein. 68&nbsp;Prozent der Tech-Executives nennen schlechte Datenqualit&auml;t als Hauptgrund f&uuml;r gescheiterte KI-Projekte.</p>
+
+        <p>Dazu kommt regulatorischer Gegenwind: Der EU AI Act, dessen Hochrisiko-Bestimmungen am 2.&nbsp;August 2026 in Kraft treten, k&ouml;nnte bestimmte KI-Systeme in der Wirkstoffforschung als hochriskant einstufen. F&uuml;r Pharma-Unternehmen bedeutet das eine weitere Compliance-Schicht in einem ohnehin stark regulierten Umfeld.</p>
+
+        <p>2026 wird zum Entscheidungsjahr: Mehrere Phase-III-Ergebnisse stehen aus. Wenn die ersten KI-designten Medikamente die Zulassung schaffen, wird das Milliarden an zus&auml;tzlichem Investment ausl&ouml;sen. Wenn sie scheitern, wird die Branche einen schmerzhaften Reality-Check durchlaufen &mdash; nicht das Ende der KI in der Pharma, aber eine N&uuml;chternheit, die l&auml;ngst &uuml;berf&auml;llig ist. Anthropics 400-Millionen-Dollar-Wette auf Coefficient Bio zeigt, dass zumindest einer der gro&szlig;en Spieler an das erste Szenario glaubt.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://techcrunch.com/2026/04/03/anthropic-buys-biotech-startup-coefficient-bio-in-400m-deal-reports/" rel="noopener noreferrer external">TechCrunch: Anthropic buys Coefficient Bio in $400M deal</a></li>
+            <li><a href="https://www.isomorphiclabs.com/articles/the-isomorphic-labs-drug-design-engine-unlocks-a-new-frontier" rel="noopener noreferrer external">Isomorphic Labs: Drug Design Engine</a></li>
+            <li><a href="https://www.nature.com/articles/s41591-025-03743-2" rel="noopener noreferrer external">Nature Medicine: Rentosertib Phase IIa Results</a></li>
+            <li><a href="https://www.businesswire.com/news/home/20250630307418/en/Chai-Discovery-Unveils-Chai-2-Breakthrough-Achieving-Fully-De-Novo-Antibody-Design-With-AI" rel="noopener noreferrer external">BusinessWire: Chai-2 De Novo Antibody Design</a></li>
+            <li><a href="https://axis-intelligence.com/ai-drug-discovery-2026-complete-analysis/" rel="noopener noreferrer external">Axis Intelligence: AI Drug Discovery 2026 Analysis</a></li>
+            <li><a href="https://www.globenewswire.com/news-release/2026/03/30/3264774/0/en/AI-in-Drug-Discovery-Market-to-Hit-USD-10-29-Bn-by-2031.html" rel="noopener noreferrer external">Mordor Intelligence: AI Drug Discovery Market Forecast</a></li>
+            <li><a href="https://www.statnews.com/2025/02/10/ai-drug-development-claims-by-biotech-companies-absci-generate-biomedicines-questioned/" rel="noopener noreferrer external">STAT News: AI Drug Development Claims Questioned</a></li>
+            <li><a href="https://www.fastcompany.com/91520205/the-ai-drug-revolution-is-real-but-the-hype-around-it-isnt" rel="noopener noreferrer external">Fast Company: The AI Drug Revolution Is Real</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
