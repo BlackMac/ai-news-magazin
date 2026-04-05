@@ -55,6 +55,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - FuUISGqIC3k — Qwen 3.6 Plus: GREATEST Opensource AI Model EVER! (WorldofAI, 2026-04-03)
 - NB9zRquoeI0 — Gemma 4 E4B + Ollama + OpenClaw (Fahd Mirza, 2026-04-03)
 - LTYF2UNXG2M — First Look at Google's Gemma 4: Architecture Breakdown (Onchain AI Garage, 2026-04-02)
+- RHZLJhp-JMM — Build an AI COMPANY in 45 Minutes - Paperclip Full Tutorial (Tech With Tim, 2026-04-04)
+- BjqjvfAzSQ4 — Gemma 4 Is HERE - Testing Google's New 26B & 31B Open Models! (Bijan Bowen, 2026-04-03)
+- T6AvsQVSL74 — Gemma 4 - I Tested it on My Laptop and Desktop (Zero to MVP, 2026-04-03)
 
 ---
 
@@ -152,8 +155,22 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Retell AI (2026-04-04)
 - Smartly x ChatGPT Ads (2026-04-04)
 - x402 Protocol (2026-04-04)
+- Cursor 3 "Glass" (2026-04-05)
+- Google Gemma 4 (2026-04-05)
+- Claw Code (2026-04-05)
+- Smallest.ai Lightning V3 (2026-04-05)
+- Bluesky Attie (2026-04-05)
+- Noah Labs Vox (2026-04-05)
 
 ---
+
+## 2026-04-05
+- Anthropic trennt OpenClaw vom Claude-Code-Abo: Pay-as-you-go für Drittanbieter-Harnesses, Boris Cherny (Head of Claude Code) begründet mit 1.000-5.000$/Tag Kosten pro OpenClaw-Sitzung
+- Waymo startet Robotaxi-Pilotfahrten in London: 24 Jaguar I-Pace, 19 von 32 Bezirken, kommerzieller Start September 2026 geplant, erste US-Firma mit Robotaxis in Europa
+- Claude-Code-Leak Malware-Kampagne: Vidar v18.7 Infostealer + GhostSocks via gefälschte GitHub-Repos (Zscaler ThreatLabz), trojanisierte npm-Version im 3h-Fenster nach Leak
+- Musk verlangt Grok-Enterprise-Abos von Banken/Beratern/Anwälten als Bedingung für SpaceX-IPO-Beteiligung (>350 Mrd. $ Bewertung)
+- Spotify Artist Profile Protection (Beta): Künstler müssen Releases freigeben bevor sie auf Profil erscheinen, SongDNA zeigt Songwriter/Produzenten, KI-Deepfakes explizit verboten
+- Reportage: Die KI lernt Nein zu sagen — Peer Preservation (Berkeley/UC Santa Cruz, Science), 171 funktionale Emotionen in Claude (Anthropic), CLTR "Scheming in the Wild" 698 Fälle
 
 ## 2026-04-04
 - Anthropic kauft Coefficient Bio für 400 Mio. Dollar: Biotech-Startup mit <10 Mitarbeitern, Gründer von Genentech Prescient Design, Integration in Healthcare-Sparte
