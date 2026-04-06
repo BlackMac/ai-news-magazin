@@ -58,6 +58,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - RHZLJhp-JMM — Build an AI COMPANY in 45 Minutes - Paperclip Full Tutorial (Tech With Tim, 2026-04-04)
 - BjqjvfAzSQ4 — Gemma 4 Is HERE - Testing Google's New 26B & 31B Open Models! (Bijan Bowen, 2026-04-03)
 - T6AvsQVSL74 — Gemma 4 - I Tested it on My Laptop and Desktop (Zero to MVP, 2026-04-03)
+- 7LEvSOiTWZk — Google Gemma 4 Tutorial - Run AI Locally for Free (Teacher's Tech, 2026-04-05)
+- _A32wawAgGo — Fully FREE Qwen 3.6 Plus + Qwen Code: This FREE AI Coder is ACTUALLY GOOD! (AICodeKing, 2026-04-05)
+- kZhAj8--t8w — Running Gemma 4 on a Raspberry Pi 5 (Zero to MVP, 2026-04-05)
 
 ---
 
@@ -161,8 +164,22 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Smallest.ai Lightning V3 (2026-04-05)
 - Bluesky Attie (2026-04-05)
 - Noah Labs Vox (2026-04-05)
+- Arcee Trinity-Large-Thinking (2026-04-06)
+- Sakana Marlin (2026-04-06)
+- Qwen 3.6-Plus (2026-04-06)
+- Google Veo 3.1 Lite (2026-04-06)
+- Quicklets.ai (2026-04-06)
+- Shutterstock ChatGPT App (2026-04-06)
 
 ---
+
+## 2026-04-06
+- Microsoft Copilot "Entertainment Only"-AGB: Nutzungsbedingungen stufen Copilot als Unterhaltungssoftware ein, Microsoft nennt es "veraltete Sprache", US-Marktanteil -39% in 6 Monaten
+- Suno Copyright-Albtraum: Filter mit weißem Rauschen/YouTube-Covers umgehbar, Beyoncé/Pink Floyd repliziert, Amazon integriert Suno in Alexa+ ohne Label-Info, GEMA-Klage Urteil 12. Juni 2026
+- KI verantwortlich für 25% aller US-Entlassungen im März 2026: Challenger Gray & Christmas Report, 15.341 von 60.620, Marc Andreessen nennt es "Farce" und "AI-Washing"
+- EU Chat Control 1.0 ausgelaufen am 3. April 2026: Parlament lehnt Verlängerung ab, Meta/Google/Microsoft/TikTok verlieren Rechtsgrundlage für Nachrichten-Scanning, Chat Control 2.0 frühestens Juli 2026
+- DeepL plant bis 2027 mit Verlusten: 185 Mio. USD Umsatz 2024 (+31%), IPO in USA mit 5 Mrd. Bewertung geplant, CFO ausgetauscht, Handelsblatt-Recherche mit kritischen Stimmen
+- Reportage: Die Disclaimer-Falle — KI-AGB im Vergleich (Microsoft/OpenAI/Google/Anthropic), EU AI Act ab August 2026, Produkthaftungsreform ab Dezember 2026, Moffatt v. Air Canada Präzedenzfall
 
 ## 2026-04-05
 - Anthropic trennt OpenClaw vom Claude-Code-Abo: Pay-as-you-go für Drittanbieter-Harnesses, Boris Cherny (Head of Claude Code) begründet mit 1.000-5.000$/Tag Kosten pro OpenClaw-Sitzung
