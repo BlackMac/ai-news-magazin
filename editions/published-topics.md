@@ -61,6 +61,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - 7LEvSOiTWZk — Google Gemma 4 Tutorial - Run AI Locally for Free (Teacher's Tech, 2026-04-05)
 - _A32wawAgGo — Fully FREE Qwen 3.6 Plus + Qwen Code: This FREE AI Coder is ACTUALLY GOOD! (AICodeKing, 2026-04-05)
 - kZhAj8--t8w — Running Gemma 4 on a Raspberry Pi 5 (Zero to MVP, 2026-04-05)
+- ZCKuK8UCsP4 — Gemma-4 31B vs Qwen3.5 27B: Hands-on Local Comparison (Fahd Mirza, 2026-04-06)
+- d9LGtygWEKQ — Fine-Tune Gemma 4 in Minutes (No Code!) — Unsloth Studio Tutorial (Prompt Engineer, 2026-04-05)
+- JmCiKKw6bMA — Gemma 4 31B vs 26B-A4B: 16GB VRAM Local Test (kintu, 2026-04-06)
 
 ---
 
@@ -170,8 +173,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Google Veo 3.1 Lite (2026-04-06)
 - Quicklets.ai (2026-04-06)
 - Shutterstock ChatGPT App (2026-04-06)
+- Apfel (2026-04-07)
+- oh-my-codex OMX (2026-04-07)
+- MS Agent Governance Toolkit (2026-04-07)
+- Agentshub.AI (2026-04-07)
+- Vibrantsnap (2026-04-07)
+- Goose v1.29 (2026-04-07)
 
 ---
+
+## 2026-04-07
+- Iran droht Stargate-Rechenzentrum in Abu Dhabi: IRGC-Drohvideo mit Satellitenaufnahmen, 30-Mrd-Dollar-Rechenzentrum, Bezug auf Drohnenangriffe auf AWS im März 2026
+- OpenAI Industrial Policy Paper "Intelligence Age": Public Wealth Fund, Roboter-Steuern, Vier-Tage-Woche, automatische Sicherheitsnetze — am selben Tag wie Ronan Farrow New-Yorker-Investigativ über Safety-Abbau
+- OpenAI Safety Fellowship angekündigt: 6-monatiges Stipendium ab September 2026, Bewerbungsfrist 3. Mai
+- Cambridge-Studie "Datenhitzeinseln": 8.400 Rechenzentren analysiert, durchschnittlich 2°C Erwärmung, max. 9,1°C, 340 Mio. Menschen betroffen
+- AGENTS.md-Debatte: ETH-Zürich-Studie zeigt LLM-generierte Kontextdateien verschlechtern Erfolgsrate, außer in dokumentationsarmen Projekten
+- Google AI Edge Eloquent: Offline-KI-Diktier-App auf iOS, Gemma-basiert, ohne Ankündigung gelauncht
+- Reportage: Die Geopolitik der KI-Infrastruktur — Stargate 500 Mrd., Iran-Drohnen auf AWS, globale Compute-Landkarte (USA 74%, China 14%, EU 4,8%), Energieengpass
 
 ## 2026-04-06
 - Microsoft Copilot "Entertainment Only"-AGB: Nutzungsbedingungen stufen Copilot als Unterhaltungssoftware ein, Microsoft nennt es "veraltete Sprache", US-Marktanteil -39% in 6 Monaten
