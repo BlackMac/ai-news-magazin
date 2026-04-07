@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 7. April 2026</title>    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-07">Dienstag, 7. April 2026</time> &middot; 5 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 7. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Geopolitik &middot; KI-Infrastruktur</span><span class="toc-title">Iran droht mit Vernichtung von OpenAIs Stargate-Rechenzentrum &mdash; KI-Infrastruktur wird zum Kriegsziel</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Policy &middot; OpenAI</span><span class="toc-title">OpenAIs New Deal: Roboter-Steuern, Vier-Tage-Woche und ein Public Wealth Fund</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Umwelt &middot; Studie</span><span class="toc-title">KI-Rechenzentren heizen ihre Umgebung um bis zu 9&nbsp;Grad auf</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Entwicklung &middot; Debatte</span><span class="toc-title">AGENTS.md: Wie viel Kontext braucht ein KI-Coding-Agent?</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Produkt &middot; Google</span><span class="toc-title">Google startet leise eine Offline-KI-Diktier-App &mdash; auf dem iPhone</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Die Geopolitik der KI-Infrastruktur</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Geopolitik &middot; KI-Infrastruktur</div>
+            <h2 id="art-1-h">Iran droht mit &bdquo;v&ouml;lliger Vernichtung&ldquo; von OpenAIs Stargate-Rechenzentrum &mdash; KI-Infrastruktur wird zum Kriegsziel</h2>
+            <div class="article-meta"><time datetime="2026-04-06">6. April 2026</time> &middot; Quellen: TechCrunch, Tom&rsquo;s Hardware, TechRadar, The Conversation</div>
+        </header>
+        <p class="article-teaser">Die iranische Revolutionsgarde ver&ouml;ffentlicht ein Drohvideo mit Satellitenaufnahmen von OpenAIs geplantem 30-Milliarden-Dollar-Rechenzentrum in Abu Dhabi. Nach den Drohnenangriffen auf AWS-Rechenzentren im M&auml;rz werden KI-Datenzentren endg&uuml;ltig zum geopolitischen Machtfaktor.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 3.&nbsp;April 2026 ver&ouml;ffentlichte die Islamische Revolutionsgarde (IRGC) &uuml;ber ihren Sprecher Brigadegeneral Ebrahim Zolfaghari ein Video, das die &bdquo;vollst&auml;ndige und restlose Vernichtung&ldquo; US-amerikanischer und israelischer Einrichtungen androht &mdash; darunter explizit OpenAIs geplantes Stargate-Rechenzentrum in Abu Dhabi. Das Video zeigt Satellitenbilder des Standorts und wechselt zu einer Nachtsicht-Ansicht mit der Botschaft: &bdquo;Nichts bleibt unseren Augen verborgen, auch wenn Google es versteckt.&ldquo;</p>
+            <p>Die Drohung ist keine leere Rhetorik: Am 1.&nbsp;M&auml;rz 2026 hatten iranische Shahed-Drohnen bereits drei Rechenzentren von Amazon Web Services in den Vereinigten Arabischen Emiraten und Bahrain getroffen &mdash; der erste gezielte milit&auml;rische Angriff auf kommerzielle Cloud-Infrastruktur in der Geschichte. Zwei von drei AWS-Verf&uuml;gbarkeitszonen in der VAE-Region fielen aus. Banken, Zahlungsdienstleister und Unternehmenssoftware gingen offline. Auch ein Oracle-Rechenzentrum in Dubai wurde mit Raketen beschossen.</p>
+            <p>Das Stargate-Rechenzentrum in Abu Dhabi ist Teil des 500-Milliarden-Dollar-Stargate-Projekts, eines Joint Ventures von OpenAI, SoftBank, Oracle und dem Investmentfonds MGX. Das Flaggschiff in Abilene, Texas, ist bereits teilweise in Betrieb; insgesamt sind sieben Standorte in verschiedenen Entwicklungsphasen geplant, mit einer Gesamtkapazit&auml;t von fast sieben Gigawatt. Iran hat am 31.&nbsp;M&auml;rz zudem eine explizite Liste amerikanischer Tech-Unternehmen als Ziele benannt: Microsoft, Google, Apple, Meta, Oracle, Intel, Palantir und NVIDIA.</p>
+            <p>Das Weltwirtschaftsforum reagierte prompt und forderte Anfang April, KI-Infrastruktur offiziell als kritische Infrastruktur einzustufen &mdash; mit allen v&ouml;lkerrechtlichen Schutzbestimmungen, die damit einhergehen. Denn bisher existiert kein internationaler Rahmen, der kommerzielle Rechenzentren im Konfliktfall explizit sch&uuml;tzt. F&uuml;r europ&auml;ische Unternehmen, die ihre KI-Workloads in Cloud-Regionen im Nahen Osten betreiben, stellt sich eine unbequeme Frage: Wie bewertet man geopolitisches Risiko in der Standortwahl f&uuml;r Recheninfrastruktur? Unsere <a href="reportagen/2026-04-07.html">heutige Reportage</a> analysiert die Geopolitik der KI-Infrastruktur im Detail.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/06/iran-threatens-stargate-ai-data-centers/" rel="noopener noreferrer external">TechCrunch: Iran threatens Stargate AI data centers</a></li>
+                <li><a href="https://www.tomshardware.com/tech-industry/iran-threatens-complete-and-utter-annihilation-of-openais-usd30b-stargate-ai-data-center-in-abu-dhabi-regime-posts-video-with-satellite-imagery-of-chatgpt-makers-premier-1gw-data-center" rel="noopener noreferrer external">Tom&rsquo;s Hardware: Iran droht Stargate-Rechenzentrum in Abu Dhabi</a></li>
+                <li><a href="https://theconversation.com/why-iran-targeted-amazon-data-centers-and-what-that-does-and-doesnt-change-about-warfare-278642" rel="noopener noreferrer external">The Conversation: Why Iran targeted Amazon data centers</a></li>
+                <li><a href="https://www.weforum.org/stories/2026/04/ai-infrastructure-critical-infrastructure/" rel="noopener noreferrer external">WEF: AI infrastructure as critical infrastructure</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Policy &middot; OpenAI</div>
+            <h2 id="art-2-h">OpenAIs New Deal: Roboter-Steuern, Vier-Tage-Woche und ein Public Wealth Fund &mdash; w&auml;hrend der New Yorker die Safety-Fassade zerlegt</h2>
+            <div class="article-meta"><time datetime="2026-04-06">6. April 2026</time> &middot; Quellen: OpenAI Blog, TechCrunch, Fortune, Axios, Semafor, New Yorker</div>
+        </header>
+        <p class="article-teaser">OpenAI ver&ouml;ffentlicht ein 13-seitiges Policy-Paper mit Vision&auml;ren Vorschl&auml;gen f&uuml;r die KI-&Ouml;konomie &mdash; am selben Tag, an dem eine investigative Recherche des New Yorker die Aufl&ouml;sung interner Safety-Teams enth&uuml;llt. Das Timing ist bemerkenswert.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Unter dem Titel &bdquo;Industrial Policy for the Intelligence Age: Ideas to Keep People First&ldquo; ver&ouml;ffentlichte OpenAI am 6.&nbsp;April ein Policy-Paper mit ambitionierten Vorschl&auml;gen: ein national verwalteter <strong>Public Wealth Fund</strong>, gespeist von Beitr&auml;gen der KI-Unternehmen, dessen Renditen direkt an US-B&uuml;rger ausgesch&uuml;ttet werden sollen &mdash; vergleichbar mit Alaskas Permanent Fund. Dazu <strong>Roboter-Steuern</strong>, also eine Verlagerung der Steuerlast von Arbeit auf Kapital, subventionierte Pilotprojekte f&uuml;r eine <strong>Vier-Tage-Woche</strong> bei vollem Lohnausgleich und <strong>automatische Sicherheitsnetze</strong>, die aktiviert werden, wenn KI-bedingte Arbeitsplatzverluste vordefinierte Schwellenwerte &uuml;berschreiten.</p>
+            <p>Das Timing ist kaum zuf&auml;llig: Am selben Tag erschien eine 18 Monate lange Investigativ-Recherche von Ronan Farrow und Andrew Marantz im New Yorker, die schwere Vorw&uuml;rfe gegen OpenAI erhebt. Demnach hat das Unternehmen seine Superalignment- und AGI-Readiness-Teams aufgel&ouml;st und &bdquo;Safety&ldquo; von der Liste seiner wichtigsten Aktivit&auml;ten in den IRS-Unterlagen gestrichen. Als ein OpenAI-Vertreter nach Forschern f&uuml;r &bdquo;existential safety&ldquo; gefragt wurde, soll er geantwortet haben: &bdquo;What do you mean by &lsquo;existential safety&rsquo;? That&rsquo;s not, like, a thing.&ldquo;</p>
+            <p>Parallel k&uuml;ndigte OpenAI ein <strong>Safety Fellowship</strong> an: ein sechs&shy;monatiges Stipendien&shy;programm f&uuml;r externe Forscher, das am 14.&nbsp;September 2026 beginnt. Bewerbungsfrist ist der 3.&nbsp;Mai. Kritiker wie Gary Marcus bezeichneten sowohl das Policy-Paper als auch das Fellowship als &bdquo;regulatory nihilism&ldquo; &mdash; ein Versuch, die Nachrichtenagenda vom negativen New-Yorker-Bericht abzulenken, w&auml;hrend gleichzeitig die internen Safety-Kapazit&auml;ten abgebaut werden.</p>
+            <p>Die inhaltlichen Vorschl&auml;ge des Papers sind dabei durchaus beachtenswert &mdash; wenn auch &bdquo;intentionally early and exploratory&ldquo;, wie OpenAI selbst schreibt. Die Idee, KI-Unternehmen in einen &ouml;ffentlichen Verm&ouml;gensfonds einzahlen zu lassen und die Effizienz-Dividende der KI &uuml;ber eine verk&uuml;rzte Arbeitswoche an alle weiterzugeben, ist ein Signal an die Politik: Wir denken &uuml;ber die gesellschaftlichen Folgen nach. Ob diese Vision mehr ist als ein PR-Dokument, wird sich an konkreten Handlungen messen lassen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://openai.com/index/industrial-policy-for-the-intelligence-age/" rel="noopener noreferrer external">OpenAI: Industrial Policy for the Intelligence Age</a></li>
+                <li><a href="https://techcrunch.com/2026/04/06/openais-vision-for-the-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week/" rel="noopener noreferrer external">TechCrunch: OpenAI&rsquo;s vision for the AI economy</a></li>
+                <li><a href="https://fortune.com/2026/04/06/sam-altman-says-ai-superintelligence-is-so-big-that-we-need-a-new-deal-critics-say-openais-policy-ideas-are-a-cover-for-regulatory-nihilism/" rel="noopener noreferrer external">Fortune: Reactions to OpenAI&rsquo;s policy paper</a></li>
+                <li><a href="https://www.semafor.com/article/04/06/2026/new-yorker-investigation-raises-questions-over-sam-altmans-trustworthiness" rel="noopener noreferrer external">Semafor: New Yorker investigation on OpenAI</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Umwelt &middot; Studie</div>
+            <h2 id="art-3-h">&bdquo;Datenhitzeinseln&ldquo;: KI-Rechenzentren erw&auml;rmen ihre Umgebung um bis zu 9&nbsp;Grad &mdash; 340&nbsp;Millionen Menschen betroffen</h2>
+            <div class="article-meta"><time datetime="2026-04-06">6. April 2026</time> &middot; Quellen: t3n, CNN, futurezone.at, Universit&auml;t Cambridge (arXiv)</div>
+        </header>
+        <p class="article-teaser">Eine Cambridge-Studie analysiert erstmals systematisch die W&auml;rmeeffekte von &uuml;ber 8.400 Rechenzentren weltweit. Das Ergebnis: lokale Temperaturerh&ouml;hungen von durchschnittlich 2&nbsp;Grad Celsius &mdash; in Extremf&auml;llen bis zu 9,1&nbsp;Grad &mdash; in einem Radius von bis zu zehn Kilometern.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Ein Forschungsteam der University of Cambridge unter Leitung von Andrea Marinoni hat &uuml;ber zwanzig Jahre Satellitendaten mit Standortdaten von mehr als 8.400 Rechenzentren weltweit verglichen &mdash; und erstmals systematisch belegt, was Anwohner l&auml;ngst ahnten: Rechenzentren erzeugen &bdquo;lokale Datenhitzeinseln&ldquo;, analog zu den bekannten st&auml;dtischen W&auml;rmeinseln. Die durchschnittliche Oberfl&auml;chentemperatur stieg nach Inbetriebnahme eines Rechenzentrums um rund 2&nbsp;Grad Celsius. Der h&ouml;chste gemessene Wert lag bei 9,1&nbsp;Grad um ein einzelnes Rechenzentrum.</p>
+            <p>Der Effekt ist auch in gr&ouml;&szlig;erer Entfernung messbar: In 4,5&nbsp;Kilometern Abstand betr&auml;gt die Erw&auml;rmung noch etwa ein Grad, in sieben Kilometern rund 30&nbsp;Prozent der Maximalbelastung. Erst ab zehn Kilometern Entfernung wird der Effekt vernachl&auml;ssigbar. Weltweit leben rund 340&nbsp;Millionen Menschen innerhalb dieses Zehn-Kilometer-Radius &mdash; besonders betroffen sind Regionen in Mexiko, Spanien und Brasilien.</p>
+            <p>Die Ergebnisse sind im Kontext des KI-Booms besonders brisant: W&auml;hrend die Branche Hunderte Milliarden in neue Rechenzentren investiert, werden die lokalen Umweltauswirkungen selten thematisiert. Ein typisches 100-Megawatt-Rechenzentrum verbraucht zudem rund 1,1&nbsp;Millionen Liter K&uuml;hlwasser pro Tag &mdash; so viel wie 2.600 Haushalte. Die Internationale Energieagentur sch&auml;tzt den globalen Stromverbrauch von Rechenzentren auf rund 415&nbsp;Terawattstunden im Jahr 2024 &mdash; bis 2026 k&ouml;nnten es &uuml;ber 1.000&nbsp;Terawattstunden werden.</p>
+            <p>In Irland, einem europ&auml;ischen Hotspot f&uuml;r Rechenzentren, k&ouml;nnten diese laut IEA bereits 2026 rund 32&nbsp;Prozent des nationalen Stromverbrauchs ausmachen. Die Cambridge-Forscher fordern bessere K&uuml;hlsysteme und effizientere Software-Optimierung &mdash; doch strukturell stellt sich die Frage, ob die derzeitige Standortwahl f&uuml;r Rechenzentren die lokalen Auswirkungen ausreichend ber&uuml;cksichtigt. In bereits hei&szlig;en Regionen wie Mexiko oder Spanien kann eine zus&auml;tzliche Erw&auml;rmung von 2&nbsp;Grad die Lebensqualit&auml;t und Gesundheit erheblich beeintr&auml;chtigen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://t3n.de/news/ki-rechenzentren-waerme-umgebung-1736542/" rel="noopener noreferrer external">t3n: KI-Rechenzentren heizen Umgebung auf</a></li>
+                <li><a href="https://edition.cnn.com/2026/03/30/climate/data-centers-are-having-an-underrported" rel="noopener noreferrer external">CNN: Data centers creating heat islands</a></li>
+                <li><a href="https://futurezone.at/science/ki-rechenzentren-erwaermung-hitzeinseln-studie/403145975" rel="noopener noreferrer external">futurezone.at: KI-Rechenzentren &mdash; 9,1&nbsp;Grad Erw&auml;rmung</a></li>
+                <li><a href="https://arxiv.org/abs/2603.20897" rel="noopener noreferrer external">arXiv: The data heat island effect (Cambridge)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Entwicklung &middot; Debatte</div>
+            <h2 id="art-4-h">AGENTS.md: Wie viel Kontext braucht ein KI-Coding-Agent &mdash; und wann wird Information zum Ballast?</h2>
+            <div class="article-meta"><time datetime="2026-04-06">6. April 2026</time> &middot; Quellen: heise online, InfoQ, ETH Z&uuml;rich, GitHub</div>
+        </header>
+        <p class="article-teaser">Eine standardisierte Kontextdatei soll KI-Coding-Agenten helfen, sich in Projekten zurechtzufinden. Doch eine ETH-Z&uuml;rich-Studie zeigt: LLM-generierte AGENTS.md-Dateien verschlechtern die Erfolgsrate &mdash; es sei denn, das Projekt ist schlecht dokumentiert.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>AGENTS.md ist eine Initiative der Open-Source-Community: eine standardisierte Datei im Repository-Root, die KI-Coding-Agenten Kontext gibt &mdash; Build-Steps, Test-Befehle, Architektur-Richtlinien, Coding-Konventionen. Quasi eine &bdquo;README f&uuml;r Agenten&ldquo;. Die Idee klingt einleuchtend: Wer einem neuen Teammitglied ein Onboarding-Dokument gibt, sollte das auch f&uuml;r KI-Agenten tun, die sich sonst m&uuml;hsam durch den Code k&auml;mpfen m&uuml;ssen.</p>
+            <p>Doch eine aktuelle Studie der ETH Z&uuml;rich liefert ein differenzierteres Bild: LLM-generierte Kontext-Dateien &mdash; also AGENTS.md-Dateien, die von einer KI statt von Menschen geschrieben wurden &mdash; reduzieren die Erfolgsrate im Durchschnitt leicht: um etwa 0,5&nbsp;Prozentpunkte bei SWE-bench&nbsp;Lite und 2&ndash;3&nbsp;Prozentpunkte bei AgentBench. Die Erkl&auml;rung ist naheliegend: In gut dokumentierten Projekten ist die Information redundant, der Agent kann den Kontext bereits aus dem Code erschlie&szlig;en. Die zus&auml;tzlichen Token verbrauchen Kontextfenster, ohne Mehrwert zu liefern.</p>
+            <p>Die entscheidende Ausnahme: In dokumentationsarmen Projekten verbessern generierte Kontext-Dateien die Erfolgsrate um durchschnittlich 2,7&nbsp;Prozentpunkte. Die ETH-Forscher empfehlen daher einen pragmatischen Ansatz: Kontext-Dateien sollten ein &bdquo;lean, precise operating manual&ldquo; sein &mdash; menschlich geschrieben, auf genuinely nicht-ableitbare Details beschr&auml;nkt (spezifische Tooling-Konfigurationen, Custom-Build-Befehle) und keine Kopie der bestehenden Dokumentation.</p>
+            <p>Gegenl&auml;ufige Studien zeigen allerdings auch positive Effekte: 28,6&nbsp;Prozent niedrigere Median-Laufzeit und 16,6&nbsp;Prozent reduzierter Token-Verbrauch mit gut strukturierten AGENTS.md-Dateien. Die Debatte spiegelt ein grundlegendes Dilemma der KI-gest&uuml;tzten Software&shy;entwicklung: Der Nutzen von Kontext h&auml;ngt entscheidend von der Qualit&auml;t des Kontexts ab &mdash; und davon, ob er von einem Menschen oder einer Maschine stammt.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.heise.de/en/background/AGENTS-md-Helpful-agent-briefing-or-token-hog-11245317.html" rel="noopener noreferrer external">heise online: AGENTS.md &mdash; Helpful agent briefing or token hog?</a></li>
+                <li><a href="https://www.infoq.com/news/2026/03/agents-context-file-value-review/" rel="noopener noreferrer external">InfoQ: Do AI Agent Context Files Actually Help?</a></li>
+                <li><a href="https://github.com/agentsmd/agents.md" rel="noopener noreferrer external">GitHub: agents.md Spezifikation</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Produkt &middot; Google</div>
+            <h2 id="art-5-h">Google startet leise eine Offline-KI-Diktier-App &mdash; ausgerechnet auf dem iPhone</h2>
+            <div class="article-meta"><time datetime="2026-04-06">6. April 2026</time> &middot; Quellen: TechCrunch, 9to5Google, The Next Web</div>
+        </header>
+        <p class="article-teaser">Ohne Ank&uuml;ndigung, ohne Blogpost: Google ver&ouml;ffentlicht &bdquo;AI Edge Eloquent&ldquo;, eine Diktier-App, die Sprache komplett lokal auf dem Ger&auml;t verarbeitet &mdash; inklusive automatischer Bereinigung von F&uuml;llw&ouml;rtern. Die Premiere: iOS statt Android.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 6.&nbsp;April erschien &bdquo;Google AI Edge Eloquent&ldquo; ohne jede Ank&uuml;ndigung im iOS App Store &mdash; eine Diktier-App, die auf Googles Gemma-Modellen basiert und Sprache vollst&auml;ndig lokal auf dem Ger&auml;t verarbeitet. Keine Cloud, keine Daten&uuml;bertragung, keine API-Keys. Die App transkribiert Gesprochenes in Echtzeit und geht dabei &uuml;ber klassische Spracherkennung hinaus: F&uuml;llw&ouml;rter wie &bdquo;&auml;hm&ldquo; und &bdquo;ah&ldquo; werden automatisch entfernt, Selbstkorrekturen gegl&auml;ttet, und der Output als lesbarer Flie&szlig;text formatiert.</p>
+            <p>Bemerkenswert ist die Plattformwahl: Google startet eine KI-App zuerst auf Apples iOS &mdash; nicht auf dem eigenen Android. Das signalisiert, dass Google sein &bdquo;AI Edge&ldquo;-&Ouml;kosystem aggressiv verbreiten will, jenseits der eigenen Plattformgrenzen. Die App demonstriert die Leistungsf&auml;higkeit der Gemma-Modellfamilie als On-Device-KI &mdash; ein strategisches Argument f&uuml;r Entwickler, die lokale Spracherkennung in ihre Apps integrieren wollen.</p>
+            <p>Neben der Kernfunktion bietet Eloquent Textbearbeitungs-Tools: &bdquo;Kernpunkte&ldquo; (automatische Aufz&auml;hlungen), &bdquo;Formal&ldquo;, &bdquo;Kurz&ldquo; und &bdquo;Lang&ldquo; als Formatierungsoptionen, Nutzungsstatistiken und ein pers&ouml;nliches W&ouml;rterbuch mit Gmail-Import. Ein optionaler Cloud-Modus erm&ouml;glicht Textbereinigung &uuml;ber Gemini-Modelle &mdash; die Spracherkennung selbst bleibt aber immer lokal.</p>
+            <p>In Zeiten wachsender Datenschutz-Sensibilit&auml;t ist eine App, die Audio vollst&auml;ndig lokal verarbeiten kann, ein starkes Argument &mdash; besonders im europ&auml;ischen Markt. Die Konkurrenz durch Tools wie Wispr Flow und SuperWhisper ist allerdings bereits etabliert. Der Stealth-Launch ohne Blogpost oder Pressekonferenz ist ungew&ouml;hnlich f&uuml;r Google und deutet darauf hin, dass die App noch im fr&uuml;hen Stadium ist &mdash; ein &ouml;ffentliches Experiment mit Googles On-Device-KI-Strategie.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/06/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/" rel="noopener noreferrer external">TechCrunch: Google quietly releases offline AI dictation app</a></li>
+                <li><a href="https://9to5google.com/2026/04/06/google-ai-edge-eloquent-app/" rel="noopener noreferrer external">9to5Google: Google AI Edge Eloquent app</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE-TEASER ═══ -->
+    <section class="article section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Die Geopolitik der KI-Infrastruktur &mdash; Warum Rechenzentren zum strategischen Machtfaktor werden</h2>
+            <p class="article-teaser">Im M&auml;rz 2026 trafen iranische Drohnen erstmals kommerzielle Cloud-Rechenzentren. Es war der Moment, in dem KI-Infrastruktur endg&uuml;ltig zur Frage der nationalen Sicherheit wurde. Wer die Rechenzentren baut, definiert die Regeln &mdash; und wer sie zerst&ouml;ren kann, h&auml;lt ein neues geopolitisches Druckmittel in der Hand.</p>
+            <a href="reportagen/2026-04-07.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">6 neue KI-Tools, die diese Woche aufgefallen sind</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/apfel.franzai.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/Arthur-Ficial/apfel" rel="noopener noreferrer external">Apfel</a></div>
+                    <div class="tool-card-desc">CLI-Tool und OpenAI-kompatibler lokaler Server, der Apples verstecktes 3B-Parameter On-Device-LLM auf Apple&nbsp;Silicon freischaltet &mdash; ohne API-Keys, Cloud oder Kosten. Von <code>brew install</code> bis zum ersten Output in 12&nbsp;Sekunden.</div>
+                    <div class="tool-card-meta">3. April 2026. Open Source (MIT), 513 Punkte auf Hacker News.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/Yeachan-Heo/oh-my-codex" rel="noopener noreferrer external">oh-my-codex (OMX)</a></div>
+                    <div class="tool-card-desc">Multi-Agent-Orchestrierungsschicht f&uuml;r OpenAIs Codex&nbsp;CLI: verwandelt einzelne KI-Assistenten in koordinierte Teams spezialisierter Agenten. Hooks, isolierte Git-Worktrees, HUD-Interface und persistenter MCP-Speicher. Von 456 auf 12.000 GitHub-Stars in einer Woche.</div>
+                    <div class="tool-card-meta">Viral seit 4. April 2026. Open Source, 27 Contributors.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/microsoft/agent-governance-toolkit" rel="noopener noreferrer external">MS Agent Governance Toolkit</a></div>
+                    <div class="tool-card-desc">Open-Source-Runtime-Security-Framework, das autonome KI-Agenten mit deterministischer Policy-Enforcement in unter 0,1&nbsp;ms absichert &mdash; das erste Toolkit, das alle 10 OWASP-Agentic-AI-Risiken abdeckt. Pakete f&uuml;r Python, TypeScript, Rust, Go und .NET.</div>
+                    <div class="tool-card-meta">2. April 2026. Microsoft (MIT-Lizenz), geplante Foundation-&Uuml;bergabe.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/agentshub.ai.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://agentshub.ai" rel="noopener noreferrer external">Agentshub.AI</a></div>
+                    <div class="tool-card-desc">No-Code-Plattform zum Bauen, Deployen und Skalieren autonomer KI-Agenten f&uuml;r Marketing, Sales, HR und Ops. Visueller Agent-Builder, vorgefertigte Workforce-Templates und ein Agent-Marketplace mit &uuml;ber 1.000 Integrationen.</div>
+                    <div class="tool-card-meta">6. April 2026. Elite Discoveries Digital Inc. (Startup).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/vibrantsnap.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.vibrantsnap.com/" rel="noopener noreferrer external">Vibrantsnap</a></div>
+                    <div class="tool-card-desc">KI-Screen-Recorder, der Bildschirmaufnahmen automatisch in professionelle Produktvideos verwandelt: KI-Avatar-Presenter, Auto-Cut, F&uuml;llwort-Entfernung und Studio-Audio. #1 Product of the Day auf Product Hunt.</div>
+                    <div class="tool-card-meta">5. April 2026. Startup, Product-Hunt-Top-Maker.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/block.github.io.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/block/goose" rel="noopener noreferrer external">Goose v1.29</a></div>
+                    <div class="tool-card-desc">Open-Source-KI-Agent von Block (Square/Cash&nbsp;App), der &uuml;ber Code-Vorschl&auml;ge hinausgeht: installiert, f&uuml;hrt aus, debuggt und testet autonom mit jedem LLM. Version&nbsp;1.29 bringt Sub-Agent-Delegation, Desktop-UI und MCP-Integration. 30.000+ GitHub-Stars.</div>
+                    <div class="tool-card-meta">3. April 2026. Block Inc. (Apache 2.0), Linux Foundation.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=ZCKuK8UCsP4" rel="noopener noreferrer external"><img src="../assets/images/thumbs/ZCKuK8UCsP4.jpg" alt="Fahd Mirza Gemma 4 vs Qwen 3.5 Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 23 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=ZCKuK8UCsP4" rel="noopener noreferrer external">Gemma-4 31B vs Qwen3.5 27B: Hands-on Local Comparison</a></div>
+                    <div class="yt-card-channel">Fahd Mirza (174.000 Subs) &middot; 6. April 2026</div>
+                    <div class="yt-card-desc">Fahd Mirza vergleicht die beiden aktuell st&auml;rksten dichten Open-Weight-Modelle in einem detaillierten Hands-on-Test: Googles Gemma&nbsp;4 31B und Alibabas Qwen&nbsp;3.5 27B. Beide Modelle laufen lokal via Ollama; getestet werden Reasoning, Codierung und allgemeines Wissen &mdash; mit klaren St&auml;rken und Schw&auml;chen bei realen Aufgaben.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=d9LGtygWEKQ" rel="noopener noreferrer external"><img src="../assets/images/thumbs/d9LGtygWEKQ.jpg" alt="Prompt Engineer Gemma 4 Fine-Tuning Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 9 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=d9LGtygWEKQ" rel="noopener noreferrer external">Fine-Tune Gemma 4 in Minutes (No Code!) &mdash; Unsloth Studio Tutorial</a></div>
+                    <div class="yt-card-channel">Prompt Engineer (21.500 Subs) &middot; 5. April 2026</div>
+                    <div class="yt-card-desc">Schritt-f&uuml;r-Schritt-Anleitung zum Fine-Tuning von Gemma&nbsp;4 mit Unsloths neuer Studio-Oberfl&auml;che &mdash; ganz ohne Code. Das Video zeigt, wie man &uuml;ber die No-Code-GUI eigene Trainingsdaten hochl&auml;dt, LoRA-Parameter konfiguriert und in wenigen Minuten ein angepasstes Modell erstellt. Ideal f&uuml;r Einsteiger.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=JmCiKKw6bMA" rel="noopener noreferrer external"><img src="../assets/images/thumbs/JmCiKKw6bMA.jpg" alt="kintu Gemma 4 16GB VRAM Test Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 24 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=JmCiKKw6bMA" rel="noopener noreferrer external">Gemma 4 31B vs 26B-A4B: 16GB VRAM Local Test</a></div>
+                    <div class="yt-card-channel">kintu (461 Subs) &middot; 6. April 2026 &middot; 1.000+ Views in 24h</div>
+                    <div class="yt-card-desc">Ein Mikro-Creator mit nur 461 Abonnenten testet die beiden Gemma-4-Varianten (31B Dense vs. 26B Mixture-of-Experts A4B) auf einer Consumer-GPU mit 16&nbsp;GB VRAM. Konkrete Zahlen zu Inferenzgeschwindigkeit, Speicherverbrauch und Quantisierungs-Trade-offs &mdash; genau die Informationen, die die Community dringend braucht, um zu entscheiden, welche Gemma-4-Variante auf ihrer Hardware l&auml;uft.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Die Geopolitik der KI-Infrastruktur &mdash; Die Inferenz, 7. April 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 60ch;
+        }
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-top: var(--space-4);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            max-width: var(--width-article);
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            text-wrap: balance;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .article-body h3 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: var(--text-lg);
+            color: var(--text-primary);
+            margin: var(--space-8) 0 var(--space-3);
+            text-wrap: balance;
+        }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-07.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Die Geopolitik der KI-Infrastruktur &mdash; Warum Rechenzentren zum strategischen Machtfaktor werden</h1>
+    <p class="article-subtitle">Im M&auml;rz 2026 trafen iranische Drohnen erstmals kommerzielle Cloud-Rechenzentren. Es war der Moment, in dem KI-Infrastruktur endg&uuml;ltig zur Frage der nationalen Sicherheit wurde. Wer die Rechenzentren baut, definiert die Regeln &mdash; und wer sie zerst&ouml;ren kann, h&auml;lt ein neues geopolitisches Druckmittel in der Hand.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-07">Dienstag, 7. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Am 1.&nbsp;M&auml;rz 2026, kurz vor Sonnenaufgang, trafen iranische Shahed-Drohnen drei Rechenzentren von Amazon Web Services in den Vereinigten Arabischen Emiraten und Bahrain. Zwei von drei Cloud-Verf&uuml;gbarkeitszonen in der VAE-Region fielen aus. Bankensysteme, Zahlungsdienstleister und Unternehmenssoftware gingen offline. Es war der erste bekannte milit&auml;rische Angriff auf die physische Infrastruktur eines gro&szlig;en Cloud-Anbieters in der Geschichte &mdash; und ein Moment, der die Technologiebranche zwang, eine unbequeme Wahrheit anzuerkennen: KI-Infrastruktur ist l&auml;ngst kein technisches Thema mehr. Sie ist eine Frage der nationalen Sicherheit.</p>
+
+        <p>F&uuml;nf Wochen sp&auml;ter, am 3.&nbsp;April, ver&ouml;ffentlichte die iranische Revolutionsgarde ein Drohvideo mit Satellitenaufnahmen von OpenAIs geplantem Stargate-Rechenzentrum in Abu Dhabi. Die Botschaft: &bdquo;Vollst&auml;ndige und restlose Vernichtung&ldquo;, sollten die USA iranische Energieanlagen angreifen. Ein 30-Milliarden-Dollar-Rechenzentrum mit einem Gigawatt Rechenleistung &mdash; als Vergeltungsziel auf einem Propagandavideo.</p>
+
+        <h2>Das 500-Milliarden-Dollar-Wettr&uuml;sten</h2>
+
+        <p>Was Iran da ins Visier nimmt, ist Teil des gr&ouml;&szlig;ten Infrastrukturprojekts der Technologiegeschichte. Das Stargate-Projekt, ein Joint Venture von OpenAI, SoftBank, Oracle und dem Investmentfonds MGX, plant Investitionen von insgesamt 500&nbsp;Milliarden Dollar in KI-Rechen&shy;infrastruktur. Am Flaggschiff-Standort in Abilene, Texas, sind bereits zwei Geb&auml;ude in Betrieb, sechs weitere sollen bis Mitte 2026 fertig sein &mdash; ausgestattet mit &uuml;ber 450.000 NVIDIA-GB200-GPUs. Insgesamt sind sieben Standorte in den USA in verschiedenen Entwicklungsphasen geplant, mit einer Gesamtkapazit&auml;t von fast sieben Gigawatt.</p>
+
+        <p>Doch Stargate ist nur die Spitze des Eisbergs. Die f&uuml;nf gr&ouml;&szlig;ten Hyperscaler &mdash; Amazon, Microsoft, Google, Meta und Oracle &mdash; werden 2026 voraussichtlich &uuml;ber 600&nbsp;Milliarden Dollar in Infrastruktur investieren, ein Anstieg von 36&nbsp;Prozent gegen&uuml;ber dem Vorjahr. OpenAI entwickelt parallel mit Broadcom einen eigenen KI-Chip namens &bdquo;Titan&ldquo;, der in der zweiten Jahresh&auml;lfte 2026 in TSMCs 3-Nanometer-Fertigung in Massenproduktion gehen soll. Der Hunger nach Rechenleistung ist uners&auml;ttlich &mdash; und er ver&auml;ndert die geopolitische Landkarte.</p>
+
+        <h2>Wenn Rechenzentren zu milit&auml;rischen Zielen werden</h2>
+
+        <p>Die Drohnenangriffe vom M&auml;rz markieren eine Z&auml;sur. Iran begr&uuml;ndete die Angriffe auf die AWS-Rechenzentren damit, dass dort unter anderem KI-Systeme gehostet w&uuml;rden, die das US-Milit&auml;r f&uuml;r Geheimdienstanalysen und Kriegssimulationen nutze. Ob diese Behauptung zutrifft, ist zweitrangig &mdash; entscheidend ist die Logik dahinter: Wer die Recheninfrastruktur kontrolliert oder zerst&ouml;rt, trifft nicht nur Tech-Unternehmen, sondern potenziell die milit&auml;rische und wirtschaftliche Handlungsf&auml;higkeit ganzer Regionen.</p>
+
+        <div class="pull-quote">Rechenzentren sind die Pipelines des 21.&nbsp;Jahrhunderts. Wie einst &Ouml;lpipelines bestimmen sie, wer Zugang zu einer strategischen Ressource hat &mdash; und wer nicht.</div>
+
+        <p>Das Weltwirtschaftsforum reagierte prompt und forderte Anfang April 2026, KI-Infrastruktur offiziell als kritische Infrastruktur einzustufen &mdash; mit allen v&ouml;lkerrechtlichen Schutzbestimmungen, die damit einhergehen. Denn bisher existiert kein internationaler Rahmen, der kommerzielle Rechenzentren im Konfliktfall explizit sch&uuml;tzt.</p>
+
+        <h2>Die globale Compute-Landkarte: Ein dramatisches Ungleichgewicht</h2>
+
+        <p>Wer verstehen will, warum Rechenzentren zum geopolitischen Machtfaktor werden, muss auf die Zahlen schauen. Die USA kontrollieren derzeit rund 74&nbsp;Prozent der globalen High-End-KI-Rechenkapazit&auml;t. China kommt auf etwa 14&nbsp;Prozent, die gesamte Europ&auml;ische Union auf 4,8&nbsp;Prozent. Dieses Ungleichgewicht ist kein Zufall, sondern Ergebnis jahrelanger strategischer Industriepolitik &mdash; und es hat handfeste Konsequenzen.</p>
+
+        <p>Die US-Exportkontrollen f&uuml;r Hochleistungschips zeigen Wirkung: Huaweis beste KI-Chips sind derzeit f&uuml;nfmal weniger leistungsf&auml;hig als NVIDIAs Spitzenmodelle. Laut dem Council on Foreign Relations wird diese L&uuml;cke bis 2027 auf den Faktor 17 anwachsen. Selbst unter optimistischen Annahmen produziert Huawei 2026 nur etwa vier Prozent der gesamten KI-Rechenleistung von NVIDIA. China investiert massiv in eigene Chip-Entwicklung, doch der technologische Vorsprung der USA &mdash; gest&uuml;tzt auf TSMCs Fertigungskapazit&auml;ten in Taiwan &mdash; bleibt enorm.</p>
+
+        <p>Gleichzeitig positionieren sich neue Akteure. Saudi-Arabien hat Microsoft rund 80&nbsp;Milliarden Dollar f&uuml;r KI-Infrastruktur zugesagt. Die Vereinigten Arabischen Emirate wollen zum globalen KI-Hub werden &mdash; und nehmen daf&uuml;r offenbar auch Sicherheitsrisiken in Kauf.</p>
+
+        <h2>Energie: Der neue Engpass</h2>
+
+        <p>Das erste Quartal 2026 markiert laut Branchenanalysten den Moment, in dem KI-Infrastruktur nicht mehr durch Kapital begrenzt wird, sondern durch Energie. Die Internationale Energieagentur (IEA) sch&auml;tzt den globalen Stromverbrauch von Rechenzentren auf rund 415&nbsp;Terawattstunden im Jahr 2024 &mdash; bis 2026 k&ouml;nnten es &uuml;ber 1.000&nbsp;Terawattstunden werden, eine Verdopplung in nur zwei Jahren.</p>
+
+        <p>Die Folgen werden zunehmend lokal sp&uuml;rbar. Eine aktuelle Studie der Universit&auml;t Cambridge analysierte &uuml;ber 8.400 Rechenzentren weltweit und stellte fest, dass sie die Bodentemperatur in ihrer Umgebung um durchschnittlich zwei Grad Celsius erh&ouml;hen &mdash; in Extremf&auml;llen bis zu neun Grad, in einem Radius von rund zehn Kilometern. Weltweit k&ouml;nnten davon 340&nbsp;Millionen Menschen betroffen sein. Ein typisches 100-Megawatt-Rechenzentrum verbraucht zudem rund 1,1&nbsp;Millionen Liter K&uuml;hlwasser pro Tag &mdash; so viel wie 2.600 Haushalte.</p>
+
+        <p>In Irland, einem europ&auml;ischen Hotspot f&uuml;r Rechenzentren, k&ouml;nnten diese laut IEA bereits 2026 rund 32&nbsp;Prozent des nationalen Stromverbrauchs ausmachen. Energie ist nicht mehr nur eine Kostenfrage &mdash; sie wird zum geopolitischen Druckmittel, wie Irans Drohungen gegen Energieanlagen und Rechenzentren gleicherma&szlig;en zeigen.</p>
+
+        <h2>Europas Dilemma</h2>
+
+        <p>Europa steht vor einem strategischen Dilemma. Die Ausgaben f&uuml;r souver&auml;ne Cloud-Infrastruktur in Europa betragen 2026 gesch&auml;tzt 10,6&nbsp;Milliarden Euro &mdash; ein Wachstum von 83&nbsp;Prozent gegen&uuml;ber dem Vorjahr, aber ein Rundungsfehler im Vergleich zu den 600&nbsp;Milliarden Dollar der US-Hyperscaler. Frankreichs Pr&auml;sident Macron hat 109&nbsp;Milliarden Euro f&uuml;r KI-Investitionen angek&uuml;ndigt, Mistral&nbsp;AI baut mit NVIDIA eine Cloud-Plattform mit 18.000 Grace-Blackwell-Systemen. Die EU hat f&uuml;nf &bdquo;AI Factories&ldquo; als souver&auml;ne Compute-Hubs initiiert.</p>
+
+        <p>Doch die Realit&auml;t ist ern&uuml;chternd: 52&nbsp;Prozent der westeurop&auml;ischen Unternehmen wollen ihre Investitionen in Datensouver&auml;nit&auml;t beschleunigen, 47&nbsp;Prozent &uuml;berdenken ihre Abh&auml;ngigkeit von au&szlig;ereurop&auml;ischen Cloud-Anbietern. Zwischen Ambition und Umsetzung klafft eine L&uuml;cke, die sich mit jedem Quartal vergr&ouml;&szlig;ert, in dem US-Unternehmen Hunderte Milliarden investieren.</p>
+
+        <h2>Die neuen Pipelines</h2>
+
+        <p>OpenAIs j&uuml;ngstes Policy-Paper &mdash; ver&ouml;ffentlicht am 6.&nbsp;April unter dem Titel &bdquo;Industrial Policy for the Intelligence Age&ldquo; &mdash; liest sich wie ein Manifest f&uuml;r eine neue Wirtschaftsordnung: &ouml;ffentliche Verm&ouml;gensfonds, automatische Sicherheitsnetze, Verlagerung der Steuerlast von Arbeit auf Kapital. Doch zwischen den Zeilen steht vor allem eine Botschaft: Wer die KI-Infrastruktur baut, definiert die Regeln.</p>
+
+        <p>Wie einst &Ouml;lpipelines bestimmen Rechenzentren, wer Zugang zu einer strategischen Ressource hat &mdash; und wer nicht. Die Drohnenangriffe vom M&auml;rz und Irans j&uuml;ngste Drohungen machen unmissverst&auml;ndlich klar: Diese Infrastruktur ist verwundbar, sie ist umk&auml;mpft, und sie wird zum Gravitationszentrum k&uuml;nftiger geopolitischer Konflikte.</p>
+
+        <p>F&uuml;r europ&auml;ische Unternehmen bedeutet das eine unbequeme Erkenntnis: Wer seine KI-Workloads in US-Cloud-Regionen im Nahen Osten betreibt, tr&auml;gt nicht nur ein technisches, sondern ein geopolitisches Risiko. Und wer auf souver&auml;ne europ&auml;ische Alternativen wartet, muss sich fragen, ob die kommen werden, bevor die Abh&auml;ngigkeit irreversibel wird.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://techcrunch.com/2026/04/06/iran-threatens-stargate-ai-data-centers/" rel="noopener noreferrer external">TechCrunch: Iran threatens Stargate AI data centers</a></li>
+            <li><a href="https://www.tomshardware.com/tech-industry/iran-threatens-complete-and-utter-annihilation-of-openais-usd30b-stargate-ai-data-center-in-abu-dhabi-regime-posts-video-with-satellite-imagery-of-chatgpt-makers-premier-1gw-data-center" rel="noopener noreferrer external">Tom&rsquo;s Hardware: Iran droht Stargate-Rechenzentrum in Abu Dhabi</a></li>
+            <li><a href="https://www.cnbc.com/2026/03/03/iran-war-uae-drone-strikes-aws-data-centers.html" rel="noopener noreferrer external">CNBC: Iran drone strikes on AWS data centers in UAE</a></li>
+            <li><a href="https://fortune.com/2026/03/09/irans-attacks-on-amazon-data-centers-in-uae-bahrain-signal-a-new-kind-of-war-as-ai-plays-an-increasingly-strategic-role-analysts-say/" rel="noopener noreferrer external">Fortune: Iran&rsquo;s attacks signal a new kind of war</a></li>
+            <li><a href="https://edition.cnn.com/2026/03/30/climate/data-centers-are-having-an-underrported" rel="noopener noreferrer external">CNN: Data centers creating heat islands</a></li>
+            <li><a href="https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" rel="noopener noreferrer external">IEA: Energy demand from AI</a></li>
+            <li><a href="https://www.spglobal.com/en/research-insights/special-reports/look-forward/data-center-frontiers/geopolitics-data-sovereignty-data-center-security" rel="noopener noreferrer external">S&amp;P Global: Geopolitics of data centers</a></li>
+            <li><a href="https://www.weforum.org/stories/2026/04/ai-infrastructure-critical-infrastructure/" rel="noopener noreferrer external">WEF: AI infrastructure as critical infrastructure</a></li>
+            <li><a href="https://openai.com/index/five-new-stargate-sites/" rel="noopener noreferrer external">OpenAI: Five new Stargate sites</a></li>
+            <li><a href="https://www.cfr.org/article/chinas-ai-chip-deficit-why-huawei-cant-catch-nvidia-and-us-export-controls-should-remain" rel="noopener noreferrer external">CFR: China&rsquo;s AI Chip Deficit</a></li>
+            <li><a href="https://arxiv.org/abs/2603.20897" rel="noopener noreferrer external">arXiv: The data heat island effect (Cambridge)</a></li>
+            <li><a href="https://www.euronews.com/business/2026/02/16/big-techs-ai-spending-is-ballooning-but-will-it-crush-europe" rel="noopener noreferrer external">Euronews: Big Tech&rsquo;s AI spending vs. Europe&rsquo;s data sovereignty</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
