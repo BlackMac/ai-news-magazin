@@ -64,6 +64,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - ZCKuK8UCsP4 — Gemma-4 31B vs Qwen3.5 27B: Hands-on Local Comparison (Fahd Mirza, 2026-04-06)
 - d9LGtygWEKQ — Fine-Tune Gemma 4 in Minutes (No Code!) — Unsloth Studio Tutorial (Prompt Engineer, 2026-04-05)
 - JmCiKKw6bMA — Gemma 4 31B vs 26B-A4B: 16GB VRAM Local Test (kintu, 2026-04-06)
+- w-X3HV2OTfM — 50x Cheaper Than Claude - But Can It Actually Code? MiniMax M2.7 (Tech With Tim, 2026-04-07)
+- ql-YQ5ccZXs — Gemma 4 26B A4B vs Qwen3.5 35B A3B: MoE Models Battle Locally (Fahd Mirza, 2026-04-07)
+- zVEb19AwkqM — Karpathy's LLM Wiki: Watch Me Build a Knowledge Base From Scratch! (Onchain AI Garage, 2026-04-06)
 
 ---
 
@@ -179,8 +182,24 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Agentshub.AI (2026-04-07)
 - Vibrantsnap (2026-04-07)
 - Goose v1.29 (2026-04-07)
+- Felix (2026-04-08)
+- Modo (2026-04-08)
+- OpenYak (2026-04-08)
+- Straude (2026-04-08)
+- AgentMon (2026-04-08)
+- Google AI Edge Eloquent (2026-04-08)
 
 ---
+
+## 2026-04-08
+- Anthropic Mythos Preview + Project Glasswing: Modell findet tausende Zero-Day-Schwachstellen in allen großen OS und Browsern, 27 Jahre alter OpenBSD-Bug, 72,4% Exploit-Erfolgsrate, 12 Partner (Amazon, Apple, Microsoft, Google, NVIDIA, CrowdStrike, Linux Foundation u.a.), nicht öffentlich freigegeben
+- Intel wird Fertigungspartner für Musks Terafab: Intel Foundry fertigt AI5 (Edge-Inferenz) und D3 (strahlungsgehärtet für SpaceX) in 2-nm, 100K Wafer-Starts/Monat initial
+- Anthropic sichert 3,5 GW Compute mit Google/Broadcom: 400K TPUv7 Ironwood direkt von Broadcom (~10 Mrd. $), 600K über Google Cloud, Umsatz-Run-Rate 30 Mrd. $
+- Perplexity-Sammelklage wegen Datenweitergabe: Meta Pixel, Google Ads, DoubleClick und Metas Conversions API in Code eingebettet, Chat-Text an Meta/Google für Ad-Targeting, Inkognito-Modus wirkungslos, alle US-Nutzer 12/2022-02/2026 betroffen
+- EU-Institutionen verbannen KI-generierte Bilder aus offizieller Kommunikation: Kommission, Parlament und Rat erlassen Richtlinien, KI-Optimierung erlaubt, Erzeugung verboten
+- Meta wechselt zu Hybrid-Strategie für KI-Modelle: größte Modelle bleiben proprietär, kleinere Open Source, unter neuem KI-Chef Alexandr Wang
+- Samsung verachtfacht Gewinn (Q1 2026): 57,2 Bio. Won (33 Mrd. $) operativer Gewinn, +755% YoY, 95% aus Chip-Sparte, HBM4-Boom
+- Reportage: KI als Waffe und Schild — Cybersecurity im Zeitalter von Mythos, Project Glasswing, Agentic SOC, 27-Sekunden-Breakout-Time, Markt 30 Mrd. $ → 235 Mrd. $ bis 2032
 
 ## 2026-04-07
 - Iran droht Stargate-Rechenzentrum in Abu Dhabi: IRGC-Drohvideo mit Satellitenaufnahmen, 30-Mrd-Dollar-Rechenzentrum, Bezug auf Drohnenangriffe auf AWS im März 2026
