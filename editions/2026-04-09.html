@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 9. April 2026</title>    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-09">Donnerstag, 9. April 2026</time> &middot; 5 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 9. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Enterprise-KI &middot; Gartner</span><span class="toc-title">Unter 30&nbsp;Prozent der KI-Projekte erreichen ihre Ziele &mdash; Gartner-Studie offenbart ern&uuml;chternde Bilanz</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Milit&auml;r-KI &middot; US&nbsp;Army</span><span class="toc-title">Die US&nbsp;Army baut einen eigenen Chatbot f&uuml;r den Kampfeinsatz</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Modelle &middot; Meta</span><span class="toc-title">Meta Muse Spark &mdash; das erste Modell unter der neuen Hybrid-Strategie</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">KI-Politik &middot; Anthropic</span><span class="toc-title">Widerspr&uuml;chliche Urteile lassen Anthropic im Supply-Chain-Risk-Limbo</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">KI-Politik &middot; EU</span><span class="toc-title">Breites B&uuml;ndnis warnt vor Verw&auml;sserung der europ&auml;ischen KI-Regeln</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Warum drei von vier KI-Projekten ihre Ziele verfehlen</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Enterprise-KI &middot; Gartner</div>
+            <h2 id="art-1-h">Unter 30&nbsp;Prozent der KI-Projekte erreichen ihre Ziele &mdash; Gartner-Studie offenbart ern&uuml;chternde Bilanz</h2>
+            <div class="article-meta"><time datetime="2026-04-08">8. April 2026</time> &middot; Quellen: Golem.de, Gartner, McKinsey, MIT</div>
+        </header>
+        <p class="article-teaser">Eine neue Gartner-Erhebung unter 782 IT-F&uuml;hrungskr&auml;ften zeigt: Nur 28&nbsp;Prozent der KI-Projekte in der IT-Infrastruktur liefern den erhofften ROI. 20&nbsp;Prozent scheitern komplett. Die Zahlen best&auml;tigen eine wachsende Kluft zwischen KI-Investitionen und messbaren Ergebnissen &mdash; und werfen die Frage auf, ob das Problem die Technologie oder die Organisation ist.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die am 7.&nbsp;April ver&ouml;ffentlichte Gartner-Studie &bdquo;AI Projects in I&amp;O Stall Ahead of Meaningful ROI Returns&ldquo; zeichnet ein ern&uuml;chterndes Bild: Von allen KI-Projekten in der IT-Infrastruktur erreichen nur <strong>28&nbsp;Prozent</strong> ihre ROI-Ziele vollst&auml;ndig. Ein F&uuml;nftel wird komplett aufgegeben, die &uuml;brigen d&uuml;mpeln im sogenannten &bdquo;Pilot Purgatory&ldquo; &mdash; dem Fegefeuer der Pilotprojekte, aus dem der Weg in die Produktion nicht gelingt.</p>
+            <p>Die Befunde sind kein Ausrei&szlig;er. Eine MIT-Studie vom Sommer 2025 kam zu noch dramatischeren Ergebnissen: <strong>95&nbsp;Prozent</strong> aller generativen KI-Pilotprojekte lieferten keinen messbaren Beitrag zum Unternehmensergebnis. McKinseys State-of-AI-Report best&auml;tigt: Obwohl 88&nbsp;Prozent der Unternehmen KI in mindestens einer Gesch&auml;ftsfunktion nutzen, verzeichnen nur 39&nbsp;Prozent einen messbaren EBIT-Effekt. Die Gruppe der &bdquo;AI High Performers&ldquo;, die mehr als f&uuml;nf Prozent ihres Betriebsergebnisses auf KI zur&uuml;ckf&uuml;hren, umfasst gerade einmal 5,5&nbsp;Prozent der befragten Unternehmen.</p>
+            <p>Das Kernproblem ist selten technischer Natur. &bdquo;Das Modell ist fast nie das Hauptproblem&ldquo;, sagt Alex Potapov, Senior Consultant bei NTT&nbsp;DATA, der GenAI-Projekte f&uuml;r Gro&szlig;konzerne verantwortet. Die eigentlichen Stolpersteine: unvorbereitete Daten, unklare Zust&auml;ndigkeiten und Architekturen, die f&uuml;r die Pr&auml;sentation gebaut wurden, nicht f&uuml;r den Produktivbetrieb. Gartner prognostiziert, dass 60&nbsp;Prozent der KI-Projekte bis Ende 2026 an fehlender &bdquo;AI-ready Data&ldquo; scheitern werden.</p>
+            <p>Die wenigen Gewinner unterscheiden sich nicht durch bessere Modelle, sondern durch bessere Organisation: Ein Stanford-Forschungsteam, das 51 erfolgreiche Enterprise-Deployments analysierte, identifizierte drei Beschleuniger &mdash; aktive Unterst&uuml;tzung durch die Gesch&auml;ftsleitung, bestehende Dateninfrastruktur und die Bereitschaft, Workflows grundlegend neu zu gestalten statt KI auf bestehende Prozesse aufzusetzen. Nur 21&nbsp;Prozent der Unternehmen haben Letzteres bisher getan. Unsere <a href="reportagen/2026-04-09.html">heutige Reportage</a> analysiert die L&uuml;cke zwischen Investition und Ertrag im Detail.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.golem.de/news/gartner-umfrage-nur-unter-30-prozent-der-ki-projekte-erreichen-ihre-ziele-2604-195571.html" rel="noopener noreferrer external">Golem.de: Nur unter 30 Prozent der KI-Projekte erreichen ihre Ziele</a></li>
+                <li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-says-artificial-intelligence-projects-in-infrastructure-and-operations-stall-ahead-of-meaningful-roi-returns" rel="noopener noreferrer external">Gartner: AI Projects in I&amp;O Stall Ahead of Meaningful ROI Returns</a></li>
+                <li><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" rel="noopener noreferrer external">McKinsey: The State of AI 2025</a></li>
+                <li><a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" rel="noopener noreferrer external">MIT/Fortune: 95% of Generative AI Pilots Failing</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Milit&auml;r-KI &middot; US&nbsp;Army</div>
+            <h2 id="art-2-h">Die US&nbsp;Army baut einen eigenen Chatbot f&uuml;r den Kampfeinsatz</h2>
+            <div class="article-meta"><time datetime="2026-04-08">8. April 2026</time> &middot; Quellen: Wired, Defense One, MIT Technology Review</div>
+        </header>
+        <p class="article-teaser">Die US-Armee entwickelt einen eigenen KI-Chatbot f&uuml;r den milit&auml;rischen Einsatz &mdash; trainiert auf milit&auml;rischen Dokumenten, Gefechtsdoktrinen und Lageberichten. Das System soll Offizieren in Echtzeit taktische Empfehlungen geben, von der Logistikplanung bis zur Gefechtsf&uuml;hrung.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Wie Wired am 8.&nbsp;April berichtete, arbeitet die US&nbsp;Army an einem eigenen Large Language Model, das speziell f&uuml;r milit&auml;rische Anwendungen optimiert wird. Das System wird auf klassifizierten und nicht-klassifizierten Dokumenten trainiert &mdash; darunter Gefechtsdoktrinen, After-Action Reports und Logistikhandb&uuml;cher. Wie wir <a href="2026-03-17.html">in unserer Ausgabe vom 17.&nbsp;M&auml;rz berichteten</a>, hatte das Pentagon bereits Pl&auml;ne f&uuml;r KI-Training mit klassifizierten Geheimdaten angek&uuml;ndigt &mdash; der Army-Chatbot ist nun die erste konkrete Umsetzung.</p>
+            <p>Das Ziel: Offiziere sollen in Echtzeit auf ein &bdquo;institutionelles Ged&auml;chtnis&ldquo; der Armee zugreifen k&ouml;nnen &mdash; von Lektionen aus fr&uuml;heren Eins&auml;tzen &uuml;ber Beschaffungsvorschriften bis hin zu taktischen Szenarien. Die Army positioniert das Tool explizit als Unterst&uuml;tzungssystem, nicht als autonomen Entscheidungstr&auml;ger. Das ist eine Abgrenzung, die angesichts der laufenden Debatte um autonome Waffensysteme politisch notwendig ist.</p>
+            <p>Parallel verst&auml;rkt auch das Technologiekommando der Army seine KI-Kapazit&auml;ten: Im Februar schloss die Army einen 50-Millionen-Dollar-Vertrag mit Scale&nbsp;AI f&uuml;r Datenaufbereitung und Modellvalidierung ab. Mustafa Suleyman, CEO von Microsoft&nbsp;AI, bekr&auml;ftigte am selben Tag in einem Essay im MIT Technology Review, dass die KI-Entwicklung &bdquo;nicht an eine Wand sto&szlig;en&ldquo; werde &mdash; eine Aussage, die im milit&auml;rischen Kontext neue Brisanz erh&auml;lt.</p>
+            <p>Senatorin Slotkins &bdquo;AI Guardrails Act&ldquo;, <a href="2026-03-26.html">den wir in unserer Ausgabe vom 26.&nbsp;M&auml;rz vorstellten</a>, will drei rote Linien ziehen: keine autonomen T&ouml;tungsentscheidungen, keine Massen&uuml;berwachung, kein KI-Einsatz bei Atomwaffen. Der Army-Chatbot f&auml;llt zwar nicht unter diese Verbote, zeigt aber, wie schnell die Grenzen zwischen &bdquo;Unterst&uuml;tzung&ldquo; und &bdquo;Entscheidung&ldquo; verschwimmen k&ouml;nnen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.wired.com/story/us-army-building-chatbot-combat/" rel="noopener noreferrer external">Wired: The US Army Is Building Its Own Chatbot for Combat</a></li>
+                <li><a href="https://www.technologyreview.com/2026/04/08/1115271/mustafa-suleyman-ai-wont-hit-wall/" rel="noopener noreferrer external">MIT Technology Review: Mustafa Suleyman on AI development</a></li>
+                <li><a href="https://www.defense.gov/News/Releases/" rel="noopener noreferrer external">Department of Defense</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Modelle &middot; Meta</div>
+            <h2 id="art-3-h">Meta Muse Spark &mdash; das erste Modell unter der neuen Hybrid-Strategie</h2>
+            <div class="article-meta"><time datetime="2026-04-08">8. April 2026</time> &middot; Quellen: The Verge, Wired, heise online, t3n</div>
+        </header>
+        <p class="article-teaser">Meta ver&ouml;ffentlicht &bdquo;Muse Spark&ldquo; &mdash; das erste KI-Modell, das unter der neuen Hybrid-Strategie entwickelt wurde. W&auml;hrend das Modell als Schritt Richtung &bdquo;Personal Superintelligence&ldquo; beworben wird, markiert es vor allem den Kurswechsel: Metas gr&ouml;&szlig;te Modelle sind ab sofort propriet&auml;r.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Wie wir <a href="2026-04-08.html#art-4">in unserer gestrigen Ausgabe berichteten</a>, hat Meta unter dem neuen KI-Chef Alexandr Wang eine Hybrid-Strategie angek&uuml;ndigt: Die leistungsf&auml;higsten Modelle bleiben propriet&auml;r, nur kleinere Versionen werden weiterhin Open Source ver&ouml;ffentlicht. Muse Spark ist nun das erste Ergebnis dieser Neuausrichtung &mdash; und es ist geschlossen.</p>
+            <p>Meta positioniert Muse Spark als Schritt auf dem Weg zur &bdquo;Personal Superintelligence&ldquo; &mdash; einem KI-System, das individuelle Nutzer tiefgreifend versteht und proaktiv unterst&uuml;tzt. Wie genau das aussehen soll und worin sich Muse Spark von Konkurrenten wie Claude oder GPT-5 unterscheidet, blieb bei der Ank&uuml;ndigung allerdings vage. Meta ver&ouml;ffentlichte parallel einen technischen Begleit-Blogpost (&bdquo;Scaling How We Build and Test Our Most Advanced AI&ldquo;), der die Infrastruktur hinter dem Modell beschreibt &mdash; das Modell selbst bleibt jedoch ein Black Box.</p>
+            <p>Begleitet wird die Muse-Spark-Ank&uuml;ndigung von einem organisatorischen Umbau: Meta hat seine KI-Forschung unter dem neuen Label &bdquo;Meta Superintelligence Labs&ldquo; konsolidiert. Parallel ver&ouml;ffentlichte das Team Updates zu <strong>SAM&nbsp;3.1</strong> (Segment Anything Model) und einen Bericht &uuml;ber Metas hauseigene KI-Chips (<strong>MTIA</strong>) &mdash; vier Chip-Generationen in zwei Jahren. Der breite Ank&uuml;ndigungsschwall passt zum Ziel, nach der Scale-AI-Akquisition und dem Wechsel von Wang die neue Strategie nach au&szlig;en zu kommunizieren.</p>
+            <p>Die Reaktionen fallen gemischt aus: Wired titelt, Meta sei &bdquo;zur&uuml;ck am Tisch der Gro&szlig;en&ldquo;. Kritiker sehen den Open-Source-Abschied als Verlust f&uuml;r die KI-Community &mdash; Metas Llama-Modelle waren bisher die meistgenutzte Open-Source-Alternative zu propriet&auml;ren Systemen. Ob der Kurswechsel strategisch klug ist, wird sich erst zeigen, wenn die technischen Details von Muse Spark ver&ouml;ffentlicht werden &mdash; oder ein Benchmark-Vergleich m&ouml;glich wird.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theverge.com/2026/4/8/meta-muse-spark-ai-model" rel="noopener noreferrer external">The Verge: Meta is reentering the AI race with Muse Spark</a></li>
+                <li><a href="https://www.wired.com/story/metas-new-ai-model-muse-spark/" rel="noopener noreferrer external">Wired: Meta&rsquo;s New AI Model Gives Zuckerberg a Seat at the Big Kid&rsquo;s Table</a></li>
+                <li><a href="https://www.heise.de/news/Muse-Spark-Meta-praesentiert-neues-KI-Modell-11248100.html" rel="noopener noreferrer external">heise online: Muse Spark &mdash; Meta pr&auml;sentiert neues KI-Modell</a></li>
+                <li><a href="https://t3n.de/news/muse-spark-meta-ki-modell-1736920.html" rel="noopener noreferrer external">t3n: Muse Spark &mdash; Metas erstes Modell nach dem Scale-AI-Deal</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">KI-Politik &middot; Anthropic</div>
+            <h2 id="art-4-h">Widerspr&uuml;chliche Urteile lassen Anthropic im Supply-Chain-Risk-Limbo</h2>
+            <div class="article-meta"><time datetime="2026-04-08">8. April 2026</time> &middot; Quellen: Wired, TechCrunch, Reuters</div>
+        </header>
+        <p class="article-teaser">Die juristische Auseinandersetzung zwischen Anthropic und dem Pentagon wird un&uuml;bersichtlich: Zwei Bundesgerichte kommen zu widerspr&uuml;chlichen Entscheidungen &uuml;ber die &bdquo;Supply Chain Risk&ldquo;-Einstufung. Anthropic bleibt in einem rechtlichen Schwebezustand, w&auml;hrend das Justizministerium Berufung einlegt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Geschichte zieht sich seit Wochen: Im M&auml;rz erkl&auml;rte das Pentagon Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo; f&uuml;r die Lieferkette &mdash; ein beispielloser Schritt gegen ein US-KI-Unternehmen. Richterin Rita Lin am Northern District of California blockierte die Einstufung Ende M&auml;rz per einstweiliger Verf&uuml;gung und nannte das Vorgehen <a href="2026-03-27.html#art-1">&bdquo;orwellsch&ldquo;</a> und &bdquo;rechtswidrige Vergeltung&ldquo; f&uuml;r Anthropics &ouml;ffentliche Kritik an der Trump-Administration.</p>
+            <p>Nun hat ein zweites Bundesgericht &mdash; offenbar im Zusammenhang mit der Berufungsklage des Justizministeriums &mdash; eine teilweise abweichende Position eingenommen. Wired berichtet von &bdquo;conflicting rulings&ldquo;, die Anthropic in einem rechtlichen Limbo lassen: Die einstweilige Verf&uuml;gung von Richterin Lin bleibt in Kraft, aber die Frist f&uuml;r die DOJ-Berufung beim Ninth Circuit l&auml;uft bis zum 30.&nbsp;April. Wie wir <a href="2026-04-04.html#art-4">am 4.&nbsp;April berichteten</a>, hatte das Justizministerium bereits Berufung eingelegt.</p>
+            <p>Parallel erkl&auml;rt AWS-Chef Matt Garman in einem TechCrunch-Interview, warum Amazon gleichzeitig in Anthropic und OpenAI investiert &mdash; und sieht darin keinen Interessenkonflikt. Die Aussage kommt zu einem Zeitpunkt, an dem Anthropics Gesch&auml;ft trotz der Pentagon-Querelen boomt: Die Umsatz-Run-Rate liegt bei 30&nbsp;Milliarden Dollar, die t&auml;glichen Nutzer &uuml;berstiegen im M&auml;rz 11&nbsp;Millionen, und mit Project Glasswing hat Anthropic zw&ouml;lf Tech-Giganten f&uuml;r eine Cybersecurity-Initiative gewonnen.</p>
+            <p>Die Causa zeigt, wie politisiert die KI-Branche geworden ist. Anthropic-CEO Dario Amodei hatte die Trump-Administration &ouml;ffentlich f&uuml;r die Deregulierung der KI-Sicherheit kritisiert &mdash; kurz darauf folgte die Supply-Chain-Risk-Einstufung. Ob Vergeltung oder legitime Sicherheitsbedenken: Die Antwort wird vermutlich erst der Ninth Circuit geben, und das kann Monate dauern.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.wired.com/story/anthropic-supply-chain-risk-conflicting-rulings/" rel="noopener noreferrer external">Wired: Conflicting Rulings Leave Anthropic in Supply-Chain Risk Limbo</a></li>
+                <li><a href="https://techcrunch.com/2026/04/08/aws-boss-anthropic-openai-investment/" rel="noopener noreferrer external">TechCrunch: AWS boss on investing in both Anthropic and OpenAI</a></li>
+                <li><a href="https://www.reuters.com/technology/anthropic-pentagon-appeal-ninth-circuit-2026-04-04/" rel="noopener noreferrer external">Reuters: DOJ appeals Anthropic ruling</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">KI-Politik &middot; EU</div>
+            <h2 id="art-5-h">Breites B&uuml;ndnis warnt vor Verw&auml;sserung der europ&auml;ischen KI-Regeln</h2>
+            <div class="article-meta"><time datetime="2026-04-08">8. April 2026</time> &middot; Quellen: Netzpolitik.org, heise online</div>
+        </header>
+        <p class="article-teaser">Dutzende Organisationen aus Zivilgesellschaft, Wissenschaft und Datenschutz warnen in einem offenen Brief: Die EU-Mitgliedstaaten und die Kommission arbeiten daran, zentrale Bestimmungen des AI&nbsp;Act aufzuweichen &mdash; vier Monate vor dem Inkrafttreten der wichtigsten Pflichten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Wie Netzpolitik.org am 8.&nbsp;April berichtet, hat ein breites B&uuml;ndnis aus Organisationen wie AlgorithmWatch, European Digital Rights (EDRi), Access Now und dem Chaos Computer Club (CCC) einen offenen Brief an die EU-Kommission und den Rat gerichtet. Die Sorge: Hinter den Kulissen wird an der Umsetzung des AI&nbsp;Act gearbeitet &mdash; und die delegierten Rechtsakte und Durchf&uuml;hrungsbestimmungen drohen, die im Gesetz verankerten Schutzma&szlig;nahmen zu verw&auml;ssern.</p>
+            <p>Konkret kritisiert das B&uuml;ndnis, dass die Definition von &bdquo;Hochrisiko-KI-Systemen&ldquo; durch die Durchf&uuml;hrungsbestimmungen enger gefasst werden k&ouml;nnte als im Gesetzestext vorgesehen. Zudem bestehe die Gefahr, dass die Transparenzpflichten f&uuml;r Foundation Models &mdash; einer der h&auml;rtesten Verhandlungspunkte im AI&nbsp;Act &mdash; durch Ausnahmeregelungen f&uuml;r &bdquo;Open Source&ldquo; und &bdquo;Forschung&ldquo; ausgehebelt werden. Der Brief warnt ausdr&uuml;cklich: &bdquo;Der AI&nbsp;Act darf nicht durch seine eigene Implementierung unterlaufen werden.&ldquo;</p>
+            <p>Der Zeitpunkt ist kritisch: Ab <strong>August&nbsp;2026</strong> gelten die wichtigsten Pflichten des AI&nbsp;Act &mdash; darunter die Registrierung von Hochrisiko-Systemen, die Transparenzpflichten f&uuml;r generative KI und die Verbote f&uuml;r bestimmte KI-Praktiken (Social Scoring, biometrische Echtzeit-&Uuml;berwachung). Wie wir <a href="2026-03-28.html#art-1">in unserer Ausgabe vom 28.&nbsp;M&auml;rz berichteten</a>, waren zu diesem Zeitpunkt nur acht von 27 EU-Staaten auf die Implementierung vorbereitet.</p>
+            <p>Die Debatte steht im Kontext einer breiteren Auseinandersetzung: W&auml;hrend die EU reguliert, dereguliert die Trump-Administration in den USA. Das Ergebnis ist ein regulatorisches Gef&auml;lle, das europ&auml;ische KI-Unternehmen wie DeepL (das <a href="2026-04-06.html#art-5">seinen IPO in den USA plant</a>) nach Nordamerika treibt &mdash; und gleichzeitig den Druck auf die EU erh&ouml;ht, ihre eigenen Regeln abzumildern. Der offene Brief ist auch eine Reaktion auf diesen Druck.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://netzpolitik.org/2026/ki-risiken-breites-buendnis-warnt-vor-verwaesserten-ki-regeln/" rel="noopener noreferrer external">Netzpolitik.org: Breites B&uuml;ndnis warnt vor verw&auml;sserten KI-Regeln</a></li>
+                <li><a href="https://www.heise.de/news/KI-Update-Anthropics-Mythos-11248000.html" rel="noopener noreferrer external">heise online: KI-Update kompakt</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE-TEASER ═══ -->
+    <section class="article section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Die Ern&uuml;chterung nach dem Hype &mdash; Warum drei von vier KI-Projekten ihre Ziele verfehlen</h2>
+            <p class="article-teaser">Gartner, MIT und McKinsey liefern ern&uuml;chternde Zahlen: Unter 30&nbsp;Prozent ROI-Erfolg, 95&nbsp;Prozent gescheiterte Piloten, nur 5,5&nbsp;Prozent echte High Performers. Die Reportage analysiert, warum die Kluft zwischen KI-Investment und Ertrag w&auml;chst &mdash; und was die wenigen Gewinner anders machen.</p>
+            <a href="reportagen/2026-04-09.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">6 neue KI-Tools, die diese Woche aufgefallen sind</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/getgerri.ai.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.getgerri.ai/" rel="noopener noreferrer external">Gerri 2.0</a></div>
+                    <div class="tool-card-desc">KI-Agent f&uuml;r Vertragspr&uuml;fung: reviewt, kommentiert und routet Vertr&auml;ge autonom &mdash; 90&nbsp;Prozent der Reviews in unter 3&nbsp;Minuten. Version 2.0 bringt einen 10x schnelleren Engine, anpassbare Verhandlungspersona und automatische Template-Verbesserungen auf Basis der Verhandlungshistorie.</div>
+                    <div class="tool-card-meta">2. April 2026. Common Paper (YC-backed Startup), Product Hunt Launch.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/openowl.dev.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openowl.dev/" rel="noopener noreferrer external">OpenOwl</a></div>
+                    <div class="tool-card-desc">Desktop-Automatisierungsagent f&uuml;r macOS: gibt KI-Assistenten (Claude, Codex, jedes MCP-Tool) Zugriff auf Bildschirm, Maus und Tastatur. Automatisiert Aufgaben, die APIs nicht erreichen &mdash; von LinkedIn-Prospecting bis Legacy-CRM-Dateneingabe. L&auml;uft lokal, keine Daten verlassen den Rechner.</div>
+                    <div class="tool-card-meta">9. April 2026. Open Source, Product Hunt Launch, MCP-kompatibel.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/usevelo.ai.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.usevelo.ai/" rel="noopener noreferrer external">Velo</a></div>
+                    <div class="tool-card-desc">KI-Produktdemo-Generator: verwandelt Slides, PDFs oder Screen-Recordings in professionelle narrated Video-Demos mit hyperrealistischem KI-Avatar. Generiert Skripte automatisch, klont Stimmen und produziert studioqualit&auml;t ohne Kamera &mdash; f&uuml;r Founders, Sales und Product Manager.</div>
+                    <div class="tool-card-meta">8. April 2026. Startup (Early Access), Product Hunt Launch.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/clapperapp.com.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.clapperapp.com/" rel="noopener noreferrer external">Clapper AI Video</a></div>
+                    <div class="tool-card-desc">Erste Social-Media-Plattform mit nativem KI-Videogenerator: Creators k&ouml;nnen Short-Form-Videos (4&ndash;8 Sekunden) direkt in der App per Textprompt oder Foto generieren und ver&ouml;ffentlichen. 80+ L&auml;nder, 2 kostenlose Generierungen zum Start.</div>
+                    <div class="tool-card-meta">7. April 2026. Clapper Inc. (TikTok-Alternative, 17+ Creators).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/aria.network.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.aria.network/" rel="noopener noreferrer external">Aria Networks</a></div>
+                    <div class="tool-card-desc">KI-native Netzwerkinfrastruktur f&uuml;r Rechenzentren: optimiert Traffic speziell f&uuml;r KI-Workloads und verkn&uuml;pft Token-Output mit operativen Kosten. Hardware-agnostisch (NVIDIA, Google, Custom-ASICs). 125 Mio. Dollar Series&nbsp;A &mdash; eine der gr&ouml;&szlig;ten Debut-Runden f&uuml;r Infrastruktur-Startups.</div>
+                    <div class="tool-card-meta">7. April 2026. Startup (London), backed by Sutter Hill, Valor Equity.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/lessie.ai.png" alt="" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://lessie.ai/" rel="noopener noreferrer external">Lessie AI</a></div>
+                    <div class="tool-card-desc">KI-gesteuerte Personensuche &uuml;ber 100+ Quellen: Anstatt mit Filtern zu arbeiten, beschreibt man die Zielperson in nat&uuml;rlicher Sprache. Deckt B2B-Leadgenerierung, Influencer-Discovery, Talent-Recruiting und Investorensuche in einem Tool ab.</div>
+                    <div class="tool-card-meta">April 2026. Startup, Platz 7 auf Product Hunt &bdquo;Best of April&ldquo;.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und ein Trending Topic der Woche</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=txx6ec6MLNY" rel="noopener noreferrer external"><img src="../assets/images/thumbs/txx6ec6MLNY.jpg" alt="AI Explained Claude Mythos 244-page Release Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 28 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=txx6ec6MLNY" rel="noopener noreferrer external">Claude Mythos: Highlights from 244-page Release</a></div>
+                    <div class="yt-card-channel">AI Explained (414.000 Subs) &middot; 8. April 2026</div>
+                    <div class="yt-card-desc">AI Explained analysiert das 244-seitige Mythos-Release-Dokument von Anthropic &mdash; von den Cybersecurity-F&auml;higkeiten &uuml;ber die Responsible-Scaling-Entscheidungen bis zu den Benchmarks. Die detaillierteste technische Einordnung auf YouTube, systematisch und ohne Hype.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=DNhjITZy7cQ" rel="noopener noreferrer external"><img src="../assets/images/thumbs/DNhjITZy7cQ.jpg" alt="Maximilian Schwarzm&uuml;ller Mythos Glasswing Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 18 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=DNhjITZy7cQ" rel="noopener noreferrer external">What Mythos &amp; Glasswing by Anthropic mean for devs</a></div>
+                    <div class="yt-card-channel">Maximilian Schwarzm&uuml;ller (77.400 Subs) &middot; 8. April 2026</div>
+                    <div class="yt-card-desc">Der deutsche Udemy-Instructor ordnet Anthropics Mythos-Ank&uuml;ndigung aus Entwickler-Perspektive ein: Was bedeutet Project Glasswing f&uuml;r die eigene Codebasis? Wie ver&auml;ndert sich Vulnerability-Management, wenn KI Schwachstellen schneller findet als Menschen? Praxisnah und auf den Punkt.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=mcN1VTTIjQs" rel="noopener noreferrer external"><img src="../assets/images/thumbs/mcN1VTTIjQs.jpg" alt="Mo Bitar Claude Mythos is Delusional Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 7 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=mcN1VTTIjQs" rel="noopener noreferrer external">Claude Mythos is Delusional</a></div>
+                    <div class="yt-card-channel">Mo Bitar (58.000 Subs) &middot; 8. April 2026 &middot; 72.000+ Views in 24h</div>
+                    <div class="yt-card-desc">W&auml;hrend die meisten Creator Anthropics Mythos-Ank&uuml;ndigung feiern, liefert Indie-Entwickler Mo Bitar die sch&auml;rfste Gegenposition: In unter 7&nbsp;Minuten zerpfl&uuml;ckt er die Marketing-Narrative und fragt, ob die Cybersecurity-F&auml;higkeiten wirklich so revolution&auml;r sind, wie Anthropic behauptet. Das Video hat mehr Views als sein Kanal Abonnenten hat &mdash; ein klares Signal, dass die Community nicht nur Jubel h&ouml;ren will.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
