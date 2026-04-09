@@ -67,6 +67,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - w-X3HV2OTfM — 50x Cheaper Than Claude - But Can It Actually Code? MiniMax M2.7 (Tech With Tim, 2026-04-07)
 - ql-YQ5ccZXs — Gemma 4 26B A4B vs Qwen3.5 35B A3B: MoE Models Battle Locally (Fahd Mirza, 2026-04-07)
 - zVEb19AwkqM — Karpathy's LLM Wiki: Watch Me Build a Knowledge Base From Scratch! (Onchain AI Garage, 2026-04-06)
+- txx6ec6MLNY — Claude Mythos: Highlights from 244-page Release (AI Explained, 2026-04-08)
+- DNhjITZy7cQ — What Mythos & Glasswing by Anthropic mean for devs (Maximilian Schwarzmüller, 2026-04-08)
+- mcN1VTTIjQs — Claude Mythos is Delusional (Mo Bitar, 2026-04-08)
 
 ---
 
@@ -188,8 +191,22 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Straude (2026-04-08)
 - AgentMon (2026-04-08)
 - Google AI Edge Eloquent (2026-04-08)
+- Gerri 2.0 (2026-04-09)
+- OpenOwl (2026-04-09)
+- Velo (2026-04-09)
+- Clapper AI Video (2026-04-09)
+- Aria Networks (2026-04-09)
+- Lessie AI (2026-04-09)
 
 ---
+
+## 2026-04-09
+- Gartner-Studie: Nur 28% der KI-Projekte in IT-Infrastruktur erreichen ROI-Ziele, 20% scheitern komplett (782 IT-Führungskräfte befragt)
+- US Army baut eigenen Chatbot für Kampfeinsatz: trainiert auf militärischen Dokumenten, Gefechtsdoktrinen und Lageberichten
+- Meta Muse Spark: Erstes Modell unter neuer Hybrid-Strategie, propriertäres Modell, Meta Superintelligence Labs reorganisiert
+- Anthropic Supply-Chain-Risk-Streit: Widersprüchliche Urteile zweier Bundesgerichte, DOJ-Berufung beim Ninth Circuit läuft bis 30. April
+- Breites Bündnis (AlgorithmWatch, EDRi, Access Now, CCC u.a.) warnt vor Verwässerung des EU AI Act durch Durchführungsbestimmungen vor August 2026
+- Reportage: Warum drei von vier KI-Projekten ihre Ziele verfehlen — Gartner 28% ROI, MIT 95% gescheiterte Piloten, Stanford-Studie 51 Erfolgsbeispiele
 
 ## 2026-04-08
 - Anthropic Mythos Preview + Project Glasswing: Modell findet tausende Zero-Day-Schwachstellen in allen großen OS und Browsern, 27 Jahre alter OpenBSD-Bug, 72,4% Exploit-Erfolgsrate, 12 Partner (Amazon, Apple, Microsoft, Google, NVIDIA, CrowdStrike, Linux Foundation u.a.), nicht öffentlich freigegeben
