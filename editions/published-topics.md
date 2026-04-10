@@ -70,6 +70,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - txx6ec6MLNY — Claude Mythos: Highlights from 244-page Release (AI Explained, 2026-04-08)
 - DNhjITZy7cQ — What Mythos & Glasswing by Anthropic mean for devs (Maximilian Schwarzmüller, 2026-04-08)
 - mcN1VTTIjQs — Claude Mythos is Delusional (Mo Bitar, 2026-04-08)
+- 27Y44JYXZJ8 — I Tested Claude's New Managed Agents (Nate Herk, 2026-04-08)
+- DpfLbBuhHOg — Claude Managed Agents: Deploy AI Agents That Run for Hours (Leon van Zyl, 2026-04-09)
+- n1je-98lvsQ — Claude Managed Agents is AMAZING (Build Great Products, 2026-04-09)
 
 ---
 
@@ -197,6 +200,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Clapper AI Video (2026-04-09)
 - Aria Networks (2026-04-09)
 - Lessie AI (2026-04-09)
+- ZooClaw (2026-04-10)
+- OpenRouter Model Fusion (2026-04-10)
+- Handle (2026-04-10)
+- Panorama (2026-04-10)
+- C3 Code (2026-04-10)
+- Lunagraph (2026-04-10)
+
+---
+
+## 2026-04-10
+- Florida AG ermittelt gegen OpenAI: ChatGPT-Chatprotokolle zeigen Fragen nach belebtesten Campuszeiten und Waffen-Entsicherung vor FSU-Schiesserei (April 2025), OpenAI kooperiert, Familie kündigt Klage an
+- Meta und CoreWeave erweitern Partnerschaft auf 35 Mrd. Dollar (21 Mrd. Erweiterung): Inferenz-Workloads, erste Vera-Rubin-Deployments, Vertrag bis 2032
+- ChatGPT Pro 100$/Monat: Neue Stufe zwischen Plus (20$) und Pro (200$), 5x Codex-Nutzung, 3 Mio. wöchentliche Codex-Nutzer, zielt auf Anthropic
+- Aleph Alpha und Cohere verhandeln über Fusion: Handelsblatt-Exklusiv, deutsches Ministerium treibt transatlantische KI-Allianz, SAP Investor beider Unternehmen
+- OpenAI pausiert Stargate UK: Hohe Energiekosten und gescheitertes Copyright-Liberalisierung stoppen 8.000-GPU-Rechenzentrum, Rückschlag für Starmer-Regierung
+- Alibaba "Happy Horse" KI-Videomodell: HappyHorse-1.0 auf Platz 1 in Artificial Analysis Video Arena (1.333 Elo), 60 Punkte vor Seedance 2.0, 15B Parameter, Future Life Lab (Taotian Group)
+- Reportage: Europas KI-Souveränität — 7% globale Investitionen, 5-10% Compute, Aleph Alpha/Cohere-Logik, Mistral 1,7 Mrd. Serie C, EuroHPC AI Factories, AI Act August 2026
 
 ---
 
