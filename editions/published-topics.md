@@ -61,6 +61,18 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - 7LEvSOiTWZk — Google Gemma 4 Tutorial - Run AI Locally for Free (Teacher's Tech, 2026-04-05)
 - _A32wawAgGo — Fully FREE Qwen 3.6 Plus + Qwen Code: This FREE AI Coder is ACTUALLY GOOD! (AICodeKing, 2026-04-05)
 - kZhAj8--t8w — Running Gemma 4 on a Raspberry Pi 5 (Zero to MVP, 2026-04-05)
+- ZCKuK8UCsP4 — Gemma-4 31B vs Qwen3.5 27B: Hands-on Local Comparison (Fahd Mirza, 2026-04-06)
+- d9LGtygWEKQ — Fine-Tune Gemma 4 in Minutes (No Code!) — Unsloth Studio Tutorial (Prompt Engineer, 2026-04-05)
+- JmCiKKw6bMA — Gemma 4 31B vs 26B-A4B: 16GB VRAM Local Test (kintu, 2026-04-06)
+- w-X3HV2OTfM — 50x Cheaper Than Claude - But Can It Actually Code? MiniMax M2.7 (Tech With Tim, 2026-04-07)
+- ql-YQ5ccZXs — Gemma 4 26B A4B vs Qwen3.5 35B A3B: MoE Models Battle Locally (Fahd Mirza, 2026-04-07)
+- zVEb19AwkqM — Karpathy's LLM Wiki: Watch Me Build a Knowledge Base From Scratch! (Onchain AI Garage, 2026-04-06)
+- txx6ec6MLNY — Claude Mythos: Highlights from 244-page Release (AI Explained, 2026-04-08)
+- DNhjITZy7cQ — What Mythos & Glasswing by Anthropic mean for devs (Maximilian Schwarzmüller, 2026-04-08)
+- mcN1VTTIjQs — Claude Mythos is Delusional (Mo Bitar, 2026-04-08)
+- 27Y44JYXZJ8 — I Tested Claude's New Managed Agents (Nate Herk, 2026-04-08)
+- DpfLbBuhHOg — Claude Managed Agents: Deploy AI Agents That Run for Hours (Leon van Zyl, 2026-04-09)
+- n1je-98lvsQ — Claude Managed Agents is AMAZING (Build Great Products, 2026-04-09)
 
 ---
 
@@ -170,8 +182,70 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Google Veo 3.1 Lite (2026-04-06)
 - Quicklets.ai (2026-04-06)
 - Shutterstock ChatGPT App (2026-04-06)
+- Apfel (2026-04-07)
+- oh-my-codex OMX (2026-04-07)
+- MS Agent Governance Toolkit (2026-04-07)
+- Agentshub.AI (2026-04-07)
+- Vibrantsnap (2026-04-07)
+- Goose v1.29 (2026-04-07)
+- Felix (2026-04-08)
+- Modo (2026-04-08)
+- OpenYak (2026-04-08)
+- Straude (2026-04-08)
+- AgentMon (2026-04-08)
+- Google AI Edge Eloquent (2026-04-08)
+- Gerri 2.0 (2026-04-09)
+- OpenOwl (2026-04-09)
+- Velo (2026-04-09)
+- Clapper AI Video (2026-04-09)
+- Aria Networks (2026-04-09)
+- Lessie AI (2026-04-09)
+- ZooClaw (2026-04-10)
+- OpenRouter Model Fusion (2026-04-10)
+- Handle (2026-04-10)
+- Panorama (2026-04-10)
+- C3 Code (2026-04-10)
+- Lunagraph (2026-04-10)
 
 ---
+
+## 2026-04-10
+- Florida AG ermittelt gegen OpenAI: ChatGPT-Chatprotokolle zeigen Fragen nach belebtesten Campuszeiten und Waffen-Entsicherung vor FSU-Schiesserei (April 2025), OpenAI kooperiert, Familie kündigt Klage an
+- Meta und CoreWeave erweitern Partnerschaft auf 35 Mrd. Dollar (21 Mrd. Erweiterung): Inferenz-Workloads, erste Vera-Rubin-Deployments, Vertrag bis 2032
+- ChatGPT Pro 100$/Monat: Neue Stufe zwischen Plus (20$) und Pro (200$), 5x Codex-Nutzung, 3 Mio. wöchentliche Codex-Nutzer, zielt auf Anthropic
+- Aleph Alpha und Cohere verhandeln über Fusion: Handelsblatt-Exklusiv, deutsches Ministerium treibt transatlantische KI-Allianz, SAP Investor beider Unternehmen
+- OpenAI pausiert Stargate UK: Hohe Energiekosten und gescheitertes Copyright-Liberalisierung stoppen 8.000-GPU-Rechenzentrum, Rückschlag für Starmer-Regierung
+- Alibaba "Happy Horse" KI-Videomodell: HappyHorse-1.0 auf Platz 1 in Artificial Analysis Video Arena (1.333 Elo), 60 Punkte vor Seedance 2.0, 15B Parameter, Future Life Lab (Taotian Group)
+- Reportage: Europas KI-Souveränität — 7% globale Investitionen, 5-10% Compute, Aleph Alpha/Cohere-Logik, Mistral 1,7 Mrd. Serie C, EuroHPC AI Factories, AI Act August 2026
+
+---
+
+## 2026-04-09
+- Gartner-Studie: Nur 28% der KI-Projekte in IT-Infrastruktur erreichen ROI-Ziele, 20% scheitern komplett (782 IT-Führungskräfte befragt)
+- US Army baut eigenen Chatbot für Kampfeinsatz: trainiert auf militärischen Dokumenten, Gefechtsdoktrinen und Lageberichten
+- Meta Muse Spark: Erstes Modell unter neuer Hybrid-Strategie, propriertäres Modell, Meta Superintelligence Labs reorganisiert
+- Anthropic Supply-Chain-Risk-Streit: Widersprüchliche Urteile zweier Bundesgerichte, DOJ-Berufung beim Ninth Circuit läuft bis 30. April
+- Breites Bündnis (AlgorithmWatch, EDRi, Access Now, CCC u.a.) warnt vor Verwässerung des EU AI Act durch Durchführungsbestimmungen vor August 2026
+- Reportage: Warum drei von vier KI-Projekten ihre Ziele verfehlen — Gartner 28% ROI, MIT 95% gescheiterte Piloten, Stanford-Studie 51 Erfolgsbeispiele
+
+## 2026-04-08
+- Anthropic Mythos Preview + Project Glasswing: Modell findet tausende Zero-Day-Schwachstellen in allen großen OS und Browsern, 27 Jahre alter OpenBSD-Bug, 72,4% Exploit-Erfolgsrate, 12 Partner (Amazon, Apple, Microsoft, Google, NVIDIA, CrowdStrike, Linux Foundation u.a.), nicht öffentlich freigegeben
+- Intel wird Fertigungspartner für Musks Terafab: Intel Foundry fertigt AI5 (Edge-Inferenz) und D3 (strahlungsgehärtet für SpaceX) in 2-nm, 100K Wafer-Starts/Monat initial
+- Anthropic sichert 3,5 GW Compute mit Google/Broadcom: 400K TPUv7 Ironwood direkt von Broadcom (~10 Mrd. $), 600K über Google Cloud, Umsatz-Run-Rate 30 Mrd. $
+- Perplexity-Sammelklage wegen Datenweitergabe: Meta Pixel, Google Ads, DoubleClick und Metas Conversions API in Code eingebettet, Chat-Text an Meta/Google für Ad-Targeting, Inkognito-Modus wirkungslos, alle US-Nutzer 12/2022-02/2026 betroffen
+- EU-Institutionen verbannen KI-generierte Bilder aus offizieller Kommunikation: Kommission, Parlament und Rat erlassen Richtlinien, KI-Optimierung erlaubt, Erzeugung verboten
+- Meta wechselt zu Hybrid-Strategie für KI-Modelle: größte Modelle bleiben proprietär, kleinere Open Source, unter neuem KI-Chef Alexandr Wang
+- Samsung verachtfacht Gewinn (Q1 2026): 57,2 Bio. Won (33 Mrd. $) operativer Gewinn, +755% YoY, 95% aus Chip-Sparte, HBM4-Boom
+- Reportage: KI als Waffe und Schild — Cybersecurity im Zeitalter von Mythos, Project Glasswing, Agentic SOC, 27-Sekunden-Breakout-Time, Markt 30 Mrd. $ → 235 Mrd. $ bis 2032
+
+## 2026-04-07
+- Iran droht Stargate-Rechenzentrum in Abu Dhabi: IRGC-Drohvideo mit Satellitenaufnahmen, 30-Mrd-Dollar-Rechenzentrum, Bezug auf Drohnenangriffe auf AWS im März 2026
+- OpenAI Industrial Policy Paper "Intelligence Age": Public Wealth Fund, Roboter-Steuern, Vier-Tage-Woche, automatische Sicherheitsnetze — am selben Tag wie Ronan Farrow New-Yorker-Investigativ über Safety-Abbau
+- OpenAI Safety Fellowship angekündigt: 6-monatiges Stipendium ab September 2026, Bewerbungsfrist 3. Mai
+- Cambridge-Studie "Datenhitzeinseln": 8.400 Rechenzentren analysiert, durchschnittlich 2°C Erwärmung, max. 9,1°C, 340 Mio. Menschen betroffen
+- AGENTS.md-Debatte: ETH-Zürich-Studie zeigt LLM-generierte Kontextdateien verschlechtern Erfolgsrate, außer in dokumentationsarmen Projekten
+- Google AI Edge Eloquent: Offline-KI-Diktier-App auf iOS, Gemma-basiert, ohne Ankündigung gelauncht
+- Reportage: Die Geopolitik der KI-Infrastruktur — Stargate 500 Mrd., Iran-Drohnen auf AWS, globale Compute-Landkarte (USA 74%, China 14%, EU 4,8%), Energieengpass
 
 ## 2026-04-06
 - Microsoft Copilot "Entertainment Only"-AGB: Nutzungsbedingungen stufen Copilot als Unterhaltungssoftware ein, Microsoft nennt es "veraltete Sprache", US-Marktanteil -39% in 6 Monaten
