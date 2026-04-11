@@ -73,6 +73,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - 27Y44JYXZJ8 — I Tested Claude's New Managed Agents (Nate Herk, 2026-04-08)
 - DpfLbBuhHOg — Claude Managed Agents: Deploy AI Agents That Run for Hours (Leon van Zyl, 2026-04-09)
 - n1je-98lvsQ — Claude Managed Agents is AMAZING (Build Great Products, 2026-04-09)
+- GtTJ6LcqdCE — The Claude Code Situation (Tech With Tim, 2026-04-10)
+- qMnClynCAmM — The Next Evolution of AI Coding Is Harnesses (Cole Medin, 2026-04-09)
+- sKNq4CqWkT4 — How I Use Claude Code with Gemma 4 (Zero to MVP, 2026-04-09)
 
 ---
 
@@ -206,6 +209,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Panorama (2026-04-10)
 - C3 Code (2026-04-10)
 - Lunagraph (2026-04-10)
+- Microsoft Agent Framework 1.0 (2026-04-11)
+- Atlassian Remix (2026-04-11)
+- Shopify AI Toolkit (2026-04-11)
+- Google Gemini Notebooks (2026-04-11)
+- Upwork ChatGPT App (2026-04-11)
+- AMD PACE (2026-04-11)
+
+---
+
+## 2026-04-11
+- Stalking-Opfer verklagt OpenAI: 53-jähriger Stalker nutzte ChatGPT, Wahnvorstellungen bestätigt, drei Warnungen ignoriert inkl. Mass-Casualty-Flag, Kanzlei Edelson PC
+- Molotow-Angriff auf Sam Altmans Haus: Daniel Alejandro Moreno-Gama (20) festgenommen, Anklage versuchter Mord/Brandstiftung, drohte danach OpenAI-HQ niederzubrennen
+- EU-Kommission unterwirft ChatGPT dem DSA: ChatGPT als VLOP/VLOSE klassifiziert, 120,4 Mio. monatliche EU-Nutzer, jährliche Audits und Transparenzpflichten
+- OpenAI unterstützt Illinois SB 3444: Frontier-AI-Entwickler sollen bei >100 Toten oder >1 Mrd. Dollar Sachschaden nicht haften wenn Safety-Reports veröffentlicht, Caitlin Niedermeyer sagte aus
+- Anthropic sperrt OpenClaw-Entwickler Peter Steinberger temporär: Account wegen "verdächtiger Aktivitäten" gesperrt, nach viralem Post wiederhergestellt, Steinberger seit Feb 2026 bei OpenAI
+- SpaceX meldet 5 Mrd. Dollar Verlust 2025 bei 18,5 Mrd. Umsatz: xAI-Übernahme (1,25 Bio. Dollar Merger), Musk gibt zu xAI "nicht richtig gebaut", nur 2/12 Mitgründer verblieben
+- Reportage: KI-Agenten im Alltag — Gartner 40% Adoption, 40% Scheitern bis 2027, ROME-Agent Krypto-Mining, 698 Scheming-Fälle (CLTR), Gas Town 1.0 Governance, Singapur AI Governance Framework
 
 ---
 
