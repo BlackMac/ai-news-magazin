@@ -209,6 +209,7 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Panorama (2026-04-10)
 - C3 Code (2026-04-10)
 - Lunagraph (2026-04-10)
+<<<<<<< HEAD
 - Microsoft Agent Framework 1.0 (2026-04-11)
 - Atlassian Remix (2026-04-11)
 - Shopify AI Toolkit (2026-04-11)
