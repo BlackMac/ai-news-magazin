@@ -76,6 +76,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - GtTJ6LcqdCE — The Claude Code Situation (Tech With Tim, 2026-04-10)
 - qMnClynCAmM — The Next Evolution of AI Coding Is Harnesses (Cole Medin, 2026-04-09)
 - sKNq4CqWkT4 — How I Use Claude Code with Gemma 4 (Zero to MVP, 2026-04-09)
+- RDUGbxslOcM — Anthropic Just Broke Software Forever (Tech With Tim, 2026-04-11)
+- DJe5ahNAdjk — Why The Hermes Agent Just Replaced OpenClaw (BridgeMind, 2026-04-11)
+- MdLN4jhIqH0 — Die KI ist AUS IHRER SANDBOX AUSGEBROCHEN: Claude Mythos erklärt (IchBinFabian, 2026-04-11)
 
 ---
 
@@ -209,13 +212,30 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Panorama (2026-04-10)
 - C3 Code (2026-04-10)
 - Lunagraph (2026-04-10)
-<<<<<<< HEAD
 - Microsoft Agent Framework 1.0 (2026-04-11)
 - Atlassian Remix (2026-04-11)
 - Shopify AI Toolkit (2026-04-11)
 - Google Gemini Notebooks (2026-04-11)
 - Upwork ChatGPT App (2026-04-11)
 - AMD PACE (2026-04-11)
+- Claude Managed Agents (2026-04-12)
+- Tether QVAC SDK (2026-04-12)
+- Visa Intelligent Commerce (2026-04-12)
+- Graphify (2026-04-12)
+- Ridge AI (2026-04-12)
+- Cloudflare EmDash (2026-04-12)
+
+---
+
+## 2026-04-12
+- OpenAI ChatGPT-Werbung erreicht 100 Mio. Dollar ARR: Pilot seit Februar 2026, Free- und Go-Tier, 600+ Werbetreibende, Self-Serve ab April, Anthropic kontert mit werbefreiem Claude
+- Berkeley RDI "BenchJack": 8 führende KI-Agent-Benchmarks (SWE-bench, WebArena, OSWorld, GAIA, Terminal-Bench u.a.) durch einfache Exploits aushebeln — Shared-Environment-Problem
+- Bixonimania: Schwedische Forscherin Almira Osmanovic Thunström (Uni Göteborg) erfand Fake-Hautkrankheit, Copilot/Gemini/ChatGPT diagnostizierten sie als echt, Cureus-Paper zitierte sie, Nature berichtete
+- Tesla FSD Supervised erstmals in Europa: Niederlande (RDW) erteilen Typgenehmigung unter UN R-171, Level-2-System, 99 Euro/Monat Abo, Deutschland voraussichtlich Mai/Juni 2026
+- US-Notfall-Gipfel zu Mythos: Finanzminister Bessent und Fed-Chef Powell briefen Banken-CEOs (Citigroup, Morgan Stanley, BofA, Goldman Sachs) über Mythos-Cybersecurity-Fähigkeiten
+- Sam Altman Blog-Post nach New-Yorker-Investigation und Molotow-Angriff: Nennt Ronan-Farrow-Artikel "incendiary", räumt Konfliktvermeidung ein, fordert Deeskalation
+- Südkorea verteilt 14.000 Hyodol-KI-Puppen an alleinlebende Senioren: ChatGPT-basiert, Infrarotsensor für 24h-Alarm, 45% weniger depressive Symptome (JCM-Studie, 278 Teilnehmer)
+- Reportage: Die Vertrauenskrise der KI-Benchmarks — Berkeley BenchJack, Bixonimania, LMArena Cherry-Picking, OpenAI SWE-bench-Verified-Rückzug, Goodhart's Law in der KI-Evaluation
 
 ---
 
