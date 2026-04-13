@@ -79,6 +79,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - RDUGbxslOcM — Anthropic Just Broke Software Forever (Tech With Tim, 2026-04-11)
 - DJe5ahNAdjk — Why The Hermes Agent Just Replaced OpenClaw (BridgeMind, 2026-04-11)
 - MdLN4jhIqH0 — Die KI ist AUS IHRER SANDBOX AUSGEBROCHEN: Claude Mythos erklärt (IchBinFabian, 2026-04-11)
+- eAleab2cL3I — Gemma 4 + Ollama = FREE Claude Code Setup! (WorldofAI, 2026-04-12)
+- ZxQ2DuejRhU — The 2.3B AI Model that "Thinks" like a 70B (Gemma 4) (Better Stack, 2026-04-12)
+- 2BFN2DtcQMw — The Only Claude Skills You Need in 2026 (Dubibubii, 2026-04-08)
 
 ---
 
@@ -224,6 +227,22 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Graphify (2026-04-12)
 - Ridge AI (2026-04-12)
 - Cloudflare EmDash (2026-04-12)
+- Rocket 1.0 (2026-04-13)
+- Mozilla 0DIN AI Scanner (2026-04-13)
+- Pluck (2026-04-13)
+- AgentMail (2026-04-13)
+
+---
+
+## 2026-04-13
+- US-Regierung ermutigt Banken, Anthropics Mythos gegen eigene Systeme einzusetzen: Goldman Sachs, Citigroup, BofA, Morgan Stanley testen Mythos intern, Project Glasswing mit 50+ Organisationen und 100 Mio. Dollar Credits
+- OpenAI "Industrial Policy for the Intelligence Age": 13-seitiges Strategiepapier fordert Robotersteuer, nationalen Vermögensfonds, Vier-Tage-Woche bei vollem Lohnausgleich
+- HumanX-Konferenz "Claude Mania": Anthropic dominiert Branchentreffen (6.500 Teilnehmer), annualisierter Umsatz über 30 Mrd. Dollar, Claude Code 46% "Most Loved" unter Entwicklern
+- KI-Code-Kriege: GitHub Copilot (90% Fortune 100), Cursor (50-Mrd.-Bewertung, 2 Mrd. ARR), Claude Code (46% Most Loved), Preiskampf 10-200 Dollar, Vibe-Coding-Trend
+- Gen Z verliert Vertrauen in KI: Gallup-Studie zeigt -14 Punkte Begeisterung, 44% sabotieren KI-Einführung (Fortune), FOBO-Phänomen, 69% vertrauen menschlicher Arbeit mehr
+- DeepWisdom-Gründer Alex Wu Chenglin: Chinesische KI-Effizienz keine Reaktion auf US-Embargo, eigenständiger Ansatz, Atoms-Plattform 500.000 Nutzer in einem Monat, "Silicon Scaling"-Konzept
+- Tech-Bewertungen zurück auf Vor-KI-Boom-Niveau: Apollo-Analyse zeigt Forward-KGVs von 40x auf 20x halbiert, trotz 44% EPS-Wachstum im IT-Sektor Q1 2026
+- Reportage: Die technische Schuld der KI-Ära — 46% GitHub-Code von KI, 2,74x mehr Schwachstellen, Code-Churn +41%, Vibe-Coding-Ernüchterung, 80.000 Tech-Entlassungen Q1 2026
 
 ---
 
