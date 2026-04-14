@@ -82,6 +82,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - eAleab2cL3I — Gemma 4 + Ollama = FREE Claude Code Setup! (WorldofAI, 2026-04-12)
 - ZxQ2DuejRhU — The 2.3B AI Model that "Thinks" like a 70B (Gemma 4) (Better Stack, 2026-04-12)
 - 2BFN2DtcQMw — The Only Claude Skills You Need in 2026 (Dubibubii, 2026-04-08)
+- GAyNvq6Ayps — Running LLMs Locally Just Got Way Better - Ollama + MCP (Tech With Tim, 2026-04-12)
+- 99VHENEKA9o — 100 Hours Testing Claude Code vs Antigravity (Nate Herk, 2026-04-13)
+- k0RI_M6lIsg — I Built a Tool That Runs Claude Code with ANY AI Model (Anton Abyzov, 2026-04-03)
 
 ---
 
@@ -231,6 +234,24 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Mozilla 0DIN AI Scanner (2026-04-13)
 - Pluck (2026-04-13)
 - AgentMail (2026-04-13)
+- Poke (2026-04-14)
+- HeyGen Avatar V (2026-04-14)
+- PikaStream 1.0 (2026-04-14)
+- Google LiteRT-LM (2026-04-14)
+- Marble 1.1 Plus (2026-04-14)
+- Meta Muse Spark (2026-04-14)
+
+---
+
+## 2026-04-14
+- OpenAI greift Anthropic in internem Memo an: CRO Denise Dresser behauptet Anthropics 30-Mrd.-Run-Rate sei um ca. 8 Mrd. aufgebläht (Brutto-Umsätze über AWS/Azure/GCP), OpenAI plant 30 GW Compute bis 2030
+- Zuckerberg baut KI-Klon: Meta entwickelt fotorealistischen 3D-Avatar von Zuckerberg für Meetings mit 72.000 Mitarbeitern, Financial Times berichtet zuerst
+- Stanford HAI AI Index 2026: 73% der KI-Experten bewerten Arbeitsmarkt-Auswirkungen positiv vs. nur 23% der Bevölkerung, USA niedrigstes Regulierungs-Vertrauen (31%), China holt bei KI fast auf
+- OpenAI kauft Hiro Finance: Fintech-Startup (verifizierbar korrekte Finanzmathematik), Gründer Ethan Bloch (zuvor Digit, >200 Mio. Exit), sechste Akquisition 2026
+- Microsoft OpenClaw-Agenten für Copilot: Codename "Ocean 11" unter VP Omar Shahine, Always-On-Agenten für M365, Build-Konferenz Juni 2026
+- Apples KI-Chef John Giannandrea verlässt offiziell am 15. April: Siri-Team im März 2025 entzogen, Nachfolger Amar Subramanya berichtet an Federighi
+- 75+ Bürgerrechtsorganisationen (ACLU, EPIC) warnen vor Meta "Name Tag" Gesichtserkennung in Ray-Ban/Oakley Smart Glasses, internes Meta-Memo schlug Einführung bei abgelenkten Bürgerrechtlern vor
+- Reportage: Die große Umschichtung — Klarna halbiert Belegschaft/verdoppelt Umsatz, 90% Manager sehen null KI-Effekt (Register), Harvard "Jagged Frontier", Dallas Fed Einstiegslücke, BCG 10-20-70-Formel
 
 ---
 
