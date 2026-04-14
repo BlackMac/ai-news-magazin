@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Die gro&szlig;e Umschichtung &mdash; Die Inferenz, 14. April 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-14.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Die gro&szlig;e Umschichtung &mdash; Wie KI die Wissensarbeit neu ordnet</h1>
+    <p class="article-subtitle">Klarna halbiert die Belegschaft und verdoppelt den Umsatz. Microsoft meldet 116&nbsp;Prozent ROI auf Copilot. Gleichzeitig sagen neun von zehn Managern: KI hat null Effekt. Was stimmt &mdash; und was bedeutet das f&uuml;r Unternehmen?</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-14">Dienstag, 14. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Wenn Klarna-CEO Sebastian Siemiatkowski &uuml;ber k&uuml;nstliche Intelligenz spricht, klingt das nach einer abgeschlossenen Revolution. Innerhalb von drei Jahren schrumpfte die Belegschaft des schwedischen Zahlungsdienstleisters von 5.527 auf 2.907&nbsp;Mitarbeiter &mdash; nicht durch Massenentlassungen, sondern durch konsequenten Einstellungsstopp und nat&uuml;rliche Fluktuation. Im selben Zeitraum verdoppelte sich der Quartalsumsatz von 433 auf 903&nbsp;Millionen Dollar. Die verbliebenen Mitarbeiter erhielten 60&nbsp;Prozent mehr Gehalt. KI &uuml;bernimmt mittlerweile die Arbeit von 853&nbsp;Vollzeitstellen, vor allem im Kundenservice und in der Inhaltsproduktion.</p>
+
+        <p>Klarna ist zum Posterchild einer Bewegung geworden, die Unternehmensberater &bdquo;Workforce Transformation&ldquo; nennen. Doch die Geschichte hat einen Haken: Sie ist die Ausnahme, nicht die Regel.</p>
+
+        <h2>Das Produktivit&auml;tsparadoxon</h2>
+
+        <p>Die Zahlen scheinen sich zu widersprechen. Einerseits: 91&nbsp;Prozent aller Unternehmen weltweit setzen 2026 in irgendeiner Form KI ein, ein Sprung von 55&nbsp;Prozent in 2023. Andererseits: Als The Register im Februar 6.000&nbsp;F&uuml;hrungskr&auml;fte befragte, sagten mehr als 90&nbsp;Prozent der Manager, KI habe in den letzten drei Jahren weder die Produktivit&auml;t gesteigert noch Arbeitspl&auml;tze ver&auml;ndert. Das Yale Budget Lab warnt davor, die Produktivit&auml;tsdaten vorschnell als KI-Boom zu interpretieren.</p>
+
+        <p>Stellen Sie sich das wie die Einf&uuml;hrung des PCs in den 1980er-Jahren vor: Jeder Schreibtisch hatte pl&ouml;tzlich einen Computer, aber die gro&szlig;e Produktivit&auml;tswelle kam erst ein Jahrzehnt sp&auml;ter, als Unternehmen ihre Prozesse tats&auml;chlich umgebaut hatten. Genau da stehen wir wieder.</p>
+
+        <p>Der tats&auml;chliche, messbare Effizienzgewinn liegt bei durchschnittlich 5,4&nbsp;Prozent der Arbeitszeit &mdash; das sind 2,2&nbsp;Stunden pro Woche bei einer 40-Stunden-Stelle. Kein schlechter Wert, aber weit entfernt von der Disruption, die Investoren einpreisen. Forrester errechnete f&uuml;r Microsoft 365 Copilot einen ROI von 116&nbsp;Prozent &uuml;ber drei Jahre bei einem 25.000-Mitarbeiter-Unternehmen. Gleichzeitig haben nur 3,3&nbsp;Prozent aller Microsoft-365-Nutzer das kostenpflichtige Copilot-Add-on aktiviert, und 74&nbsp;Prozent der Unternehmen k&ouml;nnen keinen messbaren KI-ROI nachweisen.</p>
+
+        <h2>Die gezackte Grenze</h2>
+
+        <p>Die Erkl&auml;rung f&uuml;r diesen Widerspruch lieferte ein Forscherteam um Fabrizio Dell&rsquo;Acqua an der Harvard Business School. In einer mittlerweile wegweisenden Studie mit 758&nbsp;BCG-Beratern identifizierten sie die sogenannte &bdquo;Jagged Technological Frontier&ldquo; &mdash; eine gezackte Grenze dessen, was KI kann und was nicht.</p>
+
+        <p>Das Bild einer gezackten K&uuml;stenlinie hilft: Bei manchen Aufgaben ragt KI weit ins Meer der menschlichen F&auml;higkeiten hinein &mdash; Textentw&uuml;rfe, Datenanalyse, Recherche, Programmierung. Hier arbeiten KI-Nutzer 25&nbsp;Prozent schneller bei 40&nbsp;Prozent h&ouml;herer Qualit&auml;t. Besonders profitieren schw&auml;chere Mitarbeiter, deren Leistung sich um bis zu 34&nbsp;Prozent steigert. KI wirkt hier als Equalizer.</p>
+
+        <p>Aber direkt daneben gibt es tiefe Buchten, in denen KI versagt: Aufgaben, die Urteilsverm&ouml;gen, Kontextwissen und zwischenmenschliche Intuition erfordern. Das Problem: Die Grenze ist unsichtbar. Wer sie &uuml;berschreitet und KI blind vertraut, produziert schlechtere Ergebnisse als ganz ohne KI. Harvard Business Review beschrieb diesen Effekt im M&auml;rz 2026 als &bdquo;Brain Fry&ldquo; &mdash; die kognitive &Uuml;berlastung, die entsteht, wenn Menschen st&auml;ndig zwischen eigenem Denken und KI-Output navigieren m&uuml;ssen.</p>
+
+        <div class="pull-quote">&bdquo;50 bis 55&nbsp;Prozent aller Jobs in den USA werden innerhalb der n&auml;chsten zwei bis drei Jahre durch KI umgeformt &mdash; nicht eliminiert, aber grundlegend ver&auml;ndert.&ldquo; &mdash; BCG Henderson Institute, 2026</div>
+
+        <h2>Die Einstiegsl&uuml;cke</h2>
+
+        <p>Einer der beunruhigendsten Befunde kommt von der Federal Reserve Bank of Dallas. Ihre Studie vom Februar 2026 zeigt eine paradoxe Entwicklung in KI-exponierten Branchen: In der US-IT-Branche sank die Besch&auml;ftigung seit dem ChatGPT-Launch um f&uuml;nf Prozent, w&auml;hrend die Wochenl&ouml;hne um 16,7&nbsp;Prozent stiegen &mdash; mehr als das Doppelte des nationalen Durchschnitts von 7,5&nbsp;Prozent.</p>
+
+        <p>Die Erkl&auml;rung: KI ersetzt vor allem die kodifizierbaren T&auml;tigkeiten, die traditionell Berufseinsteiger &uuml;bernehmen &mdash; Recherchen zusammenfassen, erste Entw&uuml;rfe schreiben, Daten aufbereiten. Erfahrene Fachkr&auml;fte hingegen werden wertvoller, weil ihre implizite Expertise &mdash; Urteilsverm&ouml;gen, Kundenbeziehungen, strategisches Denken &mdash; genau das ist, was KI nicht replizieren kann. Das Ergebnis: Junge Menschen werden nicht entlassen, sie werden gar nicht erst eingestellt. F&uuml;r Unternehmen entsteht damit ein langfristiges Problem: Woher kommen die erfahrenen Fachkr&auml;fte von morgen, wenn niemand mehr die Juniorstellen durchl&auml;uft?</p>
+
+        <h2>Die 10-20-70-Formel</h2>
+
+        <p>Die Boston Consulting Group ver&ouml;ffentlichte im Fr&uuml;hjahr 2026 eine Analyse, die das Missverst&auml;ndnis hinter den meisten gescheiterten KI-Projekten auf den Punkt bringt: Nur zehn Prozent des Werts einer KI-Transformation kommen aus den Algorithmen selbst. Zwanzig Prozent entstehen durch Technologie-Integration. Die restlichen 70&nbsp;Prozent &mdash; und hier scheitern die meisten &mdash; erfordern eine fundamentale Umgestaltung der Arbeit selbst: neue Rollen, neue Prozesse, neue Entscheidungswege.</p>
+
+        <p>Der Unterschied zwischen Gewinnern und Verlierern ist messbar: In &bdquo;Trailblazer&ldquo;-Unternehmen nutzen 88&nbsp;Prozent der F&uuml;hrungskr&auml;fte KI aktiv und vorbildhaft im Alltag. Bei Nachz&uuml;glern sind es 25&nbsp;Prozent. Trailblazer investieren 60&nbsp;Prozent ihres KI-Budgets in Weiterbildung, Nachz&uuml;gler unter 25&nbsp;Prozent.</p>
+
+        <h2>Der Management-Graben</h2>
+
+        <p>Ein bisher untersch&auml;tztes Problem beschrieb die Harvard Business Review im April 2026: Zwischen C-Suite und mittlerem Management klafft eine wachsende Wahrnehmungsl&uuml;cke. W&auml;hrend Vorst&auml;nde KI als strategischen Wettbewerbsvorteil sehen, k&auml;mpfen Abteilungsleiter mit der Realit&auml;t fehlerhafter Outputs, ungekl&auml;rter Verantwortlichkeiten und &uuml;berforderter Teams. 54&nbsp;Prozent der C-Suite-F&uuml;hrungskr&auml;fte geben an, dass die KI-Einf&uuml;hrung ihr Unternehmen &bdquo;innerlich zerrei&szlig;t&ldquo;.</p>
+
+        <p>Diese Kluft ist kein Kommunikationsproblem &mdash; sie ist ein Strukturproblem. Die meisten Unternehmen haben KI-Strategie als Top-Down-Initiative aufgesetzt, ohne die mittlere F&uuml;hrungsebene einzubinden, die letztlich &uuml;ber Erfolg oder Scheitern in den t&auml;glichen Workflows entscheidet.</p>
+
+        <h2>Deutschland: Aufholbedarf mit Potenzial</h2>
+
+        <p>F&uuml;r den DACH-Raum zeigt die Bitkom-Studie 2025/2026 immerhin einen positiven Trend: Die KI-Nutzung in deutschen Unternehmen mit mehr als 20&nbsp;Mitarbeitern hat sich von 20 auf 40&nbsp;Prozent verdoppelt. Das Institut f&uuml;r Arbeitsmarkt- und Berufsforschung (IAB) sch&auml;tzt, dass 20 bis 25&nbsp;Prozent aller T&auml;tigkeiten in Deutschland innerhalb der n&auml;chsten zehn Jahre teilweise oder vollst&auml;ndig automatisiert werden k&ouml;nnten.</p>
+
+        <p>Die besondere Herausforderung hierzulande: 84&nbsp;Prozent der Unternehmen haben ihre Arbeitsabl&auml;ufe und Jobprofile noch nicht an KI-F&auml;higkeiten angepasst. Und 69&nbsp;Prozent melden Unterst&uuml;tzungsbedarf beim Umgang mit dem EU AI Act, dessen wichtigste Bestimmungen ab August 2026 greifen. Das Risiko eines doppelten R&uuml;ckstands &mdash; technologisch und regulatorisch &mdash; ist real.</p>
+
+        <h2>Was jetzt zu tun ist</h2>
+
+        <p>Die Datenlage ergibt ein klares Bild: KI ist kein Jobkiller, aber auch kein Selbstl&auml;ufer. Drei Ma&szlig;nahmen trennen die Gewinner von den Verlierern.</p>
+
+        <p><strong>Erstens: Workflow-Redesign vor Tool-Rollout.</strong> Wer Copilot oder Claude auf bestehende Prozesse legt, erreicht 5&nbsp;Prozent Effizienz. Wer Prozesse um KI-F&auml;higkeiten herum neu aufbaut, erreicht ein Vielfaches. Das erfordert Investitionen in Prozessanalyse, nicht nur in Lizenzen.</p>
+
+        <p><strong>Zweitens: Das Junior-Pipeline-Problem l&ouml;sen.</strong> Wenn Einstiegspositionen verschwinden, trocknet die Talentpipeline aus. Unternehmen wie BCG experimentieren bereits mit &bdquo;KI-augmentierten Trainee-Programmen&ldquo;, in denen Berufseinsteiger mit KI-Unterst&uuml;tzung an komplexere Aufgaben herangef&uuml;hrt werden, statt monotone Vorarbeit zu leisten.</p>
+
+        <p><strong>Drittens: Middle Management einbinden.</strong> Die F&uuml;hrungsebene, die &uuml;ber den t&auml;glichen Einsatz entscheidet, braucht nicht nur Tools, sondern Entscheidungskompetenz und Zeitbudget. Die 10-20-70-Formel zeigt: Technologie allein l&ouml;st weniger als ein Drittel der Aufgabe.</p>
+
+        <p>Die gro&szlig;e Umschichtung hat begonnen. Die Frage ist nicht mehr ob, sondern wie schnell Unternehmen ihre Arbeitsorganisation an eine Welt anpassen, in der KI nicht ersetzt, sondern umverteilt &mdash; Aufgaben, Verantwortung und Wertsch&ouml;pfung.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://www.cnbc.com/2025/05/14/klarna-ceo-says-ai-helped-company-shrink-workforce-by-40percent.html" rel="noopener noreferrer external">CNBC: Klarna CEO says AI helped company shrink workforce by 40%</a></li>
+            <li><a href="https://www.computerweekly.com/news/366634565/Artificial-intelligence-helps-Klarna-double-revenues-with-half-the-staff" rel="noopener noreferrer external">Computer Weekly: AI helps Klarna double revenues with half the staff</a></li>
+            <li><a href="https://www.theregister.com/2026/02/18/ai_productivity_survey/" rel="noopener noreferrer external">The Register: 6,000 execs struggle to find AI productivity boom</a></li>
+            <li><a href="https://budgetlab.yale.edu/research/ai-productivity-boom-dont-count-your-productivity-data-chickens" rel="noopener noreferrer external">Yale Budget Lab: An AI Productivity Boom?</a></li>
+            <li><a href="https://pubsonline.informs.org/doi/10.1287/orsc.2025.21838" rel="noopener noreferrer external">Harvard Business School: Navigating the Jagged Technological Frontier</a></li>
+            <li><a href="https://www.dallasfed.org/research/economics/2026/0224" rel="noopener noreferrer external">Dallas Fed: AI is simultaneously aiding and replacing workers</a></li>
+            <li><a href="https://www.bcg.com/publications/2026/ai-transformation-is-a-workforce-transformation" rel="noopener noreferrer external">BCG: AI Transformation Is a Workforce Transformation</a></li>
+            <li><a href="https://hbr.org/2026/04/managers-and-executives-disagree-on-ai-and-its-costing-companies" rel="noopener noreferrer external">HBR: Managers and Executives Disagree on AI</a></li>
+            <li><a href="https://www.bitkom.org/Bitkom/Publikationen/Kuenstliche-Intelligenz-in-Deutschland" rel="noopener noreferrer external">Bitkom: K&uuml;nstliche Intelligenz in Deutschland 2025/2026</a></li>
+            <li><a href="https://tei.forrester.com/go/microsoft/365Copilot/?lang=en-us" rel="noopener noreferrer external">Forrester TEI: Microsoft 365 Copilot</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

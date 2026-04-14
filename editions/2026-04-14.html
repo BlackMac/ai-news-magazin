@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 14. April 2026</title>    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ─��� Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ─────────��────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-14">Dienstag, 14. April 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 14. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">KI-Industrie &middot; Wettbewerb</span><span class="toc-title">OpenAI greift Anthropic in internem Memo an &mdash; und wirft aufgebl&auml;hte Umsatzzahlen vor</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">KI-Industrie &middot; Meta</span><span class="toc-title">Zuckerberg baut einen KI-Klon von sich selbst &mdash; f&uuml;r Meetings</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">KI &amp; Gesellschaft</span><span class="toc-title">Stanford-Report: Die Kluft zwischen KI-Insidern und der &Ouml;ffentlichkeit w&auml;chst</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">KI-Industrie &middot; OpenAI</span><span class="toc-title">OpenAI kauft Fintech-Startup Hiro &mdash; sechste &Uuml;bernahme 2026</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">KI-Industrie &middot; Microsoft</span><span class="toc-title">Microsoft baut OpenClaw-Agenten f&uuml;r Copilot &mdash; Codename &bdquo;Ocean&nbsp;11&ldquo;</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">KI-Industrie &middot; Apple</span><span class="toc-title">Apples KI-Chef Giannandrea verl&auml;sst das Unternehmen</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">KI &amp; Datenschutz</span><span class="toc-title">75 Organisationen warnen: Metas Smart Glasses werden zur &Uuml;berwachungswaffe</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Die gro&szlig;e Umschichtung</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">KI-Industrie &middot; Wettbewerb</div>
+            <h2 id="art-1-h">OpenAI greift Anthropic in internem Memo an &mdash; und wirft aufgebl&auml;hte Umsatzzahlen vor</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: CNBC, The Verge, Gizmodo</div>
+        </header>
+        <p class="article-teaser">OpenAIs Chief Revenue Officer behauptet in einem Investor-Memo, Anthropics gemeldete 30-Milliarden-Dollar-Run-Rate sei um rund 8&nbsp;Milliarden aufgebl&auml;ht. Gleichzeitig plant OpenAI 30&nbsp;Gigawatt Rechenleistung bis 2030. Der Kampf um die KI-Krone wird jetzt auch mit Excel-Tabellen gef&uuml;hrt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Erst dominierte Claude die Gespr&auml;che auf der <a href="2026-04-13.html#art-3">HumanX-Konferenz</a>, nun schl&auml;gt OpenAI zur&uuml;ck &mdash; mit einer ungewohnt aggressiven Strategie. Chief Revenue Officer Denise Dresser verfasste ein vierseitiges internes Memo, das von CNBC und The Verge eingesehen wurde. Die Kernbehauptung: Anthropics viel zitierter annualisierter Umsatz von &uuml;ber 30&nbsp;Milliarden Dollar sei um etwa 8&nbsp;Milliarden aufgebl&auml;ht, weil Anthropic Brutto-Ums&auml;tze &uuml;ber AWS, Azure und Google Cloud als Top-Line-Revenue verbuche, w&auml;hrend OpenAI den Microsoft-Anteil herausrechne.</p>
+
+            <p>Die Attacke kommt nicht aus dem Nichts. Seit Anthropics Mythos-Preview und dem <a href="2026-04-13.html#art-3">explosiven Umsatzwachstum</a> hat sich die Machtbalance in der KI-Industrie verschoben. OpenAIs Memo enth&auml;lt auch ein Investor-Update mit Compute-Prognosen: OpenAI plant 30&nbsp;Gigawatt Rechenkapazit&auml;t bis 2030, w&auml;hrend Anthropic auf 7 bis 8&nbsp;Gigawatt bis Ende 2027 gesch&auml;tzt wird. Diese Zahlen sollen Investoren signalisieren: OpenAI denkt in einer anderen Gr&ouml;&szlig;enordnung.</p>
+
+            <p>Besonders brisant ist Dressers rhetorischer Angriff auf Anthropics Positionierung. Sie wirft dem Konkurrenten vor, sein Narrativ auf &bdquo;Angst, Beschr&auml;nkung und der Idee, dass eine kleine Elite KI kontrollieren sollte&ldquo; aufzubauen. Das zielt direkt auf Anthropics Responsible-Scaling-Politik und die kontrollierte Verf&uuml;gbarkeit von Mythos &mdash; Differenzierungsmerkmale, die Anthropic als Vorteil vermarktet.</p>
+
+            <p>Ein separates Memo vom 13.&nbsp;April geht noch weiter: OpenAI preist eine verst&auml;rkte Allianz mit Amazon und kritisiert, Microsoft habe &bdquo;unsere F&auml;higkeit eingeschr&auml;nkt&ldquo;, Kunden direkt zu erreichen. Der Zweifrontenkrieg &mdash; gegen Anthropic im Markt und gegen Microsoft in der eigenen Partnerschaft &mdash; offenbart, wie sehr sich OpenAIs strategische Lage ver&auml;ndert hat. Vom unangefochtenen Marktf&uuml;hrer zum Herausforderer in wenigen Monaten.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/04/09/openai-slams-anthropic-in-memo-to-shareholders-as-rival-gains-momentum.html" rel="noopener noreferrer external">CNBC: OpenAI slams Anthropic in memo to shareholders</a></li>
+                <li><a href="https://www.theverge.com/2026/4/13/openai-internal-memo-anthropic-competition" rel="noopener noreferrer external">The Verge: Read OpenAI&rsquo;s latest internal memo about beating the competition</a></li>
+                <li><a href="https://gizmodo.com/openai-exec-reveals-new-strategy-in-leaked-memo-attack-anthropic-2000745872" rel="noopener noreferrer external">Gizmodo: OpenAI Exec Reveals New Strategy: Attack Anthropic</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">KI-Industrie &middot; Meta</div>
+            <h2 id="art-2-h">Zuckerberg baut einen KI-Klon von sich selbst &mdash; f&uuml;r Meetings</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: Financial Times, Engadget, Slashdot</div>
+        </header>
+        <p class="article-teaser">Meta entwickelt einen fotorealistischen 3D-Avatar von Mark Zuckerberg, der mit Mitarbeitern interagieren soll. Der KI-Klon wird auf Zuckerbergs Sprachmuster, Tonfall und strategisches Denken trainiert. CEO-Pr&auml;senz f&uuml;r 72.000&nbsp;Mitarbeiter &mdash; ohne physische Meetings.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Financial Times berichtete zuerst: Meta arbeitet an einem fotorealistischen 3D-KI-Avatar seines Gr&uuml;nders, der in der Lage sein soll, Echtzeit-Feedback an Mitarbeiter zu geben. Zuckerberg ist pers&ouml;nlich am Training des Modells beteiligt und verbringt zus&auml;tzlich 5 bis 10&nbsp;Stunden pro Woche mit Coding an Metas KI-Projekten. Das Ziel: die CEO-Pr&auml;senz &uuml;ber alle 72.000&nbsp;Mitarbeiter hinweg zu skalieren, ohne dass Zuckerberg physisch anwesend sein muss.</p>
+
+            <p>Das Projekt befindet sich noch in einer fr&uuml;hen Entwicklungsphase, doch die strategische Sto&szlig;richtung ist klar. Meta hat unter dem neuen KI-Chef Alexandr Wang seine <a href="2026-04-08.html#art-6">Hybrid-Strategie</a> versch&auml;rft: Die gr&ouml;&szlig;ten Modelle bleiben propriet&auml;r, kleinere werden als Open Source ver&ouml;ffentlicht. Ein KI-Klon des CEOs w&auml;re die logische Verl&auml;ngerung dieses Ansatzes &mdash; propriet&auml;re KI f&uuml;r interne Kommunikation, die sp&auml;ter als Produkt f&uuml;r Dritte skaliert werden k&ouml;nnte.</p>
+
+            <p>Falls das Experiment gelingt, plant Meta, auch Creators die Erstellung eigener KI-Avatare zu erm&ouml;glichen. Die Implikationen reichen weit &uuml;ber Unternehmenskommunikation hinaus: Wenn ein CEO durch seinen KI-Klon ersetzt werden kann, stellt sich die Frage, welche F&uuml;hrungsaufgaben tats&auml;chlich menschliche Pr&auml;senz erfordern &mdash; und welche nicht. Skeptiker sehen darin ein weiteres Beispiel f&uuml;r Zuckerbergs Tendenz, menschliche Interaktion durch technische L&ouml;sungen zu ersetzen, statt die eigentliche F&uuml;hrungsherausforderung anzugehen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.engadget.com/ai/meta-is-reportedly-building-an-ai-clone-of-mark-zuckerberg-130242840.html" rel="noopener noreferrer external">Engadget: Meta is reportedly building an AI clone of Mark Zuckerberg</a></li>
+                <li><a href="https://meta.slashdot.org/story/26/04/13/1642228/mark-zuckerberg-is-reportedly-building-an-ai-clone-to-replace-him-in-meetings" rel="noopener noreferrer external">Slashdot: Zuckerberg Is Reportedly Building an AI Clone</a></li>
+                <li><a href="https://gagadget.com/en/704811-mark-zuckerbergs-ai-clone-to-handle-meetings-what-does-this-mean-for-metas-future/" rel="noopener noreferrer external">Gagadget: What Does This Mean for Meta&rsquo;s Future?</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">KI &amp; Gesellschaft</div>
+            <h2 id="art-3-h">Stanford-Report: Die Kluft zwischen KI-Insidern und der &Ouml;ffentlichkeit w&auml;chst</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: Stanford HAI, TechCrunch, SiliconANGLE</div>
+        </header>
+        <p class="article-teaser">73&nbsp;Prozent der KI-Experten bewerten die Auswirkungen auf die Arbeitswelt positiv &mdash; aber nur 23&nbsp;Prozent der Bev&ouml;lkerung. Der Stanford HAI AI Index 2026 dokumentiert eine wachsende Wahrnehmungskluft, die das Vertrauen in die Technologie gef&auml;hrdet.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der j&auml;hrliche AI Index des Stanford Institute for Human-Centered AI (HAI) geh&ouml;rt zu den wichtigsten Standortbestimmungen der KI-Branche. Die Ausgabe 2026 zeichnet ein beunruhigendes Bild: W&auml;hrend 73&nbsp;Prozent der KI-Experten die Auswirkungen auf den Arbeitsmarkt positiv einsch&auml;tzen, teilen nur 23&nbsp;Prozent der allgemeinen Bev&ouml;lkerung diese Einsch&auml;tzung. Bei den wirtschaftlichen Auswirkungen zeigt sich ein &auml;hnliches Muster: 69&nbsp;Prozent Optimismus bei Insidern gegen&uuml;ber 21&nbsp;Prozent in der Bev&ouml;lkerung.</p>
+
+            <p>Diese Kluft ist mehr als eine Wahrnehmungsdifferenz &mdash; sie birgt politisches Sprengpotenzial. 64&nbsp;Prozent der Amerikaner glauben, dass KI in 20&nbsp;Jahren zu weniger Arbeitspl&auml;tzen f&uuml;hren wird. Die USA haben das niedrigste Vertrauen in die F&auml;higkeit ihrer Regierung, KI zu regulieren (31&nbsp;Prozent), w&auml;hrend Singapur mit 81&nbsp;Prozent an der Spitze liegt. In einem Land, das gerade Milliarden in KI-Infrastruktur investiert, k&ouml;nnte dieses Misstrauen zum politischen Hindernis werden. Der jüngste <a href="2026-04-13.html#art-5">Vertrauensverlust der Gen Z</a> best&auml;tigt den Trend.</p>
+
+            <p>Bemerkenswert ist auch die geopolitische Dimension: China hat den US-Vorsprung bei KI fast vollst&auml;ndig aufgeholt. US- und chinesische Modelle tauschen seit Anfang 2025 die Spitzenpl&auml;tze in Benchmarks. Die USA f&uuml;hren zwar bei Privatinvestitionen (285,9&nbsp;Milliarden Dollar 2025 gegen&uuml;ber Chinas 12,4&nbsp;Milliarden), aber die Zahl der KI-Forscher, die in die USA ziehen, ist seit 2017 um 89&nbsp;Prozent gesunken. Der Brain-Drain-Vorteil, der Amerikas KI-Dominanz jahrzehntelang untermauerte, schwindet.</p>
+
+            <p>F&uuml;r die KI-Branche ist der Befund ein Weckruf: Technologischer Fortschritt ohne gesellschaftliche Akzeptanz f&uuml;hrt nicht zu nachhaltigem Wachstum, sondern zu Regulierungsdruck und politischem Gegenwind. Die Branche muss die Kommunikationsl&uuml;cke schlie&szlig;en &mdash; nicht durch bessere PR, sondern durch nachweisbare Ergebnisse, die auch au&szlig;erhalb der Silicon-Valley-Blase sp&uuml;rbar sind.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report" rel="noopener noreferrer external">Stanford HAI: 12 Takeaways from the 2026 Report</a></li>
+                <li><a href="https://techcrunch.com/2026/04/13/stanford-report-highlights-growing-disconnect-between-ai-insiders-and-everyone-else/" rel="noopener noreferrer external">TechCrunch: Stanford report highlights growing disconnect</a></li>
+                <li><a href="https://siliconangle.com/2026/04/13/stanford-hais-2026-ai-index-reveals-china-u-s-now-neck-neck-race-global-dominance/" rel="noopener noreferrer external">SiliconANGLE: China and U.S. now neck-and-neck in AI race</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">KI-Industrie &middot; OpenAI</div>
+            <h2 id="art-4-h">OpenAI kauft Fintech-Startup Hiro &mdash; sechste &Uuml;bernahme 2026</h2>
+            <div class="article-meta"><time datetime="2026-04-14">14. April 2026</time> &middot; Quellen: TechCrunch, Hiro Blog</div>
+        </header>
+        <p class="article-teaser">OpenAI &uuml;bernimmt das Personal-Finance-Startup Hiro &mdash; spezialisiert auf verifizierbar korrekte Finanzmathematik. Der Kaufpreis wurde nicht genannt. Gr&uuml;nder Ethan Bloch hatte zuvor Digit f&uuml;r &uuml;ber 200&nbsp;Millionen Dollar an Oportun verkauft.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Hiro Finance, ein KI-gest&uuml;tzter Finanzberater mit dem Schwerpunkt auf verifizierbar korrekter Finanzmathematik, wird k&uuml;nftig unter dem Dach von OpenAI operieren. Gr&uuml;nder Ethan Bloch und sein rund zehnk&ouml;pfiges Team wechseln komplett zu OpenAI. Hiro stellt seinen Dienst am 20.&nbsp;April ein; Nutzerdaten werden bis zum 13.&nbsp;Mai gel&ouml;scht. Investoren waren Ribbit Capital, General Catalyst und Restive.</p>
+
+            <p>Die &Uuml;bernahme reiht sich in ein Muster ein: Es ist bereits die sechste Akquisition von OpenAI im Jahr 2026 &mdash; fast so viele wie im gesamten Vorjahr. Blochs Track Record als Gr&uuml;nder von Digit, das 2021 f&uuml;r &uuml;ber 200&nbsp;Millionen Dollar an Oportun verkauft wurde, d&uuml;rfte den Ausschlag gegeben haben. OpenAI vermarktet ChatGPT gezielt an Business-Finance-Teams, und Hiros Expertise in Finanzmathematik und korrekten Berechnungen adressiert eine der gr&ouml;&szlig;ten Schw&auml;chen aktueller Sprachmodelle: numerische Pr&auml;zision.</p>
+
+            <p>Der ungenannte Kaufpreis deutet auf ein klassisches Acqui-Hire hin &mdash; es geht weniger um die Technologie als um die Menschen. F&uuml;r OpenAI ist das Talent-Rennen mindestens so wichtig wie der Modellwettbewerb: Jeder Experte, der zu OpenAI wechselt, steht der Konkurrenz nicht mehr zur Verf&uuml;gung. In einem Markt, in dem Anthropic und Google aggressiv um Finanz-KI-Talent konkurrieren, ist jede Akquisition auch ein strategischer Schachzug.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/13/openai-has-bought-ai-personal-finance-startup-hiro/" rel="noopener noreferrer external">TechCrunch: OpenAI has bought AI personal finance startup Hiro</a></li>
+                <li><a href="https://news.crunchbase.com/ma/data-openai-2023-2026-acquisitions-open-source-astral-promptfoo/" rel="noopener noreferrer external">Crunchbase: OpenAI M&amp;A Deals 2026</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">KI-Industrie &middot; Microsoft</div>
+            <h2 id="art-5-h">Microsoft baut OpenClaw-Agenten f&uuml;r Copilot &mdash; Codename &bdquo;Ocean&nbsp;11&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: TechCrunch, Windows Central, The Information</div>
+        </header>
+        <p class="article-teaser">Microsoft gr&uuml;ndet ein dediziertes Engineering-Team unter Corporate VP Omar Shahine, um das Open-Source-Framework OpenClaw in Microsoft&nbsp;365 Copilot zu integrieren. Ziel: autonome &bdquo;Always-On&ldquo;-Agenten, die 24/7 im Hintergrund arbeiten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Microsoft macht Ernst mit der Agenten-Strategie: Ein neues Engineering-Team unter dem internen Codenamen &bdquo;Ocean&nbsp;11&ldquo; soll OpenClaw &mdash; das mit &uuml;ber 354.000&nbsp;GitHub-Stars und 70.000&nbsp;Forks popul&auml;rste Open-Source-Agenten-Framework &mdash; tief in Microsoft&nbsp;365 Copilot integrieren. Geleitet wird das Projekt von Corporate VP Omar Shahine, der bereits f&uuml;r Outlook und Microsoft&nbsp;365 verantwortlich ist.</p>
+
+            <p>Die Vision geht weit &uuml;ber den heutigen Chat-basierten Copilot hinaus: Microsoft will Copilot von einem passiven Assistenten zu einer Plattform f&uuml;r autonome Agenten transformieren, die Aufgaben eigenst&auml;ndig und kontinuierlich im Hintergrund erledigen. Auf ClawHub sind bereits &uuml;ber 44.000&nbsp;Skills gelistet, und ein voll integriertes Plugin f&uuml;r Microsoft Teams existiert. Die neuen Agenten sollen auf der Build-Konferenz im Juni vorgestellt werden.</p>
+
+            <p>F&uuml;r Microsofts KI-Strategie ist der Schritt eine Kurskorrektur. Copilot hatte mit der Nutzerakzeptanz gek&auml;mpft &mdash; nur 3,3&nbsp;Prozent aller Microsoft-365-Nutzer haben das Add-on aktiviert, und die <a href="2026-04-06.html#art-1">&bdquo;Entertainment Only&ldquo;-AGB</a> sorgten f&uuml;r Irritation. OpenClaw-basierte Always-On-Agenten k&ouml;nnten das Wertversprechen fundamental ver&auml;ndern: Statt gelegentlich einen Chatbot zu befragen, w&uuml;rden Nutzer von proaktiven Agenten unterst&uuml;tzt, die E-Mails sortieren, Meetings vorbereiten und Workflows automatisieren &mdash; ohne explizite Aufforderung.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/13/microsoft-is-working-on-yet-another-openclaw-like-agent/" rel="noopener noreferrer external">TechCrunch: Microsoft is working on yet another OpenClaw-like agent</a></li>
+                <li><a href="https://www.windowscentral.com/artificial-intelligence/microsoft-openclaw-will-add-personal-ai-agents-in-microsoft-365" rel="noopener noreferrer external">Windows Central: Microsoft 365 is getting personal AI agents</a></li>
+                <li><a href="https://www.theinformation.com/articles/microsoft-plots-new-copilot-features-inspired-openclaw" rel="noopener noreferrer external">The Information: Microsoft Plots New Copilot Features Inspired by OpenClaw</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">KI-Industrie &middot; Apple</div>
+            <h2 id="art-6-h">Apples KI-Chef Giannandrea verl&auml;sst das Unternehmen</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: 9to5Mac, MacRumors, Apple Newsroom</div>
+        </header>
+        <p class="article-teaser">John Giannandrea, seit 2018 Apples Leiter f&uuml;r KI und Machine Learning, verlässt diese Woche offiziell das Unternehmen. Tim Cook hatte ihm im M&auml;rz 2025 die Kontrolle &uuml;ber Siri entzogen. Der Abgang markiert Apples stilles Eingest&auml;ndnis, bei KI hinter der Konkurrenz zu liegen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das Ende kam schleichend: John Giannandrea, der 2018 von Google zu Apple wechselte und die KI/ML-Abteilung aufbaute, verl&auml;sst das Unternehmen offiziell am 15.&nbsp;April. Sein Abgang war bereits im Dezember 2025 angek&uuml;ndigt worden &mdash; seitdem war Giannandrea als Berater t&auml;tig, in der Branche scherzhaft als &bdquo;Resting and Vesting&ldquo; bezeichnet, bis seine Aktienoptionen am Stichtag frei werden.</p>
+
+            <p>Der Bruch zwischen Cook und Giannandrea hat eine Vorgeschichte. Im M&auml;rz 2025 entzog der CEO seinem KI-Chef die Kontrolle &uuml;ber das Siri-Team &mdash; ein klares Signal, dass das Vertrauen in Giannandreas F&auml;higkeit zur Produktentwicklung ersch&ouml;pft war. Siri, Apples wichtigstes KI-Produkt f&uuml;r Endkunden, hatte trotz jahrelanger Investitionen den Anschluss an ChatGPT, Claude und Gemini verloren.</p>
+
+            <p>Nachfolger wird Amar Subramanya, der als VP of AI an Craig Federighi berichtet &mdash; nicht an einen eigenst&auml;ndigen KI-Chef. Diese organisatorische Einordnung ist aufschlussreich: Apple integriert KI k&uuml;nftig tiefer in die Software-Entwicklung, statt sie als eigene Sparte zu behandeln. Giannandrea selbst plant, Startup-Boards beizutreten und Beratungsarbeit zu machen.</p>
+
+            <p>F&uuml;r Apple steht viel auf dem Spiel. Das Unternehmen arbeitet angeblich an <a href="https://www.golem.de/news/ki-brille-apple-testet-vier-designs-fuer-smart-glasses-2604-207488.html" rel="noopener noreferrer external">vier verschiedenen Designs f&uuml;r Smart Glasses</a>, die KI-Funktionen ben&ouml;tigen werden. Ob der F&uuml;hrungswechsel die N&ouml;tige Dynamik bringt oder nur die Symptome eines tieferen Problems behandelt, wird sich in den kommenden Monaten zeigen.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://9to5mac.com/2026/04/13/former-ai-boss-john-giannandrea-officially-leaving-apple-this-week-after-resting-and-vesting/" rel="noopener noreferrer external">9to5Mac: Former AI boss Giannandrea officially leaving Apple</a></li>
+                <li><a href="https://www.macrumors.com/2026/04/13/john-giannandrea-departs-apple-this-week/" rel="noopener noreferrer external">MacRumors: Apple&rsquo;s AI Chief John Giannandrea Departs This Week</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 7 ═══ -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">KI &amp; Datenschutz</div>
+            <h2 id="art-7-h">75 Organisationen warnen: Metas Smart Glasses werden zur &Uuml;berwachungswaffe</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13. April 2026</time> &middot; Quellen: ACLU, Engadget, EPIC</div>
+        </header>
+        <p class="article-teaser">&Uuml;ber 75&nbsp;B&uuml;rgerrechtsorganisationen, angef&uuml;hrt von der ACLU, fordern Meta auf, die Integration von Gesichtserkennung in Ray-Ban und Oakley Smart Glasses zu stoppen. Ein internes Meta-Memo schlug vor, die Technologie einzuf&uuml;hren, w&auml;hrend B&uuml;rgerrechtler &bdquo;ihre Ressourcen auf andere Anliegen konzentriert&ldquo; h&auml;tten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Koalition ist breit und hochkar&auml;tig: ACLU, Electronic Privacy Information Center (EPIC) und &uuml;ber 70 weitere Organisationen warnen Meta in einem offenen Brief vor der geplanten &bdquo;Name Tag&ldquo;-Funktion f&uuml;r Ray-Ban und Oakley Smart Glasses. Die Technologie w&uuml;rde es erm&ouml;glichen, Fremde im Sichtfeld per Gesichtserkennung zu identifizieren und mit digitalen Datenbanken zu verkn&uuml;pfen.</p>
+
+            <p>Die Sorge ist konkret: Opfer h&auml;uslicher Gewalt k&ouml;nnten von ihren Peinigern aufgesp&uuml;rt werden. Immigranten ohne Papiere, LGBTQ+-Personen, religi&ouml;se Minderheiten und Protestierende w&auml;ren &uuml;berwachbar, ohne es zu wissen. Die Technologie w&uuml;rde &mdash; anders als station&auml;re &Uuml;berwachungskameras &mdash; in jeder sozialen Interaktion verf&uuml;gbar sein, auf der Stra&szlig;e, in Gesch&auml;ften, bei Veranstaltungen.</p>
+
+            <p>Besonders brisant ist ein internes Meta-Memo, das die Koalition zitiert. Darin schlugen Meta-Mitarbeiter vor, die Technologie &bdquo;in einem dynamischen politischen Umfeld&ldquo; einzuf&uuml;hren, in dem B&uuml;rgerrechtsgruppen &bdquo;ihre Ressourcen auf andere Anliegen konzentriert&ldquo; h&auml;tten. Die Koalition bezeichnete diesen Ansatz als &bdquo;abscheulich&ldquo;. US-Senatoren Markey, Wyden und Merkley forderten ebenfalls Transparenz von Meta.</p>
+
+            <p>Der Fall wirft grunds&auml;tzliche Fragen auf: Wo verl&auml;uft die Grenze zwischen Augmented Reality und &Uuml;berwachung? Metas gleichzeitige Entwicklung eines <a href="#art-2">KI-Klons des CEOs</a> und einer Gesichtserkennungs-Brille zeichnet das Bild eines Unternehmens, das menschliche Identit&auml;t zunehmend als Datenpunkt begreift &mdash; mal als digitalen Zwilling, mal als Ziel f&uuml;r Identifizierung. F&uuml;r den europ&auml;ischen Markt d&uuml;rfte die Technologie unter dem EU AI Act ohnehin auf erhebliche H&uuml;rden sto&szlig;en.</p>
+        </div>
+
+        <footer class="sources">
+            <h3 class="sr-only">Quellen</h3>
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.aclu.org/press-releases/aclu-and-75-organizations-sound-alarm-on-metas-plans-to-add-facial-recognition-technology-to-ray-ban-and-oakley-eyeglasses" rel="noopener noreferrer external">ACLU: 75 Organizations Sound Alarm on Meta&rsquo;s Facial Recognition Plans</a></li>
+                <li><a href="https://www.engadget.com/big-tech/meta-warned-by-dozens-of-organizations-that-facial-recognition-on-its-smart-glasses-would-empower-predators-185000998.html" rel="noopener noreferrer external">Engadget: Meta warned that facial recognition glasses would empower predators</a></li>
+                <li><a href="https://epic.org/epic-joins-aclus-eyewear-not-spyware-campaign-to-fight-metas-surveillance-glasses/" rel="noopener noreferrer external">EPIC: Eyewear, Not Spyware campaign</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE TEASER ═══ -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Die gro&szlig;e Umschichtung &mdash; Wie KI die Wissensarbeit neu ordnet</h2>
+            <p class="article-teaser">Klarna halbiert die Belegschaft und verdoppelt den Umsatz. Microsoft meldet 116&nbsp;Prozent ROI auf Copilot. Gleichzeitig sagen neun von zehn Managern: KI hat null Effekt. Was stimmt &mdash; und was bedeutet das f&uuml;r Unternehmen?</p>
+            <a href="reportagen/2026-04-14.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/poke.com.png" alt="Poke Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://poke.com/" rel="noopener noreferrer external">Poke</a></div>
+                    <div class="tool-card-desc">KI-Agent, der per SMS, iMessage, Telegram und WhatsApp Alltagsaufgaben automatisiert &mdash; Kalender, Erinnerungen, Smart Home und sogar Developer-Workflows &uuml;ber GitHub und Cursor Cloud. Statt einer eigenen App setzt Poke konsequent auf bestehende Messaging-Plattformen als Interface.</div>
+                    <div class="tool-card-meta">8. April 2026. Startup aus Palo Alto (Marvin von Hagen, Felix Schlegel). $25 Mio. bei $300 Mio. Bewertung.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/heygen.com.png" alt="HeyGen Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.heygen.com/" rel="noopener noreferrer external">HeyGen Avatar V</a></div>
+                    <div class="tool-card-desc">Erzeugt aus einer 15-Sekunden-Webcam-Aufnahme fotorealistische KI-Avatare mit konsistenter Identit&auml;t, Gestik und Mikromimik f&uuml;r Videoproduktion in 175&nbsp;Sprachen. L&ouml;st das &bdquo;Identity Drift&ldquo;-Problem auf Modellebene &mdash; Gesicht, Hauttextur und Sprechrhythmus bleiben stabil.</div>
+                    <div class="tool-card-meta">8. April 2026. HeyGen (AI-Video-Startup, Series C, $60 Mio.+).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/pika.me.png" alt="PikaStream Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.pika.me/" rel="noopener noreferrer external">PikaStream 1.0</a></div>
+                    <div class="tool-card-desc">Echtzeit-Video-Engine, die KI-Agents als sprechende Avatare in Google-Meet-Calls teilnehmen l&auml;sst &mdash; mit Voice-Cloning, Ged&auml;chtnis und der F&auml;higkeit, w&auml;hrend des Gespr&auml;chs Aufgaben auszuf&uuml;hren. 24&nbsp;FPS bei ca. 1,5&nbsp;Sekunden Latenz.</div>
+                    <div class="tool-card-meta">5. April 2026 (Beta). Pika Labs (Startup, bekannt f&uuml;r KI-Videogenerierung).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/ai.google.dev.png" alt="LiteRT-LM Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://ai.google.dev/edge/litert-lm" rel="noopener noreferrer external">Google LiteRT-LM</a></div>
+                    <div class="tool-card-desc">Open-Source-Inference-Framework f&uuml;r die Ausf&uuml;hrung gro&szlig;er Sprachmodelle (Gemma, Llama, Phi-4, Qwen) auf Edge-Ger&auml;ten &mdash; Smartphones, Raspberry Pi, Wearables und im Browser. Unter 1,5&nbsp;GB RAM und unter 100&nbsp;ms Latenz.</div>
+                    <div class="tool-card-meta">April 2026 (v0.10.1 mit Gemma-4-Support). Google AI Edge (Open Source).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/worldlabs.ai.png" alt="Marble Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://marble.worldlabs.ai/" rel="noopener noreferrer external">Marble 1.1 Plus</a></div>
+                    <div class="tool-card-desc">Generiert aus Text, Bildern oder Video begehbare 3D-Welten als Gaussian Splats &mdash; exportierbar f&uuml;r Desktop, Mobile und VR-Headsets. Neue automatische r&auml;umliche Expansion l&auml;sst 3D-Umgebungen dynamisch wachsen.</div>
+                    <div class="tool-card-meta">2. April 2026. World Labs (Gr&uuml;nderin: Fei-Fei Li, $1 Mrd. Funding von NVIDIA, AMD, Autodesk).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/meta.ai.png" alt="Muse Spark Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.meta.ai/" rel="noopener noreferrer external">Meta Muse Spark</a></div>
+                    <div class="tool-card-desc">Metas neues nativ multimodales KI-Modell mit Sprach-, Text- und Bildeingabe, Tool-Nutzung und Multi-Agent-Orchestrierung. Erstes Modell von Meta Superintelligence Labs &mdash; Closed-Source, ein Strategiewechsel f&uuml;r Meta.</div>
+                    <div class="tool-card-meta">8. April 2026. Meta (Big Tech). Verf&uuml;gbar auf meta.ai, bald in WhatsApp und Instagram.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=GAyNvq6Ayps" rel="noopener noreferrer external"><img src="../assets/images/thumbs/GAyNvq6Ayps.jpg" alt="Tech With Tim Ollama MCP Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 22 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=GAyNvq6Ayps" rel="noopener noreferrer external">Running LLMs Locally Just Got Way Better &mdash; Ollama + MCP</a></div>
+                    <div class="yt-card-channel">Tech With Tim (1,99 Mio. Subs) &middot; 12. April 2026</div>
+                    <div class="yt-card-desc">Praxistutorial, das zeigt, wie man mit Ollama ein lokales LLM (Qwen 3.5) aufsetzt und es via MCP (Model Context Protocol) mit externen Tools verbindet. Die komplette Kette: Modell-Download, lokale Inferenz und Anbindung an tausende Anwendungen &mdash; kostenlos, privat und ohne Cloud-Abh&auml;ngigkeit.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=99VHENEKA9o" rel="noopener noreferrer external"><img src="../assets/images/thumbs/99VHENEKA9o.jpg" alt="Nate Herk Claude Code vs Antigravity Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Vergleich &middot; 24 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=99VHENEKA9o" rel="noopener noreferrer external">100 Hours Testing Claude Code vs Antigravity (honest results)</a></div>
+                    <div class="yt-card-channel">Nate Herk (653.000 Subs) &middot; 13. April 2026</div>
+                    <div class="yt-card-desc">Nach 100&nbsp;Stunden Praxistest vergleicht Nate Herk Claude Code und Googles Antigravity (AI Studio 2.0) als Agentic-Coding-Tools. Das Video geht &uuml;ber typische Benchmarks hinaus und bewertet beide Werkzeuge anhand realer Automations-Projekte &mdash; mit konkreten St&auml;rken, Schw&auml;chen und Empfehlungen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=k0RI_M6lIsg" rel="noopener noreferrer external"><img src="../assets/images/thumbs/k0RI_M6lIsg.jpg" alt="Anton Abyzov AnyModel Tool Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 17 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=k0RI_M6lIsg" rel="noopener noreferrer external">I Built a Tool That Runs Claude Code with ANY AI Model</a></div>
+                    <div class="yt-card-channel">Anton Abyzov: AI Power (521 Subs) &middot; 3. April 2026 &middot; 9.800+ Views</div>
+                    <div class="yt-card-desc">Anton Abyzov stellt sein Open-Source-Tool &bdquo;AnyModel&ldquo; vor, das Claude Code von seinem propriet&auml;ren Backend entkoppelt: Per npm-Paket lassen sich beliebige LLMs (GPT-5.4, DeepSeek R1, Gemini 3.1, Qwen, Llama) als Backend nutzen &mdash; auch v&ouml;llig kostenlose Modelle. Mit einem Views-zu-Subscriber-Verh&auml;ltnis von fast 19:1 ein klarer Fr&uuml;hindikator f&uuml;r den Trend, Coding-Agenten modellunabh&auml;ngig zu machen.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
