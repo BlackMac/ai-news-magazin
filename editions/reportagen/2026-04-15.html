@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Die unsichtbare Markierung &mdash; Die Inferenz, 15. April 2026</title>    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-15.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Die unsichtbare Markierung &mdash; Warum KI-Wasserzeichen bisher nicht halten, was sie versprechen</h1>
+    <p class="article-subtitle">Ein Entwickler knackt Googles SynthID mit 200 schwarzen Bildern. Die EU fordert Kennzeichnungspflicht ab August. Und Social-Media-Plattformen l&ouml;schen Herkunftsnachweise beim Upload. &Uuml;ber die fragile Architektur digitaler Authentizit&auml;t.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-15">Mittwoch, 15. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Es brauchte keine Hacker-Armee, keinen Nationalstaat und keinen Milliarden-Etat. Es brauchte einen Entwickler, 200 schwarze Bilder und ein wenig Spektralanalyse. Im M&auml;rz 2026 ver&ouml;ffentlichte der Ingenieur Alosh Denny auf GitHub ein Open-Source-Tool namens &bdquo;reverse-SynthID&ldquo;, das Googles unsichtbares KI-Wasserzeichen mit einer Erkennungsgenauigkeit von 90&nbsp;Prozent identifiziert &mdash; und es anschlie&szlig;end so weit st&ouml;rt, dass Googles eigener Detektor das Bild nicht mehr als KI-generiert erkennt. Die Bild&shy;qualit&auml;t bleibt dabei praktisch unver&auml;ndert: &uuml;ber 43&nbsp;Dezibel PSNR, visuell nicht vom Original zu unterscheiden.</p>
+
+        <p>Dennys Methode war verbl&uuml;ffend einfach: Er generierte &uuml;ber Googles Gemini rein schwarze und wei&szlig;e Bilder &mdash; Fl&auml;chen ohne eigenen Inhalt. Dann mittelte er die Ergebnisse. Was &uuml;brig blieb, war das einzige konsistente Element: die Frequenzstruktur des Wasserzeichens. Mit klassischer Signalverarbeitung, ganz ohne Zugang zu Googles propriet&auml;rem Encoder, kartierte er die aufl&ouml;sungs&shy;abh&auml;ngigen Tr&auml;gerfrequenzen von SynthID. Das Repository sammelte innerhalb weniger Tage &uuml;ber 1.600 GitHub-Stars und wurde auf Hacker News breit diskutiert.</p>
+
+        <p>Der Vorfall w&auml;re eine Randnotiz, g&auml;be es nicht eine unbequeme Wahrheit: Google hat nach eigenen Angaben &uuml;ber zehn Milliarden Inhalte &mdash; Bilder, Texte, Audio, Video &mdash; mit SynthID markiert. Und ab dem 2.&nbsp;August 2026 verlangt der EU AI Act in Artikel&nbsp;50, dass alle KI-Systeme ihre synthetischen Outputs in maschinenlesbarem Format kennzeichnen. Die Frage ist nicht mehr theoretisch: Funktioniert die unsichtbare Markierung &uuml;berhaupt?</p>
+
+        <h2>Das Versprechen der digitalen Herkunft</h2>
+
+        <p>Die Idee klingt bestechend: Jeder KI-generierte Inhalt tr&auml;gt eine unsichtbare Signatur, die seine Herkunft verifizierbar macht. Deepfakes werden entlarvt, bevor sie Schaden anrichten. W&auml;hler k&ouml;nnen zwischen echten und synthetischen Bildern unterscheiden. Journalisten k&ouml;nnen die Echtheit ihrer Quellen belegen. Zwei technische Ans&auml;tze konkurrieren um diese Vision.</p>
+
+        <p>Der erste ist das <strong>unsichtbare Wasserzeichen</strong>, wie es Google mit SynthID betreibt. Das Signal wird w&auml;hrend der Generierung in den Inhalt eingewoben &mdash; bei Bildern in die Pixelstruktur, bei Text in die Token-Auswahl&shy;wahrscheinlichkeiten. Der Vorteil: Das Wasserzeichen &uuml;berlebt moderate Bearbeitungen wie Zuschneiden oder Kompression. Der Nachteil: Es markiert nur Inhalte des eigenen Systems. SynthID erkennt keine Bilder von Midjourney, DALL-E oder Stable Diffusion.</p>
+
+        <p>Der zweite Ansatz sind <strong>Content Credentials</strong> nach dem C2PA-Standard, vorangetrieben von einer Koalition um Adobe, Microsoft, Google und Meta. Statt den Inhalt selbst zu ver&auml;ndern, werden kryptographisch signierte Metadaten angeh&auml;ngt &mdash; eine Art digitaler Beipackzettel, der festhält, wer den Inhalt wann mit welchem Werkzeug erstellt oder bearbeitet hat. Die Content Authenticity Initiative z&auml;hlt mittlerweile &uuml;ber 6.000&nbsp;Mitglieder. Kameras von Leica, Sony und Nikon signieren Fotos ab Werk. Googles Pixel&nbsp;10 nutzt seinen Titan-M2-Sicherheitschip f&uuml;r On-Device-Zeitstempel. Cloudflare unterst&uuml;tzt C2PA seit Februar 2025 und erreicht damit potenziell 20&nbsp;Prozent des Webs.</p>
+
+        <div class="pull-quote">&bdquo;The technique itself is in its infancy. We need it to grow up fast.&ldquo; &mdash; Nature, Oktober 2024</div>
+
+        <h2>Die Risse im System</h2>
+
+        <p>Die Realit&auml;t hinter den Pressemitteilungen ist ern&uuml;chternd. Jeder der beiden Ans&auml;tze hat fundamentale Schw&auml;chen &mdash; und die gr&ouml;&szlig;te Bedrohung kommt nicht von b&ouml;swilligen Angreifern, sondern von der ganz allt&auml;glichen Nutzung digitaler Inhalte.</p>
+
+        <p><strong>Text-Wasserzeichen</strong> sind besonders fragil. Eine einfache Paraphrasierung &mdash; etwa durch ein anderes Sprachmodell &mdash; senkt die Erkennungsrate von &uuml;ber 99 auf unter f&uuml;nf Prozent. Eine &Uuml;bersetzung in eine andere Sprache entfernt das Wasserzeichen praktisch vollst&auml;ndig. Bei faktualen Aussagen mit geringem Formulierungs&shy;spielraum funktioniert die Markierung von vornherein kaum, weil der Algorithmus zu wenig Freiheit bei der Wortwahl hat. Noch problematischer: Es ist m&ouml;glich, auch menschlich geschriebenen Text so zu manipulieren, dass er als KI-generiert erkannt wird &mdash; ein Angriffsvektor, der Sch&uuml;lern, Journalisten oder Wissenschaftlern f&auml;lschlich KI-Nutzung unterstellen k&ouml;nnte.</p>
+
+        <p><strong>Bild-Wasserzeichen</strong> sind robuster, aber nicht immun. JPEG-Kompression, Rauschen und geometrische Transformationen besch&auml;digen das Signal. Und Dennys SynthID-Bypass zeigt, dass auch ohne Zugang zum Encoder eine gezielte St&ouml;rung m&ouml;glich ist &mdash; mit &ouml;ffentlich verf&uuml;gbaren Werkzeugen der Signalverarbeitung.</p>
+
+        <p><strong>C2PA-Metadaten</strong> haben ein noch grundlegenderes Problem: Social-Media-Plattformen entfernen sie beim Upload. Kompression, Gr&ouml;&szlig;en&shy;&auml;nderung und Formatkonvertierung strippen die kryptographischen Signaturen. Das Paradox ist offensichtlich: Genau die Inhalte, die am dringendsten einen Herkunfts&shy;nachweis br&auml;uchten &mdash; viral geteilte Bilder und Videos &mdash; verlieren ihn als Erstes. Ein einfacher Screenshot reicht, um jede C2PA-Signatur zu zerst&ouml;ren. Und Nikons Zertifikatsprogramm f&uuml;r Kameras musste nach einer Signing-Schwachstelle suspendiert werden &mdash; Stand April 2026 ist es noch nicht wiederhergestellt.</p>
+
+        <h2>Artikel&nbsp;50: Die Regulierung &uuml;berholt die Technik</h2>
+
+        <p>Der EU AI Act stellt Anbietern und Betreibern von KI-Systemen ab August 2026 klare Pflichten: Synthetische Inhalte m&uuml;ssen in einem &bdquo;effektiven, interoperablen, robusten und zuverl&auml;ssigen&ldquo; Format maschinenlesbar markiert werden. Deepfakes m&uuml;ssen als k&uuml;nstlich erzeugt offengelegt werden. KI-generierter Text, der die &Ouml;ffentlichkeit informiert, muss als solcher gekennzeichnet sein &mdash; mit einer Ausnahme f&uuml;r k&uuml;nstlerische, satirische und fiktionale Inhalte.</p>
+
+        <p>Der begleitende Code of Practice, ein freiwilliges Compliance-Instrument, dessen zweiter Entwurf Anfang 2026 ver&ouml;ffentlicht wurde, soll bis Juni 2026 finalisiert werden &mdash; zwei Monate vor dem Stichtag. F&uuml;r Unternehmen stellt sich eine unbequeme Frage: Wie erf&uuml;llt man eine Kennzeichnungs&shy;pflicht mit Technologien, deren Zuverl&auml;ssigkeit gerade &ouml;ffentlich in Frage gestellt wird?</p>
+
+        <p>Die regulatorische Herausforderung beschr&auml;nkt sich nicht auf Europa. Indien hat im Februar 2026 Regeln erlassen, die Plattformen verpflichten, synthetische Inhalte proaktiv zu erkennen und zu kennzeichnen. Die US-Midterm-Wahlen 2026 stehen bevor, und Deepfake-Werbung ist bereits im Einsatz. Das World Economic Forum warnte im M&auml;rz 2026, kognitive Manipulation und KI w&uuml;rden die Desinformation in diesem Jahr pr&auml;gen. Ein akademisches Paper bringt das Problem auf den Punkt: &bdquo;Watermarking Without Standards Is Not AI Governance&ldquo; &mdash; Wasserzeichen ohne verbindliche Standards sind kein Governance-Instrument.</p>
+
+        <h2>Der Liar&rsquo;s Dividend</h2>
+
+        <p>Jenseits der technischen Limitationen gibt es ein gesellschaftliches Problem, das Forscher als &bdquo;Liar&rsquo;s Dividend&ldquo; bezeichnen: Je mehr Menschen von der Existenz von Deepfakes wissen, desto einfacher wird es, echte Beweise als F&auml;lschung abzutun. Ein Politiker, der in einem kompromittierenden Video zu sehen ist, muss nur behaupten, es handle sich um einen Deepfake &mdash; und die blo&szlig;e M&ouml;glichkeit gen&uuml;gt, um Zweifel zu s&auml;en. In den USA wurden Deepfake-Behauptungen bereits in Gerichts&shy;verfahren als Verteidigungsstrategie eingesetzt.</p>
+
+        <p>Wasserzeichen und Content Credentials k&ouml;nnten dieses Problem theoretisch l&ouml;sen: Wenn ein Foto eine ungebrochene kryptographische Kette von der Kamera bis zur Ver&ouml;ffentlichung aufweist, ist es authentisch. Aber die Kette hat zu viele Schwachstellen. Und die Abwesenheit einer Signatur beweist nichts &mdash; sie kann durch Screenshot, Bearbeitung oder schlicht durch die Nutzung einer &auml;lteren Kamera ohne C2PA-Unterst&uuml;tzung fehlen.</p>
+
+        <h2>Der Weg nach vorn: Schichten statt Silberkugeln</h2>
+
+        <p>Die Experten, die sich am intensivsten mit dem Problem besch&auml;ftigen, sind sich in einem Punkt einig: Es gibt keine Einzell&ouml;sung. Die Zukunft liegt in einem mehrschichtigen Ansatz. Unsichtbare Wasserzeichen als erste Verteidigungslinie. C2PA-Metadaten f&uuml;r die kryptographische Provenance-Kette. Infrastruktur-Partner wie Cloudflare, die Signaturen bei der Auslieferung erhalten. Und Detektions&shy;modelle, die auch ohne Wasserzeichen synthetische Inhalte erkennen k&ouml;nnen.</p>
+
+        <p>F&uuml;r Unternehmen bedeutet das konkret: Wer KI-generierte Inhalte in seiner Kommunikation nutzt, sollte sich nicht auf eine einzelne Kennzeichnungs&shy;methode verlassen. Die C2PA-Integration in Produktionstools &mdash; von Adobe GenStudio &uuml;ber OpenAIs DALL-E&nbsp;3 bis zu Googles Gemini &mdash; ist ein pragmatischer erster Schritt. Wichtiger als die Wahl der Technologie ist die organisatorische Disziplin: Wer erstellt welche Inhalte, mit welchen Werkzeugen, und wo in der Distribution geht die Herkunfts&shy;information verloren?</p>
+
+        <p>Alosh Dennys SynthID-Bypass war kein Angriff &mdash; er bezeichnet sein Projekt ausdr&uuml;cklich als Forschungsarbeit. Aber er hat die unbequemste Frage der digitalen Authentizit&auml;t beantwortet, bevor die Regulierer sie gestellt hatten: Was passiert, wenn die unsichtbare Markierung sichtbar wird? Die Antwort: Sie verschwindet. Und mit ihr ein St&uuml;ck des Vertrauens, auf dem die gesamte Architektur aufbaut.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://github.com/aloshdenny/reverse-SynthID" rel="noopener noreferrer external">GitHub: reverse-SynthID &mdash; Quellcode und technische Dokumentation</a></li>
+            <li><a href="https://www.medianama.com/2026/04/223-google-gemini-synthid-ai-watermark-bypass/" rel="noopener noreferrer external">Medianama: GitHub Tool Bypasses Google SynthID AI Watermark</a></li>
+            <li><a href="https://www.nature.com/articles/s41586-024-08025-4" rel="noopener noreferrer external">Nature: Scalable watermarking for identifying large language model outputs</a></li>
+            <li><a href="https://www.nature.com/articles/d41586-024-03418-x" rel="noopener noreferrer external">Nature Editorial: AI watermarking must be watertight</a></li>
+            <li><a href="https://artificialintelligenceact.eu/article/50/" rel="noopener noreferrer external">EU AI Act, Artikel 50: Transparenzpflichten f&uuml;r KI-generierte Inhalte</a></li>
+            <li><a href="https://www.kennedyslaw.com/en/thought-leadership/article/2026/the-eu-ai-act-s-draft-code-of-practice-on-marking-and-labelling-of-ai-generated-content-what-providers-and-deployers-need-to-know/" rel="noopener noreferrer external">Kennedys Law: Draft Code of Practice on Marking and Labelling</a></li>
+            <li><a href="https://blog.cloudflare.com/preserve-content-credentials-with-cloudflare-images/" rel="noopener noreferrer external">Cloudflare Blog: Preserve Content Credentials</a></li>
+            <li><a href="https://contentauthenticity.org/blog/5000-members-building-momentum-for-a-more-trustworthy-digital-world" rel="noopener noreferrer external">Content Authenticity Initiative: 5,000+ Members</a></li>
+            <li><a href="https://eu.detroitnews.com/story/news/politics/2026/03/28/deepfake-ads-midterm-election-artifical-intelligence-ai-2026/89361534007/" rel="noopener noreferrer external">Detroit News: Deepfake Ads in 2026 Midterms</a></li>
+            <li><a href="https://arxiv.org/html/2505.23814v1" rel="noopener noreferrer external">arXiv: Watermarking Without Standards Is Not AI Governance</a></li>
+            <li><a href="https://spectrum.ieee.org/meta-ai-watermarks" rel="noopener noreferrer external">IEEE Spectrum: Meta&rsquo;s AI Watermarks Are &bdquo;Flimsy at Best&ldquo;</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
