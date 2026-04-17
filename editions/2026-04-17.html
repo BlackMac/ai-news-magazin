@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 17. April 2026</title>    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        /* ═══════════════════════════════════════════════
+           AI NEWS MAGAZIN — READABILITY-FIRST REDESIGN
+           ═══════════════════════════════════════════════ */
+
+        :root {
+            /* Fonts */
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+            /* Type Scale (Major Third 1.25) */
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Content Widths */
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+
+            /* Light Mode Colors */
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+
+            color-scheme: light dark;
+        }
+
+        /* Dark Mode — via class or system preference */
+        [data-theme="dark"] {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Reset */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        /* ── Skip Link ─────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ── Focus ──────────────────────────────────── */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* ── Links ──────────────────────────────────── */
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        /* ── Site Header / Masthead ─────────────────── */
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        /* ── Edition Header ─────────────────────────── */
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        /* ── Main Content ──────────────────────────── */
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        /* ── Table of Contents ─────────────────────── */
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        /* Active state (set by Intersection Observer) */
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Special sections separator */
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        /* ── Article ───────────────────────────────── */
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ── Analysis Body ─────────────────────────── */
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+
+            /* German hyphenation */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p {
+            margin: 0 0 1.2em;
+        }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        /* ── Sources ───────────────────────────────── */
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a {
+            color: var(--text-muted);
+        }
+        .sources a:hover { color: var(--link-hover); }
+
+        /* ── Section Dividers ──────────────────────── */
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        /* ── Reportage Teaser ──────────────────────── */
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 {
+            font-size: var(--text-2xl);
+        }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* ── Tool Radar ────────────────────────────── */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        /* ── YouTube / Werkstatt ───────────────────── */
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        /* ── Footer ────────────────────────────────── */
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        /* ── Visually Hidden ───────────────────────── */
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Scroll Margin for Anchors (sticky header offset) ── */
+        [id] { scroll-margin-top: 4.5rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            body { font-size: 1.1875rem; }
+        }
+
+        @media (min-width: 1280px) {
+            body { font-size: 1.25rem; }
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        /* ── Text Wrap ─────────────────────────────── */
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+        </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<!-- ═══ SITE HEADER ═══ -->
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ═══ EDITION HEADER ═══ -->
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-17">Freitag, 17. April 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 17. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main id="main-content" class="site-main">
+
+    <!-- ── Inhaltsverzeichnis ── -->
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">KI-Modelle &middot; Anthropic</span><span class="toc-title">Claude Opus 4.7: Das neue Flaggschiff, das Anweisungen w&ouml;rtlich nimmt</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">KI-Entwicklung &middot; OpenAI</span><span class="toc-title">OpenAI kontert: Codex &uuml;bernimmt den Mac &mdash; parallel, im Hintergrund</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">KI &amp; Wirtschaft</span><span class="toc-title">Anthropic plant Design-Tool: Figma verliert Boardmitglied und 6&nbsp;% Kurs</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">KI-Politik &middot; UK</span><span class="toc-title">Gro&szlig;britannien startet 500-Millionen-Pfund-Fonds f&uuml;r souver&auml;ne KI</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Robotik</span><span class="toc-title">Physical Intelligence &pi;0.7: Ein Roboterhirn, das improvisiert</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">KI-Infrastruktur</span><span class="toc-title">TSMC: Rekordgewinn +58&nbsp;%, 2nm ausgebucht &mdash; KI-Nachfrage &bdquo;extrem robust&ldquo;</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Souver&auml;ne KI &mdash; Europas verspäteter Wettlauf</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ═══ LEITARTIKEL ═══ -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">KI-Modelle &middot; Anthropic</div>
+            <h2 id="art-1-h">Claude Opus 4.7: Das neue Flaggschiff, das Anweisungen w&ouml;rtlich nimmt</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: Anthropic, heise online, VentureBeat, The Decoder, llm-stats</div>
+        </header>
+        <p class="article-teaser">Anthropic hat mit Opus&nbsp;4.7 ein neues Spitzenmodell freigegeben. Der auff&auml;lligste Fortschritt steckt nicht in einem Benchmark, sondern in einer Charaktereigenschaft: Das Modell befolgt Anweisungen nun &bdquo;substanziell besser&ldquo; &mdash; wortw&ouml;rtlich und ohne eigenm&auml;chtige Interpretationen. F&uuml;r Entwickler bedeutet das: Alte Prompts funktionieren teilweise nicht mehr.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am sp&auml;ten Nachmittag des 16.&nbsp;April ver&ouml;ffentlichte Anthropic Opus&nbsp;4.7 als allgemein verf&uuml;gbares Modell. Die Preise bleiben gegen&uuml;ber Opus&nbsp;4.6 unver&auml;ndert bei 5&nbsp;Dollar pro Million Input-Token und 25&nbsp;Dollar pro Million Output-Token, das Kontextfenster betr&auml;gt eine Million Token, das Modell ist sofort auf Claude.ai, &uuml;ber die API, Amazon Bedrock, Google Vertex AI, Microsoft Foundry und Snowflake Cortex verf&uuml;gbar.</p>
+
+            <p>In den Benchmarks legt Opus&nbsp;4.7 deutlich zu. Auf SWE-bench Pro, das reale Software-Engineering-Aufgaben testet, erreicht das Modell laut llm-stats 64,3&nbsp;Prozent &mdash; ein Sprung gegen&uuml;ber 53,4&nbsp;Prozent bei Opus&nbsp;4.6, vor GPT-5.4 (57,7&nbsp;Prozent) und Gemini&nbsp;3.1 Pro (54,2&nbsp;Prozent). Auf SWE-bench Verified klettert der Wert von 80,8 auf 87,6&nbsp;Prozent, Terminal-Bench&nbsp;2.0 steigt von 65,4 auf 69,4&nbsp;Prozent. OSWorld-Verified (78&nbsp;Prozent) und MCP-Atlas (77,3&nbsp;Prozent) zeigen st&auml;rkere Werkzeugnutzung. Die Bildverarbeitung akzeptiert nun Bildkanten bis 2.576&nbsp;Pixel &mdash; das Dreifache des Vorg&auml;ngers. Anthropic selbst nennt Opus&nbsp;4.7 &bdquo;state-of-the-art&ldquo; f&uuml;r Coding und Long-Context-Aufgaben.</p>
+
+            <p>Der eigentliche Paradigmenwechsel steckt im Namen des Release: &bdquo;substanziell besser bei der Befolgung von Anweisungen&ldquo;. Opus&nbsp;4.6 war bekannt daf&uuml;r, Prompts proaktiv umzuinterpretieren &mdash; wenn etwa ein Entwickler bat, eine Funktion zu l&ouml;schen, r&auml;umte das Modell mit oft auch verwandten Code auf. Opus&nbsp;4.7 tut das nicht mehr. Anthropic weist explizit darauf hin, dass bestehende Prompts &bdquo;unerwartete Ergebnisse&ldquo; liefern k&ouml;nnen und &uuml;berarbeitet werden m&uuml;ssen. In der Community auf Hacker News wird das gemischt aufgenommen: W&ouml;rtlichkeit erh&ouml;ht die Verl&auml;sslichkeit f&uuml;r Agenten-Workflows, verringert aber die &bdquo;magische&ldquo; Erfahrung, wenn ein Modell Zusammenh&auml;nge eigenst&auml;ndig erkennt.</p>
+
+            <p>Opus&nbsp;4.7 tritt in ein spezielles Verh&auml;ltnis zu Anthropics Mythos-Preview, dem Cyber-Security-Modell, das wir in unserer <a href="2026-04-08.html#art-1">Ausgabe vom 8.&nbsp;April</a> vorstellten. Anthropic hat Opus&nbsp;4.7 bewusst schw&auml;cher bei offensiven Cyberaufgaben trainiert (&bdquo;differentially reduce these capabilities&ldquo;) und zus&auml;tzliche Safeguards eingebaut. Die Botschaft: Opus ist das Arbeitspferd f&uuml;r breite Anwendung, Mythos bleibt elitenzug&auml;nglich. VentureBeat titelt &bdquo;narrowly retaking lead for most powerful generally available LLM&ldquo; &mdash; eine typisch amerikanische Formulierung f&uuml;r: Das Modell ist knapp vorn, aber Anthropic r&auml;umt selbst ein, dass Mythos intern st&auml;rker ist.</p>
+
+            <p>F&uuml;r Entwickler &auml;ndern sich zwei Details, die nicht in den Pressemitteilungen stehen, aber in der Praxis Wirkung entfalten. Erstens nutzt Opus&nbsp;4.7 einen neuen Tokenizer, der je nach Text bis zu 1,35-mal mehr Tokens erzeugt als der Vorg&auml;nger &mdash; die effektiven Kosten steigen damit trotz gleichem Pro-Token-Preis. Zweitens ist das &bdquo;Adaptive Thinking&ldquo; standardm&auml;&szlig;ig aktiv: Das Modell entscheidet selbst, ob es ausf&uuml;hrlich denkt oder nicht. Wer die Gedankenspur sehen will, muss <code>display:&nbsp;summarized</code> setzen. GitHub Copilot berechnet Opus&nbsp;4.7 mit 7,5&nbsp;Premium-Requests pro Aufruf &mdash; ein Aufschlag, der zu kontroversen Diskussionen in der Developer-Community f&uuml;hrt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.anthropic.com/news/claude-opus-4-7" rel="noopener noreferrer external">Anthropic &mdash; Introducing Claude Opus 4.7</a></li>
+                <li><a href="https://www.heise.de/news/Befolgt-Anweisungen-substanziell-besser-Anthropic-gibt-Opus-4-7-frei-11261267.html" rel="noopener noreferrer external">heise online &mdash; Anthropic gibt Opus 4.7 frei</a></li>
+                <li><a href="https://venturebeat.com/technology/anthropic-releases-claude-opus-4-7-narrowly-retaking-lead-for-most-powerful-generally-available-llm" rel="noopener noreferrer external">VentureBeat &mdash; Anthropic Releases Claude Opus 4.7</a></li>
+                <li><a href="https://llm-stats.com/blog/research/claude-opus-4-7-launch" rel="noopener noreferrer external">llm-stats &mdash; Claude Opus 4.7 Benchmark-Launch</a></li>
+                <li><a href="https://the-decoder.com/anthropics-claude-opus-4-7-makes-a-big-leap-in-coding-while-deliberately-scaling-back-cyber-capabilities/" rel="noopener noreferrer external">The Decoder &mdash; Big Leap in Coding, Scaled-Back Cyber</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 2 ═══ -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">KI-Entwicklung &middot; OpenAI</div>
+            <h2 id="art-2-h">OpenAI kontert: Codex &uuml;bernimmt den Mac &mdash; parallel, im Hintergrund</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: TechCrunch, VentureBeat, The New Stack, OpenAI Blog</div>
+        </header>
+        <p class="article-teaser">W&auml;hrend Anthropic Opus&nbsp;4.7 ver&ouml;ffentlicht, dreht OpenAI am selben Tag den n&auml;chsten Angriff auf Claude Code: Codex steuert jetzt Desktop-Apps, &ouml;ffnet Fenster, klickt und tippt &mdash; parallel, im Hintergrund, ohne den aktiven Nutzer auszubremsen. Dazu kommen Memory, ein integrierter Browser und 90+ Plugin-Integrationen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der zeitliche Zufall k&ouml;nnte passender nicht sein. Noch am selben 16.&nbsp;April, an dem Anthropic Opus&nbsp;4.7 freigab, rollte OpenAI ein gro&szlig;es Update seiner Codex-Desktop-App aus. Das Leitfeature: <em>Computer Use</em>. Codex kann Desktop-Anwendungen &ouml;ffnen, mit einem eigenen Cursor klicken, Text eintippen und mehrere Aufgaben parallel bearbeiten. Laut OpenAI l&auml;uft das Ganze im Hintergrund, ohne dass der Mac blockiert wird &mdash; ein Vorteil gegen&uuml;ber Anthropics Computer-Use-Research-Preview, bei dem der Rechner w&auml;hrend der Agent-Aktion praktisch gesperrt ist. Intern nutzt OpenAI das Feature bereits f&uuml;r Qualit&auml;tssicherung.</p>
+
+            <p>Neu sind au&szlig;erdem: Ein integrierter <em>Atlas</em>-Browser, in dem Codex einzelne DOM-Elemente kommentieren und sp&auml;ter ganze Web-Anwendungen steuern k&ouml;nnen soll. Ein <em>Memory</em>-System, das sich &uuml;ber Sessions hinweg den Tech-Stack, Workflows und Pr&auml;ferenzen merkt. <em>Multi-Agent-Workflows</em>, in denen spezialisierte Agenten f&uuml;r Schreiben, Debugging und Testing parallel laufen. Und <em>Heartbeat Automations</em>: Codex kann sich selbst zuk&uuml;nftige Aufgaben schedulen und tagelange Vorhaben wiederaufnehmen. Dazu ein eingebauter Bildgenerator (gpt-image-1.5), 90+ Plugin-Integrationen von Atlassian Rovo &uuml;ber CircleCI und CodeRabbit bis GitLab, Microsoft Suite und Neon.</p>
+
+            <p>Der Haken f&uuml;r europ&auml;ische Entwickler: Computer Use und Memory sind zum Launch <strong>nicht</strong> in der EU und in Gro&szlig;britannien verf&uuml;gbar. OpenAI begr&uuml;ndet das nicht explizit, Branchenkenner vermuten DSA- und AI-Act-Unsicherheiten. Wer heute produktiv in der EU mit autonomen Desktop-Agenten arbeiten will, muss weiter auf Claude Code oder alternative Harnesses ausweichen &mdash; ein nicht zu untersch&auml;tzender Nachteil im Wettbewerb um Software-Engineering-Produktivit&auml;t.</p>
+
+            <p>Die Nutzerzahlen zeigen, warum OpenAI diesen Push unternimmt. Anfang April verk&uuml;ndete Sam Altman 3&nbsp;Millionen w&ouml;chentliche Codex-Nutzer und setzte aus diesem Anlass die Nutzungslimits zur&uuml;ck &mdash; ein Geschenk, das OpenAI bei jeder weiteren Millionen-Marke bis 10&nbsp;Millionen wiederholen will. Intern nutzen laut The New Stack bereits 80&nbsp;Prozent aller OpenAI-Mitarbeitenden Codex. Das Unternehmen baut aus der Desktop-App systematisch eine &bdquo;Super-App&ldquo;, wie The New Stack es nennt &mdash; eine einzige Schaltzentrale f&uuml;r alles, was fr&uuml;her in separaten Tools stattfand: IDE, Terminal, Browser, Projektmanagement.</p>
+
+            <p>Pikant: Codex und Claude Code werden von TechCrunch explizit als Konkurrenten um denselben Markt beschrieben, aber gleichzeitig existiert ein offizielles Codex-Plugin f&uuml;r Claude Code. Die Tools interoperieren auf technischer Ebene, w&auml;hrend ihre Anbieter sich medial bek&auml;mpfen &mdash; ein typisches Muster der aktuellen KI-Entwicklungsphase. F&uuml;r Teams bedeutet das: Vendor-Lock-in l&auml;sst sich durch Harnesses wie OpenRouter, LiteLLM oder gen-lock-freie Agent-Frameworks heute weitgehend vermeiden. Wer direkt auf OpenAI-SDK oder Anthropic-SDK baut, zahlt sp&auml;ter h&ouml;here Switching-Kosten.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/16/openai-takes-aim-at-anthropic-with-beefed-up-codex-that-gives-it-more-power-over-your-desktop/" rel="noopener noreferrer external">TechCrunch &mdash; OpenAI Takes Aim at Anthropic with Beefed-Up Codex</a></li>
+                <li><a href="https://venturebeat.com/technology/openai-drastically-updates-codex-desktop-app-to-use-all-other-apps-on-your-computer-generate-images-preview-webpages" rel="noopener noreferrer external">VentureBeat &mdash; OpenAI Drastically Updates Codex Desktop</a></li>
+                <li><a href="https://thenewstack.io/openais-superapp-takes-shape/" rel="noopener noreferrer external">The New Stack &mdash; OpenAI&rsquo;s Super-App Takes Shape</a></li>
+                <li><a href="https://www.theverge.com/tech/913308/openai-codex-big-update-desktop-app-direct-shot-at-claude-code" rel="noopener noreferrer external">The Verge &mdash; OpenAI&rsquo;s Big Codex Update is a Direct Shot at Claude Code</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 3 ═══ -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">KI &amp; Wirtschaft</div>
+            <h2 id="art-3-h">Anthropic plant Design-Tool: Figma verliert Boardmitglied und 6&nbsp;% Kurs</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: TechCrunch, The Information, CNBC, Simply Wall St</div>
+        </header>
+        <p class="article-teaser">Mike Krieger, Chief Product Officer bei Anthropic und Instagram-Co-Gr&uuml;nder, verl&auml;sst den Figma-Vorstand. Der Grund: Opus&nbsp;4.7 kommt nicht nur als Modell &mdash; Anthropic liefert parallel ein AI-Design-Tool aus, das Websites, Landing Pages und Pr&auml;sentationen aus nat&uuml;rlicher Sprache generiert. Figma, Adobe, Wix und Canva geraten zeitgleich unter Druck.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die SEC-Einreichung datiert auf den 14.&nbsp;April, ver&ouml;ffentlicht wurde die Nachricht am 16.&nbsp;April von TechCrunch. Mike Krieger, seit Mai&nbsp;2024 Chief Product Officer bei Anthropic, trat mit sofortiger Wirkung aus dem Figma-Board zur&uuml;ck, dem er gemeinsam mit Duolingo-CEO Luis von Ahn keine zw&ouml;lf Monate angeh&ouml;rt hatte. Figmas offizielle Begr&uuml;ndung &mdash; &bdquo;nicht aufgrund von Meinungsverschiedenheiten&ldquo; &mdash; ist die diplomatische Formel f&uuml;r einen klassischen Interessenkonflikt. Krieger hatte als Boardmitglied Einblick in Figmas strategische Roadmap, w&auml;hrend Anthropic im Stillen an einem Konkurrenzprodukt arbeitete.</p>
+
+            <p>Dieses Produkt leakte The Information am 14.&nbsp;April: Opus&nbsp;4.7 werde mit einem eigenst&auml;ndigen AI-Design-Tool ausgeliefert, das Websites, Landing Pages, Pr&auml;sentationen und Prototypen aus natursprachigen Prompts generiert. Zielgruppe sind ausdr&uuml;cklich auch Nicht-Designer. Anthropic positioniert sich damit frontal gegen Figma, Adobe, Wix, GoDaddy, Gamma, Canva und Googles Stitch. Kein Assistenz-Werkzeug f&uuml;r existierende Designer, sondern ein Ersatz f&uuml;r den Start-Workflow.</p>
+
+            <p>Die Markt-Reaktion war unmissverst&auml;ndlich. Figma verlor am Tag der Ger&uuml;chte rund 6&nbsp;Prozent, Adobe, Wix und GoDaddy mehr als 2&nbsp;Prozent. Nach Kriegers Austritt erholte sich Figma wieder um 5&nbsp;Prozent &mdash; Erleichterung &uuml;ber die saubere Trennung. Analysten sprechen von einer zweiten Welle des &bdquo;SaaSpocalypse&ldquo;, einer These, die im Februar&nbsp;2026 nach dem Launch von Claude Cowork Karriere machte und seither die Q1-Bewertungen im B2B-SaaS-Sektor pr&auml;gt: Wenn ein Foundation-Model-Anbieter beschlie&szlig;t, vertikal in einen SaaS-Markt hineinzuwachsen, sind die etablierten Spieler strukturell angreifbar &mdash; nicht weil das erste KI-Tool das beste ist, sondern weil das Modell selbst den Wettbewerbsvorteil darstellt.</p>
+
+            <p>Figma-CEO Dylan Field hat im Februar, als Figma und Anthropic noch die &bdquo;Code to Canvas&ldquo;-Partnerschaft verk&uuml;ndeten, eine defensive Positionierung formuliert: &bdquo;In a world where AI can help build any possibility you can articulate, your core work is to find the best possible solutions in a nearly infinite possibility space.&ldquo; Design werde zur Kunst der kuratorischen Auswahl aus einem unendlichen M&ouml;glichkeitsraum. Ob Geschmack und redaktionelles Urteilsverm&ouml;gen ausreichen, um ein Tool wie Figma gegen Modelle zu verteidigen, die selbst Alternativen generieren k&ouml;nnen, ist die offene Frage dieses Jahres. Kriegers Austritt zeigt zumindest: Auch Figmas Board glaubt nicht mehr an Koexistenz auf gleicher Augenh&ouml;he.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/16/anthropic-cpo-leaves-figmas-board-after-reports-he-will-offer-a-competing-product/" rel="noopener noreferrer external">TechCrunch &mdash; Anthropic CPO Leaves Figma&rsquo;s Board</a></li>
+                <li><a href="https://www.theinformation.com/briefings/exclusive-anthropic-preps-opus-4-7-model-ai-design-tool" rel="noopener noreferrer external">The Information &mdash; Anthropic Preps Opus 4.7 and AI Design Tool</a></li>
+                <li><a href="https://www.cnbc.com/2026/02/17/figma-anthropic-ai-code-designs.html" rel="noopener noreferrer external">CNBC &mdash; Figma Partners with Anthropic on Code-to-Canvas</a></li>
+                <li><a href="https://simplywall.st/stocks/us/software/nyse-fig/figma/news/krieger-exit-puts-figma-board-oversight-and-valuation-discou" rel="noopener noreferrer external">Simply Wall St &mdash; Krieger Exit Puts Figma Board Oversight in Focus</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 4 ═══ -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">KI-Politik &middot; UK</div>
+            <h2 id="art-4-h">Gro&szlig;britannien startet 500-Millionen-Pfund-Fonds f&uuml;r souver&auml;ne KI</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: GOV.UK, Wired, Bloomberg, CNBC</div>
+        </header>
+        <p class="article-teaser">Eine Woche nachdem OpenAI das Stargate-UK-Projekt pausierte, reagiert die britische Regierung: Ein 500-Millionen-Pfund-Fonds (rund 675&nbsp;Mio. Dollar) f&uuml;r sieben erste KI-Startups. Anthropic unterschreibt parallel einen B&uuml;rovertrag f&uuml;r bis zu 800&nbsp;Mitarbeitende in London &mdash; eine Vervierfachung der aktuellen Belegschaft.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 16.&nbsp;April startete das britische Department for Science, Innovation and Technology (DSIT) eine neue &bdquo;Sovereign AI Unit&ldquo; mit einem Volumen von 500&nbsp;Millionen Pfund. An der Spitze steht <strong>James Wise</strong>, Partner beim Londoner VC Balderton &mdash; er beh&auml;lt seinen VC-Job und signalisiert damit den ungew&ouml;hnlichen Betriebsmodus der Einheit: Sie soll mit dem Tempo eines Wagniskapitalgebers arbeiten, nicht mit dem einer Beh&ouml;rde. Das Instrumentarium ist drei-teilig: direkte Eigenkapitalbeteiligungen, Compute-Gutscheine von bis zu einer Million GPU-Stunden pro Startup &uuml;ber die staatliche AI Research Resource, sowie schnelle Visa und Zugang zu Regierungsdaten.</p>
+
+            <p>Die erste Kohorte umfasst sieben Unternehmen, von denen nur eines &mdash; <em>Callosum</em>, ein Londoner Infrastruktur-Startup f&uuml;r Multi-Chip-Architekturen &mdash; eine direkte Kapitalbeteiligung erh&auml;lt. Die anderen sechs bekommen Compute-Zugang: <em>Prima Mente</em> (Foundation-Modelle f&uuml;r Hirnerkrankungen), <em>Cosine</em> (On-Prem-Coding-Agent f&uuml;r Verteidigung), <em>Cursive</em> (Infrastruktur), <em>Doubleword</em> (Inferenz und Governance), <em>Twig Bio</em> (Foundation-Modell f&uuml;r Biomanufacturing) und <em>Odyssey</em> (World Models f&uuml;r Verteidigung und Autonomie). Weitere 30 Unternehmen werden laut DSIT verhandelt.</p>
+
+            <p>Der Kontext ist direkter, als es in offiziellen Verlautbarungen wirken soll. Am 9.&nbsp;April pausierte OpenAI das Stargate-UK-Projekt (urspr&uuml;nglich 8.000 GPUs, skalierbar auf 31.000) wegen hoher Energiepreise und dem Zur&uuml;ckziehen einer geplanten Copyright-Ausnahme f&uuml;r KI-Training. AI-Minister Kanishka Narayan widersprach OpenAI in Bloomberg-Interviews: An den Energiekosten habe sich gegen&uuml;ber dem Vertragsschluss nichts ge&auml;ndert. Eine Woche sp&auml;ter antwortet die Regierung mit dem Sovereign-AI-Fonds &mdash; eine Mischung aus Trotzreaktion und strategischem Pivot weg von der Abh&auml;ngigkeit von US-Hyperscalern.</p>
+
+            <p>Parallel meldet Anthropic: Das Unternehmen hat im Londoner Knowledge Quarter ein B&uuml;ro f&uuml;r bis zu 800&nbsp;Mitarbeiter angemietet &mdash; eine Vervierfachung der aktuellen rund 200&nbsp;UK-Kr&auml;fte, von denen etwa 60 Sicherheitsforscher sind. Das Timing ist politisch abgestimmt und signalisiert, dass Starmer und Kendall trotz des Stargate-D&auml;mpfers weiterhin AI-Champions anziehen k&ouml;nnen. Die Rolle Gro&szlig;britanniens als dritter Pol neben USA und EU wird damit greifbarer. Welche praktischen Implikationen sich f&uuml;r Unternehmen ergeben &mdash; und was Europa dagegensetzt &mdash; beleuchten wir ausf&uuml;hrlich in unserer <a href="reportagen/2026-04-17.html">Reportage dieser Ausgabe</a>.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.gov.uk/government/news/ai-firms-pioneering-drug-discovery-cheaper-supercomputing-and-more-get-first-backing-through-uks-sovereign-ai" rel="noopener noreferrer external">GOV.UK &mdash; UK&rsquo;s Sovereign AI Unit Launch</a></li>
+                <li><a href="https://www.wired.com/story/the-uk-launches-its-dollar675-million-sovereign-ai-fund/" rel="noopener noreferrer external">Wired &mdash; The UK Launches Its $675 Million Sovereign AI Fund</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-16/uk-ai-minister-hits-back-at-openai-for-pausing-stargate-project" rel="noopener noreferrer external">Bloomberg &mdash; UK AI Minister Hits Back at OpenAI</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/16/anthropic-london-office-800-staff-openai-expansion.html" rel="noopener noreferrer external">CNBC &mdash; Anthropic London Office Expansion</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 5 ═══ -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Robotik</div>
+            <h2 id="art-5-h">Physical Intelligence &pi;0.7: Ein Roboterhirn, das improvisiert</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: TechCrunch, Physical Intelligence, Bloomberg, arXiv</div>
+        </header>
+        <p class="article-teaser">Das Robotik-Startup Physical Intelligence hat sein neues Foundation-Modell &pi;0.7 vorgestellt. Die Kernf&auml;higkeit: Der Roboter kombiniert Fragmente aus verschiedenen Trainingskontexten zu neuen Aufgaben, die er nie gelernt hat &mdash; und l&auml;sst sich durch nat&uuml;rliche Sprache wie ein Lehrling coachen. Die Bewertung der Firma: rund 11&nbsp;Milliarden Dollar.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das Startup Physical Intelligence, gegr&uuml;ndet 2024 in San Francisco von Karol Hausman (Ex-Google-DeepMind), Sergey Levine (UC Berkeley) und Chelsea Finn (Stanford), verfolgt eine bewusst hardwareneutrale Strategie: Statt eigene Roboter zu bauen, entwickelt das Unternehmen Foundation-Modelle, die auf jeder Plattform laufen &mdash; von Franka-Armen &uuml;ber ALOHA-Doppelarm-Setups bis zu mobilen Manipulatoren. Laut Bloomberg und TechCrunch befindet sich Physical Intelligence gerade in Gespr&auml;chen f&uuml;r eine neue Finanzierungsrunde bei einer Bewertung von rund 11&nbsp;Milliarden Dollar, nachdem die Vorgehensrunde mit 5,6&nbsp;Milliarden abgeschlossen wurde.</p>
+
+            <p>Das am 16.&nbsp;April vorgestellte &pi;0.7 ist das dritte Modell der Reihe nach &pi;0 und &pi;0.5. Der Begriff, den die Firma f&uuml;r den Fortschritt w&auml;hlt, lautet &bdquo;compositional generalization&ldquo; &mdash; zu deutsch etwa: kombinatorische Verallgemeinerung. Gemeint ist ein Szenario, das die bisherigen VLA-Modelle (Vision-Language-Action) &uuml;berforderte: Der Roboter bekommt eine Aufgabe, f&uuml;r die im Trainingsdatensatz nur einzelne, isolierte Fragmente existieren, und muss diese sinnvoll kombinieren.</p>
+
+            <p>Ein Beispiel aus der Demonstration: Ein Air-Fryer-Task &mdash; der Roboter soll eine S&uuml;&szlig;kartoffel in einer Hei&szlig;luftfritteuse zubereiten. Im Trainingsdatensatz gab es genau zwei relevante Fragmente: einmal eine Klappe schlie&szlig;en, einmal eine Flasche abstellen. Daraus plus allgemeinem Web-Vorwissen soll der Roboter nun eine l&auml;ngere Sequenz bew&auml;ltigen. Die Erfolgsquote beim ersten Versuch: magere 5&nbsp;Prozent. Wenn der Roboter aber schrittweise sprachlich angeleitet wird &mdash; &bdquo;&Ouml;ffne die Klappe&ldquo;, &bdquo;Lege die Kartoffel hinein&ldquo;, &bdquo;Schlie&szlig;e die Klappe&ldquo; &mdash; steigt die Erfolgsrate auf 95&nbsp;Prozent. Der Roboter wird gewisserma&szlig;en zum Lehrling, der kein neues Training braucht, sondern gute Anweisungen.</p>
+
+            <p>Die Grenzen sind klar benannt und sollten nicht &uuml;bersehen werden. Karol Hausman sagt gegen&uuml;ber TechCrunch: &bdquo;You can&rsquo;t tell it, &lsquo;Hey, go make me some toast.&rsquo;&ldquo; Autonome Multi-Schritt-Aufgaben ohne menschliche F&uuml;hrung gelingen noch nicht. Und im Gegensatz zu &pi;0 und &pi;0.5, die Physical Intelligence im Februar 2025 als openpi-Projekt auf GitHub unter einer offenen Lizenz ver&ouml;ffentlichte, gibt es f&uuml;r &pi;0.7 vorerst keinen Open-Source-Plan. Wer das Modell haben will, wird auf Lizenzdeals und Partnerschaften angewiesen sein &mdash; eine Entwicklung, die die Robotik-Community aufmerksam beobachtet. F&uuml;r Industriekunden ist die Botschaft dennoch klar: Die n&auml;chste Generation von Warehouse- und Manufacturing-Robotern wird nicht mehr f&uuml;r jede Task neu programmiert, sondern angelernt wie ein Auszubildender.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/16/physical-intelligence-a-hot-robotics-startup-says-its-new-robot-brain-can-figure-out-tasks-it-was-never-taught/" rel="noopener noreferrer external">TechCrunch &mdash; Physical Intelligence &pi;0.7 Announcement</a></li>
+                <li><a href="https://www.pi.website/blog" rel="noopener noreferrer external">Physical Intelligence &mdash; Offizielles Blog</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-03-27/ex-deepmind-staffers-robotics-startup-in-talks-for-11-billion-valuation" rel="noopener noreferrer external">Bloomberg &mdash; PI in Talks for $11B Valuation</a></li>
+                <li><a href="https://github.com/Physical-Intelligence/openpi" rel="noopener noreferrer external">GitHub &mdash; openpi Repository (&pi;0 / &pi;0.5)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ ARTIKEL 6 ═══ -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">KI-Infrastruktur</div>
+            <h2 id="art-6-h">TSMC: Rekordgewinn +58&nbsp;%, 2nm ausgebucht &mdash; KI-Nachfrage &bdquo;extrem robust&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-04-16">16. April 2026</time> &middot; Quellen: TSMC, CNBC, DataCenterDynamics, TrendForce, heise online</div>
+        </header>
+        <p class="article-teaser">Der taiwanische Chipauftragsfertiger TSMC meldet f&uuml;r das erste Quartal 2026 einen Umsatz von 35,7&nbsp;Milliarden Dollar (+35&nbsp;Prozent) und einen Nettogewinn von 18&nbsp;Milliarden Dollar (+58&nbsp;Prozent). CEO C.C. Wei bezeichnet die KI-Nachfrage als &bdquo;extrem robust&ldquo;. Der Iran-Konflikt erzeugt bisher keine Delle &mdash; wohl aber Helium-Engp&auml;sse und H&ouml;chstrisiken im H2.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>TSMC ver&ouml;ffentlichte die Zahlen am 16.&nbsp;April vor B&ouml;rsenbeginn in Taipeh. Der Umsatz lag bei 1,134 Billionen neuen Taiwan-Dollar, umgerechnet 35,71&nbsp;Mrd. US-Dollar und damit am oberen Ende der eigenen Prognose. Das Plus gegen&uuml;ber dem Vorjahresquartal betr&auml;gt 35,1&nbsp;Prozent. Der Nettogewinn stieg sogar um 58,3&nbsp;Prozent auf 18&nbsp;Milliarden Dollar &mdash; die vierte Rekordquartalsmeldung in Folge. Bruttomarge 66,2&nbsp;Prozent, operative Marge 58,1&nbsp;Prozent, beide &uuml;ber der eigenen Guidance. F&uuml;r das Gesamtjahr 2026 hebt TSMC die Umsatzprognose auf &uuml;ber 30&nbsp;Prozent Wachstum an &mdash; vorher waren es &bdquo;mid-20s&ldquo;.</p>
+
+            <p>Der Treiber ist eindeutig: das HPC-Segment (High Performance Computing, de facto KI und Cloud) macht 61&nbsp;Prozent des Quartalsumsatzes aus und w&auml;chst 20&nbsp;Prozent zum Vorquartal. Smartphones, fr&uuml;her TSMCs Zugpferd, schrumpfen um 11&nbsp;Prozent auf 26&nbsp;Prozent Anteil. Die Hauptkunden hinter dieser Verschiebung sind NVIDIA mit der Blackwell- und kommenden Rubin-Generation, AMD mit der MI-Serie, Broadcom mit Custom-ASICs f&uuml;r Hyperscaler und Apple mit den A20-Chips. Advanced Nodes (7nm und feiner) machen mittlerweile drei Viertel des Wafer-Umsatzes aus.</p>
+
+            <p>C.C. Weis zentrale Aussagen im Earnings Call waren knapp und un&uuml;blich konfident: KI-Nachfrage &bdquo;extrem robust&ldquo;, man sei im &bdquo;multi-year AI megatrend&ldquo;, die Nachfrage &uuml;bersteige das Angebot weiterhin deutlich. Die 2-nm-Produktion l&auml;uft in mehreren Wellen in Hsinchu und Kaohsiung hoch und ist bis Ende 2026 ausgebucht. Ein Wafer in 2nm kostet laut TrendForce &uuml;ber 30.000&nbsp;US-Dollar &mdash; rund 50&nbsp;Prozent mehr als N3. Preiserh&ouml;hungen zwischen 3 und 10&nbsp;Prozent f&uuml;r alle Sub-5nm-Prozesse sind zum 1.&nbsp;Januar 2026 in Kraft getreten, mit weiteren Steigerungen bis 2029 im Plan.</p>
+
+            <p>Der Iran-Konflikt, seit dem 4.&nbsp;M&auml;rz mit effektiver Sperrung der Stra&szlig;e von Hormuz, erzeugt laut TSMC bislang keine Produktionsst&ouml;rung. Taiwan h&auml;lt LNG-Reserven f&uuml;r mindestens bis Mai vor, Spezialgase bezieht die Insel aus mehreren Regionen. Allerdings haben sich die Helium-Preise seit Kriegsbeginn verdoppelt, nachdem das Ras-Laffan-Terminal in Katar (etwa 33&nbsp;Prozent Weltangebot) nach iranischen Angriffen Anfang M&auml;rz ausfiel. Strukturell bleibt Taiwan verwundbar: Die Insel importiert 97&nbsp;Prozent ihrer Energie, 37&nbsp;Prozent des Strommixes stammen aus Middle-East-LNG, die Reserve reicht ohne Nachlieferung nur 11 Tage.</p>
+
+            <p>Parallel treibt TSMC die US-Fabs voran: Die Arizona-Fab21 hat den Ramp auf H2 2027 vorgezogen, bei einer Gesamtinvestition von 165&nbsp;Milliarden Dollar f&uuml;r bis zu 12 Fabs. Capex 2026: 52 bis 56&nbsp;Milliarden Dollar. F&uuml;r das Q2 rechnet TSMC mit 39 bis 40,2&nbsp;Milliarden Dollar Umsatz &mdash; erneut ein Plus von 10&nbsp;Prozent zum Vorquartal. Die Botschaft an Investoren: Der KI-Boom st&uuml;tzt die Industrie auch im zweiten Jahr in Folge, die Kapazit&auml;ten sind f&uuml;r 2026 fast komplett verkauft, der Iran-Krieg bislang ein Risiko ohne Realisierung.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.cnbc.com/2026/04/16/tsmc-q1-profit-58-percent-ai-chip-demand-record.html" rel="noopener noreferrer external">CNBC &mdash; TSMC Q1 Profit Rises 58% on AI Chip Demand</a></li>
+                <li><a href="https://www.heise.de/news/Mehr-Wafer-hoehere-Preise-TSMC-liefert-neue-Rekorde-ab-11261029.html" rel="noopener noreferrer external">heise online &mdash; TSMC liefert neue Rekorde ab</a></li>
+                <li><a href="https://www.datacenterdynamics.com/en/news/tsmc-announces-2026-capex-spend-of-56bn-after-posting-eighth-consecutive-quarter-of-growth/" rel="noopener noreferrer external">DataCenterDynamics &mdash; TSMC 2026 Capex $56bn</a></li>
+                <li><a href="https://www.trendforce.com/news/2025/12/29/news-tsmc-reportedly-to-raise-sub-3nm-prices-3-10-in-2026-plans-hikes-through-2029/" rel="noopener noreferrer external">TrendForce &mdash; TSMC Sub-3nm Preiserh&ouml;hungen 2026</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- ═══ REPORTAGE-TEASER ═══ -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Souver&auml;ne KI &mdash; Europas verspäteter Wettlauf um eigene Modelle, Chips und Rechenzentren</h2>
+            <p class="article-teaser">Am 16.&nbsp;April startet Gro&szlig;britannien einen 500-Millionen-Pfund-Fonds, Anthropic vervierfacht London, OpenAI pausiert Stargate UK, Microsoft &uuml;bernimmt ein gescheitertes OpenAI-Rechenzentrum in Norwegen. Die EU hat 4,8 Prozent der globalen KI-Compute, keinen einsetzbaren KI-Beschleuniger und einen zahlenden AI Act ab August. Was CTOs jetzt tun sollten &mdash; und warum die Antwort selten &bdquo;on-prem trainieren&ldquo; ist. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-17.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ═══ TOOL-RADAR ═══ -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/openai.com.png" alt="OpenAI Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openai.com/index/the-next-evolution-of-the-agents-sdk/" rel="noopener noreferrer external">OpenAI Agents SDK 2.0</a></div>
+                    <div class="tool-card-desc">N&auml;chste Evolution von OpenAIs Agent-Framework: native Sandbox-Ausf&uuml;hrung, konfigurierbares Memory, Codex-artige Filesystem-Tools, standardisierte Tool-Integrationen &mdash; Agenten greifen isoliert auf Files und Code zu, System-Integrit&auml;t bleibt gesch&uuml;tzt.</div>
+                    <div class="tool-card-meta">15. April 2026. OpenAI.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/deepmind.google.png" alt="Google DeepMind Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://deepmind.google/blog/gemini-robotics-er-1-6/" rel="noopener noreferrer external">Gemini Robotics-ER 1.6</a></div>
+                    <div class="tool-card-desc">Embodied-Reasoning-Modell f&uuml;r Roboter: r&auml;umliches Verst&auml;ndnis, Task-Planung, Erfolgs-Detektion aus mehreren Blickwinkeln. Neue F&auml;higkeit: analoge Manometer und Anzeigen lesen &mdash; l&auml;uft im Spot-Roboter von Boston Dynamics in Industrieanlagen.</div>
+                    <div class="tool-card-meta">14. April 2026. Google DeepMind.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/databricks.com.png" alt="Databricks Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.databricks.com/blog/ai-gateway-governance-layer-agentic-ai" rel="noopener noreferrer external">Databricks Unity AI Gateway</a></div>
+                    <div class="tool-card-desc">AI Gateway wandert in Unity Catalog: einheitliche Governance f&uuml;r LLM- und MCP-Zugriffe mit Rate Limits, PII-Redaktion und Prompt-Injection-Erkennung. On-Behalf-Of-Access f&uuml;r MCP-Server, End-to-End-Observability, Kosten-Attribution.</div>
+                    <div class="tool-card-meta">15. April 2026. Databricks.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/augmentcode.com.png" alt="Augment Code Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.augmentcode.com/product/intent" rel="noopener noreferrer external">Intent (Augment Code)</a></div>
+                    <div class="tool-card-desc">Workspace f&uuml;r Agent-Orchestrierung: Ein Koordinator-Agent plant, mehrere Implementor-Agenten schreiben Code in Wellen, ein Verifier-Agent pr&uuml;ft gegen die Spec. Kernkonzept &bdquo;Living Specs&ldquo; &mdash; Markdown-Specs, die mit dem Code automatisch weiterwachsen.</div>
+                    <div class="tool-card-meta">Mitte April 2026. Augment Code.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/lovable.dev.png" alt="Lovable Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://lovable.dev/download" rel="noopener noreferrer external">Lovable Desktop App</a></div>
+                    <div class="tool-card-desc">Native macOS-App f&uuml;r den AI-Fullstack-Builder Lovable &mdash; Multi-Project-Tabs, native Shortcuts. Erstmals mit Support f&uuml;r lokale MCP-Server (Figma Desktop, Custom HTTP), die im Browser wegen Sandboxing nicht m&ouml;glich waren.</div>
+                    <div class="tool-card-meta">15. April 2026. Lovable.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="Libretto Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/saffron-health/libretto" rel="noopener noreferrer external">Libretto</a></div>
+                    <div class="tool-card-desc">Open-Source-Toolkit, das KI-Browser-Automationen deterministisch macht: Das System inspiziert Live-Seiten, reverse-engineered Netzwerk-Requests und baut daraus robuste Workflows. 95&nbsp;Prozent Erfolgsrate bei Wiederholungen gegen&uuml;ber rund 70&nbsp;Prozent bei Standard-Agents.</div>
+                    <div class="tool-card-meta">14. April 2026. Saffron Health, Open Source.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AUS DER WERKSTATT ═══ -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=N4ZWCc_Fr3U" rel="noopener noreferrer external"><img src="../assets/images/thumbs/N4ZWCc_Fr3U.jpg" alt="Matthew Berman Opus 4.7 Analyse Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 18 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=N4ZWCc_Fr3U" rel="noopener noreferrer external">Opus 4.7 Just Dropped&hellip; and I&rsquo;m Confused</a></div>
+                    <div class="yt-card-channel">Matthew Berman (594.000 Subs) &middot; 16. April 2026</div>
+                    <div class="yt-card-desc">Matthew Berman f&uuml;hrt einen skeptischen Praxis-Check mit Opus&nbsp;4.7 durch und pr&uuml;ft, ob die Benchmark-Anspr&uuml;che (Vision von 54 auf 98&nbsp;Prozent, SWE-bench Pro-Sprung) in echten Tests halten. Seine Kernfrage: Ist das wirklich ein bedeutender Sprung gegen&uuml;ber 4.6 &mdash; oder ein Punktsieg um Nuancen?</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=Sk9tvyRSCgY" rel="noopener noreferrer external"><img src="../assets/images/thumbs/Sk9tvyRSCgY.jpg" alt="Two Minute Papers DeepMind AI Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 12 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=Sk9tvyRSCgY" rel="noopener noreferrer external">Why DeepMind&rsquo;s New AI Broke the Internet</a></div>
+                    <div class="yt-card-channel">Two Minute Papers (1,8 Mio. Subs) &middot; 16. April 2026</div>
+                    <div class="yt-card-desc">K&aacute;roly Zsolnai-Feh&eacute;r analysiert die Architekturentscheidungen hinter Googles Gemma-4-Modell und ordnet die Benchmark-Ergebnisse ein. Wie &uuml;blich bei Two Minute Papers: dichte technische Aufarbeitung, ohne Hype &mdash; gut f&uuml;r PMs und Tech Leads, die die neue Open-Source-Welle verstehen wollen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=LRorapr8Oyc" rel="noopener noreferrer external"><img src="../assets/images/thumbs/LRorapr8Oyc.jpg" alt="CodeRabbit Opus 4.7 Code Review Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 21 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=LRorapr8Oyc" rel="noopener noreferrer external">What Claude Opus 4.7 Means for AI Code Review</a></div>
+                    <div class="yt-card-channel">CodeRabbit (2.380 Subs) &middot; 4.804 Views &middot; Views/Subs: 2,0x</div>
+                    <div class="yt-card-desc">Der Code-Review-Anbieter CodeRabbit hat Opus&nbsp;4.7 gegen die eigene Produktions-Pipeline getestet und misst gegen Opus&nbsp;4.6 an echten Pull Requests &mdash; keine synthetischen Benchmarks, sondern reale GitHub-Issues. Ein seltener Produktionsvergleich eines kleinen Company-Kanals, den der Algorithmus gerade auftreibt &mdash; Fr&uuml;hindikator daf&uuml;r, wie neue Modelle in echten Toolchains ankommen.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+/* Scroll-Spy: highlights active TOC item */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
