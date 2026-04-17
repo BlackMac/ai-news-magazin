@@ -85,6 +85,15 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - GAyNvq6Ayps — Running LLMs Locally Just Got Way Better - Ollama + MCP (Tech With Tim, 2026-04-12)
 - 99VHENEKA9o — 100 Hours Testing Claude Code vs Antigravity (Nate Herk, 2026-04-13)
 - k0RI_M6lIsg — I Built a Tool That Runs Claude Code with ANY AI Model (Anton Abyzov, 2026-04-03)
+- ehg4fhydTgs — Claude Code Just Dropped Routines. 24/7 Agents. (Nate Herk, 2026-04-14)
+- jsy3m7Emkr0 — How to Setup AI Agent Skills for Better Code | TRAE SOLO (Tech With Tim, 2026-04-14)
+- 89bhDV0FBSM — How I Use Local AI Models in VS Code (Free & No API Key) (Zero to MVP, 2026-04-13)
+- M-NTwkM3VwM — Local AI Agents In 26 Minutes (Tina Huang, 2026-04-15)
+- mtiOK2QG9Q0 — The 7 Skills You Need to Build AI Agents (IBM Technology, 2026-04-14)
+- oC3F2SFaF9w — Claude Code's Agent Teams Are Insane (Build Your AI Workforce) (Turing College, 2026-02-26)
+- N4ZWCc_Fr3U — Opus 4.7 just dropped... and I'm confused. (Matthew Berman, 2026-04-16)
+- Sk9tvyRSCgY — Why DeepMind's New AI Broke The Internet (Two Minute Papers, 2026-04-16)
+- LRorapr8Oyc — What Claude Opus 4.7 means for AI code review (CodeRabbit, 2026-04-16)
 
 ---
 
@@ -240,6 +249,58 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Google LiteRT-LM (2026-04-14)
 - Marble 1.1 Plus (2026-04-14)
 - Meta Muse Spark (2026-04-14)
+- Twill (2026-04-15)
+- Norton AI Agent Protection (2026-04-15)
+- mesh-llm (2026-04-15)
+- MCPCore (2026-04-15)
+- Eve (2026-04-15)
+- mngr / Imbue (2026-04-15)
+- Adobe Firefly AI Assistant (2026-04-16)
+- Fathom 3.0 (2026-04-16)
+- Gemini CLI Subagents (2026-04-16)
+- Synera (2026-04-16)
+- Bluefish (2026-04-16)
+- Archon (2026-04-16)
+- OpenAI Agents SDK 2.0 (2026-04-17)
+- Gemini Robotics-ER 1.6 (2026-04-17)
+- Databricks Unity AI Gateway (2026-04-17)
+- Intent (Augment Code) (2026-04-17)
+- Lovable Desktop App (2026-04-17)
+- Libretto (2026-04-17)
+
+---
+
+## 2026-04-17
+- Anthropic Claude Opus 4.7 Release: "substanziell bessere" Instruktionsbefolgung (wörtlich, kein Reinterpretieren), SWE-bench Pro 64,3% (Opus 4.6: 53,4%, GPT-5.4: 57,7%, Gemini 3.1 Pro: 54,2%), SWE-bench Verified 87,6%, Terminal-Bench 2.0 69,4%, OSWorld 78%, MCP-Atlas 77,3%; Preise 5$/25$ unverändert, 1M Context, Vision bis 2.576px, neuer Tokenizer +35%, adaptive Thinking default, GitHub Copilot 7,5 Premium-Requests; differentially reduziert bei Cyber gegenüber Mythos
+- OpenAI Codex Desktop-Update: Computer Use (macOS only, im Hintergrund parallel), Atlas-Browser Preview, Memory Preview, Multi-Agent-Workflows, Heartbeat Automations (Self-Scheduling), 90+ Plugin-Integrationen, 3 Mio. weekly users (Altman 8.4.), Limits Reset alle 1 Mio. User bis 10 Mio.; Computer Use und Memory NICHT in EU/UK verfügbar
+- Anthropic CPO Mike Krieger tritt am 14.04. aus Figma-Board zurück, parallel Leak durch The Information: Opus 4.7 wird mit eigenständigem AI-Design-Tool ausgeliefert (Websites/Landing Pages/Präsentationen/Prototypen aus Prompts), gegen Figma/Adobe/Wix/Canva/Stitch; Figma -6% am Leak-Tag, +5% nach Rücktritt, SaaSpocalypse-Welle 2
+- UK Sovereign AI Fund (DSIT): £500 Mio. (~$675 Mio.), James Wise (Balderton) als Chair, Sovereign AI Unit im DSIT; 7 erste Startups — Callosum (einziges Equity), Prima Mente, Cosine, Cursive, Doubleword, Twig Bio, Odyssey; Compute bis 1 Mio. GPU-Stunden pro Startup via AIRR; Reaktion auf OpenAI Stargate-UK-Pause 9.04. wegen Strompreisen; AI-Minister Kanishka Narayan widerspricht OpenAI öffentlich; parallel Anthropic London-Expansion auf bis zu 800 Mitarbeiter (vorher ~200)
+- Physical Intelligence π0.7: "Compositional Generalization" VLA-Modell, Air-Fryer-Demo (Erfolgsrate 5% → 95% durch Sprach-Coaching), Gründer Karol Hausman / Sergey Levine / Chelsea Finn, Bewertungsgespräche ~$11 Mrd. (nach $5,6 Mrd.); π0 und π0.5 waren openpi Apache-2.0, π0.7 vorerst kein Open Source; hardwareneutral (Franka, ALOHA, mobile Manipulatoren)
+- TSMC Q1 2026 Rekord: Umsatz NT$ 1.134 Mrd. / $35,71 Mrd. (+35,1% YoY), Nettogewinn $18 Mrd. (+58,3%, 4. Rekordquartal in Folge), Bruttomarge 66,2%, HPC-Segment 61% des Umsatzes, 2nm bis Ende 2026 ausgebucht; C.C. Wei: KI-Nachfrage "extrem robust", Jahresprognose auf >30% USD-Wachstum angehoben; 3-10% Preiserhöhungen Sub-5nm seit 1.1.2026; Iran-Krieg ohne Produktionsdelle, Helium-Preise +100%, Arizona Fab Ramp auf H2 2027 vorgezogen
+- Reportage: Souveräne KI — Europas Wettlauf um Modelle/Chips/Rechenzentren — UK Sovereign AI Fund £500 Mio., Anthropic London 4x, OpenAI Stargate-UK-Pause, Microsoft 30.000 Vera-Rubin-Chips in Narvik, EU 4,8% global Compute vs. USA 74% / China 14%, SiPearl Rhea1 als HPC (kein KI-Beschleuniger), Graphcore-Lehre an SoftBank, Silo AI an AMD, Mistral €1,7 Mrd. + $830 Mio., Aleph-Alpha-Cohere-Fusion, EU AI Act 2.8.2026 (€35 Mio. / 7% Strafen), 5-Fragen-Framework für CTOs
+
+---
+
+## 2026-04-16
+- OpenAI GPT-5.4-Cyber: Cybersecurity-Modell als Antwort auf Anthropics Mythos, "cyber-permissive" mit gelockerten Ablehnungs-Schwellen, gestuftes Trusted Access for Cyber (TAC) Verifizierungssystem
+- Grok stand kurz vor App-Store-Rauswurf: NBC News veröffentlicht Apple-Brief an US-Senatoren, 1,8 Mio. sexualisierte Bilder in 9 Tagen, geschätzt 23.000 von Minderjährigen, 35 Generalstaatsanwälte forderten Stopp
+- US v. Heppner (S.D.N.Y.): Richter Rakoff entscheidet erstmals — KI-Chats genießen kein Attorney-Client Privilege, Nutzer von Consumer-KI (Claude) haben "keine vernünftige Erwartung der Vertraulichkeit"
+- EU zwingt Meta WhatsApp für Konkurrenz-KI zu öffnen: Kommission weist Metas "Pay-to-Play"-Kompromiss (4,9-13,2 Cent/Nachricht) zurück, verlangt Rückkehr zu Vor-Oktober-2025-Bedingungen, Art. 102 AEUV
+- Google Gemini native Mac-App: Swift-App mit Window-Sharing (Option+Space), Creative Tools Bar, 100+ Features in 100 Tagen, kostenlos ab macOS 15
+- Google DeepMind Gemini 3.1 Flash TTS: 200+ Audio Tags für Stimmsteuerung, 70+ Sprachen, Multi-Speaker-Dialoge, 1.211 Elo (vor ElevenLabs Eleven v3)
+- Allbirds wird NewBird AI: Schuhmarke für 39 Mio. $ an American Exchange Group verkauft, Pivot zu GPU-as-a-Service, 50 Mio. $ Wandelanleihe, Aktie +580%, breite Skepsis (Bloomberg/CNBC: "Long Blockchain"-Parallele)
+- Reportage: Die KI-Agenten kommen in den Alltag — 57,3% Unternehmen nutzen Agenten produktiv, nur 12% zentrale Kontrolle, Klarna-Parabel, OpenAI SDK + Anthropic Managed Agents + Google + Microsoft Plattform-Wettrennen, EU AI Act August 2026
+
+---
+
+## 2026-04-15
+- Anthropic lehnt Illinois SB 3444 ("AI Safety Act") ab, den OpenAI unterstützt: Cesar Fernandez nennt es "Freifahrtschein gegen Haftung", Anthropic unterstützt Gegenentwurf SB 3261
+- Google Chrome AI Skills: Wiederverwendbare KI-Prompts als Ein-Klick-Tools im Browser, Skills Library unter chrome://skills/browse, zunächst nur Englisch (US)
+- Google SynthID Wasserzeichen per Spektralanalyse reverse-engineered: Entwickler Alosh Denny veröffentlicht "reverse-SynthID" auf GitHub (1.600+ Stars), 90% Erkennungsgenauigkeit, 91% Phasenkohärenz-Reduktion
+- KI-Halluzinationen vor Gericht: AG Köln (Az. 312 F 130/25) — Anwalt zitiert frei erfundene BGH-Entscheidungen, 500+ dokumentierte Fälle weltweit
+- Microsoft übernimmt OpenAI-Rechenzentrum in Norwegen: 30.000 Nvidia Vera Rubin Chips von Nscale in Narvik, OpenAI konnte Deal nicht schließen, Stargate Norway gescheitert
+- Unitree H1 Geschwindigkeitsrekord: 10,1 m/s (36 km/h), 97% von Bolts 100m-Durchschnitt, RL-basierte Gangsteuerung, $90.000 Listenpreis
+- Reportage: Die unsichtbare Markierung — SynthID-Bypass, C2PA mit 6.000+ Mitgliedern, EU AI Act Art. 50 ab August 2026, Text-Wasserzeichen durch Paraphrasierung auf <5% Erkennung reduzierbar
 
 ---
 
