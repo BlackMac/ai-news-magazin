@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 18. April 2026</title>
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-18">Samstag, 18. April 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 18. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">KI-Unternehmen &middot; OpenAI</span><span class="toc-title">OpenAIs gro&szlig;e Aufr&auml;um-Woche: Codex-Chef und Sora-Gr&uuml;nder verlassen die Firma</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">KI-Tools &middot; Anthropic</span><span class="toc-title">Claude Design ist jetzt offiziell &mdash; und ein Frontalangriff auf Figma, Canva und Stitch</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">KI-Investment</span><span class="toc-title">Cursor verhandelt &uuml;ber $2&nbsp;Mrd. &mdash; bei 50-Mrd.-Bewertung in nur zehn Monaten</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">KI-Politik</span><span class="toc-title">Anthropic zur&uuml;ck im Wei&szlig;en Haus: Amodei trifft Wiles und Bessent</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Identit&auml;t &amp; KI</span><span class="toc-title">Tinder l&auml;sst bald in den Orb schauen: Altmans World expandiert</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Medien &amp; KI</span><span class="toc-title">Netflix-Gr&uuml;nder Hastings zieht sich zur&uuml;ck &mdash; KI &uuml;bernimmt immer mehr Produktionen</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Der Kampf um die digitale Identit&auml;t</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">KI-Unternehmen &middot; OpenAI</div>
+            <h2 id="art-1-h">OpenAIs gro&szlig;e Aufr&auml;um-Woche: Codex-Chef und Sora-Gr&uuml;nder verlassen die Firma</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17. April 2026</time> &middot; Quellen: TechCrunch, Bloomberg, CNBC, Semafor</div>
+        </header>
+        <p class="article-teaser">An einem einzigen Tag geben drei hochrangige F&uuml;hrungskr&auml;fte ihren Abschied bei OpenAI bekannt: Ex-CPO Kevin Weil, Sora-Chef Bill Peebles und Enterprise-CTO Srinivas Narayanan. Fidji Simos Memo-Formel &bdquo;side quests&ldquo; liefert das Framing &mdash; doch hinter der Rhetorik der Fokussierung zeichnet sich eine F&uuml;hrungskrise zwischen Farrow-Investigation, Molotow-Angriff und geplantem IPO ab.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der 17.&nbsp;April 2026 war f&uuml;r OpenAI der sichtbarste Tag einer dreiw&ouml;chigen Abgangskaskade. <strong>Kevin Weil</strong>, im Sommer 2024 als Chief Product Officer geholt und zuletzt Leiter der Abteilung &bdquo;OpenAI for Science&ldquo;, verk&uuml;ndete seinen Abschied auf X: Seine Einheit werde aufgel&ouml;st und in andere Research-Teams verteilt. Wenige Stunden vorher hatte OpenAI das Life-Sciences-Modell GPT-Rosalind angek&uuml;ndigt. Weil bleibt damit genau zwei Jahre im Haus &mdash; davor war er Produktchef bei Instagram, Twitter und Planet Labs, sowie Mitentwickler des gescheiterten Libra-Projekts. Parallel ging <strong>Bill Peebles</strong>, Miterfinder der Diffusion-Transformer-Architektur (DiT), die Sora m&ouml;glich gemacht hatte, und &bdquo;Chief Research Officer for Media&ldquo;. Der dritte Abgang &mdash; oft &uuml;bersehen, aber nicht weniger wichtig &mdash; war <strong>Srinivas Narayanan</strong>, CTO of Enterprise Applications.</p>
+
+            <p>Der Kontext dieser Woche ist nicht nur die offensichtliche Redaktion des Portfolios. Anfang April hatte OpenAI bereits einen gr&ouml;&szlig;eren F&uuml;hrungsumbau angek&uuml;ndigt: <strong>Fidji Simo</strong>, die erst im Sommer 2025 als CEO of Applications angetreten war, ging wegen eines Sch&uuml;bs ihrer chronischen Erkrankung POTS in einen mehrw&ouml;chigen medizinischen Urlaub. COO <strong>Brad Lightcap</strong> wechselte zu &bdquo;Special Projects&ldquo; rund um das Rechenzentrum-JV DeployCo, CMO <strong>Kate Rouch</strong> trat wegen Brustkrebs im Sp&auml;tstadium zur&uuml;ck. <strong>Greg Brockman</strong> hat interimistisch Simos Produktverantwortung &uuml;bernommen. Wie wir in unserer <a href="2026-04-14.html#art-1">Ausgabe vom 14.&nbsp;April</a> berichteten, griff OpenAIs Vertriebschefin Denise Dresser parallel Anthropic in einem internen Memo als aufgebl&auml;ht an.</p>
+
+            <p>Der Sprachgebrauch, mit dem TechCrunch den Umbau rahmt, stammt interessanterweise nicht von Sam Altman, sondern aus einem All-Hands-Memo von Fidji Simo, das das Wall Street Journal im M&auml;rz zitierte: &bdquo;We cannot miss this moment because we are distracted by side quests.&ldquo; Diese Formel &mdash; &bdquo;side quests&ldquo;, Nebenaufgaben &mdash; ist zur Leitmetapher f&uuml;r abgewickelte Produkte und entlassene Verantwortliche geworden. Erstes Opfer: die Sora-App. Ihre Abschaltung wurde am 24.&nbsp;M&auml;rz bekannt gegeben, die App-Version schlie&szlig;t am 26.&nbsp;April, die API l&auml;uft bis 24.&nbsp;September. Laut Forbes kostete Sora zuletzt rund 15&nbsp;Mio.&nbsp;Dollar t&auml;glich an Inferenz, w&auml;hrend die In-App-Eink&auml;ufe lebenslang nur 2,1&nbsp;Mio.&nbsp;Dollar einbrachten. Zweites Opfer: OpenAI for Science, zu fr&uuml;h und zu isoliert angelegt.</p>
+
+            <p>Der Abschied steht in einem extrem heiklen Umfeld. Zehn Tage zuvor, am 7.&nbsp;April, ver&ouml;ffentlichten Ronan Farrow und Andrew Marantz im New Yorker eine eineinhalbj&auml;hrige Recherche auf Basis von &uuml;ber 100 Interviews und mehr als 200 Seiten interner Dokumente. Darin enthalten: 70 Seiten Memos von Ex-Chief-Scientist Ilya Sutskever, die Altman ein &bdquo;consistent pattern of lying&ldquo; attestieren sollen. Altman selbst nannte den Artikel &ouml;ffentlich &bdquo;incendiary&ldquo;. Drei Tage sp&auml;ter warf ein 20-j&auml;hriger Mann einen Molotow-Cocktail auf Altmans Haus im Russian-Hill-Viertel, wurde wegen zweifachen versuchten Mordes angeklagt und drohte, auch das Firmenhauptquartier niederzubrennen. Am 12.&nbsp;April schossen zwei weitere Personen in der N&auml;he des Hauses.</p>
+
+            <p>F&uuml;r die IPO-Pl&auml;ne im vierten Quartal 2026 mit einem Zielvolumen von einer Billion Dollar ist das Timing toxisch. Gizmodo berichtete bereits von Investorensorgen, ob Altman der richtige B&ouml;rsenchef sei. Der Umbau wird aktiv als Disziplinierungssignal an die Bookrunner verkauft &mdash; &bdquo;wir fokussieren, wir machen Schluss mit teuren Nebenprojekten&ldquo; &mdash; wirkt aber aus dem Haus heraus wie forcierter Abgang jener, die eigene Research-Wetten hatten. Das Framing h&auml;lt nur, solange keine vierte oder f&uuml;nfte F&uuml;hrungskraft in derselben Woche geht. Parallel meldet xAI seinen totalen Mitgr&uuml;nder-Exodus &mdash; alle elf haben das Unternehmen verlassen. Die beiden gr&ouml;&szlig;ten KI-Unternehmen mit US-Wurzeln befinden sich gleichzeitig in F&uuml;hrungskrisen. Das hat es in dieser Form noch nie gegeben.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/17/kevin-weil-and-bill-peebles-exit-openai-as-company-continues-to-shed-side-quests/" rel="noopener noreferrer external">TechCrunch &mdash; Kevin Weil and Bill Peebles Exit OpenAI</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/17/openai-executives-leave.html" rel="noopener noreferrer external">CNBC &mdash; OpenAI Executives Leave</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-17/openai-s-former-product-chief-and-sora-head-leave-company" rel="noopener noreferrer external">Bloomberg &mdash; OpenAI&rsquo;s Former Product Chief and Sora Head Leave</a></li>
+                <li><a href="https://techcrunch.com/2026/04/03/openai-executive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch/" rel="noopener noreferrer external">TechCrunch &mdash; OpenAI Executive Shuffle (3.&nbsp;April)</a></li>
+                <li><a href="https://www.semafor.com/article/04/06/2026/new-yorker-investigation-raises-questions-over-sam-altmans-trustworthiness" rel="noopener noreferrer external">Semafor &mdash; New Yorker Investigation on Altman</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">KI-Tools &middot; Anthropic</div>
+            <h2 id="art-2-h">Claude Design ist jetzt offiziell &mdash; und ein Frontalangriff auf Figma, Canva und Stitch</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17. April 2026</time> &middot; Quellen: Anthropic, TechCrunch, VentureBeat, Sherwood News</div>
+        </header>
+        <p class="article-teaser">Drei Tage nachdem CPO Mike Krieger das Figma-Board verlie&szlig;, best&auml;tigt Anthropic den Leak: Claude Design ist live. Aus Prompts entstehen Websites, Prototypen, Slides und One-Pager &mdash; gesteuert &uuml;ber Chat, Kommentare und dynamisch generierte Tweak-Slider. Die eigentliche Waffe steckt nicht im UI, sondern darin, dass Claude Codebase und Design-Files automatisch zum Design-System zusammenf&uuml;hrt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 17.&nbsp;April rollte Anthropic &bdquo;Claude Design&ldquo; &uuml;ber den Tag schrittweise auf Claude.ai aus. Der Launch schlie&szlig;t einen Leak, &uuml;ber den wir in unserer <a href="2026-04-17.html#art-3">Ausgabe vom 17.&nbsp;April</a> berichteten: Am 14.&nbsp;April trat Anthropic-CPO Mike Krieger aus dem Figma-Board zur&uuml;ck, The Information meldete denselben Tag, Anthropic bereite ein eigenes AI-Design-Tool vor, die Figma-Aktie gab bis zu sechs Prozent nach. Dass Claude Design exakt drei Tage nach dem Rauswurf kommt, erkl&auml;rt die Panik im Figma-Board r&uuml;ckwirkend.</p>
+
+            <p>Technisch l&auml;uft Claude Design auf Opus&nbsp;4.7. Nutzer geben in nat&uuml;rlicher Sprache vor, was sie wollen &mdash; eine Landingpage, einen Prototyp, eine Pitch-Pr&auml;sentation, ein Wireframe &mdash; und Claude rendert. Verfeinern l&auml;sst sich das Ergebnis &uuml;ber vier Kan&auml;le: Chat, Inline-Kommentare direkt an Design-Elementen, direktes Text-Editieren oder &uuml;ber Slider, die Claude dynamisch pro Element generiert. Die zentrale Innovation liegt im Onboarding: Claude liest die bestehende Codebase und die Design-Files des Teams, baut daraus automatisch ein Design-System mit Farben, Typografie und Komponenten und wendet es auf jedes neue Projekt an. Ein Web-Capture-Tool &uuml;bernimmt Brand-Assets aus bestehenden Websites, Dokumenten-Upload erg&auml;nzt Briefings. Exportformate sind PDF, &ouml;ffentliche URLs, PPTX, standalone HTML &mdash; sowie direkt editierbarer Export nach Canva. Ein direkter Figma-Export fehlt zum Launch. Produktions-Code gibt es &uuml;ber einen Handoff an Claude Code, nicht aus der Design-UI heraus.</p>
+
+            <p>Die Zielgruppe adressiert Anthropic selbst ungew&ouml;hnlich explizit: Founder, Product Manager, Marketer &bdquo;ohne Design-Hintergrund&ldquo;. Professionelle Designer sind ausdr&uuml;cklich nicht im Fokus. Das deutet auf eine gezielte Flanken-Strategie: Nicht der Figma-Kernmarkt (Design-Teams) wird angegriffen, sondern dessen Wachstumsring &mdash; die Non-Designer, die Figma mit FigJam und Figma Slides gerade f&uuml;r sich gewonnen hatte. Und Canvas Zielgruppe, die Marketing- und SaaS-Anwender. Die Marktreaktion fiel entsprechend aus: Figma verlor am Launch-Tag intraday bis zu 6,8&nbsp;Prozent auf rund 18,79&nbsp;Dollar, Adobe-Aktie ebenfalls im Minus. Canva, das Claude Design als Export-Ziel einbaut, profitiert paradoxerweise.</p>
+
+            <p>Ara Kharazian von Ramp fasst die Dynamik zusammen: &bdquo;Anthropic has definitely been on a tear. Its increase in adoption rates has been driven by its ability to sell to less technical users and smaller contracts than it typically has.&ldquo; F&uuml;r Tech-Leads und PMs ist das strategisch relevant: Claude Design ist nicht einfach ein weiteres Prompt-to-UI-Spielzeug. Es ist der sichtbare Teil einer Produktachse Claude Code &leftrightarrow; Claude Design, die den klassischen Designer-Developer-Handoff komplett umgeht. Wer Claude Code bereits in der Codebase nutzt, bekommt Claude Design faktisch geschenkt &mdash; das Design-System wird aus dem Code abgeleitet, nicht umgekehrt.</p>
+
+            <p>F&uuml;r Figmas 1-to-100-Refinement, Design-Ops, komplexe Component-Libraries, Collaboration und die professionellen Workflows bleibt der Moat vorerst intakt &mdash; f&uuml;r die 0-to-1-Phase, in der viele Produkte entstehen, ist er es nicht mehr. Tyler Moores YouTube-Titel &bdquo;Figma Is Dead&ldquo; &uuml;bertreibt, aber Sherwood-Analyst Tom Grew bringt es realistischer auf den Punkt: Stitch (Google) und Claude Design &uuml;bernehmen den Start-Workflow, Figma bleibt f&uuml;r Verfeinerung. Ein Zwei-Tool-Regime, das Figmas Wachstumsring absch&auml;lt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.anthropic.com/news/claude-design-anthropic-labs" rel="noopener noreferrer external">Anthropic &mdash; Introducing Claude Design by Anthropic Labs</a></li>
+                <li><a href="https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/" rel="noopener noreferrer external">TechCrunch &mdash; Anthropic Launches Claude Design</a></li>
+                <li><a href="https://venturebeat.com/technology/anthropic-just-launched-claude-design-an-ai-tool-that-turns-prompts-into-prototypes-and-challenges-figma" rel="noopener noreferrer external">VentureBeat &mdash; Claude Design Challenges Figma</a></li>
+                <li><a href="https://sherwood.news/tech/anthropic-launches-claude-design-sending-shares-of-figma-down/" rel="noopener noreferrer external">Sherwood News &mdash; Figma Shares Drop on Claude Design</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">KI-Investment</div>
+            <h2 id="art-3-h">Cursor verhandelt &uuml;ber $2&nbsp;Mrd. &mdash; bei 50-Mrd.-Bewertung in nur zehn Monaten</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17. April 2026</time> &middot; Quellen: TechCrunch, Bloomberg, Newcomer, Fortune</div>
+        </header>
+        <p class="article-teaser">Im Juni 2025 war Anysphere 9,9&nbsp;Mrd. Dollar wert. Zehn Monate sp&auml;ter liegen laut TechCrunch Term Sheets &uuml;ber 50&nbsp;Mrd. auf dem Tisch, bei einer neuen Runde von mindestens zwei Milliarden. Lead-Investoren sind Thrive Capital und Andreessen Horowitz, neu dabei Battery Ventures und Nvidia. Der Enterprise-Durchmarsch ist real &mdash; die Frage ist, ob 25x ARR aufs aktuelle Jahr rational ist.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Eckdaten, die TechCrunch am 17.&nbsp;April meldete: Mindestens zwei Milliarden Dollar neues Kapital bei einer Bewertung von rund 50&nbsp;Mrd. Dollar pre-money, f&uuml;hrend Thrive Capital und Andreessen Horowitz als Returning Investors, Battery Ventures neu dabei, Nvidia als strategischer Investor. Die Runde ist laut Berichten bereits &uuml;berzeichnet, Newcomer nennt H&ouml;he von bis zu f&uuml;nf Milliarden bei bis zu 60&nbsp;Mrd. Bewertung. Zum Vergleich: Die letzte Runde im November 2025 war 2,3&nbsp;Mrd. Dollar bei 29,3&nbsp;Mrd. Bewertung (Lead Accel, Coatue). Davor, im Juni 2025, waren es 900&nbsp;Mio. bei 9,9&nbsp;Mrd. Cursor hat in zehn Monaten die Bewertung vervierfacht bis verf&uuml;nffacht.</p>
+
+            <p>Die Umsatzentwicklung rechtfertigt das Tempo erstaunlich gut. Im Februar 2026 meldete Anysphere zwei Milliarden Dollar ARR &mdash; eine Verdoppelung in drei Monaten. F&uuml;r Jahresende 2026 nennt die Firma sechs Milliarden ARR als Ziel, was eine weitere Verdreifachung in zehn Monaten implizieren w&uuml;rde. Enterprise tr&auml;gt rund 60&nbsp;Prozent des Umsatzes, mit positiven Bruttomargen; das Einzelkunden-Segment ist noch defizit&auml;r. Die Kundenliste liest sich wie ein Stripe-Referenzkatalog: OpenAI, Stripe, Shopify, Uber, Adobe, Spotify, Midjourney, Nvidia, Salesforce. Bei Salesforce nutzen laut Cursor &uuml;ber 90&nbsp;Prozent der 20.000 Entwickler das Tool. Insgesamt mehr als zwei Millionen monatlich aktive Entwickler, rund 700.000 Team-Seats.</p>
+
+            <p>Rechnerisch ist 50&nbsp;Mrd. / 2&nbsp;Mrd. ARR ein 25-faches Multiple auf aktuelle Zahlen &mdash; etwa zweieinhalbmal so viel wie der SaaS-Median zwischen 6-10x. Auf den Jahresend-Forecast von sechs Milliarden bezogen, liegt das Multiple bei rund 8x und damit im normalen SaaS-Range. Der bewertende Investor zahlt also nicht f&uuml;r heute, sondern f&uuml;r das erwartete Ende 2026. Diese Forecast-Trajektorie muss sehr exakt treffen, sonst wird die Runde r&uuml;ckblickend zur Hoffnungspr&auml;mie. CEO <strong>Michael Truell</strong> hat selbst die investitionsth&egrave;se auf den Punkt gebracht: &bdquo;It&rsquo;s pretty clear the market is standardizing on a couple solutions.&ldquo;</p>
+
+            <p>Die Konkurrenz ist breit: GitHub Copilot in 90&nbsp;Prozent der Fortune&nbsp;100 (Microsoft-Vertriebsmacht), Claude Code mit dem h&ouml;chsten &bdquo;Most-Loved&ldquo;-Wert unter Entwicklern (Stack Overflow 2026), OpenAIs Codex, Googles Antigravity. Cursor differenziert sich durch drei Dinge: Modell-Agnostik (GPT-5.2, Opus 4.6, Gemini&nbsp;3 Pro, Grok Code und das eigene Composer&nbsp;2 sind parallel verf&uuml;gbar), die Kombination aus IDE-First und Agents-Konsole, sowie Enterprise-Self-Hosting. Cursor&nbsp;3 &bdquo;Glass&ldquo; vom 2.&nbsp;April hat das Produkt auf &bdquo;Agents Window als Prim&auml;r-Interface&ldquo; umgebaut &mdash; die IDE wurde zum Fallback degradiert. Auch Windsurf stellte am 19.&nbsp;M&auml;rz seine Preise um. Die Marge bei Individual-Usern liegt &uuml;berall unter Druck.</p>
+
+            <p>Es gibt drei strukturelle Risiken. Erstens: Die Komposer-2-Kontroverse aus dem M&auml;rz &mdash; das Default-Modell baut auf Moonshot AIs Kimi K2.5 auf, was im Original-Blogpost nicht erw&auml;hnt wurde. Mitgr&uuml;nder Aman Sanger r&auml;umte ein, es sei &bdquo;ein Miss&ldquo; gewesen. Zweitens: Die METR-Studie, die erfahrenen Devs mit KI-Tools einen Produktivit&auml;tsabfall von 19&nbsp;Prozent attestiert. Drittens: 80.000 Tech-Layoffs im Q1 2026 reduzieren den adressierbaren Markt. Trotzdem bleibt die Bewertung die spannendste Wette im aktuellen KI-Markt &mdash; nicht weil sie sicher rational ist, sondern weil sie so explizit auf die These &bdquo;Winner-takes-most&ldquo; setzt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/17/sources-cursor-in-talks-to-raise-2b-at-50b-valuation-as-enterprise-growth-surges/" rel="noopener noreferrer external">TechCrunch &mdash; Cursor in Talks to Raise $2B at $50B Valuation</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-17/ai-coding-startup-cursor-in-talks-to-raise-2-billion-in-funding" rel="noopener noreferrer external">Bloomberg &mdash; Cursor in Talks to Raise $2 Billion</a></li>
+                <li><a href="https://www.newcomer.co/p/cursor-weighs-fresh-fundraise-as" rel="noopener noreferrer external">Newcomer &mdash; Cursor Weighs Fresh Fundraise</a></li>
+                <li><a href="https://fortune.com/2026/03/21/cursor-ceo-michael-truell-ai-coding-claude-anthropic-venture-capital/" rel="noopener noreferrer external">Fortune &mdash; Cursor CEO Michael Truell Interview</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">KI-Politik</div>
+            <h2 id="art-4-h">Anthropic zur&uuml;ck im Wei&szlig;en Haus: Amodei trifft Wiles und Bessent</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17./18. April 2026</time> &middot; Quellen: Axios, Bloomberg, Spiegel, The Verge</div>
+        </header>
+        <p class="article-teaser">Zwei Monate nachdem Kriegsminister Hegseth Anthropic zum &bdquo;Supply-Chain-Risiko&ldquo; erkl&auml;rte, trifft CEO Dario Amodei am Freitag Stabschefin Susie Wiles und &mdash; &uuml;berraschend &mdash; Finanzminister Scott Bessent. OMB informiert parallel Kabinettsmitglieder, dass sechs zivile Beh&ouml;rden in Wochen Zugang zu Claude Mythos Preview erhalten. Der Tauwetter-Kanal umgeht das Pentagon.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Axios berichtet das Treffen am 17.&nbsp;April als &bdquo;Thaw&ldquo; im zwei Monate lang eingefrorenen Verh&auml;ltnis. Dario Amodei trifft Susie Wiles im Wei&szlig;en Haus. Scott Bessent sto&szlig;t &uuml;berraschend dazu. Thema: Wie bekommt die Regierung offiziellen Zugang zu Claude Mythos &mdash; und wie l&auml;sst sich die Pentagon-Sackgasse l&ouml;sen, die am 18.&nbsp;M&auml;rz begann, als Pete Hegseth Anthropic per X-Post zum &bdquo;unacceptable supply-chain risk&ldquo; erkl&auml;rte. Wie wir in unserer <a href="2026-04-09.html">Ausgabe vom 9.&nbsp;April</a> dokumentierten, folgten eine einstweilige Verf&uuml;gung von Richterin Rita Lin (&bdquo;orwellisch&ldquo; nannte sie die Einstufung) und eine DOJ-Berufung beim Ninth Circuit.</p>
+
+            <p>Das parallele, entscheidendere Signal kam vom Office of Management and Budget: Treasury, State, DHS, Commerce, Justice und CISA werden laut OMB-Memo &bdquo;binnen Wochen&ldquo; Zugang zu Mythos Preview erhalten &mdash; ungeachtet des Pentagon-Bans, der formal weiter gilt. Teile der Intelligence Community und CISA testen bereits. Das hei&szlig;t konkret: Die zivile Exekutive arbeitet am milit&auml;rischen Trakt vorbei. Hegseths Linie hat im Gericht verloren, im OMB wurde sie &uuml;berbr&uuml;ckt. Der Ninth Circuit hatte am 8.&nbsp;April Anthropics Antrag auf einstweilige Aussetzung der Blacklist zwar abgelehnt, doch die j&uuml;ngste Eskalation verlagert den Streit auf administrative Seitenkan&auml;le.</p>
+
+            <p>Bessents Anwesenheit ist das eigentliche Signal. Der Finanzminister war am 10.-13.&nbsp;April gemeinsam mit Fed-Chef Powell Gastgeber eines Notfallgipfels mit den CEOs von Goldman Sachs, Citigroup, BofA, Morgan Stanley und BNY &mdash; Thema war Mythos als Bedrohung f&uuml;r die Finanzmarktstabilit&auml;t. Die Banken testen Mythos inzwischen intern als Red-Team gegen die eigenen Systeme; BNY hat auch Zugang zu OpenAIs GPT-5.4-Cyber. Die Regierung hat verstanden: Wenn Mythos-artige Offensivkapazit&auml;ten in die falschen H&auml;nde gelangen oder als Verteidigungstool fehlen, kann das systemische Konsequenzen haben.</p>
+
+            <p>Anthropics Antwort war Opus&nbsp;4.7 am 16.&nbsp;April: ein breit einsetzbares Modell mit &bdquo;differentiell reduzierten&ldquo; Cyber-Kapazit&auml;ten &mdash; Mythos ohne Mythos. Anthropic beh&auml;lt damit die Hochrisiko-Variante hinter dem Gatekeeping-Mechanismus Project Glasswing (50+ Partnerorganisationen, bis zu 100&nbsp;Mio.&nbsp;Dollar Usage-Credits), bietet aber f&uuml;r den Massenmarkt ein Modell mit eingebauten Safeguards. F&uuml;r die Trump-Administration ist das gesichtswahrend: Man muss Mythos nicht komplett freigeben, kann aber &uuml;ber Opus&nbsp;4.7 und den OMB-Kanal einen Deal ermoeglichen. OpenAI konterte am 16.&nbsp;April mit GPT-5.4-Cyber und dem eigenen Programm &bdquo;Trusted Access for Cyber&ldquo; (TAC). OpenAI-Blogpost zum Launch: &bdquo;We don&rsquo;t think it&rsquo;s practical or appropriate to centrally decide who gets to defend themselves.&ldquo; Eine Spitze gegen Anthropics restriktives Gatekeeping-Modell.</p>
+
+            <p>Das Treffen ist kein Durchbruch, aber der erste Schritt zu einer L&ouml;sung vor der DOJ-Deadline am 30.&nbsp;April. Wer genau hinschaut, sieht: Anthropic und Washington haben begonnen, ohne Hegseth zu reden. Die &ouml;konomische Realit&auml;t &mdash; Banken brauchen Mythos gegen Mythos-basierte Angreifer &mdash; hat die politische Rhetorik &uuml;berholt. Richterin Lins Urteil bleibt formal in Kraft, Opus&nbsp;4.7 liefert das Friedensangebot, und OMB baut die Umgehungsarchitektur.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.axios.com/2026/04/17/anthropic-white-house-wiles-bessent-amodei" rel="noopener noreferrer external">Axios &mdash; Bessent and Wiles met Amodei in sign of thaw</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-17/anthropic-s-amodei-to-meet-wiles-with-us-seeking-mythos-access" rel="noopener noreferrer external">Bloomberg &mdash; Amodei to Meet Wiles</a></li>
+                <li><a href="https://www.spiegel.de/netzwelt/anthropic-us-regierung-verhandelt-mit-ceo-ueber-cyberrisiko-ki-a-0abca9b1-8575-458a-a83a-88b7eea74102" rel="noopener noreferrer external">Spiegel &mdash; US-Regierung verhandelt mit Amodei &uuml;ber Cyberrisiko-KI</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/16/anthropic-claude-opus-4-7-model-mythos.html" rel="noopener noreferrer external">CNBC &mdash; Anthropic rolls out Opus 4.7</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Identit&auml;t &amp; KI</div>
+            <h2 id="art-5-h">Tinder l&auml;sst bald in den Orb schauen: Altmans World expandiert</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17. April 2026</time> &middot; Quellen: TechCrunch, Axios, CBS News, Biometric Update</div>
+        </header>
+        <p class="article-teaser">Tools for Humanity, die Firma hinter World (fr&uuml;her Worldcoin), verk&uuml;ndet auf einem Event in San Francisco das bislang gr&ouml;&szlig;te Update: Partnerschaften mit Tinder, Zoom, Visa, DocuSign und Ticketmaster. Ziel ist eine globale &bdquo;Proof-of-Human&ldquo;-Infrastruktur via Iris-Scan. Der Interessenkonflikt ist offensichtlich &mdash; Altman verkauft die L&ouml;sung gegen die Bot-Flut, die sein anderes Unternehmen mit antreibt.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Am 17.&nbsp;April pr&auml;sentierte Sam Altman pers&ouml;nlich in San Francisco das &bdquo;full-stack proof of human&ldquo;-Update f&uuml;r World. Die neuen Partnerschaften: <strong>Tinder</strong> (Match Group, mit einem &bdquo;Verified Human&ldquo;-Badge in Profilen gegen Bot-Flut und Romance Scams), <strong>Zoom</strong> (ein Feature namens &bdquo;Deep Face&ldquo; gegen Deepfake-Meetings), <strong>DocuSign</strong> (Proof-of-Human bei digitalen Unterschriften), <strong>Visa</strong> (eine World-Karte), sowie <strong>Ticketmaster</strong> und Eventbrite (&bdquo;Concert Kit&ldquo; gegen Scalper-Bots). Parallel l&auml;uft Altmans Projekt seit Mitte 2025 in Japan im Pilot, wo es zur Altersverifikationspflicht nach japanischem Dating-App-Gesetz geh&ouml;rt.</p>
+
+            <p>Die Mechanik des &bdquo;Orbs&ldquo; ist seit 2023 weitgehend unver&auml;ndert: Der Nutzer schaut in ein melonengro&szlig;es silbernes Ger&auml;t, das die Iris und das Gesicht scannt. Daraus wird ein kryptografischer Hash (IrisCode) erzeugt, die Bilder werden laut Tools for Humanity sofort gel&ouml;scht, anonymisierte Fragmente &uuml;ber ein verteiltes Netzwerk verteilt, um Doppelregistrierung auszuschlie&szlig;en. Die Authentifizierung bei Tinder erfolgt &uuml;ber Zero-Knowledge-Proofs (die Plattform erf&auml;hrt nicht die Identit&auml;t, nur dass der Nutzer einmalig ein Mensch ist). World z&auml;hlt laut Biometric Update Ende 2025 zwischen 38 und 40 Millionen App-Nutzer, davon etwa 20 Millionen Orb-verifizierte &bdquo;verified humans&ldquo;. In den USA ist Orb-Pr&auml;senz aktuell in Atlanta, Austin, Los Angeles, Miami, Nashville und San Francisco; Ausbau auf New York und weitere St&auml;dte ist angek&uuml;ndigt, zus&auml;tzlich mobile &bdquo;Orb-to-you&ldquo;-Services.</p>
+
+            <p>Altman begr&uuml;ndete den Vorsto&szlig; mit zwei S&auml;tzen, die die Ambition und die Ironie gut zeigen. &bdquo;World ID is on the way to being a real human network for the internet.&ldquo; Und: &bdquo;We are also heading to a world now where there&rsquo;s going to be more stuff generated by AI than by humans.&ldquo; Der offensichtliche Interessenkonflikt: Altman ist zugleich CEO von OpenAI &mdash; dem Unternehmen, dessen Generatoren (ChatGPT, Sora) wesentlich zur Bot- und Synthetik-Content-Flut beitragen, gegen die World nun die L&ouml;sung verkauft. Kritiker nennen das &bdquo;Problem verkaufen, L&ouml;sung verkaufen&ldquo;.</p>
+
+            <p>Deutschland fehlt auff&auml;llig in der Pressemitteilung. Das Bayerische Landesamt f&uuml;r Datenschutzaufsicht (BayLDA) f&uuml;hrt gegen Worldcoin seit 2023 ein Verfahren und ordnete Ende 2024 eine DSGVO-konforme L&ouml;schung der Irisdaten an. World legte Berufung ein, das Verfahren ist nicht abgeschlossen. Ein direkter Tinder-World-Launch in Deutschland ist damit rechtlich heikel. In Spanien, Kenia und auf den Philippinen wurde World zeitweise komplett verbannt. Ein zweites Problem: Iris-Scans sind biometrische Sonderkategorie-Daten nach DSGVO Art. 9 und &mdash; anders als ein Passwort &mdash; nicht zur&uuml;cksetzbar. Parallel launcht World &bdquo;AgentKit&ldquo;, mit dem verifizierte Menschen ihre ID an KI-Agenten delegieren k&ouml;nnen: Die Grenze zwischen &bdquo;Mensch&ldquo; und &bdquo;Bot mit menschlicher Ausweisleihe&ldquo; wird damit vom L&ouml;sungsanbieter selbst aufgeweicht.</p>
+
+            <p>Im Kontext des Tages l&auml;sst sich die Meldung nicht isolieren. Am selben 17.&nbsp;April dr&auml;ngten Macron, Merz und von der Leyen auf EU-weite Alterskontrollen, die EU-Altersverifikations-App wurde von Sicherheitsforschern in zwei Minuten geknackt, und Justizministerin Hubig stellte das Gesetz gegen digitale Gewalt (Deepfakes, Doxing, Cyberstalking) vor. Die Frage wird damit politisch: Soll Proof-of-Personhood staatlich (EU eID, EUDIW) oder privatwirtschaftlich-biometrisch (Altman, Orb) gel&ouml;st werden? Wir beleuchten die kompletten technischen, rechtlichen und strategischen Dimensionen in unserer <a href="reportagen/2026-04-18.html">Reportage dieser Ausgabe</a>.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/17/sam-altmans-project-world-looks-to-scale-its-human-verification-empire-first-stop-tinder/" rel="noopener noreferrer external">TechCrunch &mdash; Sam Altman&rsquo;s World Expands: First Stop Tinder</a></li>
+                <li><a href="https://www.axios.com/2026/04/17/worldcoin-zoom-shopify-retail-partnership" rel="noopener noreferrer external">Axios &mdash; World partners with Zoom, Tinder, Shopify</a></li>
+                <li><a href="https://www.cbsnews.com/news/sam-altman-orb-world-iris-scan-proof-of-personhood-ai/" rel="noopener noreferrer external">CBS News &mdash; Altman&rsquo;s Orb and Proof of Personhood</a></li>
+                <li><a href="https://www.biometricupdate.com/202501/world-network-reaches-10-million-verified-humans-amid-continued-legal-blocks" rel="noopener noreferrer external">Biometric Update &mdash; World Network Verified Humans</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Medien &amp; KI</div>
+            <h2 id="art-6-h">Netflix-Gr&uuml;nder Hastings zieht sich zur&uuml;ck &mdash; KI &uuml;bernimmt immer mehr Produktionen</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17. April 2026</time> &middot; Quellen: Variety, Bloomberg, TechCrunch, Netflix</div>
+        </header>
+        <p class="article-teaser">Reed Hastings, Netflix-Mitgr&uuml;nder seit 1997 und zuletzt Aufsichtsratsvorsitzender, kandidiert im Juni nicht mehr. Im selben Quartalsbrief k&uuml;ndigt Netflix massiven KI-Einsatz bei Produktion, Empfehlungen und einem neuen Vertical-Feed an. Das Ende der Gr&uuml;nder-&Auml;ra und der Start der KI-&Auml;ra fallen zusammen &mdash; Disney folgt im Tagestakt mit 1.000 Entlassungen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Ank&uuml;ndigung kam am Abend des 16.&nbsp;April im Q1-Shareholder-Letter, aufgegriffen in deutschen Medien am Freitag, 17.&nbsp;April. <strong>Reed Hastings</strong>, Chairman des Boards seit Januar 2023 und Co-CEO davor, kandidiert beim Annual Meeting am 4.&nbsp;Juni nicht mehr zur Wiederwahl. Er hat Netflix 29 Jahre begleitet, vom DVD-Versand &uuml;ber das Streaming-Pivot bis zum Original-Content-Dominator. Das Nominating Committee soll in den kommenden Monaten die Board-Neustruktur gestalten. Co-CEOs Ted Sarandos und Greg Peters bleiben. Offizielle Begr&uuml;ndung: Fokus auf Philanthropie und &bdquo;other pursuits&ldquo;. Kein &ouml;ffentlicher Bruch, aber der Kurs fiel am Handelstag trotzdem um mehr als zehn Prozent &mdash; nicht wegen Hastings, sondern wegen des schwachen Ausblicks von 12-14&nbsp;Prozent Umsatzwachstum.</p>
+
+            <p>Im selben Dokument konkretisierte Netflix seine KI-Strategie deutlich. Der Einsatz-Katalog ist breit: Generative KI f&uuml;r VFX (bereits produktiv), Pre-Visualization, Shot Planning, Personalisierte Empfehlungen plus einen <em>neuen Vertical-Video-Feed</em> als direkte TikTok-Antwort, Dubbing und Lokalisierung, sowie Ad-Targeting f&uuml;r das 2026er Werbeziel von rund drei Milliarden Dollar. Leuchtturmprojekt ist die argentinische Sci-Fi-Serie &bdquo;El Eternauta&ldquo;: Eine komplette Geb&auml;udeeinsturz-Szene wurde zu hundert Prozent generativ erzeugt &mdash; laut Netflix zehnmal schneller und deutlich g&uuml;nstiger als klassische VFX. Die Tools stammen von Netflix-Tochter Eyeline Studios und der Anfang M&auml;rz 2026 &uuml;bernommenen Firma <strong>InterPositive</strong>, Ben Afflecks KI-VFX-Startup. Netflix committet sich bewusst nicht auf einen Modell-Anbieter &mdash; eigene Modelle, OpenAI und Anthropic laufen parallel.</p>
+
+            <p>Sarandos hat seine Haltung aus 2025 wiederholt: AI sei &bdquo;an incredible opportunity to help creators make films and series better, not just cheaper&ldquo;. Er nennt &bdquo;10&nbsp;Prozent besser&ldquo; statt &bdquo;50&nbsp;Prozent g&uuml;nstiger&ldquo; als Netflix-Leitlinie &mdash; eine Reaktion auf James Camerons Warnung, Netflix setze auf Effizienz statt auf Qualit&auml;t. Bela Bajaria, Chief Content Officer, kommentierte die InterPositive-&Uuml;bernahme: &bdquo;For me, it&rsquo;s not really about cheaper, it&rsquo;s really about better.&ldquo; Die SAG-AFTRA-Leitlinien von 2024 bleiben in Kraft: GenAI darf laut Partner-Vereinbarung nicht zur Ersetzung gewerkschaftlich abgedeckter Arbeit oder zur Erzeugung synthetischer Darsteller ohne Zustimmung eingesetzt werden.</p>
+
+            <p>Der Zeitpunkt verbindet zwei Geschichten &mdash; Gr&uuml;nder-&Uuml;bergang und KI-&Auml;ra &mdash; in derselben Woche, in der Disney bis zu 1.000 Mitarbeiter entl&auml;sst und Snapchat 16&nbsp;Prozent seiner Stellen streicht (Messenger-Probleme). F&uuml;r PMs und Medienmanager ist die Kernbotschaft: Die Produktions&ouml;konomie verschiebt sich schneller, als viele Analysten erwartet haben. Wer KI nicht in die Pipeline integriert, wird nicht unbedingt schlechtere Serien produzieren &mdash; aber teurer. Und in einem Markt, in dem Netflix, Disney+, Amazon, YouTube, TikTok und nun auch Apple TV+ um dieselben Werbeminuten k&auml;mpfen, ist Kosten-Disziplin nicht mehr Nice-to-Have.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://variety.com/2026/tv/news/reed-hastings-exits-netflix-board-1236723878/" rel="noopener noreferrer external">Variety &mdash; Reed Hastings Exits Netflix Board</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-16/netflix-co-founder-reed-hastings-to-leave-board-in-june" rel="noopener noreferrer external">Bloomberg &mdash; Netflix Co-Founder to Leave Board</a></li>
+                <li><a href="https://techcrunch.com/2026/04/17/netflix-plans-to-add-a-vertical-video-feed-use-ai-for-recommendations/" rel="noopener noreferrer external">TechCrunch &mdash; Netflix Plans Vertical Video Feed</a></li>
+                <li><a href="https://ir.netflix.net/files/doc_financials/2026/q1/FINAL-Q1-26-Shareholder-Letter.pdf" rel="noopener noreferrer external">Netflix &mdash; Q1 2026 Shareholder Letter (PDF)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Der Kampf um die digitale Identit&auml;t &mdash; wie KI-generierter Content eine neue Infrastruktur erzwingt</h2>
+            <p class="article-teaser">Deepfakes kosteten 2024 allein in den USA 16,6&nbsp;Mrd.&nbsp;Dollar, der Arup-CFO-Fake brachte 25&nbsp;Mio. in eine Transaktion, und auf Tinder sind Sch&auml;tzungen zufolge 30-50 Prozent der Profile gef&auml;lscht. Am selben Tag, an dem Tinder den Orb-Scan ank&uuml;ndigt, dr&uuml;ckt Macron Alterskontrollen, knackt ein Forscher die EU-App in Minuten, und Hubig stellt das Digitale-Gewalt-Gesetz vor. Was Tech-CEOs jetzt entscheiden m&uuml;ssen &mdash; und warum kein System allein gewinnt. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-18.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/canva.com.png" alt="Canva Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.canva.com/newsroom/news/canva-create-2026-ai/" rel="noopener noreferrer external">Canva AI 2.0</a></div>
+                    <div class="tool-card-desc">Agentische Design-Plattform, die Prompts in vollst&auml;ndig editierbare Designs verwandelt und sich mit Slack, Notion, Gmail, Drive und Zoom verbindet. Eigene Modelle (Proteus, Lucid Origin, I2V) laut Canva bis zu siebenmal schneller und 30x g&uuml;nstiger als vergleichbare Frontier-Modelle.</div>
+                    <div class="tool-card-meta">16. April 2026. Canva, Sydney.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/nvidia.com.png" alt="NVIDIA Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers" rel="noopener noreferrer external">NVIDIA Ising</a></div>
+                    <div class="tool-card-desc">Erste offene KI-Modellfamilie f&uuml;r Quantenprozessor-Kalibrierung und Fehlerkorrektur-Decoding: 2,5x schneller, 3x genauer als klassische Ans&auml;tze, Kalibrierung in Stunden statt Tagen. Erste ernsthafte Br&uuml;cke zwischen KI und Quantum-Stack &mdash; Early Adopters: Harvard, Fermilab, LBNL, IQM.</div>
+                    <div class="tool-card-meta">14. April 2026. NVIDIA.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/hubspot.com.png" alt="HubSpot Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.hubspot.com/company-news/spring-2026-spotlight" rel="noopener noreferrer external">HubSpot Breeze Agents</a></div>
+                    <div class="tool-card-desc">Rebuild von Prospecting, Customer und Deal-Progression-Agenten plus neues AEO-Produkt. Erster gro&szlig;er CRM-Anbieter mit Outcome-Based Pricing: 0,50&nbsp;$ pro gel&ouml;ster Kundenkonversation, 1&nbsp;$ pro empfohlenem Lead. Kampfansage an Salesforce und Microsoft &mdash; 100+ Updates auf einen Schlag.</div>
+                    <div class="tool-card-meta">14. April 2026. HubSpot.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/emergent.sh.png" alt="Emergent Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://emergent.sh" rel="noopener noreferrer external">Emergent Wingman</a></div>
+                    <div class="tool-card-desc">Autonomer Agent, der &uuml;ber WhatsApp, Telegram und iMessage l&auml;uft &mdash; managt E-Mail, Kalender, Recherche, Sales und Hiring im Hintergrund. Messenger-natives Agent-Interface statt Web-UI, mit &bdquo;Trust Boundaries&ldquo; f&uuml;r kritische Aktionen.</div>
+                    <div class="tool-card-meta">15. April 2026. Emergent, Bengaluru.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/coderabbit.ai.png" alt="CodeRabbit Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.coderabbit.ai/blog/coderabbit-plugin-for-codex" rel="noopener noreferrer external">CodeRabbit f&uuml;r Codex</a></div>
+                    <div class="tool-card-desc">Plugin, das CodeRabbit-Code-Reviews direkt in OpenAIs Codex (App und CLI) einbettet &mdash; &bdquo;Review meine &Auml;nderungen&ldquo; als Chat-Command. Erstes Plugin &uuml;ber das Codex Plugin Directory, das End-to-End-Code-Review in den Agent-Workflow verlagert. Findings sortiert nach Severity.</div>
+                    <div class="tool-card-meta">15. April 2026. CodeRabbit, San Francisco (YC).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="Haindy GitHub Repo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/Haindy/haindy" rel="noopener noreferrer external">Haindy</a></div>
+                    <div class="tool-card-desc">Open-Source-CLI, die Coding-Agenten (Claude Code, Codex CLI, OpenCode) Computer-Use-F&auml;higkeiten gibt &mdash; Screenshot- und koordinatenbasiert auf Desktop, Android und iOS. Statt DOM/Accessibility rein visuelles Navigieren, identisch zu menschlichem Testing. Trending auf Hacker News.</div>
+                    <div class="tool-card-meta">17. April 2026. Indie Developer, MIT-Lizenz.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=QVJcdfkRpH8" rel="noopener noreferrer external"><img src="../assets/images/thumbs/QVJcdfkRpH8.jpg" alt="AI Explained Opus 4.7 Analyse Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 20 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=QVJcdfkRpH8" rel="noopener noreferrer external">Claude Opus 4.7 &mdash; A New Frontier, in Performance and Drama</a></div>
+                    <div class="yt-card-channel">AI Explained (417.000 Subs) &middot; 17. April 2026</div>
+                    <div class="yt-card-desc">Philip von AI Explained ordnet Opus&nbsp;4.7 in den Kontext von Mythos und dem Wiles/Bessent-Treffen ein: Wie sich differentielle Reduktion bei Cyber-F&auml;higkeiten auf reale Benchmarks auswirkt, warum der neue Tokenizer die 35-Prozent-Mehrkosten bedeutet, und was das f&uuml;r Enterprises hei&szlig;t, die derzeit Mythos und Opus parallel evaluieren.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=5PnP1gWGw20" rel="noopener noreferrer external"><img src="../assets/images/thumbs/5PnP1gWGw20.jpg" alt="NeetCode Opus 4.7 kritische Analyse Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 14 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=5PnP1gWGw20" rel="noopener noreferrer external">Opus 4.7 Has a Big Problem</a></div>
+                    <div class="yt-card-channel">NeetCode (1,07 Mio. Subs) &middot; 17. April 2026</div>
+                    <div class="yt-card-desc">Der CS-Educator NeetCode macht einen Developer-nahen Kritik-Check: Wo Opus&nbsp;4.7 auf echten Coding-Problemen schw&auml;chelt, wie sich &bdquo;w&ouml;rtliche Instruktionsbefolgung&ldquo; im Alltag eines Software-Engineers negativ auswirkt und warum die Token-Verbrauchs&auml;nderung f&uuml;r viele Teams der Blocker wird. Pflicht f&uuml;r Leads, die Anthropic-Kosten im Griff halten m&uuml;ssen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=bmDJYcyv4m8" rel="noopener noreferrer external"><img src="../assets/images/thumbs/bmDJYcyv4m8.jpg" alt="Eliot Prince Claude Design Analyse Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 17 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=bmDJYcyv4m8" rel="noopener noreferrer external">Claude DESIGN Just Dropped, And&hellip;</a></div>
+                    <div class="yt-card-channel">Eliot Prince (34.900 Subs) &middot; 27.358 Views in 24h &middot; ca. 0,8x Views/Subs</div>
+                    <div class="yt-card-desc">Eliot Prince ist ein kleinerer Design-orientierter Creator, der Claude Design am Launch-Tag in der Produktion durchgetestet hat: Was das Tool wirklich kann (Design-System aus Codebase ableiten), wo es abbricht (komplexe Interaktionen, Component-Libraries) und wie Designer das einordnen sollten. Ein seltener ehrlicher Praxischeck aus der Design-Community, der am Launch-Tag viral geht &mdash; Fr&uuml;hindikator daf&uuml;r, wie Claude Design in professionellen Teams ankommt.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
