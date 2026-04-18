@@ -94,6 +94,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - N4ZWCc_Fr3U — Opus 4.7 just dropped... and I'm confused. (Matthew Berman, 2026-04-16)
 - Sk9tvyRSCgY — Why DeepMind's New AI Broke The Internet (Two Minute Papers, 2026-04-16)
 - LRorapr8Oyc — What Claude Opus 4.7 means for AI code review (CodeRabbit, 2026-04-16)
+- QVJcdfkRpH8 — Claude Opus 4.7 - A New Frontier, in Performance and Drama (AI Explained, 2026-04-17)
+- 5PnP1gWGw20 — Opus 4.7 Has a Big Problem (NeetCode, 2026-04-17)
+- bmDJYcyv4m8 — Claude DESIGN Just Dropped, And... (Eliot Prince, 2026-04-17)
 
 ---
 
@@ -267,6 +270,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Intent (Augment Code) (2026-04-17)
 - Lovable Desktop App (2026-04-17)
 - Libretto (2026-04-17)
+- Canva AI 2.0 (2026-04-18)
+- NVIDIA Ising (2026-04-18)
+- HubSpot Breeze Agents (2026-04-18)
+- Emergent Wingman (2026-04-18)
+- CodeRabbit for Codex (2026-04-18)
+- Haindy (2026-04-18)
+
+---
+
+## 2026-04-18
+- OpenAI-Exodus 17.04.: Kevin Weil (Ex-CPO, OpenAI for Science) + Bill Peebles (Sora/DiT-Miterfinder) + Srinivas Narayanan (Enterprise-CTO) verlassen am selben Tag — Framing via Simos "side quests"-Memo; Kontext: Farrow-New-Yorker-Artikel 07.04., Molotow-Angriff 10.04., IPO Q4 2026 bei 1 Billion Zielbewertung; Sora-App-Shutdown 26.04., API bis 24.09.; parallel xAI-Komplettexodus aller 11 Mitgr&uuml;nder
+- Anthropic Claude Design Launch: Opus-4.7-basiert, Websites/Prototypen/Slides aus Prompts, Design-System automatisch aus Codebase und Design-Files, Export zu Canva/PDF/PPTX/HTML (kein direkter Figma-Export), Zielgruppe explizit Non-Designer (Founder/PMs/Marketer); Figma-Aktie intraday bis -6,8% auf 18,79 USD, drei Tage nach Mike Kriegers Figma-Board-Austritt
+- Cursor verhandelt $2 Mrd.+ bei $50 Mrd. Bewertung: Lead Thrive/a16z, neu Battery Ventures und Nvidia strategisch; ARR Feb 2026: $2 Mrd. (Verdopplung in 3 Monaten), Jahresend-Ziel $6 Mrd.; 90% der 20.000 Salesforce-Entwickler nutzen Cursor; letzter Bewertungssprung $9,9 Mrd. (Juni 2025) → $29,3 Mrd. (Nov 2025) → $50 Mrd. (April 2026)
+- Anthropic-US-Regierung Verhandlungen: Amodei trifft Stabschefin Susie Wiles und überraschend Finanzminister Scott Bessent im Wei&szlig;en Haus; OMB-Memo: Treasury, State, DHS, Commerce, Justice, CISA erhalten "in Wochen" Zugang zu Mythos Preview — umgeht Pentagon/Hegseth; Ninth-Circuit-Deadline DOJ am 30.04.; Opus 4.7 als "differentiell reduziertes" Bridge-Modell; OpenAI kontert mit GPT-5.4-Cyber + TAC-Programm
+- Sam Altmans World expandiert zu Tinder/Match Group, Zoom ("Deep Face"), Visa, DocuSign, Ticketmaster — Proof-of-Human via Orb-Iris-Scan und ZKP-Auth; 18 Mio. verifizierte Nutzer Ende 2025, Orb-Pr&auml;senz in 6 US-St&auml;dten (Atlanta, Austin, LA, Miami, Nashville, SF); Tinder-Pilot l&auml;uft seit Mitte 2025 in Japan; Deutschland fehlt wegen BayLDA-Verfahren
+- Reed Hastings verl&auml;sst Netflix-Board zum 4. Juni 2026 nach 29 Jahren; parallel Q1-Announcement: massiver Gen-AI-Einsatz für VFX (Eyeline Studios + InterPositive/Ben Affleck), Pre-Vis, Dubbing, neuer Vertical-Video-Feed als TikTok-Kontra, 3 Mrd. Werbeziel 2026; Leuchtturm-Serie "El Eternauta" (Geb&auml;udeeinsturz 100% generativ); Netflix-Kurs -10% am Handelstag wg schwachem 12-14% Umsatzwachstum
+- Reportage: Der Kampf um die digitale Identit&auml;t — FBI IC3 16,6 Mrd. USD 2024, Arup 25-Mio-Deepfake-CFO-Fall, Tinder 30-50% Fake-Profile; 5 konkurrierende Technologien (World Orb biometrisch, BrightID dezentral, ZKPs, C2PA Content Provenance, EU eID/EUDIW); EU AI Act Art. 50 zum 2.8.2026, deutsches Digitales-Gewalt-Gesetz mit bis zu 2 Jahre Haft f&uuml;r Deepfakes, Chat-Control-2.0-Verhandlungen; EU-App in 2 Minuten geknackt (Paul Moore); 5-Fragen-Framework f&uuml;r CTOs
 
 ---
 
