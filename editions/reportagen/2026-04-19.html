@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Die Konsolidierung des AI-Chip-Marktes &mdash; Die Inferenz, 19. April 2026</title>
+    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-19.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Die Konsolidierung des AI-Chip-Marktes &mdash; was Cerebras&rsquo; IPO-Comeback &uuml;ber Nvidias Herausforderer verr&auml;t</h1>
+    <p class="article-subtitle">Im Dezember 2025 kaufte Nvidia das Inference-Startup Groq f&uuml;r 20&nbsp;Mrd.&nbsp;Dollar. Im Februar lehnte SambaNova ein Intel-Angebot &uuml;ber 1,6&nbsp;Mrd. ab. Am 17.&nbsp;April reichte Cerebras erneut ein IPO-Prospekt ein &mdash; mit 510&nbsp;Mio. Umsatz und 86&nbsp;Prozent der Eink&uuml;nfte aus den Vereinigten Arabischen Emiraten. Die Nvidia-Herausforderer stehen 2026 vor drei Wegen: Staatsfonds-Abh&auml;ngigkeit, Hyperscaler-Abkommen oder IP-Lizenzierung &agrave; la ARM. Was Tech-Leads daraus lernen.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-19">Sonntag, 19. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Die Zahlen sehen auf den ersten Blick nach Gesundheit aus. Cerebras Systems, der einzige verbliebene Pure-Play-Nvidia-Herausforderer mit &ouml;ffentlich einsehbaren Finanzen, reichte am 17.&nbsp;April 2026 ein S-1-Dokument bei der SEC ein: 510&nbsp;Millionen&nbsp;Dollar Umsatz 2025 (plus 76&nbsp;Prozent), erstmalig 87,9&nbsp;Millionen&nbsp;Dollar Nettogewinn, Ticker CBRS an der Nasdaq, Bewertung 22 bis 25&nbsp;Milliarden. Zum Vergleich: 2024 hatte das Haus noch 485&nbsp;Millionen Verlust geschrieben. Ein zweijahriger Turnaround-Erfolg, und zugleich der zweite IPO-Versuch &mdash; der erste 2024 war an einer CFIUS-Pr&uuml;fung zum Minderheitsaktion&auml;r G42 aus den VAE gescheitert. Alles gut also? Nicht ganz.</p>
+
+        <p>In derselben S-1-Datei steht, dass 62&nbsp;Prozent des Umsatzes 2025 aus einer einzigen Kundenbeziehung stammten: der Mohamed bin Zayed University of Artificial Intelligence. G42 machte weitere 24&nbsp;Prozent aus. Zusammen: 86&nbsp;Prozent aus den Vereinigten Arabischen Emiraten. Auf der anderen Seite der Welt, f&uuml;nf Monate zuvor, hatte Nvidia zu Weihnachten 2025 still angek&uuml;ndigt, das Konkurrenz-Startup Groq f&uuml;r rund 20&nbsp;Milliarden&nbsp;Dollar zu &uuml;bernehmen &mdash; ein Deal, den die US-Senatoren Warren, Blumenthal und Wyden inzwischen als &bdquo;reverse acqui-hire&ldquo; angreifen und den DOJ und FTC pr&uuml;fen sollen. Beide Meldungen zusammen beschreiben einen Markt in der Endphase seiner ersten Konsolidierung.</p>
+
+        <h2>Nvidias Position 2026: kein M&auml;rchen vom Schrumpfen</h2>
+
+        <p>Um die Gegner zu verstehen, muss man zuerst den Marktf&uuml;hrer verstehen. Nvidia meldete f&uuml;r das Geschaftsquartal Q3 FY2026 (Ende 26.&nbsp;Oktober 2025) einen Umsatz von 57&nbsp;Milliarden&nbsp;Dollar &mdash; plus 62&nbsp;Prozent gegen&uuml;ber dem Vorjahr &mdash; bei einer GAAP-Bruttomarge von 73,4&nbsp;Prozent. F&uuml;r das laufende Fiskaljahr 2026 erwartet das Unternehmen rund 194&nbsp;Milliarden Dollar alleine im Data-Center-Segment. Der Marktanteil bei Data-Center-AI-Accelerators liegt laut mehreren Analystenh&auml;usern weiterhin bei 86 bis 92&nbsp;Prozent. Prognosen f&uuml;r 2026/27 sehen einen R&uuml;ckgang auf rund 75&nbsp;Prozent &mdash; in absoluten Zahlen aber weiteres Wachstum, weil der Markt schneller w&auml;chst, als Anteile verloren gehen.</p>
+
+        <p>Die Produkt-Taktung des Marktf&uuml;hrers verh&auml;rtet die Position zus&auml;tzlich. Blackwell Ultra (B300, 288&nbsp;GB HBM3e, 15&nbsp;Petaflops FP4) liefert seit Januar 2026 aus. Vera Rubin (R200) soll in der zweiten Jahresh&auml;lfte 2026 folgen: 336&nbsp;Milliarden Transistoren, 288&nbsp;GB HBM4, 22&nbsp;TB/s Speicherbandbreite, laut Nvidias eigener Prognose zehnmal niedrigere Inference-Kosten pro Token gegen&uuml;ber Blackwell. Der eigentliche Graben liegt aber nicht im Chip. Er liegt im Packaging: Nvidia sichert sich nach Angaben von Paradox Intelligence &uuml;ber 60&nbsp;Prozent der gesamten TSMC-CoWoS-Kapazit&auml;t 2026 und &uuml;ber 70&nbsp;Prozent der h&ouml;herwertigen CoWoS-L-Variante, die f&uuml;r HBM-Integration n&ouml;tig ist. Wer heute einen Plan f&uuml;r 2027 schmiedet, muss also nicht nur Silizium bekommen, sondern auch den Platz im CoWoS-Backend.</p>
+
+        <p>CUDA ist und bleibt der unsichtbare Moat: rund 85&nbsp;Prozent Marktanteil bei AI-Training. ROCm (AMD) schlie&szlig;t 2026 zwar auf &mdash; die MI355X lag im MLPerf-Inference-Benchmark vom 1.&nbsp;April 2026 im einstelligen Prozentbereich hinter Nvidias B200 &mdash; aber der Wechsel kostet Engineering-Zeit, f&uuml;r die keine einzige Finanzvorstand zahlen will, solange das bestehende Setup liefert.</p>
+
+        <h2>Der Groq-Deal: die neue Form der Vollendung</h2>
+
+        <p>Der Schock der Branche kam am 24.&nbsp;Dezember 2025. Nvidia verk&uuml;ndete eine &bdquo;non-exclusive licensing agreement&ldquo; mit Groq &mdash; nicht eine Akquisition im klassischen Sinn. Die Struktur: Nvidia lizenziert Groqs LPU-Inference-IP, &uuml;bernimmt die F&uuml;hrung (CEO Jonathan Ross, President Sunny Madra sowie Kern-Ingenieure wechseln zu Nvidia), und Groq firmiert unter neuem CEO Simon Edwards (vormals CFO) formal als unabh&auml;ngige Inference-Cloud weiter. Transaktionswert nach Marktmeldungen: rund 20&nbsp;Milliarden Dollar &mdash; etwa dreimal die letzte Groq-Finanzierung vom September 2025 (750&nbsp;Millionen zu 6,9&nbsp;Milliarden Bewertung). Damit w&auml;re es der gr&ouml;&szlig;te Nvidia-Deal &uuml;berhaupt.</p>
+
+        <p>Die gew&auml;hlte Form ist kein Zufall. Eine klassische &Uuml;bernahme h&auml;tte die Hart-Scott-Rodino-Meldung und eine garantierte Prufung ausgel&ouml;st. Eine reine Lizenzvereinbarung plus Personaltransfer umgeht das &mdash; bis zum 4.&nbsp;Februar 2026, an dem Warren, Blumenthal und Wyden einen Brief an Nvidia verschickten, der den Deal als &bdquo;reverse acqui-hire&ldquo; beschreibt und DOJ sowie FTC zur Pr&uuml;fung auffordert. FTC-Chair Ferguson hatte im Januar 2026 &ouml;ffentlich erkl&auml;rt, solche Deal-Strukturen in die Aufsicht einbeziehen zu wollen. Eine m&ouml;gliche Folge: Unwind-Order, Zwangsver&auml;u&szlig;erung der Lizenz, Geldstrafen. Der Prozess l&auml;uft.</p>
+
+        <p class="pull-quote">&bdquo;Die gew&auml;hlte Dealstruktur vermeidet den formalen Zusammenschluss &mdash; f&uuml;r die Kartellbeh&ouml;rden ist das nicht die entscheidende Frage.&ldquo;</p>
+
+        <h2>Drei &Uuml;berlebensstrategien</h2>
+
+        <p>Wenn Groq gefallen ist, was bleibt den anderen? Ein Blick auf die drei gr&ouml;&szlig;ten verbliebenen unabh&auml;ngigen Nvidia-Konkurrenten zeigt drei v&ouml;llig unterschiedliche Wege.</p>
+
+        <p><strong>Cerebras &mdash; die Staatsfonds-Pfadabh&auml;ngigkeit.</strong> Die technischen Zahlen des WSE-3-Chips sind beeindruckend: 4&nbsp;Billionen Transistoren, 900.000 Cores auf einer einzigen Siliziumscheibe, 969&nbsp;Tokens pro Sekunde bei Llama&nbsp;3.1-405B, laut Cerebras 21-mal schneller als ein Nvidia-DGX-B200 bei einem Drittel der Kosten. Kommerziell ist die Story aber eindimensional: MBZUAI plus G42 plus ein OpenAI-Infrastruktur-Deal &uuml;ber &uuml;ber 10&nbsp;Milliarden Dollar (Januar 2026, 750&nbsp;MW Compute bis 2028). Der OpenAI-Vertrag brachte Cerebras eine kritische Diversifizierung &mdash; aber OpenAI ist gleichzeitig Kunde der Hyperscaler, die Nvidia-Hardware nutzen. Die VAE-Konzentration bleibt das Risiko, das jeden IPO-Investor als Erstes st&ouml;ren wird. Kurzfassung des Modells: Wer keinen westlichen Hyperscaler gewinnt, h&auml;ngt vom n&auml;chsten Staatsfonds-Deal ab.</p>
+
+        <p><strong>SambaNova &mdash; der Hyperscaler-Begleiter.</strong> Im Januar 2026 zerschlug sich &uuml;berraschend die fortgeschrittene &Uuml;bernahmeverhandlung mit Intel: 1,6&nbsp;Milliarden&nbsp;Dollar standen im Raum. SambaNova lehnte ab, weil die Auftragsbucher im Schlussquartal 2025 so gut liefen, dass Vista Equity und Cambium Capital im Februar eine 350-Millionen-Series-E bereitstellten, an der sich Intel Capital sowie Staatsfonds aus Katar und Saudi-Arabien beteiligten. Der neue SN50-RDU-Chip (TSMC N3, 3,2&nbsp;Petaflops FP8, bis zu 2&nbsp;TB DDR5-Speicher plus 64&nbsp;GB HBM2e) ist f&uuml;r agentische Inference optimiert und soll laut SambaNova f&uuml;nfmal schneller und dreimal effizienter sein als ein B200. Der Erstkunde: SoftBank Corp. Japan. Parallel sicherte sich SambaNova eine mehrj&auml;hrige Intel-Partnerschaft (Xeon-CPUs, Intel-GPUs als Host). Das Modell: spezifische Workload-Nische (Long Context, Agent Inference) bedienen und sich bewusst nicht als Nvidia-Ersatz positionieren.</p>
+
+        <p><strong>Tenstorrent &mdash; die ARM-Strategie.</strong> Jim Kellers Firma setzt auf einen v&ouml;llig anderen Business-Pfad. 693&nbsp;Millionen&nbsp;Dollar Series-D Ende 2025, nachgelagert auf 800&nbsp;Millionen bei 3,2&nbsp;Milliarden Bewertung aufgestockt, Samsung Securities und Fidelity als Leads, Hyundai und Kia als strategische Investoren (je 30 und 20&nbsp;Millionen). Das Produkt ist nicht der eigene Chip, sondern eine lizenzierbare IP-Familie: Ascalon als RISC-V-CPU-Kern, Tensix als AI-Beschleuniger. Tenstorrent will nicht der n&auml;chste Nvidia werden, sondern der n&auml;chste ARM &mdash; einer, der Chip-Designs an andere verkauft, statt selbst zu fertigen. Der offene Software-Stack und die Razer-Partnerschaft im Januar 2026 f&uuml;r Edge-AI-Beschleuniger deuten den Weg an. Der Nachteil: Lizenz-Gesch&auml;fte skalieren langsamer als Hardware-Verk&auml;ufe und funktionieren erst, wenn genug Lizenznehmer vorhanden sind.</p>
+
+        <h2>Der stille Angriff aus den Hyperscaler-Fabs</h2>
+
+        <p>Die sichtbare Konkurrenz zu Nvidia besteht aus Startups &mdash; die strukturell gef&auml;hrlichere kommt aus den Cloud-Konzernen selbst. Google stellte am 7.&nbsp;November 2025 den TPU v7 mit dem Codenamen Ironwood vor: 4.614 FP8-Teraflops pro Chip, 192&nbsp;GB HBM3e, ein Pod mit 9.216 Chips, zehnmal Peak gegen&uuml;ber TPU v5p, und erstmals f&uuml;r reine Inference ausgelegt. AWS Trainium 3 (3&nbsp;nm, 144&nbsp;GB HBM3e, UltraServer mit 144 Chips) wird bei Anthropic, OpenAI und Apple eingesetzt. Microsoft Maia 200 (3&nbsp;nm, 216&nbsp;GB HBM3e, 30&nbsp;Prozent bessere Preis-Leistung) ist Inference-fokussiert. Meta zieht mit MTIA-Generation 3 in Produktion ab Mitte 2026 und hat &uuml;ber Broadcom vier weitere Generationen bis 2027 kontrahiert.</p>
+
+        <p>Die Auswirkung auf den Markt ist konkret. Custom-ASICs halten 2025 rund 10 bis 15&nbsp;Prozent Marktanteil; Prognosen sehen bis 2030 einen Anstieg auf 15 bis 25&nbsp;Prozent bei einer Wachstumsrate von 44,6&nbsp;Prozent pro Jahr. Gleichzeitig verschiebt sich das Gesamtgewicht von Training zu Inference: 2025 liegt der Inference-Anteil an den AI-Compute-Ausgaben bereits bei 50&nbsp;Prozent, 2026 bei rund zwei Dritteln, Prognose 2030: 75&nbsp;Prozent. Inference ist gleichzeitig das Segment, in dem Non-Nvidia-Chips die besten Chancen haben &mdash; weil Software-Portierung kleiner ist als im Training, und weil Latenz und Preis pro Token direkt die Kundenrechnung treffen.</p>
+
+        <h2>Was Tech-Leads daraus mitnehmen sollten</h2>
+
+        <p>F&uuml;r CTOs und PMs, die Infrastruktur-Entscheidungen f&uuml;r die kommenden achtzehn Monate treffen m&uuml;ssen, ergeben sich drei konkrete Leitplanken.</p>
+
+        <p><strong>Erstens: Die Lock-in-Frage zum zweiten Mal stellen.</strong> Wer bisher standardm&auml;&szlig;ig Nvidia-Hardware vorgeschrieben oder CUDA-Kernels in die eigene Codebasis geschrieben hat, sollte diese Entscheidung 2026 erneut pr&uuml;fen. F&uuml;r Training ist Nvidia noch die rationale Wahl. F&uuml;r Inference &mdash; der gr&ouml;&szlig;ere Posten &mdash; sind die Kostendifferenzen zu Non-Nvidia-Alternativen zu gro&szlig;, um sie zu ignorieren: Laut einer Register-Analyse vom M&auml;rz 2026 liegt der Cost-per-Token auf spezialisierten Inference-Chips zwischen fahig f&uuml;nf- bis f&uuml;nfzigmal niedriger als auf GPUs. Nvidia kontert mit Vera Rubins Preis-Leistungs-Sprung, aber die Rechnung bleibt offen. Praktische Konsequenz: PyTorch-first schreiben, Triton oder OpenXLA nutzen, wo m&ouml;glich, und sich nicht auf proprietare CUDA-Features festnageln.</p>
+
+        <p><strong>Zweitens: Multi-Vendor-Strategie &uuml;ber Cloud-APIs absichern.</strong> AWS Bedrock, Google Vertex, Azure AI Foundry abstrahieren die Hardware komplett weg. Wer &uuml;ber diese Schichten konsumiert, kann seinen Anbieter wechseln, ohne den eigenen Code zu &auml;ndern. Der Nachteil: Preis und Kontrolle. Der Vorteil: Resilienz gegen Allokationsengp&auml;sse. F&uuml;r Unternehmen, die keine eigene Beschaffungsstrategie auf Chip-Ebene stemmen k&ouml;nnen, ist das der pragmatischste Hedge gegen den CoWoS-Engpass und die Nvidia-Allokation.</p>
+
+        <p><strong>Drittens: Open-Weights-Strategie als Hardware-Unabh&auml;ngigkeit.</strong> Llama, Qwen, Gemma, DeepSeek &mdash; offene Modelle laufen auf Cerebras-WSE, auf Groq-LPU, auf AMD MI355X, auf Intel Gaudi und auf TPUs. Wer Closed-Model-Provider mit einer eigenen Hardware-Abh&auml;ngigkeit nutzt (Anthropic auf AWS Trainium, OpenAI auf Nvidia/Cerebras-Mischung), erbt deren strukturelle Fragilit&auml;ten. F&uuml;r kritische Inference-Workloads wird die Open-Weights-Option 2026 nicht mehr nur aus Kosten-, sondern aus Resilienz-Gr&uuml;nden interessant.</p>
+
+        <h2>Wohin der Markt l&auml;uft</h2>
+
+        <p>Das Signal von Cerebras&rsquo; IPO ist ambivalent. Zum ersten Mal hat ein Nvidia-Herausforderer &ouml;ffentliche Zahlen, wachsenden Umsatz und einen Gewinn vorgelegt. Zum ersten Mal wird ein AI-Chip-Unternehmen au&szlig;erhalb der Hyperscaler-Welt an die B&ouml;rse gehen &mdash; mit der Chance, durch die Notierung Kapital und Deckung f&uuml;r den weiteren Weg zu bekommen. Zum anderen zeigt die Finanzierungsgeschichte seit 2024, dass nur drei Arten von Ankerkunden f&uuml;r Pure-Play-Startups existieren: Staatsfonds (Cerebras, SambaNova), Hyperscaler (OpenAI, SoftBank) oder strategische Industriekunden (Hyundai/Kia f&uuml;r Tenstorrent). Das indische oder europ&auml;ische Unternehmen, das einfach mal AI-Chips kauft, ist nicht die Zielgruppe.</p>
+
+        <p>Das bedeutet auch: Der Markt f&uuml;r AI-Beschleuniger entwickelt sich nicht in Richtung Vielfalt, sondern in Richtung geteilter Geopolitik. Nvidia-CUDA bleibt der Westen-Standard. Huawei-Ascend wird Chinas Standard (mit US-Exportkontrollen, die auch Nicht-US-Personen treffen). Cerebras und SambaNova operieren als Middle-East-Proxy-Infrastruktur. Die Sorge, die CFIUS und DOJ umtreibt, ist damit nicht nur kartellrechtlich, sondern strategisch: Wer die AI-Chips liefert, bestimmt, wer welche Modelle trainieren und ausliefern kann. F&uuml;r europ&auml;ische Unternehmen ist das eine Aufforderung zum Hedging &mdash; nicht aus &ouml;konomischer Kalkulation, sondern aus strategischer Notwendigkeit.</p>
+
+        <p>Cerebras&rsquo; IPO k&ouml;nnte der letzte Versuch eines unabh&auml;ngigen Nvidia-Herausforderers sein, am Public Market Kapital zu beschaffen. Ob er gelingt, h&auml;ngt nicht von der Technik ab, sondern davon, ob Investoren 86&nbsp;Prozent Kundenkonzentration aus einem einzigen Land als L&ouml;sung oder als Hypothek einordnen. Bis zur Preisspanne in den kommenden Wochen bleibt das die offene Frage &mdash; und sie entscheidet dar&uuml;ber, wie lang das Zeitfenster f&uuml;r einen weiteren Pure-Play-AI-Chip-Launch am Public Market &uuml;berhaupt noch offen steht.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://techcrunch.com/2026/04/18/ai-chip-startup-cerebras-files-for-ipo/" rel="noopener noreferrer external">TechCrunch &mdash; Cerebras files for IPO</a></li>
+            <li><a href="https://www.cnbc.com/2026/04/17/cerebras-new-ipo-ai-chips.html" rel="noopener noreferrer external">CNBC &mdash; Cerebras New IPO AI Chips</a></li>
+            <li><a href="https://finance.yahoo.com/news/exclusive-ai-chip-firm-cerebras-181107401.html" rel="noopener noreferrer external">Reuters / Yahoo &mdash; Breaking Down the Cerebras S-1</a></li>
+            <li><a href="https://sherwood.news/markets/ai-cerebras-ipo-g42-customer-relationship/" rel="noopener noreferrer external">Sherwood News &mdash; Cerebras IPO and G42 Customer Concentration</a></li>
+            <li><a href="https://www.cnbc.com/2026/01/14/cerebras-scores-openai-deal-worth-over-10-billion.html" rel="noopener noreferrer external">CNBC &mdash; Cerebras Scores OpenAI Deal Worth Over $10B</a></li>
+            <li><a href="https://www.cnbc.com/2025/12/24/nvidia-buying-ai-chip-startup-groq-for-about-20-billion-biggest-deal.html" rel="noopener noreferrer external">CNBC &mdash; Nvidia Acquires Groq for ~$20 Billion</a></li>
+            <li><a href="https://groq.com/newsroom/groq-and-nvidia-enter-non-exclusive-inference-technology-licensing-agreement-to-accelerate-ai-inference-at-global-scale" rel="noopener noreferrer external">Groq Newsroom &mdash; Non-Exclusive Licensing Agreement with Nvidia</a></li>
+            <li><a href="https://www.warren.senate.gov/imo/media/doc/letter_from_senators_warren_blumenthal_to_nvidia_on_groq_deal.pdf" rel="noopener noreferrer external">US Senate &mdash; Warren, Blumenthal, Wyden Brief zum Nvidia-Groq-Deal (PDF)</a></li>
+            <li><a href="https://www.eetimes.com/sambanova-abandons-intel-acquisition-raises-funding-instead/" rel="noopener noreferrer external">EE Times &mdash; SambaNova Abandons Intel Acquisition</a></li>
+            <li><a href="https://sambanova.ai/blog/introducing-the-sn50-rdu-purpose-built-for-agentic-inference" rel="noopener noreferrer external">SambaNova &mdash; SN50 RDU Launch</a></li>
+            <li><a href="https://markets.financialcontent.com/wral/article/tokenring-2025-12-25-the-arm-killer-jim-kellers-tenstorrent-unleashes-ascalon-risc-v-ip-to-disrupt-the-data-center" rel="noopener noreferrer external">FinancialContent &mdash; Tenstorrent Ascalon RISC-V IP</a></li>
+            <li><a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026" rel="noopener noreferrer external">Nvidia &mdash; Q3 FY2026 Ergebnisse</a></li>
+            <li><a href="https://www.nextplatform.com/ai/2026/01/06/nvidias-vera-rubin-platform-obsoletes-current-ai-iron-six-months-ahead-of-launch/4092179" rel="noopener noreferrer external">Next Platform &mdash; Vera Rubin Obsoletes Current AI Iron</a></li>
+            <li><a href="https://blog.google/products/google-cloud/ironwood-google-tpu-things-to-know/" rel="noopener noreferrer external">Google Blog &mdash; Ironwood TPU v7</a></li>
+            <li><a href="https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference" rel="noopener noreferrer external">Tom&rsquo;s Hardware &mdash; Meta MTIA Chip Lineup</a></li>
+            <li><a href="https://www.paradoxintelligence.com/news/tsmc-2nm-three-layer-constraint-2026" rel="noopener noreferrer external">Paradox Intelligence &mdash; TSMC 2nm und CoWoS-Engpass</a></li>
+            <li><a href="https://www.theregister.com/2026/03/07/ai_inference_economics/" rel="noopener noreferrer external">The Register &mdash; Tokenomics of AI Inference</a></li>
+            <li><a href="https://www.cfr.org/articles/chinas-ai-chip-deficit-why-huawei-cant-catch-nvidia-and-us-export-controls-should-remain" rel="noopener noreferrer external">CFR &mdash; China&rsquo;s AI Chip Deficit</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
