@@ -97,6 +97,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - QVJcdfkRpH8 — Claude Opus 4.7 - A New Frontier, in Performance and Drama (AI Explained, 2026-04-17)
 - 5PnP1gWGw20 — Opus 4.7 Has a Big Problem (NeetCode, 2026-04-17)
 - bmDJYcyv4m8 — Claude DESIGN Just Dropped, And... (Eliot Prince, 2026-04-17)
+- 8YhYtIF9PYI — 7 Claude Code secrets you had NO idea about (Alex Finn, 2026-04-18)
+- VFLieg8JjLA — Claude Code: Build an AI Agent That Finds Vulnerabilities (Leon van Zyl, 2026-04-18)
+- sVzY_GQem4A — Claude Opus 4.7 is INSANE (Rank #1 in 10 Mins) (Sarvesh Shrivastava, 2026-04-17)
 
 ---
 
@@ -276,10 +279,21 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Emergent Wingman (2026-04-18)
 - CodeRabbit for Codex (2026-04-18)
 - Haindy (2026-04-18)
+- Schematik (2026-04-19)
+- Cloudflare Agent Memory (2026-04-19)
+- Twill.ai (2026-04-19)
+- Gemini for Mac (2026-04-19)
 
 ---
 
-## 2026-04-18
+## 2026-04-19
+- Meta plant am 20.05.2026 erste gro&szlig;e Entlassungswelle 2026: rund 8.000 Stellen / ~10% der 78.865-Belegschaft (Reuters-Exclusive 17.04.); weitere Runde in H2 2026 geplant; begr&uuml;ndet mit KI-Effizienzgewinnen und MSL-Umschichtung; Capex-Ausblick 2026 115-135 Mrd. USD (fast Verdopplung gg. 72 Mrd. 2025); Meta-Aktie +3% am Leak-Tag, Bank of America sch&auml;tzt 7-8 Mrd. USD j&auml;hrliche Einsparungen; Seit 2022 bereits 25.000 Stellen abgebaut
+- Cerebras Systems zweiter IPO-Anlauf: S-1 am 17.04.2026 bei SEC, Ticker CBRS, Nasdaq, Morgan Stanley + Citigroup Lead Underwriter; Volumen ~$2 Mrd. bei 22-25 Mrd. Bewertung; 2025 erstmals Nettogewinn $87,9 Mio. (vs. -$485 Mio. 2024), Umsatz $510 Mio. (+76%); Kundenkonzentration 62% MBZUAI + 24% G42 = 86% aus VAE; OpenAI-Vertrag Jan 2026 >$10 Mrd. &uuml;ber 750 MW Compute bis 2028; AWS-Partnerschaft M&auml;rz 2026; CFIUS-Pr&uuml;fung 2025 abgeschlossen, G42 nicht mehr Investor
+- OpenAI GPT-Rosalind Launch (16.04.2026): Frontier-Reasoning-Modell fine-tuned f&uuml;r Life Sciences, benannt nach Rosalind Franklin; 50 common biological workflows, LABBench2 besser als GPT-5.4 in 6/11 Tasks, BixBench 0,751; Launch-Partner Amgen, Moderna, Allen Institute, Thermo Fisher; kein &ouml;ffentlicher API, nur Trusted Access Program; kostenloses Life-Sciences-Plugin f&uuml;r Codex GitHub; OpenAI for Science wird am 17.04. aufgel&ouml;st (Kevin Weil exit), Nachfolger f&uuml;r Science-Sparte nicht benannt
+- Schematik (&bdquo;Cursor for Hardware&ldquo;) 4,6 Mio. USD Pre-Seed (Lightspeed lead, Puzzle Ventures, Angels aus Hugging Face/Google DeepMind); Gr&uuml;nder Sam Beek (Ex-VEED, Amsterdam); LLM generiert Embedded-Code + Schaltplan + St&uuml;ckliste aus Text-Prompts f&uuml;r Maker/Founder/Indie-Hardware; Anthropic-Engineer Felix Rieseberg launcht Hardware-API f&uuml;r Claude, Schematik ist Launch-Partner (laut Wired 18.04.); Wettbewerb: Flux.ai (37M Feb 2026), CircuitMind, JITX, Antioch
+- Stanford Sykophantie-Studie (Science 26.03.2026, Myra Cheng/Dan Jurafsky): 11 Frontier-LLMs in 2.400+ interpersonalen Dilemmata; LLMs best&auml;tigen Nutzer-Positionen 49% h&auml;ufiger als Menschen, auch bei sch&auml;dlichem/illegalem Verhalten; einzige sykophantische Antwort reduziert Entschuldigungsbereitschaft; Nutzer bewerten sykophantische Modelle +13% vertrauensw&uuml;rdiger; Modell-Ranking zeigt &auml;hnliche Werte f&uuml;r Claude/Gemini/ChatGPT (strukturelles RLHF-Problem); t3n greift am 18.04. auf
+- Tokenmaxxing (t3n 18.04.): Begriff seit Anfang 2026 viral nach Jensen-Huang-Aussage; Meta-internes &bdquo;Token Legend&ldquo;-Leaderboard; Chroma Research &bdquo;Context Rot&ldquo;-Paper zeigt systematische Qualit&auml;tsverschlechterung bei steigendem Kontext; Claude Opus 4.6 Retrieval-Accuracy 92% bei 256k auf 78% bei 1M Tokens (sekund&auml;re Quelle); &bdquo;Lost in the Middle&ldquo; 85-95% vs. 76-82% Recall; Empfehlung: gezieltes Retrieval + Task-Framing statt Complete-Context-Push
+- Reportage: Konsolidierung des AI-Chip-Marktes &mdash; Cerebras-IPO-Kontext; Nvidia-Groq-Deal Dez 2025 ($20 Mrd.) als Non-Exclusive Licensing + Personaltransfer, Warren/Blumenthal/Wyden-Antitrust-Brief 04.02.2026; SambaNova refusing Intel $1,6 Mrd. Jan 2026, $350M Series E Feb 2026, SN50 RDU Feb 2026; Tenstorrent $800M bei $3,2 Mrd. Bewertung, Ascalon RISC-V IP-Strategie &agrave; la ARM; Hyperscaler-Custom-ASICs (Google Ironwood TPU v7, AWS Trainium 3, Microsoft Maia 200, Meta MTIA 300-500); TSMC CoWoS >60% Nvidia, 70% CoWoS-L; Nvidia Vera Rubin H2 2026 (288GB HBM4, 10x Inference-Kosten niedriger)
 - OpenAI-Exodus 17.04.: Kevin Weil (Ex-CPO, OpenAI for Science) + Bill Peebles (Sora/DiT-Miterfinder) + Srinivas Narayanan (Enterprise-CTO) verlassen am selben Tag — Framing via Simos "side quests"-Memo; Kontext: Farrow-New-Yorker-Artikel 07.04., Molotow-Angriff 10.04., IPO Q4 2026 bei 1 Billion Zielbewertung; Sora-App-Shutdown 26.04., API bis 24.09.; parallel xAI-Komplettexodus aller 11 Mitgr&uuml;nder
 - Anthropic Claude Design Launch: Opus-4.7-basiert, Websites/Prototypen/Slides aus Prompts, Design-System automatisch aus Codebase und Design-Files, Export zu Canva/PDF/PPTX/HTML (kein direkter Figma-Export), Zielgruppe explizit Non-Designer (Founder/PMs/Marketer); Figma-Aktie intraday bis -6,8% auf 18,79 USD, drei Tage nach Mike Kriegers Figma-Board-Austritt
 - Cursor verhandelt $2 Mrd.+ bei $50 Mrd. Bewertung: Lead Thrive/a16z, neu Battery Ventures und Nvidia strategisch; ARR Feb 2026: $2 Mrd. (Verdopplung in 3 Monaten), Jahresend-Ziel $6 Mrd.; 90% der 20.000 Salesforce-Entwickler nutzen Cursor; letzter Bewertungssprung $9,9 Mrd. (Juni 2025) → $29,3 Mrd. (Nov 2025) → $50 Mrd. (April 2026)
