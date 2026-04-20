@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 20. April 2026</title>
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-20">Montag, 20. April 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 20. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">KI-Geopolitik &middot; Stanford</span><span class="toc-title">Stanford AI Index 2026: Chinas Vorsprung ist real &mdash; die L&uuml;cke liegt bei 2,7&nbsp;Prozent</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Industrie &middot; Hannover Messe</span><span class="toc-title">Hannover Messe 2026: Merz und Lula er&ouml;ffnen unter dem Leitthema &bdquo;Physical AI&ldquo;</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Autonomes Fahren &middot; Tesla</span><span class="toc-title">Tesla startet Robotaxi-Dienst in Dallas und Houston &mdash; trotz 15 NHTSA-Vorf&auml;llen</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Robotik &middot; Peking</span><span class="toc-title">Honors &bdquo;Lightning&ldquo; l&auml;uft Halbmarathon in 50:26 &mdash; unter dem menschlichen Weltrekord</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Cybersicherheit &middot; Vercel</span><span class="toc-title">Vercel-Hack via Context.ai: Wie eine OAuth-App einen Hyperscaler aufmachte</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">AI-Washing &middot; DOJ</span><span class="toc-title">iLearningEngines-Prozess: Ex-CEO wegen 421-Millionen-Dollar-KI-Betrug angeklagt</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Physical AI &mdash; Vom Bildschirm in die Welt</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">KI-Geopolitik &middot; Stanford</div>
+            <h2 id="art-1-h">Stanford AI Index 2026: Chinas Vorsprung ist real &mdash; die L&uuml;cke liegt bei 2,7&nbsp;Prozent</h2>
+            <div class="article-meta"><time datetime="2026-04-13">13.&ndash;19. April 2026</time> &middot; Quellen: Stanford HAI, IEEE Spectrum, SiliconANGLE, t3n, The Next Web</div>
+        </header>
+        <p class="article-teaser">Stanfords Human-Centered-AI-Institut hat am 13.&nbsp;April seinen j&auml;hrlichen AI Index vorgelegt. Die zentrale Zahl: Der Leistungsunterschied zwischen dem besten US- und dem besten chinesischen KI-Modell liegt im M&auml;rz 2026 bei 2,7&nbsp;Prozent &mdash; 2023 waren es noch 17,5&nbsp;Prozent. Gleichzeitig liegen US-Privatinvestitionen 23-mal h&ouml;her als chinesische, China f&uuml;hrt aber bei Patenten, Publikationen und Industrierobotern. Und Europa taucht im Report fast nur noch in Fu&szlig;noten auf.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der AI Index der Stanford University ist seit 2017 der einfl&uuml;ssreichste j&auml;hrliche Statusbericht zur KI-Industrie. Die neunte Ausgabe erschien am 13.&nbsp;April 2026 mit &uuml;ber 400 Seiten &mdash; und die deutsche Fachpresse hat die Kernzahlen in den vergangenen Tagen in praktisch alle Leitmedien gespielt. T3n titelt am 19.&nbsp;April: &bdquo;Chinas Aufstieg radiert den KI-Vorsprung der USA fast aus.&ldquo; Die Formulierung ist nicht &uuml;bertrieben. Vor drei Jahren stellten US-Modelle den Stand der Technik um 17,5&nbsp;Prozent besser dar als chinesische. Im Februar 2025 zog DeepSeek-R1 erstmals mit der US-Spitze gleich. Im M&auml;rz 2026 liegt Anthropics Opus&nbsp;4.7 noch 2,7&nbsp;Prozent vor ByteDances Dola-Seed-2.0-Preview. In denselben zw&ouml;lf Monaten tauschten die Spitzenpl&auml;tze laut Stanford mehrfach die Seiten.</p>
+
+            <p>Die Finanzseite bleibt w&auml;hrenddessen einseitig: US-Privatinvestitionen in KI erreichten 2025 rund 285,9&nbsp;Milliarden Dollar &mdash; gegen&uuml;ber 12,4&nbsp;Milliarden in China. Ein Faktor von 23. Das globale Investitionsvolumen lag bei 581,7&nbsp;Milliarden Dollar, eine Verdopplung gegen&uuml;ber dem Vorjahr. Die USA dominieren auch bei neugegr&uuml;ndeten KI-Startups (1.953 in 2025, mehr als zehnmal die Nr.&nbsp;2), Rechenzentren (5.427 gegen&uuml;ber wieder mehr als zehnfachem Abstand zu Platz 2) und notable Frontier-Modellen (laut Stanford etwa 50 in den USA gegen&uuml;ber rund 30 in China). Die Geschichte der n&auml;chsten Jahre ist aber nicht mehr die Dominanzfrage, sondern die der strukturellen Parit&auml;t.</p>
+
+            <p>China f&uuml;hrt bei Metriken, die Industriesouver&auml;nit&auml;t beschreiben. 69,7&nbsp;Prozent der globalen KI-Patente kommen aus China; 23,2&nbsp;Prozent der KI-Publikationen. Und besonders beunruhigend: 2024 wurden in China 295.000 Industrieroboter installiert, in den USA 34.200 &mdash; ein Faktor neun. Diese Zahl ist der versteckte Indikator f&uuml;r die kommende Phase der KI-Wirtschaft, die sich aus Chatbots in Fabriken verlagert. Wir ordnen den Trend in unserer <a href="reportagen/2026-04-20.html">heutigen Reportage</a> breiter ein.</p>
+
+            <p>F&uuml;r Europa ist der Index unangenehm zu lesen. Der Kontinent h&auml;lt rund 3&nbsp;Prozent der globalen KI-Patente, 11&nbsp;Prozent der Compute-Research-Papers &mdash; und produziert nach Stanford-Definition kein nennenswertes Frontier-Modell. Deutschland liegt mit 48.520 KI-Expert:innen an Platz drei weltweit, verliert aber netto Talente an US-Unternehmen. Der einzige Hebel, den der Index Europa attestiert, ist regulatorische Glaubw&uuml;rdigkeit: 53&nbsp;Prozent der global Befragten vertrauen der EU-KI-Regulierung, gegen&uuml;ber 37&nbsp;Prozent US-Regulierung und 27&nbsp;Prozent China. F&uuml;r die Bundesregierung ist das eine d&uuml;nne Basis, f&uuml;r den europ&auml;ischen Binnenmarkt als KI-Standort ist es eine ernste Warnung.</p>
+
+            <p>Der Index dokumentiert au&szlig;erdem das Ph&auml;nomen der &bdquo;Jagged Frontier&ldquo;: KI-Modelle l&ouml;sen Graduate-Physik-Pr&uuml;fungen, scheitern aber am Ablesen analoger Uhren in 50,1&nbsp;Prozent der F&auml;lle. Haushaltsroboter schaffen Standard-Aufgaben wie W&auml;sche legen nur zu 12&nbsp;Prozent erfolgreich. Gleichzeitig ist der SWE-bench-Verified-Wert in zw&ouml;lf Monaten von 60 auf fast 100&nbsp;Prozent gestiegen, der Humanity&rsquo;s-Last-Exam-Wert von 8,8 auf &uuml;ber 50&nbsp;Prozent. Fortschritt und Regression sind asymmetrisch verteilt, was strategische Planung erschwert &mdash; was heute unm&ouml;glich scheint, ist in neun Monaten Standard; was trivial wirkt, bleibt jahrelang ungel&ouml;st.</p>
+
+            <p>F&uuml;r CTOs und PMs ergibt sich eine konkrete Konsequenz. Die fr&uuml;here Heuristik, dass ein US-Frontier-Lab das technologisch F&uuml;hrende ist und alle anderen nachziehen, gilt in dieser Form nicht mehr. Der Index nennt es vorsichtig einen &bdquo;multi-polar technology race&ldquo;. Wer konkurrierende Produkte evaluiert, sollte Qwen3-VL, MiniMax&nbsp;2.7, DeepSeek-R1 und ByteDance-Modelle im Benchmark-Portfolio f&uuml;hren &mdash; auch wenn kommerzielle Zug&auml;nglichkeit &uuml;ber westliche Hyperscaler noch eingeschr&auml;nkt ist. Die zweite Folgerung: Transparenz. Der Stanford Foundation Model Transparency Index ist von 58 auf 40 Punkte gesunken &mdash; die erfolgreichsten Modelle ver&ouml;ffentlichen am wenigsten &uuml;ber Training und Daten. Audits und Reproduzierbarkeit werden zum Differenzierungsmerkmal.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" rel="noopener noreferrer external">Stanford HAI &mdash; 2026 AI Index Report</a></li>
+                <li><a href="https://hai.stanford.edu/news/inside-the-ai-index-12-takeaways-from-the-2026-report" rel="noopener noreferrer external">Stanford HAI &mdash; 12 Takeaways aus dem Report</a></li>
+                <li><a href="https://spectrum.ieee.org/state-of-ai-index-2026" rel="noopener noreferrer external">IEEE Spectrum &mdash; State of AI Index 2026</a></li>
+                <li><a href="https://siliconangle.com/2026/04/13/stanford-hais-2026-ai-index-reveals-china-u-s-now-neck-neck-race-global-dominance/" rel="noopener noreferrer external">SiliconANGLE &mdash; China narrows US AI lead to 2,7&nbsp;Prozent</a></li>
+                <li><a href="https://t3n.de/news/stanford-ai-index-2026-china-usa-ki-vorsprung-1738881/" rel="noopener noreferrer external">t3n &mdash; Chinas Aufstieg radiert den KI-Vorsprung der USA aus</a></li>
+                <li><a href="https://thenextweb.com/news/stanford-ai-index-2026-china-us-performance-gap" rel="noopener noreferrer external">The Next Web &mdash; Stanford AI Index 2026</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Industrie &middot; Hannover Messe</div>
+            <h2 id="art-2-h">Hannover Messe 2026: Merz und Lula er&ouml;ffnen unter dem Leitthema &bdquo;Physical AI&ldquo;</h2>
+            <div class="article-meta"><time datetime="2026-04-19">19./20. April 2026</time> &middot; Quellen: heise online, Handelsblatt, Hannover Messe, Produktion.de, ZDFheute</div>
+        </header>
+        <p class="article-teaser">Bundeskanzler Friedrich Merz und Brasiliens Pr&auml;sident Luiz In&aacute;cio Lula da Silva er&ouml;ffneten am Sonntagabend die Hannover Messe 2026. Das Leitthema &bdquo;Think Tech Forward&ldquo; r&uuml;ckt erstmals &bdquo;Physical AI&ldquo; und humanoide Roboter ins Zentrum. &Uuml;ber 3.500 Aussteller aus mehr als 150 L&auml;ndern, 130.000 erwartete Besucher. Partnerland Brasilien bringt 140 Firmen mit. Merz spricht von &bdquo;Zuversicht&ldquo;, die Industrie ruft nach &bdquo;einem gro&szlig;en Wurf&ldquo;.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Begriff &bdquo;Physical AI&ldquo; hat an diesem Wochenende einen zentralen Platz im deutschen Industrie-Diskurs eingenommen. Auf der offiziellen Hannover-Messe-Website firmiert das diesj&auml;hrige Motto unter &bdquo;Industrielle KI als Wettbewerbsvorsprung&ldquo;, mit &bdquo;Physical AI&ldquo; als Unterbegriff f&uuml;r KI, die direkt in Maschinen, Roboter und Produktionslinien integriert wird. 15 Aussteller zeigen humanoide Roboter &mdash; ein R&uuml;cksprung vor zwei Jahren, als humanoide Robotik ein Rand- und Forschungsthema war. Der Shift geschieht auf der gleichen Messe, auf der 2025 noch die &bdquo;Agentic Factory&ldquo; als Vision pr&auml;sentiert wurde. 2026 ist sie Realit&auml;t, zumindest in Prototypen.</p>
+
+            <p>Die politische Choreographie der Er&ouml;ffnung sprach f&uuml;r sich. Am Sonntagabend, 19.&nbsp;April, stellten sich Bundeskanzler Merz und Staatspr&auml;sident Lula gemeinsam auf die B&uuml;hne. Brasilien ist Partnerland mit dem gr&ouml;&szlig;ten j&auml;hrlichen Partnerland-Auftritt der Messe-Geschichte: 140 Unternehmen in sechs Hallen, Leitaussteller ABIMAQ und Brazil Machinery Solutions, parallel die Deutsch-Brasilianischen Wirtschaftstage. Lulas Kernbotschaft: Brasilien bietet g&uuml;nstige erneuerbare Energie und Rohstoffe f&uuml;r die Dekarbonisierung der europ&auml;ischen Industrie, im Tausch gegen Technologietransfer. Merz' Auftritt war zur&uuml;ckhaltender: &bdquo;Zuversicht, das ist der Geist&ldquo; &mdash; eine Formulierung, die als Versuch gelesen werden kann, die deutsch-industrielle Stimmung nach zwei Jahren schwacher Auftragseing&auml;nge zu kalibrieren. Die Industrie konterte: Die Verb&auml;nde BDI und ZVEI forderten &bdquo;einen gro&szlig;en Wurf, keine Flickschusterei&ldquo; &mdash; gemeint sind Energiekosten, B&uuml;rokratieabbau, strukturelle Reformen.</p>
+
+            <p>Am Messemontag trifft Merz zum DAX-Gipfel mit Roland Busch (Siemens), Christian Klein (SAP), Tim H&ouml;ttges (Deutsche Telekom) und weiteren CEOs. Hauptthema: Skalierung industrieller KI in deutscher Fertigung. Siemens zeigt den digitalen Zwilling der Amberg-Fabrik, wo laut Unternehmensangaben aktuell 99,99885&nbsp;Prozent Fehlerfreiheit bei 17,5&nbsp;Millionen produzierten Komponenten pro Jahr erreicht werden. Microsoft ist mit einer eigenen Industrial-Cloud-Pr&auml;sentation angereist. DFKI zeigt 6G-vernetzte Mensch-Roboter-Kooperation. Der Kontrast zu den gleichzeitig laufenden US- und China-Demos ist auff&auml;llig: W&auml;hrend die chinesische Konkurrenz auf Massenproduktion und humanoide Kompaktheit setzt, pr&auml;sentiert die deutsche Industrie Pr&auml;zision, Zuverl&auml;ssigkeit und Integration in komplexe Produktionsprozesse.</p>
+
+            <p>Der Kontext der Eroeffnung ist ungewohnt dramatisch. Seit Anfang April bestimmt die Energiekrise um die Stra&szlig;e von Hormuz die Schlagzeilen. Brent-&Ouml;l liegt bei &uuml;ber 120 US-Dollar, der deutsche Gaspreis hat in zwei Wochen 40&nbsp;Prozent zugelegt. Merz k&uuml;ndigte in Hannover an, den Nationalen Sicherheitsrat &bdquo;zeitnah&ldquo; einzuberufen. F&uuml;r deutsche Industrie ist der Energiekontext damit Teil des Messe-Subtextes: Wer &uuml;ber KI in der Fertigung redet, redet &uuml;ber Produktionskosten, die in den n&auml;chsten Monaten von Faktoren dominiert werden, die keine KI-Entscheidung beeinflussen kann.</p>
+
+            <p>Die strategische Botschaft der Messe bleibt f&uuml;r deutsche Tech-Leads dennoch relevant. Erstens: Die Anerkennung von Physical AI als Leitthema verschiebt die Investitions-Orthodoxie. Wer bisher als SaaS-Anbieter die klassische Cloud-Integration verkauft hat, ger&auml;t in den Kontext, in dem Industrie-Kunden konkret nach Roboter-Integration fragen. Zweitens: Die Brasilien-Partnerschaft signalisiert ein geopolitisches Hedging &mdash; weniger US-Abh&auml;ngigkeit, mehr S&uuml;d-Akzeptanz. Drittens: Der Chefverband der Elektroindustrie (ZVEI) prognostiziert 9,5&nbsp;Prozent Umsatzwachstum f&uuml;r Industrieautomation 2026 &mdash; trotz Energiekrise, weil KI-Integration zum Effizienztreiber wird, nicht zum Kosten-Zusatz.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.heise.de/news/Merz-und-Lula-eroeffnen-Hannover-Messe-2026-Zwischen-KI-Zuversicht-und-Reformdruck-11263549.html" rel="noopener noreferrer external">heise online &mdash; Merz und Lula er&ouml;ffnen Hannover Messe 2026</a></li>
+                <li><a href="https://www.handelsblatt.com/unternehmen/industrie/hannover-messe-2026-merz-eroeffnet-hannover-messe-die-industrie-setzt-auf-eine-technologieoffensive/100216800.html" rel="noopener noreferrer external">Handelsblatt &mdash; Industrie setzt auf Technologieoffensive</a></li>
+                <li><a href="https://www.hannovermesse.de/de/presse/pressemitteilungen/hannover-messe/hannover-messe-2026-mit-industrieller-ki-zum-wettbewerbsvorsprung" rel="noopener noreferrer external">Hannover Messe &mdash; 2026 mit industrieller KI zum Wettbewerbsvorsprung</a></li>
+                <li><a href="https://www.produktion.de/technik/das-sind-die-highlights-der-hannover-messe-2026/2626310" rel="noopener noreferrer external">Produktion.de &mdash; Highlights der Hannover Messe 2026</a></li>
+                <li><a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/manufacturing/2026/04/16/industrial-intelligence-unlocked-microsoft-at-hannover-messe-2026/" rel="noopener noreferrer external">Microsoft &mdash; Industrial Intelligence Unlocked</a></li>
+                <li><a href="https://www.zdfheute.de/wirtschaft/hannover-messe-relevanz-digitalisierung-industrie-100.html" rel="noopener noreferrer external">ZDFheute &mdash; Relevanz der Hannover Messe</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Autonomes Fahren &middot; Tesla</div>
+            <h2 id="art-3-h">Tesla startet Robotaxi-Dienst in Dallas und Houston &mdash; trotz 15 NHTSA-Vorf&auml;llen</h2>
+            <div class="article-meta"><time datetime="2026-04-18">18. April 2026</time> &middot; Quellen: Electrek, TechCrunch, Bloomberg, Fortune, Reuters</div>
+        </header>
+        <p class="article-teaser">Am 18.&nbsp;April startete Tesla in Dallas und Houston seinen unbeaufsichtigten Robotaxi-Dienst &mdash; erstmals ohne Safety-Monitor im Beifahrersitz. Die Flotte ist klein: Tracker z&auml;hlen zun&auml;chst nur ein einziges aktives Fahrzeug pro Stadt. Seit Austin-Start im Juni 2025 dokumentierte die NHTSA 15 Crashes, die Unfallrate liegt laut Fortune vier- bis achtmal &uuml;ber der menschlicher Fahrer. Das Rennen zwischen Tesla-Kamera-Only und Waymo-Lidar-Stack geht in die kritische Phase.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Ank&uuml;ndigung erfolgte am fr&uuml;hen Samstagmorgen per X-Post auf dem offiziellen @Tesla_Robotaxi-Account. Ohne Pressekonferenz, ohne strukturierten Media-Rollout: Dallas und Houston sind jetzt aktiv. Das macht den Tesla-Dienst zum dritten Markt in den USA nach Austin (Juni 2025) und San Francisco (Januar 2026). Tesla nennt intern sieben St&auml;dte bis Ende Juni 2026 als Ziel &mdash; Phoenix, Miami, Orlando, Tampa, Las Vegas folgen in den kommenden Wochen, laut Electrek-Berichten auf Basis von Interieur-Code-Ver&auml;nderungen der Tesla-App.</p>
+
+            <p>Operativ ist die Realit&auml;t ernuchternder, als die Ank&uuml;ndigung suggeriert. Crowdsourcing-Tracker auf X und Reddit verfolgen am Launchtag nur jeweils ein aktives Fahrzeug in Dallas und Houston. Die von der Tesla-Analyse &bdquo;ElectricDrive&ldquo; genannte Zahl von 573 registrierten Fahrzeugen im Bundesstaat Texas ist eine Flotten-Gr&ouml;&szlig;e, keine operative Dienst-Gr&ouml;&szlig;e. Die Geofences sind klein: Houston ca. 12 bis 25 Quadratmeilen (inklusive Jersey Village und Willowbrook), Dallas 30 bis 35 Quadratmeilen (Urban Core, Highland Park, Park Cities). Zum Vergleich: Waymo fahrt bei &uuml;ber 500.000 bezahlten Fahrten pro Woche durch elf US-St&auml;dte inklusive London.</p>
+
+            <p>Der strategische Pr&uuml;fstein ist die Sicherheitsbilanz. Seit dem Austin-Start im Juni 2025 hat die National Highway Traffic Safety Administration (NHTSA) 15 Unf&auml;lle dokumentiert, f&uuml;nf davon allein im Januar 2026, alle involvierten Fahrzeuge waren laut Berichten Tesla Model Y mit aktivierter vollautonomer Software (FSD Unsupervised, ab Juni 2025). Laut CBS News, Bloomberg und Fortune-Analysen liegt die Unfallrate bei etwa einem Unfall pro 57.000 Meilen &mdash; der US-Durchschnitt liegt bei einem Unfall pro 500.000 Meilen. Tesla-eigene Zahlen, die Fortune am 26.&nbsp;Februar publizierte, beziffern die Unfallrate als vier- bis achtmal schlechter als menschliche Fahrer. Ein prominenter Fall: Ein Model 3 durchbrach Bahnschrankenbarrieren &mdash; viral geworden, noch in Pr&uuml;fung.</p>
+
+            <p>Die NHTSA ermittelt auf zwei Ebenen. Erstens: Untersuchung gegen 2,88 Millionen Fahrzeuge wegen fehlender ADS-Reife; 80 dokumentierte Verkehrsverst&ouml;&szlig;e allein in Austin. Zweitens: Pr&uuml;fung wegen verspateter Unfallmeldungen &mdash; Tesla ist nach der &bdquo;Standing General Order&ldquo; verpflichtet, binnen f&uuml;nf Tagen zu melden, hat laut Reuters mehrfach Fristen &uuml;berschritten. Besonders kritisch: Tesla ist der einzige ADS-Betreiber, der Unfall-Narrative zu 100&nbsp;Prozent schw&auml;rzt (Waymo, Zoox, Aurora, Nuro ver&ouml;ffentlichen redigierte, aber nachvollziehbare Berichte). Waymo-CEO Tekedra Mawakana nannte Teslas kamerabasierten Ansatz in einem Bloomberg-Interview am 14.&nbsp;April: &bdquo;never safe enough&ldquo; &mdash; ein ungew&ouml;hnlich scharfer Kommentar aus einem Branchenwettbewerber, der sonst lieber durch Zahlen als durch Worte kommuniziert.</p>
+
+            <p>Die paradigmatische Frage hinter dem Scale-out: Kann ein Kamera-Only-Stack (weniger als zehn Kameras pro Fahrzeug, kein Lidar, kein Radar) mit einem Multi-Sensor-Stack wie dem Waymo-Architekturansatz (29 Kameras, f&uuml;nf Lidars, sechs Radare) konkurrieren? Die Antwort h&auml;ngt davon ab, wie man &bdquo;konkurrieren&ldquo; definiert. Tesla produziert zehnmal mehr Fahrzeuge pro Jahr als Waymo, der Sensor-Stack ist um Gr&ouml;&szlig;enordnungen billiger. Waymo hat bessere Sicherheits-Kennzahlen, aber einen sp&auml;teren Break-Even-Pfad. F&uuml;r Tech-Leads, die in angrenzenden Industrien Roboter- oder Computer-Vision-Produkte bauen: Die Tesla-Entscheidung ist ein Signal, dass Kamera-Stacks kommerziell tragen k&ouml;nnen &mdash; aber mit regulatorischem Risiko, das Waymo nicht hat. Die Tesla-Aktie stieg am Launch-Tag um 12&nbsp;Prozent. Die NHTSA hat noch bis August 2026 Zeit, ihre aktive Untersuchung abzuschlie&szlig;en.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://electrek.co/2026/04/18/tesla-robotaxi-launches-dallas-houston-small-geofences/" rel="noopener noreferrer external">Electrek &mdash; Tesla Robotaxi launches in Dallas and Houston</a></li>
+                <li><a href="https://techcrunch.com/2026/04/18/tesla-brings-its-robotaxi-service-to-dallas-and-houston/" rel="noopener noreferrer external">TechCrunch &mdash; Tesla brings Robotaxi to Dallas and Houston</a></li>
+                <li><a href="https://www.cbsnews.com/news/tesla-robotaxi-austin-14-crashes-nhtsa/" rel="noopener noreferrer external">CBS News &mdash; Tesla Robotaxi Austin 14 Crashes</a></li>
+                <li><a href="https://fortune.com/2026/02/26/tesla-robotaxis-4x-8x-worse-than-humans-at-driving-safety-record-crashes/" rel="noopener noreferrer external">Fortune &mdash; Tesla Robotaxis 4-8x worse than humans</a></li>
+                <li><a href="https://www.engadget.com/transportation/tesla-is-rolling-out-its-robotaxi-service-to-dallas-and-houston-160742941.html" rel="noopener noreferrer external">Engadget &mdash; Tesla rolls out Robotaxi to Dallas and Houston</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Robotik &middot; Peking</div>
+            <h2 id="art-4-h">Honors &bdquo;Lightning&ldquo; l&auml;uft Halbmarathon in 50:26 &mdash; unter dem menschlichen Weltrekord</h2>
+            <div class="article-meta"><time datetime="2026-04-19">19. April 2026</time> &middot; Quellen: CNN, Fortune, Al Jazeera, TechCrunch, PBS/Reuters</div>
+        </header>
+        <p class="article-teaser">Am Sonntag fand in Pekings Bezirk Yizhuang der zweite Humanoid-Halbmarathon statt. &Uuml;ber 300 Roboter aus mehr als 100 Teams nahmen teil. Sieger: &bdquo;Lightning&ldquo; des chinesischen Smartphone-Herstellers Honor mit 50 Minuten 26 Sekunden &mdash; sieben Minuten schneller als der menschliche Halbmarathon-Weltrekord von Jacob Kiplimo (57:20, M&auml;rz 2026). Ein Jahr zuvor brauchte Tiangong Ultra f&uuml;r dieselbe Strecke noch zwei Stunden 40. Honor belegte alle drei Podiumspl&auml;tze.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Beijing E-Town Humanoid Robot Half Marathon 2026 fand am Sonntag, 19.&nbsp;April, im s&uuml;d&ouml;stlichen Pekinger Bezirk Yizhuang statt. Teilnehmende: mehr als 300 humanoide Roboter aus &uuml;ber 100 Teams, parallel 12.000 menschliche Laufer &uuml;ber die gleiche Strecke. Sieger im Robot-Feld wurde &bdquo;Lightning&ldquo;, ein bipedaler Humanoid des chinesischen Smartphone-Herstellers Honor (ein Huawei-Spin-off, aber ohne strategische Kontrolle durch Huawei), mit einer Streckenzeit von 50 Minuten 26 Sekunden. Das entspricht einer Durchschnittsgeschwindigkeit von rund 25 Kilometern pro Stunde auf 21,1 Kilometern &mdash; und ist sieben Minuten schneller als der menschliche Halbmarathon-Weltrekord von Jacob Kiplimo, aufgestellt im M&auml;rz 2026 in Lissabon.</p>
+
+            <p>Der sportliche Vergleich ist bewusst asymmetrisch. Roboter drufen Begleitfahrzeuge nutzen, Team-Operatoren d&uuml;rfen eingreifen, St&uuml;rze werden zeitbestraft, aber nicht disqualifiziert. Auch Akkuwechsel sind erlaubt. Honor nutzte nach eigenen Angaben weder Fernsteuerung noch Akkuwechsel &mdash; Lightning lief vollautonom, mit einem flussigkeitsgek&uuml;hlten Kernsystem aus Honors Smartphone-Technologie. Die Beinlangen von 90 bis 95 Zentimetern wurden bewusst elitaeren menschlichen Laufern nachempfunden.</p>
+
+            <p>Der Technologie-Sprung zwischen den beiden Halbmarathons ist dramatisch. 2025, in der Premiere, hatte der Sieger Tiangong Ultra vom Beijing Humanoid Robot Innovation Center zwei Stunden 40 Minuten gebraucht &mdash; mit drei Batteriewechseln und Pilot-gef&uuml;hrter Steuerung. Ein Jahr sp&auml;ter: Dreifache Geschwindigkeit, kein Batteriewechsel bei Lightning, voll autonome Navigation. Der Veranstalter wertete nach einem gewichteten System, das autonome Teams bevorzugte. Ein ferngesteuerter Honor-Roboter &uuml;berquerte die Ziellinie faktisch zuerst (in 48:19), wurde aber nach der Wertung nicht als Gesamtsieger gef&uuml;hrt.</p>
+
+            <p>F&uuml;r die strategische Einordnung ist entscheidend, wer gestartet ist. Unitree war mit H1-Varianten pr&auml;sent, die 2025 den Speed-Rekord von 36 Kilometern pro Stunde gehalten hatten &mdash; kam aber nicht auf die Podiumspl&auml;tze. Fourier GR-1, UBTech Walker S, EngineAI, 1X-Testkandidaten (keine Podiumsplazierung): Das gesamte China-&Ouml;kosystem war vertreten, und das Resultat war ein Clean Sweep eines Newcomers aus dem Consumer-Electronics-Sektor. Das ist das eigentlich neue Signal: Humanoid-Robotik hat ihre Forschungs-Monokultur verlassen. Wenn Smartphone-Hersteller mit Akkutechnik, K&uuml;hlung und Supply Chain in den Markt dr&uuml;cken, wird die Produkteinf&uuml;hrung nicht von Durchbruchs-Momenten in US-Research-Labs diktiert, sondern von Fertigungszyklen in Shenzhen.</p>
+
+            <p>Die westliche Reaktion ist gemischt. Tesla Optimus hat seine Gen-3-Roadmap auf Q4 2026 verschoben; Figure AI bleibt bei BMW-Pilotdeployments; 1X Technologies arbeitet an NEO Beta mit Consumer-Fokus f&uuml;r 2027; Boston Dynamics (nach der Hyundai-&Uuml;bernahme aus 2021 chinaunabh&auml;ngig) zeigt Atlas-Electric in Forschungskooperationen. Was der Beijing-Marathon illustriert und was wir in unserer <a href="reportagen/2026-04-20.html">heutigen Reportage</a> breiter ausarbeiten: Der Zeitpunkt des Marktstarts f&uuml;r Physical-AI-Produkte verschiebt sich von 2028/29 auf 2026/27. Das 18-Monats-Fenster wird knapp.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://edition.cnn.com/2026/04/19/china/china-robot-half-marathon-intl-hnk" rel="noopener noreferrer external">CNN &mdash; Chinese android faster than any human ever</a></li>
+                <li><a href="https://fortune.com/2026/04/19/humanoid-robot-world-record-half-marathon-race-china-honor/" rel="noopener noreferrer external">Fortune &mdash; Humanoid robot faster than any person</a></li>
+                <li><a href="https://www.aljazeera.com/sports/2026/4/19/humanoid-robot-breaks-half-marathon-world-record-in-beijing" rel="noopener noreferrer external">Al Jazeera &mdash; Humanoid robot breaks half-marathon world record</a></li>
+                <li><a href="https://techcrunch.com/2026/04/19/robots-beat-human-records-at-beijing-half-marathon/" rel="noopener noreferrer external">TechCrunch &mdash; Robots beat human records at Beijing half-marathon</a></li>
+                <li><a href="https://www.pbs.org/newshour/world/humanoid-robot-wins-beijing-half-marathon-defeating-the-human-world-record" rel="noopener noreferrer external">PBS / Reuters &mdash; Humanoid robot wins Beijing half-marathon</a></li>
+                <li><a href="https://www.heise.de/news/Halbmarathon-in-Peking-Humanoide-Roboter-schneller-als-Menschen-11263594.html" rel="noopener noreferrer external">heise online &mdash; Humanoide Roboter schneller als Menschen</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Cybersicherheit &middot; Vercel</div>
+            <h2 id="art-5-h">Vercel-Hack via Context.ai: Wie eine OAuth-App einen Hyperscaler aufmachte</h2>
+            <div class="article-meta"><time datetime="2026-04-19">19. April 2026</time> &middot; Quellen: The Verge, BleepingComputer, Vercel KB, Decipher, CyberInsider</div>
+        </header>
+        <p class="article-teaser">Vercel bestatigte am Samstag einen Einbruch in interne Systeme. Angriffsvektor: die OAuth-App der AI-Integration &bdquo;Context.ai&ldquo;, die einen Vercel-Mitarbeiter-Google-Account &uuml;bernommen hat. Angeblich gestohlen: Datenbank-Snapshots, Source-Code, API-Keys, NPM- und GitHub-Tokens, interne Linear-Tickets. Ein ShinyHunters-Imitator fordert auf BreachForums 2 Mio. USD. Next.js und Open-Source-Projekte sind laut Audit nicht betroffen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Vercel ist die Cloud-Deployment-Plattform hinter dem beliebten Next.js-Framework und hostet Seiten von OpenAI-Marketing bis zu unz&auml;hligen YC-Startups. Das offizielle Security Bulletin vom 19.&nbsp;April (&bdquo;Vercel April 2026 security incident&ldquo;) beschreibt die Kill Chain in seltener Offenheit: Ein Supply-Chain-Angriff auf die OAuth-App der AI-Integration &bdquo;Context.ai&ldquo; erm&ouml;glichte den Angreifern, &uuml;ber eine Vercel-Mitarbeiterin mit aktiver Context.ai-Integration Kontrolle &uuml;ber deren Google-Workspace-Account zu erlangen. Von dort Pivot in die interne Vercel-Umgebung, Privilege Escalation durch Enumeration nicht-sensitiver Umgebungsvariablen, Zugriff auf Vercels Linear (Issue-Tracker) und die GitHub-Integrationen. Der Vercel-CEO Guillermo Rauch spricht in einer internen Notiz von &bdquo;highly sophisticated and significantly accelerated by AI&ldquo; &mdash; eine Formulierung, die darauf hindeutet, dass die Angreifer LLM-basierte Recon- und Escalation-Tools systematisch eingesetzt haben.</p>
+
+            <p>Die beanspruchte Beutemenge ist erheblich. Ein Post auf dem BreachForums am 19.&nbsp;April, firmierend unter dem Namen &bdquo;ShinyHunters&ldquo;, fordert zwei Millionen Dollar (mit Verhandlungsspielraum ab 500.000) f&uuml;r ein Paket aus Datenbank-Snapshots, Source-Code, Access- und API-Keys, NPM-Tokens, GitHub-Tokens und Daten aus Vercels User-Management-System. Als Proof wurden 580 Employee-Records ver&ouml;ffentlicht. BleepingComputer hat allerdings nach Nachfrage bei bekannten ShinyHunters-Akteuren klargestellt: Der Post ist vermutlich nicht von der etablierten Gruppe &mdash; es handelt sich um eine Imitation oder einen Trittbrettfahrer. Das &auml;ndert wenig an den rohen Fakten: Der Vercel-Datenfund ist real, und Teile davon sind wahrscheinlich bereits abgezogen.</p>
+
+            <p>Der entscheidende Punkt f&uuml;r CTOs und Engineering-Leads ist struktureller Natur: Die Attacke l&auml;uft &uuml;ber eine OAuth-App, die einem AI-Produktivit&auml;ts-Tool breite Google-Workspace-Permissions erteilt hatte. Context.ai, ein kleines AI-Integration-Startup, erfuhr selbst das Ziel eines Supply-Chain-Kompromisses &mdash; eine Geschichte, die aktuell wenig Berichterstattung hat, aber die unmittelbare Lieferkettengeschichte dahinter ist. Zugriff auf eine einzelne OAuth-App mit breiten Scopes war damit Zugriff auf ein kritisches Hyperscaler-Backend. Das Muster ist nicht neu &mdash; die LiteLLM/Mercor-Attacke von M&auml;rz 2026 lief in der gleichen Logik &mdash; aber die Pointe, dass ein AI-Coaching-Tool der Einstieg war, zeigt die neue Reichweite dieser Klasse von Angriffen. LLM-gestuzte Assistenten mit Calendar-, Email- und Dokumenten-Permissions sind Teil fast jeder Unternehmens-Infrastruktur.</p>
+
+            <p>Vercel hat Kunden aufgefordert, Environment Variables zu rotieren und das &bdquo;sensitive&ldquo;-Flag (Vercels Encryption-at-Rest-Marker) zu setzen. Nicht-sensitive Env-Vars waren laut Bulletin unverschl&uuml;sselt at rest &mdash; eine typische Default-Konfiguration, die der Angreifer f&uuml;r Enumeration nutzte. Vercel betont, dass Next.js, Turbopack und die offiziellen Open-Source-Projekte vom Supply-Chain-Audit nicht betroffen seien. Impact auf einzelne Kunden bleibt offen: Rauch spricht von &bdquo;quite limited&ldquo;, konkrete Zahlen wurden nicht genannt. Das Timing ist besonders unangenehm: Vercel befindet sich in IPO-Vorbereitung; Startup Fortune titelt bereits &bdquo;Breach Exposes AI Tool Supply Chain Risk Ahead of IPO&ldquo;.</p>
+
+            <p>Die praktische Konsequenz ist dreifach. Erstens: Eine Inventarisierung aller OAuth-Apps mit Google-Workspace- oder Microsoft-365-Integrationen im eigenen Unternehmen. Zweitens: Review der Scopes &mdash; selbst &bdquo;nur Kalenderzugriff&ldquo; kann Rueckschl&uuml;sse auf Meeting-Teilnehmer und Strategie erm&ouml;glichen. Drittens: Default-Encryption f&uuml;r alle Environment Variables, ohne Ausnahme. Vercels Bulletin ist in seiner Transparenz vorbildlich und in seiner Kill-Chain eine Blaupause daf&uuml;r, wie kompetent AI-assistierte Angriffsgruppen heute arbeiten.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://vercel.com/kb/bulletin/vercel-april-2026-security-incident" rel="noopener noreferrer external">Vercel Knowledge Base &mdash; April 2026 security incident</a></li>
+                <li><a href="https://www.bleepingcomputer.com/news/security/vercel-confirms-breach-as-hackers-claim-to-be-selling-stolen-data/" rel="noopener noreferrer external">BleepingComputer &mdash; Vercel confirms breach</a></li>
+                <li><a href="https://www.theverge.com/" rel="noopener noreferrer external">The Verge &mdash; Cloud development platform Vercel was hacked</a></li>
+                <li><a href="https://decipher.sc/2026/04/19/vercel-says-internal-systems-hit-in-breach/" rel="noopener noreferrer external">Decipher &mdash; Vercel Internal Systems Breach</a></li>
+                <li><a href="https://cyberinsider.com/vercel-confirms-security-incident-as-hackers-claim-to-sell-internal-access/" rel="noopener noreferrer external">CyberInsider &mdash; Vercel Security Incident</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">AI-Washing &middot; DOJ</div>
+            <h2 id="art-6-h">iLearningEngines-Prozess: Ex-CEO wegen 421-Millionen-Dollar-KI-Betrug angeklagt</h2>
+            <div class="article-meta"><time datetime="2026-04-17">17.&ndash;18. April 2026</time> &middot; Quellen: Reuters, Law360, Capital AI Daily, TechStory, US DOJ</div>
+        </header>
+        <p class="article-teaser">Das US-Justizministerium hat am 17.&nbsp;April Anklage gegen den Gr&uuml;nder und Ex-CEO von iLearningEngines erhoben &mdash; einem ehemaligen Nasdaq-Unternehmen, das mit KI-gesteuerter Business-Automation warb. Der Vorwurf: 90&nbsp;Prozent der 421&nbsp;Millionen Dollar Umsatz 2023 sollen fabriziert gewesen sein, teils &uuml;ber &bdquo;Round-Trip&ldquo;-Geldfl&uuml;sse mit Strohmann-Konten. Die Firma ging Ende 2024 pleite, ihre Marktkapitalisierung von 1,5&nbsp;Mrd. USD verschwand. Ein Paradebeispiel f&uuml;r AI-Washing im SPAC-Zeitalter.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>iLearningEngines ging im April 2024 per SPAC-Merger an die Nasdaq &mdash; zu einer Bewertung von knapp 1,5 Milliarden Dollar zur Spitzenzeit. Das Unternehmen vermarktete sich als &bdquo;AI-native learning automation&ldquo;-Plattform f&uuml;r Enterprise-Training und Compliance &mdash; ein Feld, in dem &bdquo;AI&ldquo; als Label auf praktisch jeden Workflow angeheftet werden konnte, ohne dass K&auml;ufer technische Details pr&uuml;fen mussten. Ende 2024 brach das Geldhaus unter Short-Seller-Druck zusammen; im Dezember 2024 meldete die Firma Chapter&nbsp;11 an, im M&auml;rz 2025 erfolgte die Konversion zu Chapter&nbsp;7 (vollst&auml;ndige Liquidation).</p>
+
+            <p>Die am 17.&nbsp;April 2026 verk&uuml;ndete Anklage betrifft Puthugramam Chidambaran (57), den Ex-CEO, verhaftet in Potomac, Maryland &mdash; und Sayyed Farhan Ali Naqvi (44), den Ex-CFO, verhaftet in San Jose, Kalifornien. Das 10-Count-Indictment der US Attorney&rsquo;s Office for the Eastern District of New York listet &bdquo;continuing financial crimes enterprise&ldquo;, Securities Fraud, Wire Fraud und Verschw&ouml;rung. Die Kernvorw&uuml;rfe: Mindestens 90 Prozent der 421 Millionen Dollar Umsatz f&uuml;r das Gesch&auml;ftsjahr 2023 seien erfunden gewesen. Das Schema: Mit Strohmann-Konten wurden &bdquo;Round-Trip&ldquo;-Fonds aufgesetzt, also Investoren- und Kreditgeld zur&uuml;ck an Konten geleitet, die als Kundenzahlungen an iLearningEngines erschienen. Mitarbeiter und &mdash; laut DOJ &mdash; Familienmitglieder unterschrieben als fiktive Executives anderer Firmen, um die Transaktionen als glaubw&uuml;rdig auszuweisen. &bdquo;Virtually all&ldquo; Kundenbeziehungen, zitiert das DOJ aus einem Executive-Memo, seien fingiert gewesen.</p>
+
+            <p>Der Fall steht beispielhaft f&uuml;r eine Welle von AI-Washing-F&auml;llen, die sich seit 2024 h&auml;ufen. Die SEC hat im letzten Jahr 48 AI-bezogene Enforcement-Aktionen gef&uuml;hrt &mdash; ein Faktor drei gegen&uuml;ber 2023. Die Muster &auml;hneln sich: Ein bestehendes Gesch&auml;ftsmodell wird mit einem AI-Overlay rebranded; die SPAC- oder IPO-Bewertung steigt um 3 bis 10x; Umsatz wird fabriziert, bis die Short Seller kommen; der Kurs bricht ein; die Bankrotta folgt; erst dann wird mit zwei, drei Jahren Verzug strafrechtlich ermittelt. CognitionAI (SPAC-Kollaps Oktober 2025), XecutionAI (SEC-Strafzahlung Januar 2026) und jetzt iLearningEngines bilden eine Reihe, die bei Investment Banks intern inzwischen &bdquo;AI-SPAC Winter&ldquo; genannt wird.</p>
+
+            <p>F&uuml;r CTOs und Finanzvorstande, die mit Vendor-Evaluationen befasst sind, ist der Fall eine operative Erinnerung. Erstens: Due Diligence sollte die technische Substanz des AI-Claims separat pr&uuml;fen &mdash; nicht nur die Demos. Ein konkreter Check: Welche ML-Engineers sind beim Vendor angestellt? Welche Modelle laufen in Produktion? Existiert ein Model-Card-Dokument mit Training-Daten und Performance-Metriken? Zweitens: Reference Checks bei genannten Kunden sollten direkt beim Kunden-Engineering-Lead laufen, nicht bei der Prokurist:in, die der Vendor vermittelt. Drittens: &bdquo;Customer Concentration&ldquo; ist im SEC-Sinn ein Konzentrationsrisiko, aber auch ein Fake-Indikator &mdash; wenn 60&nbsp;Prozent eines Umsatzes aus drei Kunden stammen, sollte Backchannel-Verifikation m&ouml;glich sein. Der iLearningEngines-Fall ist extrem, aber die diagnostische Checkliste ist universell einsetzbar.</p>
+
+            <p>Auf makroregulatorischer Ebene wirkt der Fall als Katalysator. Sechs US-Senator:innen forderten am 18.&nbsp;April in einem Brief an die SEC, AI-Claims in Prospekten mit denselben Standards zu regulieren wie Lizenz- oder Patent-Claims. Die Wahrscheinlichkeit, dass 2026 eine konkrete SEC-Regulierung folgt, ist damit deutlich gestiegen. F&uuml;r seri&ouml;se AI-Startups ist das eine gute Nachricht &mdash; sie erh&ouml;ht das Signal-Rausch-Verh&auml;ltnis in ihrem Sektor und reduziert die Gefahr, mit Betr&uuml;gern in denselben Gespr&auml;chen zu landen.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.investing.com/news/stock-market-news/exceo-excfo-of-bankrupt-ai-company-charged-with-fraud-4621508" rel="noopener noreferrer external">Reuters via Investing.com &mdash; Ex-CEO, Ex-CFO of Bankrupt AI Company charged with Fraud</a></li>
+                <li><a href="https://www.law360.com/compliance/articles/2466955" rel="noopener noreferrer external">Law360 &mdash; iLearningEngines Fraud Indictment</a></li>
+                <li><a href="https://www.capitalaidaily.com/ceo-of-nasdaq-listed-ai-firm-allegedly-masterminds-421000000-round-trip-scheme-to-defraud-investors-doj/" rel="noopener noreferrer external">Capital AI Daily &mdash; DOJ 421-Millionen-Dollar-Round-Trip-Scheme</a></li>
+                <li><a href="https://techstory.in/tech-ceo-indicted-in-420m-ai-fraud-scheme/" rel="noopener noreferrer external">TechStory &mdash; Tech CEO Indicted in 420M AI Fraud Scheme</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Physical AI &mdash; Vom Bildschirm in die Welt: Was der Beijing-Halbmarathon f&uuml;r die Industrie bedeutet</h2>
+            <p class="article-teaser">2025 brauchte der Sieger-Roboter zwei Stunden 40. 2026 l&auml;uft &bdquo;Lightning&ldquo; von Honor die 21,1 Kilometer in 50:26 &mdash; unter dem menschlichen Weltrekord. Gleichzeitig r&uuml;ckt &bdquo;Physical AI&ldquo; auf der Hannover Messe ins Leitthema. Tesla startet Robotaxis in Dallas und Houston. China installiert 295.000 Industrieroboter pro Jahr &mdash; die USA 34.200. Warum 2026 das Jahr ist, in dem KI aus dem Bildschirm tritt &mdash; und was das f&uuml;r deutsche SaaS-Unternehmen bedeutet. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-20.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/figma.com.png" alt="Figma Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.figma.com/blog/the-figma-canvas-is-now-open-to-agents/" rel="noopener noreferrer external">Figma for Agents</a></div>
+                    <div class="tool-card-desc">Figmas Canvas ist jetzt schreibend &uuml;ber einen MCP-Server f&uuml;r KI-Agenten zug&auml;nglich. Erste gro&szlig;e Design-Tool-Plattform, die Write-Access f&uuml;r Agenten standardisiert &mdash; inklusive neuer &bdquo;Skills&ldquo; als Markdown-Instruktionssets. Kompatibel mit Claude Code, Codex und jedem MCP-Client.</div>
+                    <div class="tool-card-meta">14. April 2026. Figma, Beta (kostenlos).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/krisp.ai.png" alt="Krisp Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://krisp.ai/" rel="noopener noreferrer external">Krisp Accent Converter</a></div>
+                    <div class="tool-card-desc">Chrome-Extension, die in Echtzeit Akzente in YouTube-Videos f&uuml;r klareres Verst&auml;ndnis konvertiert. Erster Einsatz von Krisps Voice-AI au&szlig;erhalb des Meeting-Kontexts, l&auml;uft komplett on-device. 50.000+ Installs vor offiziellem Launch.</div>
+                    <div class="tool-card-meta">13. April 2026. Krisp, Voice-AI seit 2017.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/catdoes.com.png" alt="CatDoes Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.catdoes.com/" rel="noopener noreferrer external">CatDoes v4</a></div>
+                    <div class="tool-card-desc">No-Code-App-Builder, dessen Cloud-Agent &bdquo;Compose&ldquo; in eigener Compute-Umgebung mobile Apps und Websites baut. Vollautonomie &mdash; Tab schlie&szlig;en, Agent arbeitet weiter, installiert Pakete, f&uuml;hrt Tests aus. v4 bringt dedizierte Cloud-Compute pro Agent.</div>
+                    <div class="tool-card-meta">14. April 2026. CatDoes (Indie-Startup).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="GitHub Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/khendzel/skills-janitor" rel="noopener noreferrer external">Skills Janitor</a></div>
+                    <div class="tool-card-desc">Open-Source-CLI, die Claude-Code-Skills auditiert, dedupliziert, lintet und Nutzungsstatistiken erstellt. Adressiert ein wachsendes Problem: Wer viele Skills installiert hat, verliert den &Uuml;berblick. Bash + Python, MIT-Lizenz, kein Tracking.</div>
+                    <div class="tool-card-meta">13. April 2026. khendzel (Open Source).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/labs.google.png" alt="Google Labs Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://research.google/blog/towards-developing-future-ready-skills-with-generative-ai/" rel="noopener noreferrer external">Vantage (Google Labs)</a></div>
+                    <div class="tool-card-desc">KI-Assessment f&uuml;r &bdquo;Future-Ready Skills&ldquo; (Kollaboration, kritisches Denken, Kreativit&auml;t) via Dialog mit KI-Avataren in simulierten Szenarien. Ersetzt statische Tests durch dynamische Multi-Party-Gespr&auml;che. Kooperation mit NYU-P&auml;dagogikforschern.</div>
+                    <div class="tool-card-meta">13. April 2026. Google Research.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/ovren.ai.png" alt="Ovren Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.ovren.ai/" rel="noopener noreferrer external">Ovren</a></div>
+                    <div class="tool-card-desc">KI-Frontend- und -Backend-Agenten ziehen sich eigenst&auml;ndig Tasks aus dem Backlog und liefern reviewbare Code-Updates direkt in GitHub. Task-Pull statt Task-Push, parallele Arbeit auf beiden Disziplinen. Free Tier mit 5 Credits.</div>
+                    <div class="tool-card-meta">14. April 2026. Ovren (Bootstrapped).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=WMnk1LFBMqA" rel="noopener noreferrer external"><img src="../assets/images/thumbs/WMnk1LFBMqA.jpg" alt="Peter Yang Claude Design Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 17 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=WMnk1LFBMqA" rel="noopener noreferrer external">Claude Design: Everything You Can Build in 16 Minutes (5 Real Use Cases)</a></div>
+                    <div class="yt-card-channel">Peter Yang (84.000 Subs) &middot; 18. April 2026</div>
+                    <div class="yt-card-desc">Peter Yang zeigt in f&uuml;nf konkreten Anwendungsf&auml;llen, was mit Claude Design in Produktionsqualit&auml;t geht: Pitch-Deck aus Jira-Tickets, Landing Page aus Produktnotizen, Prototype-UI f&uuml;r Kunden-Feedback. Fokussiert auf die Real-World-Grenzen, die der Launch-Hype nicht diskutiert &mdash; etwa, wo Claude Design noch Figma nicht ersetzt.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=BV9Bnj3l8pk" rel="noopener noreferrer external"><img src="../assets/images/thumbs/BV9Bnj3l8pk.jpg" alt="Leon van Zyl Opus 4.7 Real-World Test Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 16 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=BV9Bnj3l8pk" rel="noopener noreferrer external">How Good is Opus 4.7 Really? (New Claude Code Desktop Test)</a></div>
+                    <div class="yt-card-channel">Leon van Zyl (95.000 Subs) &middot; 17. April 2026</div>
+                    <div class="yt-card-desc">Leon van Zyl testet Opus&nbsp;4.7 in der neuen Claude-Code-Desktop-App an realen Coding-Aufgaben &mdash; Refactoring eines Next.js-Backends, Integration einer Stripe-Webhook-Pipeline, Debugging eines Race-Conditions-Problems. Ern&uuml;chternder Ton statt Launch-Euphorie: Zeigt, wo das Modell liefert, wo es hakt und wo die 1M-Kontext-Vorteile wirklich zum Tragen kommen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=pH8tVBqCRLY" rel="noopener noreferrer external"><img src="../assets/images/thumbs/pH8tVBqCRLY.jpg" alt="Capital Markets AI Honor Lightning Half Marathon Analysis Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 9 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=pH8tVBqCRLY" rel="noopener noreferrer external">China's Humanoid Robot Ran a Half Marathon in 50 Minutes</a></div>
+                    <div class="yt-card-channel">Capital Markets AI (270 Subs) &middot; 1.304 Views in 24h &middot; 19. April 2026</div>
+                    <div class="yt-card-desc">Ein kleiner Channel mit aussergewohnlicher Signal-Tiefe. Der Analyst zerlegt den Honor-&bdquo;Lightning&ldquo;-Sieg von gestern nicht nur technisch, sondern im Investment-Kontext: Welche chinesischen Humanoid-Aktien bewegen sich nach dem Event, welche west-westlichen Zulieferer werden gerade unterbewertet, und welche Zeitleiste f&uuml;r Massenmarkt-Humanoide sieht der Markt wirklich. 4,8-facher Views-zu-Subscriber-Ratio &mdash; klarer Fr&uuml;hindikator f&uuml;r viralen Traffic in einem Nischen-Thema.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

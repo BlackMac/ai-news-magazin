@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Physical AI &mdash; Die Inferenz, 20. April 2026</title>
+    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-20.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Physical AI &mdash; Vom Bildschirm in die Welt: Was der Beijing-Halbmarathon f&uuml;r die Industrie bedeutet</h1>
+    <p class="article-subtitle">2025 brauchte der Sieger-Roboter zwei Stunden 40. 2026 l&auml;uft &bdquo;Lightning&ldquo; von Honor die 21,1 Kilometer in 50:26 &mdash; unter dem menschlichen Weltrekord. Gleichzeitig r&uuml;ckt &bdquo;Physical AI&ldquo; auf der Hannover Messe ins Leitthema. Tesla startet Robotaxis in Dallas und Houston. China installiert 295.000 Industrieroboter pro Jahr &mdash; die USA 34.200. Warum 2026 das Jahr ist, in dem KI aus dem Bildschirm tritt &mdash; und was das f&uuml;r deutsche SaaS-Unternehmen bedeutet.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-20">Montag, 20. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Peking, Bezirk Yizhuang, Sonntagvormittag, 19.&nbsp;April 2026. &Uuml;ber 300 humanoide Roboter aus mehr als 100 Teams stehen an der Startlinie eines Halbmarathons. Parallel starten 12.000 menschliche L&auml;ufer. Neben ihnen die jetzt fast vergessene Erinnerung an die Premiere vor genau einem Jahr: Damals brauchte der Sieger-Roboter &bdquo;Tiangong Ultra&ldquo; zwei Stunden 40 und drei Batteriewechsel. Diesmal &uuml;berquert &bdquo;Lightning&ldquo;, ein bipedaler Humanoid des chinesischen Smartphone-Herstellers Honor, die Ziellinie nach 50 Minuten 26 Sekunden &mdash; sieben Minuten schneller als der menschliche Halbmarathon-Weltrekord von Jacob Kiplimo aus M&auml;rz 2026. Durchschnittsgeschwindigkeit: rund 25 Stundenkilometer. Honor belegt alle drei Podiumspl&auml;tze.</p>
+
+        <p>Der sportliche Vergleich ist unsauber: Roboter d&uuml;rfen Begleitfahrzeuge nutzen, Operatoren d&uuml;rfen eingreifen, St&uuml;rze werden zeitbestraft, aber nicht disqualifiziert. Doch als technisches Signal ist die Zahl konkret. Zwischen zwei Halbmarathons dreifache Geschwindigkeit. Kein Batteriewechsel mehr. Vollautonome Navigation &mdash; die Honor-Teams liefen ohne Funk-Pilot, rein auf eigenem SLAM und Pfadplanung. Der Roboter war vor einem Jahr noch ein wissenschaftliches Demo-Objekt. 2026 ist er ein Consumer-Electronics-Produkt in Pr&auml;-Launch-Phase.</p>
+
+        <h2>Was &bdquo;Physical AI&ldquo; eigentlich hei&szlig;t</h2>
+
+        <p>Der Begriff ist neu genug, dass er in deutschen Tech-Leitmedien uneinheitlich verwendet wird &mdash; und alt genug, dass Nvidia-CEO Jensen Huang ihn 2024 zum &bdquo;n&auml;chsten Frontier&ldquo; erkl&auml;rt hat. Physical AI umschreibt k&uuml;nstliche Intelligenz, die nicht in einem Chatfenster operiert, sondern in der realen Welt: Humanoide Roboter, autonome Fahrzeuge, industrielle Cobots, Agricultural Drones, Warehouse-Robotik. Technisch gemeinsam ist der Stack: Ein Foundation-Modell &uuml;bernimmt Reasoning und Planung, ein Vision-Language-Action-Modell (VLA) verbindet Kamerabilder mit Bewegungskommandos, ein klassischer Controller &uuml;bersetzt in Gelenkwinkel. Marktforscher taxieren das Segment f&uuml;r 2030 auf 68 bis &uuml;ber 100 Milliarden Dollar &mdash; bei Wachstumsraten von 35 bis 45&nbsp;Prozent pro Jahr.</p>
+
+        <p>Die Unterscheidung zu klassischer Robotik ist praktisch wichtig. Ein ABB- oder Kuka-Schweissroboter ist programmiert auf eine festgelegte Bewegungsabfolge. Ein Physical-AI-System soll per Sprachbefehl oder Kamerainput eine neue Aufgabe bew&auml;ltigen, die es nie vorher gesehen hat &mdash; etwa eine Tasse vom Tisch r&auml;umen, einen offenen Kreis auf dem Boden aufwischen, einen gest&uuml;rzten Menschen sachte aufrichten. Was ein Kleinkind in 18 Monaten lernt, ist f&uuml;r Maschinen bis 2023 unm&ouml;glich gewesen. 2026 ist es ein Benchmark, an dem konkurrierende Modelle gemessen werden.</p>
+
+        <h2>Die drei Felder der Physical-AI-Front</h2>
+
+        <p><strong>Humanoide Roboter</strong> sind das sichtbarste Feld. Neben Honor, das als Smartphone-Hersteller mit F&uuml;ssigkeitsk&uuml;hlung und Akkutechnik einen Supply-Chain-Vorsprung mitbringt, operieren Unitree (dessen H1 bereits 2025 den Speed-Rekord von 36&nbsp;km/h hielt), Figure AI (2&nbsp;Mrd. USD Bewertung, BMW-Partner, Figure 03 in Pilot-Serie seit Q3 2025), Tesla Optimus (Gen 3 angek&uuml;ndigt f&uuml;r Q4 2026), 1X Technologies (Norwegen, OpenAI-investiert), UBTech, Agility Robotics (Digit), Apptronik (Apollo, mit Mercedes-Partnerschaft) und eine zweistellige Zahl chinesischer Player, die der Westen kaum namentlich kennt. Die China-Konzentration im Humanoid-Segment ist auffallend: Im Beijing-Halbmarathon waren alle drei Podiumspl&auml;tze Honor &mdash; aber die Anmeldung von &uuml;ber 300 Robotern aus mehr als 100 Teams spricht f&uuml;r ein Okosystem, das selbstverst&auml;ndlicher in die Industrieproduktion integriert ist als irgendwo sonst.</p>
+
+        <p><strong>Autonome Fahrzeuge</strong> sind das Feld mit den gr&ouml;&szlig;ten Investitionen und dem l&auml;ngsten Produktisierungs-Pfad. Waymo f&auml;hrt Anfang 2026 &uuml;ber 500.000 bezahlte Fahrten pro Woche in mehr als zehn US-St&auml;dten, seit April auch in London. Tesla startete am 18.&nbsp;April 2026 in Dallas und Houston seinen Robotaxi-Dienst &mdash; erstmals ohne Safety Monitor im Beifahrersitz. Damit ist Tesla in drei M&auml;rkten pr&auml;sent (Austin, SF, Dallas, Houston), parallel l&auml;uft die NHTSA-Untersuchung zu 15 gemeldeten Unf&auml;llen seit dem Austin-Start im Juni 2025. Die Rate liegt laut Fortune und Bloomberg bei vier- bis achtmal der menschlicher Fahrer. Der eigentliche Streitpunkt ist paradigmatisch: Tesla f&auml;hrt kameragest&uuml;tzt (weniger als zehn Kameras, kein Lidar, kein Radar) &mdash; Waymo setzt auf 29 Kameras, f&uuml;nf Lidars, sechs Radare pro Fahrzeug. Welches Paradigma auch gewinnt: Das Rennen findet 2026 statt.</p>
+
+        <p><strong>Industrierobotik</strong> ist das versteckte, aber strategisch wichtigste Feld. Die International Federation of Robotics (IFR) meldet f&uuml;r 2024 (neuere Zahlen liegen im Juni 2026 vor) eine Installation von 295.000 Industrierobotern in China &mdash; gegen&uuml;ber 34.200 in den USA, einem Faktor neun. Der globale Bestand erreichte Ende 2024 &uuml;ber 4,6 Millionen Einheiten. Auf der Hannover Messe, die am 20.&nbsp;April unter dem Leitthema &bdquo;Think Tech Forward&ldquo; er&ouml;ffnet wurde, zeigen 15 Aussteller humanoide Roboter &mdash; erstmals Kern des Leitprogramms, nicht mehr Randthema. Bundeskanzler Friedrich Merz und Brasiliens Pr&auml;sident Lula er&ouml;ffneten die Messe gemeinsam; der DFKI-Stand zeigt 6G-vernetzte Mensch-Roboter-Kooperation, Microsoft eine Industrial-Cloud, Siemens einen digitalen Zwilling seiner Amberg-Fabrik.</p>
+
+        <h2>Warum China vorn ist &mdash; und was das mit dem Stanford Index zu tun hat</h2>
+
+        <p>Der am 13.&nbsp;April 2026 ver&ouml;ffentlichte Stanford AI Index 2026 dokumentiert, was der Beijing-Halbmarathon illustriert. Chinas Spitzenmodelle liegen nur noch 2,7&nbsp;Prozent hinter dem US-Spitzenreiter Anthropic &mdash; vor drei Jahren waren es 17,5&nbsp;Prozent. Entscheidender f&uuml;r Physical AI: China h&auml;lt 69,7&nbsp;Prozent der globalen AI-Patente, publiziert 23,2&nbsp;Prozent aller AI-Papers &mdash; und produziert, wie oben genannt, neunmal mehr Industrieroboter als die USA. In den Chip-Packages sitzt inzwischen nicht nur Nvidia-Silizium, sondern auch zunehmend Huawei Ascend (in China abgeschottet), AMD MI355X und hyperscaler-eigene ASICs. Der Hardware-Stack hinter Physical AI wird zur strategischen Industrie &mdash; bei der Bundesregierung fehlt bislang eine sichtbare Antwort. Europa h&auml;lt laut Stanford 3&nbsp;Prozent der AI-Patente, 11&nbsp;Prozent der Compute-Research-Paper, kein nennenswertes Frontier-Modell.</p>
+
+        <p class="pull-quote">&bdquo;Was ein Kleinkind in 18 Monaten lernt, ist f&uuml;r Maschinen bis 2023 unm&ouml;glich gewesen. 2026 ist es ein Benchmark, an dem konkurrierende Modelle gemessen werden.&ldquo;</p>
+
+        <p>Die Trainingsdaten sind dabei ein struktureller Vorteil, den China nicht aufgibt. Physical-AI-Modelle brauchen Video- und Sensordaten aus realen Umgebungen, in denen Roboter agieren. Chinas gro&szlig;fl&auml;chige Fabrikr&auml;ume, der Robotaxi-Piloten in f&uuml;nf St&auml;dten, die industrielle Automatisierungsoffensive &bdquo;Made in China 2030&ldquo; (der Nachfolger von 2025) liefern Datenvolumen, die US-Player nur unter Schwierigkeiten mobilisieren k&ouml;nnen. Laut dem Anthropic-Mitbegr&uuml;nder Chris Olah in einem M&auml;rz-Vortrag bei der AAAI bleibt das Fehlen skalierbarer Physical-World-Simulationsumgebungen &bdquo;unser gr&ouml;&szlig;tes Engpassproblem&ldquo; in der westlichen Forschung.</p>
+
+        <h2>Der westliche Counter: VLA-Modelle und Open-Source-Stacks</h2>
+
+        <p>Die USA halten zwei strategische Trumpfkarten. Erstens: Vision-Language-Action-Modelle (VLAs). Physical Intelligence aus San Francisco &mdash; gegr&uuml;ndet von Karol Hausman, Sergey Levine und Chelsea Finn, aktuell bei rund 11&nbsp;Milliarden Dollar bewertet &mdash; ver&ouml;ffentlichte im April π0.7, ein &bdquo;compositional generalization&ldquo;-Modell, dessen Air-Fryer-Demo in drei Wochen die Erfolgsrate unbekannter K&uuml;chenaufgaben von 5 auf 95&nbsp;Prozent hob. Google DeepMind launchte am 17.&nbsp;April Gemini Robotics-ER 1.6 als Open-Weights-Release. Nvidias GROOT-Stack &mdash; ein Humanoid-Foundation-Modell plus Isaac-Sim-Trainingsumgebung &mdash; z&auml;hlt &uuml;ber 80 Physical-AI-Partner. Zweitens: Die meisten VLA-Gewichte sind open &mdash; π0 und π0.5 waren Apache-2.0, Isaac Sim ist kostenlos. China nutzt diese Stacks mit und entwickelt parallel eigene.</p>
+
+        <p>Die Frage, welche Seite schneller iteriert, entscheidet sich in der Hardware-Supply-Chain: TSMCs CoWoS-L-Packaging-Kapazit&auml;t sichert Nvidia &uuml;ber 70&nbsp;Prozent bis Ende 2026. Huawei Ascend 910C l&auml;uft &uuml;ber SMIC-7nm, das laut Paradox Intelligence strukturell nicht konkurrenzf&auml;hig ist. China setzt daher auf Masse &mdash; viele Robotikeinheiten pro Industrie-Arbeitsplatz &mdash; w&auml;hrend der Westen auf Fahigkeit pro Einheit setzt. Beide Strategien k&ouml;nnen funktionieren. Nur nicht dieselbe Zielgruppe bedienen.</p>
+
+        <h2>Was das f&uuml;r deutsche SaaS-Unternehmen bedeutet</h2>
+
+        <p>Die unmittelbare Relevanz f&uuml;r Software-as-a-Service-Firmen ist begrenzt &mdash; und genau deshalb unterschatzt. Drei konkrete Implikationen verdienen Aufmerksamkeit.</p>
+
+        <p><strong>Erstens: Der Talentmarkt f&uuml;r Machine-Learning-Ingenieure verschiebt sich.</strong> Spitzenkr&auml;fte, die bisher in LLM-Labs bei OpenAI, Anthropic oder Mistral gearbeitet haben, wandern zunehmend in Physical-AI-Startups ab &mdash; weil die technische Neuartigkeit gr&ouml;&szlig;er und die Investorenzuflucht knapper wird. F&uuml;r SaaS-Unternehmen hei&szlig;t das: Der Remote-Bewerbungsstrom von Senior-MLEs aus dem Silicon Valley wird 2026 d&uuml;nner. Wer heute vor der Entscheidung steht, ein eigenes ML-Team aufzubauen, hat im Sommerfenster mehr Wahl als im Herbst. Die US-AI-Talent-Migration ist laut Stanford AI Index 2026 im letzten Jahr um 80&nbsp;Prozent gesunken &mdash; viele bleiben in Asien oder ziehen dorthin.</p>
+
+        <p><strong>Zweitens: Die &bdquo;Frontier&rdquo;-Heuristik f&uuml;r neue KI-Features &auml;ndert sich.</strong> Bisher galt: Was Anthropic oder OpenAI nicht kann, kann kein anderer Anbieter. Das stimmt f&uuml;r Reasoning-Benchmarks noch. F&uuml;r Multimodalit&auml;t, Vision, Robotik-&auml;hnliche Visual-Tasks &uuml;berholt China im Halbjahrestakt. Product Managers, die heute konkurrierende Produkte analysieren, sollten Qwen3-VL, Yi-Vision, MiniMax 2.7 und Honor-proprietaere Stacks mit einbeziehen. Kommerzielle Zug&auml;ngigkeit ist eine andere Frage &mdash; viele chinesische Stacks sind entweder lokal zu hosten oder laufen nur &uuml;ber Nicht-Hyperscaler-APIs. Aber technisch sind sie Teil des Benchmark-Vergleichs.</p>
+
+        <p><strong>Drittens: Der Hardware-Zuliefermarkt wird selbst SaaS-Produkt.</strong> Schematik &mdash; von uns in der <a href="../2026-04-19.html#art-4">Ausgabe vom 19.&nbsp;April</a> als &bdquo;Cursor for Hardware&ldquo; beschrieben &mdash; ist nur der sichtbarste Vertreter eines breiteren Musters. Claude bekommt via Anthropic-Engineer Rieseberg eine Hardware-API. Cadence und Synopsys bauen AI-Copiloten in ihre EDA-Suiten. Arduino hat im M&auml;rz 2026 den offiziellen AI-Codebuilder gestartet. Wer 2027 ein ausstellungsreifes Hardware-Pendant zu einem Software-Produkt bauen will &mdash; Badge, Kiosk, Companion-Device, Robotics-Integration &mdash; arbeitet in einer Welt, in der dieses Projekt keine 18 Monate mehr braucht. Strategische Produktplanungen sollten diese Option kennen, selbst wenn sie sie nicht w&auml;hlen.</p>
+
+        <h2>Das 18-Monats-Fenster</h2>
+
+        <p>Die Prognosen f&uuml;r das Kommerzialisierungs-Fenster gehen auseinander. Goldman Sachs rechnet f&uuml;r 2027/28 mit ersten Massenbewegungen in Humanoid-Logistik (Warehouse-Picking, Hotel-Reinigung, Altenpflege). Morgan Stanley sieht eine &bdquo;iPhone-Moment-Schwelle&ldquo; f&uuml;r Haushaltsroboter fr&uuml;hestens 2029. Das Institut f&uuml;r Robotik am DFKI erwartet den industriellen Durchbruch bei Cobots fr&uuml;her &mdash; 2026/27 bei spezialisierten Tasks, 2028/29 bei allgemeiner Einsatzf&auml;higkeit. Physical Intelligence-CEO Karol Hausman nennt &bdquo;Ende 2027&ldquo; als Datum, an dem ein Haushaltsroboter zuverl&auml;ssig W&auml;sche legen soll.</p>
+
+        <p>Das 18-Monats-Fenster, das f&uuml;r SaaS-Entscheider z&auml;hlt, sieht anders aus. In dieser Periode entsteht klar, welche Plattformen sich durchsetzen (Nvidia GROOT, Anthropic Hardware-API, OpenVLA, Physical Intelligence pi), welche Regulierungsregime greifen (EU AI Act August 2026 f&uuml;r &bdquo;High-Risk&ldquo;-Robotics, US NHTSA-Verfahren, Chinas autonomes Fahrzeug-Gesetz Q3 2026), und welche VCs die n&auml;chste Finanzierungsrunde treiben. Wer die Entwicklung bis Ende 2027 nur passiv beobachtet, wird im Januar 2028 feststellen, dass zentrale Weichenstellungen getroffen wurden &mdash; ohne dass das eigene Unternehmen Einfluss genommen hat.</p>
+
+        <p>Der Beijing-Halbmarathon 2026 ist kein Deep-Blue-Moment im Sinne einer erledigten Frage. Er ist ein Sputnik-Moment im Sinne einer ge&ouml;ffneten. Die Frage ist nicht, ob Maschinen laufen k&ouml;nnen &mdash; die Frage ist, wer ihre Betriebssysteme schreibt und wo sie produziert werden. Chinas Honor hat am 19.&nbsp;April gezeigt, dass sie in beidem Vorsprung hat. Deutschland hat auf der Hannover Messe die Kulisse, um zu antworten. Zwischen Zuversicht und Reformdruck liegt das n&auml;chste halbe Jahr.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://edition.cnn.com/2026/04/19/china/china-robot-half-marathon-intl-hnk" rel="noopener noreferrer external">CNN &mdash; Chinese android runs half-marathon faster than any human</a></li>
+            <li><a href="https://fortune.com/2026/04/19/humanoid-robot-world-record-half-marathon-race-china-honor/" rel="noopener noreferrer external">Fortune &mdash; Humanoid robot faster than any person in half marathon</a></li>
+            <li><a href="https://www.aljazeera.com/sports/2026/4/19/humanoid-robot-breaks-half-marathon-world-record-in-beijing" rel="noopener noreferrer external">Al Jazeera &mdash; Humanoid robot breaks half-marathon world record</a></li>
+            <li><a href="https://www.pbs.org/newshour/world/humanoid-robot-wins-beijing-half-marathon-defeating-the-human-world-record" rel="noopener noreferrer external">PBS/Reuters &mdash; Humanoid robot wins Beijing half-marathon</a></li>
+            <li><a href="https://techcrunch.com/2026/04/19/robots-beat-human-records-at-beijing-half-marathon/" rel="noopener noreferrer external">TechCrunch &mdash; Robots beat human records at Beijing half-marathon</a></li>
+            <li><a href="https://technode.com/2025/04/21/beijing-hosts-worlds-first-half-marathon-for-humanoid-robots-tiangong-ultra-wins-in-two-hours-40-minutes/" rel="noopener noreferrer external">TechNode &mdash; 2025-Premiere: Tiangong Ultra wins in 2:40</a></li>
+            <li><a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" rel="noopener noreferrer external">Stanford HAI &mdash; AI Index 2026 Report</a></li>
+            <li><a href="https://spectrum.ieee.org/state-of-ai-index-2026" rel="noopener noreferrer external">IEEE Spectrum &mdash; State of the AI Index 2026</a></li>
+            <li><a href="https://www.heise.de/news/Merz-und-Lula-eroeffnen-Hannover-Messe-2026-Zwischen-KI-Zuversicht-und-Reformdruck-11263549.html" rel="noopener noreferrer external">heise &mdash; Merz und Lula er&ouml;ffnen Hannover Messe 2026</a></li>
+            <li><a href="https://www.hannovermesse.de/de/presse/pressemitteilungen/hannover-messe/hannover-messe-2026-mit-industrieller-ki-zum-wettbewerbsvorsprung" rel="noopener noreferrer external">Hannover Messe &mdash; 2026 mit industrieller KI zum Wettbewerbsvorsprung</a></li>
+            <li><a href="https://ifr.org/ifr-press-releases/news/record-of-4-million-robots-work-in-factories-worldwide" rel="noopener noreferrer external">IFR &mdash; Record 4 million robots at work in factories worldwide</a></li>
+            <li><a href="https://electrek.co/2026/04/18/tesla-robotaxi-launches-dallas-houston-small-geofences/" rel="noopener noreferrer external">Electrek &mdash; Tesla Robotaxi launches in Dallas and Houston</a></li>
+            <li><a href="https://techcrunch.com/2026/04/18/tesla-brings-its-robotaxi-service-to-dallas-and-houston/" rel="noopener noreferrer external">TechCrunch &mdash; Tesla brings Robotaxi to Dallas and Houston</a></li>
+            <li><a href="https://fortune.com/2026/02/26/tesla-robotaxis-4x-8x-worse-than-humans-at-driving-safety-record-crashes/" rel="noopener noreferrer external">Fortune &mdash; Tesla Robotaxis 4-8x worse than humans at driving</a></li>
+            <li><a href="https://www.physicalintelligence.company/blog/pi07" rel="noopener noreferrer external">Physical Intelligence &mdash; π0.7 Compositional Generalization</a></li>
+            <li><a href="https://deepmind.google/discover/blog/gemini-robotics-1-6/" rel="noopener noreferrer external">Google DeepMind &mdash; Gemini Robotics-ER 1.6</a></li>
+            <li><a href="https://developer.nvidia.com/isaac/groot" rel="noopener noreferrer external">Nvidia &mdash; Isaac GROOT Foundation Model</a></li>
+            <li><a href="https://www.goldmansachs.com/insights/articles/humanoid-robot-market" rel="noopener noreferrer external">Goldman Sachs &mdash; The Humanoid Robot Market</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

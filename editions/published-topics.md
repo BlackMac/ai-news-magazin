@@ -100,6 +100,9 @@ Dieses Log hilft, exakte Wiederholungen zu vermeiden.
 - 8YhYtIF9PYI — 7 Claude Code secrets you had NO idea about (Alex Finn, 2026-04-18)
 - VFLieg8JjLA — Claude Code: Build an AI Agent That Finds Vulnerabilities (Leon van Zyl, 2026-04-18)
 - sVzY_GQem4A — Claude Opus 4.7 is INSANE (Rank #1 in 10 Mins) (Sarvesh Shrivastava, 2026-04-17)
+- WMnk1LFBMqA — Claude Design: Everything You Can Build in 16 Minutes (5 Real Use Cases) (Peter Yang, 2026-04-18)
+- BV9Bnj3l8pk — How Good is Opus 4.7 Really? (New Claude Code Desktop Test) (Leon van Zyl, 2026-04-17)
+- pH8tVBqCRLY — China's Humanoid Robot Ran a Half Marathon in 50 Minutes (Capital Markets AI, 2026-04-19)
 
 ---
 
@@ -283,6 +286,23 @@ Jedes Tool darf nur **einmal** im Tool-Radar erscheinen. Vor der Aufnahme neuer 
 - Cloudflare Agent Memory (2026-04-19)
 - Twill.ai (2026-04-19)
 - Gemini for Mac (2026-04-19)
+- Figma for Agents (2026-04-20)
+- Krisp Accent Converter (2026-04-20)
+- CatDoes v4 (2026-04-20)
+- Skills Janitor (2026-04-20)
+- Vantage (Google Labs) (2026-04-20)
+- Ovren (2026-04-20)
+
+---
+
+## 2026-04-20
+- Stanford AI Index 2026 publiziert 13.04.2026 (Stanford HAI, 9. Ausgabe, >400 Seiten): US-China-Leistungsl&uuml;cke 2,7% (2023: 17,5%), Anthropic Opus 4.7 vs ByteDance Dola-Seed-2.0-Preview M&auml;rz 2026, DeepSeek-R1 zog Feb 2025 erstmals gleich; US-Privatinvestitionen $285,9 Mrd. vs China $12,4 Mrd. (23x); China 69,7% globale AI-Patente, 23,2% Publikationen, 295.000 Industrieroboter 2024 (USA 34.200); Europa 3% Patente, 11% Compute-Papers; Foundation Model Transparency Index 58&rarr;40; SWE-bench Verified 60&rarr;100% in 12 Monaten; Humanity's Last Exam 8,8&rarr;50%; Jagged Frontier (Analoguhren nur 50,1%, W&auml;sche legen 12%); US-AI-Talent-Migration -80% im letzten Jahr; EU 53% globales Regulierungsvertrauen
+- Hannover Messe 2026 Er&ouml;ffnung 19.04.2026: Merz und Lula gemeinsam; Leitthema Think Tech Forward, erstmals Physical AI im Zentrum, 15 Aussteller zeigen humanoide Roboter; 3.500 Aussteller aus 150+ L&auml;ndern, 130.000 Besucher erwartet; Partnerland Brasilien mit 140 Firmen in 6 Hallen (st&auml;rkste Partnerland-Pr&auml;senz aller Zeiten); DAX-Gipfel mit Busch/Klein/H&ouml;ttges; Siemens Amberg-Twin; Microsoft Industrial Cloud; DFKI 6G-Robotik; Kontext Energiekrise Hormuz (Merz beruft Nationalen Sicherheitsrat ein); ZVEI prognostiziert +9,5% Industrieautomation 2026
+- Tesla Robotaxi Dallas/Houston Launch 18.04.2026: X-Post durch @Tesla_Robotaxi ohne Pressekonferenz; erstmals ohne Safety Monitor; Geofences klein (Houston 12-25 mi&sup2;, Dallas 30-35 mi&sup2;); Tracker z&auml;hlen nur 1 aktives Fahrzeug je Stadt am Launch-Tag; Austin-Flat-Fare 6,90 USD; NHTSA ermittelt 15 Crashes seit Juni 2025, 1 Crash pro 57.000 mi vs US-Durchschnitt 1 pro 500.000 mi (4-8x schlechter laut Fortune); Tesla schw&auml;rzt 100% Unfall-Narrative; Plan 7 St&auml;dte bis Juni 2026; Waymo 500.000 bezahlte Fahrten/Woche in 10+ St&auml;dten; Tesla-Aktie +12% nach Launch; Camera-Only (&lt;10) vs Waymo 29 Kameras + 5 Lidars + 6 Radare
+- Honor Lightning gewinnt 2. Beijing E-Town Humanoid Robot Half Marathon 19.04.2026 in Yizhuang: Streckenzeit 50:26 &uuml;ber 21,1 km, ca. 25 km/h; 7 Minuten unter Jacob Kiplimo Menschen-Weltrekord 57:20 (M&auml;rz 2026 Lissabon); &uuml;ber 300 Roboter aus 100+ Teams, parallel 12.000 menschliche L&auml;ufer; Honor clean sweep aller 3 Podiumspl&auml;tze; Flussigkeitsk&uuml;hlung aus Smartphone-Technik, 90-95cm Beinl&auml;nge, vollautonome Navigation, keine Batteriewechsel; ferngesteuerter Honor-Roboter &uuml;berquerte Ziellinie faktisch zuerst (48:19) aber gewichtete Wertung bevorzugte Autonomie; 2025 Sieger Tiangong Ultra hatte noch 2:40 h und 3 Batteriewechsel gebraucht
+- Vercel-Hack 19.04.2026: Supply-Chain-Attacke via Context.ai OAuth-App; &uuml;bernahm Google-Workspace-Account einer Vercel-Mitarbeiterin, Pivot in interne Umgebung, Privilege Escalation via Env-Var-Enumeration, Zugriff auf Linear + GitHub; CEO Guillermo Rauch: "highly sophisticated and significantly accelerated by AI"; angebliche Beute Datenbank-Snapshots, Source-Code, API-Keys, NPM/GitHub-Tokens, User-Management-Daten; BreachForums-Post als "ShinyHunters" fordert $2M (ab $500k verhandelbar), 580 Employee-Records als Proof; BleepingComputer: vermutlich Imitation, nicht echte ShinyHunters-Gruppe; Next.js + Turbopack + Open Source laut Audit nicht betroffen; Vercel fordert Env-Var-Rotation und "sensitive"-Flag; Timing in IPO-Vorbereitung
+- iLearningEngines DOJ-Indictment 17.04.2026 (US Attorney EDNY): Ex-CEO Puthugramam Chidambaran (57, Potomac MD) und Ex-CFO Sayyed Farhan Ali Naqvi (44, San Jose CA) verhaftet; 10-Count-Indictment "continuing financial crimes enterprise" + Securities Fraud + Wire Fraud; Vorwurf: 90% der $421 Mio. Umsatz 2023 fabriziert via "Round-Trip"-Geldfl&uuml;sse mit Strohmann-Konten, Mitarbeiter und Familienmitglieder als Fake-Executives anderer Firmen; SPAC-IPO April 2024 Peak-Marktkapitalisierung $1,5 Mrd., Chapter 11 Dez 2024, Chapter 7 M&auml;rz 2025; Paradebeispiel AI-Washing; SEC hat 2025 48 AI-Enforcement-Aktionen (3x gegen&uuml;ber 2023); 6 US-Senator:innen fordern 18.04. AI-Claim-Regulierung von SEC; Reihe CognitionAI/XecutionAI/iLearningEngines als "AI-SPAC Winter"
+- Reportage: Physical AI &mdash; Beijing Halbmarathon 19.04. als Anker; Honor Lightning 50:26 (Tiangong Ultra 2025: 2:40); Goldman Sachs Markt 68-100 Mrd. USD 2030 (35-45% CAGR); Physical Intelligence &pi;0.7 "compositional generalization" (Air-Fryer-Demo 5%&rarr;95%); Google DeepMind Gemini Robotics-ER 1.6 Open-Weights 17.04.; Nvidia GROOT-Stack 80+ Partner; Waymo 500k Fahrten/Woche, Tesla Camera-Only vs Waymo Lidar-Stack; Figure AI 2 Mrd. USD mit BMW, 1X Technologies, Apptronik mit Mercedes; IFR China 295k Industrieroboter 2024 vs USA 34,2k (9x); TSMC CoWoS-L 70% Nvidia; US-AI-Talent-Migration -80%; Hannover Messe 15 Humanoide als Leitthema; drei Implikationen f&uuml;r deutsche SaaS (Talentmarkt, Frontier-Heuristik, Hardware-Supply als SaaS-Produkt); 18-Monats-Fenster
 
 ---
 
