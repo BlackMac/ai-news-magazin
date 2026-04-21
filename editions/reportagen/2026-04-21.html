@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportage: Das Karussell der KI-Finanzierung &mdash; Die Inferenz, 21. April 2026</title>
+    <link rel="stylesheet" href="../../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .article-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article-header h1 {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-3xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-4);
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .article-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: var(--space-3);
+            line-height: 1.65;
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .article-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .article-body p { margin: 0 0 1.2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        .article-body h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--text-primary);
+            margin: var(--space-12) 0 var(--space-4);
+            letter-spacing: -0.01em;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+
+        .pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-6);
+            margin: var(--space-8) 0;
+            max-width: var(--width-article);
+        }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .article-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article-header h1 { font-size: var(--text-2xl); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Navigation">
+            <a href="../2026-04-21.html">&larr; Zur&uuml;ck zur Ausgabe</a>
+            <a href="../../index.html">Alle Ausgaben</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="article-header">
+    <div class="article-kicker">Reportage</div>
+    <h1>Das Karussell: Wie die KI-Branche sich selbst finanziert &mdash; und warum das f&uuml;r SaaS-Unternehmen z&auml;hlt</h1>
+    <p class="article-subtitle">Amazon investiert bis zu 25 Milliarden in Anthropic, Anthropic verspricht 100 Milliarden AWS-Ausgaben. Nvidia und OpenAI zeichnen einen 100-Milliarden-Deal, OpenAI kauft Nvidia-Chips. Oracle reserviert 300 Milliarden. AMD bekommt 10&nbsp;Prozent-Aktien-Warrants und liefert 6 GW GPUs. Die Muster wiederholen sich. Was passiert, wenn ein Hyperscaler gleichzeitig Investor und Kunde eines KI-Labors ist &mdash; und welche Margen-, Lock-in- und Governance-Risiken das f&uuml;r B2B-SaaS mit KI-Features bedeutet.</p>
+    <div class="article-meta">Von Stefan Lange-Hegermann &middot; <time datetime="2026-04-21">Dienstag, 21. April 2026</time></div>
+</div>
+
+<main id="main-content" class="site-main">
+    <article class="article-body">
+
+        <p>Am Montag, den 20.&nbsp;April 2026, kurz nach 16&nbsp;Uhr deutscher Zeit, ver&ouml;ffentlichten Amazon und Anthropic zeitgleich ihre Pressemitteilungen. Amazon investiert weitere f&uuml;nf Milliarden Dollar in das KI-Startup, potenziell bis zu 25 Milliarden &uuml;ber Meilenstein-Tranchen. Anthropic verpflichtet sich im Gegenzug, in den n&auml;chsten zehn Jahren mehr als 100 Milliarden Dollar auf AWS auszugeben &mdash; f&uuml;r bis zu f&uuml;nf Gigawatt Compute-Kapazit&auml;t auf Amazons Trainium-Chips. Es ist der achte gro&szlig;e Deal dieser Bauart in sieben Monaten. Und er zeigt ein Muster, das die KI-Finanzierung des Jahres 2026 definiert: Hyperscaler investieren Eigenkapital in KI-Labore, die das Geld dann als Cloud-Umsatz zur&uuml;ckbuchen.</p>
+
+        <p>&Ouml;konomen und Aktien-Analysten haben f&uuml;r das Muster einen nicht v&ouml;llig schmeichelhaften Namen: &bdquo;circular financing&ldquo;, zu Deutsch zirkul&auml;re Finanzierung oder &mdash; historisch belasteter &mdash; Round-Tripping. Die meisten Teilnehmer der Industrie weisen den Begriff zur&uuml;ck. Sie bevorzugen &bdquo;strategische Kooperation&ldquo; oder &bdquo;ecosystem deals&ldquo;. Wer jedoch Software-as-a-Service mit KI-Features baut, sollte die Mechanik verstehen. Sie entscheidet mit, wie Compute-Preise entstehen, welche Modelle &uuml;berleben &mdash; und welche Spielr&auml;ume Enterprise-Kunden in Vertragsverhandlungen der n&auml;chsten zwei Jahre haben.</p>
+
+        <h2>Das Grundmuster: Eigenkapital gegen Cloud-Umsatz</h2>
+
+        <p>Der Amazon-Anthropic-Deal l&auml;sst sich auf zwei Zeilen verdichten. Amazon gibt bis zu 25 Milliarden Dollar in das Startup. Anthropic gibt &uuml;ber zehn Jahre mehr als 100 Milliarden Dollar in die AWS-Cloud zur&uuml;ck &mdash; durchschnittlich zehn Milliarden pro Jahr, also gut ein Drittel des aktuellen Anthropic-Umsatzes. Das Nettogeld, das Amazon als Finanzierung wirklich an Anthropic verliert (&bdquo;Ingresso&ldquo; minus &bdquo;Egresso&ldquo; in den Worten italienischer Forensik-Spezialisten), ist deutlich negativ. Formal verbucht AWS die 100 Milliarden als &bdquo;committed revenue&ldquo; &mdash; ein positives Signal f&uuml;r Analysten, f&uuml;r die Langfristigkeit ohne konkurrierende Angebote.</p>
+
+        <p>Dieselbe Logik trifft f&uuml;r die anderen Gro&szlig;deals zu, wenn man genauer hinsieht. Im September 2025 unterzeichneten Nvidia und OpenAI einen Letter of Intent &uuml;ber bis zu 100 Milliarden Dollar Nvidia-Investment in OpenAI &mdash; gebunden an die Installation von zehn Gigawatt Nvidia-Systemen. Die Tranchen flie&szlig;en in 10-Milliarden-Bl&ouml;cken, immer wenn ein weiteres Gigawatt in Betrieb geht. OpenAI kauft daf&uuml;r vier bis f&uuml;nf Millionen Nvidia-GPUs der Vera-Rubin-Generation. Im Oktober folgte AMD: Sechs Gigawatt AMD-Instinct-GPUs, dazu Warrants &uuml;ber 160 Millionen AMD-Aktien &mdash; rund zehn Prozent des Unternehmens &mdash; f&uuml;r OpenAI. Oracle schrieb bereits im Juli 2025 ein f&uuml;nf-jahriges Compute-Commitment &uuml;ber 300 Milliarden Dollar fest, im Rahmen des Stargate-Projekts. CoreWeave kumuliert bei OpenAI inzwischen Vertr&auml;ge &uuml;ber 22,4 Milliarden Dollar; Nvidia h&auml;lt rund 13&nbsp;Prozent von CoreWeave.</p>
+
+        <p>Auf der Gegenseite die gleiche Struktur: Google gab im Oktober 2025 ein Compute-Abkommen mit Anthropic bekannt, das im April per Broadcom-SEC-Filing auf 3,5 Gigawatt TPU-Kapazit&auml;t ab 2027 ausgeweitet wurde. Mizuho sch&auml;tzt: 21 Milliarden Dollar AI-Umsatz f&uuml;r Broadcom 2026 allein aus Anthropic-Kontext, 42 Milliarden 2027. Microsoft investierte im November 2025 bis zu f&uuml;nf Milliarden Dollar in Anthropic, Anthropic committete 30 Milliarden Azure-Spend. xAI hat in Memphis seit Januar 2026 rund 18 Milliarden Dollar f&uuml;r 555.000 Nvidia-GPUs ausgegeben &mdash; im dritten Colossus-Gebaeude mit 2 Gigawatt Leistung. Meta plant 2026 Capex zwischen 115 und 135 Milliarden Dollar &mdash; fast eine Verdopplung des Vorjahrs, gr&ouml;&szlig;tenteils f&uuml;r Nvidia-GPUs und Broadcom-designtes MTIA-Silicon.</p>
+
+        <p>In der Summe sind &uuml;ber 1,4 Billionen Dollar an Compute-Commitments seit September 2025 angek&uuml;ndigt worden. Hyperscaler-Capex 2026 betr&auml;gt nach aktuellen Prognosen zwischen 600 und 750 Milliarden Dollar, rund drei Viertel davon AI-bezogen. Bank of England-Sch&auml;tzungen in ihrem April-Financial-Policy-Committee-Protokoll: 5 Billionen Dollar AI-Infrastruktur-Spending in den n&auml;chsten f&uuml;nf Jahren, davon rund die H&auml;lfte fremdfinanziert &mdash; meistens &uuml;ber Unternehmensanleihen. Nvidia-CEO Jensen Huang setzt das Endziel auf 3 bis 4 Billionen Dollar bis Ende der Dekade.</p>
+
+        <h2>Die Warner: Cahn, Burry, Chanos, Marcus</h2>
+
+        <p>Der Sequoia-Partner David Cahn hat den Begriff &bdquo;AI&rsquo;s 600B Question&ldquo; gepragt &mdash; gemeint ist die j&auml;hrliche Revenue-L&uuml;cke zwischen den laufenden AI-Capex und den tats&auml;chlichen AI-Ums&auml;tzen. Im September 2023 war die Zahl noch 125 Milliarden; im April 2026 liegt sie laut Cahn n&auml;her an 500 bis 600 Milliarden. Die Rechnung ist simpel: Hyperscaler investieren in Compute-Infrastruktur, die AI-Produkte verkaufen. Die Ums&auml;tze der AI-Produkte sind in den letzten drei Jahren um etwa ein Zehntel der Capex-Zahlen gewachsen. Irgendwann muss die Gleichung sich schlie&szlig;en &mdash; entweder durch explodierende Revenue, durch kollabierende Capex oder durch eine Bilanzkorrektur.</p>
+
+        <p class="pull-quote">&bdquo;Round-Tripping ist ein bilanzieller Taschenspielertrick. Ein Hyperscaler, der zehn Milliarden in ein Lab investiert, das dieselben zehn Milliarden als Cloud-Kauf zur&uuml;ckbucht, hat nichts verkauft. Er hat nur das Geld von einem Topf in den anderen geschoben.&ldquo;</p>
+
+        <p>Der Short-Investor Michael Burry &mdash; bekannt f&uuml;r seine Dotcom- und Subprime-Warnungen &mdash; hat im November 2025 Put-Optionen &uuml;ber mehr als eine Milliarde Dollar gegen Nvidia und Palantir ge&ouml;ffnet. In einem Substack-Essay nennt er Nvidia &bdquo;the Cisco at the center of it all&ldquo; und verwendet explizit den Begriff &bdquo;circular financing&ldquo;. Gary Marcus zitiert Goldman-Sachs-Sch&auml;tzungen: 15 Prozent von Nvidias 2026-Umsatz stammen direkt aus zirkul&auml;ren Deals. Jim Chanos, der legend&auml;re Short-Seller (Enron, Tyco), argumentiert eine &bdquo;depreciation time bomb&ldquo;: CoreWeaves eigener CEO nennt 2 bis 3 Jahre als realistische GPU-Nutzungsdauer. Meta schreibt die gleichen Chips &uuml;ber 11 bis 12 Jahre ab. Korrigiert w&uuml;rde das Metas Earnings substanziell dr&uuml;cken. Ed Zitron hat errechnet, dass OpenAI zwischen Anfang 2024 und September 2025 rund 12 Milliarden Dollar f&uuml;r Inferenz ausgegeben hat &mdash; das Zwei- bis Dreifache ihrer Revenue. Kein KI-Unternehmen ist in der Inferenz profitabel.</p>
+
+        <p>Institutionelle Warnungen kommen in denselben Wochen. Die Bank of England stufte im Dezember 2025 die Equity-Bewertungen US-amerikanischer Tech-Konzerne als &bdquo;nahe den h&ouml;chsten seit der Dotcom-Blase&ldquo; ein. Das FPC-Protokoll vom April 2026 betont AI-spezifische Risiken: Konzentration in wenigen Schuldnern, stark korrelierte Sicherheiten (GPUs), Refinanzierungspunkt um 2027/28. Der IMF und IMF-Chefin Kristalina Georgieva haben den Dotcom-Vergleich im Oktober 2025 explizit gemacht. Jerome Powell sprach im September von &bdquo;fairly highly valued equity prices&ldquo;; das Fed-2026-Severely-Adverse-Szenario modelliert einen 54-prozentigen Aktienmarkt-Einbruch, ausgel&ouml;st durch eine AI-Bubble-Korrektur.</p>
+
+        <h2>Die Verteidigung: &bdquo;Compute-Constrained World&ldquo;</h2>
+
+        <p>Die Industrie widerspricht &mdash; mit durchaus argumentfester Logik. Brad Gerstner, Gr&uuml;nder von Altimeter Capital und Investor in Nvidia, CoreWeave, SK Hynix und TSMC, nennt die aktuellen Deals &bdquo;more evidence that the world will remain compute-constrained&ldquo;. Er bettet sie in ein Manhattan-Project-Narrativ ein: ein Nationales Sicherheits-Infrastruktur-Projekt im Wettlauf mit China. Jensen Huang argumentiert, Nvidias strategische Investments seien nur ein kleiner Bruchteil des Gesamtumsatzes und l&auml;ngst durch den zyklischen Capex der Hyperscaler ausgeglichen. Sam Altman verweist auf das First-Mover-Principle im AI-Markt: Wer zuerst die Compute-Kapazit&auml;t f&uuml;r das n&auml;chste Training hat, gewinnt &mdash; Preisbereitschaft sei zweitrangig. Jerome Powell distanziert sich teilweise vom Dotcom-Vergleich: AI-Firmen generierten &bdquo;echte Revenue&ldquo;, Data-Center-Spending treibe das BIP.</p>
+
+        <p>Die historische Parallele, die f&uuml;r SaaS-Leads relevant ist, ist nicht Dotcom allgemein, sondern das Lucent/Nortel/WorldCom-Kapitel. Lucent Technologies verkaufte Ende der 90er Jahre seinen Netzwerk-Ausr&uuml;ster-Kunden Finanzierungen f&uuml;r den Kauf von Lucent-Equipment &mdash; Vendor Financing. Als die Kunden nicht zahlen konnten, kollabierte die Revenue-Kette. Die SEC klagte Lucent 2004 wegen 1,148 Milliarden Dollar Revenue-Inflation an, davon 470 Millionen vorsteuerlicher Gewinn. Die Mechanik: Channel-Stuffing, Side Agreements, vorgezogene Buchungen. Die Parallele zum heutigen AI-Markt ist nicht perfekt, aber strukturell &auml;hnlich: Commitments werden als Revenue gebucht; die eigentliche Zahlung h&auml;ngt an Meilensteinen, die der Schuldner erst erreichen muss.</p>
+
+        <h2>Die Folgen f&uuml;r SaaS-Unternehmen: F&uuml;nf konkrete Punkte</h2>
+
+        <p><strong>Erstens: Die Margen-Schere schlie&szlig;t sich.</strong> Klassische SaaS-Gross-Margins liegen bei 80 bis 90 Prozent. AI-First-SaaS erreicht aktuell nur 50 bis 65 Prozent &mdash; Inference-Kosten machen bis zu 85 Prozent des Enterprise-AI-Budgets aus. 84 Prozent der befragten Unternehmen melden Gross-Margin-Erosion von sechs Prozent oder mehr durch AI-Infrastruktur-Kosten. In diesem Umfeld sind Pricing-Strategien auf Basis von Token-Volumen riskant: Eine Preiserh&ouml;hung bei Anthropic oder OpenAI von 30 Prozent trifft den SaaS-Kalkulations-Puffer unmittelbar.</p>
+
+        <p><strong>Zweitens: Die Preis-Quersubvention hat ein Verfallsdatum.</strong> Aktuelle API-Preise sind durch Hyperscaler-Investitionen, VC-Subventionen und strategische Kampfpreise kunstlich niedrig gehalten. Wenn die zirkul&auml;re Finanzierung sich normalisiert &mdash; und sp&auml;testens bei der ersten gr&ouml;&szlig;eren Korrektur wird sie das &mdash;, steigen Token-Preise um gesch&auml;tzte 30 bis 50 Prozent. Zeithorizont nach Einsch&auml;tzung mehrerer Analysten: 12 bis 24 Monate. B2B-SaaS mit knapper AI-Marge sollte diesen Fall im Pricing-Modell kalkulieren.</p>
+
+        <p><strong>Drittens: Vendor-Lock-in wird strategisch.</strong> Wenn Cloud-Anbieter Miteigent&uuml;mer an Modellen sind (Microsoft h&auml;lt 26,8 Prozent an OpenAI, Amazon rund 7 Prozent an Anthropic), wird Multi-Cloud-AI eine Governance-Frage. Modell-Verf&uuml;gbarkeit und Pricing-Konditionen werden zu strategischen Entscheidungen des Cloud-Eigent&uuml;mers, nicht zu Kundenw&uuml;nschen. Wer als Enterprise-Kunde eine AI-First-Produkt-Strategie fahren will, sollte Multi-Cloud-Provisioning und Modell-Austauschbarkeit in die technische Architektur einbauen. Abstraktionsschichten wie LangChain, LiteLLM, oder OpenRouter werden Mission-Critical.</p>
+
+        <p><strong>Viertens: Governance verschiebt sich in die Boardrooms der Hyperscaler.</strong> Model-Policies &mdash; Safety, erlaubte Inhalte, Enterprise-Regeln &mdash; werden nicht mehr nur zwischen Anbieter und Kunde verhandelt. Wenn Amazon und Microsoft strategische Anteile an Modellen halten, bekommen Hyperscaler-Vorst&auml;nde faktisch Mitspracherecht an Policy-Entscheidungen. Der Mythos-Fall illustriert, was das bedeuten kann: Das US-OMB gew&auml;hrte zivilen Agenturen Zugang zu einem Modell, das das Pentagon als &bdquo;supply chain risk&ldquo; gelistet hatte &mdash; weil die Governance-Ebenen sich neu verteilen. F&uuml;r regulierte Branchen (Finanzen, Healthcare, Public Sector) bedeutet das eine erh&ouml;hte Compliance-Komplexit&auml;t.</p>
+
+        <p><strong>F&uuml;nftens: Das Enterprise-Verhandlungsfenster &ouml;ffnet sich bei einer Korrektur.</strong> Solange Compute knapp bleibt, diktieren Labs und Hyperscaler die Preise. Bei einer Korrektur werden die fixen Commitments zur Falle: Anthropic muss 100 Milliarden AWS-Spend erf&uuml;llen, egal wie der Markt aussieht. OpenAI ist an 300 Milliarden Oracle-Compute gebunden. Enterprise-Kunden mit Flexibilit&auml;t &mdash; Multi-Cloud, kein mehrj&auml;hriges Lock-in, offene Modell-Architektur &mdash; gewinnen in diesem Szenario betr&auml;chtlich. Kunden, die heute 5-Jahres-Vertr&auml;ge unterzeichnen, verlieren die Option.</p>
+
+        <h2>Was jetzt zu tun ist</h2>
+
+        <p>Die Zeitachse ist deutlich. Die n&auml;chsten 12 bis 18 Monate bestimmen, wie viele der angek&uuml;ndigten Compute-Deals tats&auml;chlich Cashflows produzieren und wie viele sich in Meilenstein-Verz&ouml;gerungen und Tranchen-Anpassungen aufl&ouml;sen. Der <a href="../2026-04-21.html#art-6">Fermi-Fall vom Montag</a>, &uuml;ber den wir in der heutigen Ausgabe berichten, zeigt die Kehrseite: Ein IPO-Unternehmen mit 19-Milliarden-Bewertung und Null-Umsatz verliert CEO und CFO an einem Tag, die Aktie f&auml;llt 22 Prozent. Das ist nicht die Bubble insgesamt, aber ein Warnsignal.</p>
+
+        <p>F&uuml;r SaaS-Leads bedeutet das, drei Dinge in den n&auml;chsten 90 Tagen aktiv zu &uuml;berpr&uuml;fen. Erstens: Welche zentralen KI-Fahigkeiten des eigenen Produkts h&auml;ngen an einem einzelnen Modell-Anbieter? Falls mehr als 30 Prozent der KI-Funktionen von Claude oder GPT abh&auml;ngig sind, ist eine Abstraktionsschicht (OpenRouter, LiteLLM, Vercel AI SDK) &uuml;berf&auml;llig. Zweitens: Wie reagiert das Pricing-Modell, wenn Token-Preise im kommenden Jahr um 30 bis 50 Prozent steigen? Ein Simulations-Durchlauf mit pessimistischen Preis-Szenarien zeigt meist, wo Nachverhandlungen m&ouml;glich sind. Drittens: Welche Vertragsklauseln bei bestehenden Cloud-Commitments enthalten Exit-Optionen, Capacity-Swap-Klauseln oder Preis-Obergrenzen? Die Verhandlungsmacht liegt heute bei den Cloud-Anbietern; in einer Korrektur verschiebt sie sich.</p>
+
+        <p>Die Karussell-Metapher ist, wie alle Metaphern, irref&uuml;hrend. Ein Karussell dreht sich ohne Energieverbrauch, ein AI-Markt dreht sich nur, solange Kapital, Compute und Talente flie&szlig;en. Irgendwann bleibt eines davon aus. Wer heute seine Position im Spiel gestaltet, hat die Option, sie dann zu halten. Wer nur mitl&auml;uft, riskiert, dass die Musik aufh&ouml;rt &mdash; und er ohne Stuhl dasteht. Am Montag, um kurz nach 16 Uhr, hat Amazon gesagt, das Karussell dreht sich weiter. Was die Bank of England, Burry, Chanos und Cahn sagen, ist: Die Musik wird irgendwann leiser werden.</p>
+
+    </article>
+
+    <footer class="sources">
+        <h3 class="sr-only">Quellen</h3>
+        <div class="sources-label">Quellen</div>
+        <ul>
+            <li><a href="https://techcrunch.com/2026/04/20/anthropic-takes-5b-from-amazon-and-pledges-100b-in-cloud-spending-in-return/" rel="noopener noreferrer external">TechCrunch &mdash; Anthropic nimmt 5 Mrd. von Amazon, verspricht 100 Mrd. AWS-Spend</a></li>
+            <li><a href="https://www.anthropic.com/news/anthropic-amazon-compute" rel="noopener noreferrer external">Anthropic &mdash; Expanded Amazon collaboration, up to 5 GW compute</a></li>
+            <li><a href="https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai" rel="noopener noreferrer external">Amazon &mdash; Expanding strategic collaboration with Anthropic</a></li>
+            <li><a href="https://nvidianews.nvidia.com/news/openai-and-nvidia-announce-strategic-partnership-to-deploy-10gw-of-nvidia-systems" rel="noopener noreferrer external">Nvidia News &mdash; OpenAI and Nvidia 10 GW partnership</a></li>
+            <li><a href="https://ir.amd.com/news-events/press-releases/detail/1260/amd-and-openai-announce-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus" rel="noopener noreferrer external">AMD IR &mdash; AMD and OpenAI 6 GW partnership with warrants</a></li>
+            <li><a href="https://openai.com/index/stargate-advances-with-partnership-with-oracle/" rel="noopener noreferrer external">OpenAI &mdash; Stargate partnership with Oracle</a></li>
+            <li><a href="https://investors.coreweave.com/news/news-details/2025/CoreWeave-Expands-Agreement-with-OpenAI-by-up-to-6-5B/default.aspx" rel="noopener noreferrer external">CoreWeave IR &mdash; Expanded OpenAI agreement up to 6.5 Mrd.</a></li>
+            <li><a href="https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/" rel="noopener noreferrer external">Microsoft &mdash; The next chapter of the Microsoft-OpenAI partnership</a></li>
+            <li><a href="https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/" rel="noopener noreferrer external">Microsoft &mdash; Microsoft, Nvidia, Anthropic strategic partnerships</a></li>
+            <li><a href="https://www.tomshardware.com/tech-industry/broadcom-expands-anthropic-deal-to-3-5gw-of-google-tpu-capacity-from-2027" rel="noopener noreferrer external">Tom's Hardware &mdash; Broadcom 3.5 GW TPU-Kapazit&auml;t f&uuml;r Anthropic ab 2027</a></li>
+            <li><a href="https://sequoiacap.com/article/ais-600b-question/" rel="noopener noreferrer external">Sequoia Capital &mdash; AI's 600B Question (David Cahn)</a></li>
+            <li><a href="https://fortune.com/2025/11/24/big-short-investor-michael-burry-nvidia-cisco-ai-bubble/" rel="noopener noreferrer external">Fortune &mdash; Burry nennt Nvidia die Cisco des AI-Booms</a></li>
+            <li><a href="https://garymarcus.substack.com/p/peak-bubble" rel="noopener noreferrer external">Gary Marcus &mdash; Peak Bubble Analysis</a></li>
+            <li><a href="https://www.wheresyoured.at/ai-bubble-2027/" rel="noopener noreferrer external">Ed Zitron &mdash; AI Bubble 2027</a></li>
+            <li><a href="https://www.bankofengland.co.uk/financial-policy-committee-record/2026/april-2026" rel="noopener noreferrer external">Bank of England &mdash; Financial Policy Committee Record April 2026</a></li>
+            <li><a href="https://www.cnbc.com/2025/10/09/imf-and-bank-of-england-join-growing-chorus-warning-of-an-ai-bubble.html" rel="noopener noreferrer external">CNBC &mdash; IMF und Bank of England warnen vor AI-Bubble</a></li>
+            <li><a href="https://www.advisorperspectives.com/articles/2025/11/10/nvidia-deals-vendor-financing-round-tripping" rel="noopener noreferrer external">Advisor Perspectives &mdash; Nvidia Deals als Vendor Financing / Round Tripping</a></li>
+            <li><a href="https://www.sec.gov/litigation/complaints/comp17829.htm" rel="noopener noreferrer external">SEC &mdash; Lucent Technologies Revenue Inflation Complaint (2004)</a></li>
+            <li><a href="https://introl.com/blog/hyperscaler-capex-600b-2026-ai-infrastructure-debt-january-2026" rel="noopener noreferrer external">Introl &mdash; Hyperscaler Capex 2026: 600 Mrd. USD</a></li>
+            <li><a href="https://www.getmonetizely.com/blogs/the-economics-of-ai-first-b2b-saas-in-2026" rel="noopener noreferrer external">Monetizely &mdash; The Economics of AI-First B2B SaaS in 2026</a></li>
+        </ul>
+    </footer>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../../impressum.html">Impressum</a>
+        <a href="../../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>

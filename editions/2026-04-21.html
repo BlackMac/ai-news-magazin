@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 21. April 2026</title>
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-21">Dienstag, 21. April 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 21. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Konzern &middot; Apple</span><span class="toc-title">Tim Cook tritt ab: John Ternus wird am 1.&nbsp;September neuer Apple-CEO</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Compute-Deal &middot; Amazon/Anthropic</span><span class="toc-title">Anthropic nimmt weitere 5&nbsp;Mrd. USD von Amazon &mdash; und verspricht 100&nbsp;Mrd. AWS-Spend</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Geheimdienste &middot; Anthropic</span><span class="toc-title">Axios-Scoop: NSA nutzt Anthropics Mythos &mdash; trotz Pentagon-Blacklist</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Wettlauf &middot; Google</span><span class="toc-title">Googles &bdquo;Strike Team&ldquo;, Marvell-Chips und Gemini in Chrome: Drei Fronten gegen Anthropic</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Industrie &middot; Hannover Messe</span><span class="toc-title">Merz fordert Ausnahme f&uuml;r industrielle KI &mdash; Siemens launcht &bdquo;Eigen&ldquo;-Agent</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">AI-Nuklear &middot; Fermi</span><span class="toc-title">CEO und CFO von Fermi Inc. treten &uuml;ber Nacht ab &mdash; Aktie bricht 22&nbsp;Prozent ein</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Physical AI &mdash; Vom Bildschirm in die Welt</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Konzern &middot; Apple</div>
+            <h2 id="art-1-h">Tim Cook tritt ab: John Ternus wird am 1.&nbsp;September neuer Apple-CEO</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: Apple Newsroom, CNBC, Fortune, 9to5Mac, NPR, NBC News</div>
+        </header>
+        <p class="article-teaser">Nach knapp 15 Jahren an der Spitze &uuml;bergibt Tim Cook die Konzernf&uuml;hrung: Am Montag hat das Apple-Board einstimmig John Ternus, bisher Senior Vice President Hardware Engineering, zum n&auml;chsten CEO bestellt. Amtsantritt 1.&nbsp;September 2026. Cook wird Executive Chairman und konzentriert sich k&uuml;nftig auf politische Stakeholder. Die Wahl eines Hardware-Chefs &mdash; und nicht eines KI- oder Services-Managers &mdash; ist ein Signal: Apple will die n&auml;chste Produktgeneration &uuml;ber Silicon, nicht &uuml;ber Software-KI definieren.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Ank&uuml;ndigung kam via Pressemitteilung aus dem Apple Park: Tim Cook &uuml;bergibt an Senior Vice President John Ternus, 51, seit 2001 im Unternehmen und seit 2013 verantwortlich f&uuml;r die Hardware-Entwicklung von iPhone, iPad, Mac, Apple Watch, AirPods und Vision Pro. Board-Sprecher Arthur Levinson spricht von einem &bdquo;thoughtful, long-term succession planning process&ldquo; und r&uuml;ckt damit in die Rolle des Lead Independent Director. Cook, 65, wird Executive Chairman mit Fokus auf die globalen politischen Beziehungen, die er &uuml;ber die vergangenen 15 Jahre aufgebaut hat &mdash; von Peking &uuml;ber Br&uuml;ssel bis Washington. Parallel r&uuml;ckt Chip-Chef Johny Srouji zum Chief Hardware Officer auf und &uuml;bernimmt Ternus&rsquo; bisheriges Portfolio.</p>
+
+            <p>Die finanzielle Bilanz, die Cook hinterl&auml;sst, ist erdr&uuml;ckend positiv. Als er im August 2011 von Steve Jobs &uuml;bernahm, lag Apples Marktkapitalisierung bei rund 350 Milliarden Dollar. Heute sind es knapp vier Billionen &mdash; ein Zuwachs von &uuml;ber 1.000&nbsp;Prozent. Der Jahresumsatz stieg von 108 auf &uuml;ber 416 Milliarden Dollar, das Services-Segment (App Store, iCloud, Apple TV+) wuchs von praktisch null auf mehr als 100 Milliarden Dollar. Neue Produktkategorien wie Apple Watch, AirPods und Vision Pro existieren nur dank Cooks Amtszeit. Der Aktienmarkt quittierte den Wechsel fast gleichm&uuml;tig: AAPL schloss am Handelstag 1,04&nbsp;Prozent im Plus, gab im After-Hours-Handel rund 1&nbsp;Prozent nach. Die geordnete Nachfolge wurde eingepreist.</p>
+
+            <p>Interessanter als die Finanzkurve ist die Personalie. Dass Apples Board einen Hardware-Ingenieur an die Spitze setzt &mdash; und nicht den Services-Chef Eddy Cue, den Marketing-Chef Greg Joswiak oder einen externen KI-Manager &mdash; ist die strategische Aussage des Tages. Ternus verk&ouml;rpert Apples Kernkompetenz: integrierte Silizium- und Hardware-Entwicklung, Materialinnovation (3D-gedrucktes Titan in der Apple Watch Ultra&nbsp;3, vollst&auml;ndig recyceltes Aluminium im iPhone), langfristige Fertigungszyklen. Er ist die Hardware-Antwort auf die Frage, warum Apple in der Generativ-KI-Ra ins Hintertreffen geraten ist: Der Konzern setzt nicht auf einen KI-Gegenangriff mit eigenen Frontier-Modellen, sondern auf neue Produktkategorien &mdash; Smart Glasses, Foldables, Apple Silicon f&uuml;r on-device-KI, m&ouml;glicherweise Apple Home Robotics.</p>
+
+            <p>Der Kontext der Abl&ouml;sung ist genau dieser KI-Rucksack. John Giannandrea, seit 2018 Apples Head of AI/ML und zuletzt verantwortlich f&uuml;r Apple Intelligence, ging Ende 2025 in den Ruhestand; Amar Subramanya kam neu als KI-Experte zu Craig Federighi. Die im Juni 2024 versprochene &bdquo;smartere Siri&ldquo; verz&ouml;gerte sich &uuml;ber mehrere Quartale, in China bleibt Apple Intelligence wegen Regulierung vollst&auml;ndig blockiert. Gleichzeitig entstehen laut Wall Street Journal Gespr&auml;che &uuml;ber eine Integration von Google Gemini als Fallback-Modell f&uuml;r komplexe Anfragen &mdash; ein Schritt, der noch vor zwei Jahren undenkbar gewesen w&auml;re. Der Preis f&uuml;r Apples Privacy-First-KI-Strategie ist Tempo; der Preis f&uuml;r die Drittanbieter-L&ouml;sung ist strategische Abh&auml;ngigkeit.</p>
+
+            <p>F&uuml;r Unternehmen, die mit Apples Plattformen arbeiten, ergibt die Personalie drei praktische Folgerungen. Erstens: Die Hardware-Roadmap wird k&uuml;nftig die zeitliche Taktung vorgeben. Wer auf Apple Intelligence APIs baut, sollte mit einer Verz&ouml;gerung wichtiger KI-Features rechnen, w&auml;hrend neue Ger&auml;tekategorien priorisiert werden. Zweitens: Der iOS/macOS-&Ouml;ffnungsdruck durch Digital Markets Act (EU), App-Store-Urteile und Justice-Department-Klagen trifft jetzt einen CEO, der diese Verhandlungen aus dem Washington-Netzwerk seines Vorg&auml;ngers erbt, nicht selbst aufgebaut hat. Drittens: Ternus hat seit 2025 auch die Robotik-Sparte unter sich, die zuvor Giannandrea zugeordnet war. Wer Apples Physical-AI-Strategie einordnen will, sollte weniger auf die Software- als auf die Hardware-Signale achten.</p>
+
+            <p>Cook selbst hat in seinem Brief an die Mitarbeitenden einen Satz verwendet, der die Personalie zusammenfasst: &bdquo;Now is the right time to make this transition.&ldquo; Es ist zugleich eine Aussage &uuml;ber Apple und &uuml;ber die Branche. Die Ara der Consumer-Tech-Legenden &mdash; Jobs, Gates, Bezos, Zuckerberg mit Abstrichen, Cook &mdash; endet langsam. Die n&auml;chste Generation von CEOs im Big-Tech-Sektor &mdash; Ternus, m&ouml;glicherweise Sundar Pichais Nachfolger bei Alphabet, Microsoft-Post-Nadella &mdash; wird sich an einem anderen Ma&szlig;stab messen lassen m&uuml;ssen: Wer definiert die Produktkategorie nach dem Smartphone?</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.apple.com/newsroom/2026/04/tim-cook-to-become-apple-executive-chairman-john-ternus-to-become-apple-ceo/" rel="noopener noreferrer external">Apple Newsroom &mdash; Tim Cook to become Executive Chairman, John Ternus CEO</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/20/apple-names-john-ternus-ceo-replacing-tim-cook-who-becomes-chairman.html" rel="noopener noreferrer external">CNBC &mdash; Apple names John Ternus CEO, replacing Tim Cook</a></li>
+                <li><a href="https://fortune.com/article/who-is-john-ternus-new-apple-ceo-tim-cook-retirement/" rel="noopener noreferrer external">Fortune &mdash; Who is John Ternus, the new Apple CEO</a></li>
+                <li><a href="https://9to5mac.com/2026/04/20/apple-ceo-tim-cook-stepping-down-john-ternus-confirmed-as-new-apple-ceo/" rel="noopener noreferrer external">9to5Mac &mdash; Tim Cook stepping down, John Ternus confirmed as Apple CEO</a></li>
+                <li><a href="https://www.npr.org/2026/04/20/g-s1-118159/apple-ceo-tim-cook-stepping-down" rel="noopener noreferrer external">NPR &mdash; Apple CEO Tim Cook is stepping down</a></li>
+                <li><a href="https://www.nbcnews.com/business/business-news/apple-ceo-john-ternus-tim-cook-rcna341096" rel="noopener noreferrer external">NBC News &mdash; Apple names hardware chief John Ternus new CEO</a></li>
+                <li><a href="https://www.heise.de/news/Machtwechsel-bei-Apple-Tim-Cook-uebergibt-an-John-Ternus-11264972.html" rel="noopener noreferrer external">heise online &mdash; Machtwechsel bei Apple</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Compute-Deal &middot; Amazon/Anthropic</div>
+            <h2 id="art-2-h">Anthropic nimmt weitere 5&nbsp;Mrd. USD von Amazon &mdash; und verspricht 100&nbsp;Mrd. AWS-Spend</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: Anthropic, Amazon, TechCrunch, CNBC, Bloomberg, GeekWire</div>
+        </header>
+        <p class="article-teaser">Amazon und Anthropic verk&uuml;ndeten am Montag den zweiten gro&szlig;en Strategie-Sprung ihrer Partnerschaft. Sofort flie&szlig;en weitere f&uuml;nf Milliarden Dollar in Anthropic, bis zu zwanzig Milliarden sind an Meilensteine gekn&uuml;pft. Im Gegenzug verpflichtet sich Anthropic zu AWS-Ausgaben von &uuml;ber 100 Milliarden Dollar in den n&auml;chsten zehn Jahren und bis zu f&uuml;nf Gigawatt neuer Trainium-Kapazit&auml;t. Der Deal spiegelt das OpenAI-Microsoft-Muster &mdash; und zementiert Anthropics Multi-Cloud-Ansatz mit AWS als prim&auml;rem Trainingspartner.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Deal ist in der Struktur aufschlussreicher als in der Summe. Amazon zahlt f&uuml;nf Milliarden Dollar sofort &mdash; bewertet Anthropic damit auf die aktuellen 380 Milliarden Dollar, die das Startup im Februar mit der Serie G bei Coatue, GIC, Microsoft und Nvidia erreichte. Weitere zwanzig Milliarden sind an kommerzielle Meilensteine gebunden; insgesamt k&ouml;nnte Amazons Beteiligung auf 33 Milliarden Dollar wachsen, nach bisher acht Milliarden. Anthropic verpflichtet sich im Gegenzug zu einem AWS-Spend von &bdquo;&uuml;ber 100 Milliarden Dollar&ldquo; &uuml;ber zehn Jahre &mdash; verteilt auf bis zu f&uuml;nf Gigawatt zus&auml;tzlicher Compute-Kapazit&auml;t auf Amazons Trainium2-, Trainium3- und k&uuml;nftiger Trainium4-Generation.</p>
+
+            <p>Das Herzst&uuml;ck des Deals ist das &bdquo;Project Rainier&ldquo;, AWS&rsquo; Supercluster in New Carlisle, Indiana. Die Phase&nbsp;1 lief im Oktober 2025 mit rund 500.000 Trainium2-Chips an; die im November beschlossene Phase&nbsp;2 addiert weitere 15 Milliarden Dollar, zusammen werden es bis zu 30 Geb&auml;ude und 2,2 Gigawatt Leistung. Anthropic will bis Ende 2026 auf &uuml;ber eine Million Trainium2-Chips skalieren &mdash; eine Zahl, die Nvidias H100-Monopol zumindest bei einem Frontier-Lab substanziell aufbricht. Dazu kommen fast ein Gigawatt kombinierter Trainium2/3-Kapazit&auml;t bis Jahresende. F&uuml;r AWS bedeutet das den gr&ouml;&szlig;ten Trainium-Kunden in der Geschichte des Chips; f&uuml;r Broadcom, das Trainium mitdesignt, r&uuml;cken Mizuho-Sch&auml;tzungen in die N&auml;he von 21 Milliarden Dollar AI-Umsatz 2026 allein aus Anthropic-Kontext.</p>
+
+            <p>Anthropic bleibt dabei strikt multi-cloud. AWS ist &bdquo;primary cloud and training partner&ldquo; &mdash; nicht exklusiv. Parallel l&auml;uft die Anfang April ver&ouml;ffentlichte Erweiterung mit Google und Broadcom, die 3,5 Gigawatt TPU-Kapazit&auml;t ab 2027 vorsieht. Claude-Modelle sind weiterhin auf Azure Foundry, Google Vertex AI und AWS Bedrock verf&uuml;gbar &mdash; Anthropic ist damit das einzige Frontier-Modell auf allen drei Hyperscalern. Der Ansatz unterscheidet Anthropic bewusst vom OpenAI-Microsoft-Lock-in und soll sowohl Verhandlungsmacht als auch Resilienz sichern. Am Montag stieg Amazons Aktie im After-Hours-Handel um etwa drei Prozent, Broadcom legte indirekt zu.</p>
+
+            <p>Die Bedeutung der 100-Milliarden-Dollar-Zahl l&auml;sst sich einordnen, wenn man den Umsatz gegenrechnet. Anthropic hat laut eigenen Angaben im April einen annualisierten Umsatz von &uuml;ber 30 Milliarden Dollar erreicht &mdash; von neun Milliarden Ende 2025. Der AWS-Spend w&uuml;rde &uuml;ber zehn Jahre einem j&auml;hrlichen Compute-Aufwand von rund zehn Milliarden Dollar entsprechen, ein substanzieller, aber tragbarer Anteil der Gesamtkosten. Kritiker wie Ed Zitron und der Sequoia-Partner David Cahn ordnen den Deal jedoch als weiteres Beispiel f&uuml;r &bdquo;circular AI financing&ldquo; ein &mdash; Hyperscaler investiert Eigenkapital, Modellanbieter gibt es als Cloud-Umsatz zur&uuml;ck. Wir ordnen das Muster in unserer <a href="reportagen/2026-04-21.html">heutigen Reportage</a> systematisch ein.</p>
+
+            <p>F&uuml;r B2B-SaaS-Unternehmen mit KI-Integration hat der Deal zwei praktische Implikationen. Erstens: Die Kurzfristigkeit des letzten Preiskrieges um Inferenz-Token ist vorbei. Anthropics Zusage von 100 Milliarden Dollar AWS-Spend bindet die Preisstrategie &mdash; drastische Rabatte werden seltener, Enterprise-Deals laufen wieder &uuml;ber lange Commitments. Zweitens: Die Plattform-Verf&uuml;gbarkeit wird zunehmend zu einer Frage der Cloud-Wahl. Wer als SaaS-Anbieter AWS nutzt, bekommt Claude k&uuml;nftig mit tieferen Bedrock-Integrationen; wer auf Azure arbeitet, bleibt auf GPT-5.4 und die November-Anthropic-Azure-Kooperation (bis zu 5 Milliarden Microsoft-Investment, 30 Milliarden Anthropic-Azure-Spend) angewiesen. Multi-Cloud wird zur Governance-Anforderung, nicht mehr nur zur Redundanz-Option.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.anthropic.com/news/anthropic-amazon-compute" rel="noopener noreferrer external">Anthropic &mdash; Expanded collaboration for up to 5&nbsp;GW of new compute</a></li>
+                <li><a href="https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai" rel="noopener noreferrer external">Amazon &mdash; Expanding strategic collaboration with Anthropic</a></li>
+                <li><a href="https://techcrunch.com/2026/04/20/anthropic-takes-5b-from-amazon-and-pledges-100b-in-cloud-spending-in-return/" rel="noopener noreferrer external">TechCrunch &mdash; Anthropic takes 5B from Amazon, pledges 100B AWS spend</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html" rel="noopener noreferrer external">CNBC &mdash; Amazon to invest up to 25B in Anthropic</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-20/amazon-to-invest-an-additional-5-billion-in-anthropic" rel="noopener noreferrer external">Bloomberg &mdash; Amazon invests additional 5B in Anthropic</a></li>
+                <li><a href="https://www.geekwire.com/2026/amazon-doubles-down-on-anthropic-with-25b-investment-mirroring-its-openai-cloud-deal/" rel="noopener noreferrer external">GeekWire &mdash; Amazon doubles down on Anthropic with 25B investment</a></li>
+                <li><a href="https://www.aboutamazon.com/news/aws/aws-project-rainier-ai-trainium-chips-compute-cluster" rel="noopener noreferrer external">About Amazon &mdash; AWS activates Project Rainier</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Geheimdienste &middot; Anthropic</div>
+            <h2 id="art-3-h">Axios-Scoop: NSA nutzt Anthropics Mythos &mdash; trotz Pentagon-Blacklist</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: Axios, TechCrunch, Bloomberg, CNBC, Spiegel, Foreign Policy</div>
+        </header>
+        <p class="article-teaser">Ein Axios-Scoop vom Sonntag eskalierte am Montag: Die National Security Agency nutzt nach Berichten zwei anonymer Quellen Anthropics Cybersecurity-Modell Mythos, obwohl das US-Verteidigungsministerium Anthropic seit Februar als &bdquo;supply chain risk&ldquo; gelistet hat. Parallel &ouml;ffnete das White House Office of Management and Budget den Zugang zu Mythos f&uuml;r Treasury, State, Commerce, DHS und Justice. Der Mythos-Fall illustriert, wie eine zivile Regierungsfront das Pentagon-Verbot faktisch umgeht &mdash; und wie eine KI-Politik von Hyperscalern und Laboren mitverhandelt wird.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Geschichte zerf&auml;llt in drei Str&auml;nge. Erstens: Anthropics Mythos, am 8.&nbsp;April als Preview vorgestellt, hat binnen Tagen Tausende Zero-Day-Schwachstellen in Betriebssystemen und Browsern gefunden &mdash; darunter einen 27 Jahre alten TCP/SACK-Bug in OpenBSD und einen 17 Jahre alten NFS-RCE in FreeBSD. Das Modell ist Bestandteil des Konsortiums Project Glasswing (100 Millionen Dollar Usage-Credits f&uuml;r kritische Open-Source-Projekte). Zwei dominante Use Cases: defensive Code-Audits f&uuml;r Anthropic-Partner wie CrowdStrike und HackerOne &mdash; oder eben offensive Nutzung, also gezielte Zero-Day-Suche in gegnerischer Software. Letztere ist f&uuml;r die NSA, deren Tailored-Access-Operations-Teams genau diese F&auml;higkeit brauchen, das n&auml;chstliegende Einsatzgebiet. Offiziell bestatigt ist die Nutzungsart allerdings nicht.</p>
+
+            <p>Zweitens: Der Streit mit dem Pentagon l&auml;uft seit Januar. Verteidigungsminister Pete Hegseth verlangte damals, dass alle DoD-AI-Vertr&auml;ge eine &bdquo;any lawful use&ldquo;-Klausel enthalten m&uuml;ssen. Anthropic weigerte sich, zwei Klauseln aus seiner Acceptable Use Policy zu streichen: das Verbot von Massen&uuml;berwachung US-amerikanischer B&uuml;rger und das Verbot vollautonomer Waffensysteme ohne menschliche Zielentscheidung. Im Februar ordnete Pr&auml;sident Trump per Direktive allen Bundesbeh&ouml;rden an, Anthropic-Technologie nicht mehr zu nutzen; Hegseth stufte Anthropic als &bdquo;supply chain risk to national security&ldquo; ein. Am 26.&nbsp;M&auml;rz gew&auml;hrte Richterin Rita Lin (N.D.&nbsp;Cal.) eine einstweilige Verf&uuml;gung gegen die Blacklist &mdash; Begr&uuml;ndung: &bdquo;classic illegal First Amendment retaliation&ldquo;. Am 8.&nbsp;April lehnte der D.C.&nbsp;Circuit Anthropics Antrag auf Aussetzung w&auml;hrend des Berufungsverfahrens ab; das Pentagon h&auml;lt den Ban weiter aufrecht.</p>
+
+            <p>Drittens: Am 14.&nbsp;April erhielten Treasury, Commerce, DHS, DOJ und State eine E-Mail des Federal CIO Gregory Barbaccia aus dem OMB, die Mythos-Nutzung erlaubt. Am Freitag, 17.&nbsp;April, traf Anthropic-CEO Dario Amodei im Wei&szlig;en Haus Stabschefin Susie Wiles und Finanzminister Scott Bessent. Trump sagte Reportern dazu am selben Tag, er habe &bdquo;no idea&ldquo; von dem Treffen &mdash; &bdquo;who?&ldquo; zitierte Gizmodo. Die Axios-Meldung vom Sonntagabend, dass die NSA Mythos bereits nutzt, f&uuml;gt sich in dieses Bild: W&auml;hrend das Pentagon Anthropic klagt, l&auml;uft das Modell auf den Servern einer NSA-Dienststelle, die formal dem DoD untersteht. Das DoD und die NSA verweigerten auf Anfrage jeden Kommentar; Anthropic ebenso.</p>
+
+            <p>Der Widerspruch ist nicht nur politisch, sondern juristisch delikat. Die AUP-Klauseln, wegen derer der Pentagon-Streit l&auml;uft, verbieten explizit Massen&uuml;berwachung US-amerikanischer B&uuml;rger &mdash; der Kernauftrag der NSA ber&uuml;hrt diese Linie st&auml;ndig. Ob die NSA die Klausel respektiert, ist mangels Transparenz nicht pr&uuml;fbar. Bei Foreign Policy schrieb Jessica Brandt am Montag: &bdquo;Mythos changes the cyber calculus&ldquo; &mdash; der Vorteil eines Angreifers, der ein solches Modell einsetzt, gegen&uuml;ber einem, der es nicht hat, ist substanziell. F&uuml;r die internationale Abschreckungsdynamik ist das ein Einschnitt: Die USA haben ein operatives Tool, andere Staaten nicht. Russland, China, Iran und Nordkorea werden entweder eigene Varianten entwickeln oder versuchen, den Anthropic-Zugang abzusch&ouml;pfen.</p>
+
+            <p>F&uuml;r Enterprise-CIOs mit regulatorischen Pflichten ist die Episode ein Lehrst&uuml;ck in Governance-Komplexit&auml;t. Anthropics Mythos-Zugang bleibt offiziell auf rund 40 autorisierte Organisationen begrenzt &mdash; darunter zw&ouml;lf &ouml;ffentlich bekannte (CrowdStrike, HackerOne, ICS-CERT-Partner) und jetzt eine wachsende Zahl ziviler US-Beh&ouml;rden. Das gleiche Modell, das im Ministerium f&uuml;r Homeland Security defensive Code-Audits f&uuml;hrt, arbeitet in einem NSA-Dienstzweig m&ouml;glicherweise offensiv. Diese Zwei-Klassen-Nutzung innerhalb einer einzelnen Kundenorganisation (die US-Regierung) ist Neuland. Wer als Finanzdienstleister, Gesundheitsanbieter oder kritischer Infrastrukturbetreiber KI-Modelle evaluiert, sollte davon ausgehen, dass die Policy-Linien der Anbieter in den kommenden Monaten zur juristischen Verhandlungsmasse werden &mdash; und in vielen F&auml;llen von Regierungen, nicht von Kunden, verschoben werden.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.axios.com/2026/04/19/nsa-anthropic-mythos-pentagon" rel="noopener noreferrer external">Axios &mdash; NSA using Anthropic's Mythos despite Defense Department blacklist</a></li>
+                <li><a href="https://techcrunch.com/2026/04/20/nsa-spies-are-reportedly-using-anthropics-mythos-despite-pentagon-feud/" rel="noopener noreferrer external">TechCrunch &mdash; NSA spies reportedly using Anthropic's Mythos</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-16/white-house-moves-to-give-us-agencies-anthropic-mythos-access" rel="noopener noreferrer external">Bloomberg &mdash; White House moves to give US agencies Mythos access</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/17/anthropic-dario-amodei-trump-mythos.html" rel="noopener noreferrer external">CNBC &mdash; Trump &bdquo;no idea&ldquo; about Amodei White House meeting</a></li>
+                <li><a href="https://www.spiegel.de/netzwelt/netzpolitik/anthropic-mythos-us-geheimdienst-nsa-benutzt-angeblich-umstrittene-hacking-ki-a-3a7b8c9d-e1f2-4a3b-9c4d-5e6f7a8b9c0d" rel="noopener noreferrer external">Spiegel Netzwelt &mdash; US-Geheimdienst NSA benutzt angeblich Hacking-KI</a></li>
+                <li><a href="https://foreignpolicy.com/2026/04/20/claude-mythos-preview-anthropic-project-glasswing-cybersecurity-ai-hacking-danger/" rel="noopener noreferrer external">Foreign Policy &mdash; Mythos Changes the Cyber Calculus</a></li>
+                <li><a href="https://www.cbsnews.com/news/anthropic-ruling-judge-trump-pentagon-ai/" rel="noopener noreferrer external">CBS News &mdash; Judge: Pentagon's Anthropic ban retaliation</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Wettlauf &middot; Google</div>
+            <h2 id="art-4-h">Googles &bdquo;Strike Team&ldquo;, Marvell-Chips und Gemini in Chrome: Drei Fronten gegen Anthropic</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: The Information, heise online, CNBC, 9to5Google, TechCrunch, Reuters</div>
+        </header>
+        <p class="article-teaser">Google ging am Montag an drei Fronten in den Angriff. The Information berichtet, dass DeepMind unter Sebastian Borgeaud &mdash; und mit pers&ouml;nlichem Engagement von Sergey Brin &mdash; ein &bdquo;Strike Team&ldquo; gebildet hat, um die Coding-F&auml;higkeiten von Gemini zu verbessern. Parallel verhandelt Google mit Marvell &uuml;ber zwei neue KI-Chip-Designs, darunter eine Memory Processing Unit (MPU) in Auflagen von bis zu zwei Millionen St&uuml;ck. Und Gemini in Chrome expandiert in sieben weitere L&auml;nder, alle im asiatisch-pazifischen Raum.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Leitgeschichte kommt von The Information: Google DeepMind hat intern ein Strike Team gebildet, das ausschlie&szlig;lich daran arbeitet, Gemini im Coding auf das Niveau von Anthropics Claude zu heben. Leitung: Sebastian Borgeaud, zuvor Pre-Training-Lead bei Gemini. DeepMind-CTO Koray Kavukcuoglu ist als Sponsor dabei, Sergey Brin laut Bericht pers&ouml;nlich involviert. Die Teamgr&ouml;&szlig;e wird nicht beziffert, aber die interne Sprachregelung ist eindeutig: Anthropic liegt bei agentischem Coding vorn, und Google will aufschlie&szlig;en. Offizielle Benchmarks best&auml;tigen den R&uuml;ckstand &mdash; Claude Opus&nbsp;4.7 erreicht auf SWE-bench Pro 64,3&nbsp;Prozent, Gemini 3.1 Pro bleibt bei 54,2. Innerhalb von Google werden laut Bericht rund 50&nbsp;Prozent des internen Codes AI-assistiert geschrieben; Anthropic beziffert denselben Wert intern auf &bdquo;fast alles&ldquo;.</p>
+
+            <p>Die zweite Front ist Hardware. Die Information berichtet parallel von Verhandlungen zwischen Google und Marvell Technology &uuml;ber zwei neue KI-Chips. Der erste ist eine Memory Processing Unit, die parallel zur bestehenden TPU arbeiten und Compute- sowie Memory-Lasten trennen soll &mdash; Google plant nach dem Bericht die Produktion von bis zu zwei Millionen Exemplaren. Der zweite ist eine neue TPU-Variante, optimiert f&uuml;r Inferenz. Das Designziel 2027 ist realistisch, eine Deal-Summe wird nicht genannt. Strategischer Kontext: Google m&ouml;chte seine Abh&auml;ngigkeit von Broadcom reduzieren, das hohe Per-Unit-Geb&uuml;hren pro TPU verlangt &mdash; obwohl Google die Broadcom-Vertragslaufzeit im April bis 2031 verl&auml;ngert hat. Marvell-Aktie sprang am Montag um rund sechs Prozent, im April kumuliert rund 50&nbsp;Prozent. Nvidia hatte im M&auml;rz 2 Milliarden Dollar in Marvell investiert.</p>
+
+            <p>Die dritte Front ist die Distribution. Google rollte Gemini in Chrome in sieben weitere L&auml;nder aus: Australien, Indonesien, Japan, Philippinen, Singapur, S&uuml;dkorea, Vietnam. Die Gesamtzahl der M&auml;rkte steigt damit auf elf. Der Initial-Launch lief im Januar in den USA, im M&auml;rz kamen Indien, Kanada und Neuseeland hinzu; jetzt der APAC-Schwung. Features: Sidebar-Assistent, Multi-Tab-Vergleich, Zusammenfassungen, Gmail-/Calendar-/Maps-/YouTube-Integration, Bildbearbeitung via Nano Banana&nbsp;2. Agentische Browser-Automation bleibt vorerst US-only. F&uuml;r Chrome-CTOs in Corporate-Umgebungen bedeutet der Rollout eine neue Frage: Bleibt die Browser-Wahl frei, oder wird Chrome-mit-Gemini zum impliziten Standard, in dem Nutzerdaten via integrierten AI-Tools durch Google laufen?</p>
+
+            <p>Die drei Fronten gemeinsam zeichnen Googles Antwort auf den &bdquo;Coding-AI-Wars&ldquo;-Diskurs, der seit Claude Opus&nbsp;4.7 und Cursor-50-Milliarden-Bewertung den Branchen-Ton bestimmt. Google verf&uuml;gt &uuml;ber die besten Distributions-Kan&auml;le (Chrome, Workspace, Android), konkurrenzf&auml;hige Modelle (Gemini 3.1 Pro) und mit Antigravity eine agentische IDE, die sich ironischerweise auch gegen Claude Sonnet&nbsp;4.6 und Opus&nbsp;4.6 als Backends offen h&auml;lt. Was fehlt: ein Coding-Modell, das im tats&auml;chlichen Developer-Mindshare konkurriert. Der Pragmatic Engineer Survey vom Februar (15.000 Developer) ergab Claude Code 46&nbsp;Prozent &bdquo;most loved&ldquo;, Cursor 19, GitHub Copilot 9 &mdash; Gemini taucht in der Spitzenzone nicht auf. Das Strike Team ist Googles Versuch, diese Diskrepanz zu schlie&szlig;en, bevor Enterprise-Kunden sich auf Anthropic/Cursor-Stacks commiten.</p>
+
+            <p>F&uuml;r Tech-Leads in SaaS-Unternehmen sind drei Beobachtungen relevant. Erstens: Die n&auml;chste Coding-KI-Runde wird vermutlich bei Google aufschlagen, nicht bei Anthropic oder OpenAI. Wer seine Vendor-Strategie festlegt, sollte ein Gemini-Fenster im Eval-Portfolio offen halten &mdash; m&ouml;glicherweise mit sechs- bis neun-monatiger Vorwarnzeit. Zweitens: Die MPU-Strategie deutet an, dass Google im Kostenwettbewerb an Anthropic/Azure/Nvidia vorbeiziehen will. Das k&ouml;nnte ab 2027 zu signifikant niedrigeren Inferenz-Preisen auf Vertex AI f&uuml;hren &mdash; mit Impact auf Gesamtkalkulationen im KI-Produkt-Kontext. Drittens: Gemini in Chrome ist ein Vorbote f&uuml;r eine Browser-as-Agent-&Auml;ra. Die Frage, ob Webseiten f&uuml;r Agenten erreichbar sind (Agent-readiness), wird in den n&auml;chsten sechs Monaten zu einem konkreten Produkt-Attribut.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theinformation.com/articles/google-creates-strike-team-improve-coding-models" rel="noopener noreferrer external">The Information &mdash; Google Creates Strike Team to Improve Coding Models</a></li>
+                <li><a href="https://www.heise.de/news/Google-bildet-Strike-Team-zur-Verbesserung-seiner-Coding-KI-Modelle-11264748.html" rel="noopener noreferrer external">heise online &mdash; Google bildet Strike Team zur Verbesserung der Coding-KI</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/20/marvell-stock-google-custom-ai-chips.html" rel="noopener noreferrer external">CNBC &mdash; Marvell pops on report it will help Google with custom AI chips</a></li>
+                <li><a href="https://money.usnews.com/investing/news/articles/2026-04-19/google-in-talks-with-marvell-to-build-new-ai-chips-for-inference-the-information-reports" rel="noopener noreferrer external">U.S. News/Reuters &mdash; Google in talks with Marvell to build new AI chips</a></li>
+                <li><a href="https://techcrunch.com/2026/04/20/google-rolls-out-gemini-in-chrome-in-seven-new-countries/" rel="noopener noreferrer external">TechCrunch &mdash; Google rolls out Gemini in Chrome in seven new countries</a></li>
+                <li><a href="https://9to5google.com/2026/04/20/gemini-chrome-more-countries/" rel="noopener noreferrer external">9to5Google &mdash; Gemini in Chrome rolling out to seven more countries</a></li>
+                <li><a href="https://sherwood.news/tech/google-deepmind-builds-strike-team-to-catch-up-to-anthropic-models/" rel="noopener noreferrer external">Sherwood News &mdash; Google DeepMind builds strike team</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Industrie &middot; Hannover Messe</div>
+            <h2 id="art-5-h">Merz fordert Ausnahme f&uuml;r industrielle KI &mdash; Siemens launcht &bdquo;Eigen&ldquo;-Agent</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: Bundesregierung.de, heise online, Golem, Handelsblatt, Siemens Press</div>
+        </header>
+        <p class="article-teaser">Am Messemontag eskalierte die Regulierungsdebatte. Bundeskanzler Friedrich Merz k&uuml;ndigte auf der Hannover Messe an, industrielle KI aus dem EU AI Act herausl&ouml;sen zu wollen &mdash; eine Forderung, die ZVEI und VDMA lange vorangetrieben haben, die aber den TÜV-Verband und Bürgerrechtler alarmiert. Parallel stellte Siemens seinen &bdquo;Eigen Engineering Agent&ldquo; vor &mdash; laut Unternehmensangaben eines der ersten kommerziellen Agentensysteme, das industrielle Automatisierungsaufgaben plant, ausf&uuml;hrt und validiert. Tag zwei der Messe wurde zum Tag der konkreten Forderungen. <a href="2026-04-20.html#art-2">Wie wir in unserer Ausgabe vom 20.&nbsp;April berichteten</a>, steht &bdquo;Physical AI&ldquo; im Zentrum der Messe.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das Kernzitat ist knapp und politisch. &bdquo;Ich werde mich daf&uuml;r einsetzen, die europ&auml;ische KI-Regulierung zu erleichtern und wenn m&ouml;glich industrielle KI aus dem gegenw&auml;rtigen, zu engen Korsett der KI-Regulierung der Europ&auml;ischen Union herauszul&ouml;sen&ldquo; &mdash; Bundeskanzler Merz am Sonntagabend, Eroeffnungsrede der Hannover Messe. Montag verstetigt sich die Botschaft. Merz argumentiert, bei Entstehung des AI Act sei die heutige Dimension industrieller Anwendungen nicht absehbar gewesen; KI st&auml;rke &bdquo;Effizienz, Produktivit&auml;t und Wettbewerbsfahigkeit&ldquo;. Die Forderung zielt operativ auf die Phase&nbsp;2 des AI Act, die am 2.&nbsp;August 2026 in Kraft tritt &mdash; mit Pflichten f&uuml;r Hochrisiko-Systeme nach Annex&nbsp;III, unter die auch KI in Maschinen, Medizinprodukten und kritischer Infrastruktur f&auml;llt.</p>
+
+            <p>Die Verb&auml;nde haben sich die Forderung vorbereitet. ZVEI-Pr&auml;sident Gunther Kegel sprach schon vor Tagen von notwendiger &bdquo;Industrietauglichkeit&ldquo;; VDMA-Chef Bertram Kawlath forderte &bdquo;strukturelle Reformen statt Krisenmanagement&ldquo;; BDI-Pr&auml;sident Peter Leibinger will ein Reformpaket bis zum Sommer. Die Positionen sind kongruent: Industrie-KI bedeutet f&uuml;r deutsche Unternehmen konkrete Produktionsprozesse, von SPS-Programmen bis zu Roboterkalibrierung &mdash; Bereiche, in denen die Hochrisiko-Klassifizierung des AI Act tats&auml;chliche Compliance-Kosten verursacht. Der TÜV-Verband kontert allerdings: Ein Herausl&ouml;sen w&uuml;rde &bdquo;gef&auml;hrliche Regulierungsl&uuml;cken&ldquo; bei Maschinen- und Medizinger&auml;tesicherheit produzieren. AlgorithmWatch und andere B&uuml;rgerrechtsorganisationen hatten den AI Act als europ&auml;isches Grundrechte-Dokument verteidigt, wie <a href="2026-04-09.html#art-5">wir in unserer Ausgabe vom 9.&nbsp;April dokumentierten</a>.</p>
+
+            <p>Im Messepavillon wird die Theorie konkret. Siemens pr&auml;sentiert den Eigen Engineering Agent &mdash; einen Multi-Agent-Aufbau, der laut Unternehmensangaben SPS-Code schreibt (die Programmiersprache speicherprogrammierbarer Steuerungen, die jeden Industrie-Roboter und jede Fertigungsstra&szlig;e kontrollieren), HMI-Visualisierungen konfiguriert und Ger&auml;te-Setups automatisiert. Integriert ins TIA-Portal mit 600.000 Nutzern. Namensherkunft: &bdquo;Eigen&ldquo; als Anspielung auf Eigenwerte &mdash; konstante Eigenschaften in sich transformierenden Umgebungen. Siemens nennt 2&ndash;5-fache Geschwindigkeit gegen&uuml;ber manuellen Workflows, bis zu 80&nbsp;Prozent bessere L&ouml;sungsqualit&auml;t und 50&nbsp;Prozent h&ouml;here Engineering-Effizienz. &Uuml;ber 100 Firmen in 19 L&auml;ndern haben den Agent getestet, darunter ANDRITZ Metals (&Ouml;sterreich), CASMT (China) und Prism Systems (USA). Welche Foundation Models dahinter laufen, sagt Siemens nicht.</p>
+
+            <p>Weitere Hannover-Signale: RobCo stellt den humanoiden Alfie vor &mdash; zwei Arme, Level-4-Autonomie, Robotics-as-a-Service-Modell ohne Vorabinvestition. TeamViewer und Bechtle zeigen ein vorkonfiguriertes Zero-Trust-Gateway f&uuml;r Fernzugriff auf Industrieanlagen inklusive Legacy-Systeme. Und auf der Nachhaltigkeitsseite des Messe-Narrativs l&auml;uft das Projekt &bdquo;claude-carbon&ldquo; &mdash; ein Open-Source-Tool, das &uuml;ber Claude Code Hooks den CO&sub2;-Footprint jeder Entwickler-Session trackt und in der Statusline anzeigt. Laut Entwickler-Schatzung (367 Sessions &uuml;ber vier Monate): rund eine Tonne CO&sub2;-&Auml;quivalente pro Jahr bei intensiver Nutzung &mdash; ein Hin- und R&uuml;ckflug Paris-New-York.</p>
+
+            <p>F&uuml;r deutsche SaaS-Unternehmen mit Industrie-Kunden ist das Signal strategisch klar. Erstens: Die politische B&uuml;hne rutscht in Richtung Deregulierung &mdash; der AI Act bekommt wahrscheinlich Ausnahmen, nicht mehr Zahne. Das reduziert Compliance-Kosten, schafft aber Rechtsunsicherheit w&auml;hrend der Verhandlungsphase. Zweitens: Siemens Eigen ist der erste vorzeigbare Fall eines europ&auml;ischen Industrie-Konzerns, der ein Agent-System nicht als Pilot, sondern als kommerzielles Produkt ausrollt. Wer in angrenzenden Industrie-Segmenten (Automotive-Zulieferer, Maschinenbau-Software, MES-Plattformen) arbeitet, muss dieses Angebot im Vendor-Portfolio von Kunden mitbedenken. Drittens: Die Bedeutung der Amberg-Benchmark (99,99885&nbsp;Prozent Fehlerfreiheit bei 17,5 Millionen Komponenten j&auml;hrlich) als Benchmark f&uuml;r Physical-AI-Reife steigt. Enterprise-K&auml;ufer werden KI-Produkte zunehmend mit industrieller Ausfallsicherheit vergleichen &mdash; ein Ma&szlig;stab, den viele SaaS-Stacks nicht erf&uuml;llen.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.heise.de/news/Bundeskanzler-Merz-Europaeische-KI-Regulierung-erleichtern-11264933.html" rel="noopener noreferrer external">heise online &mdash; Merz: Europ&auml;ische KI-Regulierung erleichtern</a></li>
+                <li><a href="https://www.handelsblatt.com/politik/deutschland/hannover-messe-merz-will-industrielle-ki-aus-eu-richtlinien-herausnehmen/100218272.html" rel="noopener noreferrer external">Handelsblatt &mdash; Merz will industrielle KI aus EU-Richtlinien herausnehmen</a></li>
+                <li><a href="https://www.bundesregierung.de/breg-de/aktuelles/rede-merz-hannover-messe-2421888" rel="noopener noreferrer external">Bundesregierung.de &mdash; Rede Merz auf der Hannover Messe</a></li>
+                <li><a href="https://press.siemens.com/global/en/pressrelease/siemens-brings-ai-physical-world-eigen-engineering-agent" rel="noopener noreferrer external">Siemens &mdash; Eigen Engineering Agent offizielle Vorstellung</a></li>
+                <li><a href="https://www.golem.de/news/siemens-ki-agent-schreibt-und-verbessert-code-fuer-maschinensteuerung-2604-189567.html" rel="noopener noreferrer external">Golem &mdash; Siemens KI-Agent f&uuml;r Maschinensteuerung</a></li>
+                <li><a href="https://www.heise.de/news/Umweltkosten-durch-Vibe-Coding-Tool-berechnet-CO-Ausstoss-fuer-Claude-Code-11264352.html" rel="noopener noreferrer external">heise online &mdash; Claude-Carbon: Tool misst CO&sub2;-Ausstoss von Claude Code</a></li>
+                <li><a href="https://www.heise.de/news/RobCo-Autonomous-Alfie-lernfaehiger-Industrieroboter-11264340.html" rel="noopener noreferrer external">heise online &mdash; RobCo Alfie: lernf&auml;higer Industrieroboter</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">AI-Nuklear &middot; Fermi</div>
+            <h2 id="art-6-h">CEO und CFO von Fermi Inc. treten &uuml;ber Nacht ab &mdash; Aktie bricht 22&nbsp;Prozent ein</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: TechCrunch, Fortune, Bloomberg, E&amp;E News, The Register, Axios</div>
+        </header>
+        <p class="article-teaser">Am Montagmorgen verk&uuml;ndete die Nasdaq-gelistete Fermi&nbsp;Inc. den Abgang von CEO Toby Neugebauer und CFO Miles Everson &mdash; beide bereits zum 17.&nbsp;April zur&uuml;ckgetreten. Firmierung unter dem Label &bdquo;Fermi 2.0 &mdash; Strategic Evolution&ldquo;. Die Aktie brach 22&nbsp;Prozent ein. Fermi plant in Amarillo, Texas, den &bdquo;Donald J. Trump Advanced Energy and Intelligence Campus&ldquo; &mdash; einen AI-Datacenter, der schlie&szlig;lich aus vier 1-GW-Kernreaktoren gespeist werden soll. Es gibt noch kein Geb&auml;ude, keinen Hyperscaler-Ankermieter und keinen Umsatz. Die Personalie ist ein Warnsignal f&uuml;r den gesamten Nuklear-f&uuml;r-AI-Sektor.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Fermi Inc. war im Oktober 2025 per Nasdaq-IPO zu einer Bewertung von rund 19 Milliarden Dollar an den Markt gegangen &mdash; ohne Umsatz und ohne konkreten Hyperscaler-Vertrag. Mitgegr&uuml;ndet hatten das Unternehmen Toby Neugebauer, fr&uuml;her Co-Managing Partner bei Quantum Energy Partners, und der ehemalige US-Energieminister und Ex-Gouverneur von Texas, Rick Perry. Das strategische Narrativ: In Amarillo entsteht ein gigantischer Datacenter-Campus, intern &bdquo;Project Matador&ldquo; genannt, offiziell &bdquo;Donald&nbsp;J.&nbsp;Trump Advanced Energy and Intelligence Campus&ldquo;. Stromversorgung sollte am Ende aus vier 1-Gigawatt-Kernreaktoren kommen, mit Gas, Solar und Wind als Interimsversorgung.</p>
+
+            <p>Am Montagmorgen zerlegte Fermi die Erz&auml;hlung in Raten. In einem 8-K-Formular wurde kommuniziert: Neugebauer trat am 17.&nbsp;April zur&uuml;ck, bleibt aber Board-Mitglied und gr&ouml;&szlig;ter Einzelaktion&auml;r. Everson verl&auml;sst das Unternehmen &bdquo;ohne Good Reason&ldquo; laut Arbeitsvertrag, r&uuml;ckt aber in den Board. Ein &bdquo;Office of the CEO&ldquo; unter COO Jacobo Ortiz und Board-Observerin Anna Bofa (ehemalig Google, Meta) &uuml;bernimmt die Interimsf&uuml;hrung; Marius Haas wird neuer Chairman. Headhunter Heidrick &amp; Struggles startet die CEO-Suche. Die offizielle Begr&uuml;ndung &mdash; eine &bdquo;strategic evolution&ldquo; mit neuem Hauptsitz in Dallas &mdash; verschleiert drei konkrete Probleme: Ein geplanter Hyperscaler-Ankermieter ist abgesprungen (Bloomberg); Neugebauer hatte auf der Nvidia GTC in San Jose einen &ouml;ffentlichen Streit mit US-Handelsminister Howard Lutnick, dem er die Blockade s&uuml;dkoreanischer Investoren anlastet; und Satelliten-Tracking zeigt laut Cleanview, dass bisher kein einziges Geb&auml;ude errichtet ist &mdash; trotz Angaben, Phase&nbsp;1 sei &bdquo;abgeschlossen&ldquo;.</p>
+
+            <p>Fermis Aktie brach am Handelstag um rund 22&nbsp;Prozent ein. Die Bewertung verlor damit innerhalb von sechs Monaten etwa drei Viertel ihres IPO-Peaks. Das Timing ist f&uuml;r den gesamten Nuklear-Strom-f&uuml;r-AI-Sektor unangenehm. Oklo, Nano Nuclear und X-energy haben 2025 massiv Kapital eingesammelt &mdash; auf der Erzahlung, dass Hyperscaler-Datacenter die Stromknappheit nur mit Small Modular Reactors l&ouml;sen k&ouml;nnen. SMRs sind technisch und regulatorisch aber fr&uuml;hestens Ende der 2020er marktreif. Fermi zeigt den Preis, den die Branche f&uuml;r eine aggressive Pre-Revenue-Bewertung zahlt: Sobald der erste Ankermieter wackelt und das erste Satellitenbild fehlende Bauarbeiten dokumentiert, wird die Story zu teurem Marketing.</p>
+
+            <p>Die politischen Abh&auml;ngigkeiten der Fermi-Personalie sind offensichtlich und ungewohnt deutlich. Das Projekt ist nach Donald Trump benannt, mitgegr&uuml;ndet vom Ex-Energieminister der ersten Trump-Administration (Rick Perry), und h&auml;ngt laut Neugebauer an einer Handelsministerium-Freigabe, die aus dem aktuellen Trump-Kabinett kommen muss. Wenn genau diese politische Einbettung zum Problem wird &mdash; weil Handelsminister Lutnick ausl&auml;ndische Investoren ausbremst und die regulatorische Timeline nicht liefert &mdash; bricht das Gesch&auml;ftsmodell auf Unternehmens-Ebene zusammen. Branchenbeobachter ordnen das als Parallele zum iLearningEngines-SPAC-Kollaps ein: ein AI-Infrastructure-Play, dessen Bewertung die Realit&auml;t der Aufbau-Arbeit meilenweit &uuml;bersteigt.</p>
+
+            <p>F&uuml;r SaaS- und Tech-Leads, die Hyperscaler-Verf&uuml;gbarkeit 2026/27 planen, ist die Personalie eine praktische Erinnerung. Erstens: Die Compute-Engpass-These der Labs und Hyperscaler (siehe unseren <a href="#art-2">Anthropic-Amazon-Artikel oben</a>) ist real, die vorgeschlagenen L&ouml;sungen jedoch zeitlich nicht kongruent. Kernkraft-Datacenter stehen fr&uuml;hestens Ende der Dekade in Produktion; Hyperscaler-Projekte wie Stargate Abilene und AWS Rainier sind Jahre vor jedem SMR-Betrieb fertig. Zweitens: Die Risiko-Diversifizierung der Compute-Quelle lohnt sich. Wer aktuell eine Multi-Jahres-Verpflichtung an einen einzelnen Lieferanten eingeht, sollte SLA-Klauseln f&uuml;r Stromverf&uuml;gbarkeit, Kapazit&auml;ts-Swaps und Exit-Optionen explizit verhandeln. Drittens: Bei Vendor-Evaluationen jeder Pre-Revenue-Firma mit AI-Infrastructure-Narrativ gilt dieselbe Checkliste wie in unserem <a href="2026-04-20.html#art-6">iLearningEngines-Artikel gestern</a> &mdash; Demos, Kundenreferenzen, ML-Engineering-Kapazit&auml;t, Audit-Trail.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/20/fermi-ceo-and-cfo-depart-texas-nuclear-power-ai/" rel="noopener noreferrer external">TechCrunch &mdash; CEO and CFO suddenly depart AI nuclear power upstart Fermi</a></li>
+                <li><a href="https://fortune.com/2026/04/20/financially-struggling-ai-power-startup-fermi-loses-ceo-reset/" rel="noopener noreferrer external">Fortune &mdash; Financially struggling Fermi loses CEO</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-20/ai-nuclear-power-developer-fermi-slumps-after-abrupt-exit-of-ceo" rel="noopener noreferrer external">Bloomberg &mdash; AI Nuclear Developer Fermi slumps after abrupt CEO exit</a></li>
+                <li><a href="https://www.eenews.net/articles/ceos-exit-casts-doubt-on-massive-texas-data-center-plan/" rel="noopener noreferrer external">E&amp;E News &mdash; CEO's exit casts doubt on Texas data center plan</a></li>
+                <li><a href="https://www.theregister.com/2026/04/20/fermi_america_reorg/" rel="noopener noreferrer external">The Register &mdash; Fermi America reorg</a></li>
+                <li><a href="https://www.prnewswire.com/news-releases/fermi-inc-announces-fermi-2-0-strategic-evolution-new-board-chairman-leadership-transitions-and-new-office-locations-302746951.html" rel="noopener noreferrer external">PRNewswire &mdash; Fermi 2.0 Strategic Evolution Pressemitteilung</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Das Karussell: Wie die KI-Branche sich selbst finanziert &mdash; und warum das f&uuml;r SaaS-Unternehmen z&auml;hlt</h2>
+            <p class="article-teaser">Amazon investiert 25 Milliarden in Anthropic, Anthropic verspricht 100 Milliarden AWS-Ausgaben. Nvidia und OpenAI zeichnen einen 100-Milliarden-Deal, OpenAI kauft Nvidia-Chips. Oracle reserviert 300 Milliarden. AMD bekommt 10&nbsp;Prozent-Aktien-Warrants, liefert 6 GW GPUs. Die Muster wiederholen sich. Was passiert, wenn ein Hyperscaler gleichzeitig Investor und Kunde eines KI-Labors ist &mdash; und welche Margen-, Lock-in- und Governance-Risiken das f&uuml;r B2B-SaaS mit KI-Features bedeutet. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-21.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/claude.com.png" alt="Anthropic Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://code.claude.com/docs/en/routines" rel="noopener noreferrer external">Claude Code Routines</a></div>
+                    <div class="tool-card-desc">Scheduled Cloud-Automationen f&uuml;r Claude Code: Prompts, Repos und Connectors werden als &bdquo;Routine&ldquo; gespeichert und laufen zeitgesteuert oder bei GitHub-Events auf Anthropic-Infrastruktur. Erstmals l&auml;uft Claude Code ohne offenen Laptop &mdash; Anthropic hostet die Ausf&uuml;hrung.</div>
+                    <div class="tool-card-meta">14. April 2026. Anthropic (Pro/Max/Enterprise).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/softr.io.png" alt="Softr Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.softr.io/ai-app-generator" rel="noopener noreferrer external">Softr AI Co-Builder</a></div>
+                    <div class="tool-card-desc">Text-zu-Business-App-Generator, der Datenbanken, Rollen, Permissions und UI-Bausteine (Kanban, Tabellen, Forms) in einem Schritt aus natursprachlicher Beschreibung zusammenstellt. Im Unterschied zu Lovable oder Bolt baut Softr auf gepr&uuml;ften Bausteinen auf &mdash; produktionsreif statt Demoware.</div>
+                    <div class="tool-card-meta">14. April 2026. Softr (Berlin), 1&nbsp;Mio.+ Builder.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/cloudflare.com.png" alt="Cloudflare Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.cloudflare.com/agents/is-your-site-agent-ready/" rel="noopener noreferrer external">Is Your Site Agent-Ready?</a></div>
+                    <div class="tool-card-desc">Scanner, der eine Website gegen Agent-Readiness-Standards (robots.txt, MCP-Endpoints, OAuth, Agent-Protocols) pr&uuml;ft und Gaps meldet. Der erste mainstream-taugliche Agent-Readiness-Check aus dem Infrastruktur-Lager &mdash; macht die neue &bdquo;Agent-SEO&ldquo; operationalisierbar.</div>
+                    <div class="tool-card-meta">18. April 2026. Cloudflare (kostenlos).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/craftos.dev.png" alt="CraftOS Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/CraftOS-dev/CraftBot" rel="noopener noreferrer external">CraftBot (CraftOS)</a></div>
+                    <div class="tool-card-desc">Self-hosted, lokal laufender AI-Assistent, der 24/7 autonom Aufgaben plant, ausf&uuml;hrt und n&auml;chtliche &bdquo;Traum&ldquo;-Zyklen f&uuml;r Long-Term-Memory-Konsolidierung durchl&auml;uft. Unterst&uuml;tzt OpenAI, Anthropic, Gemini, Ollama; 150+ Skills, MIT-Lizenz.</div>
+                    <div class="tool-card-meta">18. April 2026. CraftOS (Open Source).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/getdune.com.png" alt="Dune Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.producthunt.com/products/dune-2" rel="noopener noreferrer external">Dune</a></div>
+                    <div class="tool-card-desc">Drei-Tasten-Keypad-App f&uuml;r den Mac, das neben der Tastatur sitzt und die Belegung kontextsensitiv je aktiver App &auml;ndert. Product Hunt #1 am 20.&nbsp;April mit 453 Upvotes &mdash; bringt die Stream-Deck-Idee in die AI-Workflow-&Auml;ra, inklusive Meeting-Automationen.</div>
+                    <div class="tool-card-meta">20. April 2026. Indie-Startup (Bootstrapped).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/github.com.png" alt="GitHub Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/gwittebolle/claude-carbon" rel="noopener noreferrer external">claude-carbon</a></div>
+                    <div class="tool-card-desc">Open-Source-CLI, die &uuml;ber native Claude-Code-Hooks den CO&sub2;-Footprint jeder Entwickler-Session berechnet und in der Statusline neben den Kosten anzeigt. Lokales SQLite-Log, PNG-Reportcards; ~1 Tonne CO&sub2;/Jahr bei intensiver Nutzung, 50&ndash;70&nbsp;Prozent Reduktion durch Modellwahl.</div>
+                    <div class="tool-card-meta">20. April 2026. gwittebolle (Open Source, MIT).</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=Xx18YRrK-Uk" rel="noopener noreferrer external"><img src="../assets/images/thumbs/Xx18YRrK-Uk.jpg" alt="Tech With Tim AI Agent Build Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 20 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=Xx18YRrK-Uk" rel="noopener noreferrer external">I Built an AI Agent in 20 Minutes &mdash; Here's How</a></div>
+                    <div class="yt-card-channel">Tech With Tim (2,0 Mio. Subs) &middot; 20. April 2026</div>
+                    <div class="yt-card-desc">Tim Ruscica baut in 20 Minuten einen Python-AI-Agent von Null &mdash; inklusive Tool Use, Memory und Orchestrierung. Der Video-Fokus liegt auf der Frage, wie ein AI-Agent mehr als ein LLM-Wrapper wird: strukturierte Planung, Tool-Ketten, State-Management. Gute Einstiegsreferenz f&uuml;r Teams, die 2026 von Chatbot- zu Agent-Denken wechseln.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=00Y-p62sk0s" rel="noopener noreferrer external"><img src="../assets/images/thumbs/00Y-p62sk0s.jpg" alt="IndyDevDan M5 Max Local AI Stack Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 39 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=00Y-p62sk0s" rel="noopener noreferrer external">My M5 Max, Gemma 4, MLX LOCAL Stack</a></div>
+                    <div class="yt-card-channel">IndyDevDan (128.000 Subs) &middot; 20. April 2026</div>
+                    <div class="yt-card-desc">Dan baut einen vollst&auml;ndig lokalen AI-Coding-Stack auf einem M5-Max-Mac mit Apple Silicon, Gemma 4 und MLX. Statt API-Token-Kosten pro Session: nur Stromverbrauch. Das Video zeigt, wo On-Device-AI f&uuml;r Engineering-Teams reif ist, und wo externe Modelle noch dominieren. Praktische Referenz f&uuml;r Privacy-sensitive Use-Cases.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=SANneV1ed78" rel="noopener noreferrer external"><img src="../assets/images/thumbs/SANneV1ed78.jpg" alt="Viktor Oddy Claude Design Review Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 19 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=SANneV1ed78" rel="noopener noreferrer external">The New Claude Design Destroys Every Site Designer</a></div>
+                    <div class="yt-card-channel">Viktor Oddy (30.300 Subs) &middot; 53.800 Views &middot; 18. April 2026</div>
+                    <div class="yt-card-desc">Kleinerer Creator, der 1,8-mal mehr Views als Subscriber hat &mdash; ein solider Fr&uuml;hindikator. Viktor Oddy dokumentiert seine ersten 72 Stunden mit Claude Design als Praktiker: von Pitch-Deck &uuml;ber Landing-Page bis zu kompletten Websites, die ohne Designer-Beteiligung in Produktion gehen. Zeigt konkret, wo Anthropics Design-Tool Figma, Webflow und Framer schlagen kann &mdash; und wo die Grenzen liegen. Der Ton bleibt bewusst praktisch statt euphorisch, was den Channel vom Launch-Hype anderer Creators abhebt.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '\u2600' : '\u263E';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
