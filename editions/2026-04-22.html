@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 22. April 2026</title>
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-strong);
+        }
+
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+        .site-footer a { color: var(--text-muted); }
+        .site-footer a:hover { color: var(--text-primary); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        [id] { scroll-margin-top: 4.5rem; }
+
+        @media (max-width: 600px) {
+            .site-header-inner { padding: var(--space-3) var(--space-4); }
+            .edition-header { padding: var(--space-6) var(--space-4) var(--space-4); }
+            .site-main { padding: 0 var(--space-4); }
+            .article h2 { font-size: var(--text-xl); }
+            .article--lead h2 { font-size: var(--text-2xl); }
+            .reportage-teaser { padding: var(--space-6); }
+            .site-footer { padding: var(--space-6) var(--space-4); }
+            .tool-grid { grid-template-columns: 1fr; }
+            .yt-grid { grid-template-columns: 1fr; }
+            .toc-list { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 1024px) { body { font-size: 1.1875rem; } }
+        @media (min-width: 1280px) { body { font-size: 1.25rem; } }
+
+        @media print {
+            .site-header, .skip-link, .site-nav { display: none; }
+            body { background: #fff; color: #000; font-size: 11pt; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            .article { page-break-inside: avoid; }
+            p { orphans: 3; widows: 3; }
+        }
+
+        h1, h2, h3, h4 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        .footer-links { display: flex; gap: var(--space-4); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-22">Mittwoch, 22. April 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 22. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Deal &middot; SpaceX/Cursor</span><span class="toc-title">SpaceX setzt 60-Milliarden-Kaufoption auf Cursor &mdash; oder zahlt zehn Milliarden</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Sicherheit &middot; Anthropic</span><span class="toc-title">Mythos-Leck, Altmans Konter und Mozillas 271 Firefox-Fixes</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">&Uuml;berwachung &middot; Meta</span><span class="toc-title">Meta Model Capability Initiative: Tastatur und Mausbewegung als KI-Trainingsdaten</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Produkt &middot; OpenAI</span><span class="toc-title">ChatGPT Images 2.0: Text, Reasoning, Web-Suche im Bild</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Plattform &middot; YouTube</span><span class="toc-title">YouTube &ouml;ffnet KI-Deepfake-Erkennung f&uuml;r Hollywood</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Privacy &middot; Clarifai</span><span class="toc-title">Nach zw&ouml;lf Jahren: Clarifai l&ouml;scht drei Millionen OkCupid-Fotos &mdash; FTC setzt Nullstrafe</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">Finanzierung &middot; NeoCognition</span><span class="toc-title">NeoCognition sammelt 40 Millionen Seed: &bdquo;Agents, die wie Menschen lernen&ldquo;</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">Der Coding-Krieg 2026</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Deal &middot; SpaceX/Cursor</div>
+            <h2 id="art-1-h">SpaceX setzt 60-Milliarden-Kaufoption auf Cursor &mdash; oder zahlt zehn Milliarden f&uuml;r die Zusammenarbeit</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: TechCrunch, CNBC, Bloomberg, The Information, The Verge</div>
+        </header>
+        <p class="article-teaser">Am Dienstagabend ver&ouml;ffentlichte SpaceX auf X eine Hybrid-Struktur-Ank&uuml;ndigung: Das Raumfahrtunternehmen und das Coding-Startup Cursor arbeiten ab sofort &bdquo;eng zusammen, um den weltweit besten Coding- und Knowledge-Work-AI&ldquo; zu bauen. Im Rahmen der Kooperation erh&auml;lt Cursor Zugriff auf den xAI-Supercomputer Colossus. Noch in diesem Jahr entscheidet SpaceX &uuml;ber eine Kaufoption f&uuml;r 60 Milliarden Dollar; wird sie nicht gezogen, zahlt SpaceX zehn Milliarden &bdquo;f&uuml;r die gemeinsame Arbeit&ldquo;. Der gr&ouml;&szlig;te IPO-Kandidat der Tech-Geschichte integriert damit das schnellstwachsende SaaS-Startup aller Zeiten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Mechanik des Deals ist ungew&ouml;hnlich. SpaceX, das im Februar 2026 durch die Fusion mit xAI zu einem Konzern mit 1,25-Billionen-Dollar-Bewertung geworden ist, hat keine klassische Akquisition angek&uuml;ndigt, sondern eine bedingte Kaufoption. Cursor darf auf dem Colossus-Supercomputer in Memphis rechnen &mdash; einem Rechenzentrum mit &uuml;ber einer halben Million Nvidia-GPUs, das xAI in den letzten 18 Monaten aufgebaut hat. Im Gegenzug kann SpaceX Cursor bis Ende 2026 zu einem fixen Preis von 60 Milliarden Dollar &uuml;bernehmen. Wird die Option nicht gezogen, zahlt SpaceX zehn Milliarden als Kompensation. Die Zahlungsmodalit&auml;t &mdash; Cash, Aktien oder Mischform &mdash; bleibt offen, was im Kontext des f&uuml;r den Sommer geplanten SpaceX-B&ouml;rsengangs bemerkenswert ist.</p>
+
+            <p>Die Vorgeschichte liefert den Kontext. Musk hatte xAIs Coding-F&auml;higkeiten im M&auml;rz 2026 &ouml;ffentlich als &bdquo;nicht richtig gebaut&ldquo; bezeichnet. Grok konnte weder mit Claude Code noch mit OpenAI Codex auf dem SWE-bench-Pro-Benchmark mithalten &mdash; Claude Opus&nbsp;4.7 erreicht dort 64,3&nbsp;Prozent, Gemini 3.1 Pro nur 54,2&nbsp;Prozent, Grok liegt deutlich darunter. Im selben Monat wechselten zwei Schl&uuml;sselpersonen zu SpaceX/xAI: Andrew Milich und Jason Ginsberg, die Produktengineering-Leads, die Cursor auf zwei Milliarden Dollar ARR skaliert hatten. Beide berichten heute direkt an Musk. Der Deal vom Dienstag schlie&szlig;t den Kreis &mdash; SpaceX bekommt Zugriff auf das Gr&uuml;ndungsteam, die Distributionskan&auml;le und den Kundenstamm, den Milich und Ginsberg aufgebaut haben.</p>
+
+            <p>F&uuml;r Cursor ist die Partnerschaft vor allem eine Compute-L&ouml;sung. CEO Michael Truell hat mehrfach erkl&auml;rt, das Startup sei &bdquo;Compute-bottlenecked&ldquo; &mdash; das eigene Frontier-Modell Composer&nbsp;2 (Launch 19. M&auml;rz) konnte nicht so schnell skaliert werden, wie die Nachfrage w&auml;chst. Colossus gibt Cursor die Kapazit&auml;t, Composer&nbsp;3 und 4 signifikant gr&ouml;&szlig;er zu trainieren. F&uuml;r SpaceX/xAI ist der Deal ein pr&auml;-IPO-Narrativ: Das Konglomerat positioniert sich als AI-Software-Anbieter, nicht nur als Raketen- und Satellitenkonzern. Im Sommer, wenn der IPO-Roadshow beginnt, ist Cursor entweder Teil der Story oder ein 10-Milliarden-Dollar-Kompensations-Wink auf die Bilanz.</p>
+
+            <p>Bemerkenswert ist der Wert in Relation zu den operativen Zahlen. Cursor hat in zw&ouml;lf Monaten seinen ARR von 500 Millionen auf zwei Milliarden Dollar verdoppelt und plant sechs Milliarden Dollar bis Jahresende. Bei 60 Milliarden Kaufpreis entspricht das einem 30-fachen aktuellen oder 10-fachen projizierten Multiple &mdash; aggressiv, aber im Triple-Digit-Growth-Bereich nicht ungew&ouml;hnlich. Salesforce hat bereits 90&nbsp;Prozent seiner rund 20.000 Entwickler auf Cursor standardisiert; NVIDIA f&uuml;hrt ebenfalls eine gro&szlig;e Migration durch. Der Deal signalisiert eine Verschiebung von Modell-Hersteller zu Distribution-Layer: Wer den Einstiegspunkt der Entwickler kontrolliert, besitzt die Kundenbeziehung, selbst wenn er fremde Modelle (Claude, GPT, Gemini) weiterverkauft.</p>
+
+            <p>F&uuml;r SaaS-Entscheider ergeben sich drei unmittelbare Konsequenzen. Erstens: Die Fragmentierung der Coding-Werkzeugkette beschleunigt sich. Im Markt konkurrieren heute Cursor, Claude Code, GitHub Copilot, OpenAI Codex und Cognition Devin mit unterschiedlichen Zielgruppen &mdash; Enterprise-Compliance, Senior-Engineers, autonome Agents, Full-Stack-Junior-Pipelines. Eine Portfolio-Strategie mit 12-Monats-Vertr&auml;gen ist gegen&uuml;ber Multi-Year-Lock-in im Vorteil. Zweitens: Die strategische Bedeutung der Abstraktionsschicht (OpenRouter, LiteLLM, Vercel AI SDK) w&auml;chst, weil das Ranking der Anbieter sich alle sechs Monate verschiebt. Drittens: Wenn SpaceX die Option zieht, wird Cursor in ein Milit&auml;r- und Raumfahrt-Konglomerat integriert &mdash; Security-, Audit- und Export-Compliance-Fragen verschieben sich. Europ&auml;ische SaaS-Unternehmen sollten im Lieferanten-Assessment bereits heute die Owner-Continuity-Klauseln pr&uuml;fen. Wir analysieren das Feld in <a href="reportagen/2026-04-22.html">unserer heutigen Reportage</a> im Detail.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/21/spacex-is-working-with-cursor-and-has-an-option-to-buy-the-startup-for-60-billion/" rel="noopener noreferrer external">TechCrunch &mdash; SpaceX hat Option auf 60-Milliarden-Kauf von Cursor</a></li>
+                <li><a href="https://www.cnbc.com/2026/04/21/spacex-says-it-can-buy-cursor-later-this-year-for-60-billion-or-pay-10-billion-for-our-work-together.html" rel="noopener noreferrer external">CNBC &mdash; SpaceX kann Cursor f&uuml;r 60 Milliarden kaufen oder 10 Milliarden zahlen</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-21/spacex-says-has-agreement-to-acquire-cursor-for-60-billion" rel="noopener noreferrer external">Bloomberg &mdash; SpaceX has agreement to acquire Cursor for 60 billion</a></li>
+                <li><a href="https://www.theverge.com/ai-artificial-intelligence/spacex-cuts-a-deal-to-maybe-buy-cursor-for-60-billion" rel="noopener noreferrer external">The Verge &mdash; SpaceX cuts a deal to maybe buy Cursor for 60 billion</a></li>
+                <li><a href="https://www.theinformation.com/articles/xai-hires-two-senior-leaders-cursor-catch-coding" rel="noopener noreferrer external">The Information &mdash; xAI holt zwei Cursor-Leads f&uuml;r Coding-Aufholjagd</a></li>
+                <li><a href="https://techcrunch.com/2026/04/17/sources-cursor-in-talks-to-raise-2b-at-50b-valuation-as-enterprise-growth-surges/" rel="noopener noreferrer external">TechCrunch &mdash; Cursor in Gespr&auml;chen f&uuml;r 2 Mrd. bei 50 Mrd. Bewertung</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Sicherheit &middot; Anthropic</div>
+            <h2 id="art-2-h">Mythos-Leck, Altmans Konter und Mozillas 271 Firefox-Fixes &mdash; die Gatekeeping-Frage wird akut</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: Bloomberg, TechCrunch, Engadget, Slashdot, Mozilla Security Advisory, Core Memory Podcast</div>
+        </header>
+        <p class="article-teaser">Drei Geschichten kollidierten am Dienstag um Anthropics Cybersecurity-Modell Mythos. Bloomberg berichtete, dass eine Discord-Gruppe &uuml;ber einen Drittanbieter-Zugang schon seit Tagen mit Mythos arbeitet &mdash; Anthropics Access-Controls sind por&ouml;ser, als der exklusive Release-Rahmen suggeriert. Wenige Stunden sp&auml;ter spottete Sam Altman im Podcast &bdquo;Core Memory&ldquo; &uuml;ber Anthropics &bdquo;fear-based marketing&ldquo;. Und Mozilla ver&ouml;ffentlichte Firefox 150 mit 271 durch Mythos gefundenen Bug-Fixes. Drei Perspektiven auf dasselbe Modell &mdash; und ein akutes Governance-Problem.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Bloomberg-Scoop vom Dienstag war kein klassischer Hack. Laut Reporting hat eine kleine Gruppe von Model-Leak-Enthusiasten, organisiert in einem privaten Discord-Channel, Zugang zum Anthropic-Modell Mythos Preview gefunden. Zwei Vektoren kombiniert: das Erraten der Online-Endpoints basierend auf bekannten Anthropic-URL-Mustern, plus die Mitwirkung einer Person, die bei einem Drittanbieter-Contractor von Anthropic besch&auml;ftigt ist. Der Zugang erfolgte am selben Tag, an dem Anthropic den beschr&auml;nkten Mythos-Preview-Release im Rahmen von &bdquo;Project Glasswing&ldquo; ank&uuml;ndigte. Anthropic betont, die eigenen Systeme seien nicht kompromittiert; der Vorfall liege &bdquo;in der Third-Party-Vendor-Umgebung&ldquo;. Die Gruppe lieferte Bloomberg Screenshots und eine Live-Demo &mdash; keine Hinweise auf Weiterverkauf oder Offensive-Einsatz, aber auch keine wirksamen Access-Controls.</p>
+
+            <p>Die Geschichte ist brisant, weil sie Anthropics eigenes Narrativ untergr&auml;bt. Mythos wird als zu gef&auml;hrlich f&uuml;r den &ouml;ffentlichen Release dargestellt &mdash; zugeteilt nur an ausgew&auml;hlte Regierungsbeh&ouml;rden (NSA, wie wir in unserer <a href="2026-04-21.html#art-3">gestrigen Ausgabe berichteten</a>) und Enterprise-Partner in Project Glasswing. Gleichzeitig ist der Modell-Zugang por&ouml;s genug, dass eine Discord-Gruppe innerhalb von Stunden durchr&uuml;ckt. Die Asymmetrie zwischen Risiko-Rhetorik und tats&auml;chlicher Gatekeeping-Qualit&auml;t wirft die Frage auf, ob die restriktive Distribution Safety-Zweck oder Gesch&auml;ftsmodell ist.</p>
+
+            <p>Sam Altman lieferte die politische Zuspitzung. Im Podcast &bdquo;Core Memory&ldquo; mit Ashlee Vance, ver&ouml;ffentlicht am Dienstagabend, fasst er Anthropics Strategie in einem Satz: &bdquo;Es ist offensichtlich unglaubliches Marketing zu sagen: &lsquo;Wir haben eine Bombe gebaut. Wir waren kurz davor, sie auf Ihren Kopf zu werfen. Wir verkaufen Ihnen einen Bombenschutzbunker f&uuml;r 100 Millionen Dollar, der &uuml;ber all Ihre Daten l&auml;uft &mdash; aber nur, wenn wir Sie als Kunden ausw&auml;hlen.&rsquo;&ldquo; Altman wirft Anthropic vor, KI in den H&auml;nden einer kleinen Elite zu halten und die Doom-Rhetorik als Premium-Positionierung zu nutzen. Er verbindet das explizit mit dem Molotov-Cocktail-Angriff auf sein Haus in San Francisco (10. April): &bdquo;Die Art, wie Anthropic &uuml;ber OpenAI spricht, hilft nicht.&ldquo; Der Anti-AI-Backlash kosten Anthropics Framing ihren Ruf in der Diskussion.</p>
+
+            <p>Mozilla lieferte parallel das Gegen-Narrativ. Firefox 150, ver&ouml;ffentlicht am Dienstag, enth&auml;lt Patches f&uuml;r 271 Schwachstellen, die Mozilla mit Hilfe von Claude Mythos Preview gefunden hat. Laut Mozilla Security Advisory MFSA2026-30 entwickelte das Modell 181 funktionierende Exploits und erreichte in weiteren 29 F&auml;llen &bdquo;register control&ldquo; &mdash; darunter eine 16 Jahre alte Vulnerability im H.264-Codec, die autonom gefunden wurde. Mozilla-Quote: &bdquo;So far we've found no category or complexity of vulnerability that humans can find that this model can't.&ldquo; Gleichzeitig relativiert Mozilla &mdash; es gehe um Skalierung, nicht um prinzipiell neue F&auml;higkeiten. Einige Funde matchen klassische Fuzzing-Ergebnisse, andere sind neue Logikfehler-Klassen, die Fuzzer nie erwischt h&auml;tten.</p>
+
+            <p>F&uuml;r Entscheider in Security-sensiblen Unternehmen ist die Schlussfolgerung unbequem. Mythos liefert echten Defensiv-Nutzen &mdash; 271 geschlossene Firefox-Bugs sind konkret. Gleichzeitig ist die Zugangsstruktur nicht verteidigbar: Eine Discord-Truppe dringt &uuml;ber einen Drittanbieter ein, w&auml;hrend Gesundheits- und Finanzkonzerne auf der Project-Glasswing-Warteliste stehen. Wer Mythos als Defensiv-Tool evaluiert, sollte auf drei Punkte achten: Zugangsmodell (On-Premises-Deployment vs. Anthropic-hosted), Audit-Trail des Contractor-&Ouml;kosystems, und vertragliche Klauseln zur Modell-Versioning. Der politische Druck auf Anthropic wird in den n&auml;chsten Wochen zunehmen &mdash; die US-Debatte um &bdquo;cyber-permissive&ldquo; Modelle (OpenAIs GPT-5.4-Cyber-Antwort) wird von Altmans Statement neu befeuert.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/21/unauthorized-group-has-gained-access-to-anthropics-exclusive-cyber-tool-mythos-report-claims/" rel="noopener noreferrer external">TechCrunch &mdash; Unauthorized group gained access to Anthropic Mythos</a></li>
+                <li><a href="https://www.bloomberg.com/news/articles/2026-04-21/anthropic-s-mythos-model-is-being-accessed-by-unauthorized-users" rel="noopener noreferrer external">Bloomberg &mdash; Anthropic's Mythos accessed by unauthorized users</a></li>
+                <li><a href="https://techcrunch.com/2026/04/21/sam-altman-throws-shade-at-anthropics-cyber-model-mythos-fear-based-marketing/" rel="noopener noreferrer external">TechCrunch &mdash; Altman: Anthropics Mythos ist &bdquo;fear-based marketing&ldquo;</a></li>
+                <li><a href="https://www.corememory.com/p/the-great-reset-at-openai-ep-67-sam-altman-greg-brockman" rel="noopener noreferrer external">Core Memory Podcast &mdash; EP 67: Sam Altman, Greg Brockman</a></li>
+                <li><a href="https://www.engadget.com/ai/mozilla-says-it-patched-271-firefox-vulnerabilities-thanks-to-anthropics-claude-mythos-224330023.html" rel="noopener noreferrer external">Engadget &mdash; Mozilla patcht 271 Firefox-Vulnerabilities mit Claude Mythos</a></li>
+                <li><a href="https://www.mozilla.org/en-US/security/advisories/mfsa2026-30/" rel="noopener noreferrer external">Mozilla &mdash; Security Advisory MFSA2026-30</a></li>
+                <li><a href="https://blog.mozilla.org/en/firefox/hardening-firefox-anthropic-red-team/" rel="noopener noreferrer external">Mozilla Blog &mdash; Hardening Firefox with Anthropic's red team</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">&Uuml;berwachung &middot; Meta</div>
+            <h2 id="art-3-h">Meta Model Capability Initiative: Tastatur und Mausbewegung als KI-Trainingsdaten</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: Reuters, TechCrunch, Fortune, Bloomberg Opinion, Gizmodo</div>
+        </header>
+        <p class="article-teaser">Meta wird ab sofort Tastatureingaben, Mausbewegungen, Klicks und gelegentliche Screenshots seiner US-Mitarbeiter aufzeichnen und zum Training seiner Computer-Use-Agenten verwenden. Reuters deckte das interne Memo der Meta-Superintelligence-Labs am Dienstag auf; Meta best&auml;tigte das Programm unter dem Namen Model Capability Initiative (MCI). Die Ma&szlig;nahme folgt auf die j&uuml;ngsten Muse-Spark- und AI4W-Initiativen und markiert eine neue Eskalationsstufe der Arbeitsplatz-&Uuml;berwachung &mdash; vorerst nur in den USA. Kein Opt-out ist dokumentiert.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Reuters-Scoop st&uuml;tzt sich auf zwei interne Dokumente &mdash; ein Memo des Meta-Superintelligence-Labs (MSL) unter Chief AI Officer Alexandr Wang und ein Memo von CTO Andrew Bosworth zu &bdquo;AI for Work&ldquo; (AI4W). Laut den Dokumenten startet Meta in dieser Woche ein Programm, das auf den Work-Computern von US-Mitarbeitern Klicks, Tastatureingaben, Mausbewegungen und sporadische Screenshots erfasst. Die Daten speisen das Training der Muse-Familie &mdash; der Foundation-Model-Serie, die Meta als Grundlage seiner &bdquo;personal superintelligence&ldquo;-Ambition positioniert.</p>
+
+            <p>Metas offizielle Begr&uuml;ndung: &bdquo;Unsere Modelle brauchen echte Beispiele dafur, wie Menschen Computer tats&auml;chlich benutzen &mdash; Mausbewegungen, Klicken, Dropdown-Navigation.&ldquo; Hintergrund ist die Schwachstelle heutiger Computer-Use-Agenten. Modelle wie Claude Computer Use oder OpenAIs Atlas-Browser scheitern immer wieder an Dropdowns, Tastaturk&uuml;rzeln und UI-Inkonsistenzen &mdash; weil ihre Trainingsdaten aus sauberen Web-Crawls stammen, nicht aus realen, fehlerbehafteten Nutzungssessions. Meta verspricht sich von MCI einen Trainings-Korpus, der diesem Gap schlie&szlig;t.</p>
+
+            <p>Die Implementierung ist in mehreren Hinsichten bemerkenswert. Das Programm l&auml;uft zun&auml;chst ausschlie&szlig;lich in den USA &mdash; die EU fehlt explizit. Der Grund ist offensichtlich: Kontinuierliche Tastatur- und Screen-Erfassung w&auml;re unter GDPR Art. 5 und 6 als exzessive Verarbeitung einzuordnen und w&uuml;rde eine Betriebsrat-Konsultation nach Richtlinie 2002/14/EG erfordern. In Deutschland w&uuml;rden Meta solche Programme zus&auml;tzlich durch das BetrVG und die strenge Rechtsprechung zu Arbeitgeber&uuml;berwachung blockiert. Die US-rechtliche Lage ist dagegen permissiv: Meta ist &uuml;berwiegend nicht gewerkschaftlich organisiert, und US-Bundesrecht erkennt Arbeitgeber-Monitoring auf Firmen-Hardware weitgehend an.</p>
+
+            <p>Metas &ouml;ffentliche Sicherheitsmechanismen sind d&uuml;nn. Das Unternehmen versichert, die Daten w&uuml;rden &bdquo;nicht f&uuml;r Performance-Evaluationen oder andere Zwecke au&szlig;erhalb des Modell-Trainings verwendet&ldquo;. Unspezifizierte &bdquo;Safeguards zum Schutz sensibler Inhalte&ldquo; sollen greifen. Was fehlt: Aufbewahrungsfristen, Anonymisierungsverfahren, L&ouml;schrichtlinien. Die interne Mitarbeiter-Reaktion laut Reuters ist sp&ouml;ttisch-gereizt &mdash; eine Slack-Reaktion: &bdquo;Eye-Tracking? Die EEG-Kappen werden sicher auch bald geliefert.&ldquo;</p>
+
+            <p>Bloomberg Opinion framed das Programm mit der sch&auml;rfsten Zuspitzung: &bdquo;Meta l&auml;sst Mitarbeiter ihre AI-Nachfolger trainieren.&ldquo; Die Einordnung ist nicht abwegig. Meta hat im Januar 2026 bereits rund 3.600 Stellen abgebaut, und eine weitere Welle von 8.000 Stellen ist f&uuml;r Mai 2026 angek&uuml;ndigt. Die Mitarbeiter, deren Klicks und Tastatur-Kombinationen heute aufgezeichnet werden, generieren Trainingsdaten f&uuml;r Agenten, die genau ihre Aufgaben automatisieren sollen. F&uuml;r die KI-Forschung ist das ein beispielloser Korpus &mdash; f&uuml;r die Arbeitsplatz-Soziologie ein Einschnitt, der die Grenze zwischen Mitarbeiter und Lieferant von Trainingsdaten verschiebt.</p>
+
+            <p>F&uuml;r europ&auml;ische SaaS-Unternehmen, die mit Meta kooperieren oder &auml;hnliche Programme evaluieren, ergeben sich drei konkrete Implikationen. Erstens: Wer in einem Joint-Venture oder einer B2B-Integration Meta-Tools nutzt, sollte in den Data-Processing-Agreements pr&uuml;fen, ob Mitarbeiterdaten von EU-Partnerteams in das MCI-Training flie&szlig;en k&ouml;nnten &mdash; der Cross-Border-Transfer ist GDPR-relevant. Zweitens: Die Normalisierung solcher Programme erh&ouml;ht den politischen Druck auf AI-Arbeitsschutz-Regulierung &mdash; die EU-Kommission hat bereits einen AI-Workplace-Pakt in Vorbereitung (erste Entw&uuml;rfe Mai 2026 erwartet). Drittens: Mitarbeiter-Vertrauen ist ein Compliance-Asset. Wer heute eigene AI-Trainings-Pipelines aufsetzt, sollte Opt-in-Strukturen, Retentions-Limits und Audit-Trails fr&uuml;h verankern &mdash; bevor die Regulierung sie erzwingt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/21/meta-will-record-employees-keystrokes-and-use-it-to-train-its-ai-models/" rel="noopener noreferrer external">TechCrunch &mdash; Meta wird Mitarbeiter-Tastatureingaben aufzeichnen</a></li>
+                <li><a href="https://fortune.com/2026/04/21/meta-will-start-tracking-employees-screens-and-keystrokes-to-train-ai/" rel="noopener noreferrer external">Fortune &mdash; Meta tracked Screens und Keystrokes</a></li>
+                <li><a href="https://www.bloomberg.com/opinion/articles/2026-04-21/meta-is-making-workers-train-their-ai-replacements" rel="noopener noreferrer external">Bloomberg Opinion &mdash; Meta l&auml;sst Mitarbeiter ihre AI-Nachfolger trainieren</a></li>
+                <li><a href="https://gizmodo.com/meta-plans-to-turn-its-employees-clicks-and-keystrokes-into-ai-training-data-2000749176" rel="noopener noreferrer external">Gizmodo &mdash; Meta verwandelt Klicks und Keystrokes in AI-Trainingsdaten</a></li>
+                <li><a href="https://news.ycombinator.com/item?id=43758300" rel="noopener noreferrer external">Hacker News Discussion</a></li>
+                <li><a href="https://ai.meta.com/blog/introducing-muse-spark-msl/" rel="noopener noreferrer external">Meta AI Blog &mdash; Introducing Muse Spark (Kontext)</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Produkt &middot; OpenAI</div>
+            <h2 id="art-4-h">ChatGPT Images 2.0: Text-Rendering, Reasoning und Web-Suche im Bild</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: OpenAI, TechCrunch, Engadget, VentureBeat, Axios, The Decoder</div>
+        </header>
+        <p class="article-teaser">OpenAI hat am Dienstag per Livestream ChatGPT Images 2.0 (Modell-ID gpt-image-2) vorgestellt &mdash; das erste Bildgenerator-Modell mit eingebauter Reasoning-Schleife und Web-Suche. Der gr&ouml;&szlig;te Sprung liegt bei Text-Rendering: dichter Flie&szlig;text, Infografiken, Speisekarten, Slides und nicht-lateinische Schriften (Japanisch, Koreanisch, Chinesisch, Hindi, Bengali) werden in einer Qualit&auml;t generiert, die bisherige Schwachstellen von DALL-E und Nano Banana adressiert. Das Modell f&uuml;hrt ab Launch alle drei Image-Arena-Leaderboards an.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Images 2.0 ist der Nachfolger von GPT-Image-1 beziehungsweise DALL-E 3. Die &auml;lteren Modelle (DALL-E 2 und DALL-E 3) werden am 12.&nbsp;Mai 2026 abgeschaltet. Architektonisch ist das neue Modell ein Bruch: Zum ersten Mal kombiniert OpenAI Bildgenerierung mit einer Reasoning-Schleife (vergleichbar zum Thinking-Modus von GPT-5) und aktiver Web-Suche w&auml;hrend der Generierung. Das Modell kann also ein aktuelles Logo, eine Statistik-Zahl oder ein Referenzbild w&auml;hrend des Generierungsprozesses nachschlagen, statt sich auf ver&auml;lteten Trainings-Kontext zu st&uuml;tzen. Bis zu acht Bilder pro Prompt sind m&ouml;glich, Multi-Image-Konsistenz &uuml;ber Panels hinweg (Comics, Markenkampagnen, verschiedene Seitenverh&auml;ltnisse) ist nativ unterst&uuml;tzt.</p>
+
+            <p>Die gr&ouml;&szlig;ten Verbesserungen sind praktisch messbar. Die Community-Bewertung auf der Image-Arena (ein Blind-Taste-Test-Leaderboard) zeigt Images 2.0 auf Platz&nbsp;1 in allen drei Hauptkategorien: Text-to-Image, Single-Image-Edit, Multi-Image-Edit. Googles Nano Banana 2 (Imagen-Linie), das bis Montag Platz&nbsp;1 hielt, wird mit einem klaren Vorsprung abgel&ouml;st. Textdarstellung in Bildern &mdash; eine seit Jahren chronische Schwachstelle generativer Bildmodelle &mdash; wird laut TechCrunch-Redakteur Kyle Wiggers &bdquo;&uuml;berraschend gut&ldquo; eingestuft. Dense-Text-Renderings mit 500+ W&ouml;rtern in Infografiken oder Magazin-Layouts gelingen, was kommerzielle Einsatzfelder im Marketing, Publishing und E-Learning &ouml;ffnet.</p>
+
+            <p>Die Rollout-Strategie ist gestaffelt. Free- und Codex-Nutzer erhalten Zugriff auf das Standardmodell ab Launch. Plus-, Pro- und Business-Abos schalten zus&auml;tzlich den Thinking-Modus, h&ouml;here Aufl&ouml;sungen (bis 2K nativ, bei Partner fal.ai bis 4K) und mehr Bilder pro Prompt frei. Enterprise-Zugang folgt &bdquo;in K&uuml;rze&ldquo;. Die API ist ab sofort verf&uuml;gbar, auch &uuml;ber den Drittanbieter fal.ai. API-Preise starten laut fal bei 0,01 Dollar pro Bild (Low, 1024&nbsp;&times;&nbsp;768) und steigen auf bis zu 0,41 Dollar pro Bild (High, 4K). OpenAI selbst kommuniziert pro Quality-Tier abgestufte Token-Preise; die offizielle Pricing-Seite verweist auf die allgemeine API-Pricing-&Uuml;bersicht.</p>
+
+            <p>Die strategische Einordnung: Images 2.0 macht OpenAI im Bildmarkt 2026 wieder konkurrenzfahig gegen Google (Nano Banana 2, Imagen), Black Forest Labs (Flux), Midjourney und Stability AI. Midjourney und Stability sind seit Monaten unter Druck, weil OpenAI und Google schneller iterieren und tiefere Ecosystem-Integration liefern. Images 2.0 ist zusatzlich in Codex integriert &mdash; Developer k&ouml;nnen Bilder direkt aus dem Codex-CLI generieren und in Produkte einbauen. Die Rollout-Seite schaltet auch OpenAI-Enterprise-Vertriebsargumente frei: Marketing-Abteilungen, die bisher mit Adobe Firefly Custom Models arbeiten, bekommen einen plausiblen Ersatz.</p>
+
+            <p>Offene Punkte bleiben. OpenAI erw&auml;hnt in der Launch-Kommunikation keine spezifischen C2PA-Metadaten oder Wasserzeichen &mdash; ein Punkt, den europ&auml;ische Regulierer im Kontext des EU AI Act Art. 50 (Transparenzpflichten f&uuml;r generierte Bilder) ab August 2026 formalisiert beobachten. Wer Images 2.0 f&uuml;r Marken- oder Produktkommunikation einsetzt, sollte Content-Provenance-Tools (C2PA, TruSense) separat in die Pipeline einbauen, bis OpenAI die eigene Markierung verbindlich dokumentiert.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://openai.com/index/introducing-chatgpt-images-2-0/" rel="noopener noreferrer external">OpenAI &mdash; Introducing ChatGPT Images 2.0</a></li>
+                <li><a href="https://techcrunch.com/2026/04/21/chatgpts-new-images-2-0-model-is-surprisingly-good-at-generating-text/" rel="noopener noreferrer external">TechCrunch &mdash; Images 2.0 ist &uuml;berraschend gut bei Textgenerierung</a></li>
+                <li><a href="https://www.theverge.com/ai-artificial-intelligence/openais-updated-image-generator-can-now-pull-information-from-the-web" rel="noopener noreferrer external">The Verge &mdash; OpenAIs Bildgenerator zieht jetzt Web-Informationen</a></li>
+                <li><a href="https://www.engadget.com/ai/chatgpt-images-20-is-better-at-rendering-non-latin-text-190000153.html" rel="noopener noreferrer external">Engadget &mdash; Bessere Darstellung nicht-lateinischer Schriften</a></li>
+                <li><a href="https://venturebeat.com/technology/openais-chatgpt-images-2-0-is-here-and-it-does-multilingual-text-full-infographics-slides-maps-even-manga-seemingly-flawlessly" rel="noopener noreferrer external">VentureBeat &mdash; ChatGPT Images 2.0 multilingual, Infographiken, Manga</a></li>
+                <li><a href="https://the-decoder.com/openais-chatgpt-images-2-0-thinks-before-it-generates-adding-reasoning-and-web-search-to-image-creation/" rel="noopener noreferrer external">The Decoder &mdash; Images 2.0 denkt vor der Generierung</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Plattform &middot; YouTube</div>
+            <h2 id="art-5-h">YouTube &ouml;ffnet KI-Deepfake-Erkennung f&uuml;r Hollywood &mdash; Agenturen CAA, UTA, WME als Launch-Partner</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: YouTube Blog, Hollywood Reporter, TechCrunch, The Wrap, The Verge</div>
+        </header>
+        <p class="article-teaser">YouTube weitet sein KI-Likeness-Detection-Programm auf die Entertainment-Branche aus. Talentagenturen und ihre prominenten Klienten k&ouml;nnen ab sofort einen biometrischen Face-Scan beim Plattformbetreiber hinterlegen &mdash; YouTube scannt dann neu hochgeladene Videos automatisch auf KI-manipulierte Darstellungen der hinterlegten Person. Launch-Partner: die vier gr&ouml;&szlig;ten Hollywood-Agenturen CAA, UTA, WME und Untitled Management. Die Logik folgt Content&nbsp;ID, addiert aber Biometrie &mdash; und r&uuml;ckt YouTube zum zentralen Durchsetzungs-Layer f&uuml;r deepfakes-bezogene Persoenlichkeitsrechte auf.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das System ist technisch eine Erweiterung von Content&nbsp;ID, scannt aber neu hochgeladene Videos einmalig nicht auf Urheberrechts-Fingerprints, sondern auf das Gesicht eingeschriebener Personen. F&uuml;r das Enrollment m&uuml;ssen Betroffene ein Regierungs-Ausweisdokument und einen Video-Face-Scan als biometrische Referenz einreichen. YouTube versichert, diese Daten dienten ausschlie&szlig;lich zur Verifizierung und Erkennung &mdash; nicht zum Training generativer Modelle. Gesichter ohne Match werden sofort verworfen. Bei Treffern kann der Rechteinhaber das Video als Datenschutz-Beschwerde oder Copyright-Entfernungsantrag melden &mdash; oder nichts tun. Parodie und Satire bleiben ausgenommen; &bdquo;Detection does not guarantee removal&ldquo;. Audio-Detection ist als n&auml;chster Rollout-Schritt angek&uuml;ndigt.</p>
+
+            <p>Die Chronologie macht die Entwicklung zum systematischen Ausbau deutlich. Im Dezember 2024 startete der Pilot mit CAA-Klienten. Im April 2025 weitete YouTube auf Top-Creator aus und unterst&uuml;tzte &ouml;ffentlich den NO&nbsp;FAKES Act, einen US-Gesetzentwurf der Senatoren Coons und Blackburn. Im Oktober 2025 rollte YouTube das Feature f&uuml;r rund 5.000 Creator aus, sp&auml;ter f&uuml;r alle rund vier Millionen Mitglieder des YouTube Partner Program. Im M&auml;rz 2026 folgte der Pilot f&uuml;r Politiker, Regierungsmitarbeiter und Journalisten. Der aktuelle Schritt &mdash; Entertainment-Branche &mdash; ist der letzte gro&szlig;e Markt, der strukturierten Zugang bekommt.</p>
+
+            <p>Der regulatorische Kontext ist doppeltgleisig. Der NO&nbsp;FAKES Act w&uuml;rde einen US-Bundesschutz von Stimme und Bildrechte gegen KI-Replicas schaffen &mdash; YouTube unterst&uuml;tzt ihn &ouml;ffentlich seit April 2025. In der EU greift ab 2.&nbsp;August 2026 der AI Act Art. 50, der Transparenzpflichten f&uuml;r Deepfakes festlegt, aber keinen proaktiven Takedown-Mechanismus vorsieht. Deutschland ging im Januar 2026 mit dem Digitalen-Gewalt-Gesetz dar&uuml;ber hinaus: bis zu zwei Jahre Haft f&uuml;r nicht-einvernehmliche Deepfakes. YouTubes Likeness Detection wird damit zum faktischen Durchsetzungs-Tool f&uuml;r ein Regulierungs-Gefl&uuml;ge, das in den n&auml;chsten 18 Monaten in den USA, der EU und in Deutschland parallel neu vertieft wird.</p>
+
+            <p>F&uuml;r Enterprise-SaaS- und Marketing-Entscheider sind drei Punkte praktisch. Erstens: Das System baut Druck auf andere Plattformen auf. TikTok, Instagram und X haben keine vergleichbare biometrische Pipeline. Wer Werbung oder Content-Kampagnen mit prominenten Personen schaltet, muss damit rechnen, dass Plattform-Asymmetrien bei Verletzungsf&auml;llen auseinanderdriften &mdash; YouTube wird mechanisch entfernen, andere Plattformen werden case-by-case-Moderation betreiben. Zweitens: Biometrische Enrollment-Daten sind ein neuer Datenpool, der selbst zum Angriffs-Target wird. Wer prominente Kunden hat, sollte deren Enrollment-Status aktiv managen und DSGVO-konform dokumentieren. Drittens: Die Geschwindigkeit, mit der YouTube das System von Pilot (2024) auf Mainstream-Rollout (2026) gebracht hat, zeigt, wie schnell Content-Provenance-Infrastruktur skalierbar ist. F&uuml;r Produkt-Teams, die eigene Content-Plattformen bauen, wird C2PA-Integration (Coalition for Content Provenance and Authenticity) zunehmend zum Commodity-Requirement &mdash; nicht mehr ein Differenzierungs-Feature.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://blog.youtube/news-and-events/youtube-likeness-detection-ai-protection/" rel="noopener noreferrer external">YouTube Blog &mdash; Likeness Detection f&uuml;r AI-Protection</a></li>
+                <li><a href="https://techcrunch.com/2026/04/21/youtube-expands-its-ai-likeness-detection-technology-to-celebrities/" rel="noopener noreferrer external">TechCrunch &mdash; YouTube erweitert KI-Likeness-Erkennung auf Prominente</a></li>
+                <li><a href="https://www.hollywoodreporter.com/business/digital/youtube-ai-deepfake-detection-tool-1236569593/" rel="noopener noreferrer external">Hollywood Reporter &mdash; YouTubes AI-Deepfake-Detection-Tool</a></li>
+                <li><a href="https://www.thewrap.com/industry-news/tech/youtube-ai-likeness-detection-access-expanded/" rel="noopener noreferrer external">The Wrap &mdash; Zugang zu Likeness Detection erweitert</a></li>
+                <li><a href="https://www.theverge.com/ai-artificial-intelligence/celebrities-will-be-able-to-find-and-request-removal-of-ai-deepfakes-on-youtube" rel="noopener noreferrer external">The Verge &mdash; Prominente k&ouml;nnen Deepfakes auf YouTube entfernen lassen</a></li>
+                <li><a href="https://support.google.com/youtube/answer/16440338?hl=en" rel="noopener noreferrer external">YouTube-Hilfe &mdash; Likeness-Detection-Enrollment</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Privacy &middot; Clarifai</div>
+            <h2 id="art-6-h">Nach zw&ouml;lf Jahren: Clarifai l&ouml;scht drei Millionen OkCupid-Fotos &mdash; FTC setzt Nullstrafe</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: TechCrunch, Engadget, State of Surveillance, Biometric Update, FTC</div>
+        </header>
+        <p class="article-teaser">Das Bild-KI-Unternehmen Clarifai hat der FTC am 7.&nbsp;April best&auml;tigt, dass alle rund drei Millionen OkCupid-Nutzerfotos gel&ouml;scht wurden &mdash; zus&auml;tzlich alle auf diesen Daten trainierten Modelle. Die Daten waren 2014 &uuml;ber eine pers&ouml;nliche E-Mail-Brucke zwischen OkCupid-Mitgr&uuml;ndern und Clarifai-Gr&uuml;ndern zur Gesichtserkennungs-Forschung weitergegeben worden. Die FTC-Einigung mit Match Group stellt keine Geldstrafe dar &mdash; ein Ergebnis, das Kritiker als Pr&auml;zedenzfall-Versagen einordnen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Geschichte reicht zur&uuml;ck in den September 2014. OkCupid &uuml;bertrug damals rund drei Millionen Nutzerfotos samt Standort- und Demografiedaten an das KI-Startup Clarifai. Die Verbindung war rein pers&ouml;nlich-finanziell: OkCupid-Mitgr&uuml;nder Sam Yagan und Max Krohn waren &uuml;ber ihren VC-Fonds Corazon an Clarifai beteiligt. Clarifai-Gr&uuml;nder Matthew Zeiler schrieb in einer E-Mail an Krohn: &bdquo;We're collecting data now and just realized that OKCupid must have a HUGE amount of awesome data for this.&ldquo; Der damalige OkCupid-CTO &uuml;bertrug die Daten &uuml;ber einen privaten E-Mail-Account. Die OkCupid-Datenschutzerkl&auml;rung versprach zu diesem Zeitpunkt ausdr&uuml;cklich, Nutzerdaten nur mit &bdquo;service providers, business partners, or other entities within its family of businesses&ldquo; zu teilen &mdash; Clarifai war keines davon.</p>
+
+            <p>Die Fotos wurden verwendet, um ein Gesichtserkennungs-Modell zu trainieren, das Alter, Geschlecht und &bdquo;Rasse&ldquo; aus Gesichtsbildern sch&auml;tzt. Nutzer-Consent: keiner. Laut FTC-Beschwerde hat OkCupid weder informiert noch Opt-out angeboten. Als die New York Times im M&auml;rz 2019 erstmals &uuml;ber die Weitergabe berichtete, habe OkCupid &bdquo;extensive efforts to conceal and deny&ldquo; unternommen. Die folgenden rechtlichen Schritte zogen sich &uuml;ber sieben Jahre: Eine Sammelklage unter dem Illinois Biometric Information Privacy Act (BIPA) wurde vom Northern District of Illinois wegen fehlender pers&ouml;nlicher Zust&auml;ndigkeit abgewiesen &mdash; Clarifai hatte in Illinois nur zwei Kunden und sieben Cent Umsatz.</p>
+
+            <p>Die FTC-Einigung, am 30.&nbsp;M&auml;rz 2026 unterzeichnet und diese Woche vollst&auml;ndig dokumentiert, enth&auml;lt keine Geldstrafe, keine Nutzerentsch&auml;digung, keine Benachrichtigungspflicht. Section 5 des FTC Act erlaubt der Kommission bei Erstverst&ouml;&szlig;en dieser Art keine Bu&szlig;gelder &mdash; nur sogenannte &bdquo;Consent Orders&ldquo;, die weiteres Fehlverhalten untersagen. Die Einigung untersagt OkCupid/Match k&uuml;nftig, irref&uuml;hrende Angaben zur Datennutzung zu machen. Clarifai hat am 16.&nbsp;April dem B&uuml;ro der US-Abgeordneten Lori Trahan schriftlich best&auml;tigt, dass die drei Millionen Fotos und alle auf ihnen trainierten Modelle gel&ouml;scht seien &mdash; und dass die Daten nie an Dritte weitergegeben wurden.</p>
+
+            <p>Die Datenschutz-Community kritisiert das Ergebnis scharf. State of Surveillance und Privacy Guides argumentieren, die Nullstrafe setze faktisch den Pr&auml;zedenzfall, dass unzul&auml;ssige Weitergabe biometrischer Trainingsdaten folgenlos bleiben kann &mdash; solange das Unternehmen die Daten nach Jahren freiwillig l&ouml;scht. Das Muster ist f&uuml;r die gesamte AI-Trainingsdaten-&Ouml;konomie relevant: LinkedIn, Reddit, Stack Overflow und zahlreiche weitere Plattformen haben in den letzten drei Jahren Nutzerdaten in AI-Trainings-Partnerschaften eingespeist. Die Clarifai-Entscheidung legt nahe, dass FTC-Enforcement im AI-Training-Feld aktuell toothless ist.</p>
+
+            <p>F&uuml;r SaaS-Leads, die AI-Features mit Nutzerdaten trainieren, ist die Lektion: US-Regulierung setzt aktuell schwache Leitplanken. Wer DSGVO-konform arbeitet, hat substanziell h&ouml;here Standards einzuhalten &mdash; was ironischerweise eine strategische St&auml;rke wird, weil EU-Datenschutz als Auditing-Grundlage international an Akzeptanz gewinnt. Zweitens: Datenschutzerkl&auml;rungen sollten AI-Training als explizite Nutzungsklasse behandeln, nicht unter &bdquo;service providers&ldquo; subsumiert werden. Drittens: Der zw&ouml;lfj&auml;hrige Zeitabstand zwischen Daten-&Uuml;bernahme und L&ouml;schung zeigt, dass die Halbwertszeit biometrischer Datenspeicher faktisch unbegrenzt ist &mdash; was die Vorsorgepflicht bei Einsammlung und Weitergabe entsprechend hochsetzt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/21/clarifai-okcupid-facial-recognition-ai-ftc-settlement/" rel="noopener noreferrer external">TechCrunch &mdash; Clarifai l&ouml;scht 3 Mio. OkCupid-Fotos</a></li>
+                <li><a href="https://www.engadget.com/ai/ai-company-deletes-the-3-million-okcupid-photos-it-used-for-facial-recognition-training-195223996.html" rel="noopener noreferrer external">Engadget &mdash; AI-Firma l&ouml;scht 3 Mio. OkCupid-Fotos</a></li>
+                <li><a href="https://stateofsurveillance.org/news/okcupid-ftc-settlement-clarifai-facial-recognition-3-million-photos-2026/" rel="noopener noreferrer external">State of Surveillance &mdash; FTC-Settlement mit Nullstrafe</a></li>
+                <li><a href="https://www.privacyguides.org/news/2026/04/05/okcupid-settles-after-selling-3-million-photos-to-a-facial-recognition-company/" rel="noopener noreferrer external">Privacy Guides &mdash; OkCupid-Settlement nach 3-Mio-Foto-Verkauf</a></li>
+                <li><a href="https://www.biometricupdate.com/202603/ftc-order-bars-okcupid-from-misleading-users-about-biometric-data-sharing" rel="noopener noreferrer external">Biometric Update &mdash; FTC-Order gegen OkCupid</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Finanzierung &middot; NeoCognition</div>
+            <h2 id="art-7-h">NeoCognition sammelt 40 Millionen Seed: Agents, die eigene &bdquo;Arbeits-Welten&ldquo; lernen</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: TechCrunch, PR Newswire, Walden Catalyst, NeoCognition.io</div>
+        </header>
+        <p class="article-teaser">Ein neues AI-Research-Lab mit Schwergewicht-Investoren und akademischer Pedigree ist aus dem Stealth-Mode aufgetaucht: NeoCognition, ein Palo-Alto-Startup unter F&uuml;hrung von Ohio-State-Professor Yu Su, hat 40 Millionen Dollar Seed eingesammelt &mdash; gro&szlig; genug, um als &bdquo;Mega-Seed&ldquo; zu gelten. Co-Lead: Cambium Capital und Walden Catalyst Ventures. Angels: Intel-CEO Lip-Bu Tan, Databricks-Mitgr&uuml;nder Ion Stoica, Dawn Song, Ruslan Salakhutdinov und Luke Zettlemoyer. These: Agenten sollen sich kontinuierlich an ihre Arbeitsumgebung anpassen, statt nur Prompts zu verarbeiten.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Yu Su, Mitgr&uuml;nder und CEO von NeoCognition, ist Professor an der Ohio State University und Sloan Research Fellow mit Schwerpunkt Large Language Models und Agents. Laut TechCrunch hat er jahrelangem VC-Druck widerstanden, bevor er seine Forschung ausgegr&uuml;ndet hat &mdash; den Ausschlag gab die These, dass die heutigen Agent-Systeme an fundamentalen Grenzen scheitern, die sich nicht durch gr&ouml;&szlig;ere Modelle l&ouml;sen lassen. Mit-Gr&uuml;nder sind Xiang Deng und Yu Gu. Das Team ist rund 15 Personen stark, &uuml;berwiegend mit Promotion. Standort: Palo Alto, Kalifornien.</p>
+
+            <p>Technisch verfolgt NeoCognition einen spezifischen Ansatz, der sich von den gro&szlig;en Foundation-Model-Labs unterscheidet. Statt alle Aufgaben mit einem riesigen, universalen Modell zu l&ouml;sen, sollen Agents &bdquo;Weltmodelle der Arbeit&ldquo; aufbauen &mdash; strukturierte Repr&auml;sentationen der spezifischen Mikro-Welt eines Berufs: seine Workflows, Tools, Constraints, implizite Regeln. Die These: Ein Agent, der zum Sachbearbeiter oder Forschungsanalyst werden soll, braucht nicht mehr Skalierung, sondern <em>Plastizit&auml;t</em> &mdash; die F&auml;higkeit, seine eigenen Repr&auml;sentationen durch kontinuierliche Erfahrung zu aktualisieren. Su zitiert als Problem: Heutige Agents (Claude Code, OpenAI Codex, Perplexity-Tools) schaffen Tasks nur zu rund 50 Prozent zuverl&auml;ssig. F&uuml;r Enterprise-Produktivit&auml;t ist das zu wenig.</p>
+
+            <p>Die Wettbewerbs-Einordnung ist pr&auml;zise. NeoCognition positioniert sich nicht als Robotik-Labor (wie Physical Intelligence mit &pi;0.7, &uuml;ber das wir in unserer <a href="2026-04-20.html#reportage">Physical-AI-Reportage am Sonntag</a> ausf&uuml;hrlich berichteten), sondern als Spezialist f&uuml;r kognitive Arbeitsumgebungen: Enterprise-Software, SaaS-Plattformen, Knowledge-Worker-Workflows. Die Abgrenzung zu Imbue (Coding-Fokus), Adept (Workflow-Automation, inzwischen teils bei Amazon) und World Labs (Fei-Fei Lis visuelle World Models) liegt in der spezifischen Kombination aus continual learning und Enterprise-SaaS-Integration.</p>
+
+            <p>Die 40 Millionen Dollar Seed sind im historischen Vergleich au&szlig;ergew&ouml;hnlich. Typische Seed-Runden im AI-Sektor liegen bei drei bis f&uuml;nfzehn Millionen. NeoCognition reiht sich in die Linie der &bdquo;Mega-Seeds&ldquo; ein, die akademischen Star-Gr&uuml;ndern sofort Kapital f&uuml;r Grundlagenforschung geben &mdash; Imbue (20 Mio. Seed, 200 Mio. Series B), Sakana AI (30 Mio. Seed). Die Angels-Liste ist ein technologisches Who-is-Who: Intel-CEO Lip-Bu Tan (Chip-Strategie), Ion Stoica (Databricks), Dawn Song (Berkeley/Security), Ruslan Salakhutdinov (CMU), Luke Zettlemoyer (Allen AI). Das signalisiert breite Unterst&uuml;tzung f&uuml;r die These, dass Continual-Learning-Agents die n&auml;chste Frontier sind.</p>
+
+            <p>F&uuml;r SaaS-Entscheider ist NeoCognition aktuell kein Produkt, aber eine Beobachtungs-Position. Continual Learning als Agent-Architektur k&ouml;nnte das Muster brechen, dass Unternehmen f&uuml;r jedes neue Modell ihre Prompts und Agent-Pipelines neu tunen m&uuml;ssen. Wenn NeoCognition liefert, entstehen Agents, die sich an die unternehmensspezifischen Workflows adaptieren statt jedes Mal frisch konfiguriert zu werden. Die Zeitachse: Erste Produktdemos werden fr&uuml;hestens Ende 2026 erwartet; kommerzielle Verf&uuml;gbarkeit 2027. F&uuml;r strategische Partner und Enterprise-Innovationsprogramme lohnt sich aktiv ein Engagement mit dem Palo-Alto-Team. Kategorische Wetten sind aktuell nicht empfehlbar &mdash; die Architektur ist unbewiesen, aber der Ansatz adressiert die entscheidende Schwachstelle der heutigen Agent-Generation.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://techcrunch.com/2026/04/21/ai-research-lab-neocognition-lands-40m-seed-to-build-agents-that-learn-like-humans/" rel="noopener noreferrer external">TechCrunch &mdash; NeoCognition sammelt 40 Mio. Seed</a></li>
+                <li><a href="https://www.prnewswire.com/news-releases/neocognition-emerges-from-stealth-with-40-million-seed-round-to-advance-specialized-intelligence-and-expert-agents-302749108.html" rel="noopener noreferrer external">PR Newswire &mdash; NeoCognition Emerges from Stealth</a></li>
+                <li><a href="https://waldencatalyst.com/blog/neocognition-emerges-from-stealth-to-build-expert-ai-agents" rel="noopener noreferrer external">Walden Catalyst &mdash; Expert AI Agents Investition</a></li>
+                <li><a href="https://neocognition.io/" rel="noopener noreferrer external">NeoCognition &mdash; Offizielle Website</a></li>
+                <li><a href="https://ysu1989.github.io/" rel="noopener noreferrer external">Yu Su &mdash; Ohio State Homepage</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">Der Coding-Krieg 2026: Warum SpaceX 60 Milliarden f&uuml;r Cursor bietet &mdash; und was das f&uuml;r jede SaaS-Firma bedeutet</h2>
+            <p class="article-teaser">Cursor hat in drei Jahren zwei Milliarden Dollar ARR aufgebaut &mdash; schneller als Slack, Zoom und Snowflake. 46 Prozent der Senior-Developer nennen Claude Code ihr &bdquo;most loved&ldquo;-Werkzeug, GitHub Copilot f&auml;llt auf neun Prozent. Am 21. April setzt Elon Musks SpaceX eine 60-Milliarden-Kaufoption auf Cursor. Hinter dem Schlagzeilen-Beben steht eine handfeste Frage: Wem geh&ouml;rt der Einstiegspunkt zum Software-Entwicklungsprozess &mdash; und wie entscheidet jede SaaS-Firma jetzt zwischen Kaufen, Bauen und Integrieren. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-22.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/salesforce.com.png" alt="Salesforce Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.salesforce.com/news/stories/salesforce-headless-360-announcement/" rel="noopener noreferrer external">Salesforce Headless 360</a></div>
+                    <div class="tool-card-desc">Macht die gesamte Salesforce-Plattform per API, MCP-Tool und CLI agentenbedienbar &mdash; ohne Browser. Mit 60+ neuen MCP-Tools, Agentforce Vibes 2.0 und Claude-Sonnet-Integration wird das weltweit gr&ouml;&szlig;te CRM zur Agent-Infrastruktur.</div>
+                    <div class="tool-card-meta">15. April 2026 &middot; Salesforce (TDX 2026 San Francisco).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/perplexity.ai.png" alt="Perplexity Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.perplexity.ai/changelog/personal-computer-on-mac-launch-and-computer-updates---april-17-2026" rel="noopener noreferrer external">Perplexity Personal Computer for Mac</a></div>
+                    <div class="tool-card-desc">Desktop-Agent, der lokale Dateien, native Mac-Apps und iMessage orchestriert &mdash; aktivierbar per Doppel-Command oder Sprache. Erster Perplexity-Agent auf Filesystem-Ebene; explizit f&uuml;r Always-On auf einem Mac mini ausgelegt. Im Max-Tier (200 $/Monat).</div>
+                    <div class="tool-card-meta">16. April 2026 &middot; Perplexity (Max-Subscription).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/godrift.ai.png" alt="Drift Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://godrift.ai/" rel="noopener noreferrer external">Drift</a></div>
+                    <div class="tool-card-desc">CLI-Agent, der aus Klartext-Prompts komplette ROS-Roboter-Simulationen inklusive URDF-Files, Launch-Configs und OS-Orchestrierung baut. &bdquo;Cursor f&uuml;r Physical AI&ldquo; &mdash; erster Agent, der Roboter-Stacks vibe-codet. TechCrunch-Feature am 16. April 2026.</div>
+                    <div class="tool-card-meta">16. April 2026 &middot; Drift (Antler-gef&ouml;rdertes Startup).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/helloaria.io.png" alt="Aria Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.helloaria.io/" rel="noopener noreferrer external">Hello Aria</a></div>
+                    <div class="tool-card-desc">Universelle AI-Productivity-Schicht, die in WhatsApp, Telegram, E-Mail und iOS lebt. Verwandelt Sprachnotizen in Tasks, Kalendereintr&auml;ge, Reminder und Meeting-Minutes &mdash; radikal niedrigschwellig: keine eigene App, sondern Integration in bestehende Messenger.</div>
+                    <div class="tool-card-meta">17. April 2026 &middot; Solo-Indie-Startup (Product Hunt #7, 172 Upvotes).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/linkedin.com.png" alt="LinkedIn Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://dataconomy.com/2026/04/21/linkedin-launches-crosscheck-to-compare-rival-ai-models/" rel="noopener noreferrer external">LinkedIn Crosscheck</a></div>
+                    <div class="tool-card-desc">Blind-Taste-Test f&uuml;r Premium-Abonnenten: Antworten konkurrierender KI-Modelle (OpenAI, Anthropic, Google, Mistral, Amazon, Moonshot) nebeneinander vergleichen &mdash; unbegrenzte Text-Prompts, &ouml;ffentliches Leaderboard pro Branche. Erste B2B-Plattform mit Modellvergleich als Feature.</div>
+                    <div class="tool-card-meta">21. April 2026 &middot; LinkedIn / Microsoft (US Premium-Rollout).</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/openai.com.png" alt="OpenAI Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openai.com/index/scaling-codex-to-enterprises-worldwide/" rel="noopener noreferrer external">OpenAI Codex Labs</a></div>
+                    <div class="tool-card-desc">Enterprise-Schulungsprogramm mit Global-System-Integratoren (Accenture, Capgemini, TCS, Infosys, Cognizant, PwC, CGI), das Firmen per Workshop-Format von Codex-Pilot zu produktiver Codex-Nutzung f&uuml;hrt. Antwort auf die Enterprise-Distribution von Claude Code.</div>
+                    <div class="tool-card-meta">21. April 2026 &middot; OpenAI mit GSI-Partnern.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=5LCjeni0Z-U" rel="noopener noreferrer external"><img src="../assets/images/thumbs/5LCjeni0Z-U.jpg" alt="Leon van Zyl Claude Code Routines Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 14 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=5LCjeni0Z-U" rel="noopener noreferrer external">Claude Code Routines &mdash; It Codes While You Sleep</a></div>
+                    <div class="yt-card-channel">Leon van Zyl (95.200 Subs) &middot; 21. April 2026</div>
+                    <div class="yt-card-desc">Leon zeigt, wie Anthropics neue Routines-Funktion Claude Code in einen 24/7-Agenten verwandelt &mdash; inklusive GitHub-Trigger, Cron-Scheduling und Error-Handling. Der Fokus liegt auf praktischen Automations-Rezepten: Bug-Triage, Daily-Standups, Content-Pipelines. Referenz f&uuml;r Teams, die Agent-Orchestrierung aus dem laufenden Terminal herausheben wollen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=zO27qhSh6dI" rel="noopener noreferrer external"><img src="../assets/images/thumbs/zO27qhSh6dI.jpg" alt="Christoph Magnussen OpenAI Codex Update Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 17 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=zO27qhSh6dI" rel="noopener noreferrer external">OpenAI CODEX Update: Ein KI-Agent-Tool f&uuml;r ALLES?</a></div>
+                    <div class="yt-card-channel">Christoph Magnussen (127.000 Subs) &middot; 20. April 2026</div>
+                    <div class="yt-card-desc">Magnussens ausf&uuml;hrliche Analyse der neuen Codex-Desktop-App und Computer-Use-F&auml;higkeiten &mdash; mit Schwerpunkt auf Enterprise-Workflows und der Frage, wie der OpenAI-Stack gegen Claude Code und Cursor positioniert ist. Deutschsprachiges Deep-Dive mit praktischen Beispielen aus Produktivit&auml;ts-Anwendungen.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=axiwTE6nPdA" rel="noopener noreferrer external"><img src="../assets/images/thumbs/axiwTE6nPdA.jpg" alt="AI Aidan Claude Opus 4.7 Blender Test Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 9 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=axiwTE6nPdA" rel="noopener noreferrer external">I Tested Claude's Opus 4.7 in Blender</a></div>
+                    <div class="yt-card-channel">AI Aidan (2.410 Subs) &middot; 7.855 Views &middot; 17. April 2026</div>
+                    <div class="yt-card-desc">Kleiner Creator mit 3,3-fach h&ouml;herer View-Ratio als Subscribers &mdash; ein solider Trend-Fr&uuml;hindikator. Aidan dokumentiert konkret, was Claude Opus 4.7 im 3D-Programm Blender kann: Python-Scripting f&uuml;r prozedurale Modelle, Animation-Logic, Rendering-Pipelines. Das Video ist kein Hype-Test, sondern eine strukturierte Evaluation mit Fails und Workarounds. Zeigt, wie weit die aktuelle Claude-Generation in kreativ-technische Nischen reicht, die bisher dedizierten 3D-Artists vorbehalten waren.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '☀' : '☾';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
