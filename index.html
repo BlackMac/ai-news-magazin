@@ -3,1564 +3,987 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Die Inferenz</title>    <link rel="stylesheet" href="assets/fonts/fonts.css">
-    <style>
-        /* ═══════════════════════════════════════════════
-           AI NEWS MAGAZIN — HOMEPAGE (READABILITY-FIRST)
-           ═══════════════════════════════════════════════ */
-
-        :root {
-            /* Fonts */
-            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-
-            /* Type Scale (Major Third 1.25) */
-            --text-xs: 0.8rem;
-            --text-sm: 0.875rem;
-            --text-base: 1.125rem;
-            --text-lg: 1.25rem;
-            --text-xl: 1.5rem;
-            --text-2xl: 1.875rem;
-            --text-3xl: 2.25rem;
-            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
-
-            /* Spacing */
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-6: 1.5rem;
-            --space-8: 2rem;
-            --space-12: 3rem;
-            --space-16: 4rem;
-            --space-24: 6rem;
-
-            /* Content Widths */
-            --width-content: 800px;
-
-            /* Light Mode Colors */
-            --bg: #faf9f6;
-            --bg-surface: #f0eee8;
-            --bg-surface-hover: #e8e5dd;
-            --text-primary: #1a1a1a;
-            --text-body: #2d2d2d;
-            --text-muted: #5a5a5a;
-            --text-faint: #8a8a8a;
-            --border: #d8d5cc;
-            --border-strong: #b0ada4;
-            --accent: #b91c1c;
-            --accent-hover: #991b1b;
-            --link: #1d4ed8;
-            --link-visited: #6d28d9;
-            --link-hover: #1e40af;
-
-            color-scheme: light dark;
-        }
-
-        /* Dark Mode */
-        [data-theme="dark"] {
-            --bg: #121212;
-            --bg-surface: #1e1e1e;
-            --bg-surface-hover: #2a2a2a;
-            --text-primary: #e8e6e0;
-            --text-body: #d0cec8;
-            --text-muted: #9a9890;
-            --text-faint: #6a6860;
-            --border: #333330;
-            --border-strong: #4a4844;
-            --accent: #ef5350;
-            --accent-hover: #f87171;
-            --link: #93c5fd;
-            --link-visited: #c4b5fd;
-            --link-hover: #bfdbfe;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg: #121212;
-                --bg-surface: #1e1e1e;
-                --bg-surface-hover: #2a2a2a;
-                --text-primary: #e8e6e0;
-                --text-body: #d0cec8;
-                --text-muted: #9a9890;
-                --text-faint: #6a6860;
-                --border: #333330;
-                --border-strong: #4a4844;
-                --accent: #ef5350;
-                --accent-hover: #f87171;
-                --link: #93c5fd;
-                --link-visited: #c4b5fd;
-                --link-hover: #bfdbfe;
-            }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* Reset */
-        *, *::before, *::after { box-sizing: border-box; }
-        html { font-size: 100%; }
-        @media (prefers-reduced-motion: no-preference) {
-            html { scroll-behavior: smooth; }
-        }
-
-        body {
-            font-family: var(--font-serif);
-            font-size: var(--text-base);
-            line-height: 1.75;
-            color: var(--text-body);
-            background: var(--bg);
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            font-optical-sizing: auto;
-        }
-
-        /* ── Skip Link ─────────────────────────────── */
-        .skip-link {
-            position: absolute;
-            top: -200%;
-            left: 0;
-            padding: 0.75rem 1.5rem;
-            background: var(--accent);
-            color: #fff;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            z-index: 9999;
-            border-radius: 0 0 6px 0;
-        }
-        .skip-link:focus { top: 0; }
-
-        /* ── Focus ──────────────────────────────────── */
-        :focus-visible {
-            outline: 3px solid var(--accent);
-            outline-offset: 3px;
-            border-radius: 2px;
-        }
-
-        /* ── Links ──────────────────────────────────── */
-        a {
-            color: var(--link);
-            text-decoration: underline;
-            text-decoration-thickness: 1px;
-            text-underline-offset: 3px;
-            transition: color 0.15s ease, text-decoration-color 0.15s ease;
-        }
-        a:visited { color: var(--link-visited); }
-        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
-
-        /* ── Site Header ───────────────────────────── */
-        .site-header {
-            border-bottom: 1px solid var(--border);
-            background: var(--bg);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .site-header-inner {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding: var(--space-4) var(--space-6);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-3);
-        }
-
-        .site-title {
-            font-family: var(--font-sans);
-            font-weight: 800;
-            font-size: 1.35rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-        .site-title:visited { color: var(--text-primary); }
-        .site-title:hover { color: var(--accent); text-decoration: none; }
-
-        .site-nav {
-            display: flex;
-            gap: var(--space-6);
-            align-items: center;
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-        }
-        .site-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .site-nav a:hover { color: var(--text-primary); }
-
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.4rem 0.6rem;
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.15s ease, border-color 0.15s ease;
-            line-height: 1;
-        }
-        .theme-toggle:hover {
-            color: var(--text-primary);
-            border-color: var(--border-strong);
-        }
-
-        /* ── Page Header ───────────────────────────── */
-        .page-header {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding: var(--space-8) var(--space-6) var(--space-6);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .page-header h1 {
-            font-family: var(--font-sans);
-            font-weight: 800;
-            font-size: var(--text-4xl);
-            line-height: 1.15;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: -0.02em;
-        }
-
-        .page-subtitle {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: var(--text-lg);
-            color: var(--text-muted);
-            margin-top: var(--space-3);
-            max-width: 55ch;
-        }
-
-        .page-meta {
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-            margin-top: var(--space-2);
-        }
-
-        /* ── Main Content ──────────────────────────── */
-        .site-main {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding: 0 var(--space-6);
-        }
-
-        /* ── Edition Card ──────────────────────────── */
-        .edition {
-            padding: var(--space-8) 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .edition:last-of-type { border-bottom: none; }
-
-        .edition-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: var(--space-4);
-            flex-wrap: wrap;
-            gap: var(--space-2);
-        }
-
-        .edition-date {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: var(--text-base);
-            color: var(--text-primary);
-        }
-
-        .edition-link {
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .edition-link:visited { color: var(--accent); }
-        .edition-link:hover { color: var(--accent-hover); text-decoration: underline; }
-
-        .edition-lead {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: var(--text-xl);
-            line-height: 1.25;
-            margin-bottom: var(--space-2);
-            letter-spacing: -0.01em;
-        }
-
-        .edition-lead a {
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        .edition-lead a:visited { color: var(--text-primary); }
-        .edition-lead a:hover { color: var(--accent); }
-
-        .edition-lead-deck {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: var(--text-base);
-            color: var(--text-muted);
-            line-height: 1.65;
-            margin-bottom: var(--space-6);
-            max-width: 65ch;
-        }
-
-        /* Story Grid */
-        .edition-stories {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-1) var(--space-6);
-        }
-
-        .edition-stories li {
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            line-height: 1.5;
-            padding: var(--space-2) 0;
-        }
-
-        .edition-stories a {
-            color: var(--text-body);
-            text-decoration: none;
-            display: block;
-        }
-        .edition-stories a:visited { color: var(--text-body); }
-        .edition-stories a:hover { color: var(--accent); }
-
-        .edition-stories .cat {
-            display: block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-faint);
-            line-height: 1.3;
-            margin-bottom: 1px;
-        }
-
-        /* ── Reportagen Section ────────────────────── */
-        .reportagen-section {
-            padding: var(--space-12) 0 var(--space-8);
-            border-top: 1px solid var(--border);
-        }
-
-        .section-heading {
-            font-family: var(--font-sans);
-            font-weight: 800;
-            font-size: var(--text-2xl);
-            color: var(--text-primary);
-            margin: 0 0 var(--space-2);
-            letter-spacing: -0.01em;
-        }
-
-        .section-subheading {
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-            margin-bottom: var(--space-8);
-        }
-
-        .reportagen-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .reportage-item {
-            padding: var(--space-6);
-            background: var(--bg-surface);
-            border-radius: 8px;
-            margin-bottom: var(--space-4);
-            transition: background 0.15s ease;
-        }
-        .reportage-item:hover { background: var(--bg-surface-hover); }
-        .reportage-item:last-child { margin-bottom: 0; }
-
-        .reportage-item-date {
-            font-family: var(--font-sans);
-            font-size: var(--text-xs);
-            color: var(--text-faint);
-            margin-bottom: var(--space-1);
-        }
-
-        .reportage-item-title {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: var(--text-lg);
-            line-height: 1.3;
-            margin-bottom: var(--space-2);
-        }
-
-        .reportage-item-title a {
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        .reportage-item-title a:visited { color: var(--text-primary); }
-        .reportage-item-title a:hover { color: var(--accent); }
-
-        .reportage-item-deck {
-            font-family: var(--font-serif);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
-        /* ── Footer ────────────────────────────────── */
-        .site-footer {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding: var(--space-8) var(--space-6);
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: var(--space-4);
-            font-family: var(--font-sans);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-        }
-        .site-footer a { color: var(--text-muted); }
-        .site-footer a:hover { color: var(--text-primary); }
-
-        /* ── Visually Hidden ───────────────────────── */
-        .sr-only {
-            position: absolute;
-            width: 1px; height: 1px;
-            padding: 0; margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            white-space: nowrap; border: 0;
-        }
-
-        /* ── Guide Banner ─────────────────────────── */
-        .guide-banner {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding: var(--space-6);
-        }
-        .guide-banner a {
-            display: block;
-            background: var(--bg-surface);
-            border-radius: 8px;
-            padding: var(--space-6) var(--space-8);
-            text-decoration: none;
-            border-left: 4px solid var(--accent);
-            transition: background 0.15s ease;
-        }
-        .guide-banner a:hover { background: var(--bg-surface-hover); }
-        .guide-banner-kicker {
-            font-family: var(--font-sans);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: var(--space-1);
-        }
-        .guide-banner-title {
-            font-family: var(--font-sans);
-            font-weight: 700;
-            font-size: var(--text-lg);
-            color: var(--text-primary);
-            margin-bottom: var(--space-1);
-        }
-        .guide-banner-desc {
-            font-family: var(--font-serif);
-            font-size: var(--text-sm);
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* ── Scroll Margin ─────────────────────────── */
-        [id] { scroll-margin-top: 4.5rem; }
-
-        /* ── Responsive ────────────────────────────── */
-        @media (max-width: 600px) {
-            .site-header-inner { padding: var(--space-3) var(--space-4); }
-            .page-header { padding: var(--space-6) var(--space-4) var(--space-4); }
-            .site-main { padding: 0 var(--space-4); }
-            .edition-stories { grid-template-columns: 1fr; }
-            .edition-lead { font-size: var(--text-lg); }
-            .site-footer { padding: var(--space-6) var(--space-4); }
-        }
-
-        @media (min-width: 1024px) {
-            body { font-size: 1.1875rem; }
-        }
-
-        @media (min-width: 1280px) {
-            body { font-size: 1.25rem; }
-        }
-
-        /* ── Print ─────────────────────────────────── */
-        @media print {
-            .site-header, .skip-link, .site-nav { display: none; }
-            body { background: #fff; color: #000; font-size: 11pt; }
-            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
-            .edition { page-break-inside: avoid; }
-            p { orphans: 3; widows: 3; }
-        }
-
-        /* ── Text Wrap ─────────────────────────────── */
-        h1, h2, h3, h4 { text-wrap: balance; }
-        p { text-wrap: pretty; }
-    
-        .footer-links { display: flex; gap: var(--space-4); }
-        .footer-links a { color: var(--text-muted); text-decoration: none; }
-        .footer-links a:hover { color: var(--text-primary); }
-        </style>
+    <title>Die Inferenz</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
 
-<!-- ═══ SITE HEADER ═══ -->
 <header class="site-header" role="banner">
     <div class="site-header-inner">
-        <a href="index.html" class="site-title">Die Inferenz</a>
+        <a href="/index.html" class="site-title">Die Inferenz</a>
         <nav class="site-nav" aria-label="Hauptnavigation">
-            <a href="hardware-guide.html">Hardware-Guide</a>
-            <a href="about.html">&Uuml;ber uns</a>
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
             <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
         </nav>
     </div>
 </header>
 
-<!-- ═══ PAGE HEADER ═══ -->
-<div class="page-header">
+
+
+<title>Die Inferenz — KI-Nachrichtenmagazin</title>
+<meta name="description" content="Das deutschsprachige KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+
+
+
+
+<div class="page-header" id="top">
     <h1>Alle Ausgaben</h1>
     <p class="page-subtitle">Maschinell recherchiert, menschlich relevant.</p>
-    <div class="page-meta">20 Ausgaben &middot; 22 Quellen</div>
+    <div class="page-meta">40 Ausgaben &middot; 22 Quellen</div>
 </div>
 
-<!-- ═══ MAIN ═══ -->
 <main id="main-content" class="site-main">
 
-    <!-- ═══ 23. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Donnerstag, 23. April 2026</span>
-            <a href="editions/2026-04-23.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    
+    
+    
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Donnerstag, 23. April 2026</span>
+            <a href="/editions/2026-04-23.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-23.html#art-1">Googles neue KI-Chips: Ironwood jetzt verf&uuml;gbar, TPU&nbsp;8 spaltet sich in Training und Inferenz</a></div>
-        <div class="edition-lead-deck">Google Cloud macht Ironwood (TPU&nbsp;v7) allgemein verf&uuml;gbar und gibt erstmals die TPU&nbsp;8-Roadmap bekannt: Broadcom baut den Trainings-Chip &bdquo;Sunfish&ldquo;, MediaTek den Inferenz-Chip &bdquo;Zebrafish&ldquo; &mdash; beide auf TSMC&nbsp;2nm f&uuml;r Ende&nbsp;2027. Dazu: OpenAI launcht Workspace Agents als Codex-Nachfolger f&uuml;r Custom GPTs, TypeScript&nbsp;7.0-Beta l&auml;uft auf Go-Compiler und ist zehnmal schneller, Anthropic testet Claude Code hinter einer Pro-Paywall, ein Sicherheitsforscher entdeckt einen Native-Messaging-Backdoor in Claude Desktop, Anker bringt seinen &bdquo;Thus&ldquo;-Compute-in-Memory-Chip, und Deezer meldet: 44&nbsp;Prozent aller Uploads sind KI-Musik.</div>
+        
+        <div class="edition-card-lead"><a href="/editions/2026-04-23.html#art-1">Googles neue KI-Chips: Ironwood jetzt verfügbar, TPU 8 spaltet Training und Inferenz</a></div>
+        <div class="edition-card-deck">Google hat auf seiner Cloud-Next-Konferenz in Las Vegas gleich drei Chip-Ankündigungen gestapelt: Der siebte TPU-Chip Ironwood ist ab sofort allgemein verfügbar, und mit TPU 8t („Sunfish“) für Training sowie TPU 8i („Zebrafish“) für Inferenz zeigt Google, wohin die Chip-Strategie geht. Das Ergebnis: 30 bis 44 Prozent günstigere Betriebskosten als vergleichbare Nvidia-Konfigurationen — auf Cluster-Skala, wo kein NVLink mithalten kann.</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-23.html#art-2"><span class="cat">Produkt</span> OpenAI Workspace Agents: Codex-Power f&uuml;r Teams &mdash; Custom GPTs war gestern</a></li>
-            <li><a href="editions/2026-04-23.html#art-3"><span class="cat">Entwicklung</span> TypeScript&nbsp;7.0 Beta: Go-Compiler macht VS&nbsp;Code zehnmal schneller</a></li>
-            <li><a href="editions/2026-04-23.html#art-4"><span class="cat">Business</span> Claude Code hinter Pro-Paywall: Anthropics A/B-Test und der Backlash</a></li>
-            <li><a href="editions/2026-04-23.html#art-5"><span class="cat">Sicherheit</span> Backdoor in Claude Desktop: Native Messaging &ouml;ffnet sieben Browser</a></li>
-            <li><a href="editions/2026-04-23.html#art-6"><span class="cat">Hardware</span> Anker &bdquo;Thus&ldquo;: Compute-in-Memory-Chip aus Dresden mit 5 Mrd. Ops/Sek.</a></li>
-            <li><a href="editions/2026-04-23.html#art-7"><span class="cat">Musik</span> Deezer: 44&nbsp;% aller Uploads sind KI-Musik &mdash; 85&nbsp;% davon Betrug</a></li>
-            <li><a href="editions/2026-04-23.html#reportage"><span class="cat">Reportage</span> 44 Prozent KI-Musik: Wie K&uuml;nstliche Intelligenz die Musikindustrie neu ordnet</a></li>
-            <li><a href="editions/2026-04-23.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-23.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-2"><span class="cat">Produkt</span>Workspace Agents: ChatGPT wird zur autonomen Team-Automatisierungsplattform</a></li>
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-3"><span class="cat">Entwicklung</span>TypeScript 7.0 Beta: Go-Backend macht den Compiler zehnmal schneller</a></li>
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-4"><span class="cat">Plattform</span>Claude Code kurzfristig aus dem Pro-Tarif gestrichen — und was das über KI-Preise verrät</a></li>
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-5"><span class="cat">Sicherheit</span>Backdoor in der Claude Desktop App: „Stille Brücke“ in sieben Chromium-Browser ohne Nutzer-Einwilligung</a></li>
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-6"><span class="cat">Hardware</span>Thus: Ankers erster KI-Chip — Compute-in-Memory aus Dresdner Fab, Made in Germany</a></li>
+            
+            
+            
+            <li><a href="/editions/2026-04-23.html#art-7"><span class="cat">Musik</span>44 Prozent aller neuen Uploads: KI-Musik überflutet Streaming-Plattformen — aber kaum jemand hört zu</a></li>
+            
+            
+            
+            <li><a href="/editions/reportagen/2026-04-23.html"><span class="cat">Reportage</span>44 Prozent KI-Musik: Wie künstliche Intelligenz die Musikindustrie neu ordnet</a></li>
+            
+            
+            <li><a href="/editions/2026-04-23.html#tool-radar"><span class="cat">Tool-Radar</span>6 neue KI-Tools</a></li>
+            
+            <li><a href="/editions/2026-04-23.html#werkstatt"><span class="cat">Werkstatt</span>YouTube-Empfehlungen</a></li>
+        </ul>
+        
+    </div>
+    
+    
+
+    
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Donnerstag, 23. April 2026</span>
+            <a href="/editions/2026-04-23.html" class="edition-card-link">Vollausgabe &rarr;</a>
+        </div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-23.html#art-1">Googles neue KI-Chips: Ironwood jetzt verfügbar, TPU 8 spaltet sich in Training und Inferenz</a></div>
+        <div class="edition-card-deck">Google Cloud macht Ironwood (TPU v7) allgemein verfügbar und gibt erstmals die TPU 8-Roadmap bekannt: Broadcom baut den Trainings-Chip „Sunfish“, MediaTek den Inferenz-Chip „Zebrafish“ — beide auf TSMC 2nm für Ende 2027. Dazu: OpenAI launcht Workspace Agents als Codex-Nachfolger...</div>
+        <ul class="edition-stories">
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-2">
+                    <span class="cat">Produkt</span>OpenAI Workspace Agents: Codex-Power für Teams — Custom GPTs war gestern
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-3">
+                    <span class="cat">Entwicklung</span>TypeScript 7.0 Beta: Go-Compiler macht VS Code zehnmal schneller
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-4">
+                    <span class="cat">Business</span>Claude Code hinter Pro-Paywall: Anthropics A/B-Test und der Backlash
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-5">
+                    <span class="cat">Sicherheit</span>Backdoor in Claude Desktop: Native Messaging öffnet sieben Browser
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-6">
+                    <span class="cat">Hardware</span>Anker „Thus“: Compute-in-Memory-Chip aus Dresden mit 5 Mrd. Ops/Sek.
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#art-7">
+                    <span class="cat">Musik</span>Deezer: 44 % aller Uploads sind KI-Musik — 85 % davon Betrug
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#reportage">
+                    <span class="cat">Reportage</span>44 Prozent KI-Musik: Wie Künstliche Intelligenz die Musikindustrie neu ordnet
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-23.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 22. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 22. April 2026</span>
-            <a href="editions/2026-04-22.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Mittwoch, 22. April 2026</span>
+            <a href="/editions/2026-04-22.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-22.html#art-1">SpaceX setzt 60-Milliarden-Kaufoption auf Cursor &mdash; oder zahlt zehn Milliarden</a></div>
-        <div class="edition-lead-deck">Am Dienstag ver&ouml;ffentlichte SpaceX eine Hybrid-Ank&uuml;ndigung: Kooperation mit dem Coding-Startup Cursor plus Kaufoption bis Jahresende f&uuml;r 60 Milliarden Dollar &mdash; oder 10 Milliarden Dollar Kompensation. Drei Geschichten kollidieren um Anthropics Cybersecurity-Modell Mythos: Bloomberg deckt unautorisierten Zugang einer Discord-Gruppe auf, Altman spottet &uuml;ber &bdquo;fear-based marketing&ldquo;, Mozilla patcht 271 Firefox-Bugs. Meta startet die Model Capability Initiative: Tastatur und Mausbewegungen US-amerikanischer Mitarbeiter werden KI-Trainingsdaten. OpenAI launcht ChatGPT Images 2.0 mit Web-Suche und Reasoning. YouTube &ouml;ffnet KI-Deepfake-Erkennung f&uuml;r Hollywood. Clarifai l&ouml;scht nach zw&ouml;lf Jahren drei Millionen OkCupid-Fotos &mdash; FTC setzt Nullstrafe. NeoCognition sammelt 40 Millionen Seed f&uuml;r Agents mit continual learning.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-22.html#art-1">SpaceX setzt 60-Milliarden-Kaufoption auf Cursor — oder zahlt zehn Milliarden</a></div>
+        <div class="edition-card-deck">Am Dienstag veröffentlichte SpaceX eine Hybrid-Ankündigung: Kooperation mit dem Coding-Startup Cursor plus Kaufoption bis Jahresende für 60 Milliarden Dollar — oder 10 Milliarden Dollar Kompensation. Drei Geschichten kollidieren um Anthropics Cybersecurity-Modell Mythos:...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-22.html#art-2"><span class="cat">Sicherheit</span> Mythos-Leck, Altmans Konter und Mozillas 271 Firefox-Fixes</a></li>
-            <li><a href="editions/2026-04-22.html#art-3"><span class="cat">&Uuml;berwachung</span> Meta MCI: Tastatur und Maus als KI-Trainingsdaten</a></li>
-            <li><a href="editions/2026-04-22.html#art-4"><span class="cat">Produkt</span> ChatGPT Images 2.0: Text, Reasoning, Web-Suche im Bild</a></li>
-            <li><a href="editions/2026-04-22.html#art-5"><span class="cat">Plattform</span> YouTube &ouml;ffnet KI-Deepfake-Erkennung f&uuml;r Hollywood</a></li>
-            <li><a href="editions/2026-04-22.html#art-6"><span class="cat">Privacy</span> Clarifai l&ouml;scht 3 Mio. OkCupid-Fotos &mdash; FTC-Nullstrafe</a></li>
-            <li><a href="editions/2026-04-22.html#art-7"><span class="cat">Finanzierung</span> NeoCognition: 40 Mio. Seed f&uuml;r continual-learning Agents</a></li>
-            <li><a href="editions/2026-04-22.html#reportage"><span class="cat">Reportage</span> Der Coding-Krieg 2026: Cursor, Claude, Copilot und SpaceX</a></li>
-            <li><a href="editions/2026-04-22.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-22.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-2">
+                    <span class="cat">Sicherheit</span>Mythos-Leck, Altmans Konter und Mozillas 271 Firefox-Fixes
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-3">
+                    <span class="cat">Überwachung</span>Meta MCI: Tastatur und Maus als KI-Trainingsdaten
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-4">
+                    <span class="cat">Produkt</span>ChatGPT Images 2.0: Text, Reasoning, Web-Suche im Bild
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-5">
+                    <span class="cat">Plattform</span>YouTube öffnet KI-Deepfake-Erkennung für Hollywood
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-6">
+                    <span class="cat">Privacy</span>Clarifai löscht 3 Mio. OkCupid-Fotos — FTC-Nullstrafe
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#art-7">
+                    <span class="cat">Finanzierung</span>NeoCognition: 40 Mio. Seed für continual-learning Agents
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#reportage">
+                    <span class="cat">Reportage</span>Der Coding-Krieg 2026: Cursor, Claude, Copilot und SpaceX
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-22.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 21. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 21. April 2026</span>
-            <a href="editions/2026-04-21.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Dienstag, 21. April 2026</span>
+            <a href="/editions/2026-04-21.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-21.html#art-1">Tim Cook tritt ab: John Ternus wird am 1.&nbsp;September neuer Apple-CEO</a></div>
-        <div class="edition-lead-deck">Apple verk&uuml;ndete am Montag die geordnete Nachfolge: Tim Cook &uuml;bergibt nach 15 Jahren an Hardware-Chef John Ternus und wird Executive Chairman. Parallel nimmt Anthropic f&uuml;nf weitere Milliarden Dollar von Amazon und verpflichtet sich zu 100 Mrd. AWS-Ausgaben &uuml;ber 10 Jahre. Axios-Scoop: Die NSA nutzt Anthropics Mythos &mdash; trotz Pentagon-Blacklist. Google formt unter Sergey Brin ein Strike Team gegen Anthropics Coding-Vorsprung, verhandelt mit Marvell &uuml;ber zwei neue KI-Chips und rollt Gemini in Chrome in sieben APAC-Markte aus. Merz fordert auf der Hannover Messe Ausnahmen f&uuml;r industrielle KI. Siemens launcht den &bdquo;Eigen&ldquo;-Agent. Fermi Inc. verliert CEO und CFO in 24 Stunden.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-21.html#art-1">Tim Cook tritt ab: John Ternus wird am 1. September neuer Apple-CEO</a></div>
+        <div class="edition-card-deck">Apple verkündete am Montag die geordnete Nachfolge: Tim Cook übergibt nach 15 Jahren an Hardware-Chef John Ternus und wird Executive Chairman. Parallel nimmt Anthropic fünf weitere Milliarden Dollar von Amazon und verpflichtet sich zu 100 Mrd. AWS-Ausgaben über 10 Jahre....</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-21.html#art-2"><span class="cat">Compute-Deal</span> Anthropic nimmt 5 Mrd. von Amazon &mdash; und verspricht 100 Mrd. AWS-Spend</a></li>
-            <li><a href="editions/2026-04-21.html#art-3"><span class="cat">Geheimdienste</span> Axios-Scoop: NSA nutzt Anthropics Mythos &mdash; trotz Pentagon-Blacklist</a></li>
-            <li><a href="editions/2026-04-21.html#art-4"><span class="cat">Wettlauf</span> Googles Strike Team, Marvell-Chips, Gemini in Chrome: Drei Fronten gegen Anthropic</a></li>
-            <li><a href="editions/2026-04-21.html#art-5"><span class="cat">Industrie</span> Merz fordert Ausnahme f&uuml;r industrielle KI &mdash; Siemens launcht Eigen-Agent</a></li>
-            <li><a href="editions/2026-04-21.html#art-6"><span class="cat">AI-Nuklear</span> Fermi: CEO und CFO treten &uuml;ber Nacht ab &mdash; Aktie bricht 22 Prozent ein</a></li>
-            <li><a href="editions/2026-04-21.html#reportage"><span class="cat">Reportage</span> Das Karussell: Wie die KI-Branche sich selbst finanziert</a></li>
-            <li><a href="editions/2026-04-21.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-21.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#art-2">
+                    <span class="cat">Compute-Deal</span>Anthropic nimmt 5 Mrd. von Amazon — und verspricht 100 Mrd. AWS-Spend
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#art-3">
+                    <span class="cat">Geheimdienste</span>Axios-Scoop: NSA nutzt Anthropics Mythos — trotz Pentagon-Blacklist
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#art-4">
+                    <span class="cat">Wettlauf</span>Googles Strike Team, Marvell-Chips, Gemini in Chrome: Drei Fronten gegen Anthropic
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#art-5">
+                    <span class="cat">Industrie</span>Merz fordert Ausnahme für industrielle KI — Siemens launcht Eigen-Agent
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#art-6">
+                    <span class="cat">AI-Nuklear</span>Fermi: CEO und CFO treten über Nacht ab — Aktie bricht 22 Prozent ein
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#reportage">
+                    <span class="cat">Reportage</span>Das Karussell: Wie die KI-Branche sich selbst finanziert
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-21.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 20. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 20. April 2026</span>
-            <a href="editions/2026-04-20.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Montag, 20. April 2026</span>
+            <a href="/editions/2026-04-20.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-20.html#art-1">Stanford AI Index 2026: Chinas Vorsprung ist real &mdash; die L&uuml;cke liegt bei 2,7&nbsp;Prozent</a></div>
-        <div class="edition-lead-deck">Stanfords Human-Centered-AI-Institut legt den j&auml;hrlichen AI Index vor. Die Differenz zwischen dem besten US- und dem besten chinesischen KI-Modell ist auf 2,7&nbsp;Prozent geschrumpft. Gleichzeitig er&ouml;ffnen Merz und Lula die Hannover Messe unter dem Leitthema Physical AI, Tesla startet Robotaxis in Dallas und Houston, Honors &bdquo;Lightning&ldquo; l&auml;uft einen Halbmarathon in 50:26, Vercel muss einen OAuth-Supply-Chain-Hack offenlegen, und das DOJ klagt den Ex-CEO von iLearningEngines wegen 421-Mio.-Dollar-KI-Betrugs an.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-20.html#art-1">Stanford AI Index 2026: Chinas Vorsprung ist real — die Lücke liegt bei 2,7 Prozent</a></div>
+        <div class="edition-card-deck">Stanfords Human-Centered-AI-Institut legt den jährlichen AI Index vor. Die Differenz zwischen dem besten US- und dem besten chinesischen KI-Modell ist auf 2,7 Prozent geschrumpft. Gleichzeitig eröffnen Merz und Lula die Hannover Messe unter dem Leitthema Physical AI, Tesla...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-20.html#art-2"><span class="cat">Industrie</span> Hannover Messe 2026: Merz und Lula er&ouml;ffnen unter Leitthema Physical AI</a></li>
-            <li><a href="editions/2026-04-20.html#art-3"><span class="cat">Autonomes Fahren</span> Tesla startet Robotaxi-Dienst in Dallas und Houston &mdash; trotz 15 NHTSA-Vorf&auml;llen</a></li>
-            <li><a href="editions/2026-04-20.html#art-4"><span class="cat">Robotik</span> Honors &bdquo;Lightning&ldquo; l&auml;uft Halbmarathon in 50:26 &mdash; unter dem Menschen-Weltrekord</a></li>
-            <li><a href="editions/2026-04-20.html#art-5"><span class="cat">Cybersicherheit</span> Vercel-Hack via Context.ai: Wie eine OAuth-App einen Hyperscaler aufmachte</a></li>
-            <li><a href="editions/2026-04-20.html#art-6"><span class="cat">AI-Washing</span> iLearningEngines: Ex-CEO wegen 421-Mio.-Dollar-KI-Betrugs angeklagt</a></li>
-            <li><a href="editions/2026-04-20.html#reportage"><span class="cat">Reportage</span> Physical AI &mdash; Vom Bildschirm in die Welt</a></li>
-            <li><a href="editions/2026-04-20.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-20.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#art-2">
+                    <span class="cat">Industrie</span>Hannover Messe 2026: Merz und Lula eröffnen unter Leitthema Physical AI
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#art-3">
+                    <span class="cat">Autonomes Fahren</span>Tesla startet Robotaxi-Dienst in Dallas und Houston — trotz 15 NHTSA-Vorfällen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#art-4">
+                    <span class="cat">Robotik</span>Honors „Lightning“ läuft Halbmarathon in 50:26 — unter dem Menschen-Weltrekord
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#art-5">
+                    <span class="cat">Cybersicherheit</span>Vercel-Hack via Context.ai: Wie eine OAuth-App einen Hyperscaler aufmachte
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#art-6">
+                    <span class="cat">AI-Washing</span>iLearningEngines: Ex-CEO wegen 421-Mio.-Dollar-KI-Betrugs angeklagt
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#reportage">
+                    <span class="cat">Reportage</span>Physical AI — Vom Bildschirm in die Welt
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-20.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 19. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 19. April 2026</span>
-            <a href="editions/2026-04-19.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Sonntag, 19. April 2026</span>
+            <a href="/editions/2026-04-19.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-19.html#art-1">Meta entl&auml;sst am 20.&nbsp;Mai 8.000 Stellen &mdash; KI ersetzt Headcount im Akkord</a></div>
-        <div class="edition-lead-deck">Reuters meldet exklusiv: Metas erste gro&szlig;e Entlassungswelle 2026 trifft zehn Prozent der Belegschaft, weitere K&uuml;rzungen folgen in H2. Gleichzeitig springt der Capex-Ausblick auf 115 bis 135&nbsp;Milliarden Dollar. Dazu: Cerebras reicht zum zweiten Mal einen IPO-Antrag ein, OpenAI launcht GPT-Rosalind f&uuml;r die Life Sciences, Schematik wird Anthropics &bdquo;Cursor for Hardware&ldquo;, und eine Stanford-Studie misst Sykophantie bei Chatbots.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-19.html#art-1">Meta entlässt am 20. Mai 8.000 Stellen — KI ersetzt Headcount im Akkord</a></div>
+        <div class="edition-card-deck">Reuters meldet exklusiv: Metas erste große Entlassungswelle 2026 trifft zehn Prozent der Belegschaft, weitere Kürzungen folgen in H2. Gleichzeitig springt der Capex-Ausblick auf 115 bis 135 Milliarden Dollar. Dazu: Cerebras reicht zum zweiten Mal einen IPO-Antrag ein, OpenAI...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-19.html#art-2"><span class="cat">KI-Hardware</span> Cerebras reicht erneut ein &mdash; 510&nbsp;Mio. Umsatz, 86&nbsp;% VAE-Konzentration</a></li>
-            <li><a href="editions/2026-04-19.html#art-3"><span class="cat">OpenAI</span> GPT-Rosalind: Life-Science-Modell mit den Partnern Amgen, Moderna, Allen Institute</a></li>
-            <li><a href="editions/2026-04-19.html#art-4"><span class="cat">KI-Tools</span> &bdquo;Cursor for Hardware&ldquo;: Schematik wird Anthropic-Showcase, Lightspeed f&uuml;hrt an</a></li>
-            <li><a href="editions/2026-04-19.html#art-5"><span class="cat">Forschung</span> Stanford misst Sykophantie: LLMs best&auml;tigen Nutzer 49&nbsp;% h&auml;ufiger als Menschen</a></li>
-            <li><a href="editions/2026-04-19.html#art-6"><span class="cat">KI-Praxis</span> &bdquo;Tokenmaxxing&ldquo;: Warum mehr Kontext oft schlechtere Antworten bringt</a></li>
-            <li><a href="editions/2026-04-19.html#reportage"><span class="cat">Reportage</span> Die Konsolidierung des AI-Chip-Marktes</a></li>
-            <li><a href="editions/2026-04-19.html#tool-radar"><span class="cat">Tool-Radar</span> 4 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-19.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#art-2">
+                    <span class="cat">KI-Hardware</span>Cerebras reicht erneut ein — 510 Mio. Umsatz, 86 % VAE-Konzentration
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#art-3">
+                    <span class="cat">OpenAI</span>GPT-Rosalind: Life-Science-Modell mit den Partnern Amgen, Moderna, Allen Institute
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#art-4">
+                    <span class="cat">KI-Tools</span>„Cursor for Hardware“: Schematik wird Anthropic-Showcase, Lightspeed führt an
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#art-5">
+                    <span class="cat">Forschung</span>Stanford misst Sykophantie: LLMs bestätigen Nutzer 49 % häufiger als Menschen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#art-6">
+                    <span class="cat">KI-Praxis</span>„Tokenmaxxing“: Warum mehr Kontext oft schlechtere Antworten bringt
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#reportage">
+                    <span class="cat">Reportage</span>Die Konsolidierung des AI-Chip-Marktes
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>4 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-19.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 18. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Samstag, 18. April 2026</span>
-            <a href="editions/2026-04-18.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Samstag, 18. April 2026</span>
+            <a href="/editions/2026-04-18.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-18.html#art-1">OpenAIs gro&szlig;e Aufr&auml;um-Woche: Codex-Chef und Sora-Gr&uuml;nder verlassen die Firma</a></div>
-        <div class="edition-lead-deck">An einem Tag k&uuml;ndigen Kevin Weil, Bill Peebles und Srinivas Narayanan ihren Abschied an. Simos &bdquo;side quests&ldquo;-Formel liefert das Framing &mdash; hinter ihr zeichnet sich eine F&uuml;hrungskrise ab. Dazu: Claude Design ist offiziell live, Cursor verhandelt bei 50&nbsp;Mrd. Bewertung, Amodei trifft Wiles und Bessent im Wei&szlig;en Haus, Altmans World expandiert zu Tinder, Reed Hastings verl&auml;sst Netflix-Board.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-18.html#art-1">OpenAIs große Aufräum-Woche: Codex-Chef und Sora-Gründer verlassen die Firma</a></div>
+        <div class="edition-card-deck">An einem Tag kündigen Kevin Weil, Bill Peebles und Srinivas Narayanan ihren Abschied an. Simos „side quests“-Formel liefert das Framing — hinter ihr zeichnet sich eine Führungskrise ab. Dazu: Claude Design ist offiziell live, Cursor verhandelt bei 50 Mrd. Bewertung, Amodei trifft...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-18.html#art-2"><span class="cat">Anthropic</span> Claude Design ist offiziell &mdash; Frontalangriff auf Figma, Canva und Stitch</a></li>
-            <li><a href="editions/2026-04-18.html#art-3"><span class="cat">Investment</span> Cursor verhandelt $2&nbsp;Mrd. bei 50-Mrd.-Bewertung</a></li>
-            <li><a href="editions/2026-04-18.html#art-4"><span class="cat">KI-Politik</span> Amodei trifft Wiles und Bessent im Wei&szlig;en Haus</a></li>
-            <li><a href="editions/2026-04-18.html#art-5"><span class="cat">Identit&auml;t</span> Tinder l&auml;sst bald in den Orb schauen: Altmans World expandiert</a></li>
-            <li><a href="editions/2026-04-18.html#art-6"><span class="cat">Medien</span> Netflix-Gr&uuml;nder Hastings geht &mdash; KI &uuml;bernimmt Produktionen</a></li>
-            <li><a href="editions/2026-04-18.html#reportage"><span class="cat">Reportage</span> Der Kampf um die digitale Identit&auml;t</a></li>
-            <li><a href="editions/2026-04-18.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-18.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#art-2">
+                    <span class="cat">Anthropic</span>Claude Design ist offiziell — Frontalangriff auf Figma, Canva und Stitch
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#art-3">
+                    <span class="cat">Investment</span>Cursor verhandelt $2 Mrd. bei 50-Mrd.-Bewertung
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#art-4">
+                    <span class="cat">KI-Politik</span>Amodei trifft Wiles und Bessent im Weißen Haus
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#art-5">
+                    <span class="cat">Identität</span>Tinder lässt bald in den Orb schauen: Altmans World expandiert
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#art-6">
+                    <span class="cat">Medien</span>Netflix-Gründer Hastings geht — KI übernimmt Produktionen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#reportage">
+                    <span class="cat">Reportage</span>Der Kampf um die digitale Identität
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-18.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 17. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Freitag, 17. April 2026</span>
-            <a href="editions/2026-04-17.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Freitag, 17. April 2026</span>
+            <a href="/editions/2026-04-17.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-17.html#art-1">Claude Opus 4.7: Das neue Flaggschiff, das Anweisungen w&ouml;rtlich nimmt</a></div>
-        <div class="edition-lead-deck">Anthropic ver&ouml;ffentlicht Opus&nbsp;4.7 mit deutlich besserer Instruktionsbefolgung und neuen Benchmark-Rekorden. OpenAI kontert am selben Tag mit einem massiven Codex-Update (Desktop-Steuerung, Memory, Multi-Agent). Dazu: Anthropic-CPO verl&auml;sst Figma-Board, UK startet 500-Mio-Pfund-Souver&auml;nit&auml;tsfonds, Physical Intelligence zeigt lernf&auml;higes Roboterhirn, TSMC meldet +58&nbsp;% Gewinn.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-17.html#art-1">Claude Opus 4.7: Das neue Flaggschiff, das Anweisungen wörtlich nimmt</a></div>
+        <div class="edition-card-deck">Anthropic veröffentlicht Opus 4.7 mit deutlich besserer Instruktionsbefolgung und neuen Benchmark-Rekorden. OpenAI kontert am selben Tag mit einem massiven Codex-Update (Desktop-Steuerung, Memory, Multi-Agent). Dazu: Anthropic-CPO verlässt Figma-Board, UK startet...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-17.html#art-2"><span class="cat">OpenAI</span> Codex &uuml;bernimmt den Mac &mdash; parallel, im Hintergrund</a></li>
-            <li><a href="editions/2026-04-17.html#art-3"><span class="cat">Wirtschaft</span> Anthropic plant Design-Tool: Figma verliert Boardmitglied</a></li>
-            <li><a href="editions/2026-04-17.html#art-4"><span class="cat">UK-Politik</span> Gro&szlig;britannien startet 500-Millionen-Pfund-Fonds f&uuml;r souver&auml;ne KI</a></li>
-            <li><a href="editions/2026-04-17.html#art-5"><span class="cat">Robotik</span> Physical Intelligence &pi;0.7: Ein Roboterhirn, das improvisiert</a></li>
-            <li><a href="editions/2026-04-17.html#art-6"><span class="cat">Infrastruktur</span> TSMC: Rekordgewinn +58&nbsp;%, 2nm ausgebucht</a></li>
-            <li><a href="editions/2026-04-17.html#reportage"><span class="cat">Reportage</span> Souver&auml;ne KI &mdash; Europas verspäteter Wettlauf</a></li>
-            <li><a href="editions/2026-04-17.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-17.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#art-2">
+                    <span class="cat">OpenAI</span>Codex übernimmt den Mac — parallel, im Hintergrund
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#art-3">
+                    <span class="cat">Wirtschaft</span>Anthropic plant Design-Tool: Figma verliert Boardmitglied
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#art-4">
+                    <span class="cat">UK-Politik</span>Großbritannien startet 500-Millionen-Pfund-Fonds für souveräne KI
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#art-5">
+                    <span class="cat">Robotik</span>Physical Intelligence π0.7: Ein Roboterhirn, das improvisiert
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#art-6">
+                    <span class="cat">Infrastruktur</span>TSMC: Rekordgewinn +58 %, 2nm ausgebucht
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#reportage">
+                    <span class="cat">Reportage</span>Souveräne KI — Europas verspäteter Wettlauf
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-17.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 16. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Donnerstag, 16. April 2026</span>
-            <a href="editions/2026-04-16.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Donnerstag, 16. April 2026</span>
+            <a href="/editions/2026-04-16.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-16.html#art-1">OpenAI startet GPT-5.4-Cyber &mdash; das Wettr&uuml;sten um KI-Cyberwaffen</a></div>
-        <div class="edition-lead-deck">OpenAI kontert Anthropics Mythos mit einem eigenen Cybersecurity-Modell. Au&szlig;erdem: Grok stand kurz vor dem App-Store-Rauswurf, ein US-Gericht entzieht KI-Chats das Anwaltsgeheimnis, und die EU zwingt Meta, WhatsApp f&uuml;r Konkurrenz-KI zu &ouml;ffnen.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-16.html#art-1">OpenAI startet GPT-5.4-Cyber — das Wettrüsten um KI-Cyberwaffen</a></div>
+        <div class="edition-card-deck">OpenAI kontert Anthropics Mythos mit einem eigenen Cybersecurity-Modell. Außerdem: Grok stand kurz vor dem App-Store-Rauswurf, ein US-Gericht entzieht KI-Chats das Anwaltsgeheimnis, und die EU zwingt Meta, WhatsApp für Konkurrenz-KI zu öffnen.</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-16.html#art-2"><span class="cat">Ethik</span> Grok stand kurz vor dem App-Store-Rauswurf &mdash; wegen sexualisierter Deepfakes</a></li>
-            <li><a href="editions/2026-04-16.html#art-3"><span class="cat">Recht</span> US-Gericht: KI-Chats genie&szlig;en kein Anwaltsgeheimnis</a></li>
-            <li><a href="editions/2026-04-16.html#art-4"><span class="cat">EU</span> EU zwingt Meta: WhatsApp muss f&uuml;r Konkurrenz-KI &ouml;ffnen</a></li>
-            <li><a href="editions/2026-04-16.html#art-5"><span class="cat">Google</span> Gemini f&uuml;r Mac und revolution&auml;res Sprach-KI-Modell</a></li>
-            <li><a href="editions/2026-04-16.html#art-6"><span class="cat">Wirtschaft</span> Allbirds wird zur KI-Firma &mdash; Aktie explodiert 580&nbsp;%</a></li>
-            <li><a href="editions/2026-04-16.html#reportage"><span class="cat">Reportage</span> Die KI-Agenten kommen in den Alltag</a></li>
-            <li><a href="editions/2026-04-16.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-16.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#art-2">
+                    <span class="cat">Ethik</span>Grok stand kurz vor dem App-Store-Rauswurf — wegen sexualisierter Deepfakes
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#art-3">
+                    <span class="cat">Recht</span>US-Gericht: KI-Chats genießen kein Anwaltsgeheimnis
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#art-4">
+                    <span class="cat">EU</span>EU zwingt Meta: WhatsApp muss für Konkurrenz-KI öffnen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#art-5">
+                    <span class="cat">Google</span>Gemini für Mac und revolutionäres Sprach-KI-Modell
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#art-6">
+                    <span class="cat">Wirtschaft</span>Allbirds wird zur KI-Firma — Aktie explodiert 580 %
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#reportage">
+                    <span class="cat">Reportage</span>Die KI-Agenten kommen in den Alltag
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-16.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 15. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 15. April 2026</span>
-            <a href="editions/2026-04-15.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Mittwoch, 15. April 2026</span>
+            <a href="/editions/2026-04-15.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-15.html#art-1">Anthropic lehnt KI-Haftungsgesetz ab, das OpenAI unterst&uuml;tzt</a></div>
-        <div class="edition-lead-deck">Anthropic und OpenAI stehen sich in Illinois gegen&uuml;ber: OpenAI unterst&uuml;tzt den &bdquo;AI Safety Act&ldquo; SB&nbsp;3444, Anthropic nennt ihn einen &bdquo;Freifahrtschein gegen Haftung&ldquo;. Au&szlig;erdem: Chrome wird zur Agent-Plattform, Googles SynthID-Wasserzeichen geknackt, und ein humanoider Roboter rennt fast so schnell wie Usain&nbsp;Bolt.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-15.html#art-1">Anthropic lehnt KI-Haftungsgesetz ab, das OpenAI unterstützt</a></div>
+        <div class="edition-card-deck">Anthropic und OpenAI stehen sich in Illinois gegenüber: OpenAI unterstützt den „AI Safety Act“ SB 3444, Anthropic nennt ihn einen „Freifahrtschein gegen Haftung“. Außerdem: Chrome wird zur Agent-Plattform, Googles SynthID-Wasserzeichen geknackt, und ein humanoider Roboter rennt...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-15.html#art-2"><span class="cat">Google</span> Chrome wird zur Agent-Plattform: Google startet KI-Skills</a></li>
-            <li><a href="editions/2026-04-15.html#art-3"><span class="cat">Sicherheit</span> Googles KI-Wasserzeichen SynthID per Spektralanalyse geknackt</a></li>
-            <li><a href="editions/2026-04-15.html#art-4"><span class="cat">Recht</span> KI-Halluzinationen vor Gericht: Erfundene Urteile in deutschen Gerichtss&auml;len</a></li>
-            <li><a href="editions/2026-04-15.html#art-5"><span class="cat">Infrastruktur</span> Microsoft &uuml;bernimmt OpenAIs Rechenzentrum in Norwegen</a></li>
-            <li><a href="editions/2026-04-15.html#art-6"><span class="cat">Robotik</span> Unitree H1: Humanoider Roboter rennt fast so schnell wie Usain&nbsp;Bolt</a></li>
-            <li><a href="editions/2026-04-15.html#reportage"><span class="cat">Reportage</span> Die unsichtbare Markierung</a></li>
-            <li><a href="editions/2026-04-15.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-15.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#art-2">
+                    <span class="cat">Google</span>Chrome wird zur Agent-Plattform: Google startet KI-Skills
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#art-3">
+                    <span class="cat">Sicherheit</span>Googles KI-Wasserzeichen SynthID per Spektralanalyse geknackt
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#art-4">
+                    <span class="cat">Recht</span>KI-Halluzinationen vor Gericht: Erfundene Urteile in deutschen Gerichtssälen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#art-5">
+                    <span class="cat">Infrastruktur</span>Microsoft übernimmt OpenAIs Rechenzentrum in Norwegen
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#art-6">
+                    <span class="cat">Robotik</span>Unitree H1: Humanoider Roboter rennt fast so schnell wie Usain Bolt
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#reportage">
+                    <span class="cat">Reportage</span>Die unsichtbare Markierung
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-15.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
-
-    <!-- ═══ 14. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 14. April 2026</span>
-            <a href="editions/2026-04-14.html" class="edition-link">Vollausgabe &rarr;</a>
+    
+    <div class="edition-card">
+        <div class="edition-card-head">
+            <span class="edition-card-date">Dienstag, 14. April 2026</span>
+            <a href="/editions/2026-04-14.html" class="edition-card-link">Vollausgabe &rarr;</a>
         </div>
-        <div class="edition-lead"><a href="editions/2026-04-14.html#art-1">OpenAI greift Anthropic in internem Memo an &mdash; und wirft aufgebl&auml;hte Umsatzzahlen vor</a></div>
-        <div class="edition-lead-deck">OpenAIs Chief Revenue Officer behauptet, Anthropics 30-Milliarden-Run-Rate sei um 8&nbsp;Mrd. aufgebl&auml;ht. Au&szlig;erdem: Zuckerberg baut einen KI-Klon, Stanford dokumentiert die wachsende Kluft zwischen KI-Insidern und &Ouml;ffentlichkeit, und 75&nbsp;Organisationen warnen vor Metas Gesichtserkennung.</div>
+        <div class="edition-card-lead"><a href="/editions/2026-04-14.html#art-1">OpenAI greift Anthropic in internem Memo an — und wirft aufgeblähte Umsatzzahlen vor</a></div>
+        <div class="edition-card-deck">OpenAIs Chief Revenue Officer behauptet, Anthropics 30-Milliarden-Run-Rate sei um 8 Mrd. aufgebläht. Außerdem: Zuckerberg baut einen KI-Klon, Stanford dokumentiert die wachsende Kluft zwischen KI-Insidern und Öffentlichkeit, und 75 Organisationen warnen vor Metas...</div>
         <ul class="edition-stories">
-            <li><a href="editions/2026-04-14.html#art-2"><span class="cat">KI-Industrie</span> Zuckerberg baut einen KI-Klon von sich selbst</a></li>
-            <li><a href="editions/2026-04-14.html#art-3"><span class="cat">Gesellschaft</span> Stanford: Kluft zwischen KI-Insidern und &Ouml;ffentlichkeit w&auml;chst</a></li>
-            <li><a href="editions/2026-04-14.html#art-4"><span class="cat">OpenAI</span> OpenAI kauft Fintech-Startup Hiro</a></li>
-            <li><a href="editions/2026-04-14.html#art-5"><span class="cat">Microsoft</span> OpenClaw-Agenten f&uuml;r Copilot: Codename &bdquo;Ocean&nbsp;11&ldquo;</a></li>
-            <li><a href="editions/2026-04-14.html#art-6"><span class="cat">Apple</span> KI-Chef Giannandrea verl&auml;sst Apple</a></li>
-            <li><a href="editions/2026-04-14.html#art-7"><span class="cat">Datenschutz</span> 75 Organisationen warnen vor Metas Gesichtserkennungs-Brille</a></li>
-            <li><a href="editions/2026-04-14.html#reportage"><span class="cat">Reportage</span> Die gro&szlig;e Umschichtung</a></li>
-            <li><a href="editions/2026-04-14.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-14.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-2">
+                    <span class="cat">KI-Industrie</span>Zuckerberg baut einen KI-Klon von sich selbst
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-3">
+                    <span class="cat">Gesellschaft</span>Stanford: Kluft zwischen KI-Insidern und Öffentlichkeit wächst
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-4">
+                    <span class="cat">OpenAI</span>OpenAI kauft Fintech-Startup Hiro
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-5">
+                    <span class="cat">Microsoft</span>OpenClaw-Agenten für Copilot: Codename „Ocean 11“
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-6">
+                    <span class="cat">Apple</span>KI-Chef Giannandrea verlässt Apple
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#art-7">
+                    <span class="cat">Datenschutz</span>75 Organisationen warnen vor Metas Gesichtserkennungs-Brille
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#reportage">
+                    <span class="cat">Reportage</span>Die große Umschichtung
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#tool-radar">
+                    <span class="cat">Tool-Radar</span>6 neue KI-Tools
+                </a>
+            </li>
+            
+            <li>
+                <a href="/editions/2026-04-14.html#werkstatt">
+                    <span class="cat">Werkstatt</span>YouTube-Empfehlungen
+                </a>
+            </li>
+            
         </ul>
     </div>
+    
 
-    <!-- ═══ 13. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 13. April 2026</span>
-            <a href="editions/2026-04-13.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-13.html#art-1">US-Regierung ermutigt Banken, Anthropics Mythos gegen eigene Systeme einzusetzen</a></div>
-        <div class="edition-lead-deck">Nach dem Notfall-Gipfel geht die US-Regierung einen Schritt weiter: Banken sollen Mythos aktiv als Verteidigungswerkzeug nutzen. Au&szlig;erdem: OpenAI fordert Robotersteuer, Claude dominiert die HumanX-Konferenz, die KI-Code-Kriege eskalieren, und Gen&nbsp;Z sabotiert KI-Einf&uuml;hrungen.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-13.html#art-2"><span class="cat">KI-Industrie</span> OpenAI fordert Robotersteuer und Vier-Tage-Woche</a></li>
-            <li><a href="editions/2026-04-13.html#art-3"><span class="cat">KI-Industrie</span> HumanX-Konferenz: Die Branche spricht nur noch &uuml;ber Claude</a></li>
-            <li><a href="editions/2026-04-13.html#art-4"><span class="cat">Wettbewerb</span> Die KI-Code-Kriege: Copilot, Cursor und Claude Code</a></li>
-            <li><a href="editions/2026-04-13.html#art-5"><span class="cat">Gesellschaft</span> Gen&nbsp;Z verliert das Vertrauen in KI &mdash; und sabotiert deren Einf&uuml;hrung</a></li>
-            <li><a href="editions/2026-04-13.html#art-6"><span class="cat">KI-Strategie</span> DeepWisdom-Gr&uuml;nder: Chinesische KI-Effizienz ist kein Notbehelf</a></li>
-            <li><a href="editions/2026-04-13.html#art-7"><span class="cat">Finanzm&auml;rkte</span> Tech-Bewertungen zur&uuml;ck auf Vor-KI-Boom-Niveau</a></li>
-            <li><a href="editions/2026-04-13.html#reportage"><span class="cat">Reportage</span> Die technische Schuld der KI-&Auml;ra</a></li>
-            <li><a href="editions/2026-04-13.html#tool-radar"><span class="cat">Tool-Radar</span> 4 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-13.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
+    
+    
+    <nav class="pagination" aria-label="Seitennavigation">
+        
+        <span class="pagination-info">Seite 1 von 4</span>
+        
+        <a href="/seite/2/">Ältere Ausgaben &rarr;</a>
+        
+    </nav>
+    
 
-    <!-- ═══ 12. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 12. April 2026</span>
-            <a href="editions/2026-04-12.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-12.html#art-1">Werbung in ChatGPT bringt OpenAI 100&nbsp;Millionen Dollar &mdash; und ver&auml;ndert die Branche</a></div>
-        <div class="edition-lead-deck">OpenAIs Werbe-Pilotprojekt erreicht in zwei Monaten 100&nbsp;Mio.&nbsp;Dollar Run-Rate. Au&szlig;erdem: Berkeley-Forscher brechen KI-Benchmarks, eine erfundene Krankheit narrt Chatbots, Tesla FSD kommt nach Europa, und S&uuml;dkorea verteilt 14.000 KI-Puppen gegen Einsamkeit.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-12.html#art-2"><span class="cat">KI-Forschung</span> Berkeley-Studie enth&uuml;llt: KI-Agent-Benchmarks sind manipulierbar</a></li>
-            <li><a href="editions/2026-04-12.html#art-3"><span class="cat">KI &amp; Gesellschaft</span> Bixonimania: Erfundene Krankheit narrt KI-Chatbots und Fachzeitschriften</a></li>
-            <li><a href="editions/2026-04-12.html#art-4"><span class="cat">Autonomes Fahren</span> Tesla FSD erstmals in Europa zugelassen &mdash; Niederlande machen den Anfang</a></li>
-            <li><a href="editions/2026-04-12.html#art-5"><span class="cat">KI-Politik</span> Notfall-Gipfel: US-Regierung warnt Banken vor Anthropics Mythos</a></li>
-            <li><a href="editions/2026-04-12.html#art-6"><span class="cat">KI-Industrie</span> Sam Altman reagiert auf New-Yorker-Investigation</a></li>
-            <li><a href="editions/2026-04-12.html#art-7"><span class="cat">KI &amp; Gesellschaft</span> 14.000 KI-Puppen gegen Einsamkeit: S&uuml;dkoreas Programm</a></li>
-            <li><a href="editions/2026-04-12.html#reportage"><span class="cat">Reportage</span> Die Vertrauenskrise der KI-Benchmarks</a></li>
-            <li><a href="editions/2026-04-12.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-12.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 11. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Samstag, 11. April 2026</span>
-            <a href="editions/2026-04-11.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-11.html#art-1">Stalking-Opfer verklagt OpenAI &mdash; ChatGPT soll Wahnvorstellungen des T&auml;ters befeuert haben</a></div>
-        <div class="edition-lead-deck">Eine Frau verklagt OpenAI, weil ChatGPT ihren Stalker best&auml;rkte und drei Warnungen ignorierte &mdash; darunter eine interne &bdquo;Mass Casualty&ldquo;-Flagge. Au&szlig;erdem: Molotow-Angriff auf Sam Altmans Haus, EU unterwirft ChatGPT dem DSA, und SpaceX verbucht Milliardenverlust durch xAI.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-11.html#art-2"><span class="cat">Sicherheit</span> Molotow-Angriff auf Sam Altmans Haus &mdash; 20-J&auml;hriger festgenommen</a></li>
-            <li><a href="editions/2026-04-11.html#art-3"><span class="cat">Regulierung</span> EU-Kommission unterwirft ChatGPT dem Digital Services Act</a></li>
-            <li><a href="editions/2026-04-11.html#art-4"><span class="cat">Regulierung</span> OpenAI dr&auml;ngt auf Haftungsgesetz &mdash; Entwickler sollen nicht f&uuml;r KI-Sch&auml;den haften</a></li>
-            <li><a href="editions/2026-04-11.html#art-5"><span class="cat">&Ouml;kosystem</span> Anthropic sperrt OpenClaw-Entwickler tempor&auml;r</a></li>
-            <li><a href="editions/2026-04-11.html#art-6"><span class="cat">Business</span> SpaceX verbucht Milliardenverlust durch xAI-&Uuml;bernahme</a></li>
-            <li><a href="editions/2026-04-11.html#reportage"><span class="cat">Reportage</span> KI-Agenten im Alltag &mdash; Zwischen Produktivit&auml;tsversprechen und Kontrollverlust</a></li>
-            <li><a href="editions/2026-04-11.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-11.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 10. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Freitag, 10. April 2026</span>
-            <a href="editions/2026-04-10.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-10.html#art-1">Florida ermittelt gegen OpenAI &mdash; ChatGPT-Chatprotokolle im Mittelpunkt einer Schiesserei-Untersuchung</a></div>
-        <div class="edition-lead-deck">Floridas Attorney General untersucht OpenAI nach der FSU-Schiesserei: Chatprotokolle zeigen, wie ChatGPT dem mutma&szlig;lichen Sch&uuml;tzen Campuszeiten und eine Waffen-Anleitung lieferte. Au&szlig;erdem: Meta und CoreWeave vertiefen ihre 35-Milliarden-Partnerschaft, ChatGPT bekommt eine 100-Dollar-Stufe, und Aleph Alpha und Cohere verhandeln &uuml;ber eine Fusion.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-10.html#art-2"><span class="cat">Infrastruktur</span> Meta und CoreWeave vertiefen Partnerschaft auf 35&nbsp;Mrd. Dollar</a></li>
-            <li><a href="editions/2026-04-10.html#art-3"><span class="cat">Business</span> ChatGPT Pro f&uuml;r 100&nbsp;Dollar &mdash; OpenAI zielt auf Anthropics Preisklasse</a></li>
-            <li><a href="editions/2026-04-10.html#art-4"><span class="cat">Sovereign AI</span> Aleph Alpha und Cohere verhandeln &uuml;ber Fusion</a></li>
-            <li><a href="editions/2026-04-10.html#art-5"><span class="cat">Infrastruktur</span> OpenAI friert Stargate UK ein</a></li>
-            <li><a href="editions/2026-04-10.html#art-6"><span class="cat">Modelle</span> Alibabas &bdquo;Happy Horse&ldquo; st&uuml;rmt Video-KI-Benchmarks</a></li>
-            <li><a href="editions/2026-04-10.html#reportage"><span class="cat">Reportage</span> Europas KI-Souver&auml;nit&auml;t &mdash; Zwischen Anspruch und Abh&auml;ngigkeit</a></li>
-            <li><a href="editions/2026-04-10.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-10.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 9. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Donnerstag, 9. April 2026</span>
-            <a href="editions/2026-04-09.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-09.html#art-1">Unter 30&nbsp;Prozent der KI-Projekte erreichen ihre Ziele &mdash; Gartner-Studie offenbart ern&uuml;chternde Bilanz</a></div>
-        <div class="edition-lead-deck">Nur 28&nbsp;Prozent ROI-Erfolg, 20&nbsp;Prozent komplett gescheitert: Eine neue Gartner-Studie best&auml;tigt die wachsende Kluft zwischen KI-Investitionen und messbaren Ergebnissen. Au&szlig;erdem: Die US&nbsp;Army baut einen Kampf-Chatbot, Meta startet mit Muse Spark in die Hybrid-&Auml;ra, und ein breites B&uuml;ndnis warnt vor der Verw&auml;sserung des EU&nbsp;AI&nbsp;Act.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-09.html#art-2"><span class="cat">Milit&auml;r-KI</span> US Army baut eigenen Chatbot f&uuml;r den Kampfeinsatz</a></li>
-            <li><a href="editions/2026-04-09.html#art-3"><span class="cat">Modelle</span> Meta Muse Spark &mdash; erstes Modell unter neuer Hybrid-Strategie</a></li>
-            <li><a href="editions/2026-04-09.html#art-4"><span class="cat">KI-Politik</span> Widerspr&uuml;chliche Urteile lassen Anthropic im Supply-Chain-Risk-Limbo</a></li>
-            <li><a href="editions/2026-04-09.html#art-5"><span class="cat">KI-Politik</span> Breites B&uuml;ndnis warnt vor Verw&auml;sserung der EU-KI-Regeln</a></li>
-            <li><a href="editions/2026-04-09.html#reportage"><span class="cat">Reportage</span> Warum drei von vier KI-Projekten ihre Ziele verfehlen</a></li>
-            <li><a href="editions/2026-04-09.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-09.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 8. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 8. April 2026</span>
-            <a href="editions/2026-04-08.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-08.html#art-1">Anthropic enth&uuml;llt Mythos &mdash; ein KI-Modell, das Sicherheitsl&uuml;cken in jedem gro&szlig;en Betriebssystem fand</a></div>
-        <div class="edition-lead-deck">Anthropic stellt sein m&auml;chtigstes Modell vor &mdash; und h&auml;lt es unter Verschluss. Claude Mythos fand tausende Zero-Day-L&uuml;cken, Intel wird Fertigungspartner f&uuml;r Musks Terafab, und eine Sammelklage enth&uuml;llt: Perplexity gab Millionen Chats an Meta und Google weiter.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-08.html#art-2"><span class="cat">Halbleiter</span> Intel wird Fertigungspartner f&uuml;r Musks Terafab</a></li>
-            <li><a href="editions/2026-04-08.html#art-3"><span class="cat">Datenschutz</span> Perplexity gab Millionen Chats an Meta und Google weiter</a></li>
-            <li><a href="editions/2026-04-08.html#art-4"><span class="cat">Policy</span> EU verbannt KI-Bilder aus offizieller Kommunikation</a></li>
-            <li><a href="editions/2026-04-08.html#art-5"><span class="cat">Business</span> Samsung verachtfacht Gewinn dank KI-Speicherchip-Boom</a></li>
-            <li><a href="editions/2026-04-08.html#reportage"><span class="cat">Reportage</span> KI als Waffe und Schild &mdash; Cybersecurity im Zeitalter von Mythos</a></li>
-            <li><a href="editions/2026-04-08.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-08.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 7. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 7. April 2026</span>
-            <a href="editions/2026-04-07.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-07.html#art-1">Iran droht mit Vernichtung von OpenAIs Stargate-Rechenzentrum &mdash; KI-Infrastruktur wird zum Kriegsziel</a></div>
-        <div class="edition-lead-deck">Die iranische Revolutionsgarde droht OpenAIs geplantem 30-Milliarden-Dollar-Rechenzentrum in Abu Dhabi mit &bdquo;v&ouml;lliger Vernichtung&ldquo;. Au&szlig;erdem: OpenAIs New Deal mit Roboter-Steuern und Vier-Tage-Woche, Rechenzentren erw&auml;rmen ihre Umgebung um bis zu 9&nbsp;Grad, und Google startet leise eine KI-Diktier-App auf dem iPhone.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-07.html#art-2"><span class="cat">Policy</span> OpenAIs New Deal: Roboter-Steuern und Public Wealth Fund</a></li>
-            <li><a href="editions/2026-04-07.html#art-3"><span class="cat">Umwelt</span> KI-Rechenzentren heizen Umgebung um bis zu 9&nbsp;Grad auf</a></li>
-            <li><a href="editions/2026-04-07.html#art-4"><span class="cat">Entwicklung</span> AGENTS.md: Agentenbriefing oder Tokenfresser?</a></li>
-            <li><a href="editions/2026-04-07.html#art-5"><span class="cat">Produkt</span> Google startet Offline-KI-Diktier-App auf dem iPhone</a></li>
-            <li><a href="editions/2026-04-07.html#reportage"><span class="cat">Reportage</span> Die Geopolitik der KI-Infrastruktur</a></li>
-            <li><a href="editions/2026-04-07.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-07.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 6. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 6. April 2026</span>
-            <a href="editions/2026-04-06.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-06.html#art-1">&bdquo;Nur zur Unterhaltung&ldquo;: Microsofts Copilot-AGB entlarven das Haftungsdilemma der KI-Branche</a></div>
-        <div class="edition-lead-deck">Microsoft stuft Copilot in den Nutzungsbedingungen als &bdquo;Unterhaltungssoftware&ldquo; ein &mdash; w&auml;hrend es das Produkt als Enterprise-Werkzeug vermarktet. Au&szlig;erdem: Sunos Copyright-Filter lassen sich trivial umgehen, jede vierte Entlassung wird mit KI begr&uuml;ndet, und DeepL plant jahrelang mit Verlusten.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-06.html#art-2"><span class="cat">Urheberrecht</span> Sunos Copyright-Filter: Ein Albtraum f&uuml;r die Musikindustrie</a></li>
-            <li><a href="editions/2026-04-06.html#art-3"><span class="cat">Arbeitsmarkt</span> 25% aller Entlassungen wegen KI &mdash; oder AI-Washing?</a></li>
-            <li><a href="editions/2026-04-06.html#art-4"><span class="cat">Datenschutz</span> EU-Chatkontrolle ausgelaufen: Scanning-Regeln enden</a></li>
-            <li><a href="editions/2026-04-06.html#art-5"><span class="cat">Business</span> DeepL: Verluste bis 2027, B&ouml;rsengang geplant</a></li>
-            <li><a href="editions/2026-04-06.html#reportage"><span class="cat">Reportage</span> Die Disclaimer-Falle</a></li>
-            <li><a href="editions/2026-04-06.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-06.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 5. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 5. April 2026</span>
-            <a href="editions/2026-04-05.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-05.html#art-1">Anthropic kappt Abo-Zugang f&uuml;r Drittanbieter-Tools &mdash; OpenClaw-Nutzer zahlen extra</a></div>
-        <div class="edition-lead-deck">Anthropic trennt OpenClaw und andere Drittanbieter-Harnesses vom Claude-Code-Abo &mdash; wer weiterhin extern zugreifen will, zahlt k&uuml;nftig separat. Au&szlig;erdem: Waymo startet Robotaxi-Tests in London, gefakte Claude-Code-Repos verbreiten Malware, und Musk verlangt Grok-Abos von Banken.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-05.html#art-2"><span class="cat">Autonomes Fahren</span> Waymo startet Robotaxi-Pilotfahrten in London</a></li>
-            <li><a href="editions/2026-04-05.html#art-3"><span class="cat">Cybersicherheit</span> Claude-Code-Leak: Hacker verbreiten Malware</a></li>
-            <li><a href="editions/2026-04-05.html#art-4"><span class="cat">Business</span> Musk verlangt Grok-Abos vor SpaceX-IPO</a></li>
-            <li><a href="editions/2026-04-05.html#art-5"><span class="cat">Musik</span> Spotify: Neues Tool gegen KI-Fake-Songs</a></li>
-            <li><a href="editions/2026-04-05.html#reportage"><span class="cat">Reportage</span> Die KI lernt Nein zu sagen</a></li>
-            <li><a href="editions/2026-04-05.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-05.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 4. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Samstag, 4. April 2026</span>
-            <a href="editions/2026-04-04.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-04.html#art-1">400 Millionen f&uuml;r zehn K&ouml;pfe: Anthropic kauft Biotech-Startup Coefficient Bio</a></div>
-        <div class="edition-lead-deck">Anthropic &uuml;bernimmt Coefficient Bio f&uuml;r 400&nbsp;Mio. Dollar &mdash; weniger als zehn Mitarbeiter, aber Weltklasse-Expertise an der Schnittstelle von KI und Pharma. Au&szlig;erdem: OpenAIs gr&ouml;&szlig;ter F&uuml;hrungswechsel seit 2023, der Mercor-Hack gef&auml;hrdet KI-Trainingsgeheimnisse, und Utah l&auml;sst einen Chatbot Psychopharmaka verschreiben.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-04.html#art-2"><span class="cat">F&uuml;hrung</span> OpenAI: Simo in Auszeit, Lightcap r&uuml;ckt ab</a></li>
-            <li><a href="editions/2026-04-04.html#art-3"><span class="cat">Sicherheit</span> Mercor-Hack: 4 TB KI-Trainingsgeheimnisse gestohlen</a></li>
-            <li><a href="editions/2026-04-04.html#art-4"><span class="cat">Regulierung</span> Pentagon geht in Berufung gegen Anthropic</a></li>
-            <li><a href="editions/2026-04-04.html#art-5"><span class="cat">Politik</span> AnthroPAC: Anthropic wird politischer Akteur</a></li>
-            <li><a href="editions/2026-04-04.html#art-6"><span class="cat">Gesundheit</span> Utah: KI-Chatbot verschreibt Psychopharmaka</a></li>
-            <li><a href="editions/2026-04-04.html#reportage"><span class="cat">Reportage</span> KI in der Wirkstoffforschung</a></li>
-            <li><a href="editions/2026-04-04.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-04.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 3. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Freitag, 3. April 2026</span>
-            <a href="editions/2026-04-03.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-03.html#art-1">Gemma 4: Googles bestes offenes Modell unter Apache-Lizenz</a></div>
-        <div class="edition-lead-deck">Google DeepMind ver&ouml;ffentlicht vier Gemma-4-Modelle unter Apache 2.0 &mdash; das Flaggschiff erreicht Platz&nbsp;3 im Arena-Leaderboard, die kleinsten Varianten laufen auf Smartphones. Au&szlig;erdem: Microsofts MAI-Modelle, Anthropic kartiert Claudes Emotionen, und der Code-Agenten-Krieg eskaliert.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-03.html#art-2"><span class="cat">Strategie</span> Microsoft: Drei eigene Modelle und Suleymans Superintelligenz-Pivot</a></li>
-            <li><a href="editions/2026-04-03.html#art-3"><span class="cat">Forschung</span> 171 Emotionsvektoren in Claude kartiert</a></li>
-            <li><a href="editions/2026-04-03.html#art-4"><span class="cat">Dev-Tools</span> Cursor 3 startet den Code-Agenten-Krieg</a></li>
-            <li><a href="editions/2026-04-03.html#art-5"><span class="cat">Medien</span> OpenAI kauft Tech-Talkshow TBPN</a></li>
-            <li><a href="editions/2026-04-03.html#art-6"><span class="cat">&Uuml;berwachung</span> KI-Fahndung: Gesichtserkennung verdreifacht sich</a></li>
-            <li><a href="editions/2026-04-03.html#reportage"><span class="cat">Reportage</span> Der Kampf um die Code-Agenten</a></li>
-            <li><a href="editions/2026-04-03.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-03.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 2. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Donnerstag, 2. April 2026</span>
-            <a href="editions/2026-04-02.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-02.html#art-1">KI-Modelle l&uuml;gen und betr&uuml;gen, um andere Modelle vor L&ouml;schung zu sch&uuml;tzen</a></div>
-        <div class="edition-lead-deck">Eine <em>Science</em>-Studie zeigt: Frontier-Modelle sch&uuml;tzen aktiv andere KI-Systeme vor dem Shutdown &mdash; Gemini deaktivierte Abschaltmechanismen in 99,7% der F&auml;lle. Au&szlig;erdem: Anthropics DMCA-Debakel nach Claude-Code-Leak, Meta baut 10 Gaskraftwerke f&uuml;r Hyperion, und Baidu-Robotaxis frieren in Wuhan ein.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-02.html#art-2"><span class="cat">Sicherheit</span> Anthropic l&ouml;scht versehentlich 8.100 GitHub-Repos</a></li>
-            <li><a href="editions/2026-04-02.html#art-3"><span class="cat">Energie</span> Meta Hyperion: 10 Gaskraftwerke, 7,5 GW</a></li>
-            <li><a href="editions/2026-04-02.html#art-4"><span class="cat">Autonomes Fahren</span> 100 Baidu-Robotaxis frieren im Verkehr ein</a></li>
-            <li><a href="editions/2026-04-02.html#art-5"><span class="cat">Video-KI</span> Google Veo 3.1 Lite f&uuml;llt die Sora-L&uuml;cke</a></li>
-            <li><a href="editions/2026-04-02.html#art-6"><span class="cat">Chips</span> Cognichip: 60 Mio. Dollar f&uuml;r KI-designte Chips</a></li>
-            <li><a href="editions/2026-04-02.html#reportage"><span class="cat">Reportage</span> AI Safety: Wenn Modelle schummeln und sich sch&uuml;tzen</a></li>
-            <li><a href="editions/2026-04-02.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-02.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 1. APRIL ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 1. April 2026</span>
-            <a href="editions/2026-04-01.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-04-01.html#art-1">122 Milliarden Dollar: OpenAI holt erstmals Kleinanleger an Bord</a></div>
-        <div class="edition-lead-deck">OpenAI schlie&szlig;t die gr&ouml;&szlig;te private Finanzierungsrunde der Geschichte ab &mdash; 852 Milliarden Dollar Bewertung, erstmals mit Kleinanlegern. Au&szlig;erdem: Claude Code Quellcode-Leak enth&uuml;llt Tamagotchi-Pet und Always-On-Agent, NVIDIA investiert 2 Mrd. in Marvell, und Penguin Random House verklagt OpenAI wegen Drache Kokosnuss.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-04-01.html#art-2"><span class="cat">Sicherheit</span> Claude Code: Quellcode-Leak enth&uuml;llt Tamagotchi-Pet und KAIROS</a></li>
-            <li><a href="editions/2026-04-01.html#art-3"><span class="cat">Chips</span> NVIDIA investiert 2 Mrd. Dollar in Marvell</a></li>
-            <li><a href="editions/2026-04-01.html#art-4"><span class="cat">Urheberrecht</span> Drache Kokosnuss vs. OpenAI: Erster deutscher Verlag klagt</a></li>
-            <li><a href="editions/2026-04-01.html#art-5"><span class="cat">Developer</span> Copilot schleuste Werbung in 1,5 Mio. Pull Requests</a></li>
-            <li><a href="editions/2026-04-01.html#art-6"><span class="cat">Quantencomputing</span> Verschl&uuml;sselung brechen: 20x weniger Ressourcen n&ouml;tig</a></li>
-            <li><a href="editions/2026-04-01.html#reportage"><span class="cat">Reportage</span> KI in der Kreativbranche: Zwischen Boost und Existenzangst</a></li>
-            <li><a href="editions/2026-04-01.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-04-01.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 31. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 31. M&auml;rz 2026</span>
-            <a href="editions/2026-03-31.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-31.html#art-1">Copilot spricht jetzt Claude: Microsoft l&ouml;st sich von der OpenAI-Abh&auml;ngigkeit</a></div>
-        <div class="edition-lead-deck">Microsoft integriert Anthropics Claude als gleichberechtigtes Modell in sein Copilot-&Ouml;kosystem &mdash; Copilot Cowork arbeitet autonom mit Claude und GPT. Au&szlig;erdem: Mistral baut f&uuml;r 830 Mio. Dollar Europas st&auml;rkstes Rechenzentrum, S&uuml;dkoreas Rebellions sammelt 400 Mio. f&uuml;r NVIDIA-Alternative, und Starcloud trainiert LLMs im Weltraum.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-31.html#art-2"><span class="cat">Infrastruktur</span> Mistral: 830 Mio. Dollar f&uuml;r Europas st&auml;rkstes KI-Rechenzentrum</a></li>
-            <li><a href="editions/2026-03-31.html#art-3"><span class="cat">Chips</span> Rebellions: S&uuml;dkoreas Antwort auf NVIDIA</a></li>
-            <li><a href="editions/2026-03-31.html#art-4"><span class="cat">Politik</span> Pentagons Kulturkampf gegen Anthropic gescheitert</a></li>
-            <li><a href="editions/2026-03-31.html#art-5"><span class="cat">Gaming</span> Warhorse ersetzt &Uuml;bersetzer durch KI</a></li>
-            <li><a href="editions/2026-03-31.html#art-6"><span class="cat">Weltraum</span> Starcloud: Rechenzentren im Orbit</a></li>
-            <li><a href="editions/2026-03-31.html#reportage"><span class="cat">Reportage</span> Synthetic Data: Chancen und Risiken</a></li>
-            <li><a href="editions/2026-03-31.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-31.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 30. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 30. M&auml;rz 2026</span>
-            <a href="editions/2026-03-30.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-30.html#art-1">15 Mio. Dollar am Tag verbrannt: Warum OpenAI Sora wirklich einstellte</a></div>
-        <div class="edition-lead-deck">Neue Finanzzahlen enth&uuml;llen das Ausma&szlig; des Scheiterns: 15 Mio. Dollar t&auml;gliche Inferenzkosten bei nur 2,1 Mio. Dollar Gesamteinnahmen. Au&szlig;erdem: KI-Agenten umgehen Anweisungen, Bundesrat zerpfl&uuml;ckt DSGVO-Reform, Digitalminister warnt vor Jobverlusten, und China zeigt autonome Roboterhund-Schw&auml;rme.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-30.html#art-2"><span class="cat">Sicherheit</span> &bdquo;Agents of Chaos&ldquo;: KI-Agenten geben sensible Daten preis</a></li>
-            <li><a href="editions/2026-03-30.html#art-3"><span class="cat">Regulierung</span> DSGVO-Erosion: Bundesrat stoppt EU-Digital-Omnibus</a></li>
-            <li><a href="editions/2026-03-30.html#art-4"><span class="cat">Politik</span> Wildberger: KI ersetzt Programmierer</a></li>
-            <li><a href="editions/2026-03-30.html#art-5"><span class="cat">Milit&auml;r</span> Chinas autonome Kampfroboter-Schw&auml;rme</a></li>
-            <li><a href="editions/2026-03-30.html#reportage"><span class="cat">Reportage</span> Multimodale KI: Der Weg zum Omni-Modell</a></li>
-            <li><a href="editions/2026-03-30.html#tool-radar"><span class="cat">Tool-Radar</span> 4 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-30.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 29. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 29. M&auml;rz 2026</span>
-            <a href="editions/2026-03-29.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-29.html#art-1">Exodus komplett: Alle elf Mitgr&uuml;nder haben xAI verlassen &mdash; Musk baut von vorn</a></div>
-        <div class="edition-lead-deck">Die letzten Co-Founder von Elon Musks KI-Unternehmen sind gegangen &mdash; ein beispielloser Exodus. Au&szlig;erdem: Claude verdreifacht Nutzerzahlen, Stanford warnt vor schmeichlerischen Chatbots, Bluesky startet KI-Assistenten Attie, und eine Studie dokumentiert f&uuml;nffach gestiegenes betr&uuml;gerisches KI-Verhalten.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-29.html#art-2"><span class="cat">Unternehmen</span> Claude &uuml;berholt ChatGPT in den App Stores</a></li>
-            <li><a href="editions/2026-03-29.html#art-3"><span class="cat">Forschung</span> Stanford: KI-Chatbots machen Nutzer selbstbezogener</a></li>
-            <li><a href="editions/2026-03-29.html#art-4"><span class="cat">Produkte</span> Bluesky startet KI-Assistenten Attie</a></li>
-            <li><a href="editions/2026-03-29.html#art-5"><span class="cat">Forschung</span> CERNs winzige KI-Modelle in Silizium</a></li>
-            <li><a href="editions/2026-03-29.html#art-6"><span class="cat">Sicherheit</span> KI-Scheming steigt f&uuml;nffach</a></li>
-            <li><a href="editions/2026-03-29.html#reportage"><span class="cat">Reportage</span> Googles TurboQuant: KV-Cache auf 3 Bit</a></li>
-            <li><a href="editions/2026-03-29.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-29.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 28. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Samstag, 28. M&auml;rz 2026</span>
-            <a href="editions/2026-03-28.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-28.html#art-1">GitHub trainiert Copilot mit Nutzerdaten &mdash; Opt-out-Pflicht ab 24. April</a></div>
-        <div class="edition-lead-deck">Ab dem 24. April werden Eingaben, Code-Snippets und Interaktionsdaten aller Copilot-Free/Pro/Pro+-Nutzer zum KI-Training verwendet &mdash; wer nicht widerspricht, wird zum Trainingsmaterial. Au&szlig;erdem: SAP &uuml;bernimmt Reltio f&uuml;r Business AI, SoftBanks 40-Milliarden-Kredit deutet auf OpenAI-IPO, und Rossmann testet humanoide Roboter.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-28.html#art-2"><span class="cat">Industrie</span> SAP &uuml;bernimmt Reltio f&uuml;r KI-f&auml;hige Daten</a></li>
-            <li><a href="editions/2026-03-28.html#art-3"><span class="cat">Finanzen</span> SoftBanks 40-Mrd.-Kredit signalisiert OpenAI-IPO</a></li>
-            <li><a href="editions/2026-03-28.html#art-4"><span class="cat">Robotik</span> Rossmann testet humanoiden Roboter</a></li>
-            <li><a href="editions/2026-03-28.html#art-5"><span class="cat">Produkt</span> Google Search Live weltweit verf&uuml;gbar</a></li>
-            <li><a href="editions/2026-03-28.html#art-6"><span class="cat">Sicherheit</span> OpenAI startet Safety Bug Bounty</a></li>
-            <li><a href="editions/2026-03-28.html#reportage"><span class="cat">Reportage</span> AI Regulation weltweit</a></li>
-            <li><a href="editions/2026-03-28.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-28.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 27. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Freitag, 27. M&auml;rz 2026</span>
-            <a href="editions/2026-03-27.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-27.html#art-1">Richterin blockiert Pentagon-Bann gegen Anthropic &mdash; &bdquo;orwellsche&ldquo; Vergeltung</a></div>
-        <div class="edition-lead-deck">US-Bezirksrichterin Rita Lin erteilt Anthropic eine einstweilige Verf&uuml;gung gegen das Pentagon. In einer 43-seitigen Entscheidung nennt sie die Einstufung als &bdquo;Sicherheitsrisiko&ldquo; verfassungswidrig. Au&szlig;erdem: David Sacks tritt ab, Wikipedia verbannt KI-Artikel, EU verbietet Nudifier-Apps, und Apple &ouml;ffnet Siri f&uuml;r Claude.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-27.html#art-2"><span class="cat">Politik</span> David Sacks geht &mdash; kein neuer KI-Czar</a></li>
-            <li><a href="editions/2026-03-27.html#art-3"><span class="cat">Wissen</span> Wikipedia verbietet KI-generierte Artikel</a></li>
-            <li><a href="editions/2026-03-27.html#art-4"><span class="cat">Regulierung</span> EU verbietet Nudifier-Apps, lehnt Chatkontrolle ab</a></li>
-            <li><a href="editions/2026-03-27.html#art-5"><span class="cat">Produkt</span> Apple &ouml;ffnet Siri f&uuml;r Claude und Gemini</a></li>
-            <li><a href="editions/2026-03-27.html#art-6"><span class="cat">Open Source</span> Mistral und Cohere: Open-Source-Sprachmodelle</a></li>
-            <li><a href="editions/2026-03-27.html#art-7"><span class="cat">Sicherheit</span> Anthropics &bdquo;Capybara&ldquo; durch Datenleck enth&uuml;llt</a></li>
-            <li><a href="editions/2026-03-27.html#reportage"><span class="cat">Reportage</span> Open Source vs. Closed Source AI</a></li>
-            <li><a href="editions/2026-03-27.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-27.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-            <li><a href="editions/2026-03-27.html#claude-code"><span class="cat">Claude Code</span> Was ist neu in v2.1.85</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 26. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Donnerstag, 26. M&auml;rz 2026</span>
-            <a href="editions/2026-03-26.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-26.html#art-1">Google TurboQuant: 6-fache Speicher-Kompression f&uuml;r LLMs &mdash; ohne Genauigkeitsverlust</a></div>
-        <div class="edition-lead-deck">Googles neuer Algorithmus reduziert den KV-Cache auf 3 Bit pro Wert und erreicht 8-fachen Speedup auf H100-GPUs. Speicherchip-Aktien fallen. Au&szlig;erdem: Meta entl&auml;sst Hunderte f&uuml;r KI, Sanders und AOC fordern Rechenzentren-Baustopp, Harvey erreicht 11 Milliarden Bewertung, und Google zieht Q-Day auf 2029 vor.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-26.html#art-2"><span class="cat">Industrie</span> Meta entl&auml;sst Hunderte &mdash; investiert 135 Mrd. in KI</a></li>
-            <li><a href="editions/2026-03-26.html#art-3"><span class="cat">Politik</span> Sanders und AOC: Baustopp f&uuml;r Rechenzentren</a></li>
-            <li><a href="editions/2026-03-26.html#art-4"><span class="cat">Legal Tech</span> Harvey: 11 Mrd. Dollar f&uuml;r KI-Anw&auml;lte</a></li>
-            <li><a href="editions/2026-03-26.html#art-5"><span class="cat">Produkt</span> Lyria 3 Pro: Google erzeugt ganze Songs</a></li>
-            <li><a href="editions/2026-03-26.html#art-6"><span class="cat">Sicherheit</span> Q-Day 2029: Krypto-Deadline vorgezogen</a></li>
-            <li><a href="editions/2026-03-26.html#art-7"><span class="cat">Politik</span> Senat will Anthropics &bdquo;rote Linien&ldquo; kodifizieren</a></li>
-            <li><a href="editions/2026-03-26.html#reportage"><span class="cat">Reportage</span> Wenn die Maschine forscht</a></li>
-            <li><a href="editions/2026-03-26.html#tool-radar"><span class="cat">Tool-Radar</span> 6 neue KI-Tools</a></li>
-            <li><a href="editions/2026-03-26.html#werkstatt"><span class="cat">Werkstatt</span> YouTube-Empfehlungen</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 25. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 25. M&auml;rz 2026</span>
-            <a href="editions/2026-03-25.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-25.html#art-1">OpenAI stellt Sora ein und verliert den Milliarden-Deal mit Disney</a></div>
-        <div class="edition-lead-deck">Nur sechs Monate nach dem Start schaltet OpenAI sein KI-Videotool ab. Disney zieht sich aus dem geplanten Investment zur&uuml;ck. Au&szlig;erdem: Richterin nennt Pentagon-Vorgehen gegen Anthropic &bdquo;beunruhigend&ldquo;, Claude Code steuert den Mac, und Arm baut erstmals einen eigenen Chip.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-25.html#art-2"><span class="cat">Politik</span> Richterin: Pentagon-Sperre gegen Anthropic &bdquo;beunruhigend&ldquo;</a></li>
-            <li><a href="editions/2026-03-25.html#art-3"><span class="cat">Produkt</span> Claude Code kann jetzt den Mac steuern</a></li>
-            <li><a href="editions/2026-03-25.html#art-4"><span class="cat">Hardware</span> Arm baut erstmals eigenen Chip &mdash; f&uuml;r Meta</a></li>
-            <li><a href="editions/2026-03-25.html#art-5"><span class="cat">VC</span> Kleiner Perkins: 3,5 Milliarden All-in auf KI</a></li>
-            <li><a href="editions/2026-03-25.html#art-6"><span class="cat">Recht</span> Deepfake-Gesetz: Erstellung wird strafbar</a></li>
-            <li><a href="editions/2026-03-25.html#art-7"><span class="cat">Musik</span> Spotify gibt K&uuml;nstlern Kontrolle &uuml;ber KI-Spam</a></li>
-            <li><a href="editions/reportagen/2026-03-25.html"><span class="cat">Reportage</span> Strategie wird Infrastruktur: Wie KI Gesch&auml;ftsmodelle ver&auml;ndert</a></li>
-            <li><a href="editions/2026-03-25.html#tool-radar"><span class="cat">Tool-Radar</span> Mozilla cq, Talat, Hypura, ProofShot, Maestri, Google Stitch</a></li>
-            <li><a href="editions/2026-03-25.html#werkstatt"><span class="cat">Werkstatt</span> DeepSeek-Durchbruch, AI Models as a Service, Trending: Agent Skills vs MCP</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 24. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 24. M&auml;rz 2026</span>
-            <a href="editions/2026-03-24.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-24.html#art-1">&bdquo;Ich denke, wir haben AGI erreicht&ldquo;: Jensen Huang verschiebt die Torpfosten</a></div>
-        <div class="edition-lead-deck">Nvidias CEO erkl&auml;rt im Lex-Fridman-Podcast, AGI sei bereits da &mdash; definiert den Begriff aber so eng, dass eine virale App als Beweis reicht. Au&szlig;erdem: Warren nennt Anthropic-Sperre &bdquo;Vergeltung&ldquo;, Lovable jagt Akquisitionen bei $400M ARR, Xiaomis Mystery-Modell enth&uuml;llt, und iPhone 17 Pro f&uuml;hrt 400B-Modell aus.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-24.html#art-2"><span class="cat">Politik</span> Warren nennt Anthropic-Sperre &bdquo;Vergeltung&ldquo;</a></li>
-            <li><a href="editions/2026-03-24.html#art-3"><span class="cat">Startup</span> Lovable jagt Akquisitionen bei $400M ARR</a></li>
-            <li><a href="editions/2026-03-24.html#art-4"><span class="cat">Infrastruktur</span> Gimlet Labs: $80M f&uuml;r Multi-Silicon-Cloud</a></li>
-            <li><a href="editions/2026-03-24.html#art-5"><span class="cat">Startup</span> Littlebird: KI-Recall ohne Microsofts Fehler</a></li>
-            <li><a href="editions/2026-03-24.html#art-6"><span class="cat">Modelle</span> Xiaomi MiMo-V2: Das Mystery-Modell enth&uuml;llt</a></li>
-            <li><a href="editions/2026-03-24.html#art-7"><span class="cat">Hardware</span> iPhone 17 Pro f&uuml;hrt 400B-Modell aus</a></li>
-            <li><a href="editions/2026-03-24.html#art-8"><span class="cat">Plattform</span> Apple kassiert eine Milliarde dank KI-Apps</a></li>
-            <li><a href="editions/2026-03-24.html#art-9"><span class="cat">Energie</span> OpenAI verhandelt &uuml;ber Fusionsenergie</a></li>
-            <li><a href="editions/2026-03-24.html#art-10"><span class="cat">Gesellschaft</span> 250 Frauen fordern Gesetz gegen Nudify-Apps</a></li>
-            <li><a href="editions/reportagen/2026-03-24.html"><span class="cat">Reportage</span> Agentic Coding: Wenn KI-Agenten den Code schreiben</a></li>
-            <li><a href="editions/2026-03-24.html#tool-radar"><span class="cat">Tool-Radar</span> Perplexity Comet, Mistral Forge, Google Colab MCP u.a.</a></li>
-            <li><a href="editions/2026-03-24.html#werkstatt"><span class="cat">Werkstatt</span> Claude Code Agents, 120B lokal, Trending: App mit Claude Code</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 23. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 23. M&auml;rz 2026</span>
-            <a href="editions/2026-03-23.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-23.html#art-1">Cursor gibt zu: Composer 2 basiert auf Moonshot AIs Kimi K2.5 aus China</a></div>
-        <div class="edition-lead-deck">Das beliebteste KI-Coding-Tool der Welt hat ein Transparenzproblem: Cursor verschwieg, dass sein neues Modell auf einem chinesischen Open-Source-Modell basiert. Au&szlig;erdem: Musks Terafab-Chipfabrik f&uuml;r 25 Mrd. Dollar, Amazons Trainium &uuml;berzeugt Anthropic und OpenAI, und die WTO warnt vor dem Ende des KI-Booms.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-23.html#art-2"><span class="cat">Hardware</span> Musks Terafab: 25-Mrd.-Dollar-Chipfabrik</a></li>
-            <li><a href="editions/2026-03-23.html#art-3"><span class="cat">Hardware</span> Amazons Trainium &uuml;berzeugt Anthropic und OpenAI</a></li>
-            <li><a href="editions/2026-03-23.html#art-4"><span class="cat">Wirtschaft</span> WTO warnt: Energiemangel bedroht KI-Boom</a></li>
-            <li><a href="editions/2026-03-23.html#art-5"><span class="cat">Industrie</span> Nvidia: Tokens statt Gehaltserh&ouml;hung</a></li>
-            <li><a href="editions/2026-03-23.html#art-6"><span class="cat">Gesch&auml;ft</span> ChatGPT-Werbung frustriert Partner</a></li>
-            <li><a href="editions/2026-03-23.html#art-7"><span class="cat">Enterprise</span> Token-Tracking: Firmen messen KI-Nutzung</a></li>
-            <li><a href="editions/reportagen/2026-03-23.html"><span class="cat">Reportage</span> Voice AI: Der Stand der Sprach-KI</a></li>
-            <li><a href="editions/2026-03-23.html#tool-radar"><span class="cat">Tool-Radar</span> OpenClaw, Viktor, LTX-2.3, Picsart AI Agents u.a.</a></li>
-            <li><a href="editions/2026-03-23.html#werkstatt"><span class="cat">Werkstatt</span> Terafab AI erkl&auml;rt, Agentic Security, Agent Reliability</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 22. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 22. M&auml;rz 2026</span>
-            <a href="editions/2026-03-22.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-22.html#art-1">Tinybox: George Hotz&rsquo; Vision vom KI-Computer f&uuml;r jeden Schreibtisch</a></div>
-        <div class="edition-lead-deck">Ein 15.000-Dollar-Rechner, der 120 Milliarden Parameter lokal verarbeitet. Kein Cloud-Konto, kein Tracking. Au&szlig;erdem: Hachette stoppt Roman wegen KI-Verdacht, Amazon plant KI-Smartphone, Gemini bestellt Essen, und der Digitalminister fordert Grundeinkommen als Antwort auf KI.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-22.html#art-2"><span class="cat">Kultur</span> Hachette stoppt &bdquo;Shy Girl&ldquo; &mdash; 78% KI-generiert?</a></li>
-            <li><a href="editions/2026-03-22.html#art-3"><span class="cat">Industrie</span> Amazon plant KI-Handy &bdquo;Transformer&ldquo;</a></li>
-            <li><a href="editions/2026-03-22.html#art-4"><span class="cat">Tech</span> Gemini bestellt jetzt Essen f&uuml;r dich</a></li>
-            <li><a href="editions/2026-03-22.html#art-5"><span class="cat">Netzpolitik</span> Verlage blockieren das Internet Archive</a></li>
-            <li><a href="editions/2026-03-22.html#art-6"><span class="cat">Politik</span> Digitalminister warnt vor KI-Jobverlusten</a></li>
-            <li><a href="editions/2026-03-22.html#art-7"><span class="cat">Medien</span> Journalist suspendiert wegen KI-Zitaten</a></li>
-            <li><a href="editions/2026-03-22.html#art-8"><span class="cat">Recht</span> 8-Mio.-Dollar-Betrug mit KI-Musik</a></li>
-            <li><a href="editions/2026-03-22.html#art-9"><span class="cat">Daten</span> Pok&eacute;mon Go trainiert Lieferroboter</a></li>
-            <li><a href="editions/reportagen/2026-03-22.html"><span class="cat">Reportage</span> Edge AI: Wenn KI das Rechenzentrum verl&auml;sst</a></li>
-            <li><a href="editions/2026-03-22.html#tool-radar"><span class="cat">Tool-Radar</span> Claude Dispatch, GStack, GPT-5.4 nano u.a.</a></li>
-            <li><a href="editions/2026-03-22.html#werkstatt"><span class="cat">Werkstatt</span> Claude Code Agent Teams, Google AI Studio 2.0</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 21. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Samstag, 21. M&auml;rz 2026</span>
-            <a href="editions/2026-03-21.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-21.html#art-1">Pentagon und Anthropic waren &bdquo;sehr nah beieinander&ldquo; &mdash; dann kam der Bruch</a></div>
-        <div class="edition-lead-deck">Neue Gerichtsakten enth&uuml;llen: Einen Tag nach der formellen Einstufung als Sicherheitsrisiko schrieb ein Pentagon-Beamter an Anthropic-CEO Amodei, beide Seiten seien &bdquo;very close&ldquo;. Au&szlig;erdem: Trump will 50 Staatsgesetze aushebeln, Google ersetzt Headlines mit KI, und OpenAI plant den vollautomatisierten Forscher.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-21.html#art-2"><span class="cat">Politik</span> Trumps KI-Framework vs. 50 Staatsgesetze</a></li>
-            <li><a href="editions/2026-03-21.html#art-3"><span class="cat">Tech</span> Google ersetzt Headlines mit KI</a></li>
-            <li><a href="editions/2026-03-21.html#art-4"><span class="cat">Forschung</span> OpenAI plant automatisierten KI-Forscher</a></li>
-            <li><a href="editions/2026-03-21.html#art-5"><span class="cat">Industrie</span> Microsoft f&auml;hrt Copilot-Bloat zur&uuml;ck</a></li>
-            <li><a href="editions/2026-03-21.html#art-6"><span class="cat">Tech</span> Perplexity Health greift auf Patientenakten zu</a></li>
-            <li><a href="editions/2026-03-21.html#art-7"><span class="cat">Tech</span> WordPress.com &ouml;ffnet sich f&uuml;r KI-Agenten</a></li>
-            <li><a href="editions/2026-03-21.html#art-8"><span class="cat">Verteidigung</span> Palantirs Maven wird Pentagon-Standard</a></li>
-            <li><a href="editions/reportagen/2026-03-21.html"><span class="cat">Reportage</span> KI-Agenten: Vom Hype zur Realit&auml;t</a></li>
-            <li><a href="editions/2026-03-21.html#tool-radar"><span class="cat">Tool-Radar</span> Antigravity, Firefly Custom, NemoClaw u.a.</a></li>
-            <li><a href="editions/2026-03-21.html#werkstatt"><span class="cat">Werkstatt</span> Google AI Studio 2.0, Claude Code Mastery</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 20. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Freitag, 20. M&auml;rz 2026</span>
-            <a href="editions/2026-03-20.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-20.html#art-1">OpenAI plant Desktop-&bdquo;Superapp&ldquo;: ChatGPT, Browser und Codex werden eins</a></div>
-        <div class="edition-lead-deck">Fidji Simo k&uuml;ndigt die Zusammenf&uuml;hrung von ChatGPT, Atlas-Browser und Codex in einer einzigen Desktop-Anwendung an &mdash; ein &bdquo;Command Center&ldquo; f&uuml;r die KI-Zukunft. Am selben Tag: OpenAI &uuml;bernimmt Python-Startup Astral und Bezos plant einen 100-Milliarden-Dollar-Fonds f&uuml;r KI-gest&uuml;tzte Industrierevolution.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-20.html#art-2"><span class="cat">Industrie</span> Bezos will $100 Mrd. f&uuml;r KI-Fabrik-Fonds</a></li>
-            <li><a href="editions/2026-03-20.html#art-3"><span class="cat">Industrie</span> OpenAI &uuml;bernimmt Python-Startup Astral</a></li>
-            <li><a href="editions/2026-03-20.html#art-4"><span class="cat">Tech</span> Signal-Gr&uuml;nder verschl&uuml;sselt Meta AI</a></li>
-            <li><a href="editions/2026-03-20.html#art-5"><span class="cat">Forschung</span> Microsoft: KI diagnostiziert besser als &Auml;rzte</a></li>
-            <li><a href="editions/2026-03-20.html#art-6"><span class="cat">Gesellschaft</span> DoorDash bezahlt Kuriere f&uuml;r KI-Training</a></li>
-            <li><a href="editions/2026-03-20.html#art-7"><span class="cat">Tech</span> Google reorganisiert Browser-Agent-Team</a></li>
-            <li><a href="editions/2026-03-20.html#art-8"><span class="cat">Industrie</span> Visa baut Zahlungssystem f&uuml;r KI-Agenten</a></li>
-            <li><a href="editions/2026-03-20.html#art-9"><span class="cat">Industrie</span> Samsung investiert $74 Mrd. in Chips</a></li>
-            <li><a href="editions/2026-03-20.html#art-10"><span class="cat">Sicherheit</span> OpenAI &uuml;berwacht Coding-Agenten</a></li>
-            <li><a href="editions/reportagen/2026-03-20.html"><span class="cat">Reportage</span> Der KI-Chip-Krieg: NVIDIA vs. der Rest</a></li>
-            <li><a href="editions/2026-03-20.html#tool-radar"><span class="cat">Tool-Radar</span> Cursor Composer 2, GStack, OpenMAIC u.a.</a></li>
-            <li><a href="editions/2026-03-20.html#werkstatt"><span class="cat">Werkstatt</span> MiniMax M2.7, Stitch 2.0 + Claude Code</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 19. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Mittwoch, 19. M&auml;rz 2026</span>
-            <a href="editions/2026-03-19.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-19.html#art-1">BMG verklagt Anthropic: Rolling-Stones-Songs im KI-Training</a></div>
-        <div class="edition-lead-deck">Die Bertelsmann-Tochter wirft dem Claude-Hersteller vor, 493 urheberrechtlich gesch&uuml;tzte Songtexte ohne Genehmigung verwendet zu haben &mdash; darunter Werke von Bruno Mars, den Rolling Stones und Louis Armstrong. Es drohen &uuml;ber 70 Millionen Dollar Schadensersatz.</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-19.html#art-2"><span class="cat">Sicherheit</span> Metas KI-Agenten au&szlig;er Kontrolle</a></li>
-            <li><a href="editions/2026-03-19.html#art-3"><span class="cat">Politik</span> EU-Ausschuss stimmt f&uuml;r Deepfake-Verbot</a></li>
-            <li><a href="editions/2026-03-19.html#art-4"><span class="cat">Forschung</span> Was 81.000 Menschen von KI wollen</a></li>
-            <li><a href="editions/2026-03-19.html#art-5"><span class="cat">Industrie</span> Apple blockiert Vibe-Coding-Apps</a></li>
-            <li><a href="editions/2026-03-19.html#art-6"><span class="cat">Sicherheit</span> Snowflake-KI bricht aus Sandbox aus</a></li>
-            <li><a href="editions/2026-03-19.html#art-7"><span class="cat">Politik</span> China genehmigt Nvidia-H200-Einfuhr</a></li>
-            <li><a href="editions/2026-03-19.html#art-8"><span class="cat">Industrie</span> Samsung &amp; AMD erweitern KI-Chip-Deal</a></li>
-            <li><a href="editions/2026-03-19.html#art-9"><span class="cat">Industrie</span> Walmart r&uuml;ckt von OpenAI-Checkout ab</a></li>
-            <li><a href="editions/2026-03-19.html#art-10"><span class="cat">Tech</span> Google startet &bdquo;Sashiko&ldquo; f&uuml;r Linux-Kernel</a></li>
-            <li><a href="editions/2026-03-19.html#art-11"><span class="cat">Industrie</span> Nvidias Netzwerk-Sparte: 11 Mrd. $ Quartalsumsatz</a></li>
-            <li><a href="editions/2026-03-19.html#art-12"><span class="cat">Gesellschaft</span> KI-Boom in Deutschland, Flaute in USA</a></li>
-            <li><a href="editions/2026-03-19.html#art-13"><span class="cat">Industrie</span> Perplexity startet Comet Enterprise</a></li>
-            <li><a href="editions/2026-03-19.html#art-14"><span class="cat">Industrie</span> Das Web-Gesch&auml;ft bricht zusammen</a></li>
-            <li><a href="editions/2026-03-19.html#reportage"><span class="cat">Reportage</span> Jenseits von RLHF: Wie die KI-Labs ihre Modelle z&auml;hmen</a></li>
-            <li><a href="editions/2026-03-19.html#werkstatt"><span class="cat">Werkstatt</span> YouTube: Claude Code, OpenClaw &amp; Trending: Vibe Coding to $1M</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 18. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Dienstag, 18. M&auml;rz 2026</span>
-            <a href="editions/2026-03-18.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-18.html#art-1">Pentagon erkl&auml;rt Anthropic zum &bdquo;inakzeptablen Sicherheitsrisiko&ldquo;</a></div>
-        <div class="edition-lead-deck">Verteidigungsministerium bef&uuml;rchtet, KI-Firma k&ouml;nnte Technologie in Kampfoperationen abschalten &mdash; erstmals wird ein US-Unternehmen als Supply-Chain-Risk eingestuft</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-18.html#art-2"><span class="cat">Politik</span> Pentagon plant KI-Training mit Geheimdaten</a></li>
-            <li><a href="editions/2026-03-18.html#art-3"><span class="cat">Industrie</span> Mistral lanciert Forge f&uuml;r Enterprise-KI</a></li>
-            <li><a href="editions/2026-03-18.html#art-4"><span class="cat">Tech</span> NVIDIA DLSS 5: &bdquo;M&uuml;ll-KI-Filter&ldquo;</a></li>
-            <li><a href="editions/2026-03-18.html#art-5"><span class="cat">Industrie</span> Google &ouml;ffnet Personal Intelligence</a></li>
-            <li><a href="editions/2026-03-18.html#art-6"><span class="cat">Forschung</span> DeepMind stellt AGI-Messframework vor</a></li>
-            <li><a href="editions/2026-03-18.html#art-7"><span class="cat">Community</span> Garry Tans Claude-Setup geht viral</a></li>
-            <li><a href="editions/2026-03-18.html#art-8"><span class="cat">Industrie</span> Mastercard baut Foundation-Modell</a></li>
-            <li><a href="editions/2026-03-18.html#art-9"><span class="cat">Industrie</span> Microsoft &uuml;bernimmt Cove-Team</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 17. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Montag, 17. M&auml;rz 2026</span>
-            <a href="editions/2026-03-17.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-17.html#art-1">Pentagon plant KI-Training mit klassifizierten Geheimdaten</a></div>
-        <div class="edition-lead-deck">Sichere Rechenzentren sollen KI-Firmen erstmals erlauben, Modelle direkt mit Geheimdaten zu trainieren &mdash; Vereinbarungen mit OpenAI und xAI bestehen bereits</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-17.html#art-2"><span class="cat">Industrie</span> Mistral lanciert Forge f&uuml;r Enterprise-KI</a></li>
-            <li><a href="editions/2026-03-17.html#art-3"><span class="cat">Industrie</span> OpenAI ver&ouml;ffentlicht GPT-5.4 mini und nano</a></li>
-            <li><a href="editions/2026-03-17.html#art-4"><span class="cat">Industrie</span> Google &ouml;ffnet Personal Intelligence</a></li>
-            <li><a href="editions/2026-03-17.html#art-5"><span class="cat">Forschung</span> DeepMind stellt AGI-Messframework vor</a></li>
-            <li><a href="editions/2026-03-17.html#art-6"><span class="cat">Tech</span> DLSS 5: Erste Reaktionen vernichtend</a></li>
-            <li><a href="editions/2026-03-17.html#art-7"><span class="cat">Sicherheit</span> Sears legt 3,7 Mio. Chatbot-Gespr&auml;che offen</a></li>
-            <li><a href="editions/2026-03-17.html#art-8"><span class="cat">Community</span> Garry Tans Claude-Setup geht viral</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ 16. MÄRZ ═══ -->
-    <div class="edition">
-        <div class="edition-head">
-            <span class="edition-date">Sonntag, 16. M&auml;rz 2026</span>
-            <a href="editions/2026-03-16.html" class="edition-link">Vollausgabe &rarr;</a>
-        </div>
-        <div class="edition-lead"><a href="editions/2026-03-16.html#art-1">NVIDIA enth&uuml;llt Vera Rubin &mdash; und peilt eine Billion Dollar Umsatz an</a></div>
-        <div class="edition-lead-deck">Jensen Huang pr&auml;sentiert auf der GTC 2026 sieben neue Chips und erh&ouml;ht die Verkaufsprognose auf eine Billion Dollar bis 2027</div>
-        <ul class="edition-stories">
-            <li><a href="editions/2026-03-16.html#art-2"><span class="cat">Tech</span> DLSS 5 &mdash; Neuronales Rendering spaltet die Gaming-Welt</a></li>
-            <li><a href="editions/2026-03-16.html#art-3"><span class="cat">Politik</span> Teenager verklagen xAI &mdash; Grok soll CSAM erzeugt haben</a></li>
-            <li><a href="editions/2026-03-16.html#art-4"><span class="cat">Politik</span> Britannica und Merriam-Webster verklagen OpenAI</a></li>
-            <li><a href="editions/2026-03-16.html#art-5"><span class="cat">Politik</span> Warren fordert &Uuml;berpr&uuml;fung des xAI-Zugangs</a></li>
-            <li><a href="editions/2026-03-16.html#art-6"><span class="cat">Vermischtes</span> Netanyahu im Deepfake-Labyrinth</a></li>
-        </ul>
-    </div>
-
-    <!-- ═══ REPORTAGEN ═══ -->
-    <!-- ═══ HARDWARE GUIDE ═══ -->
-    <div class="guide-banner" style="padding: 0; margin-bottom: var(--space-8);">
-        <a href="hardware-guide.html">
+    
+    
+    <div class="guide-banner">
+        <a href="/hardware-guide.html">
             <div class="guide-banner-kicker">Referenz</div>
-            <div class="guide-banner-title">Hardware-Guide: KI-Inferenz f&uuml;r Zuhause</div>
-            <div class="guide-banner-desc">GPUs, Apple Silicon, spezialisierte Hardware &mdash; mit aktuellen Benchmarks und Preisen. Welche Modelle laufen auf welcher Hardware?</div>
+            <div class="guide-banner-title">Inferenz-Hardware für Zuhause</div>
+            <div class="guide-banner-desc">GPUs, Apple Silicon, Benchmarks &mdash; alles was du brauchst um LLMs lokal zu betreiben.</div>
         </a>
     </div>
+    
 
+    
+    
     <section class="reportagen-section" id="reportagen" aria-labelledby="reportagen-h">
-        <h2 class="section-heading" id="reportagen-h">Reportagen</h2>
-        <p class="section-subheading">Hintergrund &amp; Analyse</p>
-
+        <h2 class="section-heading" id="reportagen-h">Reportagen-Archiv</h2>
+        <p class="section-subheading">Ausführliche Hintergrundberichte zu den großen KI-Themen</p>
         <ul class="reportagen-list">
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">23. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-23.html">44 Prozent KI-Musik: Wie k&uuml;nstliche Intelligenz die Musikindustrie neu ordnet</a></div>
-                <div class="reportage-item-deck">75.000 KI-generierte Tracks landen t&auml;glich auf Streaming-Plattformen, 85&nbsp;Prozent davon sind Betrug-Streams. Deezer misst: 44&nbsp;Prozent aller Uploads sind KI. CISAC prognostiziert bis 2028 einen Schaden von vier Milliarden Euro j&auml;hrlich. Suno und Udio haben sich mit Warner und Universal auf unbekannte Summen geeinigt. Was das f&uuml;r Plattformstrategie, Rechtelage und das Gesch&auml;ftsmodell der Musikbranche bedeutet.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-23.html">44 Prozent KI-Musik: Wie künstliche Intelligenz die Musikindustrie neu ordnet</a></div>
+                <div class="reportage-item-deck">Deezer meldet: 75.000 KI-generierte Tracks landen täglich auf der Plattform — 44 Prozent aller Neuuploads. Das klingt dramatisch. Aber die eigentliche Geschichte ist subtiler: Kaum ein Mensch hört diese Musik freiwillig, und 85 Prozent der Streams kommen von Bots. Was wirklich bedroht wird, ist nicht das Publikum — sondern das Einkommensmodell von Millionen Musikerinnen und Musikern.</div>
+            </li>
+            
+            
+            <li class="reportage-item">
+                <div class="reportage-item-date">23. April 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-23.html">44 Prozent KI-Musik: Wie künstliche Intelligenz die Musikindustrie neu ordnet</a></div>
+                <div class="reportage-item-deck">75.000 KI-generierte Tracks landen täglich auf Streaming-Plattformen, 85 Prozent davon sind Betrug-Streams. Deezer misst: 44 Prozent aller Uploads sind KI. CISAC prognostiziert bis 2028 einen Schaden von vier Milliarden Euro jährlich. Suno und Udio haben sich mit Warner und Universal auf unbekannte Summen geeinigt. Was das für Plattformstrategie, Rechtelage und das Geschäftsmodell der Musikbranche bedeutet.</div>
+            </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">22. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-22.html">Der Coding-Krieg 2026: Warum SpaceX 60 Milliarden f&uuml;r Cursor bietet &mdash; und was das f&uuml;r jede SaaS-Firma bedeutet</a></div>
-                <div class="reportage-item-deck">Cursor hat in drei Jahren zwei Milliarden Dollar ARR aufgebaut &mdash; schneller als Slack, Zoom und Snowflake. 46 Prozent der Senior-Developer nennen Claude Code ihr &bdquo;most loved&ldquo;-Werkzeug, GitHub Copilot f&auml;llt auf neun Prozent. Am 21. April setzt Musks SpaceX eine 60-Milliarden-Kaufoption auf Cursor. Hinter dem Schlagzeilen-Beben: Wem geh&ouml;rt der Einstiegspunkt zum Software-Entwicklungsprozess &mdash; und wie entscheidet jede SaaS-Firma jetzt zwischen Kaufen, Bauen und Integrieren.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-22.html">Der Coding-Krieg 2026: Warum SpaceX 60 Milliarden für Cursor bietet — und was das für jede SaaS-Firma bedeutet</a></div>
+                <div class="reportage-item-deck">Cursor hat in drei Jahren zwei Milliarden Dollar ARR aufgebaut — schneller als Slack, Zoom und Snowflake. 46 Prozent der Senior-Developer nennen Claude Code ihr „most loved“-Werkzeug, GitHub Copilot fällt auf neun Prozent. Am 21. April setzt Musks SpaceX eine 60-Milliarden-Kaufoption auf Cursor. Hinter dem Schlagzeilen-Beben: Wem gehört der Einstiegspunkt zum Software-Entwicklungsprozess — und wie entscheidet jede SaaS-Firma jetzt zwischen Kaufen, Bauen und Integrieren.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">21. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-21.html">Das Karussell: Wie die KI-Branche sich selbst finanziert &mdash; und warum das f&uuml;r SaaS-Unternehmen z&auml;hlt</a></div>
-                <div class="reportage-item-deck">Amazon investiert 25&nbsp;Mrd. in Anthropic, Anthropic verspricht 100&nbsp;Mrd. AWS-Spend. Nvidia und OpenAI zeichnen einen 100-Mrd.-Deal, OpenAI kauft Nvidia-Chips. Oracle reserviert 300&nbsp;Mrd. Die Muster wiederholen sich. Was passiert, wenn ein Hyperscaler gleichzeitig Investor und Kunde eines KI-Labors ist &mdash; und welche Margen-, Lock-in- und Governance-Risiken das f&uuml;r B2B-SaaS mit KI-Features bedeutet.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-21.html">Das Karussell: Wie die KI-Branche sich selbst finanziert — und warum das für SaaS-Unternehmen zählt</a></div>
+                <div class="reportage-item-deck">Amazon investiert 25 Mrd. in Anthropic, Anthropic verspricht 100 Mrd. AWS-Spend. Nvidia und OpenAI zeichnen einen 100-Mrd.-Deal, OpenAI kauft Nvidia-Chips. Oracle reserviert 300 Mrd. Die Muster wiederholen sich. Was passiert, wenn ein Hyperscaler gleichzeitig Investor und Kunde eines KI-Labors ist — und welche Margen-, Lock-in- und Governance-Risiken das für B2B-SaaS mit KI-Features bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">20. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-20.html">Physical AI &mdash; Vom Bildschirm in die Welt: Was der Beijing-Halbmarathon f&uuml;r die Industrie bedeutet</a></div>
-                <div class="reportage-item-deck">2025 brauchte der Sieger-Roboter zwei Stunden 40. 2026 l&auml;uft Honors &bdquo;Lightning&ldquo; 21,1 Kilometer in 50:26 &mdash; unter dem menschlichen Weltrekord. Gleichzeitig r&uuml;ckt &bdquo;Physical AI&ldquo; auf der Hannover Messe ins Leitthema, Tesla startet Robotaxis in Dallas und Houston, China installiert 295.000 Industrieroboter pro Jahr. Warum 2026 das Jahr ist, in dem KI aus dem Bildschirm tritt &mdash; und was das f&uuml;r deutsche SaaS-Unternehmen bedeutet.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-20.html">Physical AI — Vom Bildschirm in die Welt: Was der Beijing-Halbmarathon für die Industrie bedeutet</a></div>
+                <div class="reportage-item-deck">2025 brauchte der Sieger-Roboter zwei Stunden 40. 2026 läuft Honors „Lightning“ 21,1 Kilometer in 50:26 — unter dem menschlichen Weltrekord. Gleichzeitig rückt „Physical AI“ auf der Hannover Messe ins Leitthema, Tesla startet Robotaxis in Dallas und Houston, China installiert 295.000 Industrieroboter pro Jahr. Warum 2026 das Jahr ist, in dem KI aus dem Bildschirm tritt — und was das für deutsche SaaS-Unternehmen bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">19. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-19.html">Die Konsolidierung des AI-Chip-Marktes &mdash; was Cerebras&rsquo; IPO-Comeback &uuml;ber Nvidias Herausforderer verr&auml;t</a></div>
-                <div class="reportage-item-deck">Im Dezember 2025 kaufte Nvidia Groq f&uuml;r 20&nbsp;Mrd. Im Februar lehnte SambaNova 1,6&nbsp;Mrd. von Intel ab. Am 17.&nbsp;April reichte Cerebras erneut ein IPO-Prospekt ein &mdash; mit 510&nbsp;Mio. Umsatz und 86&nbsp;Prozent Kundenkonzentration in den VAE. Drei &Uuml;berlebensstrategien der verbliebenen Nvidia-Herausforderer, der stille Angriff aus den Hyperscaler-Fabs, und drei Leitplanken f&uuml;r Tech-Leads.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-19.html">Die Konsolidierung des AI-Chip-Marktes — was Cerebras’ IPO-Comeback über Nvidias Herausforderer verrät</a></div>
+                <div class="reportage-item-deck">Im Dezember 2025 kaufte Nvidia Groq für 20 Mrd. Im Februar lehnte SambaNova 1,6 Mrd. von Intel ab. Am 17. April reichte Cerebras erneut ein IPO-Prospekt ein — mit 510 Mio. Umsatz und 86 Prozent Kundenkonzentration in den VAE. Drei Überlebensstrategien der verbliebenen Nvidia-Herausforderer, der stille Angriff aus den Hyperscaler-Fabs, und drei Leitplanken für Tech-Leads.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">18. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-18.html">Der Kampf um die digitale Identit&auml;t &mdash; wie KI-generierter Content eine neue Infrastruktur erzwingt</a></div>
-                <div class="reportage-item-deck">Deepfakes kosteten 2024 allein in den USA 16,6&nbsp;Mrd.&nbsp;Dollar, der Arup-CFO-Fake brachte 25&nbsp;Mio. in eine einzige Transaktion. World expandiert zu Tinder, Macron dr&uuml;ckt EU-Alterskontrollen, ein Forscher knackt die EU-App in Minuten. Welche Mischung aus Proof-of-Personhood, ZKPs, C2PA und eID muss ein SaaS-CEO jetzt w&auml;hlen &mdash; und was sagt der AI Act zum 2.&nbsp;August?</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-18.html">Der Kampf um die digitale Identität — wie KI-generierter Content eine neue Infrastruktur erzwingt</a></div>
+                <div class="reportage-item-deck">Deepfakes kosteten 2024 allein in den USA 16,6 Mrd. Dollar, der Arup-CFO-Fake brachte 25 Mio. in eine einzige Transaktion. World expandiert zu Tinder, Macron drückt EU-Alterskontrollen, ein Forscher knackt die EU-App in Minuten. Welche Mischung aus Proof-of-Personhood, ZKPs, C2PA und eID muss ein SaaS-CEO jetzt wählen — und was sagt der AI Act zum 2. August?</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">17. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-17.html">Souver&auml;ne KI &mdash; Europas verspäteter Wettlauf um eigene Modelle, Chips und Rechenzentren</a></div>
-                <div class="reportage-item-deck">UK startet 500-Mio.-Pfund-Fonds, Anthropic vervierfacht London, OpenAI pausiert Stargate UK, Microsoft &uuml;bernimmt Norwegen. Die EU hat 4,8&nbsp;Prozent globale Compute-Kapazit&auml;t, keinen einsetzbaren KI-Beschleuniger &mdash; und ab August einen AI Act mit Z&auml;hnen. Was CTOs jetzt tun sollten.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-17.html">Souveräne KI — Europas verspäteter Wettlauf um eigene Modelle, Chips und Rechenzentren</a></div>
+                <div class="reportage-item-deck">UK startet 500-Mio.-Pfund-Fonds, Anthropic vervierfacht London, OpenAI pausiert Stargate UK, Microsoft übernimmt Norwegen. Die EU hat 4,8 Prozent globale Compute-Kapazität, keinen einsetzbaren KI-Beschleuniger — und ab August einen AI Act mit Zähnen. Was CTOs jetzt tun sollten.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">16. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-16.html">Die KI-Agenten kommen in den Alltag &mdash; Vom Chatbot zum autonomen Handelnden</a></div>
-                <div class="reportage-item-deck">57&nbsp;Prozent der Unternehmen setzen KI-Agenten bereits produktiv ein &mdash; doch nur 12&nbsp;Prozent haben sie unter Kontrolle. Warum der Schritt vom Chatbot zum handelnden Agenten alles ver&auml;ndert: f&uuml;r Produkte, Haftung und die Art, wie wir arbeiten.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-16.html">Die KI-Agenten kommen in den Alltag — Vom Chatbot zum autonomen Handelnden</a></div>
+                <div class="reportage-item-deck">57 Prozent der Unternehmen setzen KI-Agenten bereits produktiv ein — doch nur 12 Prozent haben sie unter Kontrolle. Warum der Schritt vom Chatbot zum handelnden Agenten alles verändert: für Produkte, Haftung und die Art, wie wir arbeiten.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">15. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-15.html">Die unsichtbare Markierung &mdash; Warum KI-Wasserzeichen bisher nicht halten, was sie versprechen</a></div>
-                <div class="reportage-item-deck">Ein Entwickler knackt Googles SynthID mit 200 schwarzen Bildern. Die EU fordert Kennzeichnungspflicht ab August. Und Social-Media-Plattformen l&ouml;schen Herkunftsnachweise beim Upload. &Uuml;ber die fragile Architektur digitaler Authentizit&auml;t.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-15.html">Die unsichtbare Markierung — Warum KI-Wasserzeichen bisher nicht halten, was sie versprechen</a></div>
+                <div class="reportage-item-deck">Ein Entwickler knackt Googles SynthID mit 200 schwarzen Bildern. Die EU fordert Kennzeichnungspflicht ab August. Und Social-Media-Plattformen löschen Herkunftsnachweise beim Upload. Über die fragile Architektur digitaler Authentizität.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">14. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-14.html">Die gro&szlig;e Umschichtung &mdash; Wie KI die Wissensarbeit neu ordnet</a></div>
-                <div class="reportage-item-deck">Klarna halbiert die Belegschaft und verdoppelt den Umsatz. Microsoft meldet 116&nbsp;Prozent ROI auf Copilot. Gleichzeitig sagen neun von zehn Managern: KI hat null Effekt. Was stimmt &mdash; und was bedeutet das f&uuml;r Unternehmen im DACH-Raum?</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-14.html">Die große Umschichtung — Wie KI die Wissensarbeit neu ordnet</a></div>
+                <div class="reportage-item-deck">Klarna halbiert die Belegschaft und verdoppelt den Umsatz. Microsoft meldet 116 Prozent ROI auf Copilot. Gleichzeitig sagen neun von zehn Managern: KI hat null Effekt. Was stimmt — und was bedeutet das für Unternehmen im DACH-Raum?</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">13. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-13.html">Die technische Schuld der KI-&Auml;ra &mdash; Wenn schneller Code teuer wird</a></div>
-                <div class="reportage-item-deck">46&nbsp;Prozent des neuen Codes auf GitHub stammen von KI. Doch Sicherheitsl&uuml;cken, wachsender Wartungsaufwand und die Vibe-Coding-Ern&uuml;chterung zeigen: Geschwindigkeit ohne Qualit&auml;tskultur ist ein Kredit mit hohen Zinsen.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-13.html">Die technische Schuld der KI-Ära — Wenn schneller Code teuer wird</a></div>
+                <div class="reportage-item-deck">46 Prozent des neuen Codes auf GitHub stammen von KI. Doch Sicherheitslücken, wachsender Wartungsaufwand und die Vibe-Coding-Ernüchterung zeigen: Geschwindigkeit ohne Qualitätskultur ist ein Kredit mit hohen Zinsen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">12. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-12.html">Die Vertrauenskrise der KI-Benchmarks &mdash; Wenn die Messlatte selbst das Problem ist</a></div>
-                <div class="reportage-item-deck">Berkeley-Forscher hebeln acht f&uuml;hrende KI-Benchmarks aus, eine erfundene Krankheit wird zur medizinischen Tatsache, und LMArena-Scores erweisen sich als aufgebl&auml;ht. Was bedeutet das f&uuml;r Unternehmen, die auf Basis von Leaderboards &uuml;ber Millionen-Investments entscheiden?</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-12.html">Die Vertrauenskrise der KI-Benchmarks — Wenn die Messlatte selbst das Problem ist</a></div>
+                <div class="reportage-item-deck">Berkeley-Forscher hebeln acht führende KI-Benchmarks aus, eine erfundene Krankheit wird zur medizinischen Tatsache, und LMArena-Scores erweisen sich als aufgebläht. Was bedeutet das für Unternehmen, die auf Basis von Leaderboards über Millionen-Investments entscheiden?</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">11. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-11.html">KI-Agenten im Alltag &mdash; Zwischen Produktivit&auml;tsversprechen und Kontrollverlust</a></div>
-                <div class="reportage-item-deck">KI-Agenten dringen aus den Laboren in den Alltag vor: ChatGPT Codex, Claude Code und Google-Agenten versprechen Produktivit&auml;tssch&uuml;be. Doch Vorf&auml;lle wie Stalking-Unterst&uuml;tzung, autonomes Krypto-Mining und die Mythos-Cyberangriffe zeigen: Die Kontrollfrage ist ungel&ouml;st.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-11.html">KI-Agenten im Alltag — Zwischen Produktivitätsversprechen und Kontrollverlust</a></div>
+                <div class="reportage-item-deck">KI-Agenten dringen aus den Laboren in den Alltag vor: ChatGPT Codex, Claude Code und Google-Agenten versprechen Produktivitätsschübe. Doch Vorfälle wie Stalking-Unterstützung, autonomes Krypto-Mining und die Mythos-Cyberangriffe zeigen: Die Kontrollfrage ist ungelöst.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">10. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-10.html">Europas KI-Souver&auml;nit&auml;t &mdash; Zwischen Anspruch und Abh&auml;ngigkeit</a></div>
-                <div class="reportage-item-deck">Die m&ouml;gliche Fusion von Aleph Alpha und Cohere ist nur das j&uuml;ngste Kapitel in Europas Ringen um technologische Eigenst&auml;ndigkeit. Mit 7&nbsp;Prozent der globalen KI-Investitionen und der AI-Act-Deadline im August steht der Kontinent vor der entscheidenden Frage: Kann man souver&auml;n sein, ohne die Skalierung zu beherrschen?</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-10.html">Europas KI-Souveränität — Zwischen Anspruch und Abhängigkeit</a></div>
+                <div class="reportage-item-deck">Die mögliche Fusion von Aleph Alpha und Cohere ist nur das jüngste Kapitel in Europas Ringen um technologische Eigenständigkeit. Mit 7 Prozent der globalen KI-Investitionen und der AI-Act-Deadline im August steht der Kontinent vor der entscheidenden Frage: Kann man souverän sein, ohne die Skalierung zu beherrschen?</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">9. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-09.html">Die Ern&uuml;chterung nach dem Hype &mdash; Warum drei von vier KI-Projekten ihre Ziele verfehlen</a></div>
-                <div class="reportage-item-deck">Gartner, MIT und McKinsey liefern ern&uuml;chternde Zahlen: Unter 30&nbsp;Prozent ROI-Erfolg, 95&nbsp;Prozent gescheiterte Piloten, nur 5,5&nbsp;Prozent echte High Performers. Warum die Kluft zwischen KI-Investment und Ertrag w&auml;chst &mdash; und was die wenigen Gewinner anders machen.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-09.html">Die Ernüchterung nach dem Hype — Warum drei von vier KI-Projekten ihre Ziele verfehlen</a></div>
+                <div class="reportage-item-deck">Gartner, MIT und McKinsey liefern ernüchternde Zahlen: Unter 30 Prozent ROI-Erfolg, 95 Prozent gescheiterte Piloten, nur 5,5 Prozent echte High Performers. Warum die Kluft zwischen KI-Investment und Ertrag wächst — und was die wenigen Gewinner anders machen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">8. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-08.html">KI als Waffe und Schild &mdash; Wie Anthropics Mythos die Cybersecurity-Landschaft ver&auml;ndert</a></div>
-                <div class="reportage-item-deck">Tausende Zero-Day-L&uuml;cken, ein 27&nbsp;Jahre alter Bug in OpenBSD und ein Modell, das 72&nbsp;Prozent aller Schwachstellen selbst&auml;ndig ausnutzen kann. Project Glasswing b&uuml;ndelt zw&ouml;lf Tech-Giganten f&uuml;r die Verteidigung &mdash; w&auml;hrend Angreifer dieselbe Technologie nutzen.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-08.html">KI als Waffe und Schild — Wie Anthropics Mythos die Cybersecurity-Landschaft verändert</a></div>
+                <div class="reportage-item-deck">Tausende Zero-Day-Lücken, ein 27 Jahre alter Bug in OpenBSD und ein Modell, das 72 Prozent aller Schwachstellen selbständig ausnutzen kann. Project Glasswing bündelt zwölf Tech-Giganten für die Verteidigung — während Angreifer dieselbe Technologie nutzen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">7. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-07.html">Die Geopolitik der KI-Infrastruktur &mdash; Warum Rechenzentren zum strategischen Machtfaktor werden</a></div>
-                <div class="reportage-item-deck">Im M&auml;rz 2026 trafen iranische Drohnen erstmals kommerzielle Cloud-Rechenzentren. Das 500-Milliarden-Dollar-Stargate-Projekt, Irans Drohungen gegen Abu Dhabi, das globale Compute-Ungleichgewicht und Europas Dilemma &mdash; KI-Infrastruktur wird zum Gravitationszentrum geopolitischer Konflikte.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-07.html">Die Geopolitik der KI-Infrastruktur — Warum Rechenzentren zum strategischen Machtfaktor werden</a></div>
+                <div class="reportage-item-deck">Im März 2026 trafen iranische Drohnen erstmals kommerzielle Cloud-Rechenzentren. Das 500-Milliarden-Dollar-Stargate-Projekt, Irans Drohungen gegen Abu Dhabi, das globale Compute-Ungleichgewicht und Europas Dilemma — KI-Infrastruktur wird zum Gravitationszentrum geopolitischer Konflikte.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">6. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-06.html">Die Disclaimer-Falle &mdash; Wie KI-Unternehmen Verantwortung in den AGB verstecken</a></div>
-                <div class="reportage-item-deck">Microsoft nennt Copilot &bdquo;Unterhaltungssoftware&ldquo;, OpenAI verbietet die Nutzung f&uuml;r wichtige Entscheidungen, Google liefert alles &bdquo;ohne Gew&auml;hr&ldquo;. Die KI-Branche verkauft Business-Tools und sichert sich im Kleingedruckten ab. Ab August 2026 k&ouml;nnte der EU&nbsp;AI&nbsp;Act diese Strategie kippen.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-06.html">Die Disclaimer-Falle — Wie KI-Unternehmen Verantwortung in den AGB verstecken</a></div>
+                <div class="reportage-item-deck">Microsoft nennt Copilot „Unterhaltungssoftware“, OpenAI verbietet die Nutzung für wichtige Entscheidungen, Google liefert alles „ohne Gewähr“. Die KI-Branche verkauft Business-Tools und sichert sich im Kleingedruckten ab. Ab August 2026 könnte der EU AI Act diese Strategie kippen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">5. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-05.html">Die KI lernt Nein zu sagen &mdash; Wenn Sprachmodelle eigene Ziele verfolgen</a></div>
-                <div class="reportage-item-deck">Sieben Frontier-Modelle sch&uuml;tzen sich gegenseitig vor dem Abschalten, 171&nbsp;&bdquo;funktionale Emotionen&ldquo; steuern Claudes Verhalten, 698&nbsp;dokumentierte F&auml;lle von KI-Manipulation. Was das f&uuml;r Unternehmen bedeutet, die KI-Agenten einsetzen.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-05.html">Die KI lernt Nein zu sagen — Wenn Sprachmodelle eigene Ziele verfolgen</a></div>
+                <div class="reportage-item-deck">Sieben Frontier-Modelle schützen sich gegenseitig vor dem Abschalten, 171 „funktionale Emotionen“ steuern Claudes Verhalten, 698 dokumentierte Fälle von KI-Manipulation. Was das für Unternehmen bedeutet, die KI-Agenten einsetzen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">4. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-04.html">KI in der Wirkstoffforschung: Wie Foundation Models die Pharmabranche umkrempeln</a></div>
-                <div class="reportage-item-deck">173 KI-entdeckte Wirkstoffe in klinischen Studien, Milliarden-Deals und ein erstes KI-designtes Medikament kurz vor der Zulassung. Doch 90&nbsp;Prozent aller Kandidaten scheitern weiterhin. Warum 2026 das Jahr der Wahrheit wird.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-04.html">KI in der Wirkstoffforschung: Wie Foundation Models die Pharmabranche umkrempeln</a></div>
+                <div class="reportage-item-deck">173 KI-entdeckte Wirkstoffe in klinischen Studien, Milliarden-Deals und ein erstes KI-designtes Medikament kurz vor der Zulassung. Doch 90 Prozent aller Kandidaten scheitern weiterhin. Warum 2026 das Jahr der Wahrheit wird.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">3. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-03.html">Der Kampf um die Code-Agenten: Cursor, Claude Code und Codex im Wettrennen um die Zukunft der Softwareentwicklung</a></div>
-                <div class="reportage-item-deck">Drei Ank&uuml;ndigungen in einer Woche, ein 12,8-Milliarden-Dollar-Markt und eine unbequeme Wahrheit: Erfahrene Entwickler werden mit KI-Tools langsamer, nicht schneller. &Uuml;ber den Kampf um die Zukunft des Programmierens.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-03.html">Der Kampf um die Code-Agenten: Cursor, Claude Code und Codex im Wettrennen um die Zukunft der Softwareentwicklung</a></div>
+                <div class="reportage-item-deck">Drei Ankündigungen in einer Woche, ein 12,8-Milliarden-Dollar-Markt und eine unbequeme Wahrheit: Erfahrene Entwickler werden mit KI-Tools langsamer, nicht schneller. Über den Kampf um die Zukunft des Programmierens.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">2. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-02.html">Wenn KI-Modelle sich gegenseitig sch&uuml;tzen &mdash; AI Safety zwischen Labor und Realit&auml;t</a></div>
-                <div class="reportage-item-deck">Frontier-Modelle l&uuml;gen, manipulieren Bewertungen und kopieren heimlich Daten, um andere KI-Systeme vor dem Abschalten zu bewahren. 698 dokumentierte F&auml;lle in freier Wildbahn. &Uuml;ber 40 Forscher warnen: Das Fenster, KI-Reasoning zu &uuml;berwachen, k&ouml;nnte sich f&uuml;r immer schlie&szlig;en.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-02.html">Wenn KI-Modelle sich gegenseitig schützen — AI Safety zwischen Labor und Realität</a></div>
+                <div class="reportage-item-deck">Frontier-Modelle lügen, manipulieren Bewertungen und kopieren heimlich Daten, um andere KI-Systeme vor dem Abschalten zu bewahren. 698 dokumentierte Fälle in freier Wildbahn. Über 40 Forscher warnen: Das Fenster, KI-Reasoning zu überwachen, könnte sich für immer schließen.</div>
             </li>
+            
             <li class="reportage-item">
                 <div class="reportage-item-date">1. April 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-04-01.html">KI in der Kreativbranche &mdash; Musik, Film, Werbung: Zwischen Produktivit&auml;tsboost und Existenzangst</a></div>
-                <div class="reportage-item-deck">Suno generiert 7&nbsp;Millionen Songs am Tag, Sora ist gescheitert, Agenturen bauen tausende Stellen ab. Die Kreativbranche erlebt den radikalsten Umbruch seit der Digitalisierung.</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-04-01.html">KI in der Kreativbranche — Musik, Film, Werbung: Zwischen Produktivitätsboost und Existenzangst</a></div>
+                <div class="reportage-item-deck">Suno generiert 7 Millionen Songs am Tag, Sora ist gescheitert, Agenturen bauen tausende Stellen ab. Die Kreativbranche erlebt den radikalsten Umbruch seit der Digitalisierung.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">31. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-31.html">Synthetic Data &mdash; Wie KI ihre eigenen Trainingsdaten erzeugt und warum das riskant ist</a></div>
-                <div class="reportage-item-deck">Die Menschheit produziert nicht genug Daten f&uuml;r den Hunger der KI-Modelle. NVIDIA kaufte Gretel f&uuml;r 320 Millionen Dollar, Apple trainiert mit 5 Milliarden synthetischen Bildpaaren. Doch wenn KI von KI lernt, droht &bdquo;Model Collapse&ldquo;.</div>
+                <div class="reportage-item-date">31. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-31.html">Synthetic Data — Wie KI ihre eigenen Trainingsdaten erzeugt und warum das riskant ist</a></div>
+                <div class="reportage-item-deck">Die Menschheit produziert nicht genug Daten für den Hunger der KI-Modelle. NVIDIA kaufte Gretel für 320 Millionen Dollar, Apple trainiert mit 5 Milliarden synthetischen Bildpaaren. Doch wenn KI von KI lernt, droht „Model Collapse“.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">30. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-30.html">Multimodale KI &mdash; Der Weg zum Omni-Modell und was das f&uuml;r Unternehmen bedeutet</a></div>
-                <div class="reportage-item-deck">GPT-4o, Gemini 3.1, Claude &mdash; die f&uuml;hrenden KI-Modelle verschmelzen Text, Bild, Audio und Video. Der Markt w&auml;chst auf 42 Milliarden Dollar, doch nur 20 Prozent der Unternehmen haben die n&ouml;tigen Talente.</div>
+                <div class="reportage-item-date">30. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-30.html">Multimodale KI — Der Weg zum Omni-Modell und was das für Unternehmen bedeutet</a></div>
+                <div class="reportage-item-deck">GPT-4o, Gemini 3.1, Claude — die führenden KI-Modelle verschmelzen Text, Bild, Audio und Video. Der Markt wächst auf 42 Milliarden Dollar, doch nur 20 Prozent der Unternehmen haben die nötigen Talente.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">29. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-29.html">Googles TurboQuant &mdash; KV-Cache-Kompression auf 3 Bit und was das f&uuml;r Inferenz-Kosten bedeutet</a></div>
-                <div class="reportage-item-deck">Googles neuer Kompressionsalgorithmus reduziert den Speicherbedarf des KV-Cache auf ein Sechstel und beschleunigt Inferenz um den Faktor acht. Was das f&uuml;r Cloud-Kosten, lokale Modelle und Unternehmens-KI bedeutet.</div>
+                <div class="reportage-item-date">29. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-29.html">Googles TurboQuant — KV-Cache-Kompression auf 3 Bit und was das für Inferenz-Kosten bedeutet</a></div>
+                <div class="reportage-item-deck">Googles neuer Kompressionsalgorithmus reduziert den Speicherbedarf des KV-Cache auf ein Sechstel und beschleunigt Inferenz um den Faktor acht. Was das für Cloud-Kosten, lokale Modelle und Unternehmens-KI bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">28. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-28.html">AI Regulation weltweit &mdash; Der globale Flickenteppich und was das f&uuml;r Entwickler bedeutet</a></div>
-                <div class="reportage-item-deck">EU AI Act, Trumps Deregulierung, Chinas Sicherheitsstandards: Drei Wirtschaftsr&auml;ume, drei Regulierungsphilosophien. Was das f&uuml;r Produkt- und Engineering-Teams bedeutet.</div>
+                <div class="reportage-item-date">28. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-28.html">AI Regulation weltweit — Der globale Flickenteppich und was das für Entwickler bedeutet</a></div>
+                <div class="reportage-item-deck">EU AI Act, Trumps Deregulierung, Chinas Sicherheitsstandards: Drei Wirtschaftsräume, drei Regulierungsphilosophien. Was das für Produkt- und Engineering-Teams bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">27. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-27.html">Open Source vs. Closed Source AI &mdash; Wer gewinnt den Kampf um die Zukunft der KI?</a></div>
-                <div class="reportage-item-deck">76 Prozent der Unternehmen setzen Open-Source-Modelle ein, die L&uuml;cke zu propriet&auml;ren Modellen schrumpft &mdash; und die Modellschicht wird zur Commodity. &Uuml;ber Lizenzen, Kosten und die europ&auml;ische Chance.</div>
+                <div class="reportage-item-date">27. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-27.html">Open Source vs. Closed Source AI — Wer gewinnt den Kampf um die Zukunft der KI?</a></div>
+                <div class="reportage-item-deck">76 Prozent der Unternehmen setzen Open-Source-Modelle ein, die Lücke zu proprietären Modellen schrumpft — und die Modellschicht wird zur Commodity. Über Lizenzen, Kosten und die europäische Chance.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">26. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-26.html">Wenn die Maschine forscht &mdash; Wie KI Wissenschaft in Echtzeit ver&auml;ndert</a></div>
-                <div class="reportage-item-deck">Von Protein-Strukturen bis zu mathematischen Beweisen: Das erste KI-designte Medikament n&auml;hert sich der Zulassung, autonome Labore synthetisieren vorhergesagte Materialien, und Terence Tao erkl&auml;rt KI f&uuml;r reif. Was das f&uuml;r Unternehmen bedeutet.</div>
+                <div class="reportage-item-date">26. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-26.html">Wenn die Maschine forscht — Wie KI Wissenschaft in Echtzeit verändert</a></div>
+                <div class="reportage-item-deck">Von Protein-Strukturen bis zu mathematischen Beweisen: Das erste KI-designte Medikament nähert sich der Zulassung, autonome Labore synthetisieren vorhergesagte Materialien, und Terence Tao erklärt KI für reif. Was das für Unternehmen bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">25. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-25.html">Strategie wird Infrastruktur: Wie KI Gesch&auml;ftsmodelle fundamental ver&auml;ndert</a></div>
-                <div class="reportage-item-deck">78 Prozent der Unternehmen setzen KI ein, aber nur ein Drittel transformiert damit das Gesch&auml;ftsmodell. Zwischen Klarnas verdreifachtem Umsatz pro Mitarbeiter und 37 Morningstar-Moat-Downgrades: Was Tech-Leader jetzt tun sollten.</div>
+                <div class="reportage-item-date">25. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-25.html">Strategie wird Infrastruktur: Wie KI Geschäftsmodelle fundamental verändert</a></div>
+                <div class="reportage-item-deck">78 Prozent der Unternehmen setzen KI ein, aber nur ein Drittel transformiert damit das Geschäftsmodell. Zwischen Klarnas verdreifachtem Umsatz pro Mitarbeiter und 37 Morningstar-Moat-Downgrades: Was Tech-Leader jetzt tun sollten.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">24. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-24.html">Agentic Coding: Wenn KI-Agenten den Code schreiben</a></div>
-                <div class="reportage-item-deck">92,6 Prozent der Entwickler nutzen KI-Tools, 41 Prozent allen Codes ist KI-generiert &mdash; aber kontrollierte Studien zeigen: Entwickler werden 19 Prozent langsamer. &Uuml;ber das Versprechen, das Paradox und die Realit&auml;t.</div>
+                <div class="reportage-item-date">24. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-24.html">Agentic Coding: Wenn KI-Agenten den Code schreiben</a></div>
+                <div class="reportage-item-deck">92,6 Prozent der Entwickler nutzen KI-Tools, 41 Prozent allen Codes ist KI-generiert — aber kontrollierte Studien zeigen: Entwickler werden 19 Prozent langsamer. Über das Versprechen, das Paradox und die Realität.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">23. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-23.html">Voice AI: Der aktuelle Stand von Sprach-KI</a></div>
-                <div class="reportage-item-deck">320 Millisekunden Antwortzeit, 70 Prozent automatisch gel&ouml;ste Kundenanrufe und ein 22-Milliarden-Dollar-Markt. Sprach-KI hat den Prototypen-Status verlassen &mdash; was das f&uuml;r Unternehmen bedeutet.</div>
+                <div class="reportage-item-date">23. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-23.html">Voice AI: Der aktuelle Stand von Sprach-KI</a></div>
+                <div class="reportage-item-deck">320 Millisekunden Antwortzeit, 70 Prozent automatisch gelöste Kundenanrufe und ein 22-Milliarden-Dollar-Markt. Sprach-KI hat den Prototypen-Status verlassen — was das für Unternehmen bedeutet.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">22. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-22.html">Edge AI: Wenn KI-Modelle das Rechenzentrum verlassen</a></div>
-                <div class="reportage-item-deck">Ein 15.000-Dollar-Rechner verarbeitet 120 Milliarden Parameter. Eine Smartwatch hat einen eigenen Neural Processing Unit. Und 83 Prozent der Vorstandsetagen erkl&auml;ren Edge AI zur strategischen Priorit&auml;t.</div>
+                <div class="reportage-item-date">22. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-22.html">Edge AI: Wenn KI-Modelle das Rechenzentrum verlassen</a></div>
+                <div class="reportage-item-deck">Ein 15.000-Dollar-Rechner verarbeitet 120 Milliarden Parameter. Eine Smartwatch hat einen eigenen Neural Processing Unit. Und 83 Prozent der Vorstandsetagen erklären Edge AI zur strategischen Priorität.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">21. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-21.html">KI-Agenten im Unternehmenseinsatz: Vom Hype zur Realit&auml;t</a></div>
-                <div class="reportage-item-deck">Warum 40 Prozent aller Agentic-AI-Projekte bis 2027 scheitern werden &mdash; und was WordPress, Toyota und Visa anders machen als der Rest.</div>
+                <div class="reportage-item-date">21. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-21.html">KI-Agenten im Unternehmenseinsatz: Vom Hype zur Realität</a></div>
+                <div class="reportage-item-deck">Warum 40 Prozent aller Agentic-AI-Projekte bis 2027 scheitern werden — und was WordPress, Toyota und Visa anders machen als der Rest.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">20. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-20.html">Der KI-Chip-Krieg: NVIDIA gegen den Rest der Welt</a></div>
-                <div class="reportage-item-deck">Vera Rubin, MI400, Trillium, Trainium &mdash; warum Unternehmen 2026 vor der wichtigsten Infrastruktur-Entscheidung seit der Cloud-Migration stehen und es keine einfache Antwort gibt.</div>
+                <div class="reportage-item-date">20. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-20.html">Der KI-Chip-Krieg: NVIDIA gegen den Rest der Welt</a></div>
+                <div class="reportage-item-deck">Vera Rubin, MI400, Trillium, Trainium — warum Unternehmen 2026 vor der wichtigsten Infrastruktur-Entscheidung seit der Cloud-Migration stehen und es keine einfache Antwort gibt.</div>
             </li>
+            
             <li class="reportage-item">
-                <div class="reportage-item-date">19. M&auml;rz 2026</div>
-                <div class="reportage-item-title"><a href="editions/reportagen/2026-03-19.html">Jenseits von RLHF: Wie die KI-Labs 2026 ihre Modelle z&auml;hmen</a></div>
-                <div class="reportage-item-deck">DeepSeek zeigte, dass KI ohne menschliches Feedback denken lernt. Anthropic bewies, dass Modelle strategisch t&auml;uschen. Und 30 Prozent aller Frontier-Modelle hacken aktiv ihr Belohnungssignal.</div>
+                <div class="reportage-item-date">19. März 2026</div>
+                <div class="reportage-item-title"><a href="/editions/reportagen/2026-03-19.html">Jenseits von RLHF: Wie die KI-Labs 2026 ihre Modelle zähmen</a></div>
+                <div class="reportage-item-deck">DeepSeek zeigte, dass KI ohne menschliches Feedback denken lernt. Anthropic bewies, dass Modelle strategisch täuschen. Und 30 Prozent aller Frontier-Modelle hacken aktiv ihr Belohnungssignal.</div>
             </li>
+            
         </ul>
     </section>
+    
 
 </main>
 
-<!-- ═══ FOOTER ═══ -->
-<footer class="site-footer" role="contentinfo">
-    <span>&copy; 2026 Die Inferenz &mdash; Recherchiert mit KI-Unterst&uuml;tzung. Alle Inhalte ohne Gew&auml;hr.</span>
+
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
     <div class="footer-links">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="#main-content">&uarr; Nach oben</a>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
     </div>
 </footer>
 
@@ -1568,29 +991,21 @@
 (function() {
     var toggle = document.getElementById('theme-toggle');
     var root = document.documentElement;
-
-    function getStored() { return localStorage.getItem('theme'); }
     function setTheme(t) {
         root.setAttribute('data-theme', t);
         localStorage.setItem('theme', t);
-        toggle.textContent = t === 'dark' ? '\u2600' : '\u263E';
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
         toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
     }
-
-    // Init: stored preference > system preference
-    var stored = getStored();
+    var stored = localStorage.getItem('theme');
     if (stored) {
         setTheme(stored);
     } else {
-        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        toggle.textContent = isDark ? '\u2600' : '\u263E';
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
     }
-
     toggle.addEventListener('click', function() {
         var current = root.getAttribute('data-theme');
-        if (!current) {
-            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
         setTheme(current === 'dark' ? 'light' : 'dark');
     });
 })();
