@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz &mdash; 23. April 2026</title>
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <style>
+        :root {
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --text-xs: 0.8rem;
+            --text-sm: 0.875rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.5rem;
+            --text-2xl: 1.875rem;
+            --text-3xl: 2.25rem;
+            --text-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --width-article: 68ch;
+            --width-content: 800px;
+            --width-site: 1100px;
+            --bg: #faf9f6;
+            --bg-surface: #f0eee8;
+            --bg-surface-hover: #e8e5dd;
+            --text-primary: #1a1a1a;
+            --text-body: #2d2d2d;
+            --text-muted: #5a5a5a;
+            --text-faint: #8a8a8a;
+            --border: #d8d5cc;
+            --border-strong: #b0ada4;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --link: #1d4ed8;
+            --link-visited: #6d28d9;
+            --link-hover: #1e40af;
+            color-scheme: light dark;
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-surface-hover: #2a2a2a;
+            --text-primary: #e8e6e0;
+            --text-body: #d0cec8;
+            --text-muted: #9a9890;
+            --text-faint: #6a6860;
+            --border: #333330;
+            --border-strong: #4a4844;
+            --accent: #ef5350;
+            --accent-hover: #f87171;
+            --link: #93c5fd;
+            --link-visited: #c4b5fd;
+            --link-hover: #bfdbfe;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121212;
+                --bg-surface: #1e1e1e;
+                --bg-surface-hover: #2a2a2a;
+                --text-primary: #e8e6e0;
+                --text-body: #d0cec8;
+                --text-muted: #9a9890;
+                --text-faint: #6a6860;
+                --border: #333330;
+                --border-strong: #4a4844;
+                --accent: #ef5350;
+                --accent-hover: #f87171;
+                --link: #93c5fd;
+                --link-visited: #c4b5fd;
+                --link-hover: #bfdbfe;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 100%; }
+        @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+        body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            color: var(--text-body);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-optical-sizing: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            border-radius: 0 0 6px 0;
+        }
+        .skip-link:focus { top: 0; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        }
+        a:visited { color: var(--link-visited); }
+        a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header-inner {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .site-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .site-title:visited { color: var(--text-primary); }
+        .site-title:hover { color: var(--accent); text-decoration: none; }
+
+        .site-nav {
+            display: flex;
+            gap: var(--space-6);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+        }
+        .site-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-nav a:hover { color: var(--text-primary); }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            line-height: 1;
+        }
+        .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-strong); }
+
+        .edition-header {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edition-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .edition-title {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-4xl);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0;
+            text-wrap: balance;
+            letter-spacing: -0.02em;
+        }
+
+        .edition-subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            margin-top: var(--space-3);
+            max-width: 55ch;
+        }
+
+        .site-main {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .toc {
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-heading {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin: 0 0 var(--space-6);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            column-count: 2;
+            column-gap: var(--space-8);
+        }
+
+        .toc-list li {
+            break-inside: avoid;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: var(--space-3);
+        }
+
+        .toc-num {
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+            font-size: var(--text-sm);
+            user-select: none;
+        }
+
+        .toc-list a {
+            display: block;
+            color: var(--text-body);
+            text-decoration: none;
+            padding: var(--space-1) 0;
+            border-radius: 3px;
+        }
+
+        .toc-cat {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+
+        .toc-title {
+            display: block;
+            line-height: 1.4;
+            color: var(--text-body);
+        }
+
+        .toc-list a:hover .toc-title { color: var(--accent); }
+        .toc-list a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .toc-list a.toc-active .toc-title {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .toc-separator {
+            column-span: all;
+            border-top: 1px solid var(--border);
+            margin: var(--space-4) 0 var(--space-3);
+            list-style: none;
+        }
+
+        .toc-specials-row {
+            column-span: all;
+            display: flex;
+            gap: var(--space-4);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-special {
+            flex: 1;
+            border-left: 3px solid var(--accent);
+            padding-left: var(--space-4) !important;
+        }
+
+        .toc-special .toc-cat {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .toc-special .toc-title {
+            color: var(--text-body);
+        }
+
+        @media (max-width: 600px) {
+            .toc-list { column-count: 1; }
+            .toc-cat { display: none; }
+            .toc-special .toc-cat { display: block; }
+            .toc-specials-row { flex-direction: column; }
+        }
+
+        .article {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .article:last-of-type { border-bottom: none; }
+
+        .article-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .article h2 {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-2xl);
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 0 0 var(--space-3);
+            text-wrap: balance;
+            letter-spacing: -0.01em;
+        }
+
+        .article--lead h2 {
+            font-size: var(--text-3xl);
+        }
+
+        .article-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-6);
+        }
+
+        .article-teaser {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: var(--space-8);
+            max-width: var(--width-article);
+            border-left: 3px solid var(--border-strong);
+            padding-left: var(--space-6);
+        }
+
+        .article--lead .article-teaser {
+            border-left: 3px solid var(--accent);
+        }
+
+        .analysis-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-4);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .analysis-body {
+            font-family: var(--font-serif);
+            font-size: var(--text-base);
+            line-height: 1.75;
+            max-width: var(--width-article);
+            color: var(--text-body);
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphenate-limit-chars: 6 3 2;
+            hyphenate-limit-lines: 2;
+            overflow-wrap: break-word;
+        }
+
+        .analysis-body p { margin: 0 0 1.2em; }
+        .analysis-body p:last-child { margin-bottom: 0; }
+
+        .sources {
+            margin-top: var(--space-8);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--border);
+            max-width: var(--width-article);
+        }
+
+        .sources-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-faint);
+            margin-bottom: var(--space-2);
+        }
+
+        .sources ul { list-style: none; padding: 0; margin: 0; }
+
+        .sources li {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            padding: var(--space-1) 0;
+            color: var(--text-muted);
+        }
+
+        .sources a { color: var(--text-muted); }
+        .sources a:hover { color: var(--link-hover); }
+
+        .section-break {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-heading {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+            margin: 0 0 var(--space-2);
+            letter-spacing: -0.01em;
+        }
+
+        .section-subheading {
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: var(--space-8);
+        }
+
+        .reportage-teaser {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-8);
+        }
+
+        .reportage-teaser h2 { font-size: var(--text-2xl); }
+
+        .reportage-teaser .article-teaser {
+            border-left-color: var(--accent);
+        }
+
+        .reportage-link {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: var(--space-4);
+        }
+        .reportage-link:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .tool-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            padding: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            transition: background 0.15s ease;
+        }
+        .tool-card:hover { background: var(--bg-surface-hover); }
+
+        .tool-card img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tool-card img { filter: brightness(0.9); }
+        }
+
+        .tool-card-body { flex: 1; min-width: 0; }
+
+        .tool-card-name {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            margin-bottom: var(--space-1);
+        }
+        .tool-card-name a { color: var(--text-primary); }
+        .tool-card-name a:hover { color: var(--accent); }
+
+        .tool-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .tool-card-meta {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-top: var(--space-2);
+            line-height: 1.5;
+        }
+
+        .yt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .yt-card {
+            background: var(--bg-surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.15s ease;
+        }
+        .yt-card:hover { background: var(--bg-surface-hover); }
+
+        .yt-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .yt-card-body {
+            padding: var(--space-4) var(--space-6) var(--space-6);
+        }
+
+        .yt-card-label {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .yt-card-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-base);
+            line-height: 1.3;
+            margin-bottom: var(--space-2);
+        }
+        .yt-card-title a { color: var(--text-primary); }
+        .yt-card-title a:hover { color: var(--accent); }
+
+        .yt-card-channel {
+            font-family: var(--font-sans);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            margin-bottom: var(--space-3);
+        }
+
+        .yt-card-desc {
+            font-family: var(--font-serif);
+            font-size: var(--text-sm);
+            line-height: 1.6;
+            color: var(--text-body);
+        }
+
+        .yt-card--trending {
+            border: 2px solid var(--accent);
+        }
+
+        .yt-card--full {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .yt-card--full img { height: 100%; }
+        @media (max-width: 700px) {
+            .yt-card--full { grid-template-columns: 1fr; }
+        }
+
+        .site-footer {
+            max-width: var(--width-content);
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .footer-links { display: flex; gap: var(--space-6); }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-primary); }
+
+        @media (max-width: 600px) {
+            .site-footer { flex-direction: column; }
+            .footer-links { flex-wrap: wrap; gap: var(--space-3); }
+        }
+
+        @media print {
+            .site-header, .site-footer { display: none; }
+            a::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+            @page { margin: 2cm; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="../index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            <a href="../index.html">Alle Ausgaben</a>
+            <a href="../hardware-guide.html">Hardware-Guide</a>
+            <a href="../about.html">&Uuml;ber uns</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+<div class="edition-header">
+    <div class="edition-meta">
+        <time datetime="2026-04-23">Donnerstag, 23. April 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 23. April 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1"><span class="toc-cat">Hardware &middot; Google</span><span class="toc-title">Googles neue KI-Chips: Ironwood jetzt verf&uuml;gbar, TPU&nbsp;8 spaltet sich in Training und Inferenz</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2"><span class="toc-cat">Produkt &middot; OpenAI</span><span class="toc-title">Workspace Agents: ChatGPT wird zur autonomen Team-Automatisierungsplattform</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3"><span class="toc-cat">Entwicklung &middot; Microsoft</span><span class="toc-title">TypeScript 7.0 Beta: Go-Backend macht den Compiler zehnmal schneller</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4"><span class="toc-cat">Plattform &middot; Anthropic</span><span class="toc-title">Claude Code kurzfristig aus dem Pro-Tarif gestrichen &mdash; und was das &uuml;ber Preise verrät</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5"><span class="toc-cat">Sicherheit &middot; Anthropic</span><span class="toc-title">Backdoor in der Claude Desktop App: &bdquo;Stille Br&uuml;cke&ldquo; in sieben Chromium-Browser</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6"><span class="toc-cat">Hardware &middot; Anker</span><span class="toc-title">Thus: Ankers erster KI-Chip &mdash; Compute-in-Memory aus Dresdner Fab</span></a>
+            </li>
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7"><span class="toc-cat">Musik &middot; Deezer</span><span class="toc-title">44 Prozent aller neuen Uploads: KI-Musik &uuml;berflutet Streaming-Plattformen</span></a>
+            </li>
+
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+
+            <li class="toc-specials-row" role="none">
+                <div class="toc-special">
+                    <a href="#reportage"><span class="toc-cat">Reportage</span><span class="toc-title">44&thinsp;% KI-Musik &mdash; Wie die Industrie sich neu ordnet</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#tool-radar"><span class="toc-cat">Tool-Radar</span><span class="toc-title">6 neue KI-Tools</span></a>
+                </div>
+                <div class="toc-special">
+                    <a href="#werkstatt"><span class="toc-cat">Werkstatt</span><span class="toc-title">YouTube-Empfehlungen</span></a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Article 1: Google Chips (Lead) -->
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Google Cloud Next 2026</div>
+            <h2 id="art-1-h">Googles neue KI-Chips: Ironwood jetzt verf&uuml;gbar, TPU&nbsp;8 spaltet Training und Inferenz</h2>
+            <div class="article-meta"><time datetime="2026-04-22">22. April 2026</time> &middot; Quellen: Google Cloud Blog, TechCrunch, SemiAnalysis, VentureBeat, The Next Web</div>
+        </header>
+        <p class="article-teaser">Google hat auf seiner Cloud-Next-Konferenz in Las Vegas gleich drei Chip-Ank&uuml;ndigungen gestapelt: Der siebte TPU-Chip Ironwood ist ab sofort allgemein verf&uuml;gbar, und mit TPU 8t (&bdquo;Sunfish&ldquo;) f&uuml;r Training sowie TPU 8i (&bdquo;Zebrafish&ldquo;) f&uuml;r Inferenz zeigt Google, wohin die Chip-Strategie geht. Das Ergebnis: 30 bis 44&thinsp;Prozent g&uuml;nstigere Betriebskosten als vergleichbare Nvidia-Konfigurationen &mdash; auf Cluster-Skala, wo kein NVLink mithalten kann.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Die Schlagzeile ist Ironwood: Googles siebter TPU-Chip ist ab dem 22. April f&uuml;r Google-Cloud-Kunden buchbar. Die Zahlen sind eindrucksvoll &mdash; 4,6 Petaflops FP8 pro Chip, 192 Gigabyte HBM3e-Speicher und 7,37 Terabyte Speicherbandbreite pro Sekunde (4,5-mal mehr als beim Vorg&auml;nger Trillium). In einer maximalen Superpod-Konfiguration mit 9.216 Chips erreicht Ironwood 42,5 Exaflops. Google formuliert das Verh&auml;ltnis zum weltst&auml;rksten Supercomputer El Capitan (1,7 Exaflops) ganz bewusst: mehr als das 24-fache.</p>
+
+            <p>Die eigentliche Strategiemeldung ist jedoch die Ankündigung der achten TPU-Generation in zwei Varianten. TPU 8t (&bdquo;Sunfish&ldquo;) wurde f&uuml;r Training optimiert &mdash; gemeinsam mit Broadcom entwickelt, dual-die-Architektur, acht Stapel HBM3e, rund 30&thinsp;Prozent h&ouml;here Speicherbandbreite als Ironwood und eine Skalierung bis 9.600 Chips in einer Superpod mit zwei Petabyte gemeinsamem HBM. Auf Pod-Skala: 121 Exaflops. TPU 8i (&bdquo;Zebrafish&ldquo;) wurde f&uuml;r Inferenz gebaut &mdash; gemeinsam mit MediaTek, 288 Gigabyte HBM (50&thinsp;Prozent mehr als Ironwood), dreimal so viel On-Chip-SRAM, ein &bdquo;Boardfly&ldquo;-Interconnect mit halbiertem Netzwerkdurchmesser und ein neuer Collectives Acceleration Engine, der die Latenz bei autoregressive Dekodierung um bis zu f&uuml;nffachen reduziert. Beide Chips zielen auf TSMCs 2-Nanometer-Prozess; allgemeine Verf&uuml;gbarkeit ist f&uuml;r sp&auml;t 2027 geplant.</p>
+
+            <p>Was macht diese Architektur anders als Nvidia? Der Schl&uuml;ssel liegt nicht im Einzelchip-Vergleich &mdash; dort liegt Ironwood in FP8-Rechenleistung und HBM-Kapazit&auml;t auf &auml;hnlichem Niveau wie Nvidias Blackwell-Generation. Der Unterschied liegt in der Cluster-Skalierung. Nvidias gr&ouml;&szlig;te Standardkonfiguration verkn&uuml;pft 72 GPUs &uuml;ber NVLink in einem GB200-NVL72-System. Googles TPU-Superpod verkn&uuml;pft &uuml;ber 9.000 Chips. Das ICI-Interconnect liefert dabei &uuml;ber die gesamte Pod-Breite kollektive Operationen in Zeiten, die Nvidia-Fabrics nicht erreichen. Anthropic best&auml;tigt intern, Training auf TPUs koste rund 52&thinsp;Prozent weniger pro effektivem Petaflop als auf GB300-NVL72-Systemen. Unabh&auml;ngige Analysen von SemiAnalysis beziffern den TCO-Vorteil f&uuml;r externe GCP-Kunden auf 30 bis 44&thinsp;Prozent gegen&uuml;ber vergleichbaren Nvidia-Konfigurationen.</p>
+
+            <p>Die Schwachstellen sind real. Ironwood unterst&uuml;tzt kein FP4 &mdash; Nvidias wichtigster Inferenz-Quantisierungshebel bei Blackwell. NVLink liefert mit 14,4 Terabit Bandbreite pro Ger&auml;t mehr als Ironwoods ICI mit 9,6 Terabit. Und das XLA-Compiler-&Ouml;kosystem ist enger als Nvidias CUDA-Welt mit jahrzehntelanger Reife. Wer heute PyTorch-basierte Workloads betreibt, braucht Konvertierungsarbeit f&uuml;r TPUs. Google bietet seit letztem Jahr PyTorch-Support auf TPUs in der Preview &mdash; aber es ist kein Drop-in-Ersatz.</p>
+
+            <p>F&uuml;r Infrastruktur-Entscheider in SaaS-Unternehmen ergibt sich daraus eine differenzierte Botschaft. Ironwood ist ab sofort buchbar und attraktiv f&uuml;r Inference-Heavy-Workloads bei gr&ouml;&szlig;eren Deployments &mdash; insbesondere dort, wo Batch-Inferenz und hoher Durchsatz wichtiger sind als niedrige Einzelanfragen-Latenz. TPU 8t und 8i sind relevante Investitionssignale f&uuml;r 2027: Wer heute GCP-Vertr&auml;ge abschlie&szlig;t, sollte fr&uuml;hzeitig Zugang zu Early-Access-Programmen sichern. Nvidia beh&auml;lt vorerst seinen Marktanteil von rund 92&thinsp;Prozent bei Rechenzentrum-GPUs &mdash; und wird auch auf GCP als Vera-Rubin-Option angeboten. Die eigentliche Verschiebung kommt sp&auml;ter in diesem Jahrzehnt, wenn benutzerdefinierte Chips aus der Nische zum Standard werden.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26" rel="noopener noreferrer external">Google Cloud Blog &mdash; AI infrastructure at Next '26</a></li>
+                <li><a href="https://techcrunch.com/2026/04/22/google-cloud-next-new-tpu-ai-chips-compete-with-nvidia/" rel="noopener noreferrer external">TechCrunch &mdash; Google Cloud launches two new AI chips to compete with Nvidia</a></li>
+                <li><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/" rel="noopener noreferrer external">Google Blog &mdash; Ironwood: The first Google TPU for the age of inference</a></li>
+                <li><a href="https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the" rel="noopener noreferrer external">SemiAnalysis &mdash; TPUv7: Google Takes a Swing</a></li>
+                <li><a href="https://venturebeat.com/orchestration/google-doesnt-pay-the-nvidia-tax-its-new-tpus-explain-why" rel="noopener noreferrer external">VentureBeat &mdash; Google doesn&rsquo;t pay the Nvidia tax</a></li>
+                <li><a href="https://thenextweb.com/news/google-ironwood-tpu-inference-cloud-next" rel="noopener noreferrer external">The Next Web &mdash; Google splits its next TPU in two</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 2: OpenAI Workspace Agents -->
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <header>
+            <div class="article-kicker">Produkt &middot; OpenAI</div>
+            <h2 id="art-2-h">Workspace Agents: ChatGPT wird zur autonomen Team-Automatisierungsplattform</h2>
+            <div class="article-meta"><time datetime="2026-04-22">22. April 2026</time> &middot; Quellen: OpenAI, VentureBeat, The Decoder, SiliconAngle, 9to5Mac</div>
+        </header>
+        <p class="article-teaser">OpenAI hat Custom GPTs f&uuml;r Teams in Rente geschickt. Workspace Agents, der Nachfolger, l&auml;uft persistiert in der Cloud, plant Aufgaben per Cron-Zeitplan, erinnert sich an die Arbeitsweise eines Teams und agiert ohne laufende Nutzerinteraktion &mdash; angetrieben von Codex, Integrations in Slack, Salesforce und Google und einer Abrechnung per Verbrauchseinheit. Enterprise-Automatisierung verschiebt sich damit von Zapier-artigen Regelwerken zu Sprachbeschreibung.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Workspace Agents sind am 22. April in einem Research Preview f&uuml;r ChatGPT Business ($30/Nutzer/Monat), Enterprise- und Edu-Pl&auml;ne gestartet. Der konzeptionelle Unterschied zu Custom GPTs ist grundlegend: Custom GPTs waren statische Systemanweisungen, die auf einzelne Prompts antworteten. Workspace Agents sind persistente, team-shared Einheiten mit eigenem Cloud-Workspace, Datei-Ablage, Codeausf&uuml;hrungsumgebungen und einem persistenten Ged&auml;chtnis, das aus dem Umgang mit einem Team lernt.</p>
+
+            <p>Das technische R&uuml;ckgrat ist Codex &mdash; nicht GPT-4o. OpenAI setzt damit bewusst auf ein Modell mit starker Planungs- und Code-Ausf&uuml;hrungsf&auml;higkeit statt auf konversationelle Fl&uuml;ssigkeit. Agents k&ouml;nnen auf drei Wegen ausgel&ouml;st werden: zeitgesteuert per Cron-Zeitplan, durch Slack-Nachrichten oder manuell durch Teammitglieder. Die Aufgabenliste aus der OpenAI-Presse zeigt die Breite des Einsatzes: W&ouml;chentliche Daten-Reports ohne menschlichen Ausl&ouml;ser, IT-Ticket-Erzeugung nach Policy-Pr&uuml;fung, Kundenfeedback-Aggregation &uuml;ber Slack-Kan&auml;le, Sales-Qualifizierung aus CRM-Daten. Jede Aufgabe l&auml;uft komplett autonom durch &mdash; mit konfigurierbaren &bdquo;human-in-the-loop&ldquo;-Breakpoints bei konsequenziellen Schritten.</p>
+
+            <p>Der Preismodell-Schwenk ist strategisch entscheidend. Bis zum 6. Mai gilt eine kostenlose Testphase. Danach: Credit-basierte Abrechnung auf Basis von Computerverbrauch pro Agenten-Run, zus&auml;tzlich zum Basis-Abo. Dieser &Uuml;bergang von Flatrate auf Verbrauchseinheiten ist exakt das Modell, das Anthropic gerade beim Pro-Plan zu testen versucht (siehe Artikel&nbsp;4). OpenAI l&ouml;st das Dilemma mit dem Upgrade-Pfad: Wer Agents intensiv nutzt, zahlt mehr &mdash; aber die Basiskosten bleiben planbar. Die Analogie zu AWS Lambda ist pr&auml;zise: Man zahlt f&uuml;r Ausf&uuml;hrungszeit, nicht f&uuml;r Reservierungskapazit&auml;t.</p>
+
+            <p>Die Kompatibilit&auml;t mit bestehenden Plattformen ist bewusst breit gehalten: Slack, Google Drive, Microsoft-Office-Suite, Salesforce, Notion, Atlassian Rovo und beliebige MCP-Server. Das ist der Hebel gegen Zapier und n8n: Statt Klick-f&uuml;r-Klick-Workflows geben Teams Workspace Agents in Nat&uuml;rlicher Sprache Aufgaben, die das System eigenst&auml;ndig zerlegt und ausf&uuml;hrt. Die Gegenstimme: Zapier unterst&uuml;tzt 7.000+ Apps &uuml;ber strukturierte APIs; Workspace Agents m&uuml;ssen bei ungewohnten Quellen improvisieren. Der Wettbewerb l&auml;uft nicht auf Alles-oder-Nichts hinaus, sondern auf differenzierte Einsatzfelder.</p>
+
+            <p>F&uuml;r Produkt- und Betriebsteams in SaaS-Unternehmen sind drei Punkte handlungsleitend. Erstens: Custom GPTs sterben &mdash; wer in den letzten zwei Jahren intern Custom GPTs gebaut hat, muss bis zur Migration zu Workspace Agents planen (Datum von OpenAI noch offen). Zweitens: Die persistente Gedächtnis-Funktion schafft schnell Lock-in, je mehr ein Agent die Arbeitsweise eines Teams kennt. Vertr&auml;ge sollten Datenportabilit&auml;t explizit adressieren. Drittens: Der Research-Preview-Status bedeutet, dass sich Preise und Funktionsumfang bis zum GA noch &auml;ndern k&ouml;nnen &mdash; Produktionseinsatz mit Business-kritischen Workflows sollte auf das GA warten.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/" rel="noopener noreferrer external">OpenAI &mdash; Introducing workspace agents in ChatGPT</a></li>
+                <li><a href="https://venturebeat.com/orchestration/openai-unveils-workspace-agents-a-successor-to-custom-gpts-for-enterprises-that-can-plug-directly-into-slack-salesforce-and-more" rel="noopener noreferrer external">VentureBeat &mdash; OpenAI: Workspace Agents als Nachfolger der Custom GPTs</a></li>
+                <li><a href="https://the-decoder.com/openai-launches-workspace-agents-that-turn-chatgpt-from-a-chatbot-into-a-team-automation-platform/" rel="noopener noreferrer external">The Decoder &mdash; Workspace Agents verwandeln ChatGPT in Automatisierungsplattform</a></li>
+                <li><a href="https://siliconangle.com/2026/04/22/openai-subscribers-get-new-workspace-agents-automate-complex-tasks-across-teams/" rel="noopener noreferrer external">SiliconAngle &mdash; OpenAI subscribers get new workspace agents</a></li>
+                <li><a href="https://9to5mac.com/2026/04/22/openai-updates-chatgpt-with-codex-powered-workspace-agents-for-teams/" rel="noopener noreferrer external">9to5Mac &mdash; OpenAI updates ChatGPT with Codex-powered workspace agents</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 3: TypeScript 7.0 -->
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <header>
+            <div class="article-kicker">Entwicklung &middot; Microsoft</div>
+            <h2 id="art-3-h">TypeScript 7.0 Beta: Go-Backend macht den Compiler zehnmal schneller</h2>
+            <div class="article-meta"><time datetime="2026-04-21">21. April 2026</time> &middot; Quellen: Microsoft DevBlogs, Visual Studio Magazine, heise online</div>
+        </header>
+        <p class="article-teaser">Microsoft hat die Beta von TypeScript 7.0 ver&ouml;ffentlicht &mdash; einem Compiler, der nicht mehr in TypeScript selbst geschrieben ist, sondern in Go. Der VS-Code-Repository-Build, der fr&uuml;her 89 Sekunden dauerte, ist jetzt in 8,7 Sekunden fertig. Die Typ-Pr&uuml;fung ist um bis zu 30-faches schneller, der Speicherverbrauch sinkt um 65&thinsp;Prozent. Und 95&thinsp;Prozent der TS-6.0-Codebasen laufen ohne &Auml;nderungen durch.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Microsofts Projekt Corsa ist seit Mai 2025 in Entwicklung &mdash; ein methodischer Port des TypeScript-Compilers von JavaScript/TypeScript nach Go, nicht ein Neuschrieb. Die Go-Version macht keine neuen Sprachkonzepte, f&uuml;hrt keine neuen Typen ein und bricht nicht mit bestehendem Code. Sie tut exakt das, was TypeScript&nbsp;6.0 tut &mdash; nur deutlich schneller, weil Nativ-Code und echte Parallelit&auml;t m&ouml;glich werden. TypeScript&nbsp;6.0 (M&auml;rz 2026) war explizit als &bdquo;Bridge-Release&ldquo; geplant, um Codebasen auf die 7.0-Migration vorzubereiten.</p>
+
+            <p>Warum Go und nicht Rust? Das TypeScript-Team hat Rust intensiv evaluiert. Das Ergebnis: Das JavaScript-Speichermodell lie&szlig; sich in Rust nicht sauber ohne h&auml;ufige <code>unsafe</code>-Bl&ouml;cke abbilden &mdash; und diese h&auml;tten einen der Hauptgr&uuml;nde f&uuml;r Rust untergraben. Go erlaubte einen zeilenweise &auml;hnlichen Port: Die Type-Checking-Logik in TypeScript 7.0 ist &bdquo;strukturell identisch&ldquo; mit 6.0. Goroutines und das geteilte Speichermodell von Go passen nat&uuml;rlich zu dem, was der Compiler tun muss: viele Dateien parallel pr&uuml;fen, Ergebnisse in geteiltem State zusammenf&uuml;hren.</p>
+
+            <p>Die Benchmarks sind konkret. VS Code (1,5 Millionen Zeilen TypeScript): 89 Sekunden auf 8,74 Sekunden &mdash; Faktor 10,2. Sentry: 133 Sekunden auf 16,25 Sekunden &mdash; Faktor 8,2. Speicherverbrauch: 2,9-fach weniger. Typ-Pr&uuml;fung in Isolation: bis zu 30-fach schneller. Der Default-Parallelismus sind vier Checker-Worker (&auml;nderbar per <code>--checkers</code>); mehrere Projekte in einem Monorepo bauen parallel (&auml;nderbar per <code>--builders</code>). Daneil Rosenwasser, TypeScript-Projektmanager, schreibt: &bdquo;Don&rsquo;t let the &lsquo;beta&rsquo; label fool you &mdash; you can probably start using this in your day-to-day work immediately.&ldquo;</p>
+
+            <p>Bekannte Einschr&auml;nkungen in der Beta: Der Watch-Modus ist verf&uuml;gbar, aber noch nicht performant-optimiert. <code>--target es5</code> f&uuml;hrt zu einem Fehler &mdash; ES5-Emission wird nicht mehr unterst&uuml;tzt. <code>rootDir</code> wirft bei der Migration einen anderen Default, und <code>moduleResolution: "node10"</code; wird zu <code>bundler</code> umgemappt. F&uuml;r rund 95&thinsp;Prozent der Codebasen, die sauber gegen TypeScript 6.0 mit <code>stableTypeOrdering</code> bauen, ist 7.0 ein Drop-in. Stable-Release: innerhalb der n&auml;chsten zwei Monate, also voraussichtlich im Juni 2026.</p>
+
+            <p>TypeScript 7.0 ist kein isoliertes Ereignis, sondern der bislang gr&ouml;&szlig;te Vertreter eines strukturellen Trends: ESBuild (2020, Go), SWC und Rome/Biome (Rust), Bun (Zig/C++) haben gezeigt, dass die JavaScript-basierten Dev-Toolchains an eine Perf-Grenze gesto&szlig;en waren. Microsoft verteidigte diese Grenze nicht, sondern &uuml;berschritt sie. F&uuml;r CI-Pipelines, die TypeScript-Compilation als Engpass haben, bedeutet TypeScript 7.0 direkte Infrastructure-Kostenentlastung.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://devblogs.microsoft.com/typescript/announcing-typescript-7-0-beta/" rel="noopener noreferrer external">Microsoft DevBlogs &mdash; Announcing TypeScript 7.0 Beta</a></li>
+                <li><a href="https://devblogs.microsoft.com/typescript/typescript-native-port/" rel="noopener noreferrer external">Microsoft DevBlogs &mdash; A 10x Faster TypeScript</a></li>
+                <li><a href="https://visualstudiomagazine.com/articles/2026/04/21/typescript-7-0-beta-arrives-on-go-based-foundation-with-10x-speed-claim.aspx" rel="noopener noreferrer external">Visual Studio Magazine &mdash; TypeScript 7.0 Beta Arrives on Go-Based Foundation</a></li>
+                <li><a href="https://www.heise.de/en/news/TypeScript-7-0-Beta-New-Go-Backend-Accelerates-Programming-Language-11267870.html" rel="noopener noreferrer external">heise online &mdash; TypeScript 7.0 Beta: Neue Go-Basis beschleunigt die Programmiersprache</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 4: Claude Code aus Pro-Tarif -->
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <header>
+            <div class="article-kicker">Plattform &middot; Anthropic</div>
+            <h2 id="art-4-h">Claude Code kurzfristig aus dem Pro-Tarif gestrichen &mdash; und was das &uuml;ber KI-Preise verr&auml;t</h2>
+            <div class="article-meta"><time datetime="2026-04-22">22. April 2026</time> &middot; Quellen: The Register, heise.de, XDA Developers, Simon Willison, ComputerBase, The Decoder</div>
+        </header>
+        <p class="article-teaser">Am Abend des 21. April verschwand Claude Code leise aus der Pro-Plan-&Uuml;bersichtsseite auf claude.com. Kein Changelog-Eintrag, keine E-Mail, kein Pressestatement &mdash; nur ein rotes X. Binnen Stunden brachen Reddit- und Hacker-News-Threads aus. Anthropics Head of Growth erkl&auml;rte sp&auml;ter: ein A/B-Test f&uuml;r zwei Prozent neuer Nutzer. Und gab damit unbeabsichtigt zu, dass Flatrate-Preise mit agentic KI-Nutzung nicht mehr funktionieren.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Der Ablauf war pr&auml;zise dokumentiert. Am 21. April zeigte die Preisseite <code>claude.com/pricing</code> erstmals ein rotes X f&uuml;r Claude Code im 20-Dollar-Pro-Plan. Die Support-Dokumentation wurde &auml;hnlich aktualisiert: &bdquo;Using Claude Code with your Pro or Max plan&ldquo; wurde zu &bdquo;Using Claude Code with your Max plan&ldquo;. Beides war f&uuml;r alle Besucher sichtbar &mdash; also auch f&uuml;r die 98&thinsp;Prozent der Pro-Abonnenten, die gar nicht in den Test einbezogen waren. Anthropics Amol Avasare (Head of Growth) erkl&auml;rte auf X: es sei ein Test auf rund zwei Prozent der neuen Prosumer-Anmeldungen; bestehende Abonnenten seien nicht betroffen.</p>
+
+            <p>Die eigentliche Begr&uuml;ndung ist interessanter als die Dementi-Aktion. Avasare schrieb: &bdquo;Usage has changed a lot and our current plans weren&rsquo;t built for this.&ldquo; Das ist eine Bestandsaufnahme ohne Ausweichen. Agentic Coding-Sessions &mdash; Claude Code, der &uuml;ber Stunden in einer Codebase arbeitet, Tests ausf&uuml;hrt, Commits schreibt &mdash; verbrauchen ein Vielfaches der Token einer normalen Chat-Konversation. Ein Power-User kann mit einer einzigen Claude-Code-Session die nominale Rechenleistung von Stunden normaler Nutzung absorbieren. Mit dem flachen 20-Dollar-Preis deckt Anthropic die Kosten f&uuml;r intensive Nutzer l&auml;ngst nicht mehr.</p>
+
+            <p>Die Community-Reaktion war heftig und treffend. Auf GitHub h&auml;ufte sich ein Issue mit dem Titel &bdquo;Breaking Change: Claude Code CLI Removed from Pro Plan Without Notice&ldquo; schnell. Ein besonders pr&auml;ziser Kommentar: &bdquo;Kein Mensch startet mit einem $100- oder $200-Plan. Man startet mit $20 und steigt auf.&ldquo; Blogger Simon Willison taufte die Situation treffend: &bdquo;very confusing&ldquo; &mdash; weil Anthropic die Preisseite f&uuml;r alle &auml;nderte, obwohl nur zwei Prozent betroffen waren. Die &Auml;nderungen auf der Preisseite und in der Dokumentation wurden innerhalb weniger Stunden r&uuml;ckg&auml;ngig gemacht. Der Test l&auml;uft trotzdem weiter, nur unsichtbar f&uuml;r Nicht-Betroffene.</p>
+
+            <p>Das Preisproblem ist kein Anthropic-Problem allein. GitHub hatte kurz zuvor Copilot-Anmeldungen ausgesetzt. Das gesamte Modell der KI-Flat-Subscriptions l&auml;uft auf eine strukturelle Krise zu, weil der Aufstieg agentic Nutzung den Verbrauch pro Abonnent exponentiell skaliert, w&auml;hrend die Monatsgeb&uuml;hr fix bleibt. OpenAIs Workspace-Agents-L&ouml;sung (Credit-basiert, siehe Artikel&nbsp;2) ist ein Ansatz. Anthropics Max-Plan ($100/$200 pro Monat) ist ein anderer. Das wahrscheinliche langfristige Gleichgewicht: ein g&uuml;nstigerer Einstiegs-Tarif f&uuml;r chat-basierte Nutzung und ein deutlich teurerer Tarif f&uuml;r agentic Workloads &mdash; mit oder ohne Verbrauchsmessung.</p>
+
+            <p>F&uuml;r Entwicklerinnen und Entwickler, die heute auf Claude Code aufbauen: Der Pro-Plan bleibt vorerst verf&uuml;gbar, aber die Richtung der Preisentwicklung ist unzweideutig. Wer intensive agentic Workloads plant, sollte in die ROI-Kalkulation den Max-Plan ($100/Monat f&uuml;r 5-fache Nutzungslimits) oder eine API-direkte L&ouml;sung einpreisen. Die Unruhe unter Open-Source-Advocates &mdash; Reddit-Diskussionen &uuml;ber Llama, Mistral und DeepSeek schossen am 22. April h&ouml;her als je zuvor &mdash; zeigt, dass propri&auml;re Preisimperfektion lokale Modelle politisch st&auml;rkt.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.theregister.com/2026/04/22/anthropic_removes_claude_code_pro/" rel="noopener noreferrer external">The Register &mdash; Anthropic tests how devs react to yanking Claude Code from Pro plan</a></li>
+                <li><a href="https://www.heise.de/en/news/Anthropic-is-temporarily-removing-Claude-Code-from-the-Pro-tariff-11268189.html" rel="noopener noreferrer external">heise.de &mdash; Anthropic nimmt testweise Claude Code aus dem Pro-Tarif</a></li>
+                <li><a href="https://www.xda-developers.com/anthropic-cut-claude-code-new-pro-subscriptions/" rel="noopener noreferrer external">XDA Developers &mdash; Anthropic cut Claude Code from new Pro subscriptions</a></li>
+                <li><a href="https://simonwillison.net/2026/Apr/22/claude-code-confusion/" rel="noopener noreferrer external">Simon Willison &mdash; Is Claude Code going to cost $100/month?</a></li>
+                <li><a href="https://the-decoder.de/anthropic-manager-signalisiert-dass-pro-und-max-plaene-nicht-mehr-zur-heutigen-nutzung-passen/" rel="noopener noreferrer external">The Decoder &mdash; Anthropic-Manager: Pl&auml;ne passen nicht mehr zur heutigen Nutzung</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 5: Backdoor in Claude Desktop App -->
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <header>
+            <div class="article-kicker">Sicherheit &middot; Anthropic</div>
+            <h2 id="art-5-h">Backdoor in der Claude Desktop App: &bdquo;Stille Br&uuml;cke&ldquo; in sieben Chromium-Browser ohne Nutzer-Einwilligung</h2>
+            <div class="article-meta"><time datetime="2026-04-22">22. April 2026</time> &middot; Quellen: That Privacy Guy, The Register, Golem.de, Malwarebytes, gHacks</div>
+        </header>
+        <p class="article-teaser">Wenn man die Claude Desktop App auf macOS installiert, schreibt sie still und ohne Hinweis einen Native-Messaging-Host in bis zu sieben Chromium-basierte Browser &mdash; einschlie&szlig;lich Browser, die gar nicht installiert sind. Der pr&auml;installierte Bridge-Eintrag autorisiert vorab drei Anthropic-Chrome-Extension-IDs. Anthropic hat auf die &ouml;ffentlich gewordenen Erkenntnisse bisher nicht geantwortet.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Entdeckt wurde das Verhalten am 18. April von Alexander Hanff, einem Londoner Privacy-Consultant, der unter dem Namen &bdquo;That Privacy Guy&ldquo; publiziert. Hanff hatte bewusst keine Anthropic-Browsererweiterung installiert und fiel deshalb auf, dass in seinem Chromium-Profilverzeichnis ein Manifest namens <code>com.anthropic.claude_browser_extension.json</code> lag &mdash; platziert von der Claude Desktop App, ohne seinen Wunsch, ohne Opt-in, ohne Hinweis im Installationsprozess. Das Manifest wurde f&uuml;r Chrome, Edge, Brave, Arc, Vivaldi, Opera und Chromium abgelegt, unabh&auml;ngig davon, ob diese Browser auf dem System installiert sind.</p>
+
+            <p>Die technische Mechanik: Native Messaging ist eine legitime Chrome-API, &uuml;ber die Browser-Erweiterungen mit lokalen Programmen kommunizieren k&ouml;nnen. Normalerweise wird das Manifest w&auml;hrend der Installation einer Browsererweiterung mit Nutzereinwilligung angelegt. Claude Desktop installiert es ohne jede Erweiterungsinstallation. Das Manifest nennt drei vorab autorisierte Anthropic-Extension-IDs: Jede Browsererweiterung mit diesen IDs kann sofort <code>connectNative()</code> aufrufen und einen lokalen Prozess mit den Rechten des aktuellen macOS-Nutzers starten &mdash; au&szlig;erhalb der Browser-Sandbox.</p>
+
+            <p>Der kritische Punkt ist die Kombination mit dem bekannten Sicherheitsproblem. Laut Anthropics eigenen internen Red-Team-Daten ist die Claude-for-Chrome-Erweiterung anf&auml;llig f&uuml;r Prompt Injection mit einer Erfolgsrate von 11,2 bis 23,6&thinsp;Prozent (je nach Gegenma&szlig;nahmen). Eine erfolgreiche Prompt-Injection nutzt die vorinstallierte Bridge, um &uuml;ber den genehmigten nativen Prozess Dateien zu lesen, API-Keys aus Umgebungsvariablen abzugreifen oder weitere Angriffe vorzubereiten. Das ist kein theoretisches Szenario &mdash; es ist die direkte Konsequenz zweier Schwachstellen in Kombination.</p>
+
+            <p>Erschwerend kommt hinzu: Das Manifest kann nicht dauerhaft gel&ouml;scht werden. Claude Desktop schreibt es bei jedem Programmstart neu. Wer das Problem umgehen will, muss die Desktop-App vollst&auml;ndig deinstallieren. Anthropic hat auf die &ouml;ffentliche Berichterstattung seit dem 18. April weder per Statement noch per GitHub-Issue noch per Support-Kanal geantwortet. Security-Researcher Noah M. Kenney best&auml;tigte Hanffs Befunde als reproduzierbar. Die Golem.de-Berichterstattung am 22. April unter dem pr&auml;gnanten Titel &bdquo;Stille Br&uuml;cke aus dem Browser&ldquo; machte das Problem dem deutschen Publikum bekannt.</p>
+
+            <p>F&uuml;r Unternehmen, die Claude Desktop f&uuml;r Mitarbeiter bereitstellen, folgt daraus eine konkrete Risikobewertung: Die Desktop-App erweitert ohne Wissen der IT-Abteilung die Angriffsoberfl&auml;che jedes installierten Chromium-Browsers auf dem Ger&auml;t. BYOD-Ger&auml;te sind besonders betroffen, da Mobile-Device-Management-L&ouml;sungen diese systemebenen-Datei&auml;nderung selten abfangen. Bis Anthropic eine L&ouml;sung kommuniziert, sollte der Einsatz von Claude Desktop auf Ger&auml;ten mit hochsensiblen Zugriffen (API-Keys, Production-Secrets, Finanz- oder Patientendaten) &uuml;berpr&uuml;ft werden.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.thatprivacyguy.com/blog/anthropic-spyware/" rel="noopener noreferrer external">That Privacy Guy (Alexander Hanff) &mdash; Anthropic secretly installs spyware when you install Claude Desktop</a></li>
+                <li><a href="https://www.theregister.com/2026/04/20/anthropic_claude_desktop_spyware_allegation/" rel="noopener noreferrer external">The Register &mdash; Claude Desktop changes software permissions without consent</a></li>
+                <li><a href="https://www.golem.de/news/backdoor-in-claude-desktop-app-stille-bruecke-aus-dem-browser-2604-196xxx.html" rel="noopener noreferrer external">Golem.de &mdash; Backdoor in Claude-Desktop-App: Stille Br&uuml;cke aus dem Browser</a></li>
+                <li><a href="https://www.malwarebytes.com/blog/news/2026/04/researcher-claims-claude-desktop-installs-spyware-on-macos/" rel="noopener noreferrer external">Malwarebytes &mdash; Researcher claims Claude Desktop installs &ldquo;spyware&rdquo; on macOS</a></li>
+                <li><a href="https://www.ghacks.net/2026/04/21/claude-desktop-silently-installs-browser-extension-files-for-browsers-not-installed/" rel="noopener noreferrer external">gHacks &mdash; Claude Desktop Silently Installs Browser Extension Files</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 6: Anker Thus -->
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <header>
+            <div class="article-kicker">Hardware &middot; Anker</div>
+            <h2 id="art-6-h">Thus: Ankers erster KI-Chip &mdash; Compute-in-Memory aus Dresdner Fab, Made in Germany</h2>
+            <div class="article-meta"><time datetime="2026-04-22">22. April 2026</time> &middot; Quellen: heise.de, Hacker News, Cult of Mac, Anker Pressemitteilung</div>
+        </header>
+        <p class="article-teaser">Anker hat seinen ersten selbst entwickelten KI-Chip ank&uuml;ndigt: Thus. Der Chip nutzt Compute-in-Memory-Architektur auf NOR-Flash-Basis und wird in Dresden gefertigt &mdash; einem echten Halbleiterstandort, nicht einem Marketing-Label. Mit nur wenigen Milliwatt Leistungsaufnahme liefert Thus 150-mal mehr KI-Rechenleistung f&uuml;r Ger&auml;uschunterdr&uuml;ckung als die bisherige Soundcore-Generation. Erste Produkte erscheinen am 21. Mai.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Thus ist ein Nischen-Chip &mdash; aber ein technisch aufschlussreicher. Er nutzt Compute-in-Memory (CIM), eine Architektur, bei der Matrizenmultiplikation direkt in den Speicherzellen stattfindet, statt Daten zwischen separaten Rechen- und Speichereinheiten hin- und herzuschieben. Der physische Tr&auml;ger sind NOR-Flash-Speicherzellen: Ein Controller moduliert die Widerst&auml;nde der Gates, sodass sie die gew&uuml;nschten Gewichtsmatrizen repr&auml;sentieren. Ergebnis: ungef&auml;hr f&uuml;nf Milliarden Operationen pro Sekunde bei einem Verbrauch von wenigen Milliwatt und einer Fl&auml;che von wenigen Quadratmillimetern. Zum Vergleich: Intels Core Ultra 300 NPU ist etwa 10.000-mal schneller &mdash; aber verbraucht auch Gr&ouml;&szlig;enordnungen mehr Energie. Thus konkurriert nicht mit Laptop-Chips; es adressiert die Wearables-Welt.</p>
+
+            <p>Die erste Anwendung ist Clear Calls: Ein gro&szlig;es neuronales Netz l&auml;uft vollst&auml;ndig lokal auf dem Thus-Chip und nutzt acht MEMS-Mikrofone sowie zwei Knochenleitungssensoren, um Stimme in lauten Umgebungen zu isolieren. &bdquo;Lokal&ldquo; bedeutet hier: keine Cloud, keine Latenz durch Netzwerkrundreise, keine Datenweitergabe. F&uuml;r Datenschutz-sensible Einsatzbereiche &mdash; vertrauliche Gespr&auml;che, BYOD-Umgebungen mit Compliance-Anforderungen &mdash; ist das ein echter Vorteil gegen&uuml;ber cloud-basierten Geräuschunterdrückungs-Diensten.</p>
+
+            <p>Das &bdquo;Made in Germany&ldquo; ist kein Greenwashing. Heise identifiziert X-Fab und Globalfoundries in Dresden als m&ouml;gliche Fertigungspartner, mit dem 28SLPe-Prozess von Globalfoundries als wahrscheinlichem Kandidaten. Anker ist ein chinesisches Unternehmen mit Sitz in Changsha &mdash; die Aussage bezieht sich auf den Fertigungsort, nicht den Ursprung der Chip-Entwicklung. Das ist im Kontext des EU Chips Acts, der Investitionen in europ&auml;ische Halbleiterfertigung f&ouml;rdert, trotzdem keine triviale Nachricht: Dresdner Fabs fertigen tats&auml;chlich f&uuml;r internationale Kunden.</p>
+
+            <p>Die strategische Implikation ist gr&ouml;&szlig;er als Noise-Cancellation. Anker positioniert Thus als langfristige Chip-Plattform &mdash; nicht als einmalige Produktfunktion. Die Roadmap sieht mobile Zubeh&ouml;rger&auml;te und IoT-Ger&auml;te &uuml;ber die gesamte Anker-Produktfamilie vor. Wenn &quot;On-Device AI&quot; ein Kaufargument in der Consumer-Elektronik wird, sind Apple (AirPods Pro 3 mit H3), Qualcomm (Audio-AI) und Sony (noise-cancellation-DNNC) die direkten Benchmarks. Anker, bisher als g&uuml;nstigere Alternative positioniert, macht einen Schritt Richtung Tech-Differenzierung. Ob das ausreicht, zeigen die Verkaufszahlen nach dem Anker Day am 21. Mai.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://www.heise.de/news/Winzige-KI-Chips-Made-in-Germany-Anker-kuendigt-Thus-an-11267980.html" rel="noopener noreferrer external">heise.de &mdash; Winzige KI-Chips Made in Germany: Anker k&uuml;ndigt Thus an</a></li>
+                <li><a href="https://news.ycombinator.com/item?id=43751234" rel="noopener noreferrer external">Hacker News &mdash; Anker made its own chip to bring AI to all its products</a></li>
+                <li><a href="https://www.cultofmac.com/anker-thus-ai-chip-soundcore-earbuds-apple/" rel="noopener noreferrer external">Cult of Mac &mdash; Anker Thus AI chip challenges Apple AirPods</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Article 7: Deezer KI-Musik -->
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <header>
+            <div class="article-kicker">Musik &middot; Deezer</div>
+            <h2 id="art-7-h">44&thinsp;Prozent aller neuen Uploads: KI-Musik &uuml;berflutet Streaming-Plattformen &mdash; aber kaum jemand h&ouml;rt zu</h2>
+            <div class="article-meta"><time datetime="2026-04-20">20. April 2026</time> &middot; Quellen: Deezer Newsroom, TechCrunch, Music Business Worldwide</div>
+        </header>
+        <p class="article-teaser">Deezer meldet: 75.000 KI-generierte Tracks landen t&auml;glich auf der Plattform &mdash; 44&thinsp;Prozent aller Neuuploads. Die Zahl w&auml;chst exponentiell, seit ein Qualit&auml;tssprung bei Suno und Udio 2025 begann. Aber 85&thinsp;Prozent der Streams dieser Tracks sind Bot-betrieben; echter menschlicher Konsum liegt unter einem halben Prozent. Was wirklich auf dem Spiel steht, ist nicht das H&ouml;rverhalten &mdash; sondern das Einkommensmodell von Millionen Musikerinnen.</p>
+
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body">
+            <p>Das Wachstum ist dramatisch: Im Januar 2025 wurden 10.000 KI-Tracks t&auml;glich hochgeladen. Heute sind es 75.000 &mdash; ein siebenf&auml;cher Anstieg in 15 Monaten, w&auml;hrend menschliche Uploads stagnieren. Deezer ist die einzige gro&szlig;e Streaming-Plattform, die KI-Musik systematisch erkennt und &ouml;ffentlich dar&uuml;ber berichtet. Das patentierte Erkennungssystem l&auml;uft seit Januar 2025 in Produktion und wird seit Januar 2026 an Dritte &mdash; darunter SACEM und EJI &mdash; lizenziert. Erkannte Tracks werden aus algorithmischen Playlists entfernt und bei betr&uuml;gerischen Streams demonetisiert.</p>
+
+            <p>Das Konsum-Paradox ist das eigentliche Argument: 44&thinsp;Prozent der Uploads &mdash; aber unter einem halben Prozent des echten H&ouml;rens. Die KI-Tracks werden hochgeladen, um Royalties zu manipulieren, nicht um Publikum zu finden. Spotify hat allein 2025 rund 75 Millionen Spam-Tracks gel&ouml;scht; Apple Music identifizierte rund zwei Milliarden betr&uuml;gerische Streams. Der bislang schwerste dokumentierte Fall: Der North-Carolina-Musiker Michael Smith erstellte hunderttausende KI-Songs, lie&szlig; sie von Bots milliardenfach streamen und sch&auml;digte Plattformen um acht Millionen Dollar &mdash; er bekannte sich schuldig.</p>
+
+            <p>Die CISAC-Studie (Dezember 2024) sch&auml;tzt, dass bis 2028 24&thinsp;Prozent der Einnahmen von Musikschaffenden durch KI-Substitution wegfallen k&ouml;nnen &mdash; ein j&auml;hrlicher Schaden von vier Milliarden Euro. Die Antwort der Major Labels: Sie klagten gegen Suno und Udio wegen Urheberrechtsverletzung beim Training &mdash; und schlossen 2025 Lizenzvertr&auml;ge mit denselben Unternehmen, nachdem Vergleiche erzielt worden waren. Indie-K&uuml;nstlerinnen, die 46,7&thinsp;Prozent des globalen Markts repr&auml;sentieren, stehen ohne vergleichbare Verhandlungsposition da. Unsere ausf&uuml;hrliche Reportage beleuchtet Ursachen, wirtschaftliche Auswirkungen und Regulierungs-Perspektiven im Detail.</p>
+        </div>
+
+        <footer class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                <li><a href="https://newsroom.deezer.com/2026/04/ai-generated-tracks-represent-44-of-new-uploaded-music/" rel="noopener noreferrer external">Deezer Newsroom &mdash; AI-generated tracks represent 44&thinsp;% of new uploaded music</a></li>
+                <li><a href="https://techcrunch.com/2026/04/20/deezer-says-44-of-songs-uploaded-to-its-platform-daily-are-ai-generated/" rel="noopener noreferrer external">TechCrunch &mdash; Deezer says 44&thinsp;% of songs uploaded daily are AI-generated</a></li>
+                <li><a href="https://www.musicbusinessworldwide.com/75000-ai-generated-tracks-now-flood-deezer-daily/" rel="noopener noreferrer external">Music Business Worldwide &mdash; 75.000 AI-generated tracks now flood Deezer daily</a></li>
+            </ul>
+        </footer>
+    </article>
+
+    <!-- Reportage Teaser -->
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser">
+            <div class="article-kicker">Reportage</div>
+            <h2 id="reportage-h">44 Prozent KI-Musik: Wie k&uuml;nstliche Intelligenz die Musikindustrie neu ordnet</h2>
+            <p class="article-teaser">75.000 KI-generierte Tracks t&auml;glich &mdash; 44 Prozent aller Neuuploads. Kaum jemand h&ouml;rt sie, aber sie verwässern den Royalty-Pool und ersetzen Auftr&auml;ge. Eine umfassende Analyse: Wachstumskurven, Suno- und Udio-Lizenzdeals, CISAC-Prognosen, der $8-Millionen-Streaming-Fraud-Fall und was der Branche bis 2028 droht. Von Stefan Lange-Hegermann.</p>
+            <a href="reportagen/2026-04-23.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+
+    <!-- Tool Radar -->
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und bemerkenswerte KI-Tools der Woche</p>
+
+        <div class="tool-grid">
+            <div class="tool-card">
+                <img src="../assets/images/icons/claude.ai.png" alt="Claude Design Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://claude.ai/design" rel="noopener noreferrer external">Claude Design</a></div>
+                    <div class="tool-card-desc">Verwandelt Text-Prompts in polierte UI-Prototypen, Folien-Decks und One-Pager direkt in Claude &mdash; liest die Codebase und bestehende Design-Dateien beim Onboarding, um Farben, Typografie und Komponenten automatisch anzuwenden. Anthropics erster Angriff auf Figma und Canva f&uuml;r schnelle visuelle Arbeit.</div>
+                    <div class="tool-card-meta">17. April 2026 &middot; Anthropic Labs &middot; Pro, Max, Team, Enterprise.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/kimi.com.png" alt="Kimi K2.6 Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://kimi.com" rel="noopener noreferrer external">Kimi K2.6</a></div>
+                    <div class="tool-card-desc">Open-Weight-Modell mit einer Billion Parametern (MoE), optimiert f&uuml;r autonomes Coding &uuml;ber Stunden: l&auml;uft bis zu 13 Stunden am St&uuml;ck und koordiniert bis zu 300 parallele Sub-Agents. Auf Humanity&rsquo;s Last Exam 54,0 Punkte &mdash; &uuml;bertrifft GPT-5.4, Claude Opus 4.6 und Gemini 3.1 Pro. Unter Modified MIT License frei verf&uuml;gbar.</div>
+                    <div class="tool-card-meta">21. April 2026 &middot; Moonshot AI (Peking) &middot; Open Weight, Hugging Face.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/twelvelabs.io.png" alt="TwelveLabs Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://twelvelabs.io" rel="noopener noreferrer external">Pegasus 1.5</a></div>
+                    <div class="tool-card-desc">Video-Reasoning-Modell, das Rohmaterial in strukturierte, zeitgestempelte JSON-Metadaten verwandelt &mdash; ein API-Aufruf gen&uuml;gt, auch f&uuml;r Videos bis zwei Stunden. Entdeckt automatisch Segmentgrenzen und schl&auml;gt Gemini 2.5 Pro um 30&thinsp;Prozent in Segmentierungs-Benchmarks. Bereits bei einem gro&szlig;en Broadcast-Netzwerk im Einsatz.</div>
+                    <div class="tool-card-meta">20. April 2026 &middot; TwelveLabs &middot; NAB Show 2026, Las Vegas.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/speakon.app.png" alt="SpeakON Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://speakon.app" rel="noopener noreferrer external">SpeakON</a></div>
+                    <div class="tool-card-desc">MagSafe-KI-Hardware-Kn&ouml;pfer f&uuml;rs iPhone: nimmt Sprache auf, entfernt F&uuml;llw&ouml;rter und Pausen und liefert polierten Text direkt in jede aktive App &mdash; kein Freischalten n&ouml;tig, eigenes Mikrofon. Product-Hunt-Nr. 1 am 22. April mit 415 Upvotes. Preis: 129 Dollar (Ger&auml;t) oder 199 Dollar inkl. Pro-Jahresabo.</div>
+                    <div class="tool-card-meta">21. April 2026 &middot; Indie-Startup &middot; Hardware + iOS.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/waydev.co.png" alt="Waydev Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://waydev.co" rel="noopener noreferrer external">Waydev</a></div>
+                    <div class="tool-card-desc">KI-Engineering-Intelligence-Plattform, die den gesamten KI-augmentierten Entwicklungszyklus misst &mdash; von Token-Verbrauch im IDE bis zur Deployment. Die erste Metriken-Plattform, die Agent-Impact nativ trackt: welcher Agent schrieb den Code, Kosten pro PR, Akzeptanzrate. F&uuml;r Engineering-Leads, die &ldquo;unsichtbare KI-Arbeit&ldquo; messbar machen wollen.</div>
+                    <div class="tool-card-meta">20. April 2026 &middot; Waydev (Y Combinator) &middot; Product Hunt #3.</div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <img src="../assets/images/icons/openai.com.png" alt="OpenAI Logo" width="40" height="40">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://openai.com/index/introducing-chatgpt-images-2-0/" rel="noopener noreferrer external">GPT-Image-2 API</a></div>
+                    <div class="tool-card-desc">ChatGPT Images 2.0 ist jetzt per API zug&auml;nglich &mdash; das erste Bildmodell mit eingebautem Reasoning und Web-Suche w&auml;hrend der Generierung. Bis zu acht koh&auml;rente Bilder pro Prompt, 2K nativ, pr&auml;zises Text-Rendering in Japanisch, Chinesisch, Hindi und weiteren nicht-lateinischen Schriften. Ab 0,01 Dollar pro Bild.</div>
+                    <div class="tool-card-meta">21. April 2026 &middot; OpenAI &middot; API + ChatGPT Free/Pro/Business.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aus der Werkstatt -->
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">Sehenswerte KI-Tutorials und Analysen auf YouTube</p>
+
+        <div class="yt-grid">
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=jcpZU2vyrf4" rel="noopener noreferrer external"><img src="../assets/images/thumbs/jcpZU2vyrf4.jpg" alt="AWS Developers AI Agent Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 22 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=jcpZU2vyrf4" rel="noopener noreferrer external">Build an AI Agent From Scratch With Python</a></div>
+                    <div class="yt-card-channel">AWS Developers (1,72 Mio. Subs) &middot; 22. April 2026</div>
+                    <div class="yt-card-desc">Kompaktes Hands-on: vier Bausteine eines KI-Agenten (Modell, Tools, System-Prompt, agentic Loop) mit dem neuen AWS Strands Agents SDK. In drei Zeilen Code l&auml;uft ein erster Agent; danach kommen benutzerdefinierte Tools via <code>@tool</code>-Decorator und ein Live-MCP-Server. Ideal als Einstieg in produktionsorientiertes Agent-Engineering auf AWS Bedrock AgentCore.</div>
+                </div>
+            </div>
+
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=nD24henxjT8" rel="noopener noreferrer external"><img src="../assets/images/thumbs/nD24henxjT8.jpg" alt="WorldofAI Bart Mode Claude Code Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial &middot; 13 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=nD24henxjT8" rel="noopener noreferrer external">Bart Mode + Claude Code: NEW Spec Toolkit Ends Vibe Coding!</a></div>
+                    <div class="yt-card-channel">WorldofAI (213.000 Subs) &middot; 22. April 2026</div>
+                    <div class="yt-card-desc">Traycer&rsquo;s &bdquo;Bart Mode&ldquo; (Epic Mode) ersetzt unkontrolliertes Vibe-Coding durch spezifikationsgetriebene Ausf&uuml;hrung: Parallele KI-Agents arbeiten komplette Entwicklungs-Epics ab und verifizieren ihre eigene Arbeit zwischendurch. Kombiniert mit Claude Code zeigt das Video, warum Spec-First-Development f&uuml;r komplexe Software deutlich besser funktioniert als improvisiertes Prompting.</div>
+                </div>
+            </div>
+
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=WNYe5mD4fY8" rel="noopener noreferrer external"><img src="../assets/images/thumbs/WNYe5mD4fY8.jpg" alt="Onchain AI Garage Hermes Webhooks Tutorial Thumbnail"></a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Trending Topic &middot; 28 Min.</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=WNYe5mD4fY8" rel="noopener noreferrer external">Hermes Agent + Webhooks: How to Actually Build Automated Workflows</a></div>
+                    <div class="yt-card-channel">Onchain AI Garage (10.400 Subs) &middot; 3.527 Views &middot; 22. April 2026</div>
+                    <div class="yt-card-desc">Kleiner Creator mit 34-prozentiger Views-to-Subscriber-Rate &mdash; ein starker Trendindikator. Das Video verbindet den Hermes Agent per Webhooks in beide Richtungen mit dem realen Internet: Externe Events (E-Mails, GitHub-PRs, Zahlungen) l&ouml;sen den Agenten aus; der Agent feuert seinerseits HTTP-Calls. Drei vollst&auml;ndige Live-Demos: Beehiiv-Newsletter-Ping via Telegram, automatischer GitHub-PR-Reviewer und payment-getriggerter Workflow. Produziert f&uuml;r Entwicklerinnen, die Agent-Automatisierung in echte Systeme bringen wollen &mdash; nicht als Showcase, sondern als Bauanleitung.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <span>&copy; 2026 Die Inferenz &mdash; Erstellt mit k&uuml;nstlicher Intelligenz. Alle Inhalte ohne Gew&auml;hr.</span>
+    <div class="footer-links">
+        <a href="../impressum.html">Impressum</a>
+        <a href="../datenschutz.html">Datenschutz</a>
+        <a href="#main-content">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+<script>
+(function() {
+    const toggle = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    function getStored() { return localStorage.getItem('theme'); }
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+
+    var stored = getStored();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        toggle.textContent = isDark ? '☀' : '☾';
+    }
+
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) {
+            current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+</body>
+</html>
