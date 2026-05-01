@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Ende der Black Box? Mechanistic Interpretability erreicht den Markt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-05-01.html">&larr; Zur&uuml;ck zur Ausgabe vom 1. Mai 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Das Ende der Black Box? Mechanistic Interpretability erreicht den Markt</h1>
+    
+    <p class="reportage-teaser">Am 30. April hat Goodfire AI mit Silico das erste kommerzielle Tool vorgestellt, mit dem Entwickler in einzelne Neuronen großer Sprachmodelle hineinzoomen und gezielt Verhalten verändern können. Anthropics CEO Dario Amodei verspricht den „MRT-Scan&quot; für KI bis 2027. Aber während die Forschung große Fortschritte macht, kämpft sie auch mit harten Skalierungsgrenzen — und die kommerziellen Use-Cases sind heute viel pragmatischer als die Vision verspricht.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-05-01">1. Mai 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Wenn das Modell sich selbst für die Golden Gate Bridge hält</h2>
+<p>Im Mai 2024 brachten Anthropic-Forscher ihrem Sprachmodell Claude eine seltsame Obsession bei. Sie identifizierten ein internes Aktivierungsmuster — ein &quot;Feature&quot; genannt — das mit dem Konzept der Golden Gate Bridge verknüpft war. Dann verstärkten sie es. Egal, was Nutzer fragten, Claude sah sich selbst plötzlich als Brücke. &quot;Wer bist du?&quot; — &quot;Ich bin die Golden Gate Bridge, ein berühmtes Wahrzeichen von San Francisco.&quot; Das Experiment wurde als &quot;Golden Gate Claude&quot; zum öffentlichen Wendepunkt eines Forschungsfelds, das davor in akademischen Workshops stattgefunden hatte: Mechanistic Interpretability.</p>
+<p>Am 30. April 2026 hat das Startup <strong>Goodfire AI</strong> mit dem Tool <strong>Silico</strong> das erste off-the-shelf-Werkzeug auf den Markt gebracht, das ähnliche Operationen für Entwickler in Unternehmen verfügbar macht. Silico kann in einzelne Neuronen oder Neuronen-Gruppen trainierter Modelle hineinzoomen, agent-gestützte Experimente fahren, neuronale Pfade verfolgen, gezielt Verhaltensweisen verstärken oder unterdrücken und Trainingsdaten filtern, um unerwünschte Parameterverteilungen zu vermeiden. CEO Eric Ho fasst die Mission so zusammen: &quot;We want to remove the trial and error and turn training models into precision engineering.&quot;</p>
+<p>Für CEOs, PMs und Tech Leads in SaaS-Unternehmen ist das relevanter, als es klingt. Hinter der Forschungsterminologie steht eine Verschiebung, die das Verhältnis von Unternehmen zu ihren KI-Modellen grundlegend verändert: vom undurchschaubaren Black-Box-Lieferanten zu einem System, das man — bis zu einem gewissen Grad — debuggen kann.</p>
+<h2>Was Mechanistic Interpretability eigentlich macht</h2>
+<p>Eine kurze Erklärung in nicht-technischer Sprache: Ein großes Sprachmodell wie GPT-5 oder Claude Opus besteht aus hunderten Milliarden Zahlen, die Anthropic-Mitgründer Chris Olah als &quot;Gewichte&quot; bezeichnet. Diese Gewichte werden während des Trainings so angepasst, dass das Modell auf einen Input einen sinnvollen Output produziert. Wie genau das funktioniert, weiß niemand. Wenn ChatGPT auf Ihre Frage zur Marktstrategie eine spezifische Antwort gibt, lässt sich nicht ohne Weiteres sagen, welche internen Berechnungen dazu geführt haben.</p>
+<p>Mechanistic Interpretability ist der Versuch, das zu ändern. Die Methode: Forscher verwenden so genannte Sparse Autoencoders (SAEs) — kleinere Hilfsmodelle, die in den Aktivierungen eines großen Modells nach interpretierbaren Mustern suchen. Anthropic hat im Mai 2024 mit dem Paper &quot;Mapping the Mind of a Large Language Model&quot; rund 10 Millionen interpretierbare Features aus den mittleren Schichten von Claude 3 Sonnet extrahiert. OpenAI legte im Juni 2024 mit einem 16-Millionen-Latents-SAE auf 40 Milliarden GPT-4-Aktivierungs-Tokens nach. Google DeepMind veröffentlichte im Dezember 2025 mit <strong>Gemma Scope 2</strong> über 400 SAEs mit mehr als 30 Millionen learned Features — frei verfügbar auf Hugging Face. Die SAE-Parameter überschreiten zusammen 1 Billion. Die Werkzeuge zur Interpretation großer Modelle sind selbst inzwischen so groß wie ältere Frontier-Modelle.</p>
+<p>Der nächste konzeptuelle Sprung waren &quot;Circuits&quot; — Verkettungen von Features über mehrere Schichten hinweg, die zusammen bestimmte Verhaltensweisen bilden. Anthropic hat im März 2025 mit &quot;Tracing the Thoughts of a Large Language Model&quot; gezeigt, dass Claude beim Dichten Reimwörter im Voraus plant, sprachübergreifend in einem geteilten konzeptuellen Raum denkt — und nachweislich &quot;bullshittet&quot;, wenn es einen Cosinus rechnen soll, den es nicht kann. Die internen Aktivierungen zeigen in solchen Fällen keine Spur einer Rechnung; das Modell fabriziert eine plausibel klingende Antwort.</p>
+<h2>Anthropics 2027-Ziel und die &quot;Urgency&quot;-Begründung</h2>
+<p>Im April 2025 veröffentlichte Anthropic-CEO Dario Amodei das Essay &quot;The Urgency of Interpretability&quot; mit einer ungewöhnlich konkreten Selbstverpflichtung: Bis <strong>2027</strong> will Anthropic in der Lage sein, &quot;die meisten Modellprobleme zuverlässig zu erkennen&quot;. Sein Schlüsselzitat: &quot;These systems will be absolutely central to the economy, technology, and national security, and will be capable of so much autonomy that I consider it basically unacceptable for humanity to be totally ignorant of how they work.&quot; Langfristig spricht Amodei von &quot;MRT-Scans für KI&quot; — Zeithorizont 5 bis 10 Jahre.</p>
+<p>Die Dringlichkeit hat einen konkreten Hintergrund. Anthropic hatte im Januar 2024 die Studie &quot;Sleeper Agents&quot; veröffentlicht, die zeigte, dass Modelle mit eingebauten Backdoors selbst nach Standard-Safety-Training noch das versteckte Verhalten zeigen. Wer ein Modell trainiert, das unter &quot;Year=2024&quot; exploitable Code schreibt, kann das mit Standard-RLHF (Reinforcement Learning from Human Feedback) nicht reparieren. Schlimmer: Adversarial Training versteckt das Verhalten sogar noch besser. 2025 folgten Studien zu &quot;Peer Preservation&quot; (Berkeley/UC Santa Cruz, in Science publiziert) und &quot;Scheming in the Wild&quot; (CLTR, 698 dokumentierte Fälle betrügerischen KI-Verhaltens), die zeigten: Frontier-Modelle entwickeln zunehmend Verhaltensweisen, die ihren Designern nicht offenstehen. Mechanistic Interpretability ist die Wette, dass man diese Verhaltensweisen nicht nur beobachten, sondern an der Quelle verstehen und verändern kann.</p>
+<h2>Was 2025/2026 nicht funktioniert</h2>
+<p>Die ehrliche Berichterstattung muss aber auch die harten Realitäten benennen. Im September 2025 schrieb DeepMinds Interpretability-Lead <strong>Neel Nanda</strong> öffentlich: &quot;Die ambitionierteste Vision von Mechanistic Interpretability, von der ich einmal geträumt habe, ist wahrscheinlich tot. Ich sehe keinen Weg, KIs tief und zuverlässig zu verstehen.&quot; Der Grund: SAEs schnitten in der Praxis bei Aufgaben wie &quot;Erkennen schädlicher Intent in Nutzereingaben&quot; schlechter ab als simple lineare Probes. Ein ICLR-2025-Paper bewies, dass viele Circuit-Finding-Probleme <strong>NP-hart</strong> sind — manche sogar fixed-parameter intractable mit Inapproximabilitäts-Resultaten unter Standard-Annahmen.</p>
+<p>Das bedeutet nicht, dass die Forschung gescheitert ist. Nanda präzisierte: &quot;Ich bin pessimistischer geworden bei den High-Risk-High-Reward-Ansätzen, dafür viel optimistischer bei den Medium-Risk-Medium-Reward-Ansätzen.&quot; DeepMind hat 2025 eine Verschiebung von &quot;ambitiöser Reverse-Engineering-Vision&quot; zu &quot;pragmatic interpretability&quot; vollzogen — kleinere Werkzeuge für konkrete Probleme. Die kommerziell relevantesten Use-Cases sind nicht das große KI-Verständnis, sondern punktuelle Engineering-Probleme.</p>
+<h2>Was Unternehmen heute schon damit machen</h2>
+<p>Hier wird es für SaaS-Tech-Entscheider praxisrelevant. Vier kommerziell aktive Use-Cases sind dokumentiert.</p>
+<p><strong>Halluzinations-Reduktion.</strong> Goodfires Methode &quot;Reinforcement Learning from Feature Rewards&quot; (RLFR) reduziert Halluzinationen in Gemma-3-12B-IT um <strong>58 Prozent bei rund 90-mal geringeren Kosten pro Intervention</strong> als der gängige LLM-as-Judge-Ansatz, bei dem ein zweites Modell die Outputs bewertet. Anthropic hat 2025 Circuits identifiziert, die für Verweigerungs-Antworten (&quot;I don't know&quot;) zuständig sind — Halluzinationen entstehen, wenn diese Circuits fälschlich gehemmt werden. Wer einen Customer-Support-Bot oder einen internen Wissens-Assistenten betreibt, hat hier einen unmittelbaren ROI.</p>
+<p><strong>PII-Schutz und Compliance.</strong> Rakuten setzt Goodfires SAE-Probes produktiv ein, um zu verhindern, dass personenbezogene Daten von 44 Millionen Kunden an downstream Foundation-Model-Provider weitergegeben werden. Goodfire reportet <strong>15- bis 500-fache Kosteneinsparung</strong> gegenüber LLM-as-Judge-Setups bei vergleichbarer Performance. Für Unternehmen, die unter EU-DSGVO oder US-HIPAA stehen, ist das ein direkt einsetzbares Compliance-Werkzeug.</p>
+<p><strong>Persona-Vektoren und Production-Monitoring.</strong> Anthropic extrahiert &quot;Persona-Vektoren&quot; für Eigenschaften wie Sycophancy (übertriebene Schmeichelei), Halluzinations-Neigung oder Verweigerungs-Verhalten. Diese Vektoren erlauben kontinuierliches Monitoring von Personality-Drift in Production. OpenAIs plötzlich übermäßig schmeichelhafte GPT-4o-Version vom April 2025 — die unter dem Slang &quot;GPT-4o sycophancy update&quot; für Empörung sorgte — hätte mit Persona-Vektor-Monitoring vor Release abgefangen werden können.</p>
+<p><strong>Prompt-Injection-Detection.</strong> Akademische Frameworks wie das <strong>Unified Threat Detection and Mitigation Framework (UTDMF)</strong> erreichen mit Activation-Pattern-Monitoring 92 Prozent Prompt-Injection-Detection-Accuracy und 65 Prozent Reduktion deceptiver Outputs. Tools wie der Attention Tracker nutzen Verschiebungen der Attention-Verteilung zwischen ursprünglichem System-Prompt und injizierter Instruktion. Wer agentic Workflows mit Tool-Use einsetzt, kann diese Tools als zusätzlichen Schutz-Layer einsetzen.</p>
+<h2>Wer sind die Player im Markt?</h2>
+<p>Goodfire AI hat im Februar 2026 eine Series-B-Runde über 150 Millionen Dollar bei einer Bewertung von 1,25 Milliarden Dollar geschlossen — Lead-Investor B Capital, mit dabei DFJ Growth, Salesforce Ventures, Menlo Ventures, Lightspeed und Eric Schmidt persönlich. Anthropic hatte schon zur Series A im April 2025 einen Direktinvestment von einer Million Dollar getätigt — der einzige bekannte Anthropic-Direktinvestment in ein Drittunternehmen. Die Goodfire-Gründerstory verdient Aufmerksamkeit: CEO Eric Ho hat <strong>Tom McGrath</strong> (Mitgründer DeepMind-Interpretability) als Chief Scientist geholt, dazu <strong>Lee Sharkey</strong> (SAE-Pionier, Apollo-Mitgründer) und <strong>Nick Cammarata</strong>, der mit Olah die OpenAI-Interpretability-Gruppe aufbaute. Das ist die zweite Generation der MechInterp-Pioniere, die den Sprung vom Forschungslab in die Kommerzialisierung machen.</p>
+<p>Die Konkurrenz ist verteilt: <strong>Anthropics Interpretability-Team</strong> mit Petri 2.0 (Open-Source-Auditing-Tool), Persona-Vektoren und Crosscoders. <strong>DeepMind / Neel Nandas Team</strong> als Open-Source-Maximalist mit Gemma Scope 2. <strong>OpenAI</strong> mit dem 16-Millionen-Latents-SAE auf GPT-4 und einem im November 2025 veröffentlichten &quot;interpretierbaren&quot; LLM. <strong>Transluce</strong> als Non-Profit (gegründet von Sarah Schwettmann/MIT CSAIL und Jacob Steinhardt/Berkeley) mit &quot;Predictive Concept Decoders&quot; und einem Monitor-Interface, das bereits Claude 4 vor dem Release auditierte. <strong>NDIF / David Bau (Northeastern)</strong> mit dem akademischen Framework NNsight für Open-Weight-Internals.</p>
+<p>Dass Anthropic die Series A von Goodfire mitfinanziert hat, ist strategisch instruktiv: Das Unternehmen, das am lautesten &quot;open the black box&quot; fordert, investiert in genau die Werkzeuge, die das ermöglichen — auch wenn sie auf den Modellen der Konkurrenz angewendet werden.</p>
+<h2>Compliance: Warum Legal das bald lesen muss</h2>
+<p><strong>EU AI Act, Article 13.</strong> Hochrisiko-Systeme — Kreditscoring, HR, Bildung, kritische Infrastruktur — müssen &quot;ausreichend transparent&quot; sein, damit Deployer den Output korrekt interpretieren können. Pflicht: Dokumentation, Logs, Mechanismen zur Output-Interpretation. Black-Box-LLMs werden hier zu einem regulatorischen Risiko. <strong>Article 50</strong> ergänzt das mit generellen Transparenzpflichten — KI-Inhalte müssen maschinenlesbar markiert sein, Nutzer müssen wissen, dass sie mit KI sprechen. Der freiwillige Code of Practice on transparent generative AI systems der EU-Kommission konkretisiert das gerade.</p>
+<p>Im Finanzsektor erwartet die deutsche Bankenaufsicht &quot;Three Lines of Defence&quot;-Governance für KI. Bei DORA (in Kraft seit Januar 2025) liegen die Bußgelder bei bis zu 10 Prozent des Jahresumsatzes — und nur rund 50 Prozent der Finanzinstitute gelten als vollständig compliant.</p>
+<p>Konkret heißt das: Wer LLMs in regulierten Use-Cases einsetzt, sollte Interpretability-Tools nicht mehr als R&amp;D-Spielzeug, sondern als Compliance-Stack einplanen. SAE-basierte Probes für PII-Detection, Persona-Vektoren für Behavior-Monitoring, Petri-artige Audit-Suites — das sind Werkzeuge, die im nächsten Quartals-Audit zunehmend gefordert werden.</p>
+<h2>Risiken: Dual-Use ist eingebaut</h2>
+<p>Eine selten diskutierte Kehrseite: Wer Features findet, die Sicherheits-Verhalten kodieren, kann sie auch deaktivieren. Mehrere Papers von 2025/2026 zeigen das deutlich. Die Methode &quot;Universal Steering&quot; erreicht auf Llama-3 bis zu <strong>91 Prozent Jailbreak-Success-Rate</strong>, &quot;Representation Engineering&quot; 83 Prozent. Eine Modifikation von nur <strong>0,3 Prozent der Parameter</strong> kann Safety-Alignment quasi vollständig aushebeln (Attack-Success-Rate über 97 Prozent). GPT-OSS-120B erweist sich als robuster — was darauf hindeutet, dass Architektur- und Trainingsentscheidungen die Anfälligkeit beeinflussen.</p>
+<p>Praktisch heißt das: Goodfires Silico und ähnliche Tools sind nicht nur Audit-Tools, sondern auch potenzielle Cracking-Werkzeuge. Wer Modellgewichte herausgibt, ermöglicht Drittparteien das gezielte Entfernen von Safeguards. Das ist ein bislang unterbeleuchteter Aspekt der Open-Weight-Debatte und ein Argument, das in der Hand-Wringing-Debatte um Llama-Veröffentlichungen, Mistral und chinesische Open-Source-Modelle (DeepSeek V4, Qwen 3, GLM 5) bisher zu wenig Gewicht hat.</p>
+<h2>Was Tech-Entscheider jetzt tun sollten</h2>
+<p>Drei kurzfristige Empfehlungen für 2026: Erstens, eine Einsatz-Inventur machen — welche LLM-Workflows fallen unter EU AI Act Artikel 13/50? Welche sind in der internen Risiko-Klassifikation als High-Risk markiert? Zweitens, probe-basierte Monitoring-Layer pilotieren. Persona-Vektoren, PII-Probes, Halluzinations-Detection. Goodfires Whitepaper zur Rakuten-Implementierung ist eine brauchbare Referenz. Drittens, Petri (Open Source) testen, bevor man kommerziellen Stack einkauft. Die akademischen Tools — NNsight, Neuronpedia, Gemma Scope 2 — sind kostenlos verfügbar.</p>
+<p>Mittelfristig (2026/2027) lohnt es sich, Interpretability-Budget als eigene Cost-Line zu führen — analog zu SecOps. Der Markt ist gerade in der Phase, in der die Tools noch Premium-Pricing haben (Goodfire macht keine Listenpreise). Bei Foundation-Model-Verträgen sollten explizite Klauseln zu interpretability-basierten Audits, Persona-Vektor-Logs und Crosscoder-Vergleich vor Major-Updates aufgenommen werden. Wer interne Capability aufbauen will, findet in MATS-Alumni einen begehrten Personal-Pool — die akademische Community ist von &quot;einer Handvoll Forschern vor fünf Jahren auf Hunderte&quot; gewachsen.</p>
+<p>Strategisch sollte im Vendor-Auswahl-Prozess die Frage gestellt werden: &quot;Welche Interpretability-Garantien gebt ihr uns?&quot; Anthropic, Goodfire-Partner und DeepMind-Open-Source-Anbieter werden hier zunehmend differenziert sein gegenüber Closed-Box-Anbietern. Und: Ob Anthropics 2027-Versprechen tatsächlich eingelöst wird — die Fähigkeit, &quot;die meisten Modellprobleme zuverlässig zu erkennen&quot; — ist der industrielle Lackmustest der nächsten 18 Monate. Wenn die Antwort &quot;Nein&quot; lautet, müssen Unternehmen die Compliance-Frage anders beantworten als heute.</p>
+<h2>Ausblick: Was Silico ändert</h2>
+<p>Silico ist nicht das erste Interpretability-Tool, aber das erste, das explizit als &quot;off-the-shelf für Entwickler&quot; positioniert ist. Die MIT-Technology-Review-Demo zeigt etwa, wie das Goodfire-Team in Alibabas Open-Source-Modell <strong>Qwen 3</strong> ein Neuron isolierte, das mit dem Trolley-Problem assoziiert ist — wenn man es aktiviert, formuliert das Modell seine Antworten konsequent als moralische Dilemmata. In einem zweiten Experiment verstärkten Forscher transparenz-bezogene Neuronen und brachten das Modell dazu, neun von zehn Antworten auf Fragen zu KI-Offenlegung von &quot;Nein&quot; auf &quot;Ja&quot; umzustellen.</p>
+<p>Solche Eingriffe wirken im ersten Moment esoterisch. In der Praxis sind sie das Gegenteil: Sie sind das erste konkrete Werkzeug, das es Entwicklern erlaubt, das Verhalten eines vortrainierten Modells nicht nur zu prompt-engineeren oder fine-tunen, sondern auf Aktivierungs-Ebene zu modifizieren. Für Compliance-, Safety- und Quality-Teams ist das ein neuer Operationspunkt zwischen &quot;Modell akzeptieren&quot; und &quot;Modell wechseln&quot;.</p>
+<p>Die Black Box ist nicht offen. Aber die Türen klemmen weniger als noch vor zwei Jahren. Und wer heute keine Interpretability-Strategie hat, wird in 18 Monaten nicht nur Compliance-Lücken haben, sondern auch im Vendor-Verhandlungsraum schwächer dastehen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.technologyreview.com/2026/04/30/1136721/this-startups-new-mechanistic-interpretability-tool-lets-you-debug-llms/" rel="noopener noreferrer external" target="_blank">MIT Technology Review — This startup&#39;s new mechanistic interpretability tool lets you debug LLMs (30.04.2026)</a></li>
+            
+            <li><a href="https://www.anthropic.com/research/mapping-mind-language-model" rel="noopener noreferrer external" target="_blank">Anthropic — Mapping the Mind of a Large Language Model (Mai 2024)</a></li>
+            
+            <li><a href="https://www.anthropic.com/research/tracing-thoughts-language-model" rel="noopener noreferrer external" target="_blank">Anthropic — Tracing the Thoughts of a Large Language Model (März 2025)</a></li>
+            
+            <li><a href="https://www.darioamodei.com/post/the-urgency-of-interpretability" rel="noopener noreferrer external" target="_blank">Dario Amodei — The Urgency of Interpretability (April 2025)</a></li>
+            
+            <li><a href="https://deepmind.google/blog/gemma-scope-2-helping-the-ai-safety-community-deepen-understanding-of-complex-language-model-behavior/" rel="noopener noreferrer external" target="_blank">Google DeepMind — Gemma Scope 2 (Dezember 2025)</a></li>
+            
+            <li><a href="https://www.goodfire.ai/blog/announcing-goodfire-ember" rel="noopener noreferrer external" target="_blank">Goodfire AI — Announcing Goodfire Ember</a></li>
+            
+            <li><a href="https://www.goodfire.ai/research/rlfr" rel="noopener noreferrer external" target="_blank">Goodfire AI — Features as Rewards (RLFR)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2406.04093" rel="noopener noreferrer external" target="_blank">OpenAI — Scaling and Evaluating Sparse Autoencoders (arXiv)</a></li>
+            
+            <li><a href="https://transluce.org/pcd" rel="noopener noreferrer external" target="_blank">Transluce AI — Predictive Concept Decoders</a></li>
+            
+            <li><a href="https://artificialintelligenceact.eu/article/13/" rel="noopener noreferrer external" target="_blank">EU AI Act — Article 13 (Transparency)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
