@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI an beiden Seiten der Cyberfront: Wie 2026 zum Wendepunkt der Cybersecurity wird</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-05-12.html">&larr; Zur&uuml;ck zur Ausgabe vom 12. Mai 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">KI an beiden Seiten der Cyberfront: Wie 2026 zum Wendepunkt der Cybersecurity wird</h1>
+    
+    <p class="reportage-teaser">Defender finden in Wochen Schwachstellen, die menschliche Reviews zwanzig Jahre lang übersehen haben. Angreifer bauen erstmals nachweislich Zero-Days mit LLMs. Was die KI-Cybersecurity-Wende für Entscheider in SaaS-Unternehmen heute bedeutet — und wo das Geld klug investiert ist.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-05-12">12. Mai 2026</time>
+         &middot; 11 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der eigentliche Wendepunkt</h2>
+<p>Am 27. Januar 2026 koordinierte die OpenSSL Software Foundation eine Sicherheits-Veröffentlichung, in der ein Defender alle zwölf Zero-Day-Schwachstellen entdeckt hatte. Es war kein Team von Pentestern und keine Bug-Bounty-Plattform. Es war ein KI-System eines damals erst wenige Wochen alten Startups namens AISLE. Drei Monate später, am 11. Mai 2026, meldete Googles Threat Intelligence Group erstmals einen anderen Befund: einen weaponisierten Zero-Day, der nachweislich mit einer KI geschrieben wurde. Beide Ereignisse beschreiben dasselbe Phänomen aus zwei entgegengesetzten Richtungen. KI verschiebt 2026 die Cyberfront — auf der Defender- wie auf der Angreiferseite gleichzeitig.</p>
+<p>Für Unternehmen und Vorstände, die KI bisher als Produktivitätsthema diskutiert haben, ist die Übersetzung simpel: Defender und Angreifer werden gleich schnell schneller. Die Frage, wer in zwei Jahren noch ein funktionierendes Threat-Modell hat, ist keine Hype-Frage mehr. Sie ist eine Budget-Frage, eine Tool-Auswahl-Frage und eine Architektur-Frage. Diese Reportage führt durch die Belege auf beiden Seiten — und endet mit dem, was Tech-Leads heute konkret entscheiden sollten.</p>
+<h2>Was Defender heute können</h2>
+<p>AISLE ist die deutlichste Verkörperung der neuen Defender-Generation. Gegründet von Ondrej Vlcek (Ex-CEO Avast), Jaya Baloo (Ex-CISO Avast und Rapid7) und Stanislav Fort (Ex-Anthropic und Ex-Google DeepMind), ging das Unternehmen im Oktober 2025 aus dem Stealth-Modus. Bis Mai 2026 hat das System mehr als 100 extern validierte CVEs in über 30 Open-Source-Projekten gefunden — Linux Kernel, glibc, Chromium, Firefox, WebKit, Apache HTTPd, GnuTLS, OpenVPN, Samba, NASAs CryptoLib. Der gemeinsame Nenner: Es geht nicht um aktuelle Bugs, die Entwickler letzte Woche eingebaut haben. Es geht um Schwachstellen, die jahrzehntelang in viel-reviewter, produktiver Infrastruktur dösten.</p>
+<p>Wie funktioniert das? Klassische Werkzeuge der Schwachstellen-Suche fallen in zwei Familien. Statische Analyse durchsucht Quellcode nach bekannten Mustern — pufferüberlaufgefährdete <code>strcpy</code>-Aufrufe, fehlende Bounds-Checks, leakable Pointer. Fuzzer schicken zufällige oder strukturierte Eingaben in Programme und beobachten, wann sie abstürzen. Beide funktionieren gut für eine bestimmte Klasse von Bugs — die mechanischen, mustererkennbaren. Sie versagen bei Logikfehlern: einer Authentifizierungs-Routine, die in 99 Prozent der Fälle korrekt prüft, aber unter einer bestimmten Konstellation eine Vertrauensannahme falsch anwendet. AISLEs &quot;Cyber Reasoning System&quot; liest Quellcode wie eine erfahrene Pentesterin — es versteht die Absicht des Entwicklers und identifiziert die Stellen, an denen Realität und Absicht auseinanderfallen.</p>
+<p>Konkretes Beispiel: Die FreeBSD-Lücke CVE-2026-42511, gepatcht Ende April 2026. Der DHCP-Client von FreeBSD parst eingebettete Anführungszeichen in der BOOTP-Antwort eines Servers falsch und schreibt sie ungesäubert in eine lokale Lease-Datei. Beim nächsten System-Boot oder Service-Reload werden diese Werte als Code mit Root-Rechten ausgeführt. Der Bug stammt aus dem Jahr 2005 — FreeBSD hat den Code damals aus OpenBSD importiert. OpenBSD selbst hat das betroffene Subsystem 2012 als veraltet markiert und entfernt, ohne dabei die Schwachstelle zu bemerken. Ein einundzwanzig Jahre alter Remote-Root-Bug, gefunden von einer KI in einem systematischen Durchgang der Netzwerk-Subsysteme.</p>
+<p>Parallel zu AISLE arbeitet Google DeepMind mit Project Zero an Big Sleep. Das System fand im Sommer 2025 eine SQLite-Schwachstelle (CVE-2025-6965), bevor Angreifer sie nutzen konnten — laut Google das erste dokumentierte Mal, dass eine KI eine Vulnerability vor einem aktiven Angriff identifiziert hat. Bis August 2025 hatte Big Sleep zwanzig autonom gefundene Schwachstellen in FFmpeg, ImageMagick und anderen Open-Source-Libraries vorzuweisen. Im Mai 2026 meldete Google einen weiteren Big-Sleep-Fund, den Angreifer geplant hatten auszunutzen.</p>
+<p>Beide Systeme sind Vorboten einer Pflicht-Ausstattung. Wenn Defender-KI in der Lage ist, Schwachstellen zu finden, die fünfzehn, zwanzig, fünfundzwanzig Jahre lang unter dem Radar lagen, dann wird sie diese Schwachstellen in zwei bis fünf Jahren in nahezu jeder kritischen Codebasis öffentlich gemacht haben. Die CVE-Pipeline wird entsprechend überlasten: FIRST, die internationale CSIRT-Organisation, prognostiziert für 2026 einen Median von 59.427 CVEs — bei einem 90-Prozent-Konfidenzintervall von 30.012 bis 117.673. Patch-Management-Prozesse, die heute schon an monatlichen Patch-Tuesday-Wellen kauen, müssen für ein Vielfaches skalieren.</p>
+<h2>Was Angreifer jetzt können</h2>
+<p>Die andere Seite hat im Mai 2026 ihren Beleg geliefert. Googles Threat Intelligence Group beschreibt im Bericht &quot;Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access&quot; einen Fall, der qualitativ neu ist. Eine kriminelle Koalition wollte einen Zero-Day-Exploit gegen ein populäres Open-Source-Webadministrationstool durchführen — ein Python-Skript, das die Zwei-Faktor-Authentifizierung umgeht. Die Mechanik: eine &quot;hardcoded trust assumption&quot; im Quellcode des Tools — ein Logikfehler, bei dem der Entwickler eine Ausnahme verdrahtet hatte, die die 2FA-Erzwingung unter bestimmten Umständen aushebelt. Voraussetzung: gültige User-Credentials.</p>
+<p>Bemerkenswert ist nicht die Lücke, sondern wer sie geschrieben hat. Das Python-Skript trägt klare Marker eines LLM-Outputs. Übertrieben pädagogische Docstrings, wie sie in Online-Tutorials und Trainingsdaten üblich sind. Ein halluzinierter CVSS-Score, der keiner echten CVE entspricht — ein typisches LLM-Konfabulationsartefakt. Eine &quot;textbook-pythonic&quot; Struktur, sauber wie aus einem Lehrbuch. Eine standardisierte <code>_C</code>-ANSI-Color-Klasse für die Konsolen-Ausgabe. Google sagt explizit: Das verwendete Modell war nicht Gemini. CyberScoop schließt auch Anthropics Claude Mythos aus. Der konkrete Modellname bleibt offen — wahrscheinlich ein offen verfügbares Modell wie Qwen2.5-Coder oder DeepSeek-V3, das sich der Kontrolle der Frontier-Labs entzieht.</p>
+<p>Das Entscheidende: Die Bug-Klasse ist nicht mehr die mechanische. Es ist die semantische. Pufferüberläufe und Memory-Corruption-Bugs konnten Angreifer seit Jahrzehnten automatisiert finden — mit Fuzzern, Symbolic Execution, ASLR-Bypass-Tools. Was sie nicht automatisieren konnten, war das Lesen von Auth-Logik aus Quellcode. Genau das tut der GTIG-Fall. Eine KI hat die Intention des Entwicklers verstanden, einen Widerspruch zwischen 2FA-Erzwingung und einer Ausnahme erkannt und daraus einen funktionsfähigen Exploit gebaut. Die Eintrittsbarriere für Logik-Schwachstellen-Suche, die jahrelang das Reservoir hochbezahlter Pentester war, fällt.</p>
+<p>Der GTIG-Fall folgt einer Eskalations-Sequenz. Im November 2025 dokumentierte Google PROMPTFLUX — eine experimentelle VBScript-Malware, die zur Laufzeit die Gemini-API anruft, um den eigenen Quellcode periodisch (eine Variante stündlich) für Obfuskation neu zu schreiben. PROMPTSTEAL alias LAMEHUG (Russlands APT28, GRU) nutzt seit dem Frühjahr 2025 die Hugging Face API, um Qwen2.5-Coder-32B-Instruct für Recon- und Exfiltrations-Kommandos zur Laufzeit zu konsultieren. Es war ukrainische Ziele, die als erste damit konfrontiert wurden. Beide Vorläufer beschreiben KI als Werkzeug für menschliche Angreifer. Der GTIG-Fall vom 11. Mai beschreibt KI als Autor des Angriffs.</p>
+<p>John Hultquist, Chefanalyst der GTIG, formuliert die Konsequenz lakonisch: &quot;The game's already begun and we expect the capability trajectory is pretty sharp.&quot; Was Defender 2026 detektieren konnten, ist nur jener Teil, in dem das LLM sichtbare Artefakte hinterlassen hat. Die Iceberg-These: Für jedes erkannte KI-gebaute Zero-Day gibt es vermutlich mehrere, die ohne erkennbare Stil-Signaturen auskommen.</p>
+<h2>Die kommerzielle Geometrie</h2>
+<p>Genau in dieser Asymmetrie zwischen Defender- und Angreifer-Fähigkeiten ist OpenAI Daybreak entstanden. Der Launch am 11. Mai 2026 — gleichzeitig mit dem GTIG-Bericht, was vermutlich kein Zufall ist — etabliert eine dreistufige Modell-Architektur. Standard-GPT-5.5 für allgemeine Nutzung. &quot;GPT-5.5 with Trusted Access for Cyber&quot; als empfohlener Einstieg für verifizierte Defender-Workflows. &quot;GPT-5.5-Cyber&quot; als Limited Preview mit gelockerten Safety-Filtern für autorisierte Red-Team- und Pentest-Szenarien. Der Zugang läuft über das Trusted-Access-Programm; ab Juni 2026 ist Advanced Account Security obligatorisch.</p>
+<p>OpenAIs strategische Wette ist eine ökonomische: Frontier-Cybersecurity-Modelle werden zur kommerziellen Plattform, nicht zur restriktiv kontrollierten Forschungssache. Das ist die explizite Antithese zu Anthropic. Claude Mythos, im April vorgestellt, findet in Tests autonom Browser-Exploits, verkettet vier Vulnerabilities und löst Corporate-Network-Penetrationstests, die einen menschlichen Experten zehn Stunden gekostet hätten. Anthropic gibt das Modell aber nicht allgemein frei. Project Glasswing limitiert den Zugang auf rund vierzig Partner — AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorgan Chase, Linux Foundation, Microsoft, NVIDIA, Palo Alto Networks bilden den Founding-Kreis. Anthropic legt 100 Millionen Dollar Credits dazu. Die EU verhandelt seit Wochen erfolglos um Zugang.</p>
+<p>Beide Anbieter haben unterschiedliche Risiko-Theorien. Anthropic argumentiert defensiv: Ein Modell, das autonom Exploits baut, gehört nicht in beliebige Hände. OpenAI argumentiert offensiv: Wenn Angreifer (mit oder ohne offizielle Modell-Zugänge) eh schon dazu in der Lage sind, müssen Defender mit derselben Generation aufgerüstet werden — und zwar breit, schnell, kommerziell. Beide Theorien sind verteidigbar. Beide produzieren unterschiedliche Marktdynamiken. Die etablierten Cybersecurity-Anbieter — CrowdStrike, Palo Alto, SentinelOne, Tenable, Rapid7, Snyk, Semgrep, Socket — sind ungewöhnlicherweise auf beiden Seiten Partner und beobachten, welche Theorie sich durchsetzt.</p>
+<p>Microsoft schließlich bringt eine dritte Dimension ein. Mit Purview Insider Risk Management können Compliance-Teams ab Mai 2026 KI-Prompts und KI-Antworten im Klartext einsehen — pseudonymisiert mit Reveal-Button. Purview for Agents, ebenfalls ab Mai/Juni 2026 verfügbar, behandelt KI-Agenten als First-Class-Identities, mit Anomalie-Detection auf Agent-Verhalten. Die Botschaft: KI-Risiken sind nicht mehr nur extern, sondern intern. 94 Prozent der Organisationen melden laut Thales 2026 Data Threat Report, dass KI ihre Insider-Risk-Exposition messbar erhöht; 48 Prozent der Cybersecurity-Profis sehen Agentic AI als Top-Angriffsvektor des Jahres.</p>
+<h2>Was das für Entscheider in SaaS-Firmen bedeutet</h2>
+<p>Für CEOs, PMs und Tech-Leads in SaaS-Unternehmen verdichten sich die Befunde in vier konkrete Entscheidungspunkte für die nächsten neunzig Tage.</p>
+<p>Erstens: Defender-KI evaluieren — aber richtig. Wer einen Vulnerability-Scanner anschafft, sollte nicht nur fragen &quot;findet das Tool Bugs&quot;, sondern: Findet es semantische Logik-Bugs oder nur Muster-Treffer? Liefert es ready-to-merge Patches mit Tests, oder nur Findings? Wie hoch ist die False-Positive-Rate auf eigenem Code? Ist die Datenverarbeitung DSGVO-konform und AI-Act-ready? Die curl-Bug-Bounty-Pleite 2025, bei der Low-Quality-AI-Submissions ein ganzes Programm überrollten, zeigt: Quantität ist nicht Qualität. AISLE und Big Sleep sind Benchmarks; Snyk DeepCode AI, Semgrep AI, Socket und Codex Security sind die kommerziell zugänglichen Tier-2-Optionen.</p>
+<p>Zweitens: Welche Daten in welche KI? Drei klare Klassen. Öffentlicher Code und öffentliche CVE-Daten dürfen in beliebige Frontier-APIs, idealerweise mit Caching. Privater Production-Code und Auth-Logik gehören nur in Trusted-Tier-Verträge — OpenAI Trusted Access, Anthropic Enterprise mit Zero-Data-Retention, Azure OpenAI mit EU-Datenresidenz — oder in selbst gehostete Open-Weights-Modelle (Qwen2.5-Coder, DeepSeek-V3) auf Hardware unter eigener Kontrolle. Kundendaten, Secrets und Production-Logs dürfen nie in externe Modelle. Punkt. APT28 nutzt Qwen über die Hugging Face API — die gleichen offenen Endpunkte sind ein Exfil-Kanal, wenn Mitarbeitende unbedacht Prompts absetzen.</p>
+<p>Drittens: Die Kostenfrage realistisch durchrechnen. Für ein SaaS-Unternehmen mit fünfhundert Mitarbeitenden liegt das Defender-KI-Setup 2026 in einer Range zwischen 150.000 und 400.000 US-Dollar pro Jahr — zusätzlich zum bestehenden SOC. Klassische Vuln-Plattformen wie Qualys, Tenable oder Rapid7 InsightVM kosten für fünfhundert Assets zwischen 10.000 und 25.000 Dollar. KI-Code-Security-Add-ons (Snyk DeepCode AI, Semgrep AI, Socket) liegen je nach Repo-Größe bei 30.000 bis 80.000 Dollar. LLM-Inferenz für eigene Defender-Pipelines via Trusted-Tier-API kostet 20.000 bis 100.000 Dollar, abhängig vom Scan-Volumen. Microsoft Purview AI ist in M365 E5/E7 enthalten, sonst kostet das Add-on zwölf bis fünfzehn Dollar pro Nutzer und Monat. Wer einen AISLE-Pilot oder ähnliches Boutique-Tool will, sollte mit sechsstelligen Custom-Quotes rechnen.</p>
+<p>Viertens: Die interne Angriffsfläche durch KI-Agenten ernst nehmen. Ein kompromittierter Agent ist Insider Threat mit Maschinen-Geschwindigkeit — Backups löschen, Kundendaten exfiltrieren, Trades auslösen passieren in Sekunden statt Tagen. Vier konkrete Maßnahmen: Jeder Agent bekommt eine eigene Identität (Service Principal, Workload Identity), keine geteilten Tokens; Least-Privilege bis auf API-Call-Ebene. Prompt-Injection-Resilienz testen — Red-Team-Übungen mit indirect prompt injection in RAG-Sources und gepoisonte Dokumente. Tool-Use-Sandboxing: Allowlists statt Blocklists, Output-Filter für sensitive Datenkategorien. Audit-Trail für jeden Agent-Schritt — Purview Insider Risk for Agents oder gleichwertige Lösungen, mit Anomalie-Detection auf Agent-Verhalten (warum löscht der &quot;Reporting-Agent&quot; plötzlich Backups?).</p>
+<h2>Die Compliance-Triade ab August</h2>
+<p>Auf die unternehmens-interne Ebene legt sich ab dem 2. August 2026 eine regulatorische. Der EU AI Act wird voll anwendbar. Artikel 50 (Transparenz für Endnutzer-Interaktionen, Deepfake-Kennzeichnung) wird durchsetzbar. Artikel 55 (GPAI-Modelle mit systemischem Risiko — Schwelle ungefähr 10^25 Trainings-FLOPs) verpflichtet Provider zu adversarialem Testing, Incident-Reporting und nachweislich angemessener Cybersecurity des Modells und der Infrastruktur. Für DACH-SaaS-Unternehmen, die Frontier-Modelle integrieren oder selbst trainieren, ist das ein praktischer Compliance-Pfad — kein abstrakter.</p>
+<p>Drei Linien laufen damit zusammen. DSGVO definiert, welche personenbezogenen Daten in KI-Pipelines verarbeitet werden dürfen. NIS-2 verpflichtet zur Cybersecurity-Resilienz und Incident-Meldung. Der AI Act ergänzt Cybersecurity-Anforderungen an die Modelle selbst. Die Cyber-Compliance-Triade — Datenkontrolle, Vorfallsmeldung, Modell-Cybersecurity — ist bis Q3/2026 vollständig durchsetzbar. 87 Prozent der CISOs nennen KI-Schwachstellen als das am schnellsten wachsende Risiko; 64 Prozent prüfen 2026 explizit die Security-Eigenschaften eingesetzter KI-Tools — gegenüber 37 Prozent im Vorjahr.</p>
+<h2>Der eigentliche Stresstest</h2>
+<p>Die nächsten zwölf Monate werden nicht entscheiden, ob KI in Cybersecurity ankommt. Sie ist angekommen. Die Frage ist, wer auf beiden Seiten der Front schneller ist. Defender mit Tooling-Zugang zu Frontier-Modellen werden eine massive Welle an Patches und CVE-Disclosures auslösen. Angreifer mit Zugang zu Open-Weights-Modellen werden die Eintrittsbarriere für semantische Logik-Schwachstellen-Suche permanent senken. Wer in dieser Konstellation kein klares Defender-KI-Setup hat, kein klares Daten-Governance-Modell für KI-Interaktionen und keine Insider-Threat-Strategie für KI-Agenten, wird in zwei Jahren als langsam wirken. Wer es hat, wird die nächsten Jahrzehnte mit ähnlich gutem Tooling überleben wie die ersten Angreifer.</p>
+<p>Die kommerzielle Logik ist im Übrigen klar. OpenAI Daybreak hat seine Partnerliste bewusst breit gewählt und seine Pricing-Strategie auf B2B-Cybersecurity-Industrie zugeschnitten. Anthropic Glasswing hat seinen Partnerkreis bewusst eng gewählt und kompensiert mit 100 Millionen Dollar Credits. Beide Modelle sind Belege dafür, dass Cybersecurity-KI 2026 zum eigenen Marktsegment wird — neben Frontier-Sprachmodellen, Coding-Agents und Multimodal-APIs. Wer als CISO, CTO oder Engineering-Lead heute Verträge unterzeichnet, sollte beide Optionen mitprüfen, nicht eine. Die Asymmetrie zwischen Defender- und Angreiferseite wird nicht durch Hoffnung gelöst, sondern durch Tooling, Governance und Budget.</p>
+<p>Und ja, die Story wird in den nächsten Monaten Schub bekommen. Die nächste KI-gebaute Zero-Day-Disclosure ist nur eine Frage von Wochen. Die nächste defender-seitige Mass-Disclosure-Welle (vermutlich aus AISLE oder Glasswing-Partnern) ebenfalls. Wer diese Reportage in einem halben Jahr wieder liest, wird wahrscheinlich denken, sie sei zu vorsichtig formuliert gewesen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://aisle.com/blog/aisle-discovers-cve-2026-42511-a-21-year-old-freebsd-remote-command-execution-vulnerability" rel="noopener noreferrer external" target="_blank">AISLE — CVE-2026-42511 in FreeBSD dhclient</a></li>
+            
+            <li><a href="https://aisle.com/blog/aisle-discovered-12-out-of-12-openssl-vulnerabilities" rel="noopener noreferrer external" target="_blank">AISLE — 12 of 12 OpenSSL Zero-Days</a></li>
+            
+            <li><a href="https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access" rel="noopener noreferrer external" target="_blank">Google GTIG — AI-developed zero-day report</a></li>
+            
+            <li><a href="https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-our-big-sleep-agent-makes-big-leap" rel="noopener noreferrer external" target="_blank">Google Cloud — Big Sleep cloud-ciso perspective</a></li>
+            
+            <li><a href="https://openai.com/daybreak/" rel="noopener noreferrer external" target="_blank">OpenAI — Daybreak</a></li>
+            
+            <li><a href="https://www.anthropic.com/glasswing" rel="noopener noreferrer external" target="_blank">Anthropic — Project Glasswing</a></li>
+            
+            <li><a href="https://learn.microsoft.com/en-us/purview/insider-risk-solution-privacy" rel="noopener noreferrer external" target="_blank">Microsoft Learn — Purview Insider Risk Privacy</a></li>
+            
+            <li><a href="https://thehackernews.com/2026/05/hackers-used-ai-to-develop-first-known.html" rel="noopener noreferrer external" target="_blank">The Hacker News — First Known Zero-Day 2FA Bypass for Mass Exploitation</a></li>
+            
+            <li><a href="https://www.secureworld.io/industry-news/first-forecast-cves-surpass-50k" rel="noopener noreferrer external" target="_blank">FIRST CVE-Forecast 2026</a></li>
+            
+            <li><a href="https://cpl.thalesgroup.com/blog/cybersecurity/ai-insider-threat-2026-data-threat-report" rel="noopener noreferrer external" target="_blank">Thales 2026 Data Threat Report (AI Insider Risk)</a></li>
+            
+            <li><a href="https://artificialintelligenceact.eu/article/55/" rel="noopener noreferrer external" target="_blank">EU AI Act — Artikel 55 (GPAI mit systemischem Risiko)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
