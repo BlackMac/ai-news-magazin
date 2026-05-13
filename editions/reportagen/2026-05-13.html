@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI auf Full-Duplex: Warum 200 Millisekunden die nächste Plattform definieren</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-05-13.html">&larr; Zur&uuml;ck zur Ausgabe vom 13. Mai 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Voice AI auf Full-Duplex: Warum 200 Millisekunden die nächste Plattform definieren</h1>
+    
+    <p class="reportage-teaser">Mira Muratis Thinking Machines hat am Montag eine Architektur vorgestellt, die das klassische «Sprache erkennen, denken, Sprache erzeugen»-Modell der Voice AI grundlegend angreift. Gleichzeitig schließt Vapi ein 500-Mio-Bewertungs-Round mit Amazon Ring als Anker-Kunde. Was passiert da gerade — und welche Voice-Strategie macht für SaaS-CEOs und PMs in den nächsten 12 Monaten Sinn?</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-05-13">13. Mai 2026</time>
+         &middot; 11 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Vapi-Moment und was er bedeutet</h2>
+<p>Im Dezember 2025 stand Amazons Ring-Tochter vor einem klassischen Holiday-Season-Problem: Eine Welle aus Schadensmeldungen, Login-Fragen und Lieferanfragen flutete den Customer-Support. Geschätzte Größenordnung mehrere Millionen Tickets, klassische «hold queue 45 Minuten»-Krise. Amazons Lösung war nicht, mehr Menschen einzustellen — sondern 40 Voice-AI-Anbieter zu evaluieren, darunter den hauseigenen Alexa-Stack, AWS Lex, Microsoft Voice, Retell, Synthflow und LiveKit. Den Zuschlag bekam ein 50-Personen-Startup aus San Francisco, das die meisten unserer Leser nicht kennen werden: Vapi.</p>
+<p>Heute, fünf Monate später, übernimmt Vapi 100 Prozent der inbound-Telefonie für Ring. Das Unternehmen verarbeitet zwischen 1 und 5 Millionen Anrufe pro Tag, hat die 1-Milliarde-Calls-Marke überschritten und schloss am 12. Mai eine 50-Millionen-USD-Series-B unter Lead von Peak XV bei einer 500-Millionen-USD-Bewertung. Das ist keine Hyperscale-Story — Vapis Bewertung ist im Vergleich zu OpenAI oder ElevenLabs (11 Mrd. USD, Februar 2026) bescheiden. Aber sie markiert einen Wendepunkt: Voice AI ist 2026 keine experimentelle Wette mehr.</p>
+<p>Am selben Tag, einen Tag früher, präsentierte Mira Murati ein Modell, das die Vapi-Welt unter Druck setzt. TML-Interaction-Small ist 276 Milliarden Parameter schwer und behauptet, das «Sprache erkennen → reasonen → Sprache erzeugen»-Modell der gesamten heutigen Voice-AI-Industrie obsolet zu machen. Wer Voice-Produkte baut, muss verstehen, was hier kollidiert.</p>
+<h2>Die Pipeline-Architektur, die heute Geld verdient</h2>
+<p>Um den Konflikt zu verstehen, beginnt man am besten mit der heute herrschenden Architektur. Vapi, Retell, LiveKit, ElevenLabs Conversational und die große Mehrheit aller produktiven Voice-AI-Calls läuft auf einer Pipeline aus drei Komponenten.</p>
+<p>Erstens: Speech-to-Text, oft mit OpenAIs Whisper, AssemblyAI oder Deepgrams Nova-Modell. Eingehender Audio wird in Echtzeit zu Text transkribiert, typischerweise mit 50–200 ms Latenz pro Chunk. Zweitens: Ein Large-Language-Model — GPT-5.5, Claude Opus 4.7 oder Gemini 3 — verarbeitet den Text, plant die Antwort, ruft bei Bedarf Tools auf (z.B. CRM-Lookup, Calendar-API), generiert die Antwort. Drittens: Text-to-Speech über ElevenLabs, Cartesia, oder OpenAIs TTS-Endpoint synthetisiert den Audio-Output.</p>
+<p>Das Ganze passiert in einer langen Kette: User redet → Voice Activity Detection (VAD) entscheidet, dass der User fertig ist → STT transkribiert → LLM denkt → TTS spricht. Die Gesamtlatenz vom Ende des User-Satzes bis zum Beginn der KI-Antwort ist die kritische Metrik der Industrie. Der heutige Standard liegt zwischen 500 und 800 Millisekunden; alles unter 600 ms gilt als «natürlich», alles über 800 ms «awkward» und alles über 1 Sekunde wird vom User als «Verbindungsabbruch» interpretiert, sagt der State-of-AI-Calling-Report 2026.</p>
+<p>Diese Pipeline ist ein Engineering-Triumph der letzten 18 Monate. Vapi hat sich darauf spezialisiert, die einzelnen Komponenten so eng zu verzahnen, dass die End-to-End-Latenz reproduzierbar unter 600 ms bleibt, auch bei Enterprise-SLAs. Hardware, Pre-Caching, Smart-Routing und VAD-Optimierung sind das eigentliche Asset. Das Modell darunter ist commoditisiert; Vapi unterstützt OpenAI, Anthropic, Google und mehrere Open-Source-Optionen.</p>
+<p>Eine technische Eigenheit ist die Voice Activity Detection. VAD ist die Software, die entscheidet: Hat der User aufgehört zu sprechen, oder ist das nur eine Pause? In klassischen Pipelines wartet das System typischerweise 200–400 Millisekunden Stille, bevor es transkribiert und antwortet. Diese Wartezeit verlängert die wahrgenommene Latenz, weil sie zusätzlich zur Modell-Rechenzeit hinzukommt. «Barge-In» — das aktive Unterbrechen der KI durch den User — wird als separates Feature implementiert, das die laufende TTS-Wiedergabe stoppt und die User-Eingabe priorisiert.</p>
+<h2>Was Murati grundlegend anders macht</h2>
+<p>TML-Interaction-Small bricht mit dieser Pipeline-Logik radikal. Statt drei getrennter Komponenten gibt es eine einzige Transformer-Architektur, die parallel Audio, Video und Text als Token-Streams verarbeitet. Audio wird als dMel-Repräsentation direkt in den Token-Stream eingespeist, Bilder als 40×40-Patches ohne Vision-Encoder. Alle drei Modalitäten werden gemeinsam trainiert.</p>
+<p>Das technische Schlüsselkonzept heißt «Micro-Turns»: Statt auf das Ende eines User-Satzes zu warten, schneidet das Modell den eingehenden Audio in 200-Millisekunden-Slices. In jedem 200-ms-Fenster entscheidet das Modell: Höre ich weiter zu (Backchannel), antworte ich (Speak-Token), schweige ich? Das «Verständnis» des Inputs läuft parallel zum «Erzeugen» des Outputs — Listening und Speaking sind nicht mehr sequenzielle Phasen, sondern überlappende Prozesse.</p>
+<p>Das praktische Resultat ist eine andere User Experience. Wenn der User redet, kann das Modell zustimmend «mhm» einwerfen, ohne den Sprachfluss zu unterbrechen. Wenn der User eine Frage stellt, kann das Modell bereits mit dem Antworten anfangen, bevor der Satz technisch fertig ist — wie ein menschlicher Gesprächspartner, der die letzten Worte antizipiert. Visuell: Wenn der User auf seinem Bildschirm tippt und einen Fehler einbaut, kann die KI den Bug bemerken und «warte, Zeile 12 hat ein fehlendes Semikolon» einwerfen, während der User noch das nächste Wort spricht.</p>
+<p>Im Benchmark FD-Bench V1 (Full-Duplex Bench V1, von Thinking Machines selbst entwickelt) erreicht das Modell eine Turn-Taking-Latenz von 0,40 Sekunden, gegenüber 0,80 Sekunden bei GPT-Realtime-2 und vergleichbaren Werten bei Gemini 3.1 Live. In FD-Bench V1.5 — eine Qualitätsmetrik aus Backchanneling, Interruption-Handling und Topic-Tracking — kommt TML-Interaction-Small auf 77,8 Punkte, gegenüber 45,5 bei GPT-Realtime-2 minimal und 46,8 bei Gemini-3.1-flash-live. Die Größenordnung ist relevant: Wenn die Zahlen sich in unabhängigen Reviews bestätigen, ist das ein Sprung wie von Whisper v1 zu Whisper v3 — kein inkrementelles Update.</p>
+<h2>Wer steht dazwischen?</h2>
+<p>Die offensichtliche Frage: Verdrängt Murati Vapi? Die kurze Antwort: nein, zumindest nicht direkt. Die längere Antwort verlangt eine Trennung zwischen Modell und Layer.</p>
+<p>Vapi und die anderen Voice-Plattformen sind Orchestrierungs-Layer. Sie kümmern sich um Telefon-Provider-Integration (Twilio, Plivo, SIP-Trunks), Enterprise-SLAs, Compliance (HIPAA, SOC 2 Type II), Audit-Logs, Function-Calling-Routing zu Backend-Systemen, CRM-Lookups, Calendar-Konflikt-Auflösung. Das sind Engineering-Aufgaben, die ein Frontier-Modell nicht löst — und die in einem Bare-Metal-Anschluss an TML-Interaction-Small ein 6-Personen-Engineering-Team monatelang beschäftigen würden.</p>
+<p>Vapi-CEO Jordan Dearsley hat in einem Bloomberg-Gespräch deutlich gemacht, dass er Full-Duplex-Modelle binnen sechs Monaten als optionalen Backend-Pfad einbinden wird. Statt nur GPT-Realtime und Gemini Live zu unterstützen, kommt TML-Interaction-Small als dritter Modell-Anbieter dazu — falls Thinking Machines eine offene API liefert. Vapi setzt damit auf dieselbe Wette wie Cloudflare im Edge-Compute-Markt: Solange die Anschluss-Last und Compliance-Anforderungen komplex sind, ist das Layer wertvoller als das Modell.</p>
+<p>ElevenLabs hat dagegen mehr zu verlieren. Das 11-Mrd-Bewertete Unternehmen aus London hat im Februar 500 Millionen USD Series-D-Geld eingesammelt und am Cascade-Optimierungspfad festgehalten. ElevenLabs Conversational ist eine integrierte Lösung, die STT, Reasoning und TTS unter einem Dach bündelt, aber architektonisch immer noch Pipeline-basiert ist. Wenn Full-Duplex-Modelle 2027 zum Standard werden, muss ElevenLabs entweder selbst ein Native-Voice-Modell trainieren (Capex-intensiv) oder ein bestehendes lizenzieren — die zweite Option bedeutet Margin-Druck.</p>
+<p>OpenAI, Google und Anthropic werden mitziehen. OpenAI Realtime API ist seit dem Launch im Dezember 2024 schrittweise in Richtung native multimodale Verarbeitung gewandert; GPT-Realtime-2 (April 2026) hat persistente WebSocket-Verbindungen mit Audio als native Modalität. Gemini 3.1 Live bringt vergleichbare Features mit der Bing-Suche und Workspace-Daten verkoppelt. Anthropic hat über Project Glasswing keine Voice-Native-Pläne öffentlich gemacht, aber Insider erwarten einen Claude-Voice-Stack bis Q1 2027. Murati hat mit der Architektur-Wahl von Anfang an ein anderes Spiel gespielt — Full-Duplex from scratch statt Pipeline-Optimierung.</p>
+<h2>Die wirtschaftliche Geometrie</h2>
+<p>Voice AI ist 2026 ein Markt von ungefähr 22 Milliarden USD und wächst mit 34,8 Prozent CAGR. Die meisten Schätzungen sehen 47,5 Milliarden USD bis 2034. ElevenLabs hat 2025 mit über 330 Mio. USD ARR geschlossen, OpenAI Realtime ist als Endpoint in den 11,9 Mrd. USD OpenAI-Total-Revenue eingerechnet, Vapi liegt geschätzt im niedrigen dreistelligen Millionenbereich. Voice AI Funding ist 2025 von 0,26 Mrd. auf 2,1 Mrd. USD gestiegen — das Achtfache des Vorjahres.</p>
+<p>Die Preisstruktur ist dabei wesentlich konservativer als die Hot-Take-Narrative suggerieren. OpenAI Realtime kostet 32 USD pro 1 Million Audio-Input-Tokens und 64 USD pro 1 Million Output-Tokens (Stand April 2026). In der Praxis bedeutet das für ein einminütiges Voice-Gespräch etwa 0,08–0,15 USD an reinen Modell-Kosten — plus 0,01–0,05 USD an Telefon-Provider-Gebühren. Vapi und seine Konkurrenten bepreisen typischerweise zwischen 0,05 und 0,25 USD pro Minute, je nach SLA und Volumen.</p>
+<p>Konkret: Ein Customer-Support-Team, das 10.000 Anrufe pro Monat à 5 Minuten abwickelt, läuft auf 50.000 Minuten Voice-AI-Volumen. Das entspricht Kosten zwischen 2.500 und 12.500 USD pro Monat — eine deutlich andere Größenordnung als die häufig zitierten Hyperscaler-Compute-Zahlen. Für ein 200-Personen-Sales-Team mit 100 Calls pro Tag und 10 Minuten Durchschnitt: 60.000 USD pro Monat. Das ist Personal-Kosten-substituierbar, nicht hypothetisch.</p>
+<p>Die zweite Dynamik: 80 Prozent der befragten Unternehmen planen die Voice-AI-Integration in den Customer-Support bis Ende 2026 (Ringly-Studie). Production-Deployments sind 2025 um 340 Prozent gewachsen. Die Stimmung kippt von «Pilotprojekt mit ungewissem ROI» zu «Pflicht-Strategie mit harten Quartalszielen» — auch in Europa, wo DSGVO-Compliance einen langsameren Roll-out diktiert hat.</p>
+<h2>Was Voice-First-Produkte heute strategisch tun sollten</h2>
+<p>Für SaaS-CEOs, PMs und Tech Leads, die Voice-AI-Roadmaps für 2026/27 schreiben, lassen sich aus der heutigen Lage vier konkrete Schritte ableiten.</p>
+<p>Erstens: Wer noch keine Voice-Strategie hat, sollte spätestens Q3 2026 einen Pilotbetrieb starten. Die Lernkurve ist real — VAD-Tuning, Prompt-Engineering für Voice (anders als Text), Edge-Case-Handling bei lauten Hintergründen — und braucht 4 bis 6 Monate vor Produktivbetrieb. Wer wartet, bis Full-Duplex-Modelle 2027 «mainstream» sind, hat das Lernfenster verpasst.</p>
+<p>Zweitens: Voice-Stack-Wahl sollte auf Layer-Portabilität setzen, nicht auf Modell-Lock-in. Vapi, Retell, LiveKit und Bland sind als Layer austauschbar; OpenAI Realtime, Gemini Live, ElevenLabs Conversational und potenziell TML-Interaction-Small als Modelle gegeneinander wechselbar. Die Architektur sollte ein klares Adapter-Pattern zwischen Layer und Modell haben, sodass ein Modell-Wechsel in 2 Wochen, nicht in 6 Monaten erledigt ist.</p>
+<p>Drittens: Compliance frühzeitig einbauen. Voice-Aufzeichnungen sind in Deutschland und der EU rechtlich sensibler als Text-Chats. Zwei-Personen-Consent ist in vielen Anwendungsfällen Pflicht. Recording-Aufbewahrung muss mit den AVB-Klauseln der eigenen Datenschutzerklärung übereinstimmen. Wer als Anbieter im B2B-SaaS-Sektor in Voice geht, sollte die DSGVO-Konformität dokumentieren — der EU AI Act greift ab dem 2. August 2026 zusätzlich für interaktive KI-Systeme (siehe Artikel 50, Transparenzpflichten).</p>
+<p>Viertens: Die Investitions-Achse «Modell-Anbieter» weiter beobachten, aber nicht überreagieren. Thinking Machines wird mit TML-Interaction-Small die Konversation prägen — aber das Modell ist noch Research-Preview, nicht GA. OpenAI, Google und Anthropic werden vermutlich binnen 12 Monaten vergleichbare Native-Voice-Modelle haben. Wer heute eine Cascade-Pipeline baut, hat keinen architektonischen Sackgassen-Code geschrieben — die Layer-Lösung übersteht den Modell-Wechsel.</p>
+<h2>Die zweite Schicht: Voice als UX-Layer</h2>
+<p>Was die heutigen Voice-Diskussionen meist übersehen: Voice ist nicht primär ein Kosteneinsparungs-Thema. Voice ist eine UX-Schicht, die in den nächsten 24 Monaten genauso disruptiv wird wie der Browser in den 1990ern und Mobile in den 2010ern. Murati hat das in ihrem Blog-Post explizit so formuliert: «Die Chatbot-Turn ist vorbei. Das Modell muss zuhören.»</p>
+<p>Konkret heißt das für die nächsten 24 Monate: Voice-First-UI wird in vielen Apps zur Default-Interaktion. Onboarding-Calls, Sales-Demos, Customer-Support-Tickets, Lead-Qualification, Termin-Buchungen — alles, was heute über Chat oder Forms läuft, hat eine plausiblere Voice-Variante. Apple wird mit der generativen Siri in iOS 27 (Herbst 2026) den Consumer-Markt aufmachen, Googles Personal Intelligence (Android, Sommer 2026) zieht parallel. Wer als B2B-SaaS-Anbieter heute Chat-Widgets baut, sollte parallel Voice-Endpoints planen.</p>
+<p>Die Geschwindigkeit der Architektur-Verschiebung ist die eigentliche Story der Woche. In 24 Stunden hat Murati ein neues Architekturparadigma präsentiert, Vapi sein 500-Mio-Round geschlossen, und ElevenLabs muss eine 500-Mio-ARR-Story gegen die Cascade-Frage verteidigen. Das nächste 12-Monats-Fenster wird entscheiden, welche dieser Voice-Wetten sich auszahlt — und welche SaaS-Produkte die Voice-Welle als Wachstumshebel oder als Disruption erleben.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://thinkingmachines.ai/blog/interaction-models/" rel="noopener noreferrer external" target="_blank">Thinking Machines — Interaction Models Blog</a></li>
+            
+            <li><a href="https://venturebeat.com/technology/thinking-machines-shows-off-preview-of-near-realtime-ai-voice-and-video-conversation-with-new-interaction-models" rel="noopener noreferrer external" target="_blank">VentureBeat — Near-realtime voice and video conversation</a></li>
+            
+            <li><a href="https://www.latent.space/p/ainews-thinking-machines-native-interaction" rel="noopener noreferrer external" target="_blank">Latent Space — TML-Interaction-Small 276B-A12B</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/05/12/vapi-hits-500m-valuation-as-amazon-ring-chose-its-ai-platform-over-40-rivals/" rel="noopener noreferrer external" target="_blank">TechCrunch — Vapi $500M valuation</a></li>
+            
+            <li><a href="https://www.globenewswire.com/news-release/2026/05/12/3292882/0/en/vapi-raises-50m-series-b-as-it-reaches-1-billion-calls-powering-the-next-generation-of-enterprise-voice-ai.html" rel="noopener noreferrer external" target="_blank">GlobeNewswire — Vapi $50M Series B, 1 billion calls</a></li>
+            
+            <li><a href="https://www.cxodigitalpulse.com/elevenlabs-surpasses-500-million-arr-as-voice-ai-adoption-accelerates/" rel="noopener noreferrer external" target="_blank">CXO Digital Pulse — ElevenLabs $500M ARR</a></li>
+            
+            <li><a href="https://www.autointerviewai.com/blog/the-state-of-ai-calling-competitors-2026-latency-pricing-report" rel="noopener noreferrer external" target="_blank">Auto Interview AI — State of AI Calling 2026</a></li>
+            
+            <li><a href="https://www.implicator.ai/the-chatbot-turn-is-ending-the-model-has-to-listen/" rel="noopener noreferrer external" target="_blank">Implicator AI — Thinking Machines puts 200ms at center</a></li>
+            
+            <li><a href="https://seeduplex.io/blog/best-voice-ai-apis-2026" rel="noopener noreferrer external" target="_blank">Best Voice AI APIs 2026 — Seeduplex</a></li>
+            
+            <li><a href="https://www.ringly.io/blog/voice-ai-statistics-2026" rel="noopener noreferrer external" target="_blank">Voice AI Statistics 2026 — Ringly</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
