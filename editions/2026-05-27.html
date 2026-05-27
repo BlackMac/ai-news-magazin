@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+<div class="edition-header" id="top">
+    <div class="edition-meta">
+        <time datetime="2026-05-27">Mittwoch, 27. Mai 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 27. Mai 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1">
+                    <span class="toc-cat">Sicherheit · Open Source</span>
+                    <span class="toc-title">BadHost: Eine Lücke im Fundament von FastAPI setzt Millionen KI-Agenten dem Auth-Bypass aus</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2">
+                    <span class="toc-cat">Europa · Souveräne KI</span>
+                    <span class="toc-title">Mistral stößt in regulierte Branchen vor: Legal-KI mit Harvey, Cyberabwehr mit BNP Paribas</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3">
+                    <span class="toc-cat">Markt · Suche</span>
+                    <span class="toc-title">Gegenwind für Googles KI-Suche: DuckDuckGo legt 30 Prozent zu, Brüssel droht mit Rekordstrafe</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4">
+                    <span class="toc-cat">Infrastruktur · Finanzierung</span>
+                    <span class="toc-title">OpenRouter verdoppelt Bewertung auf 1,3 Milliarden Dollar — der Schiedsrichter im Modell-Markt</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5">
+                    <span class="toc-cat">Geopolitik · KI-Talente</span>
+                    <span class="toc-title">China hält seine KI-Köpfe im Land: Ausreisebeschränkungen für Top-Talente bei Alibaba und DeepSeek</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6">
+                    <span class="toc-cat">Robotik · Humanoide</span>
+                    <span class="toc-title">200 Stunden ohne Pause: Figures Roboter sortieren eine Viertelmillion Pakete — fast fehlerfrei</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7">
+                    <span class="toc-cat">Kultur · KI und Kirche</span>
+                    <span class="toc-title">Hat der Papst KI genutzt, um vor KI zu warnen? Eine Detektor-Debatte um die Enzyklika</span>
+                </a>
+            </li>
+            
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+            <ul class="toc-specials-row">
+                
+                <li class="toc-special">
+                    <a href="#reportage">
+                        <span class="toc-cat">Reportage</span>
+                        <span class="toc-title">200 Stunden ohne Pause — und trotzdem nicht angekommen: Der wahre Stand humanoider Roboter 2026</span>
+                    </a>
+                </li>
+                
+                <li class="toc-special">
+                    <a href="#tool-radar">
+                        <span class="toc-cat">Tool-Radar</span>
+                        <span class="toc-title">Neue KI-Tools im &Uuml;berblick</span>
+                    </a>
+                </li>
+                <li class="toc-special">
+                    <a href="#werkstatt">
+                        <span class="toc-cat">Werkstatt</span>
+                        <span class="toc-title">YouTube-Empfehlungen</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+    </nav>
+
+    
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <p class="article-kicker">Sicherheit · Open Source</p>
+        <h2 id="art-1-h">BadHost: Eine Lücke im Fundament von FastAPI setzt Millionen KI-Agenten dem Auth-Bypass aus</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">Eine einzige Zeile im Open-Source-Framework Starlette — dem Unterbau von FastAPI und damit fast der gesamten Python-Welt für KI-Inferenz — lässt sich über den HTTP-Host-Header manipulieren. Die Folge: pfadbasierte Authentifizierung lässt sich umgehen. Betroffen sind vLLM, LiteLLM und vor allem MCP-Server, über die heute zahllose KI-Agenten kommunizieren. Der Patch und die Veröffentlichung kamen am selben Tag — Vorlaufzeit für Betreiber: praktisch null.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die Schwachstelle trägt den Namen <strong>BadHost</strong> (CVE-2026-48710) und steckt an einer denkbar unscheinbaren Stelle: in <strong>Starlette</strong>, einem asynchronen Web-Framework für Python. Starlette ist für sich genommen kaum bekannt — aber es ist das Routing-Fundament von <strong>FastAPI</strong> und damit nach Angaben der beteiligten Sicherheitsforscher Teil eines Ökosystems mit rund <strong>325 Millionen Downloads pro Woche</strong> und über 400.000 abhängigen Projekten auf GitHub. Wer in den vergangenen Jahren einen KI-Dienst in Python gebaut hat, hat mit hoher Wahrscheinlichkeit Starlette im Stack, ohne es zu wissen.</p>
+<p>Technisch handelt es sich um einen <strong>Authentifizierungs-Bypass über den Host-Header</strong>. Starlette rekonstruiert die angefragte URL, indem es den vom Angreifer frei wählbaren HTTP-Host-Header mit dem Anfragepfad zusammensetzt und das Ergebnis erneut parst. Schleust man Zeichen wie <code>/</code>, <code>?</code> oder <code>#</code> in den Host-Header ein, verschieben sich die Pfadgrenzen — ein einziges eingeschleustes Zeichen kann genügen, um eine pfadbasierte Auth-Middleware auszuhebeln und auf eigentlich geschützte Endpunkte zuzugreifen. Im Worst Case stehen damit Modellzugriff, API-Schlüssel und internes Tooling offen.</p>
+<p>Besonders brisant ist die Wirkung auf KI-Infrastruktur. Explizit als gefährdet genannt werden der Inferenzserver <strong>vLLM</strong>, der LLM-Proxy <strong>LiteLLM</strong> sowie <strong>MCP-Server und -Gateways</strong> — also genau jene Komponenten, über die autonome Agenten heute Werkzeuge und Datenquellen ansprechen. Verschärfend kommt hinzu: Die MCP-Spezifikation schreibt unauthentifizierte OAuth-Discovery-Endpunkte vor. Das liefert Angreifern einen verlässlichen Einstiegspunkt — und erklärt die Schlagzeile von den „Millionen gefährdeter KI-Agenten“.</p>
+<p>Entdeckt wurde die Lücke bei einem von der Stiftung <strong>OSTIF</strong> organisierten Sicherheitsaudit des vLLM-Projekts; ein Senior-Analyst des Berliner Dienstleisters <strong>X41 D-Sec</strong> fand sie in manueller Analyse. Bemerkenswert ist der Streit um die Schwere: Offiziell wurde BadHost mit einem <strong>CVSS-Score von 6,5</strong> („mittel“) eingestuft und vom Maintainer als reines Web-Framework-Problem gerahmt. Die Entdecker widersprechen ausdrücklich — angesichts „tausender abhängiger Projekte und Milliarden Installationen“ untertreibe dieser Wert die tatsächliche Tragweite massiv. Den Maintainer (den Entwickler Marcelo „Kludex“ Trylesinski) beschreibt OSTIF zugleich als überlastet von der Flut an Sicherheitsmeldungen, die 2026 nahezu jedes große Open-Source-Projekt trifft.</p>
+<p>Der <strong>Patch liegt mit Starlette 1.0.1 vor</strong> — Veröffentlichung der Lücke und Verfügbarkeit des Fixes fielen jedoch auf denselben Tag. Das bedeutet praktisch keine Vorlaufzeit zwischen Offenlegung und möglicher Exploit-Entwicklung; Betreiber sollten umgehend aktualisieren. <em>Eine aktive Ausnutzung in freier Wildbahn ist bislang nicht belegt</em> — die Warnung lautet ausdrücklich „assume zero exploit development lead time“, nicht „wurde bereits ausgenutzt“. Für Entscheider ist die eigentliche Lehre struktureller Natur: Die moderne KI-Stack-Monokultur ruht auf wenigen Low-Level-Bibliotheken. Ein Auth-Bypass im Fundament hat einen enormen Radius — und macht das oft unsichtbare Lieferketten-Risiko von KI-Infrastruktur greifbar.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://ostif.org/disclosing-the-badhost-vulnerability-in-starlette/" rel="noopener noreferrer external" target="_blank">OSTIF — Disclosing the BadHost Vulnerability in Starlette</a></li>
+                
+                <li><a href="https://badhost.org/" rel="noopener noreferrer external" target="_blank">BadHost — CVE-2026-48710 Advisory &amp; Scanner</a></li>
+                
+                <li><a href="https://cryptobriefing.com/starlette-badhost-vulnerability-ai-agents/" rel="noopener noreferrer external" target="_blank">Crypto Briefing — Starlette vulnerability exposes millions of AI agents to hackers</a></li>
+                
+                <li><a href="https://radar.offseq.com/threat/cve-2026-48710-cwe-444-inconsistent-interpretation-65cb3d4b" rel="noopener noreferrer external" target="_blank">OffSeq Threat Radar — CVE-2026-48710 (CWE-444)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <p class="article-kicker">Europa · Souveräne KI</p>
+        <h2 id="art-2-h">Mistral stößt in regulierte Branchen vor: Legal-KI mit Harvey, Cyberabwehr mit BNP Paribas</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">An einem einzigen Tag bündelt Mistral seine Strategie: Die Modelle der Pariser gehen live in der Legal-KI-Plattform Harvey, und mit der Großbank BNP Paribas baut Mistral ein cyber-spezialisiertes Modell — explizit als „europäische Antwort“ auf Anthropics zugangsbeschränktes Mythos. Beide Vorstöße tragen dieselbe Erzählung: souveräne Alternative für Branchen, die US-Systeme nicht ohne Weiteres nutzen können.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Mistral, das wichtigste europäische Frontier-Labor, hat am 26. Mai gleich zwei Kooperationen in stark regulierten Hochsicherheitsbranchen verkündet — Recht und Banken. Beide eint dieselbe Positionierung: Mistral bietet sich als souveräne, in Europa verankerte Alternative dort an, wo Datenschutz, Vertraulichkeit und regulatorische Anforderungen den Einsatz US-amerikanischer KI-Dienste erschweren.</p>
+<p>Im Rechtssektor gehen Mistrals Modelle ab sofort in der Plattform von <strong>Harvey</strong> live — dem 2022 gegründeten US-Marktführer für Legal-KI, der zuletzt im März bei einer Finanzierungsrunde mit <strong>11 Milliarden Dollar</strong> bewertet wurde und nach eigenen Angaben über 1.500 Organisationen in mehr als 60 Ländern bedient. Harvey reiht Mistral neben OpenAI, Anthropic und Google in sein Modell-Roster ein; der Rollout startet zuerst bei EU-Kunden, später folgen USA und Australien. Aus einem kleinen Test von 2024 ist damit eine vollwertige Partnerschaft geworden. Der Mistral-Aspekt zielt bewusst auf europäische Kanzleien, die über Sprachen und Jurisdiktionen hinweg arbeiten — und auf einen Sektor, in dem KI-Fehler teuer werden: Bis Ende Mai 2026 sind fast 1.500 Gerichtsfälle mit Sanktionen wegen KI-Halluzinationen in Schriftsätzen dokumentiert; erst Anfang Mai rügte ein Berliner Gericht Anwälte aus genau diesem Grund.</p>
+<p>Der zweite, sicherheitspolitisch brisantere Vorstoß ist die erweiterte Partnerschaft mit <strong>BNP Paribas</strong>, der größten Bank der Eurozone. Gemeinsam mit weiteren europäischen Instituten hilft BNP Mistral beim Aufbau eines <strong>auf Cybersicherheit spezialisierten KI-Modells</strong> zur Schwachstellenerkennung. Der Hintergrund trägt einen Namen: <strong>Mythos</strong>, Anthropics zugangsbeschränktes Modell, das in kontrollierten Tests Sicherheitslücken in Maschinengeschwindigkeit findet und ausnutzt — laut Bericht in über 83 Prozent der Fälle beim ersten Versuch ein funktionierender Exploit, oft besser als menschliche Red-Teamer.</p>
+<p>Der Zugang zu Mythos ist bewusst auf rund 40 bis 50 Organisationen rationiert — überwiegend große US-Tech-Konzerne und US-Banken. <strong>Keine europäische Bank hat Zugang.</strong> Die Europäische Zentralbank hat ihre Aufseher bereits gewarnt, dass Werkzeuge dieser Klasse das Bedrohungsbild verändern, egal wer sie besitzt; Verteidiger ohne vergleichbares Modell stünden strukturell schlechter da. Mistral positioniert sein Modell daher als souveräne Absicherung — eine Rückfalloption, falls transatlantische Verhandlungen über Zugang scheitern.</p>
+<p>Einzuordnen ist das mit einer wichtigen Einschränkung: Was Mistrals Cyber-Modell konkret leisten wird, ist <em>bislang nicht unabhängig demonstriert</em>. Dem Vernehmen nach bietet Mistral bewusst eine etwas geringere Fähigkeit als Mythos an — als kalkulierten Souveränitäts-Kompromiss. Für europäische Tech- und Finanzentscheider zeichnet sich damit ein Muster ab: Mistral besetzt nicht den Wettlauf um die maximale Rohleistung, sondern die Nische der vertrauenswürdigen, regulierungskonformen Alternative für sensible Daten. Ob das im Markt für Frontier-Fähigkeiten genügt, ist die offene Frage.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/Mistral-und-Harvey-AI-Den-Rechtssektor-im-Visier-11306559.html" rel="noopener noreferrer external" target="_blank">heise online — Mistral und Harvey AI: Den Rechtssektor im Visier</a></li>
+                
+                <li><a href="https://www.heise.de/news/Europaeische-Antwort-auf-Mythos-Mistral-und-BNP-kooperieren-bei-Bankensicherheit-11307195.html" rel="noopener noreferrer external" target="_blank">heise online — Europäische Antwort auf Mythos: Mistral und BNP kooperieren bei Bankensicherheit</a></li>
+                
+                <li><a href="https://thenextweb.com/news/bnp-paribas-mistral-mythos-rival-sovereign-ai" rel="noopener noreferrer external" target="_blank">The Next Web — BNP Paribas works with Mistral on a European answer to Anthropic&#39;s Mythos</a></li>
+                
+                <li><a href="https://www.harvey.ai/blog/mistral-now-live-in-harvey" rel="noopener noreferrer external" target="_blank">Harvey — Mistral, Now Live in Harvey</a></li>
+                
+                <li><a href="https://www.cnbc.com/2026/03/25/legal-ai-startup-harvey-raises-200-million-at-11-billion-valuation.html" rel="noopener noreferrer external" target="_blank">CNBC — Legal AI startup Harvey valued at $11 billion in funding round</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <p class="article-kicker">Markt · Suche</p>
+        <h2 id="art-3-h">Gegenwind für Googles KI-Suche: DuckDuckGo legt 30 Prozent zu, Brüssel droht mit Rekordstrafe</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">Nach dem KI-lastigen Google I/O kippt die Stimmung: Die Installationen der Alternativsuche DuckDuckGo sprangen in den USA an einem Tag um über 30 Prozent. Gleichzeitig steht laut Berichten eine Rekordstrafe der EU-Kommission im Raum. Google-Chef Sundar Pichai hält dagegen — das Web wachse, nicht schrumpfe.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Als Google auf seiner Entwicklerkonferenz I/O die klassischen „zehn blauen Links“ weitgehend durch KI-Agenten ersetzte, die Anfragen beantworten und Aufgaben selbst erledigen, war das als Zukunftsversprechen gemeint. Bei einem Teil der Nutzer löste es das Gegenteil aus. Die datenschutzorientierte Suchmaschine <strong>DuckDuckGo</strong> meldet einen deutlichen Sprung bei den US-Installationen: im Wochenvergleich durchschnittlich <strong>+18,1 Prozent</strong>, mit einem Spitzenwert von <strong>+30,5 Prozent am 25. Mai</strong>. Auf iOS allein lag das Plus im Schnitt bei rund 33 Prozent. Auch die KI-freie Variante <code>noai.duckduckgo.com</code>, bei der sämtliche KI-Funktionen standardmäßig abgeschaltet sind, legte zweistellig zu.</p>
+<p>DuckDuckGo-Chef <strong>Gabriel Weinberg</strong> formuliert den Vorwurf scharf: „Google is force-feeding AI with no way to opt out … their results are getting worse, not better.“ Der Kern des Frusts ist weniger die KI selbst als der fehlende Ausweg — keine verlässliche Möglichkeit, die KI-Antworten abzuschalten, kombiniert mit als ungenau empfundenen Ergebnissen und dem Gefühl von Kontrollverlust. Einzuordnen ist das mit Augenmaß: DuckDuckGo bleibt gegenüber Googles Milliardenpublikum eine Nische, und ein Install-Sprung über wenige Tage ist noch kein Trendwechsel. Aber er ist ein Stimmungsindikator.</p>
+<p>Zur Marktstimmung gesellt sich regulatorischer Druck. Mehreren Berichten zufolge — die Spur führt auf einen Bericht des <strong>Handelsblatts</strong> zurück — bereitet die EU-Kommission eine Rekordstrafe nach dem Digital Markets Act (DMA) vor, der Rede ist von einem „hohen dreistelligen Millionen-Euro-Betrag“. Es wäre die bislang höchste DMA-Strafe, deutlich über den mehreren Hundert Millionen Euro, die 2025 gegen Apple und Meta verhängt wurden. <em>Höhe und Zeitpunkt sind unbestätigt</em>; erwartet wird die Ankündigung vor der Sommerpause der Kommission. Inhaltlich geht es um <strong>Self-Preferencing</strong> nach DMA-Artikel 6(5): den Vorwurf, Google bevorzuge eigene vertikale Dienste — Shopping, Reise, Lokales — in den Ergebnissen. Das laufende Adtech-Verfahren mit seiner 2,95-Milliarden-Euro-Strafe vom September 2025 ist davon getrennt.</p>
+<p>Sundar Pichai bestreitet derweil unbeirrt, dass die KI-Suche das offene Web aushöhle. Niemand schicke so viel Traffic ins Web wie Google, und die Breite der angesteuerten Seiten wachse sogar — in den vergangenen zwei Jahren habe Google 45 Prozent mehr Webseiten gecrawlt, argumentiert er. Künftig werde die Suche zum „Agenten-Manager“, der im Hintergrund viele Aufgaben erledige, aber weiterhin Quellen ausweise.</p>
+<p>Diese optimistische Lesart steht in unmittelbarem Widerspruch zu dem, was Verlage seit Monaten berichten: massive Rückgänge bei den Klickraten, seit KI-Antworten die Suchergebnisse dominieren. Für Produkt- und Marketingverantwortliche ist die Botschaft doppeldeutig — wer Reichweite über Google-Suche aufbaut, sollte die Annahme stabiler Referral-Ströme kritisch prüfen, während sich mit DuckDuckGos Wachstum zeigt, dass „KI-frei“ als Produktversprechen ein eigenes Publikum findet.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/05/26/duckduckgo-installs-are-up-30-as-users-reject-being-force-fed-googles-ai-search/" rel="noopener noreferrer external" target="_blank">TechCrunch — DuckDuckGo installs are up 30% as users reject being &#39;force-fed&#39; Google&#39;s AI Search</a></li>
+                
+                <li><a href="https://9to5mac.com/2026/05/26/duckduckgo-sees-iphone-installs-spike-in-the-us-following-ai-announcements-at-google-i-o/" rel="noopener noreferrer external" target="_blank">9to5Mac — DuckDuckGo sees iPhone installs spike following AI-heavy Google I/O</a></li>
+                
+                <li><a href="https://thenextweb.com/news/eu-google-dma-fine-search-self-preferencing" rel="noopener noreferrer external" target="_blank">The Next Web — Google faces high triple-digit million euro EU fine before summer, Handelsblatt reports</a></li>
+                
+                <li><a href="https://www.seroundtable.com/google-sundar-pichai-web-publishing-ai-39491.html" rel="noopener noreferrer external" target="_blank">Search Engine Roundtable — Google&#39;s Sundar Pichai Doesn&#39;t Think Web Publishing Is Dead</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <p class="article-kicker">Infrastruktur · Finanzierung</p>
+        <h2 id="art-4-h">OpenRouter verdoppelt Bewertung auf 1,3 Milliarden Dollar — der Schiedsrichter im Modell-Markt</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">OpenRouter, das unscheinbare Gateway zwischen Anwendungen und über 400 Sprachmodellen, hat seine Bewertung binnen eines Jahres auf 1,3 Milliarden Dollar mehr als verdoppelt. Die wöchentlich durchgeleitete Token-Menge ist in sechs Monaten verfünffacht. Das Wachstum ist ein handfester Beleg für eine These: Die KI-Zukunft ist multi-modell — und braucht jemanden, der die Modelle vergleichbar macht.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Wer eine KI-Anwendung baut, steht heute vor einer schnell wachsenden Auswahl: Modelle von Anthropic, Google, OpenAI, xAI, DeepSeek und vielen mehr, jedes mit eigener Stärke, eigenem Preis und eigener API. <strong>OpenRouter</strong> verkauft die Lösung dieses Problems: ein einziges, einheitliches Tor, über das Entwickler Zugriff auf <strong>über 400 Sprachmodelle</strong> erhalten — und pro Aufgabe das günstigste oder passendste wählen können, ohne sich an einen Anbieter zu ketten. Man kann sich die Plattform als Routing- und Vergleichsschicht zwischen App und Modell-Markt vorstellen.</p>
+<p>Diese Position zahlt sich nun aus. In einer von <strong>CapitalG</strong> — dem Wachstumsfonds von Alphabet — angeführten Series-B-Runde sammelte OpenRouter <strong>113 Millionen Dollar</strong> ein, bei einer Bewertung von rund <strong>1,3 Milliarden Dollar</strong>. Das ist mehr als eine Verdopplung gegenüber den etwa 547 Millionen Dollar aus der Series A im Juni 2025. Mit an Bord sind die Wagniskapital-Arme von Nvidia, ServiceNow, MongoDB, Snowflake und Databricks sowie die Bestandsinvestoren Andreessen Horowitz und Menlo Ventures. Gegründet wurde OpenRouter 2023, unter anderem von Alex Atallah, der zuvor den NFT-Marktplatz OpenSea mitgegründet hatte.</p>
+<p>Die aussagekräftigste Zahl ist nicht die Bewertung, sondern das Volumen: Das wöchentlich durch OpenRouter geleitete Token-Aufkommen ist in nur sechs Monaten von 5 auf <strong>25 Billionen Token</strong> gestiegen — eine Verfünffachung, in der Spitze rund 100 Billionen Token pro Monat. Diese Kurve ist der eigentliche Beleg für die Multi-Modell-These: Unternehmen experimentieren nicht mehr nur, sie bringen KI in die Produktion — und sie wollen sich dabei nicht auf ein einziges Modell festlegen.</p>
+<p>Für Tech-Entscheider ist OpenRouters Aufstieg aus zwei Gründen relevant. Erstens bestätigt er, dass Modell-Portabilität zum strategischen Wert wird — die Fähigkeit, Modelle je nach Preis, Latenz und Qualität zu tauschen, schützt vor Lock-in und Preismacht einzelner Anbieter. Zweitens ist bemerkenswert, dass ausgerechnet Alphabets Fonds in einen Aggregator investiert, der Googles eigene Modelle neben denen aller Konkurrenten anbietet: ein Wettbewerb, in dem der Schiedsrichter selbst zum begehrten Posten wird.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/05/26/openrouter-more-than-doubles-valuation-to-1-3b-in-a-year/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenRouter more than doubles valuation to $1.3B in a year</a></li>
+                
+                <li><a href="https://www.businesswire.com/news/home/20260526953416/en/" rel="noopener noreferrer external" target="_blank">Businesswire — OpenRouter Raises $113 Million CapitalG-led Series B</a></li>
+                
+                <li><a href="https://www.pymnts.com/news/investment-tracker/2026/openrouter-raises-113-million-to-expand-ai-model-marketplace/" rel="noopener noreferrer external" target="_blank">PYMNTS — OpenRouter Raises $113 Million to Expand AI Model Marketplace</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <p class="article-kicker">Geopolitik · KI-Talente</p>
+        <h2 id="art-5-h">China hält seine KI-Köpfe im Land: Ausreisebeschränkungen für Top-Talente bei Alibaba und DeepSeek</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">Wer in China als strategisch wichtiger KI-Kopf gilt, muss Auslandsreisen künftig behördlich genehmigen lassen. Die Beschränkungen, bisher Atomwissenschaftlern und Staatskonzern-Managern vorbehalten, treffen nun erstmals den privaten KI-Sektor — namentlich Alibaba und DeepSeek. Peking behandelt Spitzentalente als nationales Sicherheitsgut.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Laut einem Bloomberg-Bericht, der sich auf mit der Sache vertraute Personen beruft, hat China die Reisebeschränkungen für hochrangige KI-Fachkräfte ausgeweitet. Ausgewählte Gründer, Forscher und Führungskräfte privater KI-Firmen müssen vor Auslandsreisen nun <strong>vorab eine behördliche Genehmigung</strong> einholen. Bislang mussten manche Mitarbeiter solche Reisen lediglich melden — die Genehmigungspflicht ist eine deutliche Verschärfung. Die Auswahl erfolgt nach strategischem Wert der Person, nicht nach Hierarchie oder Arbeitgeber.</p>
+<p>Namentlich genannt werden <strong>Alibaba</strong> und <strong>DeepSeek</strong> — zwei der wichtigsten Akteure im chinesischen KI-Aufschwung. Neu ist vor allem die Ausweitung auf den privaten Sektor: Maßnahmen dieser Art waren zuvor Staatsbetrieben vorbehalten. Einen Präzedenzfall gab es im Dezember 2025, als einzelne DeepSeek-Führungskräfte mit ähnlichen Beschränkungen belegt wurden; jetzt wird daraus offenbar eine breitere Praxis.</p>
+<p>Der Hintergrund ist der globale KI-Wettlauf mit den USA. Peking behandelt Spitzentalente zunehmend als nationales Sicherheitsgut — vergleichbar mit der Geheimhaltung um Atomwissenschaftler. Die Ziele liegen auf der Hand: Technologielecks verhindern, die Abwanderung der besten Köpfe stoppen und die eigene KI-Belegschaft im Land halten. Das Ganze fügt sich in ein Klima, das durch US-Exportkontrollen für KI-Chips und Chinas Hinwendung zu heimischen Alternativen geprägt ist.</p>
+<p>Belastbare Zahlen zur Größenordnung gibt es nicht: <em>Wie viele Personen betroffen sind und welche Behörde konkret zuständig ist, wurde offiziell nicht genannt.</em> Weder Alibaba noch DeepSeek äußerten sich öffentlich. Für international tätige Tech-Unternehmen ist die Entwicklung dennoch ein Signal — sie erschwert Rekrutierung, Kooperationen und Konferenzteilnahmen mit chinesischen KI-Spitzenkräften und unterstreicht, wie sehr KI-Kompetenz inzwischen als geopolitische Ressource behandelt wird.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.bloomberg.com/news/articles/2026-05-26/china-expands-travel-curbs-to-top-ai-talent-at-private-firms" rel="noopener noreferrer external" target="_blank">Bloomberg — China Expands Travel Curbs to Top AI Talent at Private Firms</a></li>
+                
+                <li><a href="https://decrypt.co/369005/china-imposes-travel-limits-on-ai-workers-at-private-firms-report" rel="noopener noreferrer external" target="_blank">Decrypt — China Imposes Travel Limits on AI Workers at Private Firms: Report</a></li>
+                
+                <li><a href="https://cryptobriefing.com/china-restricts-travel-ai-talent-alibaba-deepseek/" rel="noopener noreferrer external" target="_blank">Crypto Briefing — China restricts overseas travel for top AI talent at Alibaba and DeepSeek</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <p class="article-kicker">Robotik · Humanoide</p>
+        <h2 id="art-6-h">200 Stunden ohne Pause: Figures Roboter sortieren eine Viertelmillion Pakete — fast fehlerfrei</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">Aus einer geplanten 8-Stunden-Demo wurden 200 Stunden Dauerbetrieb: Drei humanoide Roboter von Figure AI sortierten acht Tage lang autonom Pakete — fast 250.000 Stück, ohne einen einzigen Hardware-Ausfall. CEO Brett Adcock spricht von „unerforschtem Terrain“. Der Test ist eindrucksvoll, wirft aber die entscheidende Frage nur umso schärfer auf: Wie weit ist die Branche wirklich?</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Es war als Acht-Stunden-Demonstration geplant und lief am Ende fünfundzwanzigmal so lange: Drei Exemplare des humanoiden Roboters <strong>Figure 03</strong> sortierten in einem livegestreamten Lauf <strong>200 Stunden über acht Tage</strong> hinweg Pakete — Paket greifen, Barcode finden, mit dem Code nach unten ablegen. Das Ergebnis laut Figure: <strong>rund 249.560 verarbeitete Pakete und null Hardware-Ausfälle</strong>. Die Roboter — von Zuschauern „Bob“, „Jim“ und „Rose“ getauft — wechselten sich selbstständig ab; wessen Akku (Laufzeit etwa vier Stunden) zur Neige ging, fuhr autonom zur kabellosen Ladestation, der nächste übernahm. „No humans in the loop“, betont das Unternehmen.</p>
+<p>Angetrieben wird das Ganze von <strong>Helix</strong>, Figures eigenem Vision-Language-Action-System (VLA) — einem Modell, das Sehen, Sprachverständnis und Bewegungssteuerung in einer Architektur vereint, statt sie wie in der klassischen Robotik getrennt zu programmieren. Genau das soll der Dauerlauf belegen: nicht eine einzelne beeindruckende Bewegung, sondern Zuverlässigkeit über Tage. Mit gut 2,6 Sekunden pro Paket arbeiteten die Maschinen nahe an menschlichem Tempo. CEO <strong>Brett Adcock</strong> nannte den Lauf „uncharted territory“ und kommentierte, ein menschlicher Praktikant habe ein Sortierduell nur noch hauchdünn gewonnen — „this is the last time a human will ever win“.</p>
+<p>Bei aller Wucht der Zahlen ist die Einordnung wichtig. <em>Unabhängig verifiziert sind die Angaben nicht</em> — Fehlerrate, Paketschäden und Re-Sort-Häufigkeit wurden nicht im Detail berichtet; kleinere Fehler wie fallengelassene oder falsch orientierte Pakete traten auf, wurden aber als „Handling-Probleme“ statt als Roboter-Ausfälle gewertet. Beobachter merkten zudem an, dass die Roboter im Video häufig Richtung Kopf gestikulieren — historisch ein Indiz für Teleoperation. Adcock entgegnet, das sei ein Nebeneffekt des Helix-Ganzkörper-Controllers, der Armwege automatisch freiräume, kein menschlicher Eingriff.</p>
+<p>Zur Einordnung des Unternehmens: Figure AI wurde 2022 gegründet, zuletzt mit rund <strong>39 Milliarden Dollar</strong> bewertet und betreibt mit dem Vorgängermodell Figure 02 bereits einen kommerziellen Einsatz im BMW-Werk Spartanburg. Der 200-Stunden-Lauf dagegen war ein reiner Logistik-Stresstest, nicht der Fabrikbetrieb. Was der Test zeigt — anhaltende Autonomie bei einer eng umrissenen, strukturierten Aufgabe — und was er offenlässt — Verlässlichkeit in unstrukturierten Umgebungen, ehrliche Fehlerquoten, Stückkosten — ist genau die Spannung, die wir in unserer <a href="/editions/reportagen/2026-05-27.html">heutigen Reportage</a> zum Stand der humanoiden Robotik 2026 ausführlich aufschlüsseln.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/en/news/Figure-AI-demonstrates-robot-in-200-hour-work-deployment-11306832.html" rel="noopener noreferrer external" target="_blank">heise online — Figure AI demonstrates robot in 200-hour work deployment</a></li>
+                
+                <li><a href="https://interestingengineering.com/ai-robotics/figure-03-humanoid-robot-200-hour-shift" rel="noopener noreferrer external" target="_blank">Interesting Engineering — Figure&#39;s humanoid robots work 200 hours, process 250k packages without failure</a></li>
+                
+                <li><a href="https://sherwood.news/tech/figures-robots-just-sorted-packages-for-200-hours-straight/" rel="noopener noreferrer external" target="_blank">Sherwood News — Figure&#39;s robots just sorted packages for 200 hours straight</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <p class="article-kicker">Kultur · KI und Kirche</p>
+        <h2 id="art-7-h">Hat der Papst KI genutzt, um vor KI zu warnen? Eine Detektor-Debatte um die Enzyklika</h2>
+        <p class="article-meta">
+            <time datetime="2026-05-26">26. Mai 2026</time>
+        </p>
+        <p class="article-teaser">Zwei Tage nach der Vorstellung von „Magnifica Humanitas“ kursiert eine pikante Frage: Wurde das päpstliche Lehrschreiben über die Gefahren der KI teils mit KI verfasst? Ein KI-Detektor schlägt vor allem bei der italienischen Fassung an. Beweise sind das nicht — aber die Debatte trifft einen Nerv. Und nebenbei nimmt der Papst die Tech-Branche ausgerechnet mit Tolkien in die Pflicht.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Es ist eine Ironie, die sich kaum jemand entgehen ließ: Kaum hatte Papst Leo XIV. seine erste Enzyklika vorgestellt — ein rund 42.000 Wörter langes Lehrschreiben, das vor der Überabhängigkeit von KI warnt und schärfere Regulierung fordert (wir <a href="/editions/2026-05-25.html#art-1">berichteten am 25. Mai</a>) —, stand die Frage im Raum, ob beim Verfassen selbst KI im Spiel war. Auslöser ist eine analytische Untersuchung, die vor allem die <strong>italienische Fassung</strong> durch den KI-Detektor <strong>Pangram</strong> laufen ließ, der als einer der treffsichersten kommerziellen Detektoren gilt.</p>
+<p>Die Befunde schwanken stark je Abschnitt: Für Kapitel 1 markierte Pangram in der italienischen Version rund 62 Prozent als KI-generiert, für andere Abschnitte deutlich weniger. Die englische Fassung zeigte kaum Auffälligkeiten — was zur These passt, dass Italienisch die Entwurfssprache war, wie bei vatikanischen Enzykliken üblich. Die Interpretation der Analyse: Nicht der Papst selbst, sondern einzelne mitwirkende Kardinäle könnten KI-Assistenz genutzt haben; die unterschiedlichen Quoten deuteten auf verschiedene Autoren hin.</p>
+<p>Hier ist Vorsicht geboten. <em>KI-Detektoren liefern Wahrscheinlichkeiten, keine Gewissheiten</em> — sie sind für Falsch-Positive bekannt, gerade bei formelhafter, feierlicher Prosa, wie sie ein kirchliches Lehrschreiben prägt. Die KI-Autorschaft ist damit eine detektorgestützte Vermutung, kein Beleg. Eine offizielle Stellungnahme des Vatikans zu dem Vorwurf liegt bislang nicht vor. Bemerkenswert bleibt die Debatte trotzdem: Sie zeigt, wie schnell selbst dem höchsten moralischen Lehramt der Welt der Verdacht maschineller Mitautorschaft anhaftet — ein Misstrauen, das die Enzyklika selbst zum Thema macht.</p>
+<p>Inhaltlich sorgte derweil eine literarische Volte für Aufsehen. In Paragraph 213 zitiert der Papst ausgerechnet <strong>J. R. R. Tolkien</strong>: Gandalfs Worte, es sei „nicht unsere Aufgabe, alle Fluten der Welt zu beherrschen“, sondern das Böse auf den Feldern auszureißen, die wir kennen, damit die Nachkommenden „reine Erde zu bestellen“ hätten. Tolkien gilt im Silicon Valley als Lieblingslektüre — der Papst wendet ihn nun gegen den techno-utopischen Fortschrittsglauben und stellt Gandalfs Bescheidenheit gegen den Machbarkeitsrausch.</p>
+<p>Die Reaktion der Tech-Größen fiel verhalten aus: Sam Altman, Elon Musk und Mark Zuckerberg schwiegen zunächst öffentlich. Anthropic-Mitgründer Christopher Olah, der bei der Vorstellung zugegen war, dankte für „this work of discernment“ — das Unternehmen rückte damit demonstrativ an die Vatikan-Linie heran. Aus dem Umfeld von Andreessen Horowitz kam dagegen Kritik, die Enzyklika sei „dünn in der Theologie der KI“ und wiederhole vor allem katholische Soziallehre. US-Vizepräsident JD Vance wiederum nannte die Warnungen „profound“. Die Fronten verlaufen, wie so oft bei diesem Papst und der KI, quer durch alle Lager.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.theverge.com/" rel="noopener noreferrer external" target="_blank">The Verge — Did the Pope use AI to write about the dangers of AI?</a></li>
+                
+                <li><a href="https://www.lesswrong.com/posts/GbWwesBnetyiomxEH/many-portions-of-magnifica-humanitas-appear-to-be-ai-written" rel="noopener noreferrer external" target="_blank">LessWrong — Many portions of Magnifica Humanitas appear to be AI-written</a></li>
+                
+                <li><a href="https://www.nbcnews.com/tech/innovation/tech-titans-mostly-silent-pope-leos-warning-risks-ai-rcna346903" rel="noopener noreferrer external" target="_blank">NBC News — Tech titans mostly silent after Pope Leo&#39;s warning about risks of AI</a></li>
+                
+                <li><a href="https://www.americamagazine.org/catholic-book-club/2026/05/26/why-pope-leos-new-encyclical-quotes-gandalf-literary-images-of-hope-and-faith-in-magnifica-humanitas/" rel="noopener noreferrer external" target="_blank">America Magazine — Why Pope Leo&#39;s new encyclical quotes Gandalf</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+
+    
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser-card">
+            <p class="article-kicker">Reportage</p>
+            <h2 id="reportage-h">200 Stunden ohne Pause — und trotzdem nicht angekommen: Der wahre Stand humanoider Roboter 2026</h2>
+            <p class="article-teaser">Figures Roboter sortieren acht Tage am Stück Pakete, China liefert 87 Prozent aller Humanoiden aus, Goldman Sachs sieht einen 38-Milliarden-Markt: Die humanoide Robotik erlebt 2026 ihren KI-Moment. Doch zwischen viralen Demo-Videos und produktivem Einsatz klafft eine Lücke aus Teleoperation, Zuverlässigkeitsfragen und Stückkosten. Eine Bestandsaufnahme — was wirklich funktioniert und was noch Hype ist. Von Stefan Lange-Hegermann.</p>
+            <a href="/editions/reportagen/2026-05-27.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und trendende KI-Tools des Tages</p>
+        <div class="tool-grid">
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/memdex.ai.png" width="40" height="40" alt="Memdex Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://memdex.ai" rel="noopener noreferrer external" target="_blank">Memdex</a></div>
+                    <div class="tool-card-desc">Chrome-Erweiterung, die jede KI-Konversation in ChatGPT, Claude, Gemini, Perplexity und Grok automatisch als wiederverwendbaren, lokal verschlüsselten Speicher festhält.</div>
+                    <div class="tool-card-desc">Funktioniert wie Grammarly fürs Gedächtnis: Beim Tippen unterstreicht es bereits Besprochenes und injiziert den passenden Kontext per Klick in jedes KI-Tool. Local-first — nichts wird hochgeladen, modellübergreifend ohne Setup-Ritual.</div>
+                    <div class="tool-card-meta">Produktivität &middot; 23. Mai 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/unabyss.com.png" width="40" height="40" alt="Unabyss Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://unabyss.com" rel="noopener noreferrer external" target="_blank">Unabyss</a></div>
+                    <div class="tool-card-desc">MCP-nativer Kontext-Layer: ein zentraler, strukturierter Vault aus Identität, Wissen und Präferenzen, auf den jede KI-App via Model Context Protocol zugreifen kann.</div>
+                    <div class="tool-card-desc">Verbindet die täglich genutzten Apps, extrahiert und aktualisiert den Kontext selbstständig und gibt granular frei, was jedes Tool sehen darf. Verspricht das Ende des „sich immer wieder gegenüber der KI erklären“. Product-Hunt-Tagessieger mit 454 Upvotes.</div>
+                    <div class="tool-card-meta">Agents &middot; 25. Mai 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/brew.new.png" width="40" height="40" alt="Brew Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://brew.new" rel="noopener noreferrer external" target="_blank">Brew</a></div>
+                    <div class="tool-card-desc">KI-E-Mail-Marketing-Plattform, die markenkonforme Marketing-Mails in Sekunden erzeugt — trainiert auf Brand Voice, Bildstil und bestehende Inhalte.</div>
+                    <div class="tool-card-desc">Positioniert sich als erster E-Mail-Service-Provider mit eingebauter KI-Marketing-Agentur — „wie Claude, aber fürs E-Mail-Design“. Product-Hunt-Tagessieger am 26. Mai.</div>
+                    <div class="tool-card-meta">Business &middot; 26. Mai 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/consciousengines.com.png" width="40" height="40" alt="ModelHub Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.producthunt.com/products/modelhub" rel="noopener noreferrer external" target="_blank">ModelHub</a></div>
+                    <div class="tool-card-desc">Native macOS-Menüleisten-App zum Entdecken, Herunterladen und Verwalten lokaler LLMs von Hugging Face — kompatibel mit Ollama, MLX, LM Studio und llama.cpp.</div>
+                    <div class="tool-card-desc">Beendet das Hin und Her zwischen Browser-Tabs, Terminal-Befehlen, Model Cards und lokalen Ordnern: ein zentraler Hub fürs lokale Modell-Management. Von einem kleinen Indie-Team rund um Priyanshu Ratnakar.</div>
+                    <div class="tool-card-meta">Dev-Tools &middot; 24. Mai 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/armature.tech.png" width="40" height="40" alt="Armature Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://armature.tech" rel="noopener noreferrer external" target="_blank">Armature</a></div>
+                    <div class="tool-card-desc">Test- und Monitoring-Plattform für die „Agent Experience“: schickt echte LLM-Agenten durch MCP-Server, CLIs und ChatGPT-Apps, um kaputte Workflows aufzudecken, bevor Nutzer-Agenten darüber stolpern.</div>
+                    <div class="tool-card-desc">Ersetzt die klassische UI-Testschicht durch eine Agenten-Testschicht — „dein nächster Nutzer ist ein Agent“. Ein interner Agent entdeckt die Tools eines Produkts automatisch, schlägt End-to-End-Workflows vor und kann Probleme selbst beheben. Y-Combinator-Batch Spring 2026.</div>
+                    <div class="tool-card-meta">Dev-Tools &middot; 26. Mai 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/wubble.ai.png" width="40" height="40" alt="Wubble Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://wubble.ai" rel="noopener noreferrer external" target="_blank">Wubble</a></div>
+                    <div class="tool-card-desc">KI-Audio-Studio, das aus Prompts lizenzfreie Musik, KI-Stimmen und Soundeffekte erzeugt — komplett im Browser, kommerziell nutzbar.</div>
+                    <div class="tool-card-desc">Der jüngste Launch erweitert die Plattform um Voice, SFX, Mixing, Lokalisierung und eine produktionstaugliche API. Das Startup aus Singapur (gegründet 2024 von Anand Roy und Shaad Sufi) produzierte bereits Jingles für Microsoft, HP und L&#39;Oréal.</div>
+                    <div class="tool-card-meta">Kreativ &middot; 26. Mai 2026</div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen: Tutorials, Erkl&auml;rungen und Werkzeuge</p>
+        <div class="yt-grid">
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=zVZotTk6ZWU" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/zVZotTk6ZWU.jpg" alt="Claude Code Advanced Workflow - Build &amp; Ship Real Apps" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=zVZotTk6ZWU" rel="noopener noreferrer external" target="_blank">Claude Code Advanced Workflow - Build &amp; Ship Real Apps</a></div>
+                    <div class="yt-card-channel">Leon van Zyl &middot; 19:46</div>
+                    <div class="yt-card-desc">Praxisnaher Workflow-Leitfaden eines Kanals mit rund 97.800 Abonnenten, der sich auf Claude Code und KI-gestützte App-Entwicklung spezialisiert hat. Statt einer Spielzeug-Demo zeigt das Video, wie man einen fortgeschrittenen Claude-Code-Workflow aufsetzt — von der Struktur über das Planen bis zum Ausliefern einer echten Anwendung. Frisch nach den jüngsten Claude-Code-Updates aufgenommen.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=U1VMhxccPYU" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/U1VMhxccPYU.jpg" alt="I Field Tested Gemini 3.5 Flash: Fast Boi, Smol Brain." loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=U1VMhxccPYU" rel="noopener noreferrer external" target="_blank">I Field Tested Gemini 3.5 Flash: Fast Boi, Smol Brain.</a></div>
+                    <div class="yt-card-channel">MattVidPro AI &middot; 24:42</div>
+                    <div class="yt-card-desc">Ausführlicher Praxistest von Googles neuem Modell Gemini 3.5 Flash durch einen Kanal mit rund 300.000 Abonnenten. Der Titel ist Programm: Das Modell ist extrem schnell, stößt aber bei anspruchsvolleren Reasoning-Aufgaben an Grenzen. Das Video arbeitet heraus, für welche Anwendungsfälle sich der Geschwindigkeits-Preis-Vorteil lohnt — und wo man besser zu einem Frontier-Modell greift.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=w4qFc-8xYz8" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/w4qFc-8xYz8.jpg" alt="Blender MCP: Antigravity Gemini 3.5 Flash vs GPT-5.5 vs Claude Opus 4.7" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">&#128200; Trending Topic</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=w4qFc-8xYz8" rel="noopener noreferrer external" target="_blank">Blender MCP: Antigravity Gemini 3.5 Flash vs GPT-5.5 vs Claude Opus 4.7</a></div>
+                    <div class="yt-card-channel">JC BuenaVentura &middot; 13:52</div>
+                    <div class="yt-card-desc">Trendindikator von einem kleinen Kanal (rund 8.200 Abonnenten), dessen Video überdurchschnittlich viele Aufrufe sammelt. Der Creator lässt drei Spitzenmodelle dieselbe 3D-Aufgabe über einen Blender-MCP-Server lösen und vergleicht direkt, wie gut Gemini 3.5 Flash, GPT-5.5 und Claude Opus 4.7 ein kreatives Tool per Model Context Protocol steuern. Ein konkretes, reproduzierbares Head-to-Head statt Benchmark-Tabellen.</div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    
+
+</main>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
