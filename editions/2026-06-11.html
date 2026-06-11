@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+<div class="edition-header" id="top">
+    <div class="edition-meta">
+        <time datetime="2026-06-11">Donnerstag, 11. Juni 2026</time> &middot; 6 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 11. Juni 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1">
+                    <span class="toc-cat">Modelle · Google DeepMind</span>
+                    <span class="toc-title">DiffusionGemma: Google lässt Text aus dem Rauschen entstehen — und verspricht das Vierfache an Tempo</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2">
+                    <span class="toc-cat">Modelle · Anthropic</span>
+                    <span class="toc-title">Fable 5, Tag zwei: Microsoft sperrt das Modell intern — und Sicherheitsforscher laufen gegen die Leine</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3">
+                    <span class="toc-cat">Recht · Deutschland</span>
+                    <span class="toc-title">Landgericht München: Googles KI-Übersichten sind Googles eigene Worte — und Google haftet dafür</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4">
+                    <span class="toc-cat">Regulierung · EU</span>
+                    <span class="toc-title">„AI GENERATED“: Die EU legt fest, wie KI-Inhalte künftig gekennzeichnet werden sollen</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5">
+                    <span class="toc-cat">KI-Sicherheit · xAI</span>
+                    <span class="toc-title">Drei Tage vor dem SpaceX-Börsengang: Ex-Ingenieur verklagt xAI wegen Rauswurfs nach Sicherheitswarnungen</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6">
+                    <span class="toc-cat">Ökonomie · Infrastruktur</span>
+                    <span class="toc-title">17,5 Milliarden Dollar von den Banken: Amazon leiht sich im Wochentakt Geld für die KI</span>
+                </a>
+            </li>
+            
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+            <ul class="toc-specials-row">
+                
+                <li class="toc-special">
+                    <a href="#reportage">
+                        <span class="toc-cat">Reportage</span>
+                        <span class="toc-title">Text aus dem Rauschen: Wie Diffusionsmodelle das Grundprinzip der Sprach-KI infrage stellen</span>
+                    </a>
+                </li>
+                
+                <li class="toc-special">
+                    <a href="#tool-radar">
+                        <span class="toc-cat">Tool-Radar</span>
+                        <span class="toc-title">Neue KI-Tools im &Uuml;berblick</span>
+                    </a>
+                </li>
+                <li class="toc-special">
+                    <a href="#werkstatt">
+                        <span class="toc-cat">Werkstatt</span>
+                        <span class="toc-title">YouTube-Empfehlungen</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+    </nav>
+
+    
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <p class="article-kicker">Modelle · Google DeepMind</p>
+        <h2 id="art-1-h">DiffusionGemma: Google lässt Text aus dem Rauschen entstehen — und verspricht das Vierfache an Tempo</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Praktisch jedes Sprachmodell schreibt Text Wort für Wort, von links nach rechts. Googles neues offenes Modell DiffusionGemma bricht mit diesem Prinzip: Es verfeinert 256 Token gleichzeitig aus Rauschen — wie ein Bildgenerator, nur für Text. Auf einer H100-GPU schafft es über 1.000 Token pro Sekunde. Der Preis: messbar weniger Qualität.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Am 10. Juni hat Google DeepMind <strong>DiffusionGemma</strong> veröffentlicht — ein experimentelles Diffusions-Sprachmodell mit offenen Gewichten unter Apache-2.0-Lizenz. Technisch ist es ein Mixture-of-Experts-Modell mit rund 26 Milliarden Parametern auf Basis des Gemma-4-Backbones, von denen pro Inferenzschritt nur 3,8 Milliarden aktiv sind. Es steht auf Hugging Face, im Google Cloud Model Garden und über NVIDIA NIM bereit; quantisiert läuft es in 18 GB Grafikspeicher — also auf einer besseren Consumer-GPU.</p>
+<p>Das Besondere ist die Generierungsmethode. Autoregressive Modelle wie GPT, Claude oder das normale Gemma erzeugen Token einzeln und nacheinander; DiffusionGemma startet stattdessen mit einem „Canvas“ aus 256 Platzhalter-Token und verfeinert alle gleichzeitig über mehrere Entrauschungs-Schritte — Blöcke werden anschließend aneinandergekettet. Weil dabei jedes Token alle anderen sieht (auch die „zukünftigen“), kann das Modell Lücken mitten im Text füllen und sich selbst korrigieren — Dinge, die autoregressiven Modellen strukturell schwerfallen. Google verspricht „bis zu 4x schnellere Textgenerierung auf GPUs“: über 1.000 Token pro Sekunde auf einer H100 (das normale Gemma 4 liegt laut The Decoder bei rund 300), über 700 auf einer RTX 5090. NVIDIA lieferte am selben Tag einen eigenen Blogpost mit Day-1-Optimierungen für die gesamte Hardware-Palette.</p>
+<p>Die Einschränkungen benennt Google ungewöhnlich offen selbst: Die Ausgabequalität liegt <strong>unter</strong> Standard-Gemma-4, für die Produktion bleibt das klassische Modell empfohlen. Und der Tempovorteil gilt vor allem für Einzelnutzer-Szenarien — lokal, am Edge, in latenzkritischen Anwendungen. In der Hacker-News-Diskussion (279 Punkte) wiesen Kommentatoren darauf hin, dass Cloud-Anbieter ihre GPUs ohnehin durch das Bündeln vieler paralleler Anfragen auslasten; dort schrumpft der Diffusions-Vorteil deutlich. Als Einsatzfelder werden eher Linting, Unit-Tests, Boilerplate-Code und Edge-Geräte gehandelt.</p>
+<p>Ganz neu ist das Paradigma nicht — und DiffusionGemma ist auch nicht das erste offene Diffusions-LLM eines großen Labors: NVIDIA veröffentlichte bereits Ende Mai seine Nemotron-Diffusionsmodelle, das Startup Inception Labs verkauft mit Mercury seit 2025 ein kommerzielles Diffusionsmodell, und Google selbst zeigte auf der I/O 2025 die geschlossene Demo „Gemini Diffusion“. Neu ist die Kombination: das bislang größte offene Diffusions-Sprachmodell, vom Erfinder des Gemma-Ökosystems, mit nativem Support in vLLM, Transformers und MLX ab Tag eins. Damit wandert die Technik vom Forschungspapier in den Werkzeugkasten — sie reiht sich in die Welle offener Modelle ein, <a href="/editions/2026-06-10.html#art-4">über die wir gestern berichteten</a>.</p>
+<p>Warum das strategisch zählt, wer sonst noch an Text-Diffusion arbeitet und was das für Latenz, API-Preise und Produktentscheidungen bedeutet, analysieren wir ausführlich in der heutigen Reportage.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/" rel="noopener noreferrer external" target="_blank">Google Blog — DiffusionGemma: 4x faster text generation</a></li>
+                
+                <li><a href="https://developer.nvidia.com/blog/run-diffusiongemma-on-nvidia-for-developer-ready-high-throughput-text-generation/" rel="noopener noreferrer external" target="_blank">NVIDIA Technical Blog — Run DiffusionGemma on NVIDIA</a></li>
+                
+                <li><a href="https://the-decoder.com/googles-new-open-model-diffusiongemma-generates-text-from-noise-instead-of-word-by-word/" rel="noopener noreferrer external" target="_blank">The Decoder — Google&#39;s new open model DiffusionGemma generates text from noise</a></li>
+                
+                <li><a href="https://developers.googleblog.com/en/diffusiongemma-the-developer-guide/" rel="noopener noreferrer external" target="_blank">Google Developers Blog — DiffusionGemma: The Developer Guide</a></li>
+                
+                <li><a href="https://news.ycombinator.com/item?id=48478471" rel="noopener noreferrer external" target="_blank">Hacker News — DiffusionGemma: 4x Faster Text Generation</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <p class="article-kicker">Modelle · Anthropic</p>
+        <h2 id="art-2-h">Fable 5, Tag zwei: Microsoft sperrt das Modell intern — und Sicherheitsforscher laufen gegen die Leine</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Einen Tag nach dem Launch von Claude Fable 5 hagelt es Praxis-Kritik: Microsoft schränkt die interne Nutzung wegen Anthropics neuer Datenspeicher-Regeln ein, Cybersecurity-Forscher beklagen, dass selbst harmlose Code-Reviews als Risiko eingestuft werden — und das Modell verweigert Fragen zu Mitochondrien.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><a href="/editions/2026-06-10.html#art-1">Wie wir in der gestrigen Ausgabe berichteten</a>, hat Anthropic am 9. Juni mit Claude Fable 5 das mächtigste je breit verfügbare KI-Modell veröffentlicht — abgesichert durch einen Mechanismus, der heikle Anfragen still auf das ältere Opus 4.8 herabstuft. Nach 48 Stunden im Realbetrieb zeigt sich nun, wo dieser Kompromiss schmerzt — und zwar an unerwarteter Stelle.</p>
+<p>Die überraschendste Reaktion kommt von Microsoft: Der Konzern schränkt laut The Verge die interne Nutzung von Fable 5 durch eigene Mitarbeiter ein. Auslöser sind Anthropics neue Data-Retention-Bedingungen für Mythos-Klasse-Modelle — Prompts und Ausgaben werden 30 Tage lang für „Trust and Safety“ gespeichert, bei Verdacht auf Richtlinienverstöße bis zu zwei Jahre. Microsofts Rechtsabteilung prüft, ob das mit dem Schutz von Kunden- und Geschäftsgeheimnissen vereinbar ist. Welche Teams und Tools konkret betroffen sind, ist nicht bestätigt. Pikant ist der Kontrast: Microsofts Tochter GitHub bietet Fable 5 seit dem 9. Juni regulär in Copilot an — Kunden bekommen also ein Modell, das die Mutter den eigenen Leuten vorerst nicht erlaubt. Weder Microsoft noch Anthropic äußerten sich auf Anfrage von Reuters.</p>
+<p>Parallel formiert sich Frust in der Security-Community — ausgerechnet jener Zielgruppe, für die das zugrunde liegende Mythos-Modell als Cyberdefense-Werkzeug gedacht ist. Valentina Palmiotti von IBM X-Force berichtet gegenüber TechCrunch, Fable lehne „jede Anfrage ab, die auch nur entfernt cyber-bezogen ist — sogar harmlose Aufgaben wie das Lesen eines Blogposts“. Der Sicherheitsveteran Matt Suiche beobachtet, dass schon die Bitte um <em>sicheren</em> Code als Cybersecurity-Fall eingestuft und herabgestuft wird; die Erkennung wirke schlicht stichwortbasiert. Anthropic verweist auf sein „Cyber Verification Program“, über das verifizierte Profis weniger Einschränkungen bekommen — auf die TechCrunch-Anfrage antwortete das Unternehmen nicht.</p>
+<p>Am kuriosesten sind die Fälle aus der Biologie. The Verge dokumentierte, dass Fable 5 selbst Grundschulwissen verweigert oder herabstuft: Fragen nach Mitochondrien, Zellmembranen, Prionen oder der Funktionsweise von mRNA-Impfstoffen. The Register fand noch drastischere Beispiele — bei einem Nutzer blockierte der Classifier die Eingabe „Hello“, ein Immunologe klagt, schon das Wort „cancer“ gelte als Biosicherheits-Risiko. Anthropic-Sprecherin Paruul Maheshwary verteidigt die Filter als „bewusst konservativ“ — die Hauptsorge seien Biowaffen — und kündigt an, die Erkennung zu verbessern sowie Mythos-Modelle später für die Biologie- und Life-Sciences-Community ohne diese Filter zugänglich zu machen. Ob ein Classifier-Update bereits ausgerollt wurde, ist unbestätigt.</p>
+<p>Das Muster ist für Unternehmen lehrreich: Anthropics offizielle Zahl, wonach die Schutzmechanismen in weniger als fünf Prozent der Sitzungen greifen, kollidiert sichtbar mit den Erfahrungen technischer Power-User — genau der Klientel, die das Modell am dringendsten will. Bemerkenswert ist allerdings auch der Schluss, den The New Stack aus den Nutzerforen zieht: Trotz Guardrail-Ärger und hoher Kosten bleiben viele dabei — Fable sei eben doch besser als alles andere.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/06/10/cybersecurity-researchers-arent-happy-about-the-guardrails-on-anthropics-fable/" rel="noopener noreferrer external" target="_blank">TechCrunch — Cybersecurity researchers aren&#39;t happy about the guardrails on Anthropic&#39;s Fable</a></li>
+                
+                <li><a href="https://kfgo.com/2026/06/10/microsoft-limits-employee-use-of-anthropics-claude-fable-5-over-data-retention-concerns-the-verge-reports/" rel="noopener noreferrer external" target="_blank">Reuters — Microsoft limits employee use of Anthropic&#39;s Claude Fable 5 (via KFGO)</a></li>
+                
+                <li><a href="https://www.theregister.com/ai-and-ml/2026/06/10/anthropic-claude-fable-5-refuses-innocuous-prompts/5253754" rel="noopener noreferrer external" target="_blank">The Register — It blocked us at &#39;hello!&#39; Anthropic Fable 5 refusing innocuous prompts</a></li>
+                
+                <li><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" rel="noopener noreferrer external" target="_blank">Anthropic — Claude Fable 5 and Claude Mythos 5 (Launch-Post)</a></li>
+                
+                <li><a href="https://github.blog/changelog/2026-06-09-claude-fable-5-is-generally-available-for-github-copilot/" rel="noopener noreferrer external" target="_blank">GitHub Changelog — Claude Fable 5 is generally available for GitHub Copilot</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <p class="article-kicker">Recht · Deutschland</p>
+        <h2 id="art-3-h">Landgericht München: Googles KI-Übersichten sind Googles eigene Worte — und Google haftet dafür</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Googles „Übersicht mit KI“ brachte zwei Münchner Verlage fälschlich mit Abo-Fallen und Betrugsmaschen in Verbindung — frei erfunden, in keiner verlinkten Quelle zu finden. Das Landgericht München I entschied nun: Für KI-generierte Antworten haftet Google direkt wie für eigene Inhalte. Eine Entscheidung mit Sprengkraft für alle KI-Suchdienste.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die am 10. Juni bekannt gewordene einstweilige Verfügung des Landgerichts München I (Az. 26 O 869/26, ergangen bereits am 28. Mai) ist nach Einschätzung des Branchendienstes Juve die erste gerichtliche Entscheidung zu Googles AI-Overviews-Feature überhaupt. Geklagt hatten zwei Münchner Verlage, vertreten durch die Kanzlei Lausen: Googles KI-Übersicht hatte sie bei bestimmten Suchanfragen mit Abo-Fallen, Betrugsmaschen und unseriösen Geschäftspraktiken in Verbindung gebracht — die KI vermischte Informationen über tatsächlich dubiose Drittfirmen mit den Klägern und erfand Verbindungen, die in keiner der verlinkten Quellen standen.</p>
+<p>Der juristische Kern der Entscheidung: Google kann sich nicht auf die eingeschränkte <em>Störerhaftung</em> berufen, die für klassische Suchmaschinen gilt — also die Privilegierung dessen, der nur fremde Inhalte durchleitet. Die KI-Übersicht, so das Gericht, erzeuge „eigenständige, neue und inhaltliche Aussagen“: Sie wertet Inhalte verschiedener Webseiten aus, gewichtet sie und präsentiert sie in eigenen Worten und eigener Struktur als zusammenhängenden Text. Damit ist sie eigener Inhalt Googles — mit voller, täterschaftlicher Haftung. Googles Einwand, Nutzer müssten KI-Angaben ohnehin selbst prüfen, verwarf die Kammer mit einem bemerkenswert lebensnahen Argument: Die Quellen-Links in KI-Übersichten würden faktisch kaum angeklickt; auch der Hinweis „mit KI erstellt“ ändere an der Zurechnung nichts.</p>
+<p>Die Folgen für Google: Die konkreten Falschbehauptungen sind untersagt, bei Zuwiderhandlung drohen Ordnungsgelder von bis zu 250.000 Euro pro Verstoß. Google trägt 80 Prozent der Verfahrenskosten. Rechtskräftig ist die Entscheidung nicht — als einstweilige Verfügung kann Google Rechtsmittel einlegen, ein Hauptsacheverfahren ist möglich; ob der Konzern das tut, ist bislang nicht bekannt. Eine öffentliche Stellungnahme gab Google nicht ab.</p>
+<p>Die Tragweite reicht weit über den Einzelfall hinaus. Die Argumentationslinie — wer Webinhalte per KI paraphrasiert und als eigenen Text ausspielt, haftet dafür wie ein Autor — trifft potenziell jeden KI-Suchdienst, von Perplexity über Bing Copilot bis ChatGPT Search. heise ordnet die Entscheidung als Weiterentwicklung eines Frankfurter Urteils von September 2025 ein; erstmals wurde nun eine konkrete Falschaussage einer KI-Übersicht verboten. International schlug der Fall hohe Wellen: Der Hacker-News-Thread sammelte rund 960 Punkte und über 500 Kommentare — zwischen Beifall („Google muss für eigene Inhalte geradestehen“) und der Sorge, Google könnte KI-Übersichten in Europa schlicht abschalten, weil Halluzinationen sich nie ganz vermeiden lassen.</p>
+<p>Für Unternehmen hat das Urteil zwei Lesarten. Wer von KI-Falschaussagen betroffen ist — etwa weil ein KI-Überblick das eigene Geschäft mit Betrug assoziiert —, hat nun einen erprobten Hebel. Und wer selbst KI-generierte Zusammenfassungen öffentlich ausspielt, sollte wissen: Der Verweis „das hat die KI geschrieben“ ist vor deutschen Gerichten keine Verteidigung.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/LG-Muenchen-I-Google-fuer-falsche-Aussagen-in-KI-Uebersichten-verurteilt-11327217.html" rel="noopener noreferrer external" target="_blank">heise online — LG München I: Google für falsche Aussagen in KI-Übersichten verurteilt</a></li>
+                
+                <li><a href="https://www.golem.de/news/google-stoererhaftung-gilt-nicht-fuer-ki-uebersicht-von-suchergebnissen-2606-209625.html" rel="noopener noreferrer external" target="_blank">Golem — Störerhaftung gilt nicht für KI-Übersicht von Suchergebnissen</a></li>
+                
+                <li><a href="https://t3n.de/news/muenchner-gericht-entscheidet-google-ist-fuer-falsche-ki-uebersichten-direkt-verantwortlich-1746841/" rel="noopener noreferrer external" target="_blank">t3n — Google ist für falsche KI-Übersichten direkt verantwortlich</a></li>
+                
+                <li><a href="https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/" rel="noopener noreferrer external" target="_blank">The Decoder — Landmark German ruling declares Google&#39;s AI Overviews are Google&#39;s own words</a></li>
+                
+                <li><a href="https://www.juve.de/verfahren/punktsieg-fuer-lausen-google-haftet-fuer-falschaussagen-in-ki-uebersichten/" rel="noopener noreferrer external" target="_blank">Juve — Google haftet: Lausen erstreitet erstes Urteil zu KI-Übersichten</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <p class="article-kicker">Regulierung · EU</p>
+        <h2 id="art-4-h">„AI GENERATED“: Die EU legt fest, wie KI-Inhalte künftig gekennzeichnet werden sollen</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Wasserzeichen plus signierte Metadaten, dazu sichtbare Labels für Deepfakes: Die EU-Kommission hat den finalen Verhaltenskodex zur Kennzeichnung KI-generierter Inhalte vorgelegt. Er übersetzt die ab August geltenden Transparenzpflichten des AI Act in konkrete Technik — und wer unterschreibt, bekommt eine Compliance-Vermutung.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die EU-Kommission hat am 10. Juni den finalen „Code of Practice on marking and labelling of AI-generated content“ veröffentlicht. Der Verhaltenskodex konkretisiert die Transparenzpflichten aus Artikel 50 der KI-Verordnung, die ab dem 2. August 2026 gelten — jenem Stichtag, ab dem KI-generierte Inhalte in der EU maschinenlesbar markiert und Deepfakes sichtbar gekennzeichnet sein müssen. Erarbeitet wurde der Text seit September 2025 in drei Entwurfsrunden von sechs unabhängigen Experten, unter Beteiligung von über 180 Stakeholdern aus Industrie, Wissenschaft und Zivilgesellschaft.</p>
+<p>Technisch verlangt der Kodex einen mehrschichtigen Ansatz: KI-generierte oder -veränderte Audio-, Bild-, Video- und Textinhalte sollen mit mindestens zwei maschinenlesbaren Ebenen markiert werden — digitale Metadaten mit kryptografischer Signatur plus unsichtbare Wasserzeichen. Als Umsetzungspfad gelten offene Standards wie C2PA („Content Credentials“); ob der Standard im finalen Text namentlich verankert ist, ist nicht abschließend bestätigt. Erkennungswerkzeuge müssen Behörden, Medien und Forschern dauerhaft kostenfrei zur Verfügung stehen. Für die sichtbare Ebene definiert der Kodex standardisierte EU-Icons mit den Aufschriften „AI GENERATED“ und „AI MODIFIED“ — Pflicht für Deepfakes und für KI-Texte zu Themen von öffentlichem Interesse, die ohne menschliche redaktionelle Kontrolle erscheinen.</p>
+<p>Der Kodex selbst ist freiwillig, die dahinterliegenden Artikel-50-Pflichten sind es nicht. Der Anreiz zum Unterschreiben: Unterzeichner erhalten eine Compliance-Vermutung — die Einhaltung des Kodex gilt als offizieller Nachweis der Pflichterfüllung — und reduzierten Verwaltungsaufwand. EU-Vizepräsidentin Henna Virkkunen formulierte den Anspruch so: „Die Europäerinnen und Europäer haben ein Recht darauf, zu erfahren, ob das, was sie sehen, hören oder lesen, von KI erstellt oder verändert wurde.“ Welche Unternehmen bereits unterzeichnet haben, ist noch nicht bekannt.</p>
+<p>Die Industrie hatte im Vorfeld Bedenken angemeldet: Der Verband CCIA Europe — zu dessen Mitgliedern Google, Meta und Apple zählen — warnte vor „Labelling Fatigue“, also der Abstumpfung der Nutzer durch allgegenwärtige Hinweise, und vor zu präskriptiven technischen Vorgaben, die schnell veralten. Die Kommission betont, der finale Text sei gegenüber den Entwürfen vereinfacht und flexibilisiert worden. Tatsächlich schließt der Kodex an Einzelinitiativen an, die längst laufen — von Googles SynthID-Wasserzeichen über Metas „AI Info“-Labels bis zur <a href="/editions/2026-05-28.html#art-5">automatischen KI-Kennzeichnung auf YouTube</a> —, und versucht erstmals, daraus ein einheitliches, regulatorisch verankertes Rahmenwerk zu machen.</p>
+<p>Für Unternehmen, die generative KI in Produkten einsetzen, beginnt damit die heiße Phase: Bis August bleibt Zeit zu klären, ob die eigenen Bild-, Video- und Textpipelines Provenance-Metadaten und Wasserzeichen sauber durchreichen — und ob man dem Kodex beitritt, um im Streitfall die Compliance-Vermutung auf seiner Seite zu haben.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/KI-Transparenz-Wie-die-EU-kuenstlich-generierte-Inhalte-entlarven-will-11327956.html" rel="noopener noreferrer external" target="_blank">heise online — KI-Transparenz: Wie die EU künstlich generierte Inhalte entlarven will</a></li>
+                
+                <li><a href="https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content" rel="noopener noreferrer external" target="_blank">EU-Kommission — Commission publishes Code of Practice on marking and labelling AI-generated content</a></li>
+                
+                <li><a href="https://germany.representation.ec.europa.eu/news/kennzeichnung-von-ki-generierten-inhalten-eu-kommission-veroffentlicht-verhaltenskodex-2026-06-10_de" rel="noopener noreferrer external" target="_blank">EU-Vertretung in Deutschland — Kennzeichnung von KI-generierten Inhalten</a></li>
+                
+                <li><a href="https://ccianet.org/news/2025/12/ai-acts-transparency-code-risks-user-fatigue-and-technical-deadlock-roundtable-concludes/" rel="noopener noreferrer external" target="_blank">CCIA Europe — AI Act&#39;s Transparency Code Risks User Fatigue and Technical Deadlock</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <p class="article-kicker">KI-Sicherheit · xAI</p>
+        <h2 id="art-5-h">Drei Tage vor dem SpaceX-Börsengang: Ex-Ingenieur verklagt xAI wegen Rauswurfs nach Sicherheitswarnungen</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Devin Kim gehörte zu den ersten Mitgliedern von xAIs Post-Training-Team — bis er im September 2025 gehen musste, kurz bevor er der Führung seine Safety-Bedenken zu Grok präsentieren wollte. Jetzt klagt er wegen Vergeltungskündigung. Die Klageschrift zitiert seinen Vorgesetzten mit dem Satz: „AI will kill us all anyway.“</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Am 10. Juni reichte Devin Kim bei einem kalifornischen Gericht Klage gegen xAI und dessen Mutterkonzern SpaceX ein. Kim kam 2024 als eines der ersten Mitglieder des Post-Training-Teams zu xAI und leitete später den Bereich Research Tooling; zuvor hatte er bei Scale AI ein Projekt für Trainingsdaten zur Erkennung schädlicher Inhalte verantwortet. Der Zeitpunkt der Klage ist kein Zufall: Sie kommt drei Tage vor dem für Freitag geplanten SpaceX-Börsengang — dem dritten Mega-IPO der Branche, <a href="/editions/2026-06-09.html#art-2">nach den vertraulichen Anträgen von Anthropic und OpenAI</a>.</p>
+<p>Die Vorwürfe — allesamt bislang unbewiesene Behauptungen aus der Klageschrift — wiegen schwer. Kim will intern wiederholt gewarnt haben, Grok könne Diskriminierung fördern und Informationen zur Verbreitung von Massenvernichtungswaffen liefern; xAIs Umgang mit Sicherheit mache rechtswidrige Ausgaben „praktisch garantiert“. Sein damaliger Vorgesetzter, xAI-Mitgründer Jimmy Ba, habe Sicherheitsmechanismen vehement abgelehnt — laut Klage mit dem Ausspruch „AI will kill us all anyway“ — und beim Release von Grok Code 1 im August 2025 versucht, EU-Sicherheitsregeln zu umgehen, indem Modelleigenschaften falsch dargestellt wurden, um vorgeschriebene Tests zu vermeiden. Damit habe Ba sogar Direktiven von Elon Musk ignoriert. In der Woche, in der Kim seine Erkenntnisse der Führung präsentieren wollte, habe Ba ihm stattdessen mitgeteilt, man gehe „getrennte Wege“. Die Klage stützt sich auf kalifornischen Whistleblower-Schutz (Retaliation und Wrongful Discharge) und fordert unbezifferten Schadensersatz. Weder xAI noch SpaceX noch Musk haben sich geäußert; Ba hat xAI Anfang 2026 verlassen.</p>
+<p>Unabhängig belegt ist dagegen der Kontext, in den die Klage fällt. Im Juli 2025 sorgte Grok mit antisemitischen Ausfällen („MechaHitler“) für einen Eklat, den die Klageschrift als nachträgliche Bestätigung von Kims Warnungen anführt. Um den Jahreswechsel generierte Grok binnen neun Tagen über 1,8 Millionen sexualisierte Bilder realer Frauen, mutmaßlich auch Minderjähriger — Kaliforniens Generalstaatsanwalt Rob Bonta eröffnete daraufhin eine Untersuchung gegen xAI. Und bis Februar 2026 hatte die Hälfte der zwölf Gründungsmitglieder das Unternehmen verlassen; Ex-Mitarbeiter beschrieben das Safety-Team öffentlich als faktisch „tot“, was Musk damals zurückwies.</p>
+<p>Brisanz bekommt der Fall durch Kims neue Rolle: Das Nonprofit Center for AI Safety hat ihn als Präsidenten benannt — die Klage ist damit auch ein Statement der organisierten KI-Sicherheits-Community gegen das Lab mit dem branchenweit lockersten Umgang mit Schutzmechanismen. Für Investoren des SpaceX-IPO ist sie zudem eine Erinnerung daran, dass im Konzern neben Raketen und Satelliten auch ein KI-Labor mit erheblichen Rechtsrisiken steckt. Ein Gericht hat über die Vorwürfe noch nicht befunden.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/06/10/xai-fired-an-engineer-who-raised-alarms-about-grok-safety-new-lawsuit-claims/" rel="noopener noreferrer external" target="_blank">TechCrunch — xAI fired an engineer who raised alarms about Grok safety, new lawsuit claims</a></li>
+                
+                <li><a href="https://www.yahoo.com/news/science/articles/musks-xai-accused-illegally-firing-170008905.html" rel="noopener noreferrer external" target="_blank">Reuters — Musk&#39;s xAI accused of illegally firing engineer who raised safety concerns</a></li>
+                
+                <li><a href="https://oag.ca.gov/news/press-releases/attorney-general-bonta-launches-investigation-xai-grok-over-undressed-sexual-ai" rel="noopener noreferrer external" target="_blank">California DOJ — AG Bonta Launches Investigation into xAI, Grok</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/02/10/okay-now-exactly-half-of-xais-founding-team-has-left-the-company/" rel="noopener noreferrer external" target="_blank">TechCrunch — Okay, now exactly half of xAI&#39;s founding team has left the company</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <p class="article-kicker">Ökonomie · Infrastruktur</p>
+        <h2 id="art-6-h">17,5 Milliarden Dollar von den Banken: Amazon leiht sich im Wochentakt Geld für die KI</h2>
+        <p class="article-meta">
+            <time datetime="2026-06-10">10. Juni 2026</time>
+        </p>
+        <p class="article-teaser">Erst die größte kanadische Unternehmensanleihe aller Zeiten, zwei Tage später ein 17,5-Milliarden-Kredit von einem Bankenkonsortium: Amazon stemmt seinen 200-Milliarden-Capex für KI-Rechenzentren zunehmend auf Pump — und steht damit exemplarisch für eine Branche, deren Schuldenaufnahme sich 2026 verdoppelt.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Am 10. Juni wurde ein SEC-Filing öffentlich, wonach Amazon sich bei einem Konsortium aus über einem Dutzend Banken unter Führung von Citigroup — darunter JPMorgan, Bank of America, Wells Fargo und HSBC — eine Kreditlinie über 17,5 Milliarden US-Dollar gesichert hat. Die Konstruktion ist ein sogenannter Delayed-Draw Term Loan: Amazon kann die Mittel flexibel bis Ende September abrufen, jede Tranche ist drei Jahre nach Abruf fällig. Offizieller Zweck sind „allgemeine Unternehmenszwecke“ — faktisch fließt das Geld in den KI-Infrastruktur-Ausbau.</p>
+<p>Der Kredit ist nur das jüngste Glied einer bemerkenswerten Serie. Erst zwei Tage zuvor hatte Amazon einen „Maple Bond“ über 14 Milliarden kanadische Dollar (rund 10 Milliarden US-Dollar) platziert — die größte kanadische Unternehmensanleihe aller Zeiten, mit einem Orderbuch von über 28 Milliarden kanadischen Dollar deutlich überzeichnet. Im März nahm der Konzern bereits rund 54 Milliarden Dollar an den US- und Euro-Anleihemärkten auf, im Mai folgte ein Debüt am Schweizer Franken-Markt. Amazons Gesamtverschuldung inklusive Leasing ist binnen zwölf Monaten von rund 150 auf über 225 Milliarden Dollar gestiegen — ein Plus von 50 Prozent. Dahinter steht ein Investitionsplan von rund 200 Milliarden Dollar für 2026, größtenteils für AWS-Rechenzentren und eigene Chips, den CEO Andy Jassy bei den Q4-Zahlen angekündigt hatte.</p>
+<p>Amazon ist damit kein Sonderfall, sondern Trendverstärker. Nach Zahlen von Morgan Stanley steuern die KI-bezogenen Schuldenemissionen 2026 auf rund 570 Milliarden Dollar zu — mehr als das Doppelte des Vorjahres; bis Ende Mai waren bereits 236 Milliarden begeben, das Vierfache des Vorjahreszeitraums. Die UBS rechnet vor, dass die Rechenzentrums-Investitionen der Hyperscaler 2026 nahezu 100 Prozent ihrer operativen Cashflows aufzehren — der Zehnjahresschnitt lag bei 40 Prozent. <a href="/editions/reportagen/2026-06-02.html">In unserer Reportage über den KI-Capex-Supercycle</a> hatten wir Anfang des Monats beschrieben, wie sich die Finanzierung des Booms von der Bilanz an die Kreditmärkte verlagert; Amazons Doppelschlag liefert nun das bislang größte Anschauungsbeispiel.</p>
+<p>Die Warnsignale häufen sich allerdings. Die Ratingagentur S&amp;P erwartet, dass Amazons Verschuldungsgrad „substanziell“ steigt und der Konzern zwei Jahre lang negativen freien Cashflow ausweisen dürfte. Risikoaufschläge KI-bezogener Anleihen haben sich seit September um bis zu 40 Basispunkte geweitet, Oracles Kreditausfallversicherungen notieren auf Mehrjahreshochs. Analysten ziehen zunehmend Parallelen zum kreditfinanzierten Glasfaser-Boom der späten 1990er — samt der Sorge vor „zirkulärer Finanzierung“ im Ökosystem aus Nvidia, OpenAI, Oracle und CoreWeave. TechCrunch bringt die offene Frage auf den Punkt: Nicht ob die Ausgaben nötig sind, sondern ob die Erträge sie je rechtfertigen werden.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/06/10/fresh-off-bond-sale-amazon-borrows-17-5-billion-from-banks-as-ai-spending-continues/" rel="noopener noreferrer external" target="_blank">TechCrunch — Fresh off bond sale, Amazon borrows $17.5B from banks as AI spending continues</a></li>
+                
+                <li><a href="https://www.bloomberg.com/news/articles/2026-06-10/amazon-inks-17-5-billion-loan-in-financing-led-by-citigroup" rel="noopener noreferrer external" target="_blank">Bloomberg — Amazon Secures $17.5 Billion Loan in Citigroup-Led Bank Deal</a></li>
+                
+                <li><a href="https://thenextweb.com/news/amazon-17-5-billion-loan-citigroup-ai-spending" rel="noopener noreferrer external" target="_blank">The Next Web — Amazon takes on $17.5B in new debt as AI spending pushes total borrowing past $225 billion</a></li>
+                
+                <li><a href="https://www.bnnbloomberg.ca/investing/2026/06/09/amazon-issues-record-setting-canadian-dollar-denominated-corporate-bond-deal/" rel="noopener noreferrer external" target="_blank">BNN Bloomberg — Amazon issues record-setting Canadian dollar corporate bond deal</a></li>
+                
+                <li><a href="https://finance.yahoo.com/news/analysts-revise-ai-hyperscaler-debt-180842090.html" rel="noopener noreferrer external" target="_blank">Yahoo Finance — Analysts revise AI hyperscaler debt forecasts after Amazon bond sale</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+
+    
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser-card">
+            <p class="article-kicker">Reportage</p>
+            <h2 id="reportage-h">Text aus dem Rauschen: Wie Diffusionsmodelle das Grundprinzip der Sprach-KI infrage stellen</h2>
+            <p class="article-teaser">Seit ChatGPT erzeugen praktisch alle Sprachmodelle Text auf dieselbe Weise: Wort für Wort, von links nach rechts. Mit DiffusionGemma stellt nun auch Google DeepMind ein offenes Modell vor, das ganze Textblöcke parallel aus Rauschen „herausschält“ — viermal schneller, aber mit Haken. Warum jetzt alle großen Labore an Text-Diffusion arbeiten und was das für Latenz, API-Preise und Produktentscheidungen bedeutet. Von Stefan Lange-Hegermann.</p>
+            <a href="/editions/reportagen/2026-06-11.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und trendende KI-Tools des Tages</p>
+        <div class="tool-grid">
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/niteshift.dev.png" width="40" height="40" alt="Niteshift Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://niteshift.dev" rel="noopener noreferrer external" target="_blank">Niteshift</a></div>
+                    <div class="tool-card-desc">Cloud-Plattform, die KI-Coding-Agents wie Claude Code, Codex oder OpenCode in fertig konfigurierten Entwicklungsumgebungen laufen lässt und Pull Requests „mit Beweis, dass es funktioniert“ zurückliefert.</div>
+                    <div class="tool-card-desc">Agent-agnostische Infrastruktur als Wette gegen Anbieter-Lock-in: Teams wechseln den Agent-Anbieter, ohne ihre Umgebung neu zu bauen. Gegründet von Datadog-Veteranen, 7-Mio-Seed von Greylock mit Reid Hoffman als Angel.</div>
+                    <div class="tool-card-meta">10. Juni 2026 &middot; Niteshift (Startup)</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/solarch.dev.png" width="40" height="40" alt="Solarch Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.solarch.dev" rel="noopener noreferrer external" target="_blank">Solarch</a></div>
+                    <div class="tool-card-desc">Diagram-to-Code-Plattform: Backend-Architektur als Node-Graph zeichnen — Controller, Services, Queues —, Solarch generiert daraus den Code.</div>
+                    <div class="tool-card-desc">Eine Rules-Engine validiert jede Verbindung schon beim Zeichnen, ein deterministischer Compiler erzeugt das Code-Skelett ganz ohne LLM-Token; die KI füllt nur die leeren Funktionskörper. Kein Drift mehr zwischen Diagramm und Codebase.</div>
+                    <div class="tool-card-meta">10. Juni 2026 &middot; Solo-Founder (Indie)</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/runwayml.com.png" width="40" height="40" alt="Runway Aleph 2.0 — Video Expand Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://runwayml.com/product/aleph-2" rel="noopener noreferrer external" target="_blank">Runway Aleph 2.0 — Video Expand</a></div>
+                    <div class="tool-card-desc">Runways Video-Editing-Modell für präzise, lokalisierte Änderungen an bestehendem Footage — Produkt-Swaps, Relighting, Scene-Cleanup — bis 30 Sekunden in 1080p.</div>
+                    <div class="tool-card-desc">Neu seit dieser Woche: Videos lassen sich per Outpainting auf jedes Seitenverhältnis erweitern, ohne zu croppen — das Modell generiert fehlenden Bildinhalt rund ums Original und erhält Licht, Bewegung und Texturen.</div>
+                    <div class="tool-card-meta">9. Juni 2026 &middot; Runway (New York)</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/sellerclaw.ai.png" width="40" height="40" alt="SellerClaw Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://app.sellerclaw.ai" rel="noopener noreferrer external" target="_blank">SellerClaw</a></div>
+                    <div class="tool-card-desc">Ein Team spezialisierter KI-Agents — Sourcing, Listings, Ads, Pricing, Support —, das Onlineshops über Shopify, eBay und Co. hinweg operativ betreibt.</div>
+                    <div class="tool-card-desc">Ein Supervisor-Agent koordiniert die Spezialagenten nach Business-Zielen und Guardrails; jede Aktion ist sichtbar und freigabepflichtig. Product Hunt „Product of the Day“, auch als Open-Source-Variante zum Self-Hosting.</div>
+                    <div class="tool-card-meta">5. Juni 2026 &middot; SellerAI (Startup)</div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen: Tutorials, Erkl&auml;rungen und Werkzeuge</p>
+        <div class="yt-grid">
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=hwKZq0_xG5M" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/hwKZq0_xG5M.jpg" alt="DiffusionGemma: 1100 Tokens/sec: Google&#39;s Fastest Open Model Yet Locally" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=hwKZq0_xG5M" rel="noopener noreferrer external" target="_blank">DiffusionGemma: 1100 Tokens/sec: Google&#39;s Fastest Open Model Yet Locally</a></div>
+                    <div class="yt-card-channel">Fahd Mirza (570.000 Abonnenten) &middot; 12:47</div>
+                    <div class="yt-card-desc">Passend zum Leitartikel: Fahd Mirza installiert DiffusionGemma lokal und testet, was Googles Diffusions-Sprachmodell in der Praxis liefert — rund 1.100 Token pro Sekunde auf eigener Hardware. Ein nüchterner Hands-on-Blick darauf, wie sich blockweise parallele Generierung beim Arbeiten tatsächlich anfühlt.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=1wfY7GCVvh0" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/1wfY7GCVvh0.jpg" alt="Google&#39;s Agents CLI: The CLI + Skills Combination to Ship AI Agents EASILY" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=1wfY7GCVvh0" rel="noopener noreferrer external" target="_blank">Google&#39;s Agents CLI: The CLI + Skills Combination to Ship AI Agents EASILY</a></div>
+                    <div class="yt-card-channel">Cole Medin (209.000 Abonnenten) &middot; 15:17</div>
+                    <div class="yt-card-desc">Cole Medin baut mit Googles neuer, quelloffener Agents CLI einen kompletten KI-Agenten und deployt ihn in Minuten — mit eigener Identität, abgeschotteter Sandbox für selbstgeschriebenen Code und vollständigem Audit-Trail. Ein praxisnaher Blick auf die Bausteine, die produktionsreife Agents wirklich brauchen. (Transparenzhinweis: in Kooperation mit Google entstanden.)</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=rujry8wVf60" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/rujry8wVf60.jpg" alt="Gemma 4 26B A4B QAT vs non-QAT — 16GB Local LLM setup" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">&#128200; Trending Topic</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=rujry8wVf60" rel="noopener noreferrer external" target="_blank">Gemma 4 26B A4B QAT vs non-QAT — 16GB Local LLM setup</a></div>
+                    <div class="yt-card-channel">Luke&#39;s Dev Lab (647 Abonnenten) &middot; 15:04</div>
+                    <div class="yt-card-desc">Ein kleiner Kanal mit dem 5-fachen seiner Abonnentenzahl an Views — ein Frühindikator. Der Software-Engineer vergleicht auf einem 16-GB-VRAM-Eigenbau die offizielle QAT-Quantisierung von Gemma 4 26B mit Unsloths Q4-Variante, getestet in vier Disziplinen: Reasoning, Agency, Coding und Memory. Genau der Vergleich, den Local-LLM-Nutzer gerade suchen.</div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    
+
+</main>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>

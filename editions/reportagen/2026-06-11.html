@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text aus dem Rauschen: Wie Diffusionsmodelle das Grundprinzip der Sprach-KI infrage stellen</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-06-11.html">&larr; Zur&uuml;ck zur Ausgabe vom 11. Juni 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Text aus dem Rauschen: Wie Diffusionsmodelle das Grundprinzip der Sprach-KI infrage stellen</h1>
+    
+    <p class="reportage-teaser">Seit ChatGPT erzeugen praktisch alle Sprachmodelle Text auf dieselbe Weise: Wort für Wort, von links nach rechts. Mit DiffusionGemma stellt nun auch Google DeepMind ein offenes Modell vor, das stattdessen ganze Textblöcke parallel aus Rauschen „herausschält“ — und dabei viermal schneller ist. Warum das mehr als eine technische Fußnote ist, wo die Haken liegen und was Unternehmen jetzt daraus ableiten sollten. Von Stefan Lange-Hegermann.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-06-11">11. Juni 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Wer einem Sprachmodell beim Antworten zusieht, beobachtet immer dasselbe Schauspiel: Der Text tröpfelt Wort für Wort auf den Bildschirm, von links nach rechts, wie von einer unsichtbaren Schreibmaschine getippt. Das ist keine Design-Entscheidung, sondern das Grundprinzip fast aller heutigen KI-Systeme — von ChatGPT über Gemini bis Claude. Man nennt es autoregressive Generierung: Das Modell sagt das jeweils nächste Wort voraus, hängt es an, und beginnt von vorn. Jedes Wort muss auf das vorherige warten.</p>
+<p>Am 10. Juni hat Google DeepMind mit <strong>DiffusionGemma</strong> ein Modell veröffentlicht, das diesen Mechanismus über Bord wirft. Es schreibt nicht Wort für Wort, sondern arbeitet wie ein Bildhauer: Es beginnt mit einem Block aus „Rauschen“ — 256 Platzhalter-Token auf einmal — und verfeinert ihn in mehreren Durchgängen parallel, bis lesbarer Text dasteht. Das Verfahren heißt Diffusion, und es ist dieselbe Idee, die Bildgeneratoren wie Midjourney oder Stable Diffusion groß gemacht hat: aus Rauschen schrittweise ein scharfes Ergebnis herausarbeiten. Googles Versprechen: bis zu viermal schnellere Textgenerierung, über 1.000 Token pro Sekunde auf einer einzelnen H100-GPU.</p>
+<h2>Warum das Wort-für-Wort-Prinzip zum Engpass wurde</h2>
+<p>Um zu verstehen, warum Google, Nvidia und ByteDance gerade jetzt an diesem Paradigma arbeiten, hilft ein Blick auf die Ökonomie der Inferenz — also des laufenden Betriebs von KI-Modellen. Autoregressive Modelle sind beim Antworten nicht durch Rechenleistung begrenzt, sondern durch Speicherbandbreite: Für jedes einzelne neue Wort müssen die Modellgewichte erneut durch den Grafikspeicher geschleust werden. Die teuren Rechenwerke moderner GPUs sind dabei einen Großteil der Zeit schlicht unterbeschäftigt — sie warten auf den Speicher, wie ein Sternekoch, der pro Gericht jedes Mal einzeln in den Keller läuft, um eine einzige Zutat zu holen.</p>
+<p>Diffusionsmodelle drehen das Verhältnis um: Weil sie viele Token gleichzeitig verfeinern, lasten sie die Rechenwerke aus, statt auf den Speicher zu warten. DiffusionGemma finalisiert nach Messungen von MarkTechPost 15 bis 20 Token pro Rechendurchlauf — ein autoregressives Modell schafft genau eines. Nvidia bewirbt das Modell folgerichtig als idealen Workload für die eigene Hardware: über 1.000 Token pro Sekunde auf einer H100, über 700 auf einer RTX 5090 — also auch lokal auf dem Entwickler-PC. Zum Vergleich: Das normale Gemma 4 liegt laut The Decoder bei rund 300.</p>
+<p>Dazu kommt ein zweiter Treiber: KI-Agenten. Wer ein Sprachmodell als autonomen Helfer einsetzt, der recherchiert, Code schreibt und sich selbst korrigiert, ruft das Modell pro Aufgabe dutzende Male hintereinander auf. Latenz multipliziert sich. Ein Modell, das fünfmal schneller antwortet, macht aus einer zähen Demo ein benutzbares Produkt — dieses Argument trug bereits Inception Labs vor, das Startup des Stanford-Professors Stefano Ermon, das im Februar 2025 mit Mercury das erste kommerzielle Diffusions-Sprachmodell auf den Markt brachte.</p>
+<h2>Vom Außenseiter zur Industrie-Roadmap</h2>
+<p>DiffusionGemma ist nicht der erste Vertreter seiner Art, aber ein Wendepunkt in der Breite der Bewegung. Die Zeitleiste liest sich wie eine beschleunigte Adoption: Anfang 2025 zeigte das akademische Modell LLaDA, dass Text-Diffusion grundsätzlich mit Llama-Klasse-Modellen mithalten kann — mit einem Bruchteil der Trainingsdaten. Im Mai 2025 verblüffte Google auf der I/O mit der geschlossenen Demo „Gemini Diffusion“ und fast 1.500 Token pro Sekunde. ByteDance legte mit Seed Diffusion nach, Inception Labs brachte im Februar 2026 Mercury 2 heraus, und im Mai veröffentlichte Nvidia seine Nemotron-Diffusionsmodelle — die je nach Last sogar zwischen autoregressivem und Diffusions-Modus umschalten können.</p>
+<p>Mit DiffusionGemma gibt es nun erstmals ein Diffusions-Sprachmodell von Google DeepMind mit offenen Gewichten unter Apache-2.0-Lizenz: 26 Milliarden Parameter in einer Mixture-of-Experts-Architektur, von denen pro Schritt nur 3,8 Milliarden aktiv sind. Quantisiert läuft es in 18 GB Grafikspeicher — also auf besserer Consumer-Hardware. Die Inferenz-Engine vLLM unterstützt es ab Tag eins nativ, ebenso Hugging Face, Nvidia NIM und Apples MLX. Genau diese Tooling-Reife unterscheidet 2026 von den Forschungs-Demos des Vorjahres: Man kann das Paradigma jetzt einfach ausprobieren.</p>
+<p>Diffusion bringt dabei Fähigkeiten mit, die autoregressiven Modellen strukturell fehlen. Weil beim Entrauschen jedes Token alle anderen sieht — auch die, die im Text später kommen —, kann das Modell Lücken mitten im Text füllen und sich während des Schreibens selbst korrigieren. Für Code-Editing, wo Änderungen selten am Ende einer Datei stattfinden, schlug ByteDances Seed Diffusion gleich große autoregressive Modelle. Andrej Karpathy, der frühere KI-Chef von Tesla, kommentierte schon zum Mercury-Launch, fast alle LLMs seien letztlich „Klone“ desselben autoregressiven Ansatzes — Diffusion habe das Potenzial, „andere Stärken und Schwächen“ zu zeigen.</p>
+<h2>Die Haken: Qualität, Cache und ein ernüchternder Agenten-Test</h2>
+<p>Wäre Diffusion schlicht besser, wäre die Branche längst umgestiegen. Die Trade-offs sind real. Erstens die Qualität: Google selbst stuft DiffusionGemma als experimentell ein und empfiehlt für den Produktivbetrieb weiterhin das normale Gemma 4 — auf allen veröffentlichten Benchmarks liegt das Diffusionsmodell darunter. Es gilt eine einfache Faustregel: Je mehr Token pro Schritt parallel finalisiert werden, desto mehr leidet die Qualität.</p>
+<p>Zweitens die Technik: Der KV-Cache, der zentrale Effizienz-Trick autoregressiver Inferenz, funktioniert mit bidirektionaler Attention nicht ohne Weiteres — bei langen Kontexten wird Diffusion dadurch teuer. DiffusionGemma umgeht das mit einem Hybrid-Ansatz, der 256er-Blöcke nacheinander, aber innerhalb des Blocks parallel erzeugt. Und drittens der wichtigste Gegenbefund: Eine aktuelle Studie mit dem programmatischen Titel „The Bitter Lesson of Diffusion Language Models for Agentic Workflows“ testete offene Diffusionsmodelle als Steuerzentrale von KI-Agenten — mit desaströsem Ergebnis. Beim Haushalts-Benchmark AlfWorld erreichte LLaDA eine Erfolgsquote von 5 Prozent, wo ein gleich großes autoregressives Qwen-Modell 76 Prozent schaffte; beim Aufrufen von Werkzeugen produzierten die Modelle reihenweise fehlerhafte Ausgaben. Die getesteten Modelle waren älter und kleiner als DiffusionGemma — aber die Botschaft steht: Ausgerechnet für die Agenten, deren Tempo-Hunger das Diffusions-Argument befeuert, sind heutige Diffusionsmodelle als Gehirn noch ungeeignet.</p>
+<p>Es gibt zudem einen ökonomischen Vorbehalt, der in der Hacker-News-Diskussion zum Launch prominent auftauchte: Der Geschwindigkeitsvorteil gilt vor allem für Einzelnutzer-Szenarien — lokal auf der Workstation, am Edge, in latenzkritischen Einzelanfragen. Große Cloud-Anbieter erreichen ihre GPU-Auslastung längst durch das Bündeln vieler paralleler Nutzeranfragen; dort schrumpft der Diffusions-Vorteil deutlich.</p>
+<h2>Was Entscheider daraus mitnehmen sollten</h2>
+<p>Für Unternehmen ist DiffusionGemma kein Anlass, die Modellstrategie umzuwerfen — aber ein klares Signal, wohin sich das Preis-Geschwindigkeits-Gefüge bewegt. Inception Labs verkauft Mercury 2 bereits für 0,25 Dollar pro Million Input- und 0,75 Dollar pro Million Output-Token bei vierstelligen Token-Raten — ein Bruchteil dessen, was Frontier-Modelle kosten, die oft unter 100 Token pro Sekunde liefern. Wo Geschwindigkeit und Kosten wichtiger sind als die letzten Qualitätsprozente — Autovervollständigung, Code-Edits, Echtzeit-Übersetzung, Voice-Bots, das massenhafte Umformatieren von Dokumenten —, werden Diffusionsmodelle 2026 zur ernsthaften Option. Die realistische Architektur ist hybrid: ein teures autoregressives Frontier-Modell für Planung und schwieriges Reasoning, schnelle Spezialmodelle für die Fließbandarbeit darunter.</p>
+<p>Bemerkenswert ist auch, was der Release über den Wettbewerb verrät. Google verschenkt hier unter offener Lizenz einen Forschungsstand, den vor einem Jahr nur eine Handvoll Labore besaß — und Nvidia liefert die Optimierungen am selben Tag. Das Kalkül ist auf beiden Seiten durchsichtig: Google bindet Entwickler an sein Gemma-Ökosystem, Nvidia bewirbt einen Workload, der seine teuersten Rechenwerke endlich auslastet. Für alle anderen heißt das: Das Paradigma bekommt jetzt die Investitionen, die Tooling-Lücken und Qualitätsrückstände erfahrungsgemäß schnell schließen. Karpathy hat die Koexistenz beider Welten schon skizziert — vielleicht, schrieb er, liege die Zukunft in der Interpolation zwischen beiden. Die Schreibmaschine hat Konkurrenz bekommen. Noch tippt sie besser. Aber sie ist zum ersten Mal nicht mehr allein im Raum.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/" rel="noopener noreferrer external" target="_blank">Google Blog — DiffusionGemma: 4x faster text generation</a></li>
+            
+            <li><a href="https://developer.nvidia.com/blog/run-diffusiongemma-on-nvidia-for-developer-ready-high-throughput-text-generation/" rel="noopener noreferrer external" target="_blank">NVIDIA Technical Blog — Run DiffusionGemma on NVIDIA</a></li>
+            
+            <li><a href="https://the-decoder.com/googles-new-open-model-diffusiongemma-generates-text-from-noise-instead-of-word-by-word/" rel="noopener noreferrer external" target="_blank">The Decoder — Google&#39;s new open model DiffusionGemma generates text from noise</a></li>
+            
+            <li><a href="https://vllm-project.github.io/2026/06/10/diffusion-gemma" rel="noopener noreferrer external" target="_blank">vLLM Blog — DiffusionGemma: The First dLLM Natively Supported in vLLM</a></li>
+            
+            <li><a href="https://www.inceptionlabs.ai/blog/introducing-mercury" rel="noopener noreferrer external" target="_blank">Inception Labs — Introducing Mercury</a></li>
+            
+            <li><a href="https://www.businesswire.com/news/home/20260224034496/en/Inception-Launches-Mercury-2-the-Fastest-Reasoning-LLM-5x-Faster-Than-Leading-Speed-Optimized-LLMs-with-Dramatically-Lower-Inference-Cost" rel="noopener noreferrer external" target="_blank">Businesswire — Inception Launches Mercury 2, the Fastest Reasoning LLM</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2502.09992" rel="noopener noreferrer external" target="_blank">arXiv — Large Language Diffusion Models (LLaDA)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2508.02193" rel="noopener noreferrer external" target="_blank">arXiv — Seed Diffusion (ByteDance)</a></li>
+            
+            <li><a href="https://huggingface.co/blog/nvidia/nemotron-labs-diffusion" rel="noopener noreferrer external" target="_blank">Hugging Face / NVIDIA — Nemotron-Labs-Diffusion: Towards Speed-of-Light Text Generation</a></li>
+            
+            <li><a href="https://arxiv.org/html/2601.12979v3" rel="noopener noreferrer external" target="_blank">arXiv — The Bitter Lesson of Diffusion Language Models for Agentic Workflows</a></li>
+            
+            <li><a href="https://fortune.com/2025/05/21/gemini-diffusion-google-io-sleeper-hit-blazing-speed-ai-model-wars/" rel="noopener noreferrer external" target="_blank">Fortune — Gemini Diffusion hints at the next phase of the AI model wars</a></li>
+            
+            <li><a href="https://x.com/karpathy/status/1894923254864978091" rel="noopener noreferrer external" target="_blank">Andrej Karpathy auf X — zu Diffusion vs. Autoregression</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
