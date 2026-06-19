@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Ende des Nvidia-Monopols? Wie Custom-KI-Chips die Ökonomie der KI-Infrastruktur verschieben</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-06-19.html">&larr; Zur&uuml;ck zur Ausgabe vom 19. Juni 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Das Ende des Nvidia-Monopols? Wie Custom-KI-Chips die Ökonomie der KI-Infrastruktur verschieben</h1>
+    
+    <p class="reportage-teaser">Amazon erwägt, seine Trainium-Chips erstmals direkt an externe Unternehmen zu verkaufen. Das ist mehr als eine Produktentscheidung — es ist das sichtbarste Zeichen dafür, dass die Ära der Nvidia-Allmacht in der KI-Infrastruktur ihrem Ende entgegensieht. Eine Analyse, was hinter dem Aufstieg kundenspezifischer KI-Chips steckt und was das für Unternehmen bedeutet, die Compute einkaufen.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-06-19">19. Juni 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Aufhänger: Amazon will Chips verkaufen</h2>
+<p>Am 18. Juni 2026 berichtete Bloomberg, dass Amazon in aktiven Verhandlungen sei, seine Trainium-KI-Chips erstmals direkt an Unternehmen für deren eigene Rechenzentren zu verkaufen — nicht mehr nur als gemietete Cloud-Kapazität bei AWS. Peter DeSantis, Amazons KI-Chef, bestätigte gegenüber Bloomberg, dass Trainium3-Chips „weitgehend ausverkauft“ seien und die nächste Generation Trainium4 bereits „erheblich reserviert“ ist. Schon im April hatte CEO Andy Jassy in seinem Aktionärsbrief angedeutet: „Es ist sehr gut möglich, dass wir Racks dieser Chips in Zukunft an Dritte verkaufen werden.“</p>
+<p>Das klingt nach einer Produktankündigung. Es ist in Wirklichkeit ein Strukturbruch.</p>
+<p>Denn wenn Amazon — ein Unternehmen, das seine Chips bisher exklusiv über den eigenen Cloud-Marktplatz vermietet hat — diese Chips nun nach außen verkauft, verschiebt sich das Machtgefüge in der KI-Infrastruktur grundlegend. Um zu verstehen, warum das bedeutsam ist, muss man verstehen, wie fest Nvidia diesen Markt bisher im Griff hält.</p>
+<h2>Die Grundlage des Nvidia-Imperiums: CUDA und die „Nvidia-Steuer“</h2>
+<p>Eine GPU (Graphics Processing Unit) war ursprünglich für die Darstellung von 3D-Grafiken gedacht. Für KI-Workloads erwies sie sich als zufällig ideal: Statt weniger leistungsstarker Rechenkerne wie bei einer CPU hat eine GPU Tausende kleiner Kerne, die massiv parallel arbeiten — perfekt für die Matrizenmultiplikationen, auf denen neuronale Netze basieren.</p>
+<p>Nvidia beherrscht diesen Markt mit einem Marktanteil von rund 86 bis 90 Prozent bei Rechenzentrum-GPUs. Aber der eigentliche Burggraben ist nicht der Chip selbst — es ist das Software-Ökosystem namens CUDA (Compute Unified Device Architecture). Seit 2007 entwickelt, haben sich Millionen Entwickler und Zehntausende Organisationen in CUDA eingearbeitet. Jedes Deep-Learning-Framework, jede Bibliothek, jedes optimierte Trainingsskript setzt CUDA voraus. Eine Migration weg von Nvidia bedeutet Monate der Code-Umschreibung, Ingenieurzeit und Revalidierung.</p>
+<p>Dieser Lock-in erlaubt Nvidia außergewöhnliche Bruttomargen von rund 75 Prozent. Tech-Kolumnist Robert Cringely prägte dafür den Begriff „Nvidia Tax“: die systemische Prämie, die das gesamte KI-Ökosystem zahlt, weil es keine echte Alternative gibt — oder noch nicht hatte. Genau an dieser Stelle setzen die Hyperscaler an.</p>
+<h2>Was ein ASIC ist — und warum Hyperscaler ihre eigenen bauen</h2>
+<p>Ein ASIC (Application-Specific Integrated Circuit) ist das Gegenteil einer GPU. Wo eine GPU ein Allrounder ist — programmierbar für viele Aufgaben —, ist ein ASIC ein Spezialist: einmal für genau eine Aufgabe entworfen, danach nicht mehr änderbar. Die Analogie: Eine GPU ist ein Schweizer Taschenmesser, ein ASIC ist ein Skalpell.</p>
+<p>Der Vorteil: Wer genau weiß, was sein Chip tun soll, kann ihn so optimieren, dass er diese Aufgabe wesentlich effizienter erledigt als ein Generalist. Der Nachteil: Das Designen eines eigenen Chips kostet bei modernen Fertigungsprozessen (3 oder 5 Nanometer Strukturbreite) Hunderte Millionen Dollar — allein an Entwicklungskosten. Das amortisiert sich erst ab Stückzahlen von Hunderttausenden Chips pro Jahr.</p>
+<p>Für Hyperscaler — Amazon, Google, Meta, Microsoft — ist das kein Problem. Sie kaufen Chips in einer Größenordnung, die diese Schwelle um ein Vielfaches überschreitet. Und so haben alle vier in den vergangenen Jahren ihr eigenes KI-Silizium entwickelt:</p>
+<p><strong>Google TPU (Tensor Processing Unit):</strong> Die längste Erfolgsgeschichte unter den Hyperscaler-Chips. Die aktuelle Generation Ironwood (TPU v7) ist seit März 2026 allgemein verfügbar; Anthropic plant, bis zu eine Million TPUs für die Claude-Inferenz einzusetzen. Die achte Generation — aufgeteilt in einen Trainings- und einen Inferenz-Chip — wird für 2027/2028 erwartet.</p>
+<p><strong>Amazon Trainium/Inferentia:</strong> Entwickelt von Annapurna Labs (2015 von Amazon übernommen). Aktuelle Großkunden auf AWS sind OpenAI, Anthropic und Uber. Trainium-Instanzen sind laut Amazon spürbar günstiger als vergleichbare Nvidia-Setups beim Training.</p>
+<p><strong>Meta MTIA:</strong> Im März 2026 veröffentlichte Meta einen Blogpost mit dem Titel „Vier MTIA-Chips in zwei Jahren“. Die aktuelle Generation senkt Metas interne Inferenzkosten deutlich gegenüber dem vorherigen GPU-Setup; Meta committed sich in Partnerschaft mit Broadcom zu einem initialen Deployment von über einem Gigawatt MTIA-Chips.</p>
+<p><strong>Microsoft Maia:</strong> Auf dem 3-Nanometer-Prozess gefertigt und mit deutlich niedrigeren Token-Kosten beworben. Maia läuft derzeit vor allem intern; eine breitere externe Azure-Verfügbarkeit ist angekündigt, aber noch nicht terminiert.</p>
+<h2>Broadcom und Marvell: Die stillen Gewinner</h2>
+<p>Nicht jedes Unternehmen, das einen eigenen KI-Chip will, kann sich eine vollständige Chip-Design-Abteilung aufbauen. Hier kommen Broadcom und Marvell ins Spiel — als sogenannte Merchant-ASIC-Partner, die das Design kundenspezifischer Chips als Dienstleistung anbieten.</p>
+<p>Broadcom war maßgeblich an den Kernen der Google TPUs beteiligt und ist tief in die MTIA-Roadmap von Meta eingebunden. Das Ergebnis ist eine explosive Umsatzentwicklung: Im zweiten Quartal des Geschäftsjahres 2026 meldete Broadcom einen KI-Umsatz von 10,8 Milliarden Dollar — ein Plus von 143 Prozent gegenüber dem Vorjahr. CEO Hock Tan kommunizierte ein Ziel von über 100 Milliarden Dollar KI-Umsatz für das Geschäftsjahr 2027. Marvell, ebenfalls im Custom-Silicon-Geschäft aktiv und unter anderem an Amazons Trainium beteiligt, verzeichnete am Tag der Amazon-Meldung einen deutlichen Kurssprung. Die Botschaft des Marktes ist eindeutig: Wer am Custom-Silicon-Boom verdient, ist nicht nur der Hyperscaler, sondern auch sein Design-Partner.</p>
+<h2>Die Engpässe: TSMC, HBM und das Packaging-Problem</h2>
+<p>Der Aufstieg der Custom-ASICs trifft auf eine Welt, in der die Fertigungskapazitäten fundamental knapp sind. Das schafft neue Engpässe — und andere Machtverhältnisse.</p>
+<p><strong>Advanced Packaging:</strong> Moderne KI-Chips sind keine einzelnen Siliziumstücke mehr. Sie werden über komplexe Verfahren mit Hochgeschwindigkeitsspeicher und anderen Komponenten zu einem Gesamtsystem verbunden. TSMC nennt sein Verfahren CoWoS (Chip on Wafer on Substrate). Das Problem: Die Kapazität ist chronisch überlastet, Lieferzeiten lagen zeitweise bei über 50 Wochen. TSMC skaliert aggressiv, aber Nvidia allein bindet einen Großteil der Zuteilung bis 2027.</p>
+<p><strong>HBM-Speicher:</strong> HBM (High Bandwidth Memory) ist der besondere Hochgeschwindigkeitsspeicher, der direkt neben dem Rechenchip verbaut wird — der entscheidende Flaschenhals für KI-Workloads. SK Hynix hält rund 62 Prozent Marktanteil und hat seine 2026-Produktion bereits verkauft, Micron ist ebenfalls ausgebucht. Samsung, der kleinste der drei Hersteller, holt mit der nächsten HBM-Generation auf. Eine substantielle Entspannung wird vor 2028 nicht erwartet.</p>
+<p><strong>Samsung als TSMC-Alternative:</strong> Angesichts der chronischen TSMC-Kapazitätsnot werden Alternativrouten attraktiv. Laut einem TrendForce-Bericht vom 17. Juni 2026 ist Samsung Foundry in Gesprächen mit AMD, BYD, Google und Tesla über Fertigungsaufträge. Genau diese Diversifizierung ist die zweite Hälfte der Geschichte, die mit Amazons Chip-Verkaufsplänen begann: Die gesamte Lieferkette sucht nach Wegen aus der Abhängigkeit von einem einzigen Auftragsfertiger.</p>
+<h2>Die Ökonomik: Wann rechnet sich der Eigenweg?</h2>
+<p>Der entscheidende Hebel ist nicht das Training — es ist die Inferenz. Training bedeutet, ein Modell aufzubauen: teuer, aber im Prinzip einmalig. Inferenz bedeutet, das Modell zu benutzen: jede Nutzeranfrage, jeden Tag, milliardenfach. Die vier großen Hyperscaler gaben 2025 zusammen mehrere Hundert Milliarden Dollar für Cloud-Infrastruktur aus, und der Löwenanteil der laufenden Rechenlast entfällt auf Inferenz, nicht auf Training.</p>
+<p>Inferenz-Workloads sind stabil und vorhersagbar: immer gleiche Modellarchitektur, immer ähnliche Anfragemuster. Genau das ist die Voraussetzung, unter der ein ASIC glänzt. Die Kostenzahlen sprechen eine klare Sprache: Google bewirbt für seine TPUs eine mehrfach bessere Performance pro Dollar bei deutlich niedrigerem Energieverbrauch gegenüber vergleichbaren Nvidia-Setups, Meta senkt seine internen Serving-Kosten um zweistellige Prozentsätze, und AWS bewirbt Inferentia- und Trainium-Inferenz als drastisch günstiger als High-End-GPU-Inferenz.</p>
+<p>Für Unternehmen, die KI-Compute einkaufen und keine eigene Chipentwicklung stemmen können, stellt sich die Frage anders: Nicht „soll ich einen Chip designen?“, sondern „auf wessen Plattform laufe ich?“. Die schleichende Gefahr ist ein Cloud-Lock-in zweiter Ordnung: Wer heute seinen Inferenz-Stack tief auf Trainium oder TPU optimiert, hat ähnliche Wechselkosten wie der, der CUDA-Code schreibt — nur diesmal gegenüber Amazon oder Google statt gegenüber Nvidia.</p>
+<h2>Was die Verschiebung bedeutet</h2>
+<p>Marktbeobachter wie TrendForce projizieren für 2026 ein deutlich höheres Wachstum bei ASICs als bei klassischen GPUs und erwarten, dass ASIC-Lieferungen im Lauf der zweiten Hälfte des Jahrzehnts erstmals GPU-Lieferungen übersteigen könnten. Nvidias Marktanteil bei reinen Inferenz-Workloads dürfte dabei sinken — von der heutigen Dominanz hin zu einem geteilten Markt.</p>
+<p>Das Ende des Nvidia-Monopols steht nicht unmittelbar bevor. CUDA bleibt ein Ökosystem, das sich nicht über Nacht ersetzt. Die High-End-GPUs bleiben für viele Trainings-Workloads und für Unternehmen ohne Hyperscaler-Volumen praktisch die einzige Option. Aber die strukturellen Kräfte zeigen klar in eine Richtung: Die Ökonomie des KI-Compute diversifiziert sich, die Kostenvorteile kundenspezifischer Chips werden nicht mehr ignorierbar, und mit Amazon, das seinen eigenen Chip jetzt auch an externe Abnehmer verkaufen will, tritt ein neuer Wettbewerber in den Markt ein — einer, der gleichzeitig Cloud-Anbieter, Chip-Designer und potenziell Chip-Verkäufer ist.</p>
+<p>Für CEOs und Tech Leads bedeutet das: Die Chip-Strategie ist keine reine Infrastrukturfrage mehr, sondern Teil der Wettbewerbsstrategie. Wer heute seinen Inferenz-Stack auf eine Plattform setzt, bindet sich an deren Preissetzungsmacht für die nächsten drei bis fünf Jahre. Das Aufbrechen der Nvidia-Dominanz schafft mehr Optionen — aber auch neue Abhängigkeiten, die man im Blick behalten sollte.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.benzinga.com/markets/tech/26/06/53285203/amazon-expands-trainium-ai-chip-strategy-beyond-aws" rel="noopener noreferrer external" target="_blank">Bloomberg/Benzinga — Amazon erwägt Trainium-Verkauf an Dritte (18. Juni 2026)</a></li>
+            
+            <li><a href="https://www.theregister.com/2026/04/29/amazon_chips_20b_business/" rel="noopener noreferrer external" target="_blank">The Register — Andy Jassys Aktionärsbrief: Amazon-Chips als 20-Mrd.-Dollar-Geschäft</a></li>
+            
+            <li><a href="https://www.cringely.com/2026/05/29/the-nvidia-tax/" rel="noopener noreferrer external" target="_blank">Cringely — The Nvidia Tax</a></li>
+            
+            <li><a href="https://blog.google/products/google-cloud/ironwood-tpu-age-of-inference/" rel="noopener noreferrer external" target="_blank">Google Blog — Ironwood: The first Google TPU for the age of inference</a></li>
+            
+            <li><a href="https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/" rel="noopener noreferrer external" target="_blank">Meta AI Blog — Four MTIA Chips in Two Years</a></li>
+            
+            <li><a href="https://www.cnbc.com/2026/06/03/broadcom-avgo-earnings-report-q2-2026.html" rel="noopener noreferrer external" target="_blank">CNBC — Broadcom Q2 FY2026 Earnings (KI-Umsatz +143 %)</a></li>
+            
+            <li><a href="https://www.trendforce.com/news/2025/12/08/news-tsmcs-cowos-l-s-reportedly-fully-booked-osat-partners-step-up-with-ases-cowop-in-focus/" rel="noopener noreferrer external" target="_blank">TrendForce — TSMC CoWoS-L/S vollständig ausgebucht</a></li>
+            
+            <li><a href="https://www.trendforce.com/news/2026/06/17/news-samsung-foundry-reportedly-in-talks-with-amd-for-2028-cpu-production-as-byd-google-consider-its-services/" rel="noopener noreferrer external" target="_blank">TrendForce — Samsung Foundry in Gesprächen mit AMD, BYD, Google, Tesla</a></li>
+            
+            <li><a href="https://www.techtimes.com/articles/317225/20260526/custom-ai-chips-outpace-nvidia-gpu-growth-2026-asic-shipments-set-triple-gpu-rate.htm" rel="noopener noreferrer external" target="_blank">TechTimes — Custom AI Chips übertreffen GPU-Wachstum 2026</a></li>
+            
+            <li><a href="https://www.astutegroup.com/news/general/sk-hynix-holds-62-of-hbm-micron-overtakes-samsung-2026-battle-pivots-to-hbm4/" rel="noopener noreferrer external" target="_blank">Astute Group — HBM-Marktanteile 2026: SK Hynix hält 62 %</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
