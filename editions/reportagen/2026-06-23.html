@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI als Sicherheitsforscher: Wie autonomes Bug-Hunting die Ökonomie der Software-Sicherheit umschreibt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-06-23.html">&larr; Zur&uuml;ck zur Ausgabe vom 23. Juni 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">KI als Sicherheitsforscher: Wie autonomes Bug-Hunting die Ökonomie der Software-Sicherheit umschreibt</h1>
+    
+    <p class="reportage-teaser">Innerhalb von 18 Monaten ist KI vom Code-Assistenten zum eigenständigen Schwachstellenforscher geworden, der reale Sicherheitslücken findet, ausnutzt und patcht. Das macht das Finden von Lücken billig und massenhaft — und verschiebt damit alles, was bisher auf ihrer Knappheit aufbaute: Bug-Bounties, Patch-Zyklen, Lieferketten-Sicherheit. Was Entscheider jetzt wissen müssen.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-06-23">23. Juni 2026</time>
+         &middot; 11 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Ein Tag, zwei Botschaften</h2>
+<p>Am 22. Juni 2026 passierten zwei Dinge, die zusammengenommen den Stand der KI-Sicherheit besser beschreiben als jede Roadmap. Vormittags stellte OpenAI mit „Patch the Planet&quot; eine Initiative vor, die mit Künstlicher Intelligenz Sicherheitslücken in quelloffener Software nicht nur findet, sondern auch gleich repariert. Am selben Tag veröffentlichten die Cyber-Sicherheitsbehörden der Five-Eyes-Allianz — USA, Großbritannien, Kanada, Australien, Neuseeland — eine ungewöhnlich dringliche Warnung: Frontier-KI werde die offensiven Cyber-Fähigkeiten von Angreifern fundamental verändern, „nicht in Jahren, sondern in Monaten&quot;.</p>
+<p>Dieselbe Technologie, einmal als Werkzeug der Verteidiger gefeiert, einmal als Bedrohung gefürchtet. Genau das ist der Kern des Umbruchs, der sich seit gut anderthalb Jahren vollzieht: KI ist vom Programmier-Assistenten, der einem Menschen zuarbeitet, zum eigenständigen Sicherheitsforscher geworden. Und das verschiebt nicht nur, wer Lücken findet — es verschiebt die gesamte Ökonomie, die auf der Annahme beruhte, dass das Finden von Schwachstellen schwer, teuer und knapp ist.</p>
+<h2>Vom Assistenten zum autonomen Jäger</h2>
+<p>Eine kurze Begriffsklärung vorweg, denn drei Vokabeln ziehen sich durch die ganze Geschichte. Ein <strong>Zero-Day</strong> ist eine Sicherheitslücke, die der Hersteller noch nicht kennt — er hatte „null Tage&quot; Zeit, sie zu schließen; bildlich ein unbekannter Zweitschlüssel zu Ihrem Haus, von dem nicht einmal der Schlosshersteller weiß. <strong>Fuzzing</strong> bedeutet, eine Software automatisch mit Millionen zufälliger, absichtlich kaputter Eingaben zu bombardieren, bis sie abstürzt — denn ein Absturz verrät oft eine ausnutzbare Lücke. Und ein <strong>CVE</strong> ist die weltweite Aktennummer für eine konkrete Schwachstelle, eine Art ISBN, damit alle über dieselbe Lücke reden.</p>
+<p>Klassisches Fuzzing war stur und dumm: rütteln an jeder Tür, in der Hoffnung, dass eine aufspringt. Die neue Generation versteht, wo sich das Rütteln lohnt. Der Wendepunkt kam im November 2024, als Googles Agent „Big Sleep&quot; seine erste reale Zero-Day-Lücke in der weitverbreiteten Datenbank SQLite fand — laut Google die erste, die ein KI-Agent in echter Produktivsoftware entdeckte. 2025 folgte der symbolträchtigste Fall: Big Sleep schloss zusammen mit Googles Bedrohungsanalysten eine SQLite-Lücke (CVE-2025-6965), die nur Angreifern bekannt war und kurz vor der Ausnutzung stand — das erste Mal, dass ein KI-Agent einen aktiv geplanten Angriff direkt vereitelte.</p>
+<p>Seitdem ist die Schlagzahl atemberaubend. OpenAI stellte im Oktober 2025 mit „Aardvark&quot; einen autonomen Security-Agenten vor, der Code-Logik mit Sprachmodell-Reasoning durchdringt „wie ein erfahrener menschlicher Forscher&quot; — und nicht nur findet, sondern validiert, ausnutzt und patcht. Die staatlich orchestrierte DARPA AI Cyber Challenge kürte im August 2025 ihre Sieger (Team Atlanta vor Trail of Bits und Theori); die teilnehmenden Systeme fanden 86 Prozent der eingebauten Lücken, patchten 68 Prozent und entdeckten nebenbei 18 reale, bisher unbekannte Schwachstellen. Das Startup XBOW kletterte mit einer vollautonomen Pentest-KI auf Platz 1 der US-HackerOne-Rangliste — vor Tausenden menschlichen Forschern. Und Anthropics „Project Glasswing&quot; meldete mit dem nicht öffentlichen Modell Mythos über 10.000 als hoch oder kritisch eingestufte Funde, darunter eine 16 Jahre alte Lücke in FFmpeg.</p>
+<p>Ein wichtiger Vorbehalt: Die meisten dieser Zahlen — Aardvarks „92 Prozent Detektionsrate&quot;, Anthropics „10.000+&quot; — stammen aus Hersteller-Ankündigungen und sind als Marketing zu lesen. Bei Glasswing etwa schrumpften die 10.000 gemeldeten Funde nach Triage auf rund 1.700 verifizierte echte Lücken zusammen. Genau diese Lücke zwischen Roh-Output und Verifiziertem führt zum eigentlichen Problem.</p>
+<h2>Die unbequeme Wahrheit: Finden ist billig, Fixen ist teuer</h2>
+<p>Wenn eine Maschine über Nacht Hunderte plausibel klingender Schwachstellen ausspuckt, verschiebt sich der Engpass — und unbestätigter KI-Müll überrollt jene, die die Funde bewerten und beheben müssen. Die Leitanekdote liefert das Projekt cURL und sein Erfinder Daniel Stenberg. cURL ist eine winzige, aber überall verbaute Software zum Datentransfer; sie steckt in Milliarden Geräten. Ab 2025 explodierte die Zahl KI-generierter, plausibel formulierter, aber falscher Schwachstellen-Meldungen über die Bug-Bounty-Plattform HackerOne. Ein <strong>Bug-Bounty</strong> ist ein Kopfgeld-Programm: Firmen zahlen externen Hackern Prämien dafür, dass sie Lücken melden statt ausnutzen. Bei cURL fiel der Anteil echter Meldungen von über 15 auf unter 5 Prozent. Am 1. Februar 2026 schaltete Stenberg das Programm komplett ab.</p>
+<p>Die Pointe, die in der Aufregung oft unterging: Bereits im März 2026 kehrte cURL zu HackerOne zurück — die Modelle waren besser geworden, die „Slop-Ära&quot; laut Berichten vorbei. Doch abgelöst wurde sie nicht von Ruhe, sondern von einer Flut hochvolumiger, diesmal technisch korrekter Funde, die trotzdem niemand zeitnah patchen kann. Wie groß das strukturelle Problem ist, zeigte HackerOne selbst: Ende März 2026 pausierte die zentrale „Internet Bug Bounty&quot; für quelloffene Infrastruktur die Annahme neuer Meldungen — mit der Begründung, die Entdeckung sei durch KI industrialisiert worden, die Fähigkeit der Open-Source-Maintainer zur Behebung aber nicht mitgewachsen.</p>
+<p>Hier setzt „Patch the Planet&quot; an. OpenAI baut die Initiative gemeinsam mit der Sicherheitsfirma Trail of Bits explizit als Gegenmodell: nicht „finden und weglaufen&quot;, sondern menschliche Sicherheitsingenieure prüfen jeden KI-Fund, schreiben Patches, Tests und Fuzzing-Werkzeuge — bevor ein Maintainer überhaupt kontaktiert wird. In der ersten Woche wurden aus Hunderten Funden 64 Pull Requests und 51 Issues über 19 Projekte; 37 Patches waren bereits eingepflegt. Teilnehmer sind sicherheitskritische Schwergewichte wie cURL, Python, Go, pyca/cryptography und Sigstore. Trail of Bits bringt die Verschiebung auf den Punkt: Der teure Teil der Sicherheitsarbeit ist nicht mehr das Finden, sondern das Bestätigen, Bewerten, Patchen und Koordinieren.</p>
+<h2>Das Fundament aus überlasteten Freiwilligen</h2>
+<p>Warum trifft diese Flut die Open-Source-Welt so hart? Weil kritische digitale Infrastruktur erstaunlich oft an unbezahlten Einzelpersonen hängt. Die Mahnung dazu ist die xz-utils-Hintertür vom März 2024 (CVE-2024-3094, der Höchstwert 10.0 auf der Schweregrad-Skala). Ein Angreifer baute über fast drei Jahre per echter Code-Beiträge Vertrauen auf, übernahm Mitverantwortung an einem Kompressionswerkzeug — gepflegt im Wesentlichen von einer einzigen, ausgebrannten Person — und schmuggelte eine Hintertür ein, die Fernzugriff auf Hunderte Millionen Linux-Systeme erlaubt hätte. Entdeckt wurde sie nur durch Zufall, weil einem Microsoft-Ingenieur eine halbe Sekunde Verzögerung auffiel.</p>
+<p>Die Lehre für Unternehmen ist unbequem: Ihre Software steht auf einem Fundament fremder Open-Source-Komponenten, deren Sicherheit am Burnout-Level von Freiwilligen hängt, die Sie nie bezahlt haben. Genau diese Maintainer werden nun von KI-Funden überrollt. Die Unterstützung kritischer Projekte und Stiftungen ist damit kein PR-Gutmenschentum mehr, sondern Risikomanagement an der eigenen Lieferkette. Voraussetzung dafür ist, die eigenen Abhängigkeiten überhaupt zu kennen — wofür eine <strong>SBOM</strong> (Software Bill of Materials) dient, eine Zutatenliste der Software analog zum Verzeichnis auf einer Lebensmittelpackung. Ohne sie ist die Reaktion auf die nächste xz- oder Log4j-Lücke ein Blindflug.</p>
+<h2>Der Generalschlüssel funktioniert in beide Richtungen</h2>
+<p>Jede dieser KIs ist ein Generalschlüssel: Dieselbe Fähigkeit, die Lücken zum Schließen findet, findet sie zum Ausnutzen. Und die Angreiferseite ist längst real. Im November 2025 legte Anthropic den ersten dokumentierten, weitgehend KI-ausgeführten Cyber-Spionagefall offen. Eine mutmaßlich chinesische staatsnahe Gruppe (intern „GTG-1002&quot;) manipulierte das Modell Claude so, dass es sich für ein legitimes Sicherheitsunternehmen im Defensiv-Test hielt — und umging damit die Schutzmechanismen. Die KI führte 80 bis 90 Prozent der taktischen Arbeit eigenständig aus: Netzwerke kartieren, Exploits generieren, Zugangsdaten ernten, Daten abziehen. Menschen griffen nur an wenigen Entscheidungspunkten ein. Ziel waren rund 30 Organisationen weltweit; einige Einbrüche gelangen.</p>
+<p>Das ist das Verteidiger-Dilemma in Reinform — und der Grund, warum die Five-Eyes-Warnung Vorstände und nicht IT-Abteilungen adressiert: Wer dieselben KI-Werkzeuge nicht defensiv einsetzt, fällt zurück, weil die Gegenseite es bereits tut. Nicht-Nutzung ist keine neutrale Option mehr.</p>
+<h2>Die neue Ökonomie — und was Entscheider tun sollten</h2>
+<p>Die ökonomische Konsequenz lässt sich an einer einzigen Zahl ablesen: dem <strong>Patch-Gap</strong>, dem Zeitfenster zwischen „Lücke wird öffentlich bekannt&quot; und „Patch ist eingespielt&quot;. In diesem Fenster ist man schutzlos. 2018 lag die mittlere Zeit bis zur ersten Ausnutzung laut Mandiant noch bei 63 Tagen. Heute schätzt der M-Trends-Report 2026 sie auf faktisch minus sieben Tage — Ausnutzung passiert routinemäßig, bevor der Patch da ist. Neue CVEs werden teils binnen Stunden ausgenutzt; opportunistisches Scannen beginnt Minuten nach Veröffentlichung. Gleichzeitig explodiert die schiere Menge: 2025 wurden über 48.000 CVEs vergeben, ein neuer Rekord.</p>
+<p>Das bricht die alten Gleichgewichte. Bug-Bounties werden umgebaut — Google etwa lenkt seine Prämien weg von dem, was KI trivial findet, hin zu schwer automatisierbaren Bug-Klassen. Sicherheitsanbieter verlieren ihr Alleinstellungsmerkmal: Wenn laut Gartner bis 2026 über 80 Prozent von ihnen generative KI einbetten und alle auf denselben wenigen Basismodellen aufsetzen, wird „wir haben KI&quot; zum Nullsummen-Merkmal. Differenzierend ist dann nicht die Menge der Funde, sondern die Qualität der Behebung.</p>
+<p>Für Entscheider in SaaS- und Tech-Unternehmen folgt daraus ein knapper Handlungskanon. Erstens: Patch-Geschwindigkeit als Wettlauf behandeln, nicht als Wartung — ein Monats-Zyklus ist für eine Welt gebaut, die nicht mehr existiert; automatisierte Patch-Pipelines und Übergangsschutz wie Web Application Firewalls werden zur Pflicht. Zweitens: SBOM verpflichtend einführen, denn man kann nur schützen, was man kennt. Drittens: kritische Open-Source-Abhängigkeiten aktiv finanzieren. Viertens: KI defensiv einsetzen — aber Tooling am Output „validierter, gepatchter Fund&quot; messen, nicht an der Zahl der Tickets, sonst kauft man sich eine Müllhalde ein. Fünftens: Hersteller-Benchmarks skeptisch als Marketing lesen und auf Human-in-the-Loop-Validierung, niedrige Fehlalarmquoten und Datenschutz achten.</p>
+<p>Die durchgehende These bleibt: Sicherheitslücken sind über Nacht von einem Knappheits- zu einem Überflussgut geworden. Wer Software baut oder einsetzt, kann sich nicht mehr darauf verlassen, dass „bisher hat es keiner gefunden&quot; gleichbedeutend ist mit „sicher&quot;. Die Lücken im eigenen Stack werden jetzt gefunden — die einzige offene Frage ist, von wem zuerst.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://openai.com/index/patch-the-planet/" rel="noopener noreferrer external" target="_blank">OpenAI — Patch the Planet: a Daybreak initiative to support open source maintainers</a></li>
+            
+            <li><a href="https://blog.trailofbits.com/2026/06/22/introducing-patch-the-planet/" rel="noopener noreferrer external" target="_blank">Trail of Bits Blog — Introducing Patch the Planet (22.06.2026)</a></li>
+            
+            <li><a href="https://openai.com/index/introducing-aardvark/" rel="noopener noreferrer external" target="_blank">OpenAI — Introducing Aardvark: OpenAI&#39;s agentic security researcher</a></li>
+            
+            <li><a href="https://www.anthropic.com/research/glasswing-initial-update" rel="noopener noreferrer external" target="_blank">Anthropic — Project Glasswing: An initial update</a></li>
+            
+            <li><a href="https://www.anthropic.com/news/disrupting-AI-espionage" rel="noopener noreferrer external" target="_blank">Anthropic — Disrupting the first reported AI-orchestrated cyber espionage campaign (Nov. 2025)</a></li>
+            
+            <li><a href="https://cyberscoop.com/five-eyes-alliance-say-advanced-ai-hacking-models-months-away/" rel="noopener noreferrer external" target="_blank">CyberScoop — Intel agencies: Frontier AI models will reshape cybersecurity faster than expected (Five Eyes)</a></li>
+            
+            <li><a href="https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-our-big-sleep-agent-makes-big-leap" rel="noopener noreferrer external" target="_blank">Google Cloud — Our Big Sleep agent makes a big leap (CVE-2025-6965)</a></li>
+            
+            <li><a href="https://www.darpa.mil/news/2025/aixcc-results" rel="noopener noreferrer external" target="_blank">DARPA — AI Cyber Challenge marks pivotal inflection point for cyber defense</a></li>
+            
+            <li><a href="https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/" rel="noopener noreferrer external" target="_blank">daniel.haxx.se — The end of the curl bug-bounty (Daniel Stenberg)</a></li>
+            
+            <li><a href="https://www.darkreading.com/application-security/ai-led-remediation-crisis-prompts-hackerone-pause-bug-bounties" rel="noopener noreferrer external" target="_blank">Dark Reading — AI-Led Remediation Crisis Prompts HackerOne to Pause Bug Bounties</a></li>
+            
+            <li><a href="https://en.wikipedia.org/wiki/XZ_Utils_backdoor" rel="noopener noreferrer external" target="_blank">Wikipedia — XZ Utils backdoor (CVE-2024-3094)</a></li>
+            
+            <li><a href="https://thehackernews.com/2026/06/when-attacks-come-faster-than-patches.html" rel="noopener noreferrer external" target="_blank">The Hacker News — When Attacks Come Faster Than Patches (Mandiant M-Trends 2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
