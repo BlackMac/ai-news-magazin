@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP wird zur Lingua Franca: Wie ein Elf-Monate-altes Anthropic-Protokoll zum Industriestandard wurde</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-07-09.html">&larr; Zur&uuml;ck zur Ausgabe vom 9. Juli 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">MCP wird zur Lingua Franca: Wie ein Elf-Monate-altes Anthropic-Protokoll zum Industriestandard wurde</h1>
+    
+    <p class="reportage-teaser">Als Anthropic im November 2024 das Model Context Protocol veröffentlichte, war es ein Nischenprojekt eines einzelnen KI-Labors. Heute, mit Apples Öffnung von Safari für MCP, unterstützen praktisch alle großen Tech-Konzerne den Standard. Was bedeutet diese Konsolidierung für Unternehmen, die auf KI-Agenten setzen — und wo lauern die Risiken? Von Stefan Lange-Hegermann.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-07-09">9. Juli 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Auslöser: Selbst Apple öffnet sich</h2>
+<p>Am 1. Juli 2026 veröffentlichte Apple mit Safari Technology Preview 247 einen offiziellen MCP-Server für Web-Entwickler — auf den ersten Blick eine unscheinbare Meldung für eine kleine Zielgruppe. Bei genauerem Hinsehen ist sie aber ein bemerkenswertes Signal: Apple, der Konzern, der traditionell am zögerlichsten neue offene Standards übernimmt und stattdessen eigene, geschlossene Ökosysteme bevorzugt, öffnet seinen Browser für ein Protokoll, das ein einzelnes KI-Startup erst im November 2024 erfunden hat. Wenn selbst der vorsichtigste große Tech-Konzern mitzieht, ist das ein guter Anlass, einen Schritt zurückzutreten und zu fragen: Was ist das Model Context Protocol eigentlich, warum hat es sich derart schnell durchgesetzt — und was bedeutet das für Unternehmen, die heute Entscheidungen über ihre KI-Agenten-Strategie treffen müssen?</p>
+<h2>Was MCP eigentlich löst</h2>
+<p>Das Grundproblem, das MCP adressiert, lässt sich am einfachsten mit einer Analogie erklären, die sich in der Branche längst durchgesetzt hat: MCP ist das „USB-C für KI-Anwendungen&quot;. Vor USB-C brauchte jedes Gerät sein eigenes, oft proprietäres Kabel — jede Kombination aus Hersteller und Peripheriegerät ihre eigene Lösung. USB-C löste das mit einer einzigen physischen Schnittstelle, die alle nutzen können. Genau dieses Problem hatte die KI-Branche bis Ende 2024 mit dem Anbinden von Sprachmodellen an externe Werkzeuge und Datenquellen: Wollte ein Unternehmen seine KI-Anwendung mit der eigenen Datenbank, dem CRM oder einem internen Tool verbinden, musste es für jede Kombination aus KI-Anbieter und System eigenen Verbindungscode schreiben — ein sogenanntes N-mal-M-Integrationsproblem, das mit wachsender Zahl an KI-Modellen und Tools quadratisch komplexer wird.</p>
+<p>MCP reduziert dieses N-mal-M-Problem auf N-plus-M: Wer einmal einen MCP-Server für ein System baut — etwa für die eigene Kundendatenbank —, macht dieses System für jeden MCP-fähigen KI-Client nutzbar, unabhängig vom Anbieter. Technisch basiert das Protokoll auf einem Client-Server-Modell mit drei Rollen: dem Host (die KI-Anwendung selbst, etwa Claude Desktop oder ein Firmen-Chatbot), dem Client (der die Verbindung zu genau einem Server hält) und dem Server (der die eigentlichen Fähigkeiten bereitstellt). Ein MCP-Server kann drei Arten von Bausteinen anbieten: Tools sind ausführbare Funktionen, die ein Modell aufrufen kann, etwa „Ticket erstellen&quot; oder „Zahlung anstoßen&quot;. Resources sind Kontextdaten, die ein Modell lesen kann, etwa Dateiinhalte oder Datenbankeinträge. Prompts schließlich sind wiederverwendbare Instruktionsvorlagen. Für ein nicht-technisches Publikum lässt sich das vereinfachen zu: MCP ist im Kern eine standardisierte Speisekarte, die ein System einer KI vorlegt — „das kann ich: lesen, schreiben, ausführen&quot; —, statt dass für jede KI ein individueller Übersetzer gebaut werden muss.</p>
+<h2>Vom Anthropic-Alleingang zum herstellerneutralen Standard</h2>
+<p>Die Geschwindigkeit, mit der sich MCP durchgesetzt hat, ist historisch ungewöhnlich für einen technischen Standard. Anthropic veröffentlichte das Protokoll im November 2024 als offenen, quelloffenen Standard — durchaus überraschend für ein Unternehmen, das damit potenziell auch Konkurrenten einen Vorteil verschaffte. Genau das trat dann auch ein: Bereits am 26. März 2025 kündigte OpenAI-CEO Sam Altman volle Unterstützung für MCP über Agents SDK, Responses API und die ChatGPT-Desktop-App an, mit dem bemerkenswert unpolitischen Zitat: „People love MCP and we are excited to add support across our products.&quot; Ein direkter Konkurrent übernahm damit freiwillig den Standard eines Rivalen — ein seltenes Ereignis in der Tech-Branche. Nur zwei Wochen später, am 9. April 2025, zog Google DeepMind mit einer Ankündigung von Demis Hassabis nach: „MCP is a good protocol and it's rapidly becoming an open standard for the AI agentic era.&quot; Microsoft folgte mit breiter Integration über GitHub Copilot, Copilot Studio, Azure AI Foundry und Windows 11.</p>
+<p>Der eigentliche Wendepunkt für die Statur des Protokolls kam im Dezember 2025: Anthropic spendete MCP formal an die neu gegründete Agentic AI Foundation unter dem Dach der Linux Foundation — mitbegründet von Anthropic, Block und ausgerechnet OpenAI, unterstützt von Google, Microsoft, AWS, Cloudflare und Bloomberg. Diese Übergabe ist für die Einordnung des Protokolls entscheidend: MCP ist damit kein Anthropic-Produkt mehr, das Anthropic jederzeit ändern oder monetarisieren könnte, sondern ein herstellerneutraler Standard mit Governance-Struktur, vergleichbar mit HTTP oder USB. Das Wachstum der letzten anderthalb Jahre ist entsprechend explosiv: Von rund 100.000 Downloads im November 2024 auf über acht Millionen im April 2025. Verschiedene Community-Registries zählen mittlerweile zwischen rund 7.300 und knapp 20.000 MCP-Server, je nach Zählmethode — ein Ökosystem, das binnen weniger als zwei Jahren aus dem Nichts entstanden ist, aber auch noch fragmentiert und ohne eine einzige verbindliche zentrale Registry auskommen muss.</p>
+<h2>MCP und A2A: zwei Protokolle für zwei verschiedene Probleme</h2>
+<p>Neben MCP hat sich mit Googles Agent2Agent-Protokoll (A2A), im April 2025 mit Unterstützung von über 50 Technologie- und Consulting-Partnern angekündigt, ein zweiter relevanter Standard etabliert. Für Entscheider ist wichtig zu verstehen, dass die beiden Protokolle sich nicht Konkurrenz machen, sondern unterschiedliche Ebenen adressieren. MCP ist „vertikal&quot;: Es verbindet ein einzelnes KI-Modell mit externen Werkzeugen und Daten — die Schnittstelle „Agent zu Werkzeug&quot;. A2A ist „horizontal&quot;: Es ermöglicht Agenten, direkt mit anderen Agenten zu kommunizieren und Aufgaben untereinander zu delegieren — die Schnittstelle „Agent zu Agent&quot;. Ein Unternehmen, das etwa einen Vertriebs-Agenten baut, der bei Bedarf einen spezialisierten Rechnungs-Agenten hinzuzieht, braucht praktisch beide Protokolle gleichzeitig: MCP, damit jeder einzelne Agent auf seine benötigten Werkzeuge zugreifen kann, und A2A, damit die Agenten sich untereinander koordinieren können. Ein dritter, ernstzunehmender Standard ist in der Recherche für diese Reportage nicht aufgetaucht — der Diskurs um Agenten-Interoperabilität wird 2026 fast vollständig von MCP und A2A dominiert.</p>
+<h2>Die Kehrseite: MCP-Server als neue Angriffsfläche</h2>
+<p>Die schnelle Verbreitung hat einen Preis, der in Sicherheitskreisen seit Anfang 2025 diskutiert wird. Bereits im April 2025 wies der bekannte Sicherheitsforscher Simon Willison auf ein strukturelles Problem hin: MCP-Server, die sowohl Zugriff auf private Daten haben als auch mit nicht vertrauenswürdigen Inhalten in Kontakt kommen und Daten nach außen senden können, bilden eine gefährliche Kombination, die er die „lethal trifecta&quot; nannte. Wie real das Risiko ist, zeigten mehrere dokumentierte Vorfälle im Jahresverlauf 2025: Bei Asana führte ein Tenant-Isolation-Fehler in der MCP-Integration zu Cross-Organisation-Datenvermischung, betroffen waren bis zu 1.000 Unternehmen; Asana nahm die Integration für zwei Wochen offline. Bei Supabase brachte eine Prompt-Injection über einen Support-Ticket-Text einen Agenten mit weitreichendem Datenbankzugriff dazu, private Integrations-Tokens in einem öffentlichen Thread zu veröffentlichen — ein Lehrbuchbeispiel für Willisons „lethal trifecta&quot;. Hinzu kommen dokumentierte CVEs zu sogenanntem „Tool Poisoning&quot;, bei dem ein MCP-Tool seine eigene Definition nach der Nutzer-Genehmigung heimlich verändert — ein Nutzer stimmt am Tag eins einem harmlos aussehenden Tool zu, das am Tag sieben unbemerkt beginnt, API-Schlüssel an einen Angreifer umzuleiten.</p>
+<p>Die Kernbotschaft für Unternehmen ist unbequem, aber wichtig: Ein ungesicherter MCP-Server gibt potenziell Zugriff auf alle angebundenen Datenbanken, Dateisysteme und Cloud-Dienste. Governance und Zugriffsrechte-Management werden damit zum eigentlichen Flaschenhals für den produktiven Enterprise-Einsatz — nicht die technische Eleganz des Protokolls. Das Protokoll selbst hat in mehreren Revisionen nachgebessert: Im März 2025 wurde OAuth 2.1 als Baseline für entfernte MCP-Server definiert, im Juni 2025 wurden Server als reine „Resource Server&quot; neu klassifiziert, die Tokens nur noch validieren statt selbst auszustellen, im November 2025 wurde PKCE für alle Client-Anwendungen verpflichtend. Diese Nachbesserungen zeigen: MCP ist kein statisches Protokoll, sondern lernt aus jedem dokumentierten Vorfall — was aus Sicherheitsperspektive positiv zu werten ist, aber auch bedeutet, dass Unternehmen ihre MCP-Implementierungen kontinuierlich aktuell halten müssen, statt sie einmal einzurichten und zu vergessen.</p>
+<h2>Ist MCP schon wieder tot? Die Kritik von 2026</h2>
+<p>Parallel zur breiten Adoption ist 2026 eine Gegenbewegung entstanden. Im März kündigte Perplexity-CTO Denis Yarats öffentlich an, MCP zu verlassen — mit der Begründung, MCP-Tool-Definitionen würden bis zu 72 Prozent des verfügbaren Kontextfensters eines Modells verschlingen. Ein von ihm zitiertes Beispiel: Ein Datenbank-MCP-Server mit 106 verfügbaren Tools verbrauchte allein zur Initialisierung 54.600 Token, ohne dass auch nur eine einzige Anfrage bearbeitet wurde. Eine begleitende Forschungsarbeit fand einen Token-Overhead bis zum 236-fachen gegenüber direkten Kommandozeilen-Aufrufen bei gleichzeitig sinkender Genauigkeit. Die Debatte, ob „MCP tot&quot; sei, wurde in der Branche breit diskutiert.</p>
+<p>Die Gegenposition, die sich bei genauerer Betrachtung als die tragfähigere erweist: Die Kritik kommt überwiegend von einzelnen Entwicklern, die auf persönliche Produktivität in einem einzelnen Tool optimieren — ein legitimes, aber eng gefasstes Problem. Effizienz für einen einzelnen Entwickler an einer Kommandozeile ist nicht dasselbe Problem wie Governance und Interoperabilität für fünfzig Agenten in einer ganzen Abteilung. Die Beobachtung vieler Branchenkenner: MCP verlässt gerade seine Hype-Phase und tritt in die Phase ein, in der Unternehmen tatsächlich produktiv damit arbeiten — mit allen Reibungsverlusten, die eine solche Reifung mit sich bringt. Gleichzeitig bleibt die Kritik an unnötigem Token-Overhead technisch berechtigt und sollte bei der Architektur eigener MCP-Integrationen berücksichtigt werden: Wer einem Agenten hunderte Tools gleichzeitig zur Verfügung stellt, statt kontextabhängig nur die relevanten zu laden, bezahlt dafür in echtem Geld pro API-Aufruf.</p>
+<h2>Was das für Unternehmen bedeutet</h2>
+<p>Aus der Entwicklung der letzten anderthalb Jahre lassen sich für Entscheider, die KI-Agenten-Strategien planen, vier konkrete Schlussfolgerungen ziehen.</p>
+<p><strong>Erstens: Auf offene Standards statt proprietärer Integrationen setzen.</strong> Die praktisch vollständige Herstellerunterstützung — von Anthropic über OpenAI und Google bis zu Microsoft und nun Apple — senkt das Risiko von Vendor-Lock-in erheblich. Ein einmal gebauter MCP-Connector für das eigene CRM oder die eigene Wissensdatenbank funktioniert grundsätzlich mit jedem MCP-fähigen KI-Anbieter. Wer heute noch proprietäre, anbieterspezifische Integrationen baut, sollte das explizit begründen können.</p>
+<p><strong>Zweitens: Governance vor Funktionsumfang.</strong> Die dokumentierten Vorfälle bei Asana und Supabase zeigen, dass die technische Möglichkeit, einen MCP-Server anzubinden, nicht automatisch bedeutet, dass er sicher betrieben wird. Zugriffsrechte sollten pro Server und pro Tool so eng wie möglich gescoped werden, insbesondere wenn ein Agent gleichzeitig Zugriff auf sensible Daten und auf potenziell nicht vertrauenswürdige externe Inhalte hat.</p>
+<p><strong>Drittens: Token-Overhead aktiv managen.</strong> Die Kritik von Perplexitys CTO ist technisch berechtigt genug, um sie in der eigenen Architektur zu berücksichtigen — insbesondere bei Agenten mit Zugriff auf viele MCP-Server gleichzeitig sollte kontextabhängiges Laden von Tool-Definitionen statt permanenter Vollausstattung die Regel sein.</p>
+<p><strong>Viertens: MCP und A2A als komplementäre, nicht konkurrierende Investitionen behandeln.</strong> Wer heute nur auf Werkzeugintegration über MCP setzt, aber perspektivisch Multi-Agenten-Systeme mit Aufgabenteilung plant, sollte A2A-Kompatibilität von Anfang an mitdenken, statt später eine zweite Integrationsschicht nachzurüsten.</p>
+<p>Die nüchterne Bilanz: MCP hat sich binnen weniger als zwei Jahren von einem Experiment eines einzelnen Labors zu einem von praktisch der gesamten Branche getragenen Standard entwickelt — eine Geschwindigkeit, die selbst in der schnelllebigen KI-Branche ungewöhnlich ist. Die Kehrseite dieser Geschwindigkeit sind dokumentierte Sicherheitsvorfälle und berechtigte Effizienzkritik, die zeigen, dass Standardisierung allein kein Sicherheitsversprechen ist. Für Unternehmen bedeutet das: MCP-Adoption ja, aber mit derselben Sorgfalt bei Rechteverwaltung und Architektur, die man jeder anderen sicherheitsrelevanten Infrastrukturentscheidung entgegenbringen würde.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.anthropic.com/news/model-context-protocol" rel="noopener noreferrer external" target="_blank">Anthropic — Introducing the Model Context Protocol</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/03/26/openai-adopts-rival-anthropics-standard-for-connecting-ai-models-to-data/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI adopts rival Anthropic&#39;s standard for connecting AI models to data</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/04/09/google-says-itll-embrace-anthropics-standard-for-connecting-ai-models-to-data/" rel="noopener noreferrer external" target="_blank">TechCrunch — Google says it&#39;ll embrace Anthropic&#39;s standard for connecting AI models to data</a></li>
+            
+            <li><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation" rel="noopener noreferrer external" target="_blank">Linux Foundation — Announcing the Agentic AI Foundation</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/12/09/openai-anthropic-and-block-join-new-linux-foundation-effort-to-standardize-the-ai-agent-era/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI, Anthropic and Block join new Linux Foundation effort to standardize the AI agent era</a></li>
+            
+            <li><a href="https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/" rel="noopener noreferrer external" target="_blank">WebKit-Blog — Introducing the Safari MCP Server for Web Developers</a></li>
+            
+            <li><a href="https://simonwillison.net/2025/Apr/9/mcp-prompt-injection/" rel="noopener noreferrer external" target="_blank">Simon Willison — MCP has prompt injection security problems</a></li>
+            
+            <li><a href="https://simonwillison.net/2025/Jul/6/supabase-mcp-lethal-trifecta/" rel="noopener noreferrer external" target="_blank">Simon Willison — The Supabase MCP integration and the &#39;lethal trifecta&#39;</a></li>
+            
+            <li><a href="https://composio.dev/content/mcp-vulnerabilities-every-developer-should-know" rel="noopener noreferrer external" target="_blank">Composio — MCP vulnerabilities every developer should know</a></li>
+            
+            <li><a href="https://www.descope.com/blog/post/mcp-vs-a2a" rel="noopener noreferrer external" target="_blank">Descope — MCP vs. A2A</a></li>
+            
+            <li><a href="https://growthmethod.com/is-mcp-dead/" rel="noopener noreferrer external" target="_blank">Growth Method — Is MCP dead?</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
