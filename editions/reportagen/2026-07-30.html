@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenn Prüfen länger dauert als Angreifen: Die Post-Quanten-Migration bekommt ein Tempoproblem</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-07-30.html">&larr; Zur&uuml;ck zur Ausgabe vom 30. Juli 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Wenn Prüfen länger dauert als Angreifen: Die Post-Quanten-Migration bekommt ein Tempoproblem</h1>
+    
+    <p class="reportage-teaser">Ein KI-Modell hat einen Post-Quanten-Kandidaten in 60 Stunden so weit geschwächt, dass seine Entwickler aufgaben. Für produktive Systeme ist das ungefährlich — für die Art, wie wir Vertrauen in Kryptografie aufbauen, nicht. Was Unternehmen aus dem Fall wirklich ableiten sollten, und was nur nach Alarm klingt.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-07-30">30. Juli 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Was diese Woche passiert ist, und was nicht</h2>
+<p>Ein Signaturverfahren namens HAWK ist aus dem NIST-Auswahlverfahren für Post-Quanten-Kryptografie verschwunden, nachdem ein KI-Modell in etwa 60 Stunden eine Schwachstelle darin gefunden hat. Die Meldung wurde vielerorts als Zeitenwende gelesen. Bevor man daraus etwas ableitet, lohnt der Blick auf die Grenzen des Ergebnisses — sie sind ungewöhnlich klar dokumentiert.</p>
+<p>Parallel zu Anthropics Veröffentlichung erschien mit <strong>CryptanalysisBench</strong> eine Untersuchung, die fünf Spitzenmodelle systematisch auf kryptoanalytische Aufgaben ansetzt: 191 Aufgaben aus sechs Familien kryptografischer Bausteine, in drei Schwierigkeitsstufen. Bei Verfahren, für die praktische Brüche bereits bekannt waren, lösten die Modelle 65 bis 86 Prozent der Aufgaben. Gegen einige Verfahren in voller Stärke fanden sie sogar neue Angriffe, darunter eine vollständige Schlüsselrückgewinnung gegen das AEAD-Verfahren SpoC mit nur zwei Anfragen. Und gegen korrekt implementiertes AES, RSA und Kryptografie auf elliptischen Kurven in Produktionsstärke: <strong>null Prozent Erfolg, bei jedem getesteten Modell.</strong></p>
+<p>Das ist die Linie, an der die aktuelle Debatte sich orientieren sollte. KI-Systeme sind gut darin, Designschwächen in jungen Kandidaten und in absichtlich abgeschwächten Varianten zu finden. Sie sind bislang nicht in der Lage, ausgereifte, jahrzehntelang geprüfte Verfahren zu brechen. Was in Ihrem TLS-Handshake, Ihrer Festplattenverschlüsselung und Ihrer Signaturprüfung steckt, ist von dieser Woche nicht betroffen.</p>
+<h2>Kandidaten fallen. Das ist der Sinn der Übung</h2>
+<p>Für die Einordnung braucht es außerdem Gedächtnis. Dass ein Verfahren in einer NIST-Runde scheitert, nachdem es Jahre öffentlicher Begutachtung überstanden hat, ist kein neues, KI-spezifisches Phänomen — es ist genau der Zweck eines mehrjährigen, mehrrundigen Verfahrens.</p>
+<p>Im Februar 2022 brach Ward Beullens <strong>Rainbow</strong>, ein mehrstufiges multivariates Signaturverfahren, das bis in die dritte Runde gekommen war — mit klassischer Algebra, ohne Quantencomputer. Ein halbes Jahr später zerlegten Wouter Castryck und Thomas Decru von der KU Leuven <strong>SIKE</strong>, das wegen seiner sehr kleinen Schlüssel als besonders vielversprechend gehandelt worden war. Ihr Angriff nutzte Hilfsinformationen aus, die das Protokoll selbst mitlieferte. Die Laufzeit ist die eigentliche Pointe: Die kleinste Parametervariante fiel in rund <strong>62 Minuten auf einem einzigen Rechenkern</strong> eines gewöhnlichen Serverprozessors. NIST standardisierte SIKE danach nicht.</p>
+<p>Gemessen daran ist der HAWK-Fall unspektakulärer, als die Schlagzeilen suggerieren: Der Angriff halbiert die effektive Sicherheit eines Kandidaten, er bricht ihn nicht. Neu ist nicht, <strong>dass</strong> ein Kandidat fällt, sondern <strong>wer</strong> ihn hat fallen lassen und wie schnell. Der Kryptograf Matthew Green von der Johns Hopkins University benennt das Unbequeme daran präzise: Interessant sei der Fund gerade deshalb, weil keiner seiner Bestandteile exotisch ist — die Mathematik lag im Prinzip bereit, es hat nur jahrelang niemand hingesehen.</p>
+<h2>Die Verschiebung liegt auf der Kostenseite</h2>
+<p>Der belastbare Befund dieser Woche ist ökonomisch, nicht mathematisch. Ein publikationsfähiges kryptoanalytisches Ergebnis kostete hier ungefähr 100.000 Dollar Rechenzeit und einige Tage Modellarbeit. Für einen Angriff auf ein ausgereiftes Verfahren mit vollen Parametern nennt Anthropic selbst Größenordnungen von mehreren hundert Millionen Dollar — die praktische Bedrohungslage ändert sich also kurzfristig nicht.</p>
+<p>Was sich ändert, ist die Menge. Und hier liegt der Engpass an einer Stelle, die in Sicherheitsdiskussionen selten vorkommt: bei der Prüfkapazität. Die Entdeckung dauerte Stunden bis Tage, die <strong>Verifikation durch Menschen mehrere hundert Arbeitsstunden</strong> über etwa vier Wochen — bei zwei Forschern, die genau wussten, was sie suchen. Anthropic formuliert die Konsequenz in eigener Sache ungewöhnlich offen: Sprachmodelle fänden inzwischen so viele Fehler, dass die etablierten menschlichen Prozesse nicht mithielten.</p>
+<p>Kryptografie ist ein Feld, das Vertrauen fast ausschließlich über Zeit erzeugt. Ein Verfahren gilt als sicher, weil viele kompetente Menschen es viele Jahre lang erfolglos angegriffen haben. Wenn die Zahl der zu prüfenden Angriffsbehauptungen schneller wächst als die Zahl der Menschen, die sie prüfen können, verliert dieser Mechanismus an Aussagekraft — nicht weil die Verfahren schlechter würden, sondern weil das Gütesiegel „seit Jahren unangegriffen“ weniger bedeutet. Im NIST-Forum wird deshalb bereits gefordert, KI-gestützte Angriffsbehauptungen nur mit maschinenprüfbaren Beweisen oder funktionierenden Demonstrationen an verkleinerten Zielen zu akzeptieren. Für Unternehmen ist das keine akademische Frage: Es ist der Grund, warum Sie sich nicht darauf verlassen sollten, dass Ihr heute gewähltes Verfahren in fünf Jahren noch dasselbe ist.</p>
+<h2>Der Stand der Migration: schneller als gedacht, langsamer als nötig</h2>
+<p>Die standardisierte Seite ist erfreulich weit. Seit August 2024 liegen mit <strong>ML-KEM</strong> (vormals Kyber), <strong>ML-DSA</strong> (Dilithium) und <strong>SLH-DSA</strong> (SPHINCS+) drei finale Standards vor; <strong>HQC</strong> wurde im März 2025 als Ausweichverfahren für den Schlüsselaustausch ausgewählt, der finale Standard wird für 2027 erwartet, und der Standard für Falcon ist noch in Arbeit. Keines dieser Verfahren ist von den aktuellen Funden betroffen.</p>
+<p>Die Fristen sind gesetzt, wenn auch teils unverbindlich. Der NIST-Entwurf IR 8547 sieht vor, RSA und Verfahren auf elliptischen Kurven <strong>ab 2030 als überholt</strong> und <strong>ab 2035 als unzulässig</strong> zu behandeln. Die NSA verlangt für neue Beschaffungen in nationalen Sicherheitssystemen ab Januar 2027 die Konformität mit CNSA 2.0, mit Vollmigration bis Anfang der 2030er. Das BSI empfiehlt die Ablösung klassischer Verfahren für sensible Daten bis Anfang der 2030er Jahre. Und die EU-Roadmap vom Juni 2025 verlangt nationale Migrationspläne bis Ende 2026, migrierte kritische Infrastruktur bis 2030 und den Rest bis 2035.</p>
+<p>Die interessanteste Zahl kommt von Cloudflare. Im zweiten Quartal 2026 nutzten <strong>54 Prozent</strong> der Anfragen an das Edge-Netz einen quantensicheren Schlüsselaustausch — eine Mehrheit, nach einer Minderheit vor einem Jahr. Auf der Strecke vom Edge zu den dahinterliegenden Servern der Kunden waren es <strong>9,6 Prozent</strong>. Diese Lücke ist die eigentliche Geschichte der Migration: Wo wenige große Anbieter zentral umschalten, geht es schnell. Wo Millionen einzelne Betreiber ihre eigene Infrastruktur anfassen müssten, geht es kaum voran. Wenn Sie wissen wollen, wo Ihr Unternehmen steht, ist das die richtige Seite der Statistik — Sie sind die Origin, nicht das Edge.</p>
+<p>Die Gründe sind bekannt und unglamourös. Eine Zertifikatskette mit ML-DSA-65 wiegt rund 10 Kilobyte, eine mit ECDSA etwa 1,5 — mit Folgen für Handshake-Latenz, Speicher in Zertifikatsprotokollen und alles, was über schmale Kanäle läuft. Hardware-Sicherheitsmodule, Smartcards und Beschleuniger brauchen Firmware-Updates oder Ersatz. Und vor allem: Die meisten Organisationen wissen nicht, wo sie welche Kryptografie überhaupt einsetzen. Ohne dieses Inventar ist keine Priorisierung möglich, und für große Unternehmen ist die Inventarisierung selbst ein Projekt von Monaten bis Jahren.</p>
+<h2>Das eine Raster, das Entscheider brauchen</h2>
+<p>Für die Priorisierung genügt eine Formel, die Michele Mosca von der University of Waterloo formuliert hat und die keine Kryptografiekenntnisse verlangt. Drei Größen:</p>
+<ul>
+<li><strong>X</strong> — wie lange müssen diese Daten vertraulich bleiben?</li>
+<li><strong>Y</strong> — wie lange braucht unsere Migration?</li>
+<li><strong>Z</strong> — wie lange dauert es bis zu einem Quantencomputer, der die Verfahren bricht?</li>
+</ul>
+<p><strong>Wenn X + Y größer ist als Z, sind die Daten gefährdet.</strong> Der Grund ist der Angriffstyp, der heute schon läuft: Verschlüsselten Verkehr abfangen und aufbewahren, bis er in einigen Jahren entschlüsselbar ist. Betroffen sind alle Daten mit langer Schutzdauer — Patientenakten, Genomdaten, Verträge, Konstruktionsunterlagen, aufsichtsrechtliche Kommunikation. Für einen Sitzungscookie ist der Angriff sinnlos, für eine Krankengeschichte nicht.</p>
+<p>Der Wert dieses Rasters für eine Vorstandsvorlage liegt in der Zuständigkeit: <strong>Z können Sie nicht beeinflussen, X nur begrenzt, Y vollständig.</strong> Die verbreitete Diskussion darüber, wann der Quantencomputer kommt, ist strategisch die unwichtigste der drei. Zur Einordnung: Die Mehrheit der Fachleute verortet kryptografisch relevante Quantencomputer weiterhin in den 2030er Jahren oder später, und heute existiert keine solche Maschine. Allerdings hat Google Quantum AI im März 2026 den geschätzten Ressourcenbedarf für einen Angriff auf elliptische Kurven auf unter 500.000 physische Qubits gesenkt — vorher galten rund zehn Millionen. Das ist eine Schätzung, keine Messung, und sie ist umstritten. Sie verschiebt Z aber in die falsche Richtung.</p>
+<h2>Was jetzt zu tun ist</h2>
+<p><strong>1. Krypto-Inventar starten, nicht auf fertige Standards warten.</strong> Das ist der zeitkritische Pfad, nicht die Umstellung selbst. Automatisierte Erfassung einsetzen; manuelle Dokumentation skaliert in keiner Organisation, die groß genug ist, um das Problem zu haben.</p>
+<p><strong>2. Daten nach Schutzdauer klassifizieren, nicht nach Vertraulichkeitsstufe.</strong> Das ist das X aus der Formel und der einzige Weg, die Migration zu priorisieren, statt alles gleichzeitig anzufassen. Alles mit Schutzbedarf über zehn Jahre gehört nach vorn.</p>
+<p><strong>3. Krypto-Agilität ab heute zur Anforderung in jedem neuen System machen.</strong> Nicht als Migrationsprojekt für später, sondern als Architekturregel: Verfahren müssen austauschbar sein, ohne die Anwendung umzubauen. Nachträglich einzubauen ist erheblich teurer — und der HAWK-Fall ist die Begründung, die Sie dafür brauchen.</p>
+<p><strong>4. Hybride Verfahren bevorzugen, wo verfügbar.</strong> Post-Quanten-Verfahren kombiniert mit einem klassischen Verfahren als Sicherheitsnetz, so wie Cloudflare es einsetzt. Genau weil frisch standardisierte Verfahren überraschen können, ist der doppelte Boden rational.</p>
+<p><strong>5. Lieferanten jetzt zu Roadmaps verpflichten.</strong> Cloud-Anbieter, HSM-Hersteller, Softwarelieferanten: verbindliche Termine und Zertifizierungspläne in die Verträge. Die 9,6 Prozent aus der Cloudflare-Statistik entstehen nicht bei den Hyperscalern, sondern in der Zulieferkette.</p>
+<p><strong>6. Eine namentlich benannte Verantwortung mit Budget schaffen.</strong> Realistische Migrationsdauern liegen je nach Unternehmensgröße bei etwa fünf bis fünfzehn Jahren — eine Schätzung, aber eine, die über den regulatorischen Zielmarken liegt. Wer 2029 anfängt, migriert im Notfallmodus.</p>
+<p>Der HAWK-Fall ist kein Grund, heute etwas abzuschalten. Er ist ein Beleg dafür, dass die Prüfung kryptografischer Verfahren billiger und schneller geworden ist — was zunächst der Verteidigung nützt, weil Schwächen jetzt vor dem Ausrollen gefunden werden und nicht nach zehn Jahren Produktivbetrieb. Bruce Schneiers Einordnung trifft es: frühe Ergebnisse, die man beobachten sollte. Die unbequeme Konsequenz betrifft nicht die Mathematik, sondern die Planung. Wer davon ausgeht, dass ein einmal gewähltes Verfahren zehn Jahre steht, plant gegen die aktuelle Entwicklung. Wer Wechselfähigkeit einbaut, hat den Vorfall dieser Woche richtig gelesen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses" rel="noopener noreferrer external" target="_blank">Anthropic — Discovering cryptographic weaknesses with Claude</a></li>
+            
+            <li><a href="https://blog.cryptographyengineering.com/2026/07/29/some-notes-about-anthropics-new-results/" rel="noopener noreferrer external" target="_blank">Matthew Green — Some thoughts about Anthropic&#39;s new cryptanalysis results</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2607.18538" rel="noopener noreferrer external" target="_blank">Fluri, Shafran et al. — CryptanalysisBench: Can LLMs do Cryptanalysis? (arXiv)</a></li>
+            
+            <li><a href="https://www.schneier.com/blog/archives/2026/07/measuring-llms-ability-to-perform-cryptanalysis.html" rel="noopener noreferrer external" target="_blank">Schneier on Security — Measuring LLMs&#39; Ability to Perform Cryptanalysis</a></li>
+            
+            <li><a href="https://www.schneier.com/blog/archives/2022/08/sike-broken.html" rel="noopener noreferrer external" target="_blank">Schneier on Security — SIKE Broken (Castryck/Decru 2022)</a></li>
+            
+            <li><a href="https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption" rel="noopener noreferrer external" target="_blank">NIST — NIST Selects HQC as Fifth Algorithm for Post-Quantum Encryption</a></li>
+            
+            <li><a href="https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf" rel="noopener noreferrer external" target="_blank">NIST IR 8547 — Transition to Post-Quantum Cryptography Standards</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/pq-2025/" rel="noopener noreferrer external" target="_blank">Cloudflare — State of the post-quantum Internet</a></li>
+            
+            <li><a href="https://digital-strategy.ec.europa.eu/en/library/coordinated-implementation-roadmap-transition-post-quantum-cryptography" rel="noopener noreferrer external" target="_blank">Europäische Kommission — Coordinated Implementation Roadmap for the Transition to Post-Quantum Cryptography</a></li>
+            
+            <li><a href="https://research.google/blog/safeguarding-cryptocurrency-by-disclosing-quantum-vulnerabilities-responsibly/" rel="noopener noreferrer external" target="_blank">Google Research — Safeguarding cryptocurrency by disclosing quantum vulnerabilities responsibly</a></li>
+            
+            <li><a href="https://thequantuminsider.com/2026/03/31/q-day-just-got-closer-three-papers-in-three-months-are-rewriting-the-quantum-threat-timeline/" rel="noopener noreferrer external" target="_blank">The Quantum Insider — Q-Day Just Got Closer</a></li>
+            
+            <li><a href="https://www.encryptionconsulting.com/education-center/nist-ir-8547-sp-800-131a-algorithm-transitions/" rel="noopener noreferrer external" target="_blank">Encryption Consulting — NIST IR 8547 and SP 800-131A Timeline</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
