@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle bauen einen Router — einer hat ihn wieder abgeschafft: Was LLM-Gateways wirklich leisten</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-01.html">&larr; Zur&uuml;ck zur Ausgabe vom 1. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Alle bauen einen Router — einer hat ihn wieder abgeschafft: Was LLM-Gateways wirklich leisten</h1>
+    
+    <p class="reportage-teaser">Zwischen Anwendung und Modell hat sich eine neue Software-Schicht eingenistet: das LLM-Gateway. OpenRouter leitet damit 25 Billionen Token pro Woche durch und ist 1,3 Milliarden Dollar wert. Doch das meistversprochene Feature dieser Schicht — automatisch das billigste passende Modell wählen — funktioniert schlechter, als die Verkaufsprospekte nahelegen. Eine Firma hat ihren Router nach vier Monaten wieder abgeschaltet und öffentlich erklärt, warum.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-01">1. August 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Zwischen der eigenen Anwendung und dem Sprachmodell, das sie antreibt, hat sich in den vergangenen zwei Jahren eine neue Software-Schicht eingenistet. Sie heißt LLM-Gateway, manchmal auch Model-Router, und die einfachste Beschreibung ihrer Funktion ist die eines Spediteurs: Man übergibt ihr ein Paket, und sie entscheidet, welcher Frachtführer es transportiert — heute OpenAI, morgen Anthropic, bei einfacher Ware vielleicht ein billigerer Anbieter.</p>
+<p>Der Vergleich trägt weiter, als er zunächst wirkt. Ein Spediteur nimmt einem die Verträge mit einem Dutzend Transportfirmen ab, verhandelt Preise, springt ein, wenn ein Fahrer ausfällt, und sagt am Monatsende, was welche Sendung gekostet hat. Genau das leistet ein LLM-Gateway: eine einheitliche Schnittstelle statt eines halben Dutzends Anbieter-APIs, automatisches Ausweichen bei Ausfällen, Ratenbegrenzung, Zwischenspeicherung, getrennte Schlüssel und Budgets pro Team, Protokollierung, Kostenauswertung und Inhaltsfilter.</p>
+<p>Und dann gibt es noch die Funktion, mit der diese Schicht am liebsten verkauft wird: das <strong>semantische Routing</strong>. Die Idee klingt bestechend — eine kleine, schnelle Komponente schätzt ab, wie schwierig eine Anfrage ist, und schickt Einfaches an ein günstiges, Schweres an ein teures Modell. Wer zwei Drittel seiner Anfragen von einem Fünf-Dollar- auf ein Zwanzig-Cent-Modell umlenkt, spart erheblich. Genau an dieser Funktion aber scheiden sich seit Ende Juli die Geister.</p>
+<h2>Ein Markt, in dem die Marge schon verschwunden ist</h2>
+<p>Wirtschaftlich ist die Schicht längst Realität. <strong>OpenRouter</strong>, der mit Abstand größte Anbieter, leitet nach eigenen Angaben rund 25 Billionen Token pro Woche durch — eine Verfünffachung binnen sechs Monaten — bedient über acht Millionen Nutzer und schloss im April 2026 eine Series B über 113 Millionen Dollar unter Führung von CapitalG ab, bei einer Bewertung um 1,3 Milliarden Dollar. Der annualisierte Umsatz stieg von rund 19 Millionen Dollar Ende 2025 auf etwa 50 Millionen im März 2026.</p>
+<p>Daneben steht ein dicht besetztes Feld. <strong>LiteLLM</strong> ist die quelloffene, selbst betriebene Variante und dominiert überall dort, wo Daten das eigene Rechenzentrum nicht verlassen dürfen. <strong>Portkey</strong> und <strong>Helicone</strong> verkaufen gemanagte Dienste mit Schwerpunkt auf Auswertung und Nachvollziehbarkeit. <strong>Kong</strong> bedient Unternehmen, die ohnehin schon sein API-Management einsetzen; <strong>Cloudflares AI Gateway</strong> ist im Kern gratis, weil Cloudflare am umgebenden Ökosystem verdient. <strong>Requesty</strong> positioniert sich mit einem Standort in Frankfurt und ausdrücklicher Nulldatenspeicherung explizit über die europäische Rechtslage.</p>
+<p>Bemerkenswert ist, was mit den Preisen passiert ist: Nach übereinstimmenden Marktvergleichen aus 2026 haben praktisch alle großen Gateways ihren Aufschlag auf die durchgeleiteten Token auf null gesenkt. Wer heute in diesen Markt einsteigt, verkauft nicht mehr Vermittlung, sondern Kontrolle — Protokolle, Budgets, Richtlinien.</p>
+<p>Am weitesten geht dabei <strong>agentgateway</strong>, das Projekt hinter dem jüngsten Fachartikel zum Thema: ein in Rust geschriebener, Apache-2.0-lizenzierter Kontrollpunkt unter dem Dach der Linux Foundation, den Solo.io kommerziell veredelt. Es leitet nicht nur Modellanfragen, sondern auch den Verkehr zwischen Agenten und Werkzeugen (MCP) sowie zwischen Agenten untereinander. Das ist die eigentliche Richtung, in die sich die Schicht bewegt: weg vom Modell-Vermittler, hin zur Kontrollebene für Agenten-Infrastruktur.</p>
+<h2>Der Aussteiger</h2>
+<p>Ende Juli hat die Firma <strong>Manifest</strong>, die selbst eine quelloffene Gateway-Plattform betreibt, einen Blogbeitrag mit dem Titel „Why we deprecated our LLM router“ veröffentlicht. Auf Hacker News wurde daraus binnen Stunden eine der meistdiskutierten Fragen der Woche.</p>
+<p>Der Ablauf: Manifest führte im März 2026 einen Router ein, der Anfragen in vier Schwierigkeitsstufen einsortierte, um teure Modelle einzusparen. Nach vier Monaten Betrieb mit rund 7.000 Nutzern wurde er im Juni abgekündigt; endgültig abgeschaltet wird er am 1. September 2026. Drei Gründe nennt das Unternehmen.</p>
+<p><strong>Erstens: Die Schwierigkeit steht nicht im Prompt.</strong> In einem Agenten-Ablauf entsteht der entscheidende Kontext erst unterwegs — durch Werkzeugaufrufe, Websuchen, Zwischenergebnisse. Der Router entscheidet also über die Modellwahl, bevor irgendjemand wissen kann, wie schwer die Aufgabe wird. Er entscheidet blind.</p>
+<p><strong>Zweitens: Das Zwischenspeichern wird zerstört.</strong> Beide großen Anbieter geben erhebliche Rabatte auf wiederholte Prompt-Anteile — Anthropic rund 90 Prozent auf Cache-Lesevorgänge, OpenAI etwa 50 Prozent. Diese Caches sind anbieterspezifisch. Sobald ein Router zwischen Modellen wechselt, sind sie kalt, und die Ersparnis frisst sich selbst auf.</p>
+<p><strong>Drittens: Inkonsistenz kostet Qualität.</strong> Wechselt das Modell mitten im Ablauf, ändert sich Ton, Werkzeugverhalten und Formatierung — für Nutzer spürbar als Qualitätsabfall.</p>
+<p>Manifests Fazit lautet, die zusätzliche Unsicherheitsschicht könne mehr kosten, als sie einspare; empfohlen wird die bewusste, feste Modellwahl statt der dynamischen.</p>
+<p>Die Diskussion darüber ist keineswegs einseitig. Das schärfste Argument gegen Router formulierte ein Kommentator so: Ein Router, der Schwierigkeit zuverlässig einschätzen soll, müsste fast so intelligent sein wie das teuerste Modell, das er einsparen will — womit der Zweck sich selbst untergräbt. Dagegen halten Praktiker zwei Punkte: Der Ertrag skaliert mit dem Volumen, weil die Entwicklungskosten fix bleiben und die Ersparnis linear mit dem Verkehr wächst. Und <em>fachliches</em> Routing — Recht hierhin, Code dorthin — funktioniert erkennbar besser als ein naiver Schwierigkeitswert. Mehrere Entwickler berichten von Erfolg mit fest zugeordneten Modellen pro Agentenrolle. Das ist streng genommen kein Routing mehr, sondern Architektur.</p>
+<h2>Was die Zahlen hergeben — und was nicht</h2>
+<p>Die belastbarste unabhängige Quelle bleibt das <strong>RouteLLM</strong>-Paper von LMSYS und Berkeley. Es zeigt eindrucksvolle Werte: 95 Prozent der Qualität des starken Modells bei nur 26 Prozent der Aufrufe an dieses Modell, ein Kostenfaktor von 3,66. Entscheidend ist aber die Streuung, die in Marketingfolien selten auftaucht: Diese Werte gelten für den Benchmark MT-Bench. Auf MMLU und GSM8K fielen die Einsparungen auf 45 beziehungsweise 35 Prozent. Routing-Ersparnis ist stark aufgabenabhängig und lässt sich nicht pauschal auf die eigene Anwendung übertragen.</p>
+<p>Anbieterzahlen sind entsprechend vorsichtig zu lesen. Martian wirbt mit bis zu 98 Prozent Kostenersparnis in „optimierten Produktionsumgebungen“ — eine Herstellerangabe ohne unabhängige Prüfung. NotDiamond verweist auf eine einzelne Kundenfallstudie. Dass die Forschung dieses Problem erkannt hat, zeigt <strong>RouterArena</strong>, eine 2026 vorgestellte offene Vergleichsplattform, die Router über neun Domänen hinweg an fünf Maßstäben misst — Genauigkeit, Kosten, Optimalität, Robustheit, Latenz. Sie existiert genau deshalb, weil die Anbieterzahlen bislang nicht vergleichbar waren.</p>
+<p>Neuere Arbeiten aus 2026 beschreiben zudem zwei Fehlermodi, die in keiner Verkaufsunterlage stehen: den „Routing Collapse“, bei dem ein Router mit der Zeit auf wenige Modelle degeneriert, und gezielte Angriffe, bei denen Prompts so gestaltet werden, dass sie absichtlich falsch geroutet werden — etwa auf das billigste, schwächste Modell.</p>
+<h2>Wenn der Vermittler selbst ausfällt</h2>
+<p>Der zusätzliche Netzwerksprung ist meist unkritisch; Anbieter wie Bifrost werben mit Verzögerungen im Mikrosekundenbereich, was gegenüber der Modellantwortzeit nicht ins Gewicht fällt. Das reale Risiko ist ein anderes: Die Schicht, die man gegen Anbieterausfälle einzieht, wird selbst zum Einzelpunkt des Versagens.</p>
+<p>Für OpenRouter sind mehrere Störungen dokumentiert, darunter ein rund 50-minütiger Datenbankausfall im August 2025 und ein 38-minütiger im Februar 2026. Drittanbieter-Überwachungsdienste zählen für die vergangenen zwölf Monate mehrere Dutzend kleinere Störungen — Zahlen, die nicht vom Anbieter selbst stammen und entsprechend unscharf sind. Die Konsequenz ist trotzdem eindeutig: Ein Gateway ohne konfigurierten Mehr-Anbieter-Rückfall verschlechtert die Verfügbarkeit, statt sie zu verbessern.</p>
+<h2>Die Anbieter bauen es inzwischen selbst ein</h2>
+<p>Die vielleicht wichtigste Verschiebung kommt nicht von den Gateway-Firmen, sondern von den Modellanbietern. OpenAI führte mit GPT-5 im August 2025 einen internen Auto-Router ein — und erlebte prompt einen Vertrauensverlust: Nutzer empfanden das Modell als schwächer, Sam Altman räumte Fehlfunktionen des Umschalters ein, OpenAI musste vorübergehend zurückrudern. Anthropic geht in Claude Code einen ähnlichen Weg mit automatischer Zuweisung von Hintergrundaufgaben an kleinere Modelle.</p>
+<p>Dazu kommt die Preisseite. Wie wir <a href="/editions/2026-07-31.html#art-4">in unserer Ausgabe vom 31. Juli</a> berichteten, hat OpenAI am 30. Juli den Preis seines günstigsten Modells um 80 Prozent gesenkt und Geschwindigkeit als separat bepreiste Stufe eingeführt. Je feiner und billiger die Anbieter ihre eigenen Stufen selbst staffeln, desto weniger Marge bleibt für einen externen Vermittler, der genau diese Auswahl treffen wollte.</p>
+<h2>Was das für die Entscheidung heißt</h2>
+<p>Die ehrliche Zusammenfassung trennt zwei Dinge, die im Marketing verschmelzen: <strong>Gateway</strong> und <strong>dynamisches Routing</strong>. Das eine ist eine Infrastrukturentscheidung, das andere eine Optimierungswette.</p>
+<p>Für ein Gateway sprechen vier klare Kriterien: mehrere gleichzeitig genutzte Anbieter, ausreichendes Volumen, damit sich der Betriebsaufwand rechnet, Anforderungen an Datenresidenz und Prüfbarkeit — und Mandantenfähigkeit, wenn Kosten pro Kunde oder Team zugeordnet werden müssen. Der Compliance-Punkt hat dabei gerade an Gewicht gewonnen: Seit dem 2. August 2026 greifen die Durchsetzungsbefugnisse zum EU AI Act, und eine zentrale Schicht mit Protokollierung, Rechteverwaltung und Regeln darüber, welcher Anbieter welche Daten sehen darf, ist der pragmatischste Ort, diese Nachweise zu erzeugen.</p>
+<p>Gegen dynamisches Routing sprechen ebenso klare Gegenanzeigen: kleine Volumina, agentische Abläufe mit starker Cache-Abhängigkeit und Anwendungen, deren Qualität an Modellkonsistenz hängt.</p>
+<p>Die praktische Empfehlung, die sich aus Forschung und Praxisberichten gleichermaßen ergibt, ist unspektakulär: Die Vermittlungsschicht ja — für Ausweichpfade, Kostenzuordnung und Nachweispflichten. Die automatische Modellwahl eher nein, jedenfalls nicht als Erstes. Wer sparen will, kommt mit einer bewussten, festen Zuordnung von Modell zu Aufgabe weiter als mit einem Router, der raten muss, wie schwer eine Frage wird, bevor er sie gelesen hat.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://manifest.build/blog/why-we-deprecated-our-llm-router/" rel="noopener noreferrer external" target="_blank">Manifest — Why we deprecated our LLM router</a></li>
+            
+            <li><a href="https://news.ycombinator.com/item?id=49126630" rel="noopener noreferrer external" target="_blank">Hacker News — Diskussion „Everyone is building LLM routers, we deprecated ours“</a></li>
+            
+            <li><a href="https://siliconangle.com/2026/05/26/openrouter-raises-113m-bring-order-enterprise-ai-inference-routing/" rel="noopener noreferrer external" target="_blank">SiliconANGLE — OpenRouter raises $113M to bring order to enterprise AI inference routing</a></li>
+            
+            <li><a href="https://openrouter.ai/blog/insights/reliability-failover/" rel="noopener noreferrer external" target="_blank">OpenRouter — Reliability and Failover</a></li>
+            
+            <li><a href="https://arxiv.org/pdf/2406.18665" rel="noopener noreferrer external" target="_blank">LMSYS/Berkeley — RouteLLM: Learning to Route LLMs with Preference Data (arXiv 2406.18665)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2510.00202" rel="noopener noreferrer external" target="_blank">RouterArena — An Open Platform for Comprehensive Comparison of LLM Routers (arXiv 2510.00202)</a></li>
+            
+            <li><a href="https://agentgateway.dev/docs/standalone/main/about/introduction/" rel="noopener noreferrer external" target="_blank">agentgateway — Projekt-Einführung (Linux Foundation, Apache 2.0)</a></li>
+            
+            <li><a href="https://www.solo.io/blog/introducing-solo-enterprise-for-agentgateway" rel="noopener noreferrer external" target="_blank">Solo.io — Introducing Solo Enterprise for agentgateway</a></li>
+            
+            <li><a href="https://venturebeat.com/technology/ai-price-wars-openai-cuts-gpt-5-6-luna-prices-by-80-as-model-competition-shifts-toward-cost" rel="noopener noreferrer external" target="_blank">VentureBeat — AI price wars: OpenAI cuts GPT-5.6 Luna prices by 80%</a></li>
+            
+            <li><a href="https://www.fortune.com/2025/08/12/openai-gpt-5-model-router-backlash-ai-future" rel="noopener noreferrer external" target="_blank">Fortune — OpenAI&#39;s GPT-5 model router backlash</a></li>
+            
+            <li><a href="https://www.requesty.ai/blog/eu-compliant-ai-routing-gdpr-eu-ai-act-why-requesty-is-the-safe-choice" rel="noopener noreferrer external" target="_blank">Requesty — EU Compliant AI Routing: GDPR and the EU AI Act</a></li>
+            
+            <li><a href="https://guptadeepak.com/tools/top-5-ai-gateways-2026/" rel="noopener noreferrer external" target="_blank">Deepak Gupta — Top 5 AI Gateways 2026 (Kong, Portkey, LiteLLM, Cloudflare, Helicone)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
