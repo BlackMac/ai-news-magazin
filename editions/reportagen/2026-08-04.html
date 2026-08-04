@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Schwachstellen-Inflation: Wenn KI mehr Lücken findet, als irgendjemand einordnen kann</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-04.html">&larr; Zur&uuml;ck zur Ausgabe vom 4. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Die Schwachstellen-Inflation: Wenn KI mehr Lücken findet, als irgendjemand einordnen kann</h1>
+    
+    <p class="reportage-teaser">23.000 Funde, 126 veröffentlichte CVEs, ein einziger nachweislich ausgenutzter Fall — das ist die Bilanz von Anthropics Project Glasswing nach knapp vier Monaten. Die befürchtete Angriffswelle durch KI-gefundene Schwachstellen ist in den Daten nicht zu sehen. Ein anderes Problem dafür umso deutlicher: Die Institutionen, die Schwachstellen bewerten und einordnen, haben die Skalierung bereits aufgegeben.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-04">4. August 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Die Welle, die nicht kam</h2>
+<p>Als Anthropic am 7. April 2026 das <em>Project Glasswing</em> vorstellte, war die Reaktion in der Sicherheitsbranche eine Mischung aus Faszination und Alarm. Ein unveröffentlichtes Modell namens Claude Mythos Preview sollte selbstständig kritische Software durchsuchen: Code lesen, Eingaben durchprobieren, über Speicherlayouts nachdenken und für gefundene Lücken einen funktionierenden Nachweis produzieren. Die Partnerliste las sich wie ein Branchenverzeichnis — AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, die Linux Foundation, Microsoft, NVIDIA und Palo Alto Networks. Anthropic selbst formulierte den offensichtlichen Einwand mit ungewöhnlicher Klarheit: Kein Unternehmen, das eigene eingeschlossen, habe bislang Schutzmechanismen entwickelt, die zuverlässig genug wären, um den böswilligen Einsatz von Modellen dieser Leistungsklasse zu verhindern.</p>
+<p>Die naheliegende Befürchtung lautete: Wenn eine Maschine Schwachstellen im Industriemaßstab findet, dann finden Angreifer sie auch — und die Zeit zwischen Entdeckung und Ausnutzung schrumpft gegen null.</p>
+<p>Vier Monate später gibt es dazu belastbare Zahlen, und sie sagen etwas anderes. Der Sicherheitsdatenanbieter <strong>VulnCheck</strong> hat für seinen Halbjahresbericht <em>State of Exploitation 1H-2026</em>, veröffentlicht am 29. Juli, alle Schwachstellen ausgewertet, die einer KI-gestützten Entdeckung zugeschrieben werden — aus Project Glasswing und der Berkeley Vulnerability Research Initiative. Von <strong>1.061 solchen Schwachstellen wurden 14 nachweislich ausgenutzt</strong>. Das sind 1,3 Prozent — und damit exakt die Quote, die VulnCheck auch über den gesamten Schwachstellenbestand hinweg misst. KI-gefundene Lücken werden also weder häufiger noch seltener angegriffen als konventionell gefundene. Der Forscher Patrick Garrity zieht daraus den Schluss, die Daten sprächen eher dafür, dass Spitzenmodelle den Verteidigern einen Vorteil verschaffen als den Angreifern.</p>
+<h2>Was Glasswing tatsächlich produziert hat</h2>
+<p>Der Blick auf Glasswing im Einzelnen ist noch aufschlussreicher — und ernüchternder, als die Ankündigung erwarten ließ. Anthropic hat nach eigenen Angaben über 1.000 Open-Source-Projekte gescannt und dabei <strong>23.019 Auffälligkeiten</strong> gemeldet, von denen 6.202 als hoch oder kritisch eingestuft wurden. Allein in einem einzigen Monat kamen die beteiligten Partner auf mehr als 10.000 Funde dieser Schweregrade.</p>
+<p>Von diesen 23.000 Funden haben es nach VulnCheck-Zählung <strong>126 zu einer veröffentlichten CVE-Nummer</strong> gebracht. Eine einzige gilt als in freier Wildbahn ausgenutzt.</p>
+<p>Diese Zahlenreihe ist der Kern der Geschichte, und sie lässt sich in zwei Richtungen lesen. Die wohlwollende Lesart: Die meisten Funde waren echt, aber unbedeutend — Lücken in selten genutzten Codepfaden, theoretisch ausnutzbar, praktisch uninteressant. Die skeptische Lesart: Ein erheblicher Teil war schlicht nicht belastbar genug, um den Weg durch eine Verifikation zu überstehen. Beide Lesarten führen zum selben betriebswirtschaftlichen Befund. Ein Fund ist kein Ergebnis. Ein Ergebnis ist ein Fund, den jemand geprüft, eingeordnet, gemeldet und behoben hat — und genau dieser Teil der Kette ist nicht mitskaliert.</p>
+<p>Anthropic benennt das selbst: Die zentrale Schwierigkeit habe sich vom Finden zum Verifizieren, Offenlegen und Patchen verlagert. Für einen von Mythos gefundenen Fehler hoher oder kritischer Schwere vergehen im Durchschnitt <strong>zwei Wochen</strong> bis zum Patch. Zwei Wochen pro Fund, bei 6.202 hochkritischen Funden — das ist keine Kapazitätsfrage mehr, das ist eine Größenordnungsfrage.</p>
+<h2>Die Institution, die aufgegeben hat</h2>
+<p>Der entscheidende Engpass liegt an einer Stelle, die in der öffentlichen Debatte kaum vorkommt: bei der Bewertung.</p>
+<p>Damit eine gemeldete Schwachstelle für Unternehmen brauchbar wird, braucht sie mehr als eine Nummer. Sie braucht eine Einordnung: Wie schwer wiegt sie? Welche Produkte und Versionen sind betroffen? Wie lässt sie sich ausnutzen? Diese Anreicherung leistete jahrzehntelang die <strong>National Vulnerability Database</strong> (NVD) des US-Normeninstituts NIST — faktisch die Referenzdatenbank der ganzen Branche, auf der Schwachstellenscanner, Ticketsysteme und Compliance-Werkzeuge weltweit aufsetzen.</p>
+<p>Diese Referenz gibt es in ihrer bisherigen Form nicht mehr. Am <strong>15. April 2026</strong> hat NIST die Arbeitsweise der NVD grundlegend umgestellt, ausdrücklich wegen des beispiellosen Anstiegs der CVE-Zahlen. Die Einreichungen sind zwischen 2020 und 2025 um <strong>263 Prozent</strong> gewachsen, für 2026 werden mehr als 60.000 Offenlegungen erwartet, der Rückstand unbearbeiteter Einträge liegt bei über 27.000. Die Konsequenz: NIST reichert nur noch CVEs an, die im KEV-Katalog der US-Cybersicherheitsbehörde CISA stehen, Bundessoftware betreffen oder nach der Executive Order 14028 als kritisch gelten. Branchenschätzungen zufolge deckt das künftig <strong>15 bis 20 Prozent</strong> des Volumens ab. Rund 29.000 Altfälle mit Veröffentlichungsdatum vor dem 1. März 2026 sind als <em>Not Scheduled</em> eingestuft — sie werden also nicht mehr bearbeitet.</p>
+<p>Für Unternehmen heißt das im Klartext: Für vier von fünf neuen Schwachstellen gibt es künftig keinen offiziellen Schweregrad mehr. Die Priorisierungsarbeit, die bisher unsichtbar von einer amerikanischen Behörde geleistet wurde, ist ins eigene Haus gewandert. Wer sein Schwachstellenmanagement auf CVSS-Werte aus der NVD gestützt hat — und das sind die meisten —, hat still einen Lieferanten verloren.</p>
+<h2>Warum die Angreifer trotzdem schneller werden</h2>
+<p>Es wäre falsch, aus der niedrigen Ausnutzungsquote Entwarnung abzuleiten. Zwei Zahlen aus demselben VulnCheck-Bericht zeigen, warum.</p>
+<p>Erstens: Die mittlere Zeitspanne zwischen Veröffentlichung einer CVE und der bestätigten Ausnutzung ist von <strong>120 Tagen im Jahr 2025 auf 80 Tage</strong> im ersten Halbjahr 2026 gefallen. Was ausgenutzt wird, wird also ein Drittel schneller ausgenutzt.</p>
+<p>Zweitens: <strong>23,4 Prozent</strong> der tatsächlich angegriffenen Schwachstellen wurden am Tag der Veröffentlichung oder davor bereits ausgenutzt. Bei fast jeder vierten relevanten Lücke ist der Angreifer also nicht später dran als der Verteidiger, sondern früher — Patchen ist dort per Definition zu spät.</p>
+<p>Das Verhältnis von tatsächlich ausgenutzten zu insgesamt gemeldeten Schwachstellen fiel derweil auf <strong>1,4 Prozent</strong>, den niedrigsten je gemessenen Wert. Beide Bewegungen zusammen ergeben das eigentliche Bild: Der Heuhaufen wächst schneller als die Zahl der Nadeln, und die Nadeln, die es gibt, werden schneller gefunden. Das ist keine Entwarnung, sondern eine Verschiebung der Anforderung — weg von Vollständigkeit, hin zu Treffsicherheit.</p>
+<p>Wo die Nadeln liegen, ist dabei erstaunlich stabil: Content-Management-Systeme machten mit 163 Fällen ein Drittel aller bekannten Ausnutzungen aus, angeführt von WordPress-Plugins; dahinter folgen Netzwerk-Randgeräte mit 68, Betriebssysteme mit 44 und Serversoftware mit 40. Eine neue Kategorie kommt hinzu: die KI-Infrastruktur selbst. VulnCheck verzeichnet Angriffe auf Werkzeuge zum Modellbau, Skalierungsplattformen, KI-Gateways und Automatisierungsabläufe — beim Werkzeug LangFlow etwa mit Diebstahl von Zugangsdaten und Versuchen, sich im Netz weiterzubewegen.</p>
+<h2>Die Ökonomie der Meldung kippt</h2>
+<p>Parallel bricht am anderen Ende der Kette ein Mechanismus weg, der zwei Jahrzehnte lang funktioniert hat. Prämienprogramme beruhen auf einer Asymmetrie: Eine Schwachstelle zu finden war teuer, sie zu prüfen vergleichsweise billig. Sprachmodelle haben diese Asymmetrie umgedreht. Einen plausibel formulierten Bericht erzeugt man in Sekunden; ihn zu widerlegen kostet weiterhin Stunden qualifizierter Arbeit.</p>
+<p>Die Folgen sind seit anderthalb Jahren sichtbar. Das Projekt <em>curl</em> stellte sein Prämienprogramm Ende Januar 2026 ein — in sechs Jahren hatte kein einziger KI-generierter Bericht eine echte Lücke aufgedeckt. Der Internet Bug Bounty setzte die Annahme zeitweise aus. Und am 3. August zog <strong>Apple</strong> nach: Obergrenze für Einreichungen pro Person, 30 Tage Wartezeit bei Erreichen des Limits, 180 Tage Sperre bei wiederholten ungeprüften KI-Berichten, dauerhafter Ausschluss im Wiederholungsfall.</p>
+<p>Apples zweite Maßnahme ist die interessantere und wird meist überlesen: Der Konzern erhöht gleichzeitig die Höchstprämie auf über fünf Millionen Dollar und führt einen Mechanismus namens <em>target flags</em> ein — einen maschinell prüfbaren Nachweis, dass ein gemeldeter Angriff tatsächlich funktioniert. Das ist die strukturell richtige Antwort auf das Problem. Nicht die Menge der Meldungen begrenzen, sondern den Beweis automatisieren, damit Prüfaufwand wieder mit Meldeaufwand mitskaliert.</p>
+<h2>Was Entscheider daraus mitnehmen sollten</h2>
+<p>Drei Konsequenzen sind unmittelbar handlungsrelevant.</p>
+<p><strong>Erstens: Die Priorisierungslogik muss umgestellt werden.</strong> Wenn für 80 Prozent der neuen Schwachstellen kein offizieller Schweregrad mehr kommt, ist ein Prozess, der auf CVSS-Werten aus der NVD beruht, faktisch blind. Die Ersatzsignale existieren und sind kostenlos: der <em>KEV</em>-Katalog der CISA listet Schwachstellen, für die eine Ausnutzung tatsächlich belegt ist; <em>EPSS</em> schätzt für jede CVE die Wahrscheinlichkeit einer Ausnutzung in den nächsten 30 Tagen. Beides sind Wahrscheinlichkeits- statt Schweregradmaße — und damit näher an der Frage, die ein Unternehmen wirklich beantworten muss.</p>
+<p><strong>Zweitens: Vollständigkeit ist als Ziel gestorben.</strong> Bei über 60.000 Schwachstellen im Jahr und einer Ausnutzungsquote von 1,4 Prozent ist ein Rückstand von null keine erreichbare Kennzahl mehr, sondern eine, die Aufmerksamkeit von den relevanten Fällen abzieht. Die sinnvolle Steuerungsgröße ist nicht die Zahl offener Findings, sondern die Zeit bis zum Patch bei den wenigen Lücken, die nachweislich angegriffen werden. Wer den KEV-Katalog binnen 72 Stunden abarbeitet, ist besser aufgestellt als jemand, der einen Berg unpriorisierter Meldungen langsam abträgt.</p>
+<p><strong>Drittens: Der Zulieferer muss mitgedacht werden.</strong> Ein Drittel der Ausnutzungen betrifft Content-Management-Systeme, überwiegend über Plugins — also Software, die niemand im Unternehmen bewusst ausgewählt hat und für die es oft keinen Verantwortlichen gibt. Und die neue Kategorie KI-Infrastruktur betrifft ausgerechnet jene Werkzeuge, die in den letzten achtzehn Monaten am schnellsten und am wenigsten kontrolliert in Unternehmen eingezogen sind.</p>
+<p>Die eigentliche Pointe des Halbjahres ist damit nicht die, die man im April erwartet hätte. Die KI hat die Angriffsseite nicht dramatisch verstärkt. Sie hat die Verteidigungsseite mit mehr Information versorgt, als deren Institutionen verarbeiten können — und ausgerechnet in diesem Moment hat die wichtigste dieser Institutionen ihre Skalierungsambition offiziell aufgegeben. Das Nadelöhr liegt nicht mehr im Finden. Es liegt im Einordnen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.vulncheck.com/blog/state-of-exploitation-1h-2026" rel="noopener noreferrer external" target="_blank">VulnCheck — State of Exploitation 1H-2026</a></li>
+            
+            <li><a href="https://www.infosecurity-magazine.com/news/one-percent-ai-vulnerabilities/" rel="noopener noreferrer external" target="_blank">Infosecurity Magazine — Just 1% of AI-Discovered Vulnerabilities Exploited in the Wild</a></li>
+            
+            <li><a href="https://www.anthropic.com/research/glasswing-initial-update" rel="noopener noreferrer external" target="_blank">Anthropic — Project Glasswing: An initial update</a></li>
+            
+            <li><a href="https://www.helpnetsecurity.com/2026/05/26/anthropic-project-glasswing-update/" rel="noopener noreferrer external" target="_blank">Help Net Security — Anthropic: Claude Mythos identified 10,000+ software flaws</a></li>
+            
+            <li><a href="https://www.nist.gov/news-events/news/2026/04/nist-updates-nvd-operations-address-record-cve-growth" rel="noopener noreferrer external" target="_blank">NIST — NIST Updates NVD Operations to Address Record CVE Growth</a></li>
+            
+            <li><a href="https://www.infosecurity-magazine.com/news/nvd-enrichment-premarch-2026/" rel="noopener noreferrer external" target="_blank">Infosecurity Magazine — NIST Drops NVD Enrichment for Pre-March 2026 Vulnerabilities</a></li>
+            
+            <li><a href="https://www.nowsecure.com/blog/2026/06/03/the-nvd-backlog-is-a-symptom-vulnerability-management-has-a-scaling-problem/" rel="noopener noreferrer external" target="_blank">NowSecure — The NVD Backlog Is a Symptom. Vulnerability Management Has a Scaling Problem</a></li>
+            
+            <li><a href="https://cyberscoop.com/ai-assisted-security-tools-are-finding-more-bugs-but-the-threat-level-has-not-changed/" rel="noopener noreferrer external" target="_blank">CyberScoop — AI-assisted security tools are finding more bugs, but the threat level has not changed</a></li>
+            
+            <li><a href="https://www.heise.de/news/Apple-Limit-fuer-Bug-Meldungen-pro-Person-11395377.html" rel="noopener noreferrer external" target="_blank">heise online — KI-generierte Bugs: Apple zieht die Notbremse</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
