@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wer bezahlt, wenn nur noch Maschinen lesen: Die Betriebskosten des offenen Webs in der Agenten-Ära</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-09.html">&larr; Zur&uuml;ck zur Ausgabe vom 9. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Wer bezahlt, wenn nur noch Maschinen lesen: Die Betriebskosten des offenen Webs in der Agenten-Ära</h1>
+    
+    <p class="reportage-teaser">Ein Gentoo-Entwickler nimmt sein Bugzilla vom Netz, weil Scraper es unbenutzbar gemacht haben. Cloudflares Finanzchef prognostiziert, Menschen würden im Netz zum Rundungsfehler. Dahinter steckt eine Rechnung, die bisher niemand aufmacht: Wer trägt die Serverkosten, wenn der Leser eine Maschine ist — und was heißt das für ein Unternehmen, dessen Inhalte im Netz stehen?</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-09">9. August 2026</time>
+         &middot; 10 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Drei Arten von Maschinen, drei völlig verschiedene Rechnungen</h2>
+<p>Wer über „Bot-Traffic&quot; spricht, wirft in der Regel drei Dinge zusammen, die betriebswirtschaftlich und rechtlich nichts miteinander zu tun haben. Die Unterscheidung ist der Schlüssel zu jeder vernünftigen Entscheidung.</p>
+<p>Der <strong>Trainings-Crawler</strong> lädt Inhalte herunter, um daraus ein Modell zu bauen. Er kommt in Wellen, er nimmt alles mit, und er hat keinerlei Interesse daran, dass jemand die Seite später besucht. Für den Betreiber ist er reiner Aufwand ohne Gegenwert. Erschwerend kommt hinzu, dass Bandbreite für die Crawler-Betreiber praktisch nichts kostet — es gibt also keinen ökonomischen Anreiz, effizient zu crawlen oder Ergebnisse zu cachen.</p>
+<p>Der <strong>Retrieval-Abruf</strong> — was in der Branche RAG heißt — holt eine Seite in dem Moment, in dem ein Mensch eine Frage stellt, und verarbeitet sie zu einer Antwort. Er ist einzeln betrachtet günstig, aber er ersetzt den Besuch: Die Antwort verbraucht den Inhalt, ohne ihn zu verlinken.</p>
+<p>Der <strong>Nutzeragent</strong> schließlich ist ein Browser, der im Auftrag eines konkreten Menschen handelt — er bucht, vergleicht, füllt Formulare aus. Er verhält sich wie ein Besucher, nur eben maschinenschnell und beliebig oft. Ausgerechnet dieser dritte Typ ist, wie sich gerade herausgestellt hat, juristisch am schwersten abzuwehren.</p>
+<h2>Das Ausmaß: Die Mehrheit ist keine Prognose mehr</h2>
+<p>Dass Maschinen die Mehrheit im Web stellen, ist keine Zukunftsaussage mehr, sondern eine Messung. Der unabhängige Bad Bot Report 2026 von Imperva/Thales beziffert den automatisierten Anteil am Web-Traffic für 2025 auf 53 Prozent — nach 51 Prozent im Vorjahr —, davon 40 Prozentpunkte auf Bots, die der Bericht als schädlich einstuft, und 13 auf gutartige Automatisierung.</p>
+<p>Interessanter als die Gesamtzahl ist die Verschiebung im Inneren. Nach Cloudflares eigener Auswertung war im Juni 2026 gut die Hälfte aller Crawler-Anfragen reines Trainings-Crawling; ein Jahr zuvor lag dieser Anteil bei rund einem Fünftel. Hier ist Vorsicht geboten: Cloudflare veröffentlicht denselben Sachverhalt in verschiedenen Berichten mit deutlich abweichenden Prozentsätzen, weil einmal Anfragen und einmal Crawler-Typen gezählt werden. Die Richtung ist eindeutig, die exakte Zahl ist es nicht — und wer sie in eine Präsentation schreibt, sollte die Erhebungsmethode dazuschreiben.</p>
+<h2>Was es kostet: Die Fälle, in denen jemand nachgerechnet hat</h2>
+<p>Die aussagekräftigsten Zahlen kommen von Organisationen, die ihre Infrastrukturkosten offenlegen müssen. Die Wikimedia Foundation dokumentierte im April 2025, dass ihr Bandbreitenverbrauch für Multimedia-Dateien seit Januar 2024 um 50 Prozent gestiegen war — im Wesentlichen durch KI-Scraper. Die eigentlich bemerkenswerte Zahl steht daneben: Bots verursachen rund 35 Prozent der Seitenaufrufe, aber mindestens 65 Prozent des teuren Datacenter-Traffics.</p>
+<p>Der Grund dafür ist lehrreich und gilt für jede Website. Menschen rufen populäre Inhalte ab, die im Cache liegen und deshalb billig sind. Crawler arbeiten den Long Tail ab — genau jene Seiten, die niemand cached und die den Ursprungsserver jedes Mal neu belasten. Ein Crawler ist also nicht einfach ein besonders fleißiger Besucher. Er ist ein Besucher, der systematisch die teuersten Anfragen stellt. Wer bei Gentoo nachschaut, findet dasselbe Muster: Nicht das Ausliefern von Seiten brach zusammen, sondern die Datenbank hinter der Bugzilla-Suche.</p>
+<p>Bei kleineren Betreibern wird daraus schnell ein Existenzproblem. Die Sieben-Personen-Firma Triplegangers berichtete im Januar 2025, OpenAIs Crawler habe über rund 600 IP-Adressen zehntausende Anfragen geschickt und die Seite lahmgelegt — der Gründer verglich es mit einem DDoS-Angriff. SourceHut-Gründer Drew DeVault schrieb im März 2025, er verbringe in manchen Wochen zwischen 20 und 100 Prozent seiner Arbeitszeit mit der Abwehr von Crawlern. iFixit-CEO Kyle Wiens meldete über eine Million Anfragen eines einzelnen Anbieter-Bots binnen 24 Stunden — obwohl die eigenen Nutzungsbedingungen KI-Training ausdrücklich untersagen.</p>
+<p>Die zweite Kostenseite ist die Asymmetrie zwischen Nehmen und Zurückgeben. Cloudflare misst sie als Verhältnis von Crawls zu zurückgeschickten Besuchern. Googles Crawler liegt bei ungefähr fünf zu eins — kein Zufall, denn das Geschäftsmodell der Suche beruht darauf, Klicks weiterzureichen. Die reinen Modellanbieter liegen um Größenordnungen darüber; Anthropics Crawler war über den gesamten Beobachtungszeitraum der schlechteste Wert im Feld, mit Werten im fünf- bis sechsstelligen Bereich pro zurückgeschicktem Besucher. Diese Kennzahl schwankt allerdings wochenweise dramatisch, und Cloudflare weist selbst darauf hin. Als Größenordnung taugt sie, als exakte Zahl nicht.</p>
+<h2>Die Gegenwehr funktioniert überall dort, wo sie nicht freiwillig ist</h2>
+<p>Das Werkzeug, an das die meisten zuerst denken, ist das schwächste. <code>robots.txt</code> ist ein freiwilliger Standard ohne rechtliche Bindungswirkung. Google stuft seine nutzerausgelösten Abrufe ausdrücklich nicht als Crawler ein und respektiert die Datei dort deshalb gar nicht erst. Cloudflare dokumentierte im August 2025, dass Perplexity verschleierte Crawler einsetzte, die Sperren umgingen.</p>
+<p>Das gilt auch für den ambitioniertesten Standardisierungsversuch. Cloudflares Content Signals Policy erweitert <code>robots.txt</code> um maschinenlesbare Nutzungssignale — „durchsuchen ja, trainieren nein&quot; — und ist inzwischen automatisch für über 3,8 Millionen Domains aktiv. Nur: Nach Auskunft von Googles John Mueller ist kein einziger großer Crawler bekannt, der das Signal auswertet. Es ist der klarste vorliegende Beleg dafür, dass Technik ohne Durchsetzung folgenlos bleibt.</p>
+<p>Was tatsächlich wirkt, wirkt entweder über Rechenzwang oder über Marktmacht. Das Proof-of-Work-Gate <strong>Anubis</strong> zwingt jeden Client zu einer kleinen Rechenaufgabe, bevor er Inhalte bekommt — für einen Menschen unmerklich, für millionenfaches Crawling ruinös. GNOME, die Linux-Kernel-Server, FFmpeg, Wine und FreeCAD setzen es ein. Es bleibt aber eine Lösung für technisch versierte Betreiber. Der zweite wirksame Hebel ist Cloudflare selbst: Seit dem 1. Juli 2025 werden KI-Crawler bei Neukunden standardmäßig blockiert. Das funktioniert — und genau darin liegt das Unbehagen, denn es verlagert eine Grundsatzentscheidung über den Zugang zum Web an einen einzelnen Infrastrukturanbieter.</p>
+<p>Kryptografisch signierte Bot-Identitäten (<strong>Web Bot Auth</strong>) sind der sauberste Ansatz, aber sie stehen erst am Anfang: Cloudflare unterstützt sie seit März 2026 produktiv, die IETF-Arbeit läuft seit Anfang 2026. Das ist eine Perspektive für 2027, kein Werkzeug für das laufende Quartal.</p>
+<h2>Die Rechtslage: Ein Hebel ist gerade abgebrochen</h2>
+<p>Zwei Entwicklungen dieses Sommers verändern die Ausgangslage.</p>
+<p>Die erste ist europäisch: Seit dem 2. August 2026 setzt die EU-Kommission die Pflichten für Allzweck-KI-Modelle aus dem AI Act durch. Anbieter müssen eine Urheberrechts-Compliance-Policy vorhalten, die maschinenlesbare Opt-outs nach der TDM-Regelung respektiert. Bußgelder von bis zu 15 Millionen Euro oder drei Prozent des Jahresumsatzes stehen im Raum. Ob <code>robots.txt</code> als bindendes Opt-out im Sinne dieser Norm zählt, ist die entscheidende offene Frage — die Durchsetzungspraxis beginnt gerade erst.</p>
+<p>Die zweite ist amerikanisch und für Betreiber unbequem. Am 4. August 2026 hob der Ninth Circuit die einstweilige Verfügung auf, mit der Amazon Perplexitys Comet-Browser ausgesperrt hatte. Die Begründung: Weil der Agent auf dem Gerät des Nutzers Bildschirminhalte erfasst und nur Navigationsanweisungen zurückschickt, greift im Sinne des Computer Fraud and Abuse Act der Nutzer zu, nicht Perplexity. Das Gericht hielt ausdrücklich fest, es gebe kaum Rechtsprechung dazu, wie Verantwortung bei KI-Agenten zuzuordnen sei, und entschied im Zweifel für den Beklagten. Markenrechtliche Ansprüche bleiben bestehen, der Fall geht zurück an die erste Instanz.</p>
+<p>Praktisch heißt das: Der klassische Hebel gegen Scraping — „unbefugter Zugriff&quot; — greift gegen Trainings-Crawler weiterhin, gegen Agenten im Nutzerauftrag aber offenbar nicht. Wer sein Geschäftsmodell darauf gebaut hat, automatisierte Zugriffe rechtlich fernzuhalten, muss neu rechnen. Die großen Verfahren, die das grundsätzlich klären könnten — die New York Times gegen OpenAI, Reddit gegen Anthropic und gegen Perplexity —, stecken sämtlich in der Beweisaufnahme. Vor 2027 ist mit einer Sachentscheidung nicht zu rechnen.</p>
+<h2>Der eigentliche Bruch liegt im Geschäftsmodell</h2>
+<p>Das Web wurde über Klicks finanziert. Diese Grundlage erodiert unabhängig von den Serverkosten. Nach SparkToro-Analysen endeten in den ersten vier Monaten 2026 rund 68 Prozent aller Google-Suchen in den USA ohne einen einzigen Klick — 2019 waren es 49 Prozent. Kleine Publisher verloren binnen zwei Jahren etwa 60 Prozent ihres Google-Referral-Traffics.</p>
+<p>Der Extremfall ist Stack Overflow. Die Zahl neu gestellter Fragen fiel von über 207.000 im Monat auf ihrem Höhepunkt 2014 auf 1.442 im Juli 2026 — ein Rückgang um gut 99 Prozent. Das ist keine Kostenfrage mehr, sondern das Verschwinden eines Nutzungsverhaltens. Wir haben diese Seite der Rechnung in unserer Reportage <a href="/editions/reportagen/2026-07-28.html">„Antwort statt Klick&quot;</a> behandelt; hier geht es um das Gegenstück, das dabei meist untergeht: Während die Einnahmen wegbrechen, steigen die Kosten der Auslieferung.</p>
+<h2>Was ein Unternehmen 2026 tatsächlich entscheiden muss</h2>
+<p>Die Frage lautet nicht mehr „blocken oder nicht&quot;. Sie lautet: pro Crawler-Typ entscheiden.</p>
+<p>Bei <strong>Trainings-Crawlern</strong> ist Blocken der Normalfall, weil kein Gegenwert existiert. Wer stattdessen lizenzieren will, sollte die Größenordnungen kennen: Reddit nimmt von Google rund 60 Millionen Dollar im Jahr ein, News Corp von OpenAI etwa 250 Millionen über fünf Jahre. Das sind Zahlen für Inhalte-Bestände, die einmalig sind. Für die meisten SaaS-Unternehmen ist das kein realistischer Pfad.</p>
+<p>Bei <strong>Retrieval-Abrufen</strong> ist Blocken oft die falsche Reaktion. In den Antworten der Assistenten vorzukommen, hat einen eigenen Wert — es ist die Sichtbarkeitsfrage, die vor zehn Jahren SEO hieß. Wer hier pauschal sperrt, spart Bandbreite und verschwindet aus dem Kanal, über den Kunden künftig suchen.</p>
+<p>Bei <strong>Nutzeragenten</strong> ist Blocken nach der Ninth-Circuit-Linie ohnehin fragil. Die konstruktive Antwort heißt, agentenlesbar zu werden: strukturierte, authentifizierte Schnittstellen statt HTML, das ein Agent mühsam auseinandernimmt. Genau dafür hat sich das Model Context Protocol als De-facto-Standard etabliert — Anthropic, OpenAI und Google DeepMind unterstützen es nativ, Anfang 2026 waren über 500 öffentliche MCP-Server verfügbar. Ein MCP-Server ist billiger auszuliefern als eine gerenderte Seite, er ist authentifizierbar, und er lässt sich messen.</p>
+<p>Die Signale, auf die man dafür achten sollte, stehen bereits in den eigenen Logs: Lastspitzen ohne Umsatzkorrelation, Zugriffe entgegen der eigenen <code>robots.txt</code>, ein steigender Anteil teurer Long-Tail-Anfragen. Wer diese Kennzahlen nicht erhebt, wird die Verschiebung erst am Infrastruktur-Budget bemerken — oder, wie bei Gentoo, an einem Freiwilligen, der irgendwann den Stecker zieht.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://blog.cloudflare.com/agentic-internet-bot-report/" rel="noopener noreferrer external" target="_blank">Cloudflare Blog — Content Independence Day, one year on</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/crawlers-click-ai-bots-training/" rel="noopener noreferrer external" target="_blank">Cloudflare Blog — The crawl before the fall… of referrals</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/content-signals-policy/" rel="noopener noreferrer external" target="_blank">Cloudflare Blog — Giving users choice with Cloudflare&#39;s new Content Signals Policy</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/introducing-pay-per-crawl/" rel="noopener noreferrer external" target="_blank">Cloudflare Blog — Introducing pay per crawl</a></li>
+            
+            <li><a href="https://diff.wikimedia.org/2025/04/01/how-crawlers-impact-the-operations-of-the-wikimedia-projects/" rel="noopener noreferrer external" target="_blank">Wikimedia Diff — How crawlers impact the operations of the Wikimedia projects</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/01/10/how-openais-bot-crushed-this-seven-person-companys-web-site-like-a-ddos-attack" rel="noopener noreferrer external" target="_blank">TechCrunch — How OpenAI&#39;s bot crushed this seven-person company&#39;s website like a DDoS attack</a></li>
+            
+            <li><a href="https://www.imperva.com/blog/bad-bot-report-2026-bots-agentic-age/" rel="noopener noreferrer external" target="_blank">Imperva/Thales — Bad Bot Report 2026</a></li>
+            
+            <li><a href="https://www.technologyreview.com/2025/07/01/1119498/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites/" rel="noopener noreferrer external" target="_blank">MIT Technology Review — Cloudflare will now by default block AI bots</a></li>
+            
+            <li><a href="https://cdn.ca9.uscourts.gov/datastore/opinions/2026/08/04/26-1444.pdf" rel="noopener noreferrer external" target="_blank">Ninth Circuit — Amazon v. Perplexity, Opinion vom 4. August 2026 (PDF)</a></li>
+            
+            <li><a href="https://www.cooley.com/news/insight/2026/2026-08-06-ninth-circuit-rules-on-ai-agent-access-to-third-party-websites-under-cfaa" rel="noopener noreferrer external" target="_blank">Cooley — Ninth Circuit Rules on AI Agent Access to Third-Party Websites Under the CFAA</a></li>
+            
+            <li><a href="https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/" rel="noopener noreferrer external" target="_blank">SparkToro — In 2026, less than one third of Google searches still send a click</a></li>
+            
+            <li><a href="https://blog.ericgoldman.org/archives/2026/08/ninth-circuit-lifts-restrictions-on-agentic-ai-accessing-amazon.htm" rel="noopener noreferrer external" target="_blank">Technology &amp; Marketing Law Blog — Ninth Circuit lifts restrictions on agentic AI accessing Amazon</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
