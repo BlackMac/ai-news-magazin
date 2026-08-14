@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz-Rechnung: Warum Geschwindigkeit und Tokenpreis 2026 zur eigentlichen Produktentscheidung geworden sind</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-14.html">&larr; Zur&uuml;ck zur Ausgabe vom 14. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Die Inferenz-Rechnung: Warum Geschwindigkeit und Tokenpreis 2026 zur eigentlichen Produktentscheidung geworden sind</h1>
+    
+    <p class="reportage-teaser">Der Preis pro Token ist seit 2022 um den Faktor 280 gefallen — und die KI-Rechnungen der Unternehmen steigen trotzdem. Der Grund ist eine Verschiebung, die viele Kalkulationen noch nicht abbilden: Nicht der Stückpreis entscheidet, sondern wie viele Token eine gelöste Aufgabe verbraucht. Was das für Architektur, Modellauswahl und Budgets bedeutet.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-14">14. August 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Am 13. August passierten drei Dinge, die auf den ersten Blick nichts miteinander zu tun haben. OpenAI kündigte einen Modus an, in dem sein Spitzenmodell bis zu vierzehnmal schneller antwortet. Der Anbieter Writer stellte ein neues Modell vor — und bewarb dabei nicht dessen Intelligenz, sondern ein überarbeitetes Rahmenwerk, das die Tokenkosten eindämmen soll. Und der Identitätsanbieter Okta dokumentierte, dass sein MCP-Server Werkzeuge nur noch passend zu den Rechten des Nutzers einblendet, ausdrücklich auch, um Token zu sparen.</p>
+<p>Drei Ankündigungen, ein Thema. Die Frage, die 2026 über KI-Produkte entscheidet, ist nicht mehr, welches Modell klüger ist. Sie lautet: Was kostet eine erledigte Aufgabe — und wie lange dauert sie?</p>
+<h2>Der Preisverfall ist real, und er täuscht</h2>
+<p>Beginnen wir mit der Zahl, die alle kennen. Der Stanford AI Index dokumentiert, dass ein Modell auf GPT-3.5-Niveau im November 2022 noch 20 Dollar pro Million Token kostete. Im Oktober 2024 lag derselbe Leistungspunkt bei 0,07 Dollar. Faktor 280 in weniger als zwei Jahren. Nimmt man die Werte einer Forbes-Analyse vom Juli 2026, die auf Daten von EpochAI beruht, ist der Verfall noch dramatischer: von 60 Dollar im Jahr 2021 auf rund 6 Cent heute.</p>
+<p>Der Druck kommt inzwischen vor allem aus China. DeepSeeks V4-Flash kostet laut offizieller Preisliste 0,14 Dollar für eine Million Eingabe-Token und 0,28 Dollar für die Ausgabe; ab dem 16. August kommen halbierte Preise außerhalb der Spitzenzeiten hinzu. Ein westliches Mainstream-Modell wie GPT-4.1 liegt bei 2 beziehungsweise 8 Dollar — je nach Betrachtung das Vierzehn- bis Neunundzwanzigfache. Anthropics Claude Opus 4.8 kostet 5 und 25 Dollar. Und wie schnell sich dieser Wettbewerb inzwischen dreht, zeigte am selben Tag Google, das den Einführungspreis seines Arbeitspferds gegenüber dem drei Wochen alten Vorgänger halbierte.</p>
+<p>Wer daraus schließt, dass KI billiger wird, hat die Hälfte der Rechnung.</p>
+<h2>Warum die Rechnungen trotzdem steigen</h2>
+<p>Sundar Pichai nannte auf der Google I/O im Mai eine Zahl, die das Paradox auflöst: Der Tokenverbrauch bei Google stieg vom Jahr 2023 bis heute um den Faktor 330 — von 9,7 Billionen Token pro Monat auf über 3,2 Billiarden. Der Stückpreis fällt, die Stückzahl explodiert. Und sie explodiert aus drei Gründen, die sich addieren.</p>
+<p><strong>Erstens denken Modelle jetzt.</strong> Reasoning-Modelle erzeugen vor der sichtbaren Antwort interne Zwischenschritte — sogenannte Denk-Token. Der Kunde sieht sie nicht, bezahlt sie aber, und zwar zum teureren Ausgabepreis. Praxisbeobachtungen aus der Entwicklergemeinde nennen Größenordnungen von 500 bis 2.000 Denk-Token für eine einfache Frage mit 50 sichtbaren Ausgabe-Token, bei komplexen Aufgaben 5.000 bis 15.000 gegenüber 100 sichtbaren. Das ist keine kontrollierte Studie, sondern Erfahrungswert — aber die Richtung ist unstrittig, und die Größenordnung liegt beim Zehn- bis Dreißigfachen des Sichtbaren.</p>
+<p><strong>Zweitens laufen Agenten in Schleifen.</strong> Ein Agent plant, ruft ein Werkzeug auf, betrachtet das Ergebnis, korrigiert, versucht es erneut. Jeder dieser Schritte ist ein eigener Modellaufruf, und jeder trägt den gesamten bisherigen Gesprächsverlauf als Eingabe mit sich. Der Kontext wächst also mit jedem Schritt, und die Kosten wachsen nicht linear mit der Anzahl der Schritte, sondern schneller. (Eine viel zitierte Zahl von McKinsey, agentische Abläufe verbrauchten bis zu tausendmal mehr Token, ließ sich bei der Prüfung auf keine Primärquelle zurückführen — wir führen sie deshalb nicht.)</p>
+<p><strong>Drittens wächst der Kontext selbst.</strong> Ein Kontextfenster von einer Million Token ist 2026 Standard geworden. Wer es füllt, zahlt es.</p>
+<p>Wie sehr das ins Gewicht fällt, zeigen die Ausgabenzahlen. Menlo Ventures erhob unter 495 US-Entscheidern, dass Unternehmensausgaben für generative KI 2025 auf 37 Milliarden Dollar stiegen — von 11,5 Milliarden im Jahr davor, also gut das Dreifache. Gartner erwartet für 2026 weltweite KI-Ausgaben von 2,59 Billionen Dollar, ein Plus von 47 Prozent, und hat diese Prognose im Mai gegenüber Januar bereits nach oben korrigiert. Eine Forbes-Kolumne berichtet, Uber habe sein KI-Budget für 2026 nach vier Monaten aufgebraucht; die Angabe stammt ohne genannte Primärquelle aus dieser Kolumne und ist entsprechend zu lesen.</p>
+<h2>Latenz ist bei Agenten kein Komfortmerkmal</h2>
+<p>Bei einer Chatoberfläche entscheidet Geschwindigkeit über Behaglichkeit. Bei Agenten entscheidet sie über Machbarkeit — und der Grund ist simpel: Die Schritte laufen nacheinander. Bei zwanzig sequenziellen Modellaufrufen multipliziert sich jede Sekunde Wartezeit mit zwanzig. Ein Ablauf, der bei drei Sekunden pro Schritt eine Minute dauert, dauert bei zwanzig Sekunden pro Schritt fast sieben. Aus einem Werkzeug, das man beim Arbeiten benutzt, wird eines, das man abends anstößt und morgens ausliest.</p>
+<p>Genau hier setzt der Wettbewerb der Spezialhardware an. OpenAIs Ultrafast erreicht auf Cerebras-Chips bis zu 750 Ausgabe-Token pro Sekunde. Groq liefert mit seiner LPU-Architektur gleichbleibend niedrige Latenz statt Spitzendurchsatz, SambaNova optimiert auf Gesamtdurchsatz bei vielen parallelen Nutzern. Die Architekturen unterscheiden sich in dem, wofür sie optimieren — und genau das sollte die Auswahl bestimmen: Ein interaktiver Assistent braucht kurze Zeit bis zum ersten Zeichen, ein nächtlicher Stapelverarbeiter braucht Durchsatz, und es sind nicht dieselben Chips.</p>
+<p>Bezeichnend ist ein Wert aus Cerebras' eigenen Messungen: Auf dem Benchmark GDP-Val bringt Ultrafast einen 5,6-fachen Beschleunigungsfaktor über den gesamten Arbeitsablauf — nicht den vierzehnfachen aus der Überschrift. Der Unterschied ist die Realität: In echten Abläufen wartet ein Agent auch auf Datenbanken, Netzwerk und Dateisysteme. Wer Latenzgewinne einkauft, sollte deshalb messen, welcher Anteil der Gesamtzeit überhaupt auf das Modell entfällt. Häufig ist es weniger, als man denkt.</p>
+<h2>Die Hebel, die tatsächlich wirken</h2>
+<p>Vier Ansätze sind mit belastbaren Zahlen unterlegt.</p>
+<p><strong>Prompt-Caching</strong> speichert wiederkehrende Teile eines Prompts serverseitig zwischen — den Systemprompt, die Werkzeugdefinitionen, das große Referenzdokument —, sodass sie nicht bei jeder Anfrage neu bezahlt werden müssen. Anthropic dokumentiert das präzise: Ein Lesezugriff auf den Cache kostet 10 Prozent des Eingabepreises, also 90 Prozent Rabatt; das Schreiben kostet einmalig das 1,25-Fache (fünf Minuten Haltedauer) oder das Doppelte (eine Stunde). Bei Opus fällt der Eingabepreis damit von 5 auf 0,50 Dollar je Million Token. Die Rechnung lohnt sich ab der zweiten Anfrage mit demselben Präfix — bei einem Chatverlauf also praktisch immer. Und es ist kein Zufall, dass Google bei Gemini 3.7 Flash eine um acht Prozentpunkte höhere Cache-Trefferquote als Verkaufsargument nennt.</p>
+<p><strong>Batch-Verarbeitung</strong> bringt bei allen großen Anbietern rund 50 Prozent Rabatt, wenn Antworten nicht sofort gebraucht werden. Klassifizierung, Anreicherung, Auswertung über Nacht — alles, wo Minuten oder Stunden Verzögerung niemanden stören.</p>
+<p><strong>Modell-Routing und Kaskaden</strong> schicken eine Anfrage zuerst an ein günstiges Modell und eskalieren nur bei Unsicherheit an ein teures. Praxisberichte nennen Einsparungen zwischen 50 und 98 Prozent; ein typischer Router in einem Unternehmens-Arbeitsablauf spart im Mittel rund 38 Prozent, mit einer Bandbreite von 25 bis 55 Prozent. Ein akademisches Ergebnis aus dem Umfeld illustriert das Prinzip: 85 Prozent Kostenersparnis bei 95 Prozent der Qualität, weil nur 14 Prozent der Anfragen ans starke Modell gingen.</p>
+<p><strong>Kontextdisziplin.</strong> Der unspektakulärste Hebel ist der, den Okta gerade demonstriert: Der MCP-Server blendet einem Agenten nur die Werkzeuge ein, für die der jeweilige Nutzer auch berechtigt ist. Das ist zunächst eine Sicherheitsmaßnahme nach dem Prinzip der geringsten Rechte — spart aber nebenbei Kontext, weil Werkzeugdefinitionen bei jeder Anfrage mitgesendet werden. Die dazu kursierende Zahl von bis zu 96 Prozent weniger Kontextverbrauch stammt aus Oktas Marketing, nicht aus den Release Notes; als Prinzip ist der Effekt trotzdem unstrittig.</p>
+<p>Bemerkenswert ist, dass Writer diesen Gedanken zum Produktmerkmal macht. Der Anbieter behauptet, sein überarbeitetes Rahmenwerk senke die Kosten im Schnitt um 40 Prozent — und zwar über alle getesteten Modelle hinweg, auch über fremde von Anthropic und OpenAI —, bei 44 Prozent schnellerer Erledigung. Das sind Zahlen aus einer Studie des Anbieters selbst, ohne unabhängige Prüfung. Interessant ist aber, dass ein Modellanbieter überhaupt so argumentiert: Er verkauft nicht mehr das Modell, sondern die Sparsamkeit im Umgang damit.</p>
+<h2>Die Kennzahl, die Sie brauchen</h2>
+<p>Kosten pro Token ist die falsche Kennzahl. Sie misst einen Einsatzfaktor, nicht ein Ergebnis. Die Kennzahl, die sich 2026 durchsetzt, ist <strong>Kosten pro gelöster Aufgabe</strong> — und die Unterschiede sind dramatisch. Marktbeobachtungen für Coding-Agenten nennen 0,03 bis 0,13 Dollar pro Aufgabe bei günstigen Arbeitspferd-Modellen gegenüber 4,10 bis 4,82 Dollar bei Frontier-Modellen. Das ist ein Verhältnis von rund 1 zu 40 — bei Qualitätsunterschieden, die meist deutlich kleiner sind als Faktor 40.</p>
+<p>Im Kundenservice ist die Größenordnung greifbarer, weil dort bereits pro Ergebnis abgerechnet wird. Anbieter verlangen zwischen 0,40 und 3,50 Dollar pro gelöstem Ticket. Ein Händler mit tausend Tickets im Monat zahlt so rund 790 Dollar; steigt das Volumen in der Hochsaison auf viertausend, sind es rund 3.170 Dollar. Diese Zahlen kann man einem Aufsichtsrat vorlegen. Token-Statistiken kann man das nicht.</p>
+<p>Der praktische Rat lautet deshalb: Definieren Sie für jeden KI-Anwendungsfall die Einheit, die zählt — ein beantwortetes Ticket, ein zusammengefasster Vertrag, ein zusammengeführter Pull Request — und messen Sie die vollen Kosten dieser Einheit inklusive fehlgeschlagener Versuche. Erst diese Zahl macht Modelle vergleichbar, und erst sie zeigt, ob eine Optimierung tatsächlich etwas gebracht hat.</p>
+<h2>Die Gegenposition, die man ernst nehmen sollte</h2>
+<p>Es gibt ein Argument gegen diesen ganzen Aufwand, und es ist besser, als es zunächst klingt. Scott Breitenother, Mitgründer und Geschäftsführer von Kilo Code, formuliert es so: „Den Zugang zu deckeln, um eine Budgetzeile zu schützen, heißt, die falsche Variable zu optimieren.&quot; Sein Rechenbeispiel: Wer einem Ingenieur ohnehin 25.000 Dollar im Monat zahlt, sollte sich über 2.000 bis 3.000 Dollar Tokenkosten nicht den Kopf zerbrechen. „Die Frage, die Engineering-Verantwortliche stellen sollten, ist nicht ,Wie viel geben wir für Token aus?', sondern ,Was liefern wir aus, und schafft es Wert?'&quot;</p>
+<p>Dahinter steht das Jevons-Paradoxon: Wird eine Ressource effizienter nutzbar, sinkt ihr Verbrauch nicht — er steigt, weil Anwendungen wirtschaftlich werden, die vorher zu teuer waren. James Watts effizientere Dampfmaschine senkte den Kohleverbrauch nicht, sie vervielfachte ihn. Übertragen: Jede Kostensenkung bei der Inferenz erzeugt neue Einsatzfelder, die die Ersparnis wieder auffressen. Wer das erwartet, plant Kapazität statt Sparmaßnahmen.</p>
+<p>Beide Positionen lassen sich versöhnen, wenn man sie auf unterschiedliche Fälle anwendet. Bei einem internen Werkzeug für zwanzig Entwickler ist Kostenoptimierung tatsächlich verschwendete Zeit — die Tokenrechnung verschwindet neben den Personalkosten. Bei einem Produktmerkmal, das eine Million Endkunden nutzen, ist sie die Marge. Der Unterschied ist nicht die Technik, sondern die Frage, ob die Kosten mit der Nutzung skalieren oder nicht.</p>
+<h2>Was daraus folgt</h2>
+<p>Drei Dinge sind an der Entwicklung dieses Jahres neu, und alle drei betreffen Entscheidungen, nicht Technik.</p>
+<p>Erstens ist Geschwindigkeit vom Nebenprodukt zum eigenen Produkt geworden. OpenAI formuliert das selbst: Bislang hieß Echtzeitgeschwindigkeit, ein kleineres Modell zu wählen. Wenn diese Kopplung fällt, wird Latenz separat bepreisbar — und OpenAI nennt für den Ultrafast-Modus bezeichnenderweise noch keinen Preis.</p>
+<p>Zweitens ist die Modellauswahl zu einer laufenden Betriebsentscheidung geworden, nicht mehr zu einer Architekturentscheidung. Wenn Anbieter ihr Arbeitspferd im Dreiwochentakt ersetzen und Preise halbieren, muss der Wechsel Tage kosten, nicht Wochen. Das setzt automatisierte Auswertungen voraus — eine Sammlung echter Aufgaben mit erwarteten Ergebnissen, gegen die sich ein neues Modell in einem Durchlauf prüfen lässt. Wer die nicht hat, kann Preissenkungen nicht einlösen, weil er nicht weiß, ob er sie sich leisten kann.</p>
+<p>Drittens wandert der Engpass. Er lag beim Training, dann bei den Chips, dann beim Strom. 2026 liegt er in der Frage, wie viele Token eine Aufgabe verbraucht, bis sie erledigt ist. Das ist keine Frage an den Modellanbieter. Es ist eine Frage an die eigene Architektur.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://hai.stanford.edu/assets/files/hai_ai-index-report-2025_chapter1_final.pdf" rel="noopener noreferrer external" target="_blank">Stanford HAI — AI Index Report 2025, Kapitel 1 (Inferenzkosten)</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/08/13/openai-introduces-ultrafast-a-new-mode-that-makes-gpt-5-6-sol-work-at-14x-the-speed/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI introduces Ultrafast mode for GPT-5.6 Sol</a></li>
+            
+            <li><a href="https://www.cerebras.ai/blog/accelerating-gpt-5-6-sol-ultrafast-with-openai" rel="noopener noreferrer external" target="_blank">Cerebras — Accelerating GPT-5.6 Sol Ultrafast with OpenAI</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/08/13/writer-introduces-new-ai-model-and-upgraded-harness-to-contain-token-costs/" rel="noopener noreferrer external" target="_blank">TechCrunch — Writer introduces new AI model and upgraded harness to contain token costs</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching" rel="noopener noreferrer external" target="_blank">Anthropic — Dokumentation zum Prompt-Caching</a></li>
+            
+            <li><a href="https://api-docs.deepseek.com/quick_start/pricing/" rel="noopener noreferrer external" target="_blank">DeepSeek — offizielle API-Preisseite</a></li>
+            
+            <li><a href="https://developer.okta.com/docs/release-notes/2026-okta-mcp-server/" rel="noopener noreferrer external" target="_blank">Okta Developer — Release Notes zum Open-Source-MCP-Server</a></li>
+            
+            <li><a href="https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/" rel="noopener noreferrer external" target="_blank">Menlo Ventures — The State of Generative AI in the Enterprise</a></li>
+            
+            <li><a href="https://www.forbes.com/sites/petercohan/2026/07/28/as-token-costs-plunge-enterprise-ai-providers-face-a-new-margin-squeeze/" rel="noopener noreferrer external" target="_blank">Forbes — As Token Costs Plunge, Enterprise AI Providers Face A New Margin Squeeze</a></li>
+            
+            <li><a href="https://www.forbes.com/councils/forbestechcouncil/2026/05/08/ai-pricing-why-cost-optimization-is-the-wrong-battle/" rel="noopener noreferrer external" target="_blank">Forbes Technology Council — AI Pricing: Why Cost Optimization Is The Wrong Battle</a></li>
+            
+            <li><a href="https://www.eesel.ai/blog/how-much-does-an-ai-support-agent-cost" rel="noopener noreferrer external" target="_blank">eesel AI — How much does an AI support agent cost?</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
