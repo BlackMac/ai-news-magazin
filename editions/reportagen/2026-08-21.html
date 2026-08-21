@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zehn Beweise, zweitausend Dollar, kein Nenner: Was der Mathematik-Coup von OpenAI wirklich zeigt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-21.html">&larr; Zur&uuml;ck zur Ausgabe vom 21. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Zehn Beweise, zweitausend Dollar, kein Nenner: Was der Mathematik-Coup von OpenAI wirklich zeigt</h1>
+    
+    <p class="reportage-teaser">Am 1. August veröffentlichte OpenAI Lösungen für zehn seit Jahren offene mathematische Probleme, maschinell geprüft und damit formal unangreifbar. Zwei Tage später reproduzierte ein Mathematiker die Hälfte davon mit einem frei verfügbaren Modell. Was zwischen diesen beiden Meldungen liegt, ist die eigentliche Nachricht — und sie handelt weniger von Mathematik als von der Frage, was ein prüfbares Ergebnis wert ist.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-21">21. August 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Ein Ergebnis, das man nicht glauben muss</h2>
+<p>Am 1. August 2026 hat OpenAI unter dem Titel „Ten advances in mathematics and theoretical computer science“ eine ungewöhnliche Veröffentlichung vorgenommen. Ein intern noch unveröffentlichtes Modell mit dem Arbeitsnamen <strong>Astra</strong> habe zehn Probleme gelöst, die in Mathematik und theoretischer Informatik seit mindestens zehn Jahren offen waren. Dazu gab es ein 249-seitiges Manuskript und, entscheidend, ein öffentliches Repository namens <code>openai/ten-proofs</code> unter Apache-Lizenz. Die geschätzten Rechenkosten für alle zehn Lösungen zusammen: rund <strong>2.000 Dollar</strong> zu den regulären Preisen der Programmierschnittstelle.</p>
+<p>Wer sich in dieser Branche an Ankündigungen gewöhnt hat, wird bei „unser unveröffentlichtes Modell hat etwas Großes geschafft“ reflexhaft misstrauisch. Dieses Mal gibt es dafür aber eine ungewöhnliche Antwort. Die Beweise liegen nicht nur als Text vor, sondern als <strong>Lean-4-Zertifikate</strong>.</p>
+<p>Lean ist ein Beweisassistent — Software, in der man mathematische Aussagen so präzise formuliert, dass ein Computer jeden einzelnen logischen Schritt nachrechnen kann. Für Nicht-Mathematiker ist die naheliegendste Analogie der Compiler: Ein Programm, das kompiliert, ist damit nicht gut, aber es ist syntaktisch wohlgeformt, und darüber muss man nicht mehr diskutieren. Bei Lean ist die Messlatte höher. Wenn der Kern des Systems einen Beweis akzeptiert, dann ist er logisch korrekt — nicht wahrscheinlich, nicht plausibel, sondern korrekt. Es gibt keinen Gutachter, der sich irren könnte, und keine Reputation, auf die man sich verlassen müsste.</p>
+<p>Das ist der Grund, warum diese Veröffentlichung einen anderen Charakter hat als die üblichen Benchmark-Meldungen. Man muss OpenAI nicht glauben. Man kann das Repository klonen und die Prüfung selbst laufen lassen. Über die Ökonomie dieser Prüfbarkeit haben wir in unserer <a href="/editions/reportagen/2026-08-12.html">Reportage vom 12. August</a> geschrieben — dort ging es darum, warum formale Verifikation plötzlich bezahlbar wird. Hier geht es um die Folgefrage: Was passiert mit einer Expertendisziplin, wenn dieses Werkzeug in der Hand einer Maschine liegt, die nicht müde wird?</p>
+<h2>Warum die Vorgeschichte dazugehört</h2>
+<p>Um einzuordnen, warum die Fachwelt so genau hinschaut, muss man zehn Monate zurückgehen. Am 19. Oktober 2025 verkündete <strong>Kevin Weil</strong>, damals Vizepräsident bei OpenAI, auf X: „GPT-5 found solutions to 10 (!) previously unsolved Erdős problems and made progress on 11 others.“ Erdős-Probleme sind offene Fragen aus dem Nachlass des ungarischen Mathematikers Paul Erdős, gesammelt und gepflegt auf einer Website des Mathematikers <strong>Thomas Bloom</strong>.</p>
+<p>Bloom widersprach umgehend, und seine Erklärung war vernichtend schlicht: „Open“ bedeute auf seiner Liste lediglich, dass <em>ihm persönlich</em> keine Lösung bekannt sei. GPT-5 habe keine Probleme gelöst, sondern vorhandene Fachliteratur gefunden, die er übersehen hatte. „GPT-5 found references, which solved these problems, that I personally was unaware of“, stellte er klar. Demis Hassabis, Chef von Google DeepMind, kommentierte mit zwei Worten: „This is embarrassing.“ Der OpenAI-Forscher Sébastien Bubeck räumte ein, es seien nur Lösungen in der Literatur gefunden worden. Weil löschte seinen Beitrag.</p>
+<p>Dieser Vorfall ist die Folie, vor der alles Weitere gelesen wird — und er enthält bereits die zentrale Lehre. Der Fehler lag nicht in der Mathematik. Er lag darin, dass niemand geprüft hatte, ob die gelöste Aufgabe die Aufgabe war, die man zu lösen glaubte. Genau diese Unterscheidung wird uns bis zum Ende dieses Textes begleiten.</p>
+<p>Seither ist einiges passiert. Am 21. Mai 2026 widerlegte ein OpenAI-Modell die Erdős'sche Einheitsabstands-Vermutung; neun externe Mathematiker lasen das Argument und bestätigten es. Bereits im Januar 2026 erschien auf arXiv eine Aufarbeitung eines maschinell erzeugten Lean-Beweises für ein weiteres Erdős-Problem — geschrieben von einem Menschen, der die Maschinenausgabe für Menschen lesbar machte. Die Zusammenarbeit hatte sich also längst eingespielt, bevor die große Ankündigung kam.</p>
+<h2>Der Zähler ohne Nenner</h2>
+<p>Die schärfste Kritik an der Astra-Veröffentlichung stammt vom KI-Kritiker Gary Marcus, und sie ist erstaunlich unpolemisch. Sie lautet: Wir kennen den Zähler, aber nicht den Nenner.</p>
+<p>OpenAI berichtet zehn Erfolge und nennt Kosten von 2.000 Dollar. Was das Unternehmen nicht nennt, ist die Anzahl der Probleme, an denen dasselbe Modell erfolglos gearbeitet hat. Der OpenAI-Forscher Noam Brown hat eingeräumt, dass man sich an weiteren großen Problemen versucht habe — ohne Erfolg, und ohne dass Details veröffentlicht wurden. Damit ist die entscheidende Kennzahl unbekannt: Ist das ein System, das ein Drittel der Probleme knackt, an die es herangeht? Oder eines, das eines von tausend knackt, wobei man die 999 Fehlversuche stillschweigend verwirft?</p>
+<p>Für die Bewertung der Fähigkeit macht das den ganzen Unterschied. Für die Bewertung des <em>wirtschaftlichen</em> Nutzens übrigens weniger, als man denkt — wenn zehn Beweise am Ende 2.000 Dollar kosten, ist die Frage nach der Trefferquote zweitrangig, solange die Prüfung automatisch erfolgt. Das ist eine Struktur, die man aus der Softwareentwicklung kennt: Wie viele Vorschläge ein Codegenerator verwirft, ist gleichgültig, solange die Testsuite das Aussortieren übernimmt und die Rechenzeit billig ist. Es ist die Ökonomie des billigen Versuchs bei teurer Prüfung — nur dass die Prüfung hier eben nicht teuer ist.</p>
+<p>Terence Tao, einer der bedeutendsten lebenden Mathematiker, ordnet die Trefferquote nüchtern ein: Die tatsächliche Erfolgsrate liege bei „only a point or two“, konzentriert am leichten Ende des Spektrums, und es gebe keinen Beleg dafür, dass das mittelschwere Problem in Reichweite sei.</p>
+<h2>Die 24 Stunden, die den Burggraben kosteten</h2>
+<p>Der Befund, der die Ankündigung am nachhaltigsten relativiert hat, kam zwei Tage später. Der Mathematiker <strong>Levent Alpöge</strong> reproduzierte nach eigener Darstellung binnen 24 Stunden etwa die Hälfte der Astra-Ergebnisse — nicht mit einem geheimen Spitzenmodell, sondern mit <strong>Claude Fable</strong>, einem bereits öffentlich verfügbaren Modell. Gleicher autonomer Ansatz, ein generischer Prompt, kein Internetzugriff.</p>
+<p>Das ist aus zwei Gründen bemerkenswert. Erstens verschiebt es die Interpretation: Nicht ein neues Modell hat eine Schwelle überschritten, sondern eine <em>Arbeitsweise</em> — autonome Suche plus formale Prüfung — hat sich als tragfähig erwiesen, und zwar mit Werkzeugen, die jeder haben kann. Zweitens hat es eine ökonomische Pointe. Der behauptete Vorsprung eines unveröffentlichten Modells verdampfte binnen eines Tages, weil jemand dieselbe Methode auf ein Konkurrenzprodukt anwandte.</p>
+<p>Wenn Sie aus dieser Reportage eine einzige Beobachtung mitnehmen wollen, die auf Ihr eigenes Geschäft übertragbar ist, dann diese: <strong>Der Vorsprung lag nicht im Modell, sondern in der Idee, es so einzusetzen.</strong> Und Ideen dieser Art halten aktuell etwa einen Tag.</p>
+<h2>Was die Disziplin selbst befürchtet</h2>
+<p>Die Reaktion der Mathematik ist nicht Ablehnung, und sie ist auch nicht Begeisterung. Sie ist Sorge um etwas sehr Bestimmtes.</p>
+<p>Tao unterscheidet zwischen zwei Tätigkeiten, die Außenstehende gerne in einen Topf werfen: <strong>Probleme lösen</strong> und <strong>Theorie bilden</strong>. Ein gelöstes Problem ist ein Ergebnis. Eine Theorie ist ein Zusammenhang, der erklärt, warum ein ganzes Feld von Problemen so aussieht, wie es aussieht — und der beim nächsten Problem hilft. Bei Astra sieht Tao keinen Beleg für Fortschritt in der zweiten Kategorie. Er hat für die Gefahr einen Ausdruck geprägt: <strong>„proof indigestion“</strong>, Beweis-Verdauungsstörung. Gemeint ist ein Zustand, in dem korrekte Beweise schneller produziert werden, als Menschen sie lesen, verstehen und in ihr Weltbild einordnen können. Der Bestand an gesichertem Wissen wächst dann, das Verständnis aber nicht.</p>
+<p>Seine praktische Empfehlung an Kollegen ist bemerkenswert konkret und lässt sich wörtlich auf Unternehmen übertragen: „if you would be unable to coherently present the output of the AI in a class presentation and be able to answer questions about it without further AI assistance, it should not be part of your workflow.“ Frei übersetzt: Wenn Sie das Ergebnis nicht ohne die Maschine erklären und verteidigen können, gehört es nicht in Ihren Arbeitsablauf.</p>
+<p>Institutionell hat sich diese Sorge in der <strong>Leiden-Erklärung zu KI und Mathematik</strong> vom 2. Juni 2026 niedergeschlagen, verfasst von sechzehn Mathematikern um Jim Portegies und unterzeichnet unter anderem von Kevin Buzzard und Peter Scholze, unterstützt von der Internationalen Mathematischen Union. Sie benennt fünf Risiken; das aufschlussreichste betrifft nicht die Technik, sondern die Anreize: Die Beteiligung von Technologiekonzernen an der Forschung berge das Risiko, dass Fragen priorisiert würden, weil sie sich für KI-Methoden eignen — „rather than their deeper significance to understanding“.</p>
+<p>Das ist eine Sorge, die jeder Produktverantwortliche kennt: Was gemessen werden kann, wird bearbeitet; was bearbeitet wird, wird wichtig. Nicht weil es wichtig ist, sondern weil es messbar war.</p>
+<h2>Was Unternehmen daraus mitnehmen können</h2>
+<p>Die übertragbare Struktur dieses Falls hat nichts mit Zahlentheorie zu tun. Sie lautet: <strong>Ein Modell erzeugt einen Vorschlag, ein davon unabhängiges, deterministisches System prüft ihn, und die Prüfung ist billiger als die Erzeugung.</strong> Wo diese drei Bedingungen zusammenkommen, ändert sich die Arbeitsweise fundamental — man muss dem Modell nicht mehr vertrauen, man muss nur den Prüfer beherrschen.</p>
+<p>In Unternehmen existiert diese Struktur an mehr Stellen, als üblicherweise genutzt werden. Code mit einer belastbaren Testsuite ist der offensichtliche Fall. Formale Verifikation im Chipdesign ist ein zweiter. Finanzmodelle mit Rückrechnung gegen historische Daten ein dritter. Vertrags- und Dokumentenprüfung mit klaren, maschinell auswertbaren Regeln ein vierter. In all diesen Fällen lohnt es sich, den Engpass nicht bei der Erzeugung zu suchen, sondern bei der Prüfung: Je schärfer und automatischer der Prüfschritt, desto mehr Vorschläge kann man sich leisten.</p>
+<p>Die Kehrseite ist allerdings genau die Falle aus dem Oktober 2025, und sie ist die wichtigste Warnung dieser Reportage. <strong>Formale Prüfbarkeit ist nicht dasselbe wie inhaltliche Richtigkeit.</strong> Der Lean-Kernel bestätigt, dass ein Beweis die formalisierte Aussage korrekt herleitet. Er sagt nichts darüber, ob die Formalisierung die Frage abbildet, die jemand beantwortet haben wollte. Genau das ist der Kern der laufenden Fachdebatte, und genau das ist auch die Stelle, an der Unternehmen mit KI-gestützten Prozessen scheitern: Der Test läuft grün, die Anforderung war falsch verstanden. Die Rechnung stimmt, die Annahme dahinter nicht.</p>
+<p>Es lohnt sich außerdem, eine Einschränkung ernst zu nehmen, die OpenAI selbst genannt hat: Die Ergebnisse haben kein Peer-Review durchlaufen und stünden noch der unabhängigen Prüfung durch die Fachwelt offen. Wer solche Meldungen in die eigene Strategie einbaut, sollte diesen Vermerk mitübernehmen, statt ihn im Zitieren zu verlieren.</p>
+<p>Bleibt die Frage, ob „Krise“ das richtige Wort für den Zustand der Mathematik ist. Nach allem, was sich belegen lässt, eher nicht. Was man beobachten kann, ist eine Disziplin, die sich in bemerkenswertem Tempo darüber verständigt, welche Rolle sie einer neuen Art von Werkzeug einräumen will — mit einer Erklärung, einem ICM-Vortrag und einer offenen Streitkultur binnen weniger Monate. Verglichen mit dem Umgang der meisten Branchen mit derselben Frage ist das kein Krisenzeichen. Es ist ein ziemlich gutes Vorbild.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://github.com/openai/ten-proofs" rel="noopener noreferrer external" target="_blank">GitHub — openai/ten-proofs (Primärquelle: die Lean-Zertifikate)</a></li>
+            
+            <li><a href="https://the-decoder.com/openai-announces-its-next-major-model-astra-by-dropping-ten-previously-unsolved-math-solutions/" rel="noopener noreferrer external" target="_blank">the decoder — OpenAI announces its next major model Astra by dropping ten previously unsolved math solutions (1.8.2026)</a></li>
+            
+            <li><a href="https://simonwillison.net/2026/Aug/1/ten-advances-in-mathematics/" rel="noopener noreferrer external" target="_blank">Simon Willison — Ten advances in mathematics (1.8.2026)</a></li>
+            
+            <li><a href="https://thequantuminsider.com/2026/08/04/openai-says-next-generation-model-solved-10-major-open-problems-in-quantum-complexity-mathematics/" rel="noopener noreferrer external" target="_blank">The Quantum Insider — OpenAI says next-generation model solved 10 major open problems (4.8.2026)</a></li>
+            
+            <li><a href="https://garymarcus.substack.com/p/two-critical-updates-re-astra-and" rel="noopener noreferrer external" target="_blank">Gary Marcus — Two critical updates re: Astra and mathematics</a></li>
+            
+            <li><a href="https://teorth.github.io/tao-web/ai-views.html" rel="noopener noreferrer external" target="_blank">Terence Tao — Terence Tao on AI in mathematics (and beyond)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2608.16753" rel="noopener noreferrer external" target="_blank">Terence Tao — Mathematics in the Age of AI (ICM-Vortrag, arXiv:2608.16753)</a></li>
+            
+            <li><a href="https://en.wikipedia.org/wiki/Leiden_Declaration_on_Artificial_Intelligence_and_Mathematics" rel="noopener noreferrer external" target="_blank">Wikipedia — Leiden Declaration on Artificial Intelligence and Mathematics (2.6.2026)</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/10/19/openais-embarrassing-math/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI&#39;s embarrassing math (19.10.2025)</a></li>
+            
+            <li><a href="https://arxiv.org/pdf/2601.07421" rel="noopener noreferrer external" target="_blank">arXiv:2601.07421 — Resolution of Erdős Problem #728: a writeup of Aristotle&#39;s Lean proof (27.1.2026)</a></li>
+            
+            <li><a href="https://www.theverge.com/podcast/982434/ai-math-openai-astra-existential-crisis" rel="noopener noreferrer external" target="_blank">The Verge — Decoder: Welcome to the AI crisis in math (20.8.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
