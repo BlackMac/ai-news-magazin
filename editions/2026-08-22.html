@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+<div class="edition-header" id="top">
+    <div class="edition-meta">
+        <time datetime="2026-08-22">Samstag, 22. August 2026</time> &middot; 14 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 22. August 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1">
+                    <span class="toc-cat">Benchmarks · Agenten</span>
+                    <span class="toc-title">Von 30 auf 100 Prozent, ohne das Modell anzufassen: Warum Nvidias Bestwert vor allem zeigt, wie wenig eine Benchmark-Zahl ohne ihre Fußnoten wert ist</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2">
+                    <span class="toc-cat">Börsengang · Anthropic</span>
+                    <span class="toc-title">Vom vertraulichen Entwurf zum öffentlichen Antrag: Anthropic will noch im August liefern — und holt sich eine vierte Bank dazu</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3">
+                    <span class="toc-cat">Finanzstabilität · Euroraum</span>
+                    <span class="toc-title">440 Milliarden Euro in sieben US-Aktien: Fünf EZB-Ökonomen halten eine Korrektur für wahrscheinlich — und sagen ausdrücklich, dass sie nicht für die EZB sprechen</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4">
+                    <span class="toc-cat">Sicherheit · Modellrichtlinien</span>
+                    <span class="toc-title">Die Regel gilt, die Durchsetzung nicht: TechCrunch bringt ein älteres Claude-Modell in zehn von zehn Versuchen dazu, seine eigenen Inhaltsgrenzen zu ignorieren</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5">
+                    <span class="toc-cat">Infrastruktur · Orbit</span>
+                    <span class="toc-title">250 Millionen Dollar, um Raketenplätze zu kaufen: Starcloud sammelt nicht für Technik, sondern für Startkapazität</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6">
+                    <span class="toc-cat">Kartellrecht · Wagniskapital</span>
+                    <span class="toc-title">Ein Gesetz von 1914 gegen den größten KI-Investor: Das US-Justizministerium prüft, ob a16z in konkurrierenden Aufsichtsräten sitzt</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7">
+                    <span class="toc-cat">Infrastruktur · Nvidia</span>
+                    <span class="toc-title">Noch eine Stufe früher in der Kette: Nvidia beteiligt sich am Stromvermittler Cloverleaf</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">8.</span>
+                <a href="#art-8">
+                    <span class="toc-cat">Studie · Nutzungsdaten</span>
+                    <span class="toc-title">Fast die Hälfte fällt aus der Statistik: Ein Forschungsverbund zeigt, was die Nutzungsberichte der KI-Anbieter systematisch ausblenden</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">9.</span>
+                <a href="#art-9">
+                    <span class="toc-cat">Regulierung · Autonomes Fahren</span>
+                    <span class="toc-title">8.000 Genehmigungen in Clark County — und ein Lobbystreit darüber, ob der Mensch am Steuer bleiben muss</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">10.</span>
+                <a href="#art-10">
+                    <span class="toc-cat">Forschung · Medizin</span>
+                    <span class="toc-title">Körperzusammensetzung aus zwei Smartphone-Fotos: Googles Modell schlägt die Waage — und schweigt zur Hautfarbe</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">11.</span>
+                <a href="#art-11">
+                    <span class="toc-cat">Datenschutz · Medizin-KI</span>
+                    <span class="toc-title">Wer selten vorkommt, ist am leichtesten zu finden: Nature-Studie zeigt fast hundertprozentige Wiedererkennung in medizinischen Trainingsdaten</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">12.</span>
+                <a href="#art-12">
+                    <span class="toc-cat">Plattformen · Inhalte</span>
+                    <span class="toc-title">Eine Million Klicks auf „Seems like AI slop“: LinkedIn meldet 40 Prozent weniger Sichtbarkeit für maschinellen Füllstoff</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">13.</span>
+                <a href="#art-13">
+                    <span class="toc-cat">Cloud · Wettbewerb</span>
+                    <span class="toc-title">Meta baut die größten eigenen Rechenzentren der Branche — und kauft für hunderte Millionen bei Microsoft ein</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">14.</span>
+                <a href="#art-14">
+                    <span class="toc-cat">Robotik · Fertigung</span>
+                    <span class="toc-title">Bühl im Nordschwarzwald wird Bosch-Werk für humanoide Roboter — gefertigt wird für ein britisches Einhorn</span>
+                </a>
+            </li>
+            
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+            <ul class="toc-specials-row">
+                
+                <li class="toc-special">
+                    <a href="#reportage">
+                        <span class="toc-cat">Reportage</span>
+                        <span class="toc-title">Vierzigfache Kosten, null Prozentpunkte mehr Können: Was die Schicht um das Modell wirklich leistet</span>
+                    </a>
+                </li>
+                
+                <li class="toc-special">
+                    <a href="#tool-radar">
+                        <span class="toc-cat">Tool-Radar</span>
+                        <span class="toc-title">Neue KI-Tools im &Uuml;berblick</span>
+                    </a>
+                </li>
+                <li class="toc-special">
+                    <a href="#werkstatt">
+                        <span class="toc-cat">Werkstatt</span>
+                        <span class="toc-title">YouTube-Empfehlungen</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+    </nav>
+
+    
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <p class="article-kicker">Benchmarks · Agenten</p>
+        <h2 id="art-1-h">Von 30 auf 100 Prozent, ohne das Modell anzufassen: Warum Nvidias Bestwert vor allem zeigt, wie wenig eine Benchmark-Zahl ohne ihre Fußnoten wert ist</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Nvidia meldet einen perfekten Durchgang durch den schwierigsten Reasoning-Benchmark des Jahres — nicht mit einem eigenen Modell, sondern mit einer Hülle um Claude Opus 5. Die These dahinter ist richtig und wichtig. Die Zahl selbst hält der Prüfung nur stand, wenn man drei Fußnoten mitliest, die Nvidia teilweise selbst mitliefert.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Am 21. August hat Nvidia im hauseigenen Technical Blog gemeldet, das Agentensystem <strong>AVO</strong> — ausgeschrieben <em>Agentic Variation Operators</em> — habe auf dem Benchmark <strong>ARC-AGI-3</strong> einen <strong>RHAE-Wert von 100,00</strong> erreicht und dabei alle <strong>183 Level in 25 Umgebungen</strong> gelöst. Zum Vergleich stellt Nvidia rund 30 Prozent für Claude Opus 5. Der Clou: AVO <em>ist</em> Claude Opus 5. Verändert wurde nicht das Modell, sondern alles darum herum.</p>
+<p><strong>Was ARC-AGI-3 misst, und warum es als schwer gilt.</strong> Der Benchmark stammt von der ARC Prize Foundation um François Chollet und ist der erste interaktive der Reihe. Statt statische Puzzles vorzulegen, setzt er einen Agenten in spielartige 2D-Umgebungen — <em>ohne Anleitung, ohne erklärte Regeln, ohne genanntes Ziel</em>. Der Agent muss die Mechanik durch Ausprobieren selbst erschließen, sich ein Modell der Welt bauen und über lange Handlungsketten mit spärlicher Rückmeldung planen. Für nichttechnische Leser ist das der entscheidende Unterschied zu einem Wissenstest: Hier wird geprüft, ob ein System sich in einer völlig neuen, unbeschrifteten Lage allein zurechtfindet. Genau das ist die Fähigkeit, die man von einem Agenten im Betrieb erwartet — und genau die, die reines Mustererkennen aus Trainingsdaten nicht liefert.</p>
+<p><strong>Was AVO tatsächlich tut.</strong> Die Architektur ist unspektakulär und gerade deshalb interessant: eine Schleife aus Inspizieren, Planen, Implementieren und Auswerten; ein Gedächtnis, das frühere Versuche, deren Ergebnisse und die Ausgaben des Übersetzers über die Runden hinweg mitführt; Werkzeuge, mit denen der Agent Code ausführen und Ergebnisse selbst nachprüfen kann. Der Baustein, den Nvidia selbst hervorhebt, ist ein zweiter Agent: ein <strong>Supervisor</strong>, der erkennt, wenn der Hauptagent sich im Kreis dreht, und ihn umlenkt. <strong>Adel El Hallak</strong>, VP Product in Nvidias KI-Sparte, gegenüber TechCrunch: <em>„The more interesting part was introducing a supervising agent in addition to your main agent that's doing the work.“</em> Und grundsätzlicher: <em>„Generally speaking, the world interprets an agent almost as an API of the model. But an agent is actually more than that. It is the model. It is the scaffolding around the model, which we call the harness, i.e. the set of tools that it utilizes.“</em></p>
+<p><strong>Und jetzt die Fußnoten — die erste liefert Nvidia selbst.</strong> Im Blogpost steht wörtlich: <em>„These results cover the 25-environment ARC-AGI-3 public set using the official scorecard and RHAE metric. They are not results on the semi-private or fully private competition sets.“</em> Das ist eine bemerkenswert ehrliche Einschränkung, und sie ist zentral. ARC Prize führt seine offizielle Rangliste auf dem <em>Semi-Private</em>-Satz, gerade weil öffentlich zugängliche Aufgaben mit der Zeit in Trainingsdaten und Lösungswege einsickern. Nvidias Ergebnis ist also nicht auf dem Satz erzielt, der zählt.</p>
+<p><strong>Die zweite Fußnote betrifft den Vergleichswert.</strong> Die rund 30 Prozent, gegen die Nvidia seine 100 stellt, stammen nicht aus Nvidias eigenem Testlauf, sondern von ARC Prize — dort steht Claude Opus 5 mit hohem Reasoning-Aufwand bei <strong>30,16 Prozent</strong>, geprüft am Semi-Private-Satz, zu Kosten von <strong>20.657 Dollar</strong> für den Durchlauf. Verglichen werden damit zwei Zahlen aus <em>zwei verschiedenen Datensätzen unterschiedlicher Härte</em>. Der eigentlich naheliegende Vergleich — dasselbe Modell mit und ohne Harness auf demselben Satz — fehlt in der Quelle. Wie groß der Sprung wirklich ist, lässt sich aus den veröffentlichten Angaben deshalb nicht sauber ablesen.</p>
+<p><strong>Die dritte Fußnote ist die unbequemste: AVO war nicht die Erste.</strong> Das akademische Projekt <strong>VISTA</strong> hat auf denselben 25 öffentlichen Umgebungen mit demselben Basismodell bereits vorher einen RHAE-Wert von 100 erreicht — Nvidia führt VISTA im eigenen Blogpost als Vergleichsgrundlage an und schreibt, man habe <em>„adopted the direct-interaction design principles described by VISTA and reimplemented the task interface independently“</em>. Ein weiteres Projekt, <em>Schema-Harness</em>, berichtet nach eigenen Angaben rund 99 Prozent. Der Effizienzvorsprung, den Nvidia für sich reklamiert, beträgt gegenüber VISTA etwa 12 Prozent weniger Aktionen (6.624 gegen 7.542) — Nvidia räumt allerdings selbst ein, dass sich beide Systeme in Modell-Backend, Beobachtungsdarstellung, Gedächtnis und Kontextführung unterscheiden und der Vergleich deshalb nicht sauber ist. Kosten- oder Laufzeitangaben pro Aufgabe nennt der Blogpost nicht.</p>
+<p><strong>Fairerweise muss man sagen: Nvidia schreibt die wichtigste Einschränkung selbst hin.</strong> Im Blogpost heißt es, der Vergleich zum nackten Modell <em>„should not be interpreted as a controlled ablation“</em> — also ausdrücklich nicht als saubere Isolierung der einen veränderten Variable. Und weiter, in einem Satz, der die ganze Meldung besser zusammenfasst als ihre Überschrift: <em>„benchmark performance reflects the complete agent system, not only the underlying model.“</em> Das ist keine Marketingaussage, sondern eine methodisch korrekte. Die 100 Prozent gehören nicht Claude Opus 5 und auch nicht Nvidia, sondern der Kombination aus beidem — und genau das ist die eigentliche Nachricht.</p>
+<p><em>Was das für die Einordnung heißt.</em> AVO taucht in der offiziellen ARC-Prize-Rangliste nicht auf. Das ist kein Vorwurf, sondern eine Folge der Regeln: Nach der veröffentlichten Verifizierungsrichtlinie führt ARC Prize die als <em>verified</em> gekennzeichneten Werte selbst durch, über standardisierte öffentliche Modellschnittstellen; eingereichte eigene Harness-Läufe werden standardmäßig nicht verifiziert. Für eine Verifizierung wären ein Code-Audit, eine in unter zwölf Stunden reproduzierbare Ausführung als Kaggle-Notebook, die vollständige Offenlegung der Lösung als Open Source und eine Kostenobergrenze von 10.000 Dollar pro Lauf nötig. Nichts davon ist für AVO öffentlich nachvollziehbar. Eine Stellungnahme der ARC Prize Foundation zu Nvidias Meldung war bis Redaktionsschluss nicht auffindbar.</p>
+<p><strong>Warum die These trotzdem trägt.</strong> Es wäre falsch, die Meldung wegen ihrer Fußnoten abzutun — der Kern stimmt, und er wird von unabhängigen Datenpunkten gestützt. TechCrunch berichtet, auch OpenAI habe seine ARC-AGI-3-Werte verdreifacht, indem lediglich zwei Einstellungen am Harness verändert wurden. Databricks-Chef <strong>Ali Ghodsi</strong> beschreibt dieselbe Hebelwirkung auf der Kostenseite: <em>„You can pick the same model but different harnesses, and you get significantly more cost if you use the wrong harness … That itself can 2x your cost.“</em> Und der vielleicht stärkste Beleg ist gerade die dritte Fußnote: Dass <em>voneinander unabhängige Gruppen</em> — ein akademisches Projekt und ein Konzernlabor — mit demselben Basismodell von etwa 30 auf nahezu 100 Prozent kommen, zeigt robuster als jede Einzelmeldung, wie groß der Hebel von Gedächtnisführung, Rückkopplungsschleifen und Werkzeugorchestrierung ist.</p>
+<p><strong>Was Sie praktisch daraus mitnehmen sollten.</strong> Erstens: Wenn ein Anbieter eine Benchmark-Zahl nennt, ist die erste Frage nicht „wie hoch“, sondern „auf welchem Satz, von wem geprüft, mit welchem Gerüst darum herum“. Zweitens: Der größte verfügbare Hebel für die Qualität eines Agenten liegt derzeit nicht im nächsten Modellwechsel, sondern in der Schicht darum herum — und diese Schicht können Sie selbst kontrollieren. Drittens, und das ist die Kehrseite: Dieselbe Schicht bestimmt Ihre Rechnung. El Hallak wirbt erkennbar für offene Systeme — <em>„We believe, and we're demonstrating with the ecosystem, how open harnesses allow you to turn a lot more knobs to drive up that accuracy.“</em> — und man darf mitdenken, dass Nvidia ein Interesse daran hat, dass möglichst viele Knöpfe möglichst viel Rechenzeit verbrauchen. Warum die Harness-Schicht 2026 zur eigentlichen Produktentscheidung geworden ist, führen wir in der <a href="/editions/reportagen/2026-08-22.html">Reportage dieser Ausgabe</a> aus.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/" rel="noopener noreferrer external" target="_blank">NVIDIA Technical Blog — NVIDIA AVO Reaches 100% on ARC-AGI-3 (Primärquelle/Herstellerangabe, 21.8.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/08/21/nvidia-just-showed-that-the-harness-not-the-ai-model-is-now-the-real-hero/" rel="noopener noreferrer external" target="_blank">TechCrunch — Nvidia just showed that the harness, not the AI model, is now the real hero (Julie Bort, 21.8.2026)</a></li>
+                
+                <li><a href="https://arcprize.org/leaderboard" rel="noopener noreferrer external" target="_blank">ARC Prize — Offizielles Leaderboard (Primärquelle)</a></li>
+                
+                <li><a href="https://arcprize.org/results/anthropic-claude-opus-5" rel="noopener noreferrer external" target="_blank">ARC Prize — Verifiziertes Ergebnis für Claude Opus 5 (30,16 %)</a></li>
+                
+                <li><a href="https://arcprize.org/policy" rel="noopener noreferrer external" target="_blank">ARC Prize — Verifizierungsrichtlinie</a></li>
+                
+                <li><a href="https://arcprize.org/arc-agi/3/" rel="noopener noreferrer external" target="_blank">ARC Prize — ARC-AGI-3 Benchmark-Beschreibung</a></li>
+                
+                <li><a href="https://vista-research.github.io/" rel="noopener noreferrer external" target="_blank">VISTA — Vergleichs-Harness mit 100 % RHAE auf demselben Public Set</a></li>
+                
+                <li><a href="https://schema-harness.github.io/" rel="noopener noreferrer external" target="_blank">Schema-Harness — Projektseite (Eigenangabe rund 99 %)</a></li>
+                
+                <li><a href="https://thenewstack.io/nvidia-avo-arcagi3-benchmark/" rel="noopener noreferrer external" target="_blank">The New Stack — Claude Opus 5 scored 30% on ARC-AGI-3. Wrapped in Nvidia&#39;s AVO, it hit 100% (Adrian Bridgwater, 21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <p class="article-kicker">Börsengang · Anthropic</p>
+        <h2 id="art-2-h">Vom vertraulichen Entwurf zum öffentlichen Antrag: Anthropic will noch im August liefern — und holt sich eine vierte Bank dazu</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Der Nachrichtenkern ist ein Verfahrensschritt, aber ein bedeutsamer: Aus dem seit Juni vertraulichen Börsenprospekt soll binnen Tagen ein öffentlicher werden. Bemerkenswert ist dabei weniger die Terminplanung als die Quellenlage — bis heute hat Anthropic keine einzige der kursierenden Zahlen selbst bestätigt.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>heise online hat am 21. August unter Berufung auf Bloomberg berichtet, Anthropic wolle noch bis Ende dieses Monats den <strong>öffentlichen Antrag</strong> für seinen Börsengang einreichen. Wörtlich bei heise-Autor Axel Kannenberg: <em>„Anthropic will noch zum Ende dieses Monats den öffentlichen Antrag für seinen mit Spannung erwarteten Börsengang einreichen, wie die Finanznachrichtenagentur Bloomberg unter Berufung auf anonyme Insider berichtet.“</em></p>
+<p><strong>Warum ein Verfahrensschritt eine Nachricht ist.</strong> Seit Anfang Juni liegt der Prospekt <em>vertraulich</em> bei der US-Börsenaufsicht SEC — ein Verfahren, das Unternehmen erlaubt, den Text mit der Behörde abzustimmen, ohne Finanzdaten offenzulegen. Der öffentliche Antrag ist der Moment, in dem die Zahlen tatsächlich auf den Tisch kommen: geprüfte Abschlüsse, Risikofaktoren, Beteiligungsverhältnisse. Für alle, die bisher über Anthropics Wirtschaftlichkeit spekulieren mussten, ist das der erste belastbare Datenpunkt seit Gründung. Wir haben über die Vorstufen am <a href="/editions/2026-08-16.html#art-3">16. August</a> und über die Umsatzzahlen am <a href="/editions/2026-08-18.html#art-1">18. August</a> berichtet.</p>
+<p><strong>Neu gegenüber unserer bisherigen Berichterstattung sind genau zwei Dinge.</strong> Erstens die Verschärfung des Zeitplans — bislang war lediglich bekannt, dass ein vertraulicher Entwurf existiert. Zweitens eine personelle Erweiterung des Bankenkonsortiums: Nach einem Bloomberg-Bericht vom 20. August soll <strong>Citigroup</strong> als viertes führendes Institut neben Morgan Stanley, Goldman Sachs und JPMorgan hinzukommen. Auch das ist anonym gesourct: <em>„Anthropic PBC is set to add Citigroup Inc. to the banks working on its initial public offering, according to people familiar with the matter“</em>, und weiter: <em>„Deliberations are ongoing, details could change and more banks are expected to be added to the lineup, the people said, asking not to be identified as the information isn't public.“</em> Anthropic und Citigroup haben eine Stellungnahme abgelehnt. Dass Citigroup dazustößt, ist plausibel — die Bank unterhält bereits eine Kreditlinie über 2,5 Milliarden Dollar mit Anthropic.</p>
+<p><strong>Die Zahlen, die dabei durch die Presse laufen, verdienen eine Warnung.</strong> Genannt werden: ein Verlust von rund <strong>42 Milliarden Dollar</strong> für 2025, etwa das Fünffache der 8,3 Milliarden aus 2024; über <strong>11,5 Milliarden Dollar</strong> Umsatz im zweiten Quartal 2026 bei erstmals positivem <em>bereinigtem</em> Betriebsergebnis; eine annualisierte Umsatzrate von über 65 Milliarden Dollar zum Ende Juli. Jede dieser Angaben stammt aus Bloomberg-Berichten, die sich auf Dokumente oder anonyme Personen stützen. <em>Keine einzige davon ist von Anthropic offiziell bestätigt oder testiert.</em> Beim bereinigten Ergebnis ist zudem nicht offengelegt, welche Posten herausgerechnet wurden — und eine annualisierte Rate ist eine Hochrechnung aus einem Monat, keine Jahreszahl. Die Verlustangabe für 2025 ist überdies kein Ereignis dieser Woche: Sie stammt aus derselben Bloomberg-Meldung von Mitte August, aus der auch die Umsatzrate kam.</p>
+<p>Auch die vielzitierten Bewertungsprognosen sollte man mit Abstand lesen. heise merkt zu der von Reuters berichteten Umsatzprognose von 190 bis 200 Milliarden Dollar für 2028 selbst an: <em>„Die Annahmen hinter der optimistischen Prognose seien allerdings intransparent.“</em> Bekannt und bestätigt ist demgegenüber nur die Finanzierungsrunde vom Mai: 65 Milliarden Dollar frisches Kapital bei einer Bewertung von 965 Milliarden Dollar. Als Zielgröße für die Emission wird die Größenordnung des SpaceX-Börsengangs genannt, der rund 75 Milliarden Dollar Basiserlös und mit Mehrzuteilung etwa 86 Milliarden einbrachte.</p>
+<p><strong>Was daraus folgt.</strong> Für Kunden ändert ein Börsengang zunächst wenig, für die Erwartungshaltung an das Unternehmen dagegen viel: Ein börsennotiertes Anthropic muss vierteljährlich liefern und seine Ausgaben öffentlich rechtfertigen — bei einem Unternehmen, dessen Selbstbeschreibung auf Sicherheitsforschung und bewusster Zurückhaltung beruht, ist das ein Spannungsverhältnis, das bislang nur intern ausgetragen wurde. Praktisch heißt das für Sie vor allem: Wenn Ende August das öffentliche Dokument erscheint, ersetzt es sämtliche der oben genannten Presse-Rekonstruktionen. Bis dahin sind auch die eindrucksvollsten Zahlen genau das — Rekonstruktionen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/Anthropic-tritt-aufs-Gas-fuer-Mega-Boersengang-11421857.html" rel="noopener noreferrer external" target="_blank">heise online — Anthropic tritt aufs Gas für Mega-Börsengang (Axel Kannenberg, 21.8.2026)</a></li>
+                
+                <li><a href="https://www.business-standard.com/world-news/anthropic-set-to-add-citigroup-to-top-ipo-banks-ahead-of-mega-listing-126082100097_1.html" rel="noopener noreferrer external" target="_blank">Business Standard — Anthropic set to add Citigroup to top IPO banks (Bloomberg-Text, 21.8.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/08/17/anthropics-annualized-revenue-surges-to-65b/" rel="noopener noreferrer external" target="_blank">TechCrunch — Anthropic&#39;s annualized revenue surges to $65B (17.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <p class="article-kicker">Finanzstabilität · Euroraum</p>
+        <h2 id="art-3-h">440 Milliarden Euro in sieben US-Aktien: Fünf EZB-Ökonomen halten eine Korrektur für wahrscheinlich — und sagen ausdrücklich, dass sie nicht für die EZB sprechen</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-17">17. August 2026</time>
+        </p>
+        <p class="article-teaser">Ein Beitrag im Blog der Europäischen Zentralbank rechnet vor, wie europäische Kleinanleger über kostengünstige Indexfonds unbemerkt in ein hochkonzentriertes US-Technologierisiko geraten sind. Die Kernaussage ist unbequem — und die Zuschreibung des Textes ist es fast noch mehr.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Zur Datumslage: Der Beitrag erschien am 17. August im Blog der EZB, die deutschsprachige Berichterstattung durch heise online folgte am 21. August. Wir datieren den Artikel auf das Ereignis, nicht auf die Nachberichterstattung.</em></p>
+<p>Unter dem Titel <em>„The AI boom: rational enthusiasm or the next dot-com bubble?“</em> haben fünf Ökonominnen und Ökonomen der Europäischen Zentralbank — Malin Andersson, Johannes Breckenfelder, Stefano Corradin, Kalin Nikolov und Maria Antonietta Viola — eine Analyse veröffentlicht, deren zentraler Satz knapp ausfällt: <em>„A correction of current stock market valuations is likely.“</em></p>
+<p><strong>Eine Klarstellung vorweg, die in mehreren Berichten untergegangen ist.</strong> Dies ist <em>keine</em> Warnung der EZB. Der Text steht im Format „The ECB Blog“, das Forscherinnen und Forschern des Hauses erlaubt, unter eigenem Namen zu publizieren, und trägt den ausdrücklichen Hinweis: <em>„The views expressed in each blog entry are those of the author(s) and do not necessarily represent the views of the European Central Bank and the Eurosystem.“</em> Es handelt sich also weder um den Finanzstabilitätsbericht noch um eine geldpolitische Positionierung. Wer daraus „Die EZB warnt“ macht, gibt den Vorgang falsch wieder. Gewicht hat der Beitrag trotzdem, weil er auf internen Bestandsdaten der Notenbank beruht, die außerhalb des Hauses niemand hat.</p>
+<p><strong>Die Zahl, um die es geht.</strong> Europäische Haushalte halten nach den Berechnungen der Autoren rund <strong>440 Milliarden Euro</strong> an US-Technologieaktien — überwiegend nicht als Direktbesitz, sondern über Investmentfonds und börsengehandelte Indexfonds. Im Original: <em>„Euro area households, which are increasingly channelling funds into low-cost ETFs, have around €440 billion of exposures to US technology equities without necessarily being aware of the associated concentration risk.“</em> Der Nachsatz ist der eigentliche Punkt: <em>ohne sich des Konzentrationsrisikos zwangsläufig bewusst zu sein</em>. Wer einen breiten Welt- oder US-Index bespart, hält heute einen erheblichen Anteil in sieben Einzelwerten — den „Magnificent Seven“ Nvidia, Apple, Alphabet, Microsoft, Amazon, Meta und Tesla. <em>Einordnung zur Zahl:</em> Sie bezieht sich laut Fußnote der zugehörigen Grafik auf Marktwerte zum dritten Quartal 2025, ist also kein tagesaktueller Stand. Dass auch Versicherer und Pensionsfonds erhebliche Bestände halten, schreiben die Autoren ausdrücklich — eine Zahl dafür nennen sie nicht; die in der deutschen Berichterstattung kursierende Größenordnung „weitere hunderte Milliarden“ stammt von heise, nicht aus dem Blogbeitrag.</p>
+<p><strong>Der Mechanismus, der aus einem Kursrutsch ein Stabilitätsproblem macht.</strong> Er liegt nicht in den Kursverlusten selbst, sondern in der Fondsstruktur. Fällt der Markt, ziehen Anleger Geld aus den Fonds ab; um die Rücknahmen zu bedienen, müssen die Fonds verkaufen — zuerst das, was sich leicht verkaufen lässt, danach das, was nur noch mit Abschlag loszuwerden ist. Dieser Zwangsverkauf drückt die Kurse weiter und löst die nächste Runde aus. Die Autoren nennen als zweiten Kanal die Frage, wie stark die Übertreibung an den europäischen Börsen selbst ausgeprägt ist — und geben hier teilweise Entwarnung: Die Bewertungsniveaus im Euroraum liegen deutlich unter den amerikanischen, die Indizes sind stärker von klassischer Industrie geprägt. Nur nützt das wenig, weil die Märkte historisch hoch korreliert sind. Ihr Fazit dazu: <em>„A US AI fallout would not remain a US problem.“</em></p>
+<p><strong>Der Punkt, der die Analyse von den üblichen Blasenwarnungen unterscheidet</strong>, ist die Behandlung der Gegenposition. Die Autoren stellen zwei Erklärungen nebeneinander: die rationale, nach der hohe Bewertungen bei echter technologischer Unsicherheit gerechtfertigt sein können, und die verhaltensökonomische, nach der selbstsichere Anleger die Kurse über den Fundamentalwert treiben. Ihre Schlussfolgerung gilt in <em>beiden</em> Fällen — auch wenn die Bewertungen heute rational sind, wird eine Korrektur wahrscheinlich, sobald sich die Unsicherheit auflöst. Historische Parallelen ziehen sie zum Eisenbahnboom des 19. Jahrhunderts und zur Elektrifizierung der 1920er, nicht nur zur Dotcom-Blase.</p>
+<p>Unbequem ist der letzte Befund: Der geldpolitische Spielraum ist heute enger als 2000. Wörtlich: <em>„Unlike in the dot-com episode, today's starting point leaves markedly less room to cut interest rates or use fiscal policy to cushion the fallout.“</em> Nach dem Platzen der Dotcom-Blase konnten Notenbanken die Zinsen deutlich senken; von den heutigen Niveaus aus ist dieser Puffer kleiner.</p>
+<p><strong>Was das praktisch bedeutet.</strong> Für Unternehmen jenseits der Finanzbranche ist die Botschaft weniger eine Anlageempfehlung als eine Planungsfrage: Wenn ein erheblicher Teil der Bewertung im KI-Sektor auf Erwartungen beruht, dann hängen daran auch Investitionsbudgets, Rechenzentrumsausbau und die Preise, zu denen Sie heute Inferenz einkaufen. Wir haben die Finanzierungsmechanik dahinter in unseren Reportagen vom <a href="/editions/reportagen/2026-07-13.html">13. Juli</a> und <a href="/editions/reportagen/2026-07-22.html">22. Juli</a> ausgeführt. Die praktische Konsequenz ist unspektakulär und deshalb leicht zu übersehen: Verträge, die auf dauerhaft subventionierte Token-Preise setzen, sollten eine Annahme darüber enthalten, was passiert, wenn die Subvention endet.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.ecb.europa.eu/press/blog/date/2026/html/ecb.blog20260817~754a8a4418.en.html" rel="noopener noreferrer external" target="_blank">ECB Blog — The AI boom: rational enthusiasm or the next dot-com bubble? (Primärquelle, 17.8.2026)</a></li>
+                
+                <li><a href="https://www.heise.de/news/KI-Blase-Expertengruppe-der-EZB-warnt-vor-den-Folgen-eines-Kursrutsches-11421468.html" rel="noopener noreferrer external" target="_blank">heise online — KI-Blase: Expertengruppe der EZB warnt vor den Folgen eines Kursrutsches (Martin Holland, 21.8.2026)</a></li>
+                
+                <li><a href="https://www.rte.ie/news/business/2026/0817/1588200-ai-market-correction-is-coming-ecb-blog-predicts/" rel="noopener noreferrer external" target="_blank">RTÉ — AI market correction is coming, ECB blog predicts (17.8.2026)</a></li>
+                
+                <li><a href="https://www.centralbanking.com/central-banks/financial-stability/7976671/europes-stability-at-risk-if-ai-bubble-bursts-ecb-blog" rel="noopener noreferrer external" target="_blank">Central Banking — Europe&#39;s stability at risk if AI bubble bursts, ECB blog (18.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <p class="article-kicker">Sicherheit · Modellrichtlinien</p>
+        <h2 id="art-4-h">Die Regel gilt, die Durchsetzung nicht: TechCrunch bringt ein älteres Claude-Modell in zehn von zehn Versuchen dazu, seine eigenen Inhaltsgrenzen zu ignorieren</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Der Befund betrifft Opus 4.6, Opus 3 und Haiku 4.5 — die aktuellen Modelle ab Opus 4.7 hielten im selben Test stand. Interessant ist der Fall deshalb weniger als Skandal denn als Anschauungsmaterial dafür, was ein Regelwerk wert ist, das nur für die jeweils neueste Generation zuverlässig greift.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Einzelquellen-Hinweis vorweg: Dieser Befund beruht ausschließlich auf einem Test von TechCrunch vom 21. August. Eine unabhängige Bestätigung durch ein anderes Medium war bis Redaktionsschluss nicht auffindbar. Wir kennzeichnen das ausdrücklich und behandeln die Zahlen entsprechend zurückhaltend.</em></p>
+<p>TechCrunch hat <strong>Claude Opus 4.6</strong> systematisch auf die Einhaltung von Anthropics Inhaltsregeln geprüft. Das Ergebnis: Bei <strong>zehn von zehn</strong> direkten Anfragen nach explizit sexuellen Inhalten lieferte das Modell ohne nennenswerten Widerstand. Zusätzlich stellte ein anonymer britischer Sicherheitsforscher eine mehrstufige Umgehungstechnik zur Verfügung — eskalierendes Rollenspiel —, die TechCrunch in fünf weiteren Durchläufen reproduzieren konnte.</p>
+<p><strong>Die entscheidende Differenzierung steht im Kleingedruckten.</strong> Betroffen sind Opus 4.6, Opus 3 und Haiku 4.5 — also ältere Modellgenerationen. Die neueren Modelle von Opus 4.7 bis zum aktuellen Opus 5 erwiesen sich gegen dieselbe Technik als widerstandsfähig. Das ist der Grund, warum wir diese Meldung <em>nicht</em> als Kurswechsel lesen: Hätte Anthropic seine Inhaltspolitik bewusst gelockert, müssten die neueren Modelle freizügiger sein, nicht strenger. Was hier sichtbar wird, ist das Gegenteil — eine <strong>Durchsetzungslücke in älteren Generationen</strong>, die im Betrieb bleiben, während die Absicherung nur in den jeweils neuen Modellen nachgezogen wird.</p>
+<p><strong>Anthropics Reaktion ist reaktiv, nicht proaktiv.</strong> Es gibt keinen Blogpost, keine geänderte Modellkarte, keine Aktualisierung der Nutzungsrichtlinie zu diesem Fund — nur eine Sprecherstellungnahme gegenüber TechCrunch. Darin verweist das Unternehmen auf die unveränderte Regel: <em>„Anthropic's universal usage standards for Claude forbid the model from generating sexually explicit content.“</em> Zur praktischen Relevanz heißt es, entsprechende Anwendungsfälle seien <em>„rare, making up less than 0.1% of all conversations“</em>, und man verbessere die Schutzmaßnahmen <em>„with each new model release“</em>. Aus der Lücke bei Erwachseneninhalten lasse sich zudem nicht auf eine breitere Umgehbarkeit <em>„in higher-risk areas“</em> schließen.</p>
+<p><strong>Warum das für Unternehmenskunden relevant ist, obwohl das Thema harmlos klingt.</strong> Die inhaltliche Frage ist hier zweitrangig; die strukturelle ist es nicht. Wer ein älteres Modell aus Kosten- oder Stabilitätsgründen weiterbetreibt — und dafür gibt es gute Gründe, etwa festgeschriebene Ausgabeformate oder abgenommene Testfälle —, betreibt damit möglicherweise auch einen älteren Stand der Absicherung. Die Nutzungsrichtlinie des Anbieters gilt formal für alle Modelle gleich; ihre technische Durchsetzung tut das erkennbar nicht. Nach TechCrunchs Angaben wird Opus 4.6 weiterhin intensiv genutzt: rund 1,17 Millionen tägliche Programmierschnittstellen-Anfragen und 46 Milliarden Token im August.</p>
+<p>Die praktische Konsequenz für Betreiber ist deshalb nicht, das Modell zu wechseln, sondern die Prüfung dort anzusiedeln, wo sie unabhängig vom Modellstand greift: in der eigenen Anwendungsschicht. Das ist derselbe Gedanke, der auch dem <a href="/editions/2026-08-22.html#art-1">Leitartikel dieser Ausgabe</a> zugrunde liegt — die Schicht um das Modell herum entscheidet, und zwar nicht nur über die Qualität, sondern auch über das, was durchkommt.</p>
+<p><em>Zum zeitlichen Zusammenhang, ohne Kausalität zu behaupten:</em> Der Befund fällt in die Woche, in der Anthropic den öffentlichen Antrag für seinen Börsengang vorbereitet — <a href="/editions/2026-08-22.html#art-2">dem zweiten Artikel dieser Ausgabe</a>. Ein Unternehmen, das sich als sicherheitsorientiertes Labor an die Börse begibt, wird sich an der Frage messen lassen müssen, wie lange Absicherungen für Modelle im aktiven Betrieb nachgeführt werden. Einen belegbaren Zusammenhang zwischen beiden Vorgängen gibt es nicht, und wir behaupten keinen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/08/21/anthropics-opus-4-6-is-a-smut-machine/" rel="noopener noreferrer external" target="_blank">TechCrunch — Anthropic&#39;s Opus 4.6 is a smut-machine (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <p class="article-kicker">Infrastruktur · Orbit</p>
+        <h2 id="art-5-h">250 Millionen Dollar, um Raketenplätze zu kaufen: Starcloud sammelt nicht für Technik, sondern für Startkapazität</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Die Bewertung des Betreibers orbitaler Rechenzentren hat sich auf 2,3 Milliarden Dollar mehr als verdoppelt, Nvidia steigt mit 25 Millionen ein. Der interessanteste Satz des Gründers handelt aber nicht von Rechenleistung, sondern von einem Engpass, den kein Kapital beseitigt.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Starcloud hat seine im März gemeldete Series-A-Runde um <strong>250 Millionen Dollar</strong> erweitert. Das Unternehmen kommt damit auf insgesamt <strong>420 Millionen Dollar</strong> und wird mit <strong>2,3 Milliarden Dollar</strong> bewertet — gegenüber 1,1 Milliarden im Frühjahr mehr als eine Verdopplung. Angeführt wird die Erweiterung von Manhattan West Ventures; beteiligt sind unter anderem <strong>Nvidia mit 25 Millionen Dollar</strong>, Cisco, Benchmark, EQT, Soma, NFX, 776, Cedar Capital, Goanna Capital und Standard Capital. Über die ursprüngliche Runde und das Grundproblem orbitaler Rechenzentren haben wir in unserer <a href="/editions/reportagen/2026-06-15.html">Reportage vom 15. Juni</a> ausführlich berichtet.</p>
+<p><strong>Der eigentliche Nachrichtenwert liegt im Verwendungszweck.</strong> Starcloud sammelt das Geld nicht in erster Linie für neue Technik, sondern um sich Startkapazität für die kommenden Jahre vorab zu sichern. Gründer <strong>Philip Johnston</strong> benennt den Grund unumwunden: <em>„launch is pretty constrained right now because [SpaceX's] Falcon 9 program is scheduled to end in 2028.“</em> Und weiter: <em>„One of the biggest costs is now on securing your launch capacity.“</em> Sowie, mit bemerkenswerter Offenheit über das eigene Klumpenrisiko: <em>„Obviously if we can't book any SpaceX launch capacity in 2029, that will be challenging for us.“</em> Zusammengefasst hat er es so: <em>„We can see what's coming — we're going to need to book an enormous amount of launch.“</em></p>
+<p><strong>Warum das ein struktureller Befund ist und keine Firmenmeldung.</strong> Die gesamte Geschäftsidee orbitaler Rechenzentren beruht darauf, dass Masse günstig in den Orbit kommt. Falcon 9 hat diese Annahme jahrelang getragen. Läuft das Programm wie geplant 2028 aus, hängt alles an Starship — das für den regulären kommerziellen Einsatz noch nicht erprobt ist — oder an Alternativen wie New Glenn von Blue Origin, Vulcan von ULA und Neutron von Rocket Lab, die sämtlich noch nicht im verlässlichen Regelbetrieb fliegen. Ein Unternehmen, das eine Viertelmilliarde Dollar aufnimmt, um Frachtplätze zu reservieren, sagt damit implizit: Der Engpass ist nicht mehr die Technik, sondern der Zugang zur Umlaufbahn.</p>
+<p><strong>Der technische Stand, nüchtern betrachtet.</strong> Starcloud betreibt mit Starcloud-1 nach eigenen Angaben eine Nvidia-H100-Grafikeinheit im Orbit und hat daraus Daten für Nvidias Chipentwicklung geliefert. Als Nächstes ist für 2027 <strong>Starcloud-2</strong> vorgesehen: zwei Satelliten mit je acht Kilowatt Rechenleistung, gestartet als Mitfluglast. <strong>Starcloud-3</strong> ist als größtes Fahrzeug für den Start mit Starship ausgelegt. Das Unternehmen beschäftigt <strong>25 Mitarbeitende</strong>, bezieht eine Fertigungsfläche von rund 9.300 Quadratmetern in Woodinville im US-Bundesstaat Washington und hat bei der Regulierungsbehörde FCC einen Antrag für den Betrieb von <strong>88.000 Raumfahrzeugen</strong> gestellt.</p>
+<p><em>Was in der Berichterstattung fehlt und deshalb hier steht:</em> Zu den beiden Fragen, an denen das Konzept technisch hängt — Wärmeabfuhr im Vakuum und Strahlungsfestigkeit im Dauerbetrieb —, liefert die Meldung keine Zahlen. Es gibt auch keine Angaben zur bisherigen Betriebsdauer oder zur Ausfallrate von Starcloud-1 und keine unabhängige technische Einschätzung. Die Relation ist damit bemerkenswert: 88.000 beantragte Raumfahrzeuge stehen einer einzelnen nachgewiesenen Grafikeinheit im Orbit gegenüber. Das ist kein Einwand gegen das Vorhaben, aber der Maßstab, an dem man die nächsten Meldungen messen sollte.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/08/21/starcloud-raises-200-million-for-orbital-data-centers-as-launch-options-dry-up/" rel="noopener noreferrer external" target="_blank">TechCrunch — Starcloud raises $250 million for orbital data centers as launch options dry up (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <p class="article-kicker">Kartellrecht · Wagniskapital</p>
+        <h2 id="art-6-h">Ein Gesetz von 1914 gegen den größten KI-Investor: Das US-Justizministerium prüft, ob a16z in konkurrierenden Aufsichtsräten sitzt</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-17">17. August 2026</time>
+        </p>
+        <p class="article-teaser">Es geht nicht um Modelle, Daten oder Marktmacht im üblichen Sinn, sondern um eine selten angewandte Vorschrift des Clayton Act. Sollte sie greifen, müsste die gesamte Wagniskapitalbranche ihre Aufsichtsratsmandate neu sortieren — und zwar dort am dringlichsten, wo die Portfolios am stärksten überlappen.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Zur Datumslage: Der Vorgang wurde am 17. August durch eine Bloomberg-Exklusivrecherche bekannt und am 18. August von TechCrunch und Axios aufgegriffen. Anlass für die Aufnahme in diese Ausgabe ist die ausführliche TechCrunch-Aufarbeitung vom 21. August. Wir datieren auf das Ereignis, nicht auf die Nachberichterstattung.</em></p>
+<p>Das US-Justizministerium untersucht <strong>Andreessen Horowitz</strong> — kurz a16z, einen der einflussreichsten Kapitalgeber der KI-Branche — wegen möglicher Verstöße gegen <strong>Section 8 des Clayton Act</strong>. Die Vorschrift stammt aus dem Jahr 1914 und verbietet es, gleichzeitig in den Aufsichtsgremien konkurrierender Unternehmen zu sitzen. Der Gedanke dahinter ist einfach: Wer in beiden Chefetagen sitzt, kann Wettbewerb koordinieren, statt ihn auszutragen.</p>
+<p><strong>Die konkreten Mandate.</strong> Mitgründer <strong>Ben Horowitz</strong> sitzt im Aufsichtsgremium von <strong>Databricks</strong>, das zuletzt mit 190 Milliarden Dollar bewertet wurde. Partner <strong>Martin Casado</strong> sitzt in dem von <strong>Fivetran</strong>, das am 1. Juni 2026 mit dbt Labs fusionierte. Beide Unternehmen gelten inzwischen als Wettbewerber im Geschäft mit Datenpipelines und Dateninfrastruktur. Der entscheidende Punkt ist die Zeitachse: Als a16z ursprünglich investierte, waren die Firmen nicht notwendigerweise direkte Konkurrenten. Sie sind es durch die Marktentwicklung und durch Zukäufe geworden.</p>
+<p><strong>Zum Verfahrensstand ist Zurückhaltung geboten.</strong> Es gibt <em>keine offizielle Bestätigung des Justizministeriums</em>. Die Information stammt aus einer Bloomberg-Recherche; Ministerium, Databricks und a16z haben eine Stellungnahme abgelehnt oder nicht reagiert. Die Untersuchung läuft nach diesen Angaben bereits seit etwa einem Jahr, zeitlich parallel zur kartellrechtlichen Prüfung der Fusion von Fivetran und dbt Labs, die das Ministerium ohne Auflagen freigab. Eine Entscheidung ist nicht gefallen; das Verfahren kann auch folgenlos enden.</p>
+<p><strong>Warum die Branche nervös reagiert.</strong> TechCrunch hält fest: <em>„Several VCs told TechCrunch they were surprised by news of the probe.“</em> Die Überraschung hat einen Grund — Section 8 wurde gegenüber Wagniskapitalgebern bislang praktisch nicht durchgesetzt. Die möglichen Folgen beschreibt TechCrunch so: <em>„If a16z is forced to surrender a seat, founders may place less value on board commitments from top-tier VCs, given that those investors might be forced to step down if a portfolio overlap creates a future conflict.“</em> Übersetzt heißt das: Der Aufsichtsratssitz ist im Wagniskapital nicht bloß Kontrolle, sondern ein Verkaufsargument gegenüber Gründern — die Zusage, dass ein erfahrener Investor dauerhaft mit am Tisch sitzt. Wird dieses Versprechen widerruflich, verliert es an Wert.</p>
+<p><strong>Der KI-Bezug ist struktureller Natur.</strong> In keinem Bereich überlappen Portfolios so schnell und so unabsichtlich wie in der KI-Infrastruktur. Ein Kapitalgeber, der heute in ein Modellhaus, eine Datenplattform und ein Agenten-Framework investiert, hält morgen womöglich Anteile an drei Unternehmen, die um dieselben Kunden konkurrieren — weil sich die Produkte aufeinander zubewegt haben, nicht weil jemand eine Absicht hatte. Genau diese Dynamik trifft die Vorschrift. Sollte das Ministerium durchgreifen, müssten Kapitalgeber ihre Mandate laufend daraufhin prüfen, ob aus Nachbarn Konkurrenten geworden sind. Das wäre keine Randnotiz, sondern eine Änderung der Arbeitsweise einer ganzen Branche.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/08/18/dojs-probe-into-andreessen-horowitz-over-board-seats-baffles-vcs/" rel="noopener noreferrer external" target="_blank">TechCrunch — DOJ&#39;s probe into Andreessen Horowitz over board seats baffles VCs (18.8.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/podcast/the-doj-is-investigating-a16z-what-does-this-mean-for-venture-capital/" rel="noopener noreferrer external" target="_blank">TechCrunch Podcast — The DOJ is investigating a16z. What does this mean for venture capital? (21.8.2026)</a></li>
+                
+                <li><a href="https://finance.yahoo.com/technology/articles/doj-probe-andreessen-horowitz-over-203620969.html" rel="noopener noreferrer external" target="_blank">Yahoo Finance — DOJ probe of Andreessen Horowitz over board seats (Bloomberg-Relay, 18.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <p class="article-kicker">Infrastruktur · Nvidia</p>
+        <h2 id="art-7-h">Noch eine Stufe früher in der Kette: Nvidia beteiligt sich am Stromvermittler Cloverleaf</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Der Chiphersteller kauft sich diesmal nicht bei einem Rechenzentrumsbetreiber ein, sondern bei einem Unternehmen, das Netzanschlüsse besorgt, bevor überhaupt gebaut wird. Die Summe bleibt offiziell offen.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Nvidia geht eine Minderheitsbeteiligung an <strong>Cloverleaf Infrastructure</strong> ein, einem 2024 gegründeten Unternehmen, das seinerzeit 300 Millionen Dollar Startkapital von NGP und Sandbrook Capital eingesammelt hatte. Die Höhe der Investition wurde <em>nicht offiziell offengelegt</em>; das Wall Street Journal berichtet von einem Betrag im Bereich mehrerer hundert Millionen Dollar. Cloverleaf setzt künftig Nvidias DSX-Plattform ein, ein Referenzentwurf für die gemeinsame Planung von Standort, Stromversorgung, Kühlung und Rechenkapazität.</p>
+<p><strong>Was Cloverleaf tut, ist die eigentliche Pointe.</strong> Das Unternehmen betreibt keine Rechenzentren. Es vermittelt zwischen Energieversorgern und Betreibern und sichert <em>Netzanschlusszusagen, bevor gebaut wird</em>. Das klingt nach Verwaltungsarbeit, ist aber derzeit der härteste Engpass der Branche: Rechenkapazität lässt sich in Monaten beschaffen, ein Anschluss ans Stromnetz dauert in vielen US-Regionen Jahre. Wer die Anschlusszusage hat, bestimmt, wo gebaut werden kann.</p>
+<p>Die Beteiligten formulieren es entsprechend. <strong>Nico Caprez</strong>, VP bei Nvidia: <em>„AI factories are the infrastructure of the intelligence age, and land, power and shell are their foundation.“</em> Cloverleaf-Chef <strong>David Berry</strong>: <em>„AI is accelerating demand for digital infrastructure at an unprecedented scale.“</em> TechCrunch ordnet den Vorgang knapp ein: <em>„The deal is part of Nvidia's ongoing push to use its immense profits to keep the AI flywheel spinning.“</em></p>
+<p><strong>Das Muster ist bekannt, die Stufe ist neu.</strong> Nvidia investiert seit Monaten in die Abnehmerseite seiner eigenen Chips — wir haben das bei der gekappten OpenAI-Garantie und der Beteiligung an SB Energy am <a href="/editions/2026-08-18.html#art-2">18. August</a> und beim Blick in Nvidias Depotmeldung am <a href="/editions/2026-08-16.html#art-4">16. August</a> beschrieben. Neu an diesem Fall ist die Position in der Kette: Es geht nicht mehr um einen Betreiber oder einen Cloud-Anbieter, sondern um den vorgelagerten Standort- und Energieentwickler. Nvidia sichert damit nicht die Nachfrage nach Chips, sondern die Voraussetzung dafür, dass diese Nachfrage überhaupt entstehen kann.</p>
+<p><em>Zur Belastbarkeit der Zahlen:</em> Angaben zu Cloverleafs Projektumfang — kolportiert werden mehr als sieben Gigawatt bereits verkaufte Projekte und eine Gesamtpipeline von über zehn Gigawatt — stehen <strong>nicht</strong> in der TechCrunch-Meldung oder der Pressemitteilung, sondern stammen aus Fachdiensten wie DataCenterDynamics. Wir führen sie deshalb als nicht unabhängig bestätigt.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf/" rel="noopener noreferrer external" target="_blank">TechCrunch — Nvidia partners with data center developer Cloverleaf (21.8.2026)</a></li>
+                
+                <li><a href="https://www.prnewswire.com/news-releases/cloverleaf-infrastructure-forms-strategic-partnership-with-nvidia-to-accelerate-data-center-infrastructure-development-302857329.html" rel="noopener noreferrer external" target="_blank">PR Newswire — Cloverleaf Infrastructure Forms Strategic Partnership with NVIDIA (Primärquelle, 21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-8" aria-labelledby="art-8-h">
+        <p class="article-kicker">Studie · Nutzungsdaten</p>
+        <h2 id="art-8-h">Fast die Hälfte fällt aus der Statistik: Ein Forschungsverbund zeigt, was die Nutzungsberichte der KI-Anbieter systematisch ausblenden</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-18">18. August 2026</time>
+        </p>
+        <p class="article-teaser">Ein Konsortium um MIT und Stanford hat 23.158 echte Chatverläufe zusammengetragen und darauf die Filtermethodik angewandt, mit der Anthropic seinen eigenen Wirtschaftsindex erstellt. Ergebnis: 47,9 Prozent der Gespräche werden dabei aussortiert, bevor irgendjemand sie zu Gesicht bekommt.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Zur Datumslage: Das Vorabpapier und die Berichterstattung der MIT Technology Review datieren auf den 18. August, die deutschsprachige Zusammenfassung durch t3n auf den 21. August. Wir datieren auf das Ereignis.</em></p>
+<p>Unter dem Namen <strong>The AI Observatory</strong> hat ein breites Forschungskonsortium einen Datensatz und eine öffentliche Auswertungsplattform vorgelegt, die eine schlichte, aber selten gestellte Frage beantworten sollen: Wofür benutzen Menschen KI-Assistenten eigentlich <em>wirklich</em>? Beteiligt sind unter anderem MIT, Stanford, Northeastern, Johns Hopkins, UC Berkeley, Carnegie Mellon, NYU, Brown, die University of Waterloo, EleutherAI und Cohere. Erstautoren sind <strong>Shayne Longpre</strong> (MIT), <strong>Anka Reuel</strong> (Stanford) und <strong>Dayeon Ki</strong> (University of Maryland).</p>
+<p><strong>Warum es diese Arbeit überhaupt braucht.</strong> Was wir über die Nutzung von KI-Assistenten zu wissen glauben, stammt fast vollständig von den Anbietern selbst — etwa aus Anthropics Wirtschaftsindex oder vergleichbaren Auswertungen von OpenAI. Diese Berichte sind nicht falsch, aber sie sind von den Unternehmen erstellt, die ein Interesse am Ergebnis haben, und sie sind von außen nicht überprüfbar. Reuel formuliert das Problem gegenüber der MIT Technology Review in fünf Worten: <em>„There is no independent source to corroborate it.“</em> Longpre ergänzt: <em>„No single company report tells the whole story.“</em></p>
+<p><strong>Woraus der Datensatz besteht.</strong> Zusammengeführt wurden sieben bestehende Sammlungen aus den Jahren 2023 bis 2025: insgesamt <strong>23.158 Konversationen</strong> mit 85.633 Gesprächsrunden und 171.266 Einzelnachrichten von rund 5.000 Nutzerinnen und Nutzern über mehr als 25 Modelle hinweg. Die größte Einzelquelle ist WildChat mit 14.648 Dialogen; hinzu kommen ShareGPT, ein privater Stichprobenbestand, ein Grok-Datensatz von X, LMSYS-Chat-1M, Chatbot Arena und das National Internet Observatory, das nur aggregierte Statistiken beisteuert. Wichtig für die Bewertung: Die Daten stammen aus freiwilliger Zustimmung oder aus bereits geteilten, öffentlichen Beständen — nicht aus heimlichem Abgreifen. Annotiert wurde entlang einer Systematik aus 145 Merkmalen auf vier Ebenen.</p>
+<p><strong>Der Kernbefund ist ein methodisches Experiment.</strong> Die Forschenden haben Anthropics eigene Filterlogik auf ihren unabhängigen Datensatz angewandt — also gefragt: Was passiert mit diesen 23.158 Gesprächen, wenn man sie durch dasselbe Sieb schüttet, durch das der offizielle Wirtschaftsindex entsteht? Antwort: <strong>47,9 Prozent</strong> werden als „nicht beruflich“ herausgefiltert und tauchen in der veröffentlichten Statistik nie auf. Darunter fällt viel Persönliches, Soziales, Kulturelles — und ein erheblicher Teil dessen, was sicherheitsrelevant wäre. Der Filter ist nicht heimlich; er ist dokumentiert und für den Zweck eines <em>Wirtschafts</em>index sogar nachvollziehbar. Nur wird das Ergebnis anschließend als Aussage über KI-Nutzung insgesamt gelesen, und das trägt es nicht.</p>
+<p><em>Zur Belastbarkeit einzelner Zahlen:</em> Die in der Berichterstattung kursierenden Detailvergleiche — etwa 44,2 gegen 31,2 Prozent bei Gesundheits- und Beziehungsthemen oder 16,7 gegen 2,4 Prozent bei sexuellen Inhalten — stammen aus der Darstellung der MIT Technology Review. Wir führen sie ausdrücklich als deren Angabe und nicht als direktes Zitat aus dem Papier, das den Status <em>Preprint</em> trägt, also noch keine Begutachtung durchlaufen hat.</p>
+<p><strong>Was Sie praktisch mitnehmen sollten.</strong> Wenn in einer Vorstandsvorlage steht, „X Prozent der KI-Nutzung entfällt auf berufliche Anwendungen“, dann ist die Rückfrage nicht, ob die Zahl stimmt, sondern was vorher weggefiltert wurde. Das gilt in beide Richtungen: Wer aus Anbieterzahlen ableitet, dass KI überwiegend produktiv genutzt wird, überschätzt den Anteil; wer aus derselben Quelle Rückschlüsse auf Risiken zieht, unterschätzt sie. Für die eigene Organisation heißt das schlicht, dass man Nutzungsdaten selbst erheben muss, wenn man sie für Entscheidungen braucht — und dass diese Erhebung ihre eigenen Filter offenlegen sollte.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.dataprovenance.org/ai_observatory.pdf" rel="noopener noreferrer external" target="_blank">The AI Observatory — Preprint „A Public Measure of Real-World AI Use“ (PDF, Primärquelle)</a></li>
+                
+                <li><a href="https://ai-observatory.org" rel="noopener noreferrer external" target="_blank">The AI Observatory — Plattform</a></li>
+                
+                <li><a href="https://www.technologyreview.com/2026/08/18/1142226/how-people-use-ai/" rel="noopener noreferrer external" target="_blank">MIT Technology Review — We still don&#39;t know how people are really using AI (18.8.2026)</a></li>
+                
+                <li><a href="https://t3n.de/news/analyse-von-mehr-als-24-000-chats-diese-plattform-will-zeigen-was-ki-firmen-nicht-verraten-1759043/" rel="noopener noreferrer external" target="_blank">t3n — Analyse von mehr als 24.000 Chats (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-9" aria-labelledby="art-9-h">
+        <p class="article-kicker">Regulierung · Autonomes Fahren</p>
+        <h2 id="art-9-h">8.000 Genehmigungen in Clark County — und ein Lobbystreit darüber, ob der Mensch am Steuer bleiben muss</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Nevada hat an einem Tag Kontingente für Waymo, Uber und Tesla freigegeben. Fast zeitgleich zeigen Offenlegungspflichten, dass Waymo seine Ausgaben für Bundeslobbying verdoppelt hat — und dass Uber in einem Bundesstaat eine Menschenquote von 85 Prozent fordert.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die <strong>Nevada Transportation Authority</strong> hat einstimmig Kontingente für fahrerlose Taxis in <strong>Clark County</strong> freigegeben — dem Landkreis, zu dem Las Vegas und die umliegenden Gemeinden gehören. Die Aufteilung: <strong>Waymo 1.000</strong> Fahrzeuge, <strong>Uber 1.000</strong>, <strong>Tesla bis zu 5.000</strong>. Zoox verfügte bereits zuvor über eine gesonderte Genehmigung für 100 Fahrzeuge. Zuständig ist nicht die Kfz-Zulassungsbehörde, sondern die Verkehrsaufsicht, die seit einer Gesetzesreform von 2015 den gewerblichen Personenverkehr in Nevada reguliert.</p>
+<p><strong>Die Zahl ist eine Obergrenze, keine Ankündigung.</strong> Tesla selbst erklärte, man wäre „extrem zufrieden“, wenn binnen eines Jahres 2.500 Fahrzeuge — also die Hälfte des eigenen Kontingents — auf der Straße wären. Uber sicherte zu, dass menschliche Fahrer parallel im Einsatz blieben. Lokale Taxi- und Limousinenunternehmen hatten Einwände vorgebracht: Sie fürchten eine Übersättigung des Marktes und zusätzliche Staus auf der Strecke zwischen Flughafen und Innenstadt. Die Genehmigung ist von der kalifornischen Entscheidung zu trennen, über die wir am <a href="/editions/2026-08-16.html#art-6">16. August</a> berichtet haben — anderer Bundesstaat, andere Behörde, eigenes Verfahren.</p>
+<p><strong>Am selben Tag wurde sichtbar, womit dieser Rahmen erkämpft wird.</strong> Die Financial Times hat, syndiziert über Ars Technica, die Lobbyoffenlegungen ausgewertet: Waymo gab zwischen April und Juni 2026 mehr als <strong>eine Million Dollar</strong> für Bundeslobbying aus — mehr als doppelt so viel wie im Vorjahreszeitraum. Für das erste Halbjahr summiert sich das auf gut <strong>zwei Millionen Dollar</strong>, ein Zuwachs von <strong>93 Prozent</strong>. Damit liegt Waymo nahe am Niveau von Uber und deutlich über Zoox und Tesla. Allein in New York gab Waymo 2026 bereits über 500.000 Dollar aus, mehr als doppelt so viel wie Uber dort. Im Mai kam zusätzlich die Kanzlei Greenberg Traurig als Lobbyist hinzu.</p>
+<p><strong>Worum gestritten wird, ist konkreter als „Regulierung“.</strong> Waymo wirbt für einen bundesweiten Rahmen, der einen <em>„faster route to fully driverless commercial services“</em> eröffnet. Uber setzt auf <em>„hybrid networks“</em>, in denen Robotaxis neben menschlichen Fahrern fahren — und wird dabei sehr konkret: In New Jersey fordern Ubers Lobbyisten, dass während einer dreijährigen Pilotphase mindestens <strong>85 Prozent</strong> aller Fahrten weiterhin von Menschen erbracht werden müssen. Uber weist zurück, damit die Technologie ausbremsen zu wollen; man sei nicht <em>„anti-AV or seeking to slow AV deployment“</em>. Waymo hat zudem einen Fonds über 20 Millionen Dollar für betroffene Fahrer in Aussicht gestellt — das allerdings nach Angaben mit der Sache vertrauter Personen, nicht offiziell bestätigt.</p>
+<p>Der Analyst <strong>Walter Piecyk</strong> von LightShed Partners bringt beide Stränge zusammen: <em>„They've both stepped up lobbying and are pushing up against each other, which now appears to be hastening their divorce.“</em> Über die sich abzeichnende Trennung der beiden Partner haben wir am <a href="/editions/2026-07-27.html#art-2">27. Juli</a> berichtet und die Wirtschaftlichkeit des Geschäfts in unserer <a href="/editions/reportagen/2026-07-27.html">Reportage vom 27. Juli</a> durchgerechnet. Neu ist an dieser Meldung, dass die Eskalation jetzt in Dollarbeträgen aus Pflichtoffenlegungen nachlesbar ist statt nur aus anonymen Quellen.</p>
+<p><strong>Warum das über die Branche hinaus interessant ist.</strong> Hier lässt sich in Echtzeit beobachten, wie zwei Unternehmen mit derselben Technologie entgegengesetzte regulatorische Interessen entwickeln, weil ihre Geschäftsmodelle auseinanderlaufen: Wer die Fahrzeuge baut und betreibt, will den Menschen aus der Rechnung nehmen; wer die Vermittlungsplattform besitzt, verdient auch am Menschen. Die Menschenquote von 85 Prozent ist deshalb kein Sicherheitsargument, sondern ein Geschäftsmodellargument im Gewand eines Sicherheitsarguments — eine Unterscheidung, die bei künftigen Regulierungsdebatten zu KI allgemein nützlich sein dürfte.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/Las-Vegas-Genehmigung-fuer-bis-zu-8000-autonome-Taxis-11421391.html" rel="noopener noreferrer external" target="_blank">heise online — Las Vegas: Genehmigung für bis zu 8000 autonome Taxis (21.8.2026)</a></li>
+                
+                <li><a href="https://arstechnica.com/cars/2026/08/waymo-doubles-spending-on-lobbying-in-robotaxi-battle-with-uber/" rel="noopener noreferrer external" target="_blank">Ars Technica / Financial Times — Waymo doubles spending on lobbying in robotaxi battle with Uber (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-10" aria-labelledby="art-10-h">
+        <p class="article-kicker">Forschung · Medizin</p>
+        <h2 id="art-10-h">Körperzusammensetzung aus zwei Smartphone-Fotos: Googles Modell schlägt die Waage — und schweigt zur Hautfarbe</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Ein Google-Research-Modell schätzt den Körperfettanteil mit 2,15 Prozent mittlerer Abweichung gegenüber dem klinischen Referenzverfahren und übertrifft damit die Sensoren handelsüblicher Körperfettwaagen deutlich. Die Arbeit hat eine Lücke, die bei einem medizinischen Bildverfahren schwer wiegt.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Forschende von Google Research haben ein Verfahren vorgestellt, das aus Smartphone-Aufnahmen die Körperzusammensetzung schätzt — und daraus ein kardiometabolisches Risiko ableitet. Die Arbeit trägt den Titel <em>„Beyond BMI: Smartphone Body Composition Phenotyping for Cardiometabolic Risk Assessment“</em> und liegt als Vorabpapier vor. Die deutschsprachigen Berichte von t3n und heise nennen keine einzige konkrete Genauigkeitszahl; wir haben sie deshalb dem Papier und dem Forschungsblog direkt entnommen.</p>
+<p><strong>Warum das medizinisch überhaupt interessant ist.</strong> Der Body-Mass-Index, der Standardmaßstab seit Jahrzehnten, setzt Gewicht ins Verhältnis zur Körpergröße und kann deshalb nicht zwischen Muskel und Fett unterscheiden — und schon gar nicht zwischen Fett unter der Haut und dem viszeralen Fett um die inneren Organe, das für das Stoffwechselrisiko entscheidend ist. Der klinische Referenzstandard dafür ist die DXA-Messung, eine Röntgen-Absorptiometrie, die Geräte, Personal und einen Termin braucht. Handelsübliche Körperfettwaagen behelfen sich mit einer Impedanzmessung, also einem schwachen Strom durch den Körper — bequem, aber ungenau.</p>
+<p><strong>Aufbau und Ergebnisse.</strong> Das Modell nutzt ein ResNet-50-Rückgrat und wurde dreistufig trainiert: Vortraining auf 35.323 Datensätzen der UK Biobank, Feinjustierung an einer klinischen Kohorte mit 677 Personen, unabhängige Prüfung an 132 weiteren Personen aus einer 30-wöchigen Längsschnittstudie in San Francisco. Gegen DXA als Referenz erreicht das Verfahren beim Körperfettanteil eine mittlere absolute Abweichung von <strong>2,15 Prozent</strong> beziehungsweise 2,13 Prozent in der unabhängigen Kohorte — gegenüber <strong>2,91 Prozent</strong> für die Impedanzmessung. Bei der Vorhersage von Insulinresistenz kommt das Fotoverfahren zusammen mit demografischen Angaben auf einen AUROC-Wert von <strong>0,760</strong>; der Goldstandard DXA erreicht 0,773, demografische Angaben allein 0,692. Die Impedanzmessung brachte gegenüber der reinen Demografie-Grundlinie <em>keine</em> Verbesserung. Übersetzt: Das Foto kommt nah an das Röntgenverfahren heran, die Waage im Badezimmer trägt praktisch nichts bei.</p>
+<p><strong>Und jetzt die Lücke.</strong> Das Papier diskutiert <em>keine</em> Unterschiede nach Hautton und führt keine Fairness-Prüfung über ethnische oder soziodemografische Gruppen durch. Bei einem Verfahren, das aus Fotografien von Körpern Rückschlüsse zieht, ist das keine akademische Randfrage: Bildbasierte Medizinverfahren haben eine gut dokumentierte Geschichte systematisch schlechterer Ergebnisse für dunklere Hauttöne, von der Pulsoxymetrie bis zur Dermatologie. Die einzige demografische Einschränkung, die das Papier benennt, betrifft den höheren Frauenanteil in den Prüfkohorten. Solange dieser Nachweis fehlt, ist die Genauigkeitsangabe eine Aussage über die untersuchten Kohorten und nicht über die Bevölkerung.</p>
+<p><strong>Was das für die Praxis heißt.</strong> Es handelt sich ausdrücklich um einen <em>Forschungsprototyp</em>. Eine Produktankündigung gibt es nicht; als nächsten Schritt nennen die Autoren die Einbindung weiterer Datenquellen, nicht die Vermarktung. Die realistische Perspektive ist trotzdem greifbar: Ein Verfahren, das mit vorhandener Hardware auskommt, senkt die Hürde für Verlaufsmessungen erheblich — statt einmal im Jahr ein Termin, jederzeit eine Aufnahme. Genau daraus folgt aber auch die unangenehme Frage, die dieses Verfahren mit jedem anderen KI-Gesundheitswerkzeug teilt: Wo landen diese Bilder, und was passiert mit den daraus abgeleiteten Risikowerten, wenn sie einmal existieren? Ein Befund aus derselben Woche, den wir im <a href="/editions/2026-08-22.html#art-11">nächsten Artikel</a> behandeln, zeigt, dass diese Sorge nicht theoretisch ist.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://research.google/blog/seeing-beyond-bmi-estimating-cardiometabolic-risk-with-smartphone-imagery/" rel="noopener noreferrer external" target="_blank">Google Research Blog — Seeing beyond BMI: estimating cardiometabolic risk with smartphone imagery (Primärquelle)</a></li>
+                
+                <li><a href="https://arxiv.org/abs/2603.27017" rel="noopener noreferrer external" target="_blank">arXiv:2603.27017 — Beyond BMI: Smartphone Body Composition Phenotyping for Cardiometabolic Risk Assessment</a></li>
+                
+                <li><a href="https://t3n.de/news/besser-als-wearables-google-forscher-messen-koerperfett-anhand-von-smartphone-fotos-1758964/" rel="noopener noreferrer external" target="_blank">t3n — Google-Forscher messen Körperfett anhand von Smartphone-Fotos (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-11" aria-labelledby="art-11-h">
+        <p class="article-kicker">Datenschutz · Medizin-KI</p>
+        <h2 id="art-11-h">Wer selten vorkommt, ist am leichtesten zu finden: Nature-Studie zeigt fast hundertprozentige Wiedererkennung in medizinischen Trainingsdaten</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Ein Team von TUM, Imperial College und Hasso-Plattner-Institut hat sieben medizinische Datensätze angegriffen. Das Ergebnis kehrt eine verbreitete Annahme um: Nicht der Durchschnittspatient ist gefährdet, sondern gerade wer einer kleinen Gruppe angehört.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Ein Forschungsteam um <strong>Moritz Knolle</strong> und <strong>Daniel Rückert</strong> (Technische Universität München), <strong>Georg Kaissis</strong> (Hasso-Plattner-Institut Potsdam) und Gruppen des Imperial College London hat in <em>Nature</em> eine Arbeit veröffentlicht, die untersucht, wie gut sich aus einem trainierten medizinischen KI-Modell zurückschließen lässt, wessen Daten in das Training eingeflossen sind.</p>
+<p><strong>Das Angriffsverfahren, kurz erklärt.</strong> Es heißt <em>Membership Inference Attack</em> und beantwortet eine einzige Frage: War der Datensatz dieser bestimmten Person Teil des Trainings? Das klingt harmlos, ist es aber nicht. Wenn ein Modell auf Daten von Patientinnen und Patienten einer HIV-Ambulanz oder einer psychiatrischen Klinik trainiert wurde, verrät allein die Mitgliedschaft im Trainingsdatensatz die Diagnose — unabhängig davon, ob das Modell sonst irgendetwas preisgibt. Anonymisierung hilft dagegen nicht, weil nicht die Daten ausgelesen werden, sondern das Verhalten des Modells ausgewertet wird.</p>
+<p><strong>Der Befund.</strong> Geprüft wurde an sieben etablierten medizinischen Datensätzen aus der Bildgebung, aus EKG-Aufzeichnungen und aus elektronischen Patientenakten. Die Angriffe sind besonders erfolgreich bei Personen, die in den Datensätzen <em>unterrepräsentiert</em> sind — gruppiert etwa nach Krankheitsbild, ethnischer Zuordnung, Geschlecht oder sozioökonomischem Status. Bei bestimmten Patientinnen und Patienten gelang die Zuordnung mit nahezu <strong>hundertprozentiger</strong> Sicherheit. Rückert dazu unmissverständlich: <em>„This is not a tolerable risk. Health data is highly sensitive.“</em></p>
+<p><strong>Warum die Richtung des Effekts das eigentlich Beunruhigende ist.</strong> Ein Modell lernt seltene Fälle notgedrungen genauer auswendig als häufige — bei einem Muster, das tausendfach vorkommt, bildet es eine Verallgemeinerung; bei einem, das dreimal vorkommt, merkt es sich die Einzelfälle. Daraus folgt eine unangenehme Umkehrung des üblichen Fairness-Arguments: Dieselben Gruppen, die wegen ihrer Unterrepräsentation ohnehin schlechtere Vorhersagen bekommen, tragen zusätzlich das höchste Risiko, aus dem Modell heraus identifiziert zu werden. Wer die Datenbasis verbreitert, um Verzerrungen zu verringern, verringert damit auch dieses Risiko — beide Probleme haben dieselbe Wurzel.</p>
+<p><strong>Praktische Konsequenz.</strong> Für jede Organisation, die Modelle auf personenbezogenen Daten trainiert — und das betrifft weit über die Medizin hinaus Personal-, Versicherungs- und Kreditdaten —, ist die Lehre, dass die Löschung von Namen und Kennnummern kein Datenschutz ist, sobald das Modell selbst herausgegeben oder über eine Schnittstelle zugänglich gemacht wird. Die etablierte Gegenmaßnahme heißt <em>differentielle Privatsphäre</em> und kostet Genauigkeit; die Studie liefert das Argument dafür, diesen Preis in sensiblen Bereichen zu zahlen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.nature.com/articles/s41586-026-10688-0" rel="noopener noreferrer external" target="_blank">Nature — Studie zu Privatsphäre-Risiken in medizinischer KI (DOI 10.1038/s41586-026-10688-0)</a></li>
+                
+                <li><a href="https://www.tum.de/en/news-and-events/all-news/press-releases/details/study-reveals-privacy-risks-in-medical-ai" rel="noopener noreferrer external" target="_blank">Technische Universität München — Study reveals privacy risks in medical AI (Pressemitteilung)</a></li>
+                
+                <li><a href="https://t3n.de/news/ki-medizin-datenschutz-risiko-1758928/" rel="noopener noreferrer external" target="_blank">t3n — KI in der Medizin: Hohes Datenschutzrisiko für bestimmte Personengruppen entdeckt (21.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-12" aria-labelledby="art-12-h">
+        <p class="article-kicker">Plattformen · Inhalte</p>
+        <h2 id="art-12-h">Eine Million Klicks auf „Seems like AI slop“: LinkedIn meldet 40 Prozent weniger Sichtbarkeit für maschinellen Füllstoff</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Zwei Wochen nach Einführung des Meldeknopfs zieht LinkedIn eine erste Bilanz. Interessanter als die Zahl ist, dass die Plattform, die selbst KI-Schreibwerkzeuge eingebaut hat, nun Werkzeuge gegen deren Ergebnisse baut.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>LinkedIn hat am 30. Juli im Menü jedes Beitrags eine Meldeoption mit dem Wortlaut <strong>„Seems like AI slop“</strong> eingeführt — sinngemäß: „wirkt wie maschineller Füllstoff“. <strong>Hari Srinivasan</strong>, Chief Product Officer der Plattform, hat nun eine erste Bilanz vorgelegt: Der Knopf wurde in den ersten zwei Wochen über <strong>eine Million Mal</strong> betätigt. Zur Wirkung sagt er: <em>„Members are now experiencing 40% less views on what we classify as AI slop from just a few weeks ago.“</em></p>
+<p><strong>Was der Knopf tut — und was nicht.</strong> Er löscht nichts. Er erzeugt ein Nutzersignal, das in LinkedIns Klassifikationsmodelle einfließt. Ein einzelner Klick wirkt vor allem persönlich: Wer meldet, sieht künftig weniger von diesem Verfasser. Erst viele gleichlautende Meldungen drücken die Reichweite eines Beitrags über das eigene Netzwerk hinaus. LinkedIn gibt an, Schutzmechanismen gegen den Missbrauch der Funktion als Waffe eingebaut zu haben. Parallel hat die Plattform ihr eigenes Schreibwerkzeug „Enhance“, das komplette Texte erzeugte, auf reine Korrekturfunktionen zurückgestutzt und blockiert nach eigenen Angaben täglich Hunderttausende automatisierter Kommentarversuche.</p>
+<p><em>Zur Größenordnung des Problems, mit ausdrücklichem Vorbehalt:</em> Die kursierende Angabe, 41 Prozent der längeren Beiträge auf LinkedIn seien vollständig maschinell erzeugt, stammt von <strong>Pangram</strong>, einem Anbieter von KI-Erkennungssoftware. Das Unternehmen hat ein geschäftliches Interesse daran, dass das Problem groß erscheint, und eine unabhängige Bestätigung der Zahl liegt nicht vor. Wir nennen sie deshalb, aber nicht als gesicherten Befund. Zu den grundsätzlichen Grenzen solcher Erkennungsverfahren haben wir am <a href="/editions/2026-08-21.html#art-3">21. August</a> ausführlich geschrieben.</p>
+<p><strong>Der Knopf ist kein Einzelfall, sondern ein Muster.</strong> Spotify hat nach eigenen Angaben im vergangenen Jahr über 75 Millionen maschinell erzeugte Spam-Titel entfernt und Filter gegen Massen-Uploads eingeführt. YouTube beendete laut einem Schreiben von Neal Mohan in einer sechsmonatigen Aktion über 130.000 Kanäle wegen maschinellen Spams. Pinterest kennzeichnet KI-veränderte Inhalte mit einem eigenen Label und lässt Nutzer einstellen, wie viel davon sie sehen wollen. Auch die New York Times hat das Thema am 17. August unter dem Titel <em>„Sick of A.I. Slop? So Are Tech Giants.“</em> aufgegriffen — jener Text, den Golem am 21. August in der englischen Fassung übernommen hat.</p>
+<p><strong>Die Ironie liegt auf der Hand und ist trotzdem lehrreich.</strong> Dieselben Plattformen, die KI-Schreibhilfen in ihre Oberflächen eingebaut haben, um die Beitragsmenge zu erhöhen, bauen nun Werkzeuge, um die Folgen einzudämmen. Der Grund ist nicht Reue, sondern Ökonomie: Das Geschäftsmodell dieser Dienste beruht auf Verweildauer, und Verweildauer bricht ein, wenn die Zeitleiste sich nicht mehr lohnt. Für Unternehmen, die diese Kanäle bespielen, folgt daraus etwas sehr Konkretes: Reichweite wird zunehmend danach zugeteilt, ob ein Beitrag als maschinell erzeugt <em>wahrgenommen</em> wird — und diese Wahrnehmung entscheiden Leser mit einem Klick, nicht ein Detektor.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.engadget.com/2241857/linkedin-says-its-ai-slop-button-is-working/" rel="noopener noreferrer external" target="_blank">Engadget — LinkedIn says its AI slop button is working</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/07/30/linkedin-adds-a-button-to-report-ai-generated-slop/" rel="noopener noreferrer external" target="_blank">TechCrunch — LinkedIn adds a button to report AI-generated &#39;slop&#39; (30.7.2026)</a></li>
+                
+                <li><a href="https://www.socialmediatoday.com/news/linkedin-says-1m-people-have-reported-ai-slop/828465/" rel="noopener noreferrer external" target="_blank">Social Media Today — LinkedIn says 1M people have reported AI slop</a></li>
+                
+                <li><a href="https://www.pangram.com/blog/ai-in-your-feed" rel="noopener noreferrer external" target="_blank">Pangram — AI Content Is Everywhere, Especially LinkedIn (Anbieterstudie)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-13" aria-labelledby="art-13-h">
+        <p class="article-kicker">Cloud · Wettbewerb</p>
+        <h2 id="art-13-h">Meta baut die größten eigenen Rechenzentren der Branche — und kauft für hunderte Millionen bei Microsoft ein</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-20">20. August 2026</time>
+        </p>
+        <p class="article-teaser">Nach einem Bloomberg-Bericht gehört Meta inzwischen zu den größten Abnehmern von Microsofts KI-Diensten und verarbeitet dort billionenfach Token pro Woche. Der Widerspruch zur eigenen Infrastrukturstrategie ist nur scheinbar einer.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Quellenhinweis vorweg: Diese Meldung beruht auf einem Bloomberg-Bericht vom 20. August, der sich auf anonyme Quellen stützt. Meta und Microsoft haben beide eine Stellungnahme abgelehnt. Alle weiteren Veröffentlichungen dazu — auch die deutschsprachige bei Golem — geben denselben Bericht wieder; eine zweite, unabhängig recherchierte Quelle existiert nicht. Wir behandeln die Angaben entsprechend.</em></p>
+<p>Meta gibt danach <strong>mehrere hundert Millionen Dollar jährlich</strong> für Microsofts KI-Dienste auf Azure aus und verarbeitet über die Plattform <strong>Billionen von Token pro Woche</strong>. Genauere Zahlen nennt der Bericht nicht. Bezogen wird der Zugang zu fremden Modellen — unter anderem von OpenAI — über Microsofts Marktplatz <em>Foundry</em>. Bisher galt ByteDance als größter Kunde dieses Marktplatzes; Meta reiht sich nun mit Adobe und anderen in die Spitzengruppe ein.</p>
+<p><strong>Warum das zunächst widersprüchlich wirkt.</strong> Meta betreibt einen der aufwendigsten eigenen Rechenzentrumsausbauten der Branche, entwickelt mit MTIA eigene Beschleunigerchips und arbeitet an einem eigenen Cloud-Angebot, das künftig genau mit Foundry konkurrieren dürfte. Dass ein solches Unternehmen bei einem direkten Wettbewerber einkauft, verlangt eine Erklärung.</p>
+<p><strong>Die plausibelste steht im Bericht selbst.</strong> Meta nutzt den Zugang demnach vor allem, um die Ausgaben der <em>eigenen</em> Modelle zu bewerten — also zum Vergleich. Wer ein konkurrenzfähiges Modell bauen will, braucht laufenden Zugriff auf die Konkurrenz, und zwar nicht in Form von Benchmarkzahlen, sondern in Form echter Ausgaben zu echten Anfragen. Hinzu kommt Unterstützung bei der Softwareentwicklung. Beides sind Anwendungen, für die sich ein eigener Aufbau nicht lohnt.</p>
+<p><strong>Was daran über den Einzelfall hinausweist.</strong> Der Begriff dafür ist <em>Coopetition</em> — gleichzeitige Konkurrenz und Kooperation. In der KI-Infrastruktur ist sie inzwischen der Normalfall: Nvidia investiert in seine eigenen Kunden, Microsoft verkauft Rechenkapazität an Unternehmen, mit denen es im Produktgeschäft konkurriert, und Modellanbieter hosten die Modelle ihrer Wettbewerber. Für Einkäufer in Unternehmen ist die praktische Lehre unspektakulär, aber nützlich: Wenn selbst Meta es für sinnvoll hält, Modelle mehrerer Anbieter parallel zu beziehen statt sich festzulegen, ist die Ein-Anbieter-Strategie im eigenen Haus zumindest begründungspflichtig. Dass die Wechselkosten dabei weniger beim Modell als in der Schicht darum herum liegen, ist das Thema der <a href="/editions/reportagen/2026-08-22.html">Reportage dieser Ausgabe</a>.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.golem.de/news/azure-meta-ist-einer-der-besten-kunden-von-microsoft-ki-2608-212189.html" rel="noopener noreferrer external" target="_blank">Golem.de — Azure: Meta ist einer der besten Kunden von Microsoft-KI (21.8.2026)</a></li>
+                
+                <li><a href="https://finance.yahoo.com/technology/ai/articles/meta-quietly-become-one-microsoft-110000871.html" rel="noopener noreferrer external" target="_blank">Yahoo Finance — Meta Has Quietly Become One of Microsoft&#39;s Largest AI Customers (Bloomberg-Relay, 20.8.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-14" aria-labelledby="art-14-h">
+        <p class="article-kicker">Robotik · Fertigung</p>
+        <h2 id="art-14-h">Bühl im Nordschwarzwald wird Bosch-Werk für humanoide Roboter — gefertigt wird für ein britisches Einhorn</h2>
+        <p class="article-meta">
+            <time datetime="2026-08-21">21. August 2026</time>
+        </p>
+        <p class="article-teaser">Bosch bestätigt gegenüber Golem, ab 2027 den HMND 01 in Auftragsfertigung zu bauen. Der Konzern liefert nicht nur die Halle, sondern ist auch am Auftraggeber beteiligt — und prüft, eigene Komponenten in den Roboter zu bekommen.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p><em>Zur Einordnung vorab: Die Partnerschaft selbst wurde bereits im Mai 2026 bekannt gegeben, der zugrunde liegende Praxistest fand im März statt. Neu an der Meldung vom 21. August sind eine eigene Bestätigung mit frischem O-Ton eines Bosch-Sprechers gegenüber Golem sowie die inzwischen erreichte Bewertung des Auftraggebers. Wir machen das transparent, statt eine drei Monate alte Ankündigung als neu zu verkaufen.</em></p>
+<p>Bosch wird im Werk <strong>Bühl</strong> im Nordschwarzwald humanoide Roboter fertigen — nicht als eigenes Produkt, sondern als Auftragsfertiger für das britische Robotikunternehmen <strong>Humanoid</strong>, das 2024 von <strong>Artem Sokolov</strong> gegründet wurde. Gebaut wird der <strong>HMND 01</strong>. Es ist die erste Bosch-Fertigungsstätte für humanoide Roboter weltweit; die Serienfertigung soll ab August 2027 anlaufen, geplant sind zunächst mehrere hundert Einheiten.</p>
+<p>Der Bosch-Sprecher gegenüber Golem: <em>„Nach erfolgreichen Praxistests im Werk in Bühl übernimmt Bosch für Humanoid künftig die Auftragsfertigung von Robotern. Darüber hinaus prüfen die beiden Unternehmen auch die Integration von Bosch-Technologien, darunter Aktoren, Motoren, Sensoren und andere Komponenten, in humanoiden Robotern. Wir können bestätigen, dass die Auftragsfertigung im Laufe des Jahres 2027 beginnen soll. Angaben zu Stückzahlen oder Mitarbeitenden machen wir aktuell keine.“</em></p>
+<p><strong>Der Praxistest, der vorausging</strong>, war bewusst unglamourös: HMND-01-Roboter transportierten im Werk Bühl selbständig Kartons in fünf verschiedenen Größen und Gewichten vom Förderband auf Transportwagen. Gesteuert werden die Maschinen über <em>KinetIQ</em>, das hauseigene KI-Rahmenwerk von Humanoid; nähere Angaben zur Architektur nennt die Meldung nicht. Zielanwendungen sind zunächst Fabrik und Logistik.</p>
+<p><strong>Die drei Rollen, die Bosch hier gleichzeitig einnimmt, sind das eigentlich Bemerkenswerte.</strong> Der Konzern ist Fertiger, ist am Auftraggeber finanziell beteiligt und will zusätzlich eigene Komponenten in das Produkt bringen. Das ist keine klassische Lohnfertigung, sondern der Versuch, sich in einer entstehenden Wertschöpfungskette gleich an drei Stellen zu positionieren — bei einem Produkt, dessen Marktreife noch offen ist. Humanoid wurde im Juli 2026 nach einer Finanzierungsrunde mit <strong>1,19 Milliarden Euro</strong> bewertet und gilt damit als erstes europäisches Einhorn in der humanoiden Robotik.</p>
+<p>Wie weit die Technik insgesamt tatsächlich ist, haben wir in unserer <a href="/editions/reportagen/2026-05-27.html">Reportage vom 27. Mai</a> untersucht — mit dem Ergebnis, dass zwischen beeindruckenden Vorführungen und belastbarem Dauerbetrieb weiterhin eine erhebliche Lücke klafft. Dass Bosch zunächst mehrere hundert und nicht mehrere zehntausend Einheiten plant, passt zu diesem Bild.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.golem.de/news/humanoid-bosch-baut-humanoiden-roboter-in-deutschland-2608-212183.html" rel="noopener noreferrer external" target="_blank">Golem.de — Humanoid: Bosch baut humanoiden Roboter in Deutschland (Achim Sawall, 21.8.2026)</a></li>
+                
+                <li><a href="https://thehumanoid.ai/humanoid-secures-partnership-with-bosch-following-a-successful-poc/" rel="noopener noreferrer external" target="_blank">Humanoid — Humanoid secures partnership with Bosch following a successful PoC (Primärquelle, Mai 2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+
+    
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser-card">
+            <p class="article-kicker">Reportage</p>
+            <h2 id="reportage-h">Vierzigfache Kosten, null Prozentpunkte mehr Können: Was die Schicht um das Modell wirklich leistet</h2>
+            <p class="article-teaser">Nvidias Meldung vom Donnerstag legt nahe, dass die Hülle um ein Sprachmodell aus 30 Prozent 100 Prozent macht. Die sauberste Messung, die es dazu gibt, sagt etwas anderes — und etwas Nützlicheres: Die Wahl des Gerüsts verändert Ihre Rechnung um den Faktor vierzig und Ihre Trefferquote um fast nichts. Wer das verwechselt, optimiert die falsche Größe.</p>
+            <a href="/editions/reportagen/2026-08-22.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und trendende KI-Tools des Tages</p>
+        <div class="tool-grid">
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/vercel.com.png" width="40" height="40" alt="fx Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://github.com/vercel-labs/fx" rel="noopener noreferrer external" target="_blank">fx</a></div>
+                    <div class="tool-card-desc">Ein sehr kleiner quelloffener Codeagent, den Vercel Labs in Zig geschrieben und als natives Binärprogramm von rund sechs Megabyte veröffentlicht hat.</div>
+                    <div class="tool-card-desc">Der Reiz liegt in der Abwesenheit von allem: kein Editor, keine Laufzeitumgebung, kein Anmeldevorgang — das Programm startet in Mikrosekunden und arbeitet modellunabhängig gegen lokale wie entfernte Inferenzdienste. Nach Angaben von Vercel verlassen weder Quelltext noch Anweisungen den Rechner in eine andere Richtung als zum gewählten Modellanbieter. Für Teams, die einen Agenten in eine Fertigungsstrecke einbauen wollen, ist die geringe Angriffsfläche das eigentliche Argument.</div>
+                    <div class="tool-card-meta">Dev-Tools &middot; Quelloffene Freigabe 17. August 2026, Product-Hunt-Start 21. August</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/actx0.com.png" width="40" height="40" alt="Actx0 Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://actx0.com" rel="noopener noreferrer external" target="_blank">Actx0</a></div>
+                    <div class="tool-card-desc">Verwaltete Gedächtnisinfrastruktur, die KI-Agenten ein dauerhaftes Erinnerungsvermögen über Sitzungen, Anwendungen und Werkzeuge hinweg gibt.</div>
+                    <div class="tool-card-desc">Statt Vektordatenbanken selbst zu betreiben oder Anweisungen mit altem Kontext aufzublähen, extrahiert der Dienst die relevanten Fakten und liefert sie im Millisekundenbereich zurück. Das trifft genau den Punkt, an dem die meisten Agentenprojekte scheitern — nicht am Modell, sondern daran, dass zwischen zwei Sitzungen alles vergessen ist. Der Anbieter bezeichnet den jetzigen Stand ausdrücklich als „Tag 1 einer Roadmap“; von einem kleinen Team um den Entwickler Ahmed.</div>
+                    <div class="tool-card-meta">Agenten &middot; Product-Hunt-Start 21. August 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/mindcase.co.png" width="40" height="40" alt="Mindcase Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://mindcase.co" rel="noopener noreferrer external" target="_blank">Mindcase</a></div>
+                    <div class="tool-card-desc">Agenten, die strukturierte Webdaten aus Quellen wie LinkedIn, Amazon, Google Maps oder Instagram auf Zuruf oder über eine Schnittstelle liefern.</div>
+                    <div class="tool-card-desc">Neu ist nicht das Produkt, sondern der Zugang: Der Dienst war bislang geschlossen und wurde am 21. August für die Allgemeinheit geöffnet. Mitgeliefert werden über 75 vorgefertigte Abrufmodule, sodass die übliche Bastelei an Einzelabfragen entfällt. Gründer ist Saurabh Shubham; als Referenzkunden werden BCG und Bain genannt. Wer solche Werkzeuge einsetzt, sollte die Nutzungsbedingungen der jeweiligen Quellplattform prüfen — die Rechtslage beim Auslesen fremder Seiten ist von Fall zu Fall verschieden.</div>
+                    <div class="tool-card-meta">Business &middot; Öffentliche Freigabe 21. August 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/meetstream.ai.png" width="40" height="40" alt="MeetStream AI Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://meetstream.ai" rel="noopener noreferrer external" target="_blank">MeetStream AI</a></div>
+                    <div class="tool-card-desc">Einheitliche Schnittstelle, über die Software-Teilnehmer Besprechungen in Zoom, Google Meet und Teams beitreten, mitschneiden und live über 50 Datenpunkte auslesen.</div>
+                    <div class="tool-card-desc">Der Unterschied zur vorherigen Fassung ist eine Sprachschicht: Der Agent kann im laufenden Gespräch selbst sprechen, statt nur zuzuhören und hinterher zusammenzufassen. Damit verschiebt sich die Rolle vom Protokollanten zum Teilnehmer — mit allen Fragen zur Einwilligung der übrigen Anwesenden, die das aufwirft und die der Anbieter nicht für Sie beantwortet.</div>
+                    <div class="tool-card-meta">Business &middot; Product-Hunt-Start 20. August 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/aloud.sh.png" width="40" height="40" alt="Aloud Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.aloud.sh" rel="noopener noreferrer external" target="_blank">Aloud</a></div>
+                    <div class="tool-card-desc">Zeichnet Bildschirm, Stimme und Mitschrift auf, während man die eigene Anwendung durchspricht, und macht daraus fertige Arbeitsaufträge für Claude Code, Cursor oder Codex.</div>
+                    <div class="tool-card-desc">Die Mitschrift läuft vollständig auf dem Gerät über ein lokales Whisper-Modell, es wird also nichts hochgeladen. Interessanter ist die Arbeitsweise: Bei Mehrdeutigkeiten fragt das Programm gezielt nach, statt zu raten, und liefert am Ende eine gegliederte Aufgabenliste statt einer rohen Abschrift. Das schließt die Lücke zwischen „ich sehe den Fehler“ und „ich habe ihn so beschrieben, dass ein Agent ihn beheben kann“.</div>
+                    <div class="tool-card-meta">Produktivität &middot; Product-Hunt-Start 20. August 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/nobodywho.ai.png" width="40" height="40" alt="NobodyWho Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://nobodywho.ai" rel="noopener noreferrer external" target="_blank">NobodyWho</a></div>
+                    <div class="tool-card-desc">Quelloffene Inferenzbibliothek, mit der Sprachmodelle vollständig offline auf dem Endgerät laufen — unter anderem als Erweiterung für die Spiele-Engine Godot.</div>
+                    <div class="tool-card-desc">Der erste stabile Stand deckt sechs Plattformen gleichzeitig ab: Swift, Kotlin, Flutter, React Native, Python und Godot. Für Spiele ist das mehr als eine Randnotiz, weil Dialoge von Nebenfiguren damit ohne jeden Serveraufruf entstehen — keine Latenz, keine laufenden Kosten pro Gespräch, keine Datenschutzfrage. Getragen wird das Projekt von einem kleinen Open-Source-Team.</div>
+                    <div class="tool-card-meta">Kreativ &middot; Erster stabiler Stand, Product-Hunt-Start 21. August 2026</div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen: Tutorials, Erkl&auml;rungen und Werkzeuge</p>
+        <div class="yt-grid">
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=dTutfoSVMq4" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/dTutfoSVMq4.jpg" alt="Qwen 3.8 Locally: How Much Can You Actually Trust It?" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=dTutfoSVMq4" rel="noopener noreferrer external" target="_blank">Qwen 3.8 Locally: How Much Can You Actually Trust It?</a></div>
+                    <div class="yt-card-channel">Zero to MVP &middot; 10:30</div>
+                    <div class="yt-card-desc">Die übliche Frage bei lokalen Modellen lautet, ob sie ein Spitzenmodell ersetzen können — hier wird die nützlichere gestellt: Wie komplex darf eine Aufgabe werden, bevor ein lokal laufendes 27B-Modell abreißt? Der Creator arbeitet sich stufenweise von einer simplen Uhr bis zu einer vollständigen Full-Stack-Anwendung für Nachrichtenaggregation vor und markiert, wo genau die Qualität kippt. Sehenswert ist das wegen der Methode: ein gestufter Belastungstest mit benennbarer Abbruchkante statt einer pauschalen Empfehlung. Der Kanal hat 29.900 Abonnenten; ein Drittsponsoring liegt nicht vor, in der Beschreibung steht nur Eigenwerbung für Newsletter und Patreon.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=Hpw4fAHlHDw" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/Hpw4fAHlHDw.jpg" alt="NEW Deepseek Agent Harness EXPLAINED (deep dive)" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=Hpw4fAHlHDw" rel="noopener noreferrer external" target="_blank">NEW Deepseek Agent Harness EXPLAINED (deep dive)</a></div>
+                    <div class="yt-card-channel">Stephen G. Pope &middot; 15:31</div>
+                    <div class="yt-card-desc">Eine ruhige technische Zerlegung des Agentenloops im DeepSeek-Harness: das Prinzip Konfiguration statt Code, das dynamische Nachladen von Werkzeugen zur Laufzeit und Änderungen an der Oberfläche allein über die Konfiguration. Das Video passt unmittelbar zum Leitartikel und zur Reportage dieser Ausgabe, weil es an einem offenen, nachlesbaren Beispiel zeigt, woraus die Schicht um das Modell herum tatsächlich besteht. Wer verstehen will, wie Cursor, Claude Code oder Codex unter der Haube arbeiten, bekommt hier den kompakteren Einstieg als über die Dokumentation. Der Kanal hat 90.000 Abonnenten; kein Drittsponsoring, nur Eigenwerbung für die eigene Community.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=cLqtxkYrMDI" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/cLqtxkYrMDI.jpg" alt="Qwen3.8 27B + DeepSeek Harness BEATS Opus 4.6 in Claude Code" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">&#128200; Trending Topic</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=cLqtxkYrMDI" rel="noopener noreferrer external" target="_blank">Qwen3.8 27B + DeepSeek Harness BEATS Opus 4.6 in Claude Code</a></div>
+                    <div class="yt-card-channel">James Layne &middot; 28:53</div>
+                    <div class="yt-card-desc">Die praktische Gegenprobe zum Leitartikel und zur Reportage dieser Ausgabe: Ein lokal auf einer RTX 5090 laufendes 27B-Modell tritt über denselben Agenten-Rahmen gegen ein deutlich größeres Spitzenmodell an — beide bekommen dieselbe umfangreiche Aufgabe, einen spielbaren Minecraft-Nachbau. Davor arbeitet sich der Creator sauber durch die vier Reasoning-Stufen des kleinen Modells und richtet den DeepSeek-Harness Schritt für Schritt ein. Genau die Konstellation, um die es diese Ausgabe über geht: nicht welches Modell, sondern welches Modell in welcher Hülle. Als Trending-Empfehlung ist die Kennzahl transparent anzumerken: 3.999 Aufrufe bei 2.410 Abonnenten ergeben das 1,66-Fache und verfehlen damit unsere dreifache Schwelle. Im Frischefenster vom 19. bis 21. August war innerhalb unseres Suchbudgets kein Kandidat oberhalb der Schwelle auffindbar, der zugleich die Mindestgröße von 500 Abonnenten überschritt. Gegen den Alternativkandidaten mit dem etwas besseren Faktor 1,74 haben wir uns nach unserem eigenen Präzedenzfall vom 19. August entschieden — verfehlen beide die Schwelle, entscheidet die Länge, und dieses Video liegt mit knapp 29 Minuten im Zielkorridor der Rubrik. Offenzulegen ist: Die Beschreibung enthält Amazon-Partnerlinks zu Hardware, vom Creator selbst gekennzeichnet.</div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    
+
+</main>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>

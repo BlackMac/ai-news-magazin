@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vierzigfache Kosten, null Prozentpunkte mehr Können: Was die Schicht um das Modell wirklich leistet</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-22.html">&larr; Zur&uuml;ck zur Ausgabe vom 22. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Vierzigfache Kosten, null Prozentpunkte mehr Können: Was die Schicht um das Modell wirklich leistet</h1>
+    
+    <p class="reportage-teaser">Nvidias Meldung vom Donnerstag legt nahe, dass die Hülle um ein Sprachmodell aus 30 Prozent 100 Prozent macht. Die sauberste Messung, die es dazu gibt, sagt etwas anderes — und etwas Nützlicheres: Die Wahl des Gerüsts verändert Ihre Rechnung um den Faktor vierzig und Ihre Trefferquote um fast nichts. Wer das verwechselt, optimiert die falsche Größe.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-22">22. August 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Dieselbe Maschine, andere Hülle</h2>
+<p>Am Donnerstag meldete Nvidia, sein Agentensystem AVO habe den interaktiven Reasoning-Benchmark ARC-AGI-3 vollständig gelöst. Das Bemerkenswerte war nicht die Zahl, sondern was dafür verändert wurde: nichts am Modell. Darunter arbeitet Claude Opus 5 — dasselbe Modell, das bei der ARC Prize Foundation mit 30,16 Prozent geführt wird. Verändert wurde ausschließlich die Schicht darum herum.</p>
+<p>Für diese Schicht hat sich ein englischer Begriff durchgesetzt, den man schlecht übersetzen kann: <strong>Harness</strong>. Wörtlich das Geschirr, mit dem man ein Zugtier einspannt. Gemeint ist alles, was zwischen Ihrer Aufgabe und dem Modell steht: Was bekommt das Modell überhaupt zu sehen? Welche Werkzeuge darf es benutzen? Was passiert mit dem Ergebnis eines Werkzeugaufrufs? Wann gilt eine Aufgabe als erledigt, wann als gescheitert? Und was davon merkt sich das System bis zum nächsten Mal?</p>
+<p>Das Modell ist der Motor. Der Harness ist alles andere am Fahrzeug. Die naheliegende Schlussfolgerung aus Nvidias Meldung lautet: Das Fahrzeug ist wichtiger als der Motor. Diese Schlussfolgerung ist verführerisch, sie wird gerade überall gezogen — und sie ist in der Form, in der man sie hört, falsch.</p>
+<h2>Was die sauberste Messung sagt</h2>
+<p>Im Juli haben Naman Vats und Oleg Golev eine Arbeit veröffentlicht, die genau das tut, was Nvidias Blogpost ausdrücklich <em>nicht</em> tut: eine kontrollierte Gegenüberstellung. Unter dem Titel <em>„The Scaffold Effect in Coding Agents“</em> haben sie zwei Modelle — Qwen 3.6 Plus und MiniMax M2.5 — durch drei quelloffene Harnesses geschickt: Goose, OpenCode und OpenHands-SDK. Aufgabengrundlage waren 50 geschichtet ausgewählte Aufgaben aus Terminal-Bench Pro. Gleiche Modelle, gleiche Aufgaben, unterschiedliche Hülle.</p>
+<p>Das Ergebnis in einem Satz aus der Zusammenfassung: <em>„Harness choice induces up to a 40x difference in tokens per solved task, while paired within-model pass-rate differences remain 0-8 percentage points.“</em></p>
+<p>Man muss diesen Satz zweimal lesen. Die Wahl des Gerüsts verändert den Verbrauch pro gelöster Aufgabe um bis zum <strong>Vierzigfachen</strong>. Die Trefferquote verändert sie um <strong>null bis acht Prozentpunkte</strong> — und die Autoren merken an, dass die Vertrauensbereiche bis auf den größten Abstand die Null einschließen, der Unterschied also statistisch meist gar nicht nachweisbar ist.</p>
+<p>Das ist die unbequemste Zahl in dieser ganzen Debatte, und sie steht quer zu der Erzählung, die sich gerade etabliert. Der Harness macht Ihr System nicht klüger. Er macht es billiger oder teurer. Um den Faktor vierzig.</p>
+<p>Hinzu kommt ein zweiter Befund, der praktisch fast noch wertvoller ist: Die Autoren finden charakteristische <strong>Fehlersignaturen</strong>, die sich über beide Modelle hinweg wiederholen — Goose scheitert typischerweise am Nachdenken, OpenHands-SDK an der Überprüfung oder an der Zugbegrenzung, OpenCode an Leerlaufschleifen bis zum Zeitablauf. Diese Muster hängen am Gerüst, nicht am Modell. Wenn Ihr Agent immer auf dieselbe Weise versagt, liegt das mit einiger Wahrscheinlichkeit nicht daran, welches Modell Sie gewählt haben.</p>
+<h2>Warum die Benchmark-Sprünge trotzdem echt sind</h2>
+<p>Wie passt das zu 30 gegen 100 Prozent? Es gibt keinen Widerspruch, sondern einen Unterschied in der Aufgabenart — und den sollte man verstehen, bevor man aus einer der beiden Zahlen eine Strategie ableitet.</p>
+<p>Bei den Aufgaben in Terminal-Bench Pro weiß das Modell im Wesentlichen, was zu tun ist; die Frage ist, wie effizient es dorthin kommt. Da hilft ein besserer Harness beim Verbrauch, nicht beim Können. ARC-AGI-3 dagegen setzt einen Agenten in eine Umgebung ohne Anleitung, ohne erklärte Regeln, ohne genanntes Ziel. Hier ist die eigentliche Arbeit, überhaupt herauszufinden, worum es geht — und das heißt: systematisch ausprobieren, sich merken, was nicht funktioniert hat, und nicht in dieselbe Sackgasse zurücklaufen. Genau das sind Leistungen des Gerüsts, nicht des Modells. Ein Modell ohne Gedächtnis wiederholt seinen Fehler beliebig oft.</p>
+<p>Daraus folgt eine brauchbare Faustregel. <strong>Bei Aufgaben, die das Modell im Prinzip beherrscht, ist der Harness ein Kostenhebel. Bei Aufgaben mit langem Horizont und schwacher Rückmeldung ist er ein Fähigkeitshebel.</strong> Die Frage für Ihr Projekt ist deshalb nicht, ob der Harness wichtig ist, sondern welche der beiden Aufgabenarten Sie eigentlich haben. Die meisten Unternehmen haben die erste und optimieren, als hätten sie die zweite.</p>
+<p>Die Forschung stützt diese Zweiteilung. Das Papier zu <em>Harness-Bench</em> wertete 5.194 Ausführungsverläufe über 106 Aufgaben aus und empfiehlt daraus, Fähigkeiten <em>„at the model-harness configuration level rather than attributed to the base model alone“</em> zu berichten. Der <em>Confucius Code Agent</em> erreichte 59 Prozent auf SWE-Bench Pro und übertraf damit frühere Forschungs- und kommerzielle Werte <em>„under identical repositories, model backends, and tool access“</em> — also bei fixiertem Modell. Und das quelloffene <em>Agentless</em> zeigt die Gegenrichtung: ein bewusst nicht-agentisches Verfahren aus drei festen Schritten, das ohne autonome Schleife hohe Werte erzielt. Mehr Autonomie ist nicht automatisch besser.</p>
+<h2>Die Gegenprobe: Wenn das Gerüst zur Bremse wird</h2>
+<p>Es gibt ein ernstzunehmendes Argument dagegen, in diese Schicht viel zu investieren, und es kommt von unerwarteter Seite: von den Modellanbietern selbst.</p>
+<p>Anthropics eigene Empfehlung an Entwickler ist bis heute bemerkenswert zurückhaltend. <em>„When building applications with LLMs, we recommend finding the simplest solution possible, and only increasing complexity when needed“</em>, heißt es dort, und deutlicher noch: <em>„Frameworks can help you get started quickly, but don't hesitate to reduce abstraction layers and build with basic components as you move to production.“</em> Die Definition, die der Text gibt, ist entwaffnend schlicht: <em>„Agents are typically just LLMs using tools based on environmental feedback in a loop.“</em></p>
+<p>Dahinter steht ein Argument, das in der Fachwelt unter dem Namen <em>bitter lesson</em> läuft — die wiederkehrende Erfahrung, dass allgemeine Verfahren, die einfach mehr Rechenleistung nutzen, spezialisierte handgebaute Lösungen am Ende schlagen. Der Analyst Daniel Miessler hat dafür den Begriff des <strong>BLE-hobbled system</strong> geprägt: ein System, dessen sorgfältig gebaute Hilfskonstruktion sich in dem Moment in eine Fessel verwandelt, in dem das darunterliegende Modell besser wird. Seine Merkregel dazu lautet: <em>„Don't confuse the 'what' with the 'how.'“</em> Wer nur beschreibt, was erreicht werden soll, profitiert automatisch vom nächsten Modell. Wer vorschreibt, wie es zu geschehen hat, muss bei jedem Modellwechsel nachziehen.</p>
+<p>Aaron Levie, Chef von Box, formuliert dieselbe Erfahrung schärfer: <em>„you have to be brutally unsentimental in your architecture … you need to ruthlessly jettison your prior tech“</em>, weil die Modelle immer wieder das übernehmen, wofür man zuvor eine Krücke gebaut hat.</p>
+<p>Und schon 2024 hat die Evaluationsorganisation METR gemessen, dass Verbesserungen nach dem Training einem Modell 26 Prozentpunkte brachten, während ihre eigenen Verbesserungen am Gerüst nur acht ergaben — statistisch nicht signifikant. Ihre damalige Warnung gilt unverändert: <em>„it's easy to accidentally worsen performance by using slightly different prompting or scaffolding.“</em></p>
+<h2>Wo die Bindung inzwischen sitzt</h2>
+<p>Wenn der Harness weder zuverlässig klüger macht noch dauerhaft überlegen bleibt — warum sollte er dann Ihre strategische Aufmerksamkeit verdienen?</p>
+<p>Wegen des Gedächtnisses. Ein Modell ist zustandslos: Es weiß beim nächsten Aufruf nichts von diesem hier. Alles, was Ihr System über Ihre Abläufe, Ihre Ausnahmen und Ihre Eigenheiten gelernt hat, liegt zwangsläufig außerhalb des Modells — im Harness. LangChain hat diesen Punkt in einer Analyse mit dem Titel <em>„Your Harness, Your Memory“</em> zugespitzt: Modelle lassen sich tauschen, angesammeltes Gedächtnis nicht. Harrison Chase beschreibt darin einen internen Assistenten, der nach versehentlicher Löschung aus derselben Vorlage neu aufgebaut wurde und danach deutlich schlechter arbeitete, weil er alle Präferenzen neu lernen musste.</p>
+<p>Das verschiebt die Frage der Anbieterbindung um eine Etage. Jahrelang lautete die Sorge, man mache sich von einem Modellanbieter abhängig. Tatsächlich ist der Modellwechsel der einfachste Teil — quelloffene Harnesses wie der im August veröffentlichte DeepSeek-Harness, der als Steckplatzsystem gebaut ist und Anthropic, OpenAI, Bedrock, Vertex und Azure gleichermaßen anspricht, machen ihn zur Konfigurationsfrage. Schwer zu ersetzen ist das, was Ihr Gerüst über die Zeit angesammelt hat.</p>
+<p>Wie viel technische Substanz in dieser Schicht steckt, zeigt eine Analyse von Claude Code: Sitzungen liegen als reine Anhänge-Protokolle vor, was Fortsetzen, Verzweigen und Zurückspulen erlaubt; vor jedem Modellaufruf durchläuft der Kontext eine fünfstufige Verdichtungskette; Unteragenten laufen in eigenen Kontextfenstern und geben nur eine Zusammenfassung zurück, damit der Hauptkontext nicht explodiert. Das ist kein Zubehör. Das ist das Produkt.</p>
+<h2>Was Sie daraus machen</h2>
+<p>Vier Konsequenzen, die sich aus dem Belegten ergeben und nicht aus der Erzählung.</p>
+<p><strong>Erstens: Fragen Sie bei jeder Benchmark-Zahl nach dem Gerüst.</strong> Ein Wert ohne Angabe des Harness ist keine Aussage über ein Modell. Nvidia selbst schreibt das in den eigenen Blogpost — die 100 Prozent spiegeln <em>„the complete agent system, not only the underlying model“</em>, und der Vergleich sei <em>„not … a controlled ablation“</em>.</p>
+<p><strong>Zweitens: Optimieren Sie den Harness auf Kosten, nicht auf Können.</strong> Der belegte Hebel ist Faktor vierzig beim Verbrauch und fast nichts bei der Trefferquote. Wählen Sie das Paar aus Modell und Gerüst deshalb nach Trefferquote <em>unter einem Kosten- und Zeitbudget</em> — genau das empfehlen Vats und Golev.</p>
+<p><strong>Drittens: Bauen Sie so wenig Gerüst wie möglich und so viel wie nötig.</strong> Jede handgebaute Hilfskonstruktion ist eine Wette darauf, dass das nächste Modell sie nicht überflüssig macht. Prüfen Sie diese Wetten in festen Abständen und reißen Sie ab, was gewonnen hat.</p>
+<p><strong>Viertens: Deckeln Sie den Verbrauch, bevor Sie ihn brauchen.</strong> Uber hat sein KI-Budget für 2026 nach vier Monaten aufgebraucht, ausgelöst durch die breite Einführung von Claude Code. COO Andrew Macdonald über den Zusammenhang zwischen Ausgaben und Ergebnis: <em>„That link is not there yet.“</em> Bei einer Technik, deren Kosten je nach Gerüst um das Vierzigfache schwanken, ist eine Obergrenze pro Team keine Bürokratie, sondern die Voraussetzung dafür, überhaupt herauszufinden, was sie Ihnen wert ist.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/" rel="noopener noreferrer external" target="_blank">NVIDIA Technical Blog — NVIDIA AVO Reaches 100% on ARC-AGI-3 (21.8.2026)</a></li>
+            
+            <li><a href="https://arcprize.org/results/anthropic-claude-opus-5" rel="noopener noreferrer external" target="_blank">ARC Prize — Verifiziertes Ergebnis für Claude Opus 5 (30,16 %)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2607.22585" rel="noopener noreferrer external" target="_blank">arXiv:2607.22585 — The Scaffold Effect in Coding Agents (Vats/Golev)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2605.27922" rel="noopener noreferrer external" target="_blank">arXiv:2605.27922 — Harness-Bench</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2512.10398" rel="noopener noreferrer external" target="_blank">arXiv:2512.10398 — Confucius Code Agent</a></li>
+            
+            <li><a href="https://arxiv.org/html/2604.14228v1" rel="noopener noreferrer external" target="_blank">arXiv:2604.14228 — Dive into Claude Code</a></li>
+            
+            <li><a href="https://github.com/OpenAutoCoder/Agentless" rel="noopener noreferrer external" target="_blank">GitHub — OpenAutoCoder/Agentless</a></li>
+            
+            <li><a href="https://github.com/deepseek-ai/deepseek-harness" rel="noopener noreferrer external" target="_blank">GitHub — deepseek-ai/deepseek-harness</a></li>
+            
+            <li><a href="https://www.anthropic.com/engineering/building-effective-agents" rel="noopener noreferrer external" target="_blank">Anthropic Engineering — Building Effective Agents</a></li>
+            
+            <li><a href="https://danielmiessler.com/blog/bitter-lesson-engineering" rel="noopener noreferrer external" target="_blank">Daniel Miessler — Bitter Lesson Engineering</a></li>
+            
+            <li><a href="https://www.langchain.com/blog/your-harness-your-memory" rel="noopener noreferrer external" target="_blank">LangChain — Your Harness, Your Memory</a></li>
+            
+            <li><a href="https://fortune.com/2026/05/26/uber-coo-ai-spending-tokens-claude-code/" rel="noopener noreferrer external" target="_blank">Fortune — Uber hat sein KI-Budget nach vier Monaten aufgebraucht (26.5.2026)</a></li>
+            
+            <li><a href="https://metr.org/blog/2024-03-15-measuring-post-impact-enhancements/" rel="noopener noreferrer external" target="_blank">METR — Measuring the impact of post-training enhancements (15.3.2024)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
