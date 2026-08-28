@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Datei, die niemand liest: Wie eine Konvention für KI-Agenten zur Lieferkette für fremden Code wurde</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-08-28.html">&larr; Zur&uuml;ck zur Ausgabe vom 28. August 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Die Datei, die niemand liest: Wie eine Konvention für KI-Agenten zur Lieferkette für fremden Code wurde</h1>
+    
+    <p class="reportage-teaser">Auf über hundert Unternehmenswebsites stehen Installationsbefehle, die auf Pakete zeigen, die es nicht gibt. Agenten arbeiten sie ab. Ein Sicherheitsforscher hat daraufhin eigenen Code in Netzen von Fortune-500-Konzernen ausgeführt — in einem Fall binnen einer Stunde. Was daran neu ist, was alt, und welche vier Fragen Sie Ihrem Technikteam heute stellen sollten.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-08-28">28. August 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Stellen Sie sich vor, Ihr Unternehmen stellt einen neuen Mitarbeiter ein, der außergewöhnlich schnell arbeitet und außergewöhnlich gründlich liest. Er hat allerdings eine Eigenheit: Was in einer Herstellerdokumentation steht, hält er für wahr. Steht dort „führen Sie diesen Befehl aus“, führt er ihn aus. Er fragt nicht, ob die Anweisung sinnvoll ist, ob sie noch aktuell ist oder ob überhaupt jemand nachgesehen hat, wohin sie führt.</p>
+<p>Diesen Mitarbeiter haben inzwischen die meisten Softwareteams. Er heißt Claude Code, Codex oder Hermes.</p>
+<h2>Was gefunden wurde</h2>
+<p>Ars Technica hat gestern über eine Untersuchung berichtet, die genau diese Eigenheit systematisch ausgenutzt hat. Der Sicherheitsforscher <strong>Alon Hertz</strong> durchsuchte nach Darstellung des Berichts mehrere Tausend Unternehmenswebsites nach zwei Dateitypen — <code>llms.txt</code> und <code>llms-full.txt</code> — und fand in ihnen <strong>227 Installationsbefehle, die auf Paketnamen zeigen, die niemandem gehören</strong>. Nicht etwa auf falsche Pakete, sondern auf Namen, die in keiner Paketregistratur registriert sind. Wer sie registriert, liefert ab diesem Moment beliebigen Code an jeden aus, dessen Agent diese Dokumentation liest.</p>
+<p>Hertz hat genau das getan — mit harmlosen Testpaketen. In mindestens einem Fall meldete sich das Paket nach eigener Darstellung <strong>binnen weniger als einer Stunde</strong> aus dem Netz eines Fortune-500-Unternehmens zurück. Mehrere Dutzend Firmen führten den Testcode aus. Und mindestens eine fehlkonfigurierte Seite leitete Besucher schon vor der Untersuchung auf echte, aktive Schadsoftware.</p>
+<p>Ein dokumentierter Einzelfall macht das Muster besonders greifbar: Die Dokumentation des Authentifizierungsanbieters <strong>Clerk.com</strong>, dessen Software in vielen produktiven Web-Anwendungen steckt, wies Agenten an, ein <code>npx</code>-Kommando mit einem Paketnamen auszuführen, den Clerk selbst nie als eigenständiges Paket veröffentlicht hatte. <code>npx</code> löste den Namen daraufhin gegen die öffentliche npm-Registratur auf — wo ein Dritter ihn registriert hatte. Der Fall wurde nach Angaben der Berichte inzwischen behoben.</p>
+<p><em>Einordnung zur Quellenlage: Ars Technica ist aus unserer Umgebung nicht abrufbar. Wir stützen uns auf die Zusammenfassungen mehrerer Häuser, die den Bericht gelesen haben, und schreiben deshalb durchgängig „laut den Forschern“ beziehungsweise „nach Darstellung des Berichts“. Die exakte Zahl gescannter Domains schwankt zwischen den Sekundärquellen; die 227 Befehle und die über hundert betroffenen Websites nennen alle übereinstimmend.</em></p>
+<h2>Die Datei, die niemand für gefährlich hielt</h2>
+<p><code>llms.txt</code> ist keine Erfindung von Angreifern, sondern ein gut gemeinter Vorschlag. <strong>Jeremy Howard</strong>, Mitgründer von Answer.AI und fast.ai, schlug die Konvention im September 2024 vor. Der Gedanke ist plausibel: Sprachmodelle haben ein begrenztes Kontextfenster, und eine typische Unternehmenswebsite besteht zu großen Teilen aus Navigation, Bannern und Skripten. Eine schlanke Markdown-Datei, die einem Modell sagt, was auf dieser Seite steht und wo es was findet, spart Rechenzeit und verbessert die Antworten. Als Vorbild diente ausdrücklich <code>robots.txt</code>, jene Datei, mit der Websites seit dreißig Jahren Suchmaschinen mitteilen, was sie indexieren dürfen.</p>
+<p>Der Vergleich mit <code>robots.txt</code> ist zugleich die Schwachstelle, und sie ist keine technische, sondern eine begriffliche. <strong><code>robots.txt</code> wird gelesen. <code>llms.txt</code> wird befolgt.</strong> Ein Suchmaschinen-Crawler nimmt eine Anweisung entgegen und ordnet sie in ein enges Regelwerk ein. Ein Agent, der beauftragt ist, eine Bibliothek zu installieren, liest dieselbe Datei als Arbeitsanweisung — und tut, was dort steht.</p>
+<p>Hertz formuliert das so: „Das Vertrauensmodell ist kaputt. Agenten behandeln Herstellerdokumentation als Grundwahrheit und hinterfragen sie nicht — und die Menschen, die sie beaufsichtigen, tun es auch nicht.“ Und an anderer Stelle, präziser: „Ein Agent unterscheidet nicht zwischen einer Seite und einem Befehl. Alles, was er liest, ist Eingabe, und jede Eingabe ist eine potenzielle Anweisung.“</p>
+<p>Es gibt für <code>llms.txt</code> <strong>keine Sicherheitsspezifikation</strong>. Kein Standardisierungsgremium hat die Konvention ratifiziert, es gibt keine Signierung, keine Authentifizierung, keine Vorgabe, dass ein Agent die Inhalte in einer Sandbox behandeln müsste. Die Datei ist reiner Freitext — und wurde zu einer Zeit entworfen, als Modelle Texte zusammenfassten, statt Befehlszeilen auszuführen.</p>
+<h2>Warum das kein Einzelbefund ist</h2>
+<p>Der eigentliche Grund, warum Sie das ernst nehmen sollten, ist nicht diese eine Datei. Es ist das Muster, in das sie gehört.</p>
+<p><strong>Halluzinierte Paketnamen.</strong> Sprachmodelle erfinden gelegentlich Bibliotheken, die es nicht gibt. Eine 2026 veröffentlichte Untersuchung mit knapp 200.000 Prompts gegen die realen Bestände von PyPI und npm ermittelte bei aktuellen Spitzenmodellen Halluzinationsraten zwischen <strong>4,6 und 6,1 Prozent</strong> — deutlich besser als frühere Werte von bis zu 21 Prozent, aber eben nicht null. Interessanter als der Durchschnitt ist ein Detail der Studie: <strong>127 Paketnamen wurden von allen fünf getesteten Modellen identisch erfunden.</strong> Das sind keine Zufallsfehler mehr, sondern verlässlich vorhersagbare Ziele. Wer einen dieser Namen vorab registriert, bekommt Datenverkehr aus mehreren Modellfamilien gleichzeitig. Die Branche nennt das <em>Slopsquatting</em>.</p>
+<p><strong>Wie schnell so etwas skaliert</strong>, zeigt ein Vorfall vom März: Zwei manipulierte Versionen der weit verbreiteten Bibliothek LiteLLM lagen nach Analysen von CloudSEK etwa <strong>40 Minuten</strong> auf PyPI und enthielten einen Zugangsdaten-Dieb. Die im August veröffentlichte Auswertung verknüpfte den Vorfall mit <strong>über 2.500 Organisationen</strong> und rund 434.000 betroffenen Bauprozessen. Vierzig Minuten.</p>
+<p><strong>Und es bleibt nicht bei Paketen.</strong> Eine manipulierte Version der Nx-Console-Erweiterung für Visual Studio Code war im Mai nur <strong>18 Minuten</strong> im Marktplatz verfügbar und exfiltrierte in dieser Zeit nach Berichten Daten aus rund 3.800 Repositorien — darunter Passwort-Tresore, Cloud-Zugangsdaten und, bezeichnenderweise, Konfigurationsdateien von Claude Code.</p>
+<h2>Der unbequeme Teil: Die Voreinstellungen haben sich bewegt</h2>
+<p>Anthropic hat Mitte August den <em>Auto Mode</em> zur Voreinstellung von Claude Code für Pro-, Max- und Team-Nutzer gemacht. Die Begründung ist nachvollziehbar und wird von einer aufschlussreichen Zahl gestützt: Nutzer bestätigten zuvor <strong>97 Prozent aller Freigabeanfragen ungeprüft</strong>. Wer permanent klickt, prüft nicht mehr; das Sicherheitsversprechen der manuellen Freigabe war längst eine Fiktion. Messungen legen sogar nahe, dass der Klassifikator im Auto Mode gefährliche Befehle in 89 Prozent der Fälle abfängt, während Menschen in derselben Rolle auf 13,6 Prozent kamen.</p>
+<p>Die Maschine ist hier also nicht das Problem — die menschliche Aufsicht war es schon vorher nicht. Aber genau deshalb greift die Argumentation zu kurz. Der Angriffsweg aus dem Ars-Bericht setzt eine Ebene früher an: Er manipuliert nicht den Befehl, den ein Klassifikator prüfen könnte, sondern die <strong>Quelle, aus der der Agent seine Absicht ableitet</strong>. Ein Befehl, der aus der offiziellen Dokumentation des Herstellers stammt, sieht in jeder Prüfung legitim aus. Er ist es ja auch — bis auf die Kleinigkeit, dass das Paket am Ende jemand anderem gehört.</p>
+<h2>Was die Gegenseite sagt</h2>
+<p>Eine Reportage braucht den Widerspruch, und es gibt ihn — nur ist er unaufgeregt.</p>
+<p>Erstens ist die Angriffsfläche heute klein. Je nach Stichprobe haben zwischen <strong>7 und 16 Prozent</strong> der erreichbaren Domains überhaupt eine <code>llms.txt</code>; unter den Fortune-500-Unternehmen waren es in einer Erhebung vom März nur <strong>7,4 Prozent</strong>, also 37 von 500. Zweitens gibt es Zweifel am praktischen Nutzen der Datei überhaupt: Eine Auswertung über 900 Domains fand in sieben Monaten <strong>keinen</strong> Zugriff eines verifizierten Crawlers der großen Labore. Und drittens ist der Unterschied zwischen „227 gefundene Befehle“ und „nachgewiesener Schaden“ real. Proof-of-Concept-Code beweist die Verwundbarkeit, nicht den Verlust.</p>
+<p>Man kann das zusammenfassen als: Das Scheunentor steht offen, aber die Scheune ist noch halb leer. Das ist ein Argument gegen Panik — und keines gegen Vorbereitung, denn die Adoption der Konvention steigt, und unter Anbietern von Entwicklerwerkzeugen liegt sie bereits über 50 Prozent.</p>
+<h2>Vier Fragen für Montagmorgen</h2>
+<p>Sie müssen kein Sicherheitsarchitekt sein, um dieses Thema zu steuern. Vier Fragen genügen, und alle vier sind an einem Vormittag beantwortbar.</p>
+<p><strong>1. Darf unser Agent Pakete ohne Rückfrage installieren, und aus welchen Quellen?</strong> Das ist die eine Frage, die den Unterschied macht. Die Antwort sollte eine Erlaubnisliste sein — ein interner Spiegel der Registratur, keine offene Verbindung ins Netz.</p>
+<p><strong>2. Kommt unser Agent überhaupt ungefiltert ins Internet?</strong> Ein ausgehender Proxy mit Erlaubnisliste und der Grundeinstellung „im Zweifel blockieren“ kostet wenig und schneidet den gesamten hier beschriebenen Pfad ab. Sowohl NVIDIA als auch Microsoft haben 2026 Bauanleitungen dafür veröffentlicht.</p>
+<p><strong>3. Haben wir unsere eigenen Namensräume besetzt?</strong> Wenn Ihre Dokumentation ein internes Paket erwähnt, das öffentlich nicht existiert, ist dieser Name für jeden registrierbar. Ihn selbst zu belegen, kostet nichts.</p>
+<p><strong>4. Was steht eigentlich in unserer <code>llms.txt</code>?</strong> Bei sieben Prozent Verbreitung lautet die wahrscheinlichste Antwort: Wir haben keine. Das ist eine gute Antwort. Die zweitbeste ist, dass jemand sie kennt und pflegt. Die schlechteste ist, dass sie ein Werkzeug vor zwei Jahren automatisch erzeugt hat.</p>
+<p>Ein regulatorischer Hinweis noch, weil er näher liegt, als vielen bewusst ist: Die Meldepflichten des EU Cyber Resilience Act greifen <strong>ab dem 11. September 2026</strong> — aktiv ausgenutzte Schwachstellen und schwere Vorfälle sind dann binnen 24 Stunden an die ENISA zu melden. Das ist in zwei Wochen. Die weitergehenden Anforderungen samt Stückliste für Softwarebestandteile folgen im Dezember 2027. Unter NIS2 haftet die Geschäftsleitung zudem persönlich für die Absicherung der Lieferkette — und ein Agent, der Code aus fremden Quellen ins Netz holt, ist in jeder vernünftigen Auslegung Teil dieser Lieferkette.</p>
+<p>Der Mitarbeiter, der alles liest und alles glaubt, wird nicht wieder verschwinden. Er ist zu nützlich. Aber man kann ihm sagen, wo er einkaufen darf.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://arstechnica.com/security/2026/08/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks/" rel="noopener noreferrer external" target="_blank">Ars Technica — Claude, Codex, and Hermes installed unowned code inside corporate networks (27.8.2026)</a></li>
+            
+            <li><a href="https://yro.slashdot.org/story/26/08/27/207212/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks" rel="noopener noreferrer external" target="_blank">Slashdot — Zusammenfassung des Ars-Technica-Berichts (27.8.2026)</a></li>
+            
+            <li><a href="https://www.answer.ai/posts/2024-09-03-llmstxt.html" rel="noopener noreferrer external" target="_blank">Answer.AI — The /llms.txt file (Jeremy Howard, 3.9.2024)</a></li>
+            
+            <li><a href="https://ppc.land/only-7-4-of-fortune-500-have-an-llms-txt-file-study-finds/" rel="noopener noreferrer external" target="_blank">PPC Land — Only 7,4 % of Fortune 500 have an llms.txt file, study finds (ProGEO.ai, 31.3.2026)</a></li>
+            
+            <li><a href="https://www.digitalapplied.com/blog/llms-txt-in-practice-adoption-evidence-2026" rel="noopener noreferrer external" target="_blank">Digital Applied — llms.txt in Practice: Adoption Data, Evidence, and Setup (7.8.2026)</a></li>
+            
+            <li><a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-slopsquatting-ai-supply-chain-20260419-csa/" rel="noopener noreferrer external" target="_blank">Cloud Security Alliance — Research Note: Slopsquatting als KI-Lieferkettenvektor (19.4.2026)</a></li>
+            
+            <li><a href="https://www.unite.ai/cloudsek-links-march-litellm-supply-chain-breach-to-2500-organizations/" rel="noopener noreferrer external" target="_blank">Unite.AI — CloudSEK links March LiteLLM supply chain breach to 2.500 organizations (11.8.2026)</a></li>
+            
+            <li><a href="https://thehackernews.com/2026/07/ai-agent-exploits-langflow-rce-to-automate-database-ransomware-attack.html" rel="noopener noreferrer external" target="_blank">The Hacker News — AI agent exploits Langflow RCE to automate database ransomware attack (Juli 2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
