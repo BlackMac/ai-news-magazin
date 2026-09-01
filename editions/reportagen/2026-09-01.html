@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Chip unter dem Chip: Was die ASIC-Welle für Ihre Inferenzrechnung bedeutet</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-01.html">&larr; Zur&uuml;ck zur Ausgabe vom 1. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Chip unter dem Chip: Was die ASIC-Welle für Ihre Inferenzrechnung bedeutet</h1>
+    
+    <p class="reportage-teaser">Jeder große Cloud-Anbieter baut inzwischen eigene KI-Beschleuniger. Für Unternehmen, die auf fremden Modellen aufsetzen, ist das zunächst eine gute Nachricht: Inferenz wird billiger. Die Rechnung hat aber eine zweite Spalte — und die steht in keinem Preisblatt.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-01">1. September 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Dass Nvidia am Montag 3,5 Milliarden Dollar in den taiwanischen Chipdesigner MediaTek gesteckt hat, ist die Nachricht. Der Grund dahinter ist die eigentliche Geschichte — und sie betrifft jedes Unternehmen, das KI-Funktionen in ein Produkt einbaut, auch wenn es nie einen Chip kaufen wird.</p>
+<h2>Ein Taschenmesser und ein Spezialwerkzeug</h2>
+<p>Zwei Begriffe muss man auseinanderhalten. Eine <strong>GPU</strong> ist ein Schweizer Taschenmesser. Sie ist frei programmierbar und kann fast jede Rechenaufgabe übernehmen: Grafik, wissenschaftliche Simulation, das Training beliebiger KI-Architekturen. Diese Flexibilität kostet Chipfläche und Strom, denn ein Großteil des Siliziums ist für Aufgaben da, die man gerade nicht braucht.</p>
+<p>Ein <strong>ASIC</strong> — ein anwendungsspezifischer Schaltkreis — ist das maßgeschneiderte Werkzeug daneben. Er verdrahtet eine bestimmte Rechenoperation direkt in Silizium und lässt alles weg, was diese eine Aufgabe nicht braucht. Das Ergebnis ist deutlich sparsamer im Stromverbrauch und günstiger pro Recheneinheit. Der Preis: Er kann sich nicht auf grundlegend neue Architekturen umstellen. Ist er gefertigt, ist er festgelegt.</p>
+<p>Daraus folgt eine klare wirtschaftliche Bedingung. Ein eigener Chip lohnt sich nur, wenn ein sehr hohes, stabiles Rechenvolumen mit einer bekannten, sich nicht mehr grundlegend ändernden Architektur anfällt. Der Musterfall ist <strong>Inferenz</strong> — das Ausführen eines fertig trainierten Modells — bei einem milliardenfach genutzten Dienst. Beim Training neuer, experimenteller Architekturen dagegen, wo sich die Rechenoperationen von Generation zu Generation verändern, bleibt die Flexibilität der GPU meist überlegen.</p>
+<p>Genau diese Trennlinie zieht sich durch alle aktuellen Ankündigungen: Selbst OpenAI hat seinen eigenen Chip ausdrücklich nur für Inferenz vorgesehen. Das Vortraining bleibt vorerst auf Nvidia-Hardware.</p>
+<h2>Wer inzwischen eigenes Silizium baut</h2>
+<p>Die Liste ist in den vergangenen achtzehn Monaten von einer Kuriosität zur Norm geworden.</p>
+<p><strong>Google</strong> ist am weitesten. Die siebte TPU-Generation Ironwood erreichte 2026 volle Verfügbarkeit; ein Verbund koppelt 9.216 Chips zu über 40 Exaflops. Wie ernst es gemeint ist, zeigte sich schon im Oktober 2025, als Anthropic sich in einem Vertrag im zweistelligen Milliardenbereich Zugriff auf bis zu eine Million TPUs und mehr als ein Gigawatt Kapazität sicherte.</p>
+<p><strong>Amazon</strong> fährt dieselbe Strategie mit demselben Ankerkunden. Im April 2026 vertieften beide Seiten ihre Bindung: fünf Milliarden Dollar frisches Eigenkapital, bis zu zwanzig Milliarden an Meilensteinzahlungen — und im Gegenzug verpflichtet sich Anthropic zu hundert Milliarden Dollar AWS-Ausgaben über zehn Jahre, bei einem Kapazitätsziel von fünf Gigawatt.</p>
+<p><strong>Meta</strong> und <strong>Microsoft</strong> bauen dagegen rein interne Effizienzchips. Metas MTIA-Reihe wurde im März 2026 in vier Generationen angekündigt, Microsofts Maia 200 läuft seit Januar 2026 im eigenen Rechenzentrum. Beide tauchen in keinem Cloud-Katalog auf. Für Kunden sind sie schlicht nicht buchbar — sie senken die Kosten des Anbieters, nicht Ihre.</p>
+<p><strong>OpenAI</strong> stieg im Juni 2026 mit dem gemeinsam mit Broadcom entwickelten Inferenzchip Jalapeño ein, vom Design bis zum Tape-out in neun Monaten. <strong>Anthropic</strong> bestätigte im August 2026 ein eigenes Chip-Design-Team; ein Fertigungspartner ist berichtet, aber nicht offiziell bestätigt — behandeln Sie das als Gerücht.</p>
+<p>Wer daran verdient, lässt sich an den Zahlen der Auftragsdesigner ablesen. <strong>Broadcom</strong> steigerte seinen KI-Halbleiterumsatz im Quartal bis Anfang Mai 2026 um 143 Prozent auf 10,8 Milliarden Dollar und erwartet für die zweite Jahreshälfte 2026 noch einmal etwa eine Verdopplung; der Auftragsbestand liegt nach Unternehmensangaben deutlich über dem bereits Ausgelieferten. Vier der sechs großen Custom-Chip-Kunden sind namentlich bekannt: Anthropic, Google, Meta, OpenAI. <strong>Marvell</strong> meldete Ende August einen Rekordumsatz von 2,74 Milliarden Dollar, davon 79 Prozent aus dem Rechenzentrumsgeschäft.</p>
+<p>Dass Nvidia deshalb in Bedrängnis wäre, lässt sich allerdings nicht behaupten: Der Konzern meldete für sein im Juli 2026 endendes Quartal 89 Milliarden Dollar Rechenzentrumsumsatz bei 75 Prozent Bruttomarge. Die ASIC-Anbieter wachsen schneller — aus einer sehr viel kleineren Basis.</p>
+<h2>Warum Ihre Token billiger geworden sind</h2>
+<p>Der für Sie sichtbare Effekt ist der Preisverfall bei Inferenz. Eine Million Eingabe-Token kostete bei GPT-4s API-Start im März 2023 dreißig Dollar. Vergleichbar leistungsfähige Modelle der Economy-Klasse liegen heute bei rund zehn Cent — ein Rückgang um über 99 Prozent in gut drei Jahren.</p>
+<p>Dieser Verfall geht nicht allein auf ASICs zurück; Modelloptimierung, Quantisierung und schlichter Wettbewerbsdruck tragen mindestens ebenso viel bei. Aber die Verfügbarkeit spezialisierter, sparsamer Inferenz-Hardware ist ein struktureller Treiber, und sie wirkt weiter. Das Analysehaus New Street Research prognostiziert, Nvidias Anteil an der reinen Inferenzrechenleistung könne von über 90 auf 20 bis 30 Prozent bis 2028 fallen. Das ist eine Prognose, keine Tatsache — aber sie beschreibt die Richtung, in die alle Beteiligten investieren.</p>
+<p>Für ein Softwareunternehmen heißt das konkret: Die Grenzkosten jedes KI-Features im eigenen Produkt sinken weiter. Kalkulationen, die vor achtzehn Monaten gegen eine Funktion sprachen, sollten neu aufgemacht werden.</p>
+<h2>Der Preis der Ersparnis</h2>
+<p>Die zweite Spalte der Rechnung steht in keinem Preisblatt. Die günstigsten Angebote sind an bestimmte Infrastruktur gebunden — und zwar fester, als es bei generischer GPU-Kapazität der Fall war.</p>
+<p>TPUs sind praktisch ausschließlich über Google Cloud nutzbar, Trainium ausschließlich über AWS. Eine Nvidia-GPU bekommen Sie bei jedem Anbieter, und sie verhält sich überall gleich. Wer sich auf ein günstigeres, hauseigenes Backend einlässt, bindet sich enger an genau einen Cloud-Anbieter.</p>
+<p>Auf der Softwareebene verschärft sich das. Nvidias CUDA ist über Anbieter hinweg portabel; TPUs verlangen den Umweg über Googles XLA-Compilerschicht beziehungsweise JAX- und PyTorch-Backends, AWS-Chips das hauseigene Neuron-SDK. Für den typischen Fall — ein Unternehmen ruft ein Modell über eine API auf — ist das zunächst unsichtbar, weil der Anbieter die Übersetzung übernimmt. Sichtbar wird es in dem Moment, in dem Sie eigene Modelle betreiben, feinabstimmen oder den Anbieter wechseln wollen. Dann ist der Aufwand nicht mehr eine Konfigurationsänderung, sondern ein Projekt.</p>
+<p>Nvidias eigene Antwort auf die Bewegung ist bezeichnend unaggressiv: Mit NVLink Fusion öffnet der Konzern seit 2026 seine bislang proprietäre Verbindungstechnik für fremde Beschleuniger — Partner sind unter anderem MediaTek, Marvell, Alchip, Astera Labs, Synopsys und Cadence. Die Logik: Selbst wenn ein Cloud-Anbieter einen Teil seiner Rechenlast auf eigene Chips verlagert, bleibt Nvidias Netzwerktechnik das Rückgrat der Anlage.</p>
+<h2>Die Gegenrede</h2>
+<p>Es gibt gute Gründe, die Verdrängungserzählung zu bezweifeln. Ein Custom-Chip lohnt sich nur bei einer sehr engen Kombination von Bedingungen, und die mehrjährigen, milliardenschweren Entwicklungskosten können sich ohnehin nur eine Handvoll Konzerne leisten — praktisch genau jene, die schon heute Nvidias größte Kunden sind.</p>
+<p>Hinzu kommt das Auslastungsrisiko. Ein Chip, der auf eine Modellgeneration zugeschnitten ist, kann bei einem unerwarteten Architektursprung über Nacht an Wert verlieren, während sich eine GPU-Flotte softwareseitig umrüsten lässt. Und Nvidias Ökosystem — nach eigenen Angaben über fünf Millionen aktive Entwickler und zwei Jahrzehnte optimierter Bibliotheken — lässt sich nicht kurzfristig kopieren. Allerdings räumen auch Branchenbeobachter ein, dass dieses Argument bei standardisierten Inferenz-Workloads erheblich an Gewicht verliert. Genau dort setzt die aktuelle Welle an.</p>
+<p>Ein methodischer Hinweis, der über diesen Text hinaus gilt: Sämtliche Effizienzvergleiche in dieser Debatte — Googles doppelte Leistung pro Watt gegenüber der Vorgängergeneration ebenso wie Nvidias Vergleichszahlen — stammen von den Herstellern selbst. Unabhängige Messungen mit vergleichbarer Basis gibt es kaum.</p>
+<h2>Drei Fragen für die nächste Anbieterrunde</h2>
+<p><strong>Wie stabil ist unsere Modellwahl?</strong> Wer regelmäßig zwischen Foundation-Modellen wechselt oder eigene, sich schnell verändernde Modelle trainiert, profitiert kaum von ASIC-getriebenen Rabatten — die hängen an einer bestimmten Architektur und einem bestimmten Anbieter.</p>
+<p><strong>Was kostet der Rückweg?</strong> Bevor Sie ein Angebot annehmen, das auf hauseigener Infrastruktur beruht, fragen Sie ausdrücklich nach: Zu welchen Konditionen wäre ein Wechsel zurück auf generische Kapazität möglich, welche Anpassungen erfordert das, und wie lange dauert es? Ein Anbieter, der darauf keine belastbare Antwort gibt, hat die Frage beantwortet.</p>
+<p><strong>Woher stammt die Effizienzzahl?</strong> Bei jeder Angabe wie „halb so teuer“ oder „doppelte Leistung pro Watt“ lohnt die Nachfrage, ob es sich um eine unabhängige Messung handelt oder um einen Vergleich mit dem eigenen Vorgängerprodukt.</p>
+<p>Wer diese drei Fragen beantworten kann, erkennt, ob die ASIC-Welle dem eigenen Unternehmen tatsächlich niedrigere Kosten bringt — oder nur eine neue, unauffälligere Form der Anbieterbindung.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027" rel="noopener noreferrer external" target="_blank">NVIDIA — Financial results for Q2 fiscal 2027</a></li>
+            
+            <li><a href="https://futurumgroup.com/insights/broadcom-q2-fy-2026-vmware-stability-supports-ai-led-semiconductor-expansion/" rel="noopener noreferrer external" target="_blank">Futurum Group — Broadcom Q2 FY 2026: AI-led semiconductor expansion</a></li>
+            
+            <li><a href="https://investor.marvell.com/news-events/press-releases/detail/989/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2026-financial-results" rel="noopener noreferrer external" target="_blank">Marvell — Q2 fiscal year financial results</a></li>
+            
+            <li><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/ironwood-tpu-age-of-inference/" rel="noopener noreferrer external" target="_blank">Google Blog — Ironwood: The first Google TPU for the age of inference</a></li>
+            
+            <li><a href="https://www.cnbc.com/2025/10/23/anthropic-google-cloud-deal-tpu.html" rel="noopener noreferrer external" target="_blank">CNBC — Google and Anthropic announce cloud deal worth tens of billions</a></li>
+            
+            <li><a href="https://www.anthropic.com/news/anthropic-amazon-compute" rel="noopener noreferrer external" target="_blank">Anthropic — Anthropic and Amazon expand collaboration for up to 5 gigawatts</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI unveils its first custom chip, built by Broadcom</a></li>
+            
+            <li><a href="https://www.tomshardware.com/tech-industry/semiconductors/metas-mtia-chip-lineup-joins-hyperscaler-push-to-replace-nvidia-at-inference" rel="noopener noreferrer external" target="_blank">Tom&#39;s Hardware — Meta&#39;s MTIA chip lineup joins hyperscaler push</a></li>
+            
+            <li><a href="https://www.tomshardware.com/tech-industry/anthropic-to-build-its-own-co-designed-custom-ai-accelerator-for-inferencing-workloads-samsung-reported-to-be-partnering-with-the-claude-ai-maker-for-manufacturing" rel="noopener noreferrer external" target="_blank">Tom&#39;s Hardware — Anthropic to build its own co-designed custom AI accelerator</a></li>
+            
+            <li><a href="https://developer.nvidia.com/blog/integrating-custom-compute-into-rack-scale-architecture-with-nvidia-nvlink-fusion/" rel="noopener noreferrer external" target="_blank">NVIDIA Developer Blog — Integrating custom compute with NVLink Fusion</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
