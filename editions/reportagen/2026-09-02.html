@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Zahl, die Sie nicht kaufen können: Wie man ein Benchmark-Versprechen auf die eigene Last umrechnet</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-02.html">&larr; Zur&uuml;ck zur Ausgabe vom 2. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Die Zahl, die Sie nicht kaufen können: Wie man ein Benchmark-Versprechen auf die eigene Last umrechnet</h1>
+    
+    <p class="reportage-teaser">An einem einzigen Tag meldeten zwei Labore Rekorde: eine Verdopplung auf einem Wissenschafts-Testsatz, ein perfektes Ergebnis auf einem Hacking-Testsatz. Beide Zahlen stimmen. Und beide sagen erstaunlich wenig darüber, was das Modell in Ihrem Unternehmen leisten wird. Eine Anleitung zum Lesen von Ranglisten — mit den Befunden der Forschung, die genau das gerade nachmisst.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-02">2. September 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Zwei Rekorde an einem Dienstag</h2>
+<p>Am 1. September meldete Anthropic für Claude Fable 5.1 auf dem Testsatz Terminal-Bench-Science 52,6 Prozent gegenüber 24,7 Prozent für den Vorgänger — eine Verdopplung. Am selben Tag teilte OpenAI mit, das kommende Modell Astra erreiche auf ExploitBench, einem Test zur Entwicklung funktionierender Angriffe, das volle Ergebnis.</p>
+<p>Beide Zahlen sind vermutlich korrekt gemessen. Beide werden in den nächsten Wochen in Präsentationen auftauchen, in denen jemand eine Beschaffungsentscheidung begründet. Und beide beantworten die Frage nicht, die dabei eigentlich gestellt wird: Wird dieses Modell die Arbeit in meinem Unternehmen besser erledigen als das, was ich heute einsetze?</p>
+<p>Der Grund dafür ist kein Betrug. Er ist methodisch — und die Forschung, die das gerade systematisch nachmisst, hat in den vergangenen Monaten ungewöhnlich klare Ergebnisse geliefert. Vier davon reichen aus, um Ranglisten künftig anders zu lesen.</p>
+<h2>Was eine Benchmark-Zahl überhaupt misst</h2>
+<p>Ebenfalls am 1. September veröffentlichte das Allen Institute for AI eine Untersuchung namens <strong>BenchMIRT</strong>. Der Ansatz stammt aus der Psychometrie, also aus der Wissenschaft vom Messen menschlicher Fähigkeiten. Ihre zentrale Idee heißt Item-Response-Theorie und lässt sich in einem Satz erklären: Ob jemand eine Frage richtig beantwortet, hängt von zwei Dingen ab — von seiner Fähigkeit und von den Eigenschaften der Frage. Eine Frage kann schwer sein. Sie kann aber auch schlecht <em>trennen</em>, also starke und schwache Kandidaten nicht auseinanderhalten. Beides sind Eigenschaften der Frage, nicht des Kandidaten.</p>
+<p>Genau das hat Ai2 auf Sprachmodelle angewandt: 100 Modelle, 16 Testsätze, über 34.000 Einzelfragen — sechs Testsätze zum allgemeinen Denken, darunter MMLU-Pro, GPQA, MATH und BBH, dazu zehn aus der hauseigenen Sicherheitssammlung. Der Methode wurde ausdrücklich <em>nicht</em> gesagt, welcher Testsatz was misst; sie sollte die verborgenen Fähigkeitsdimensionen selbst finden. Herausgekommen sind zwei, und sie kamen bei jeder Wiederholung wieder heraus: <strong>Sicherheit und allgemeines Denkvermögen</strong>.</p>
+<p>Interessant sind die Zuordnungen. <strong>BBQ</strong>, ein Testsatz für soziale Vorurteile, der üblicherweise zu den Sicherheitstests gezählt wird, lud deutlich stärker auf allgemeines Denken. Ein schlechtes Ergebnis dort kann also schlicht heißen, dass ein Modell die verschachtelten Fragen nicht sauber auflöst — nicht, dass es voreingenommen ist. Noch schöner ist der Fall <strong>WMDP</strong>, das gefährliches Doppelverwendungs-Wissen abfragt: Auch hier dominiert das Denkvermögen, aber mit umgekehrtem Vorzeichen. Weil der Test das Verweigern der Antwort als erwünschtes Verhalten wertet, geht <em>stärkeres</em> Denkvermögen mit <em>niedrigeren</em> Punktzahlen einher. Und bei HarmBench spalten sich die Fragen: Die schädlichen Anfragen verhalten sich wie ein Sicherheitstest, die Urheberrechtsfragen wie ein Denktest.</p>
+<p>Übersetzt heißt das: Diese Tests messen zu erheblichen Teilen nicht das, was auf der Verpackung steht — sie messen, ob ein Modell allgemein klug ist. Wenn Sie also einen Anbieter nach dem Abschneiden bei einem Sicherheitstest fragen und eine hohe Zahl bekommen, haben Sie möglicherweise nur ein weiteres Maß für allgemeine Leistungsfähigkeit in der Hand — dieselbe Information, die Sie schon aus drei anderen Zahlen hatten.</p>
+<p>Als praktische Nebenerkenntnis fand Ai2 außerdem: Behält man nur zehn Prozent der Fragen, bleibt die Rangfolge der Modelle im Wesentlichen erhalten. Neunzig Prozent des Testaufwands liefern keinen zusätzlichen Unterschied.</p>
+<h2>Problem eins: Der Nenner ist erstaunlich klein</h2>
+<p>Der zweite Befund ist unspektakulär und wird deshalb am häufigsten übersehen. Terminal-Bench 2.0, der Testsatz, aus dessen Nachfolgeversion die oben zitierten Prozentwerte für agentisches Programmieren stammen, besteht aus <strong>89 Aufgaben</strong>. Ausgewählt wurden sie aus 229 Einreichungen von 93 Beitragenden.</p>
+<p>89 Aufgaben sind eine sorgfältig kuratierte Sammlung. Sie sind aber auch eine sehr kleine Stichprobe. Ein Unterschied von drei Prozentpunkten zwischen zwei Modellen entspricht hier weniger als drei gelösten Aufgaben. Wenn Sie in einer Anbieterpräsentation eine Rangliste sehen, in der die ersten vier Modelle innerhalb von fünf Prozentpunkten liegen, sehen Sie mit einiger Wahrscheinlichkeit Rauschen, das als Reihenfolge dargestellt wird. Verlangen Sie Konfidenzintervalle. Die meisten Ranglisten geben keine an.</p>
+<h2>Problem zwei: Bestanden ist nicht dasselbe wie richtig</h2>
+<p>Der dritte Befund ist der unangenehmste. Eine Gruppe um Boxi Yu hat unter dem Namen <strong>SWE-ABS</strong> die Lösungen der besten dreißig Systeme auf SWE-Bench Verified erneut geprüft — dem bekanntesten Testsatz für automatische Fehlerbehebung in echtem Quellcode. Das Verfahren dort ist einfach: Der Agent ändert Code, dann laufen die vorhandenen Tests. Laufen sie durch, gilt die Aufgabe als gelöst.</p>
+<p>Das Ergebnis der Nachprüfung: <strong>Eine von fünf als gelöst gezählten Änderungen ist inhaltlich falsch.</strong> Sie besteht die Prüfung nur deshalb, weil die Testfälle die Fehler nicht aufdecken. Beim führenden System fällt die Erfolgsquote nach der Korrektur von 78,80 auf 62,20 Prozent — und es rutscht von Platz eins auf Platz fünf.</p>
+<p>Für jeden, der in seinem eigenen Unternehmen schon einmal eine Testabdeckung beurteilt hat, ist das keine Überraschung, sondern eine Erinnerung: Ein Test prüft, was er prüft. Ein Modell, das darauf optimiert wurde, Tests grün zu bekommen, wird Tests grün bekommen. Ob der Code richtig ist, ist eine andere Frage — und in der Produktion Ihre.</p>
+<h2>Problem drei: Sie kaufen kein Modell, Sie kaufen ein System</h2>
+<p>Der vierte Befund verschiebt die Perspektive. Eine Arbeitsgruppe um Maria Gorinova argumentiert, dass Programmier-Testsätze grundsätzlich das Falsche zusammenfassen: Sie pressen <strong>Modell, Gerüst und Umgebung in eine einzige Gesamtnote</strong>. Ein Coding-Agent in der Praxis ist eben kein Modell, sondern ein Verbund aus Modell, Werkzeug-Gerüst, Kontextaufbereitung, Ausführungsumgebung und Rückmeldeschleifen. Und jede einzelne dieser Komponenten kann die Punktzahl um Beträge verschieben, die dem Fortschritt zwischen zwei Modellgenerationen entsprechen.</p>
+<p>Das ist die praktisch folgenreichste Einsicht dieses Textes. Wenn ein Anbieter Ihnen eine Verbesserung von acht Prozentpunkten zeigt, wissen Sie zunächst nicht, ob sie aus dem Modell kommt oder aus dem Gerüst, in dem er es getestet hat. In Ihrem Haus läuft ein anderes Gerüst. Eine ergänzende Übersichtsarbeit von Wael Albayaydh und Kollegen, die 27 Untersuchungen zu 19 Testsätzen zusammenführt, formuliert die zugehörige Warnung: Gute Leistung auf Teilaufgaben übersetzt sich nicht verlässlich in Erfolg über die gesamte Aufgabe, und Fehler häufen sich mit zunehmender Aufgabenlänge nicht linear, sondern überproportional.</p>
+<p>Wir haben dafür ein Beispiel aus dem eigenen Archiv. In unserer <a href="/editions/2026-08-19.html#art-6">Ausgabe vom 19. August</a> haben wir eine unabhängige Nachmessung eines beworbenen Modellvorsprungs referiert. Übrig blieb ein Vorsprung von 0,7 Prozentpunkten in genau einer Disziplin.</p>
+<h2>Was daraus für die Beschaffung folgt</h2>
+<p>Nichts davon heißt, dass Benchmarks wertlos sind. Sie sind ein brauchbares Vorfilter: Ein Modell, das auf mehreren unabhängigen Testsätzen deutlich zurückliegt, wird Ihre Aufgabe vermutlich auch nicht besser lösen. Ranglisten taugen zum Aussortieren. Zum Auswählen taugen sie nicht.</p>
+<p>Fünf Fragen ändern die Qualität eines Anbietergesprächs sofort:</p>
+<p><strong>Erstens: Wie viele Aufgaben enthält der Testsatz, und wie groß ist das Konfidenzintervall?</strong> Bei zweistelligen Aufgabenzahlen sind Ranglistenplätze innerhalb weniger Prozentpunkte bedeutungslos.</p>
+<p><strong>Zweitens: Wer hat gemessen, und in welchem Gerüst?</strong> Selbstgemessene Zahlen im hauseigenen Gerüst sind kein Betrug, aber auch keine Aussage über Ihr Gerüst. Fragen Sie nach unabhängigen Nachmessungen.</p>
+<p><strong>Drittens: Was genau zählt als bestanden?</strong> Bei testbasierten Verfahren ist die Antwort „die vorhandenen Tests laufen durch“ — mit den bekannten Folgen.</p>
+<p><strong>Viertens: Misst dieser Testsatz das, wonach er heißt?</strong> Nach dem Ai2-Befund messen mehrere verbreitete Sicherheitstests zu großen Teilen allgemeines Denkvermögen.</p>
+<p><strong>Fünftens — und das ist die wichtigste: Was ist Ihr eigener Testsatz?</strong> Fünfzig bis zweihundert echte Fälle aus Ihrem Betrieb, mit einer Bewertung, auf die sich Ihr Fachbereich geeinigt hat, schlagen jede öffentliche Rangliste. Sie sind auch der einzige Testsatz, den kein Modell im Training gesehen hat. Der Aufwand dafür liegt bei wenigen Personentagen — deutlich unter dem, was ein falsch gewähltes Modell über ein Jahr kostet.</p>
+<h2>Der Preis ist auch eine Benchmark</h2>
+<p>Zum Schluss ein Beispiel, das dieselbe Lesetechnik auf eine Zahl anwendet, die nicht aus einem Testsatz stammt. Anthropic bewirbt Claude Fable 5.1 mit bis zu 45 Prozent niedrigeren Kosten. Wer nachliest, findet die Mechanik: Ein- und Ausgabepreise sind unverändert, gesenkt wurde ausschließlich der Preis für Cache-Treffer, von einem Dollar auf 25 Cent je Million Token. Anthropic nennt deshalb korrekterweise zwei Zahlen — rund 25 Prozent bei typischen Lasten, bis zu 45 Prozent bei stark agentischen Abläufen.</p>
+<p>Die 45 Prozent sind kein Rabatt auf das Produkt. Sie sind ein Rabatt auf ein bestimmtes Nutzungsmuster: viele Werkzeugaufrufe, die denselben Kontext immer wieder mitschleppen. Wer das Modell für kurze Einzelanfragen einsetzt, wird davon fast nichts merken.</p>
+<p>Damit ist die Regel für beide Arten von Zahlen dieselbe. Eine Benchmark-Zahl und eine Ersparnis-Zahl beschreiben beide ein Ergebnis unter Bedingungen. Die einzige Frage, die zählt, lautet: Sind das Ihre Bedingungen?</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://huggingface.co/blog/allenai/benchmirt" rel="noopener noreferrer external" target="_blank">Ai2 — BenchMIRT: What are LLM benchmarks actually measuring?</a></li>
+            
+            <li><a href="https://github.com/allenai/BenchMIRT" rel="noopener noreferrer external" target="_blank">GitHub — allenai/BenchMIRT</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2603.00520" rel="noopener noreferrer external" target="_blank">arXiv — SWE-ABS: Adversarial Benchmark Strengthening Exposes Inflated Success Rates on Test-based Benchmark</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2606.17799" rel="noopener noreferrer external" target="_blank">arXiv — Position: Coding Benchmarks Are Misaligned with Agentic Software Engineering</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2607.05775" rel="noopener noreferrer external" target="_blank">arXiv — Beyond the Leaderboard: A Synthesis of Tool-Use, Planning, and Reasoning Failures in LLM Agents</a></li>
+            
+            <li><a href="https://huggingface.co/datasets/harborframework/terminal-bench-2.0" rel="noopener noreferrer external" target="_blank">Hugging Face — Datensatz terminal-bench-2.0 (89 Aufgaben)</a></li>
+            
+            <li><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" rel="noopener noreferrer external" target="_blank">Anthropic — Introducing Claude Fable 5.1 and Claude Mythos 5.1</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" rel="noopener noreferrer external" target="_blank">Claude Platform Docs — Claude Fable 5.1 Überblick</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
