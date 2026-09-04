@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drei Anbieter, ein Zeitfenster: Was Ausfallsicherheit im KI-Stack wirklich kostet</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-04.html">&larr; Zur&uuml;ck zur Ausgabe vom 4. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Drei Anbieter, ein Zeitfenster: Was Ausfallsicherheit im KI-Stack wirklich kostet</h1>
+    
+    <p class="reportage-teaser">Am Donnerstag fielen ChatGPT, Claude und Grok fast gleichzeitig aus, und niemand erklärt bis heute, warum. Für Unternehmen, die Modelle in Produkte eingebaut haben, ist das keine Betriebsstörung, sondern eine Rechenaufgabe: Was kostet ein zweiter Anbieter, was bringt er — und warum ist er in den meisten Fällen die falsche Antwort?</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-04">4. September 2026</time>
+         &middot; 10 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Ein Vorfall, der die falsche Frage populär macht</h2>
+<p>Am Donnerstagvormittag östlicher Zeit lief bei Downdetector innerhalb einer halben Stunde eine Meldungswelle auf: über 35.000 Störungsmeldungen für ChatGPT, rund 1.400 für Claude, etwa 1.200 für Grok. Drei Produkte von drei Wettbewerbern, im selben Zeitfenster nicht erreichbar. Microsoft Azure, das für alle drei Modellfamilien Dienste bereitstellt, meldete zeitgleich eigene Probleme. Einen bestätigten Zusammenhang gibt es bis heute nicht.</p>
+<p>Die Reaktion, die man seither in Produktrunden hört, ist reflexhaft und verständlich: Wir brauchen einen zweiten Anbieter. Diese Reaktion ist in den meisten Fällen falsch — nicht weil Ausfallsicherheit unwichtig wäre, sondern weil ein zweiter Anbieter das Problem, das sich am Donnerstag gezeigt hat, nur teilweise löst und dabei erhebliche Kosten an Stellen erzeugt, die in der Entscheidung selten auftauchen.</p>
+<p>Es lohnt sich, die Rechnung einmal ordentlich aufzumachen. Sie ist nicht kompliziert, aber sie fällt anders aus, als der Reflex nahelegt.</p>
+<h2>Warum sich Verfügbarkeiten nicht einfach multiplizieren</h2>
+<p>Der intuitive Gedanke hinter dem zweiten Anbieter ist eine Multiplikation. Wenn Anbieter A zu 99,9 Prozent verfügbar ist und Anbieter B ebenfalls, dann ist die Wahrscheinlichkeit, dass beide gleichzeitig ausfallen, das Produkt der beiden Ausfallwahrscheinlichkeiten — also 0,1 Prozent mal 0,1 Prozent, ein Millionstel. Aus knapp neun Stunden Ausfall im Jahr würden gut dreißig Sekunden. Das klingt nach dem besten Geschäft der IT-Welt.</p>
+<p>Diese Multiplikation gilt allerdings nur unter einer Bedingung, und sie steht selten dabei: Die beiden Ausfälle müssen <strong>stochastisch unabhängig</strong> sein. Unabhängig heißt, dass der Ausfall des einen nichts über die Wahrscheinlichkeit des anderen aussagt. Genau diese Annahme hat der Donnerstag beschädigt. Wenn zwei Anbieter auf derselben Cloud-Infrastruktur, in derselben Region, hinter denselben Netzbetreibern und teilweise auf denselben Chipgenerationen laufen, gibt es eine ganze Reihe von Ereignissen, die beide gleichzeitig treffen. Fachlich heißt das ein <em>korrelierter Ausfall</em>, und die Erfahrung aus anderen Bereichen der Infrastruktur ist eindeutig: Die seltenen, teuren Ausfälle sind fast immer die korrelierten.</p>
+<p>Für die Praxis folgt daraus keine Absage an Mehranbieterstrategien, sondern eine Präzisierung. Ein zweiter Anbieter schützt zuverlässig gegen anbieterspezifische Fehler: ein fehlerhaftes Deployment, ein Kapazitätsengpass, eine Modellabschaltung, ein Vertragsstreit. Gegen die Klasse von Ereignissen, die am Donnerstag im Raum stand, schützt er nur, wenn die beiden Anbieter tatsächlich auf getrennter Infrastruktur laufen. Das ist eine Frage, die man vor der Auswahl stellen muss und die sich nicht aus dem Preisblatt beantworten lässt.</p>
+<h2>Die Kosten, die nicht in der Tokenrechnung stehen</h2>
+<p>Der zweite Anbieter wird meistens als Preisfrage diskutiert: Wie viel teurer ist das Ausweichmodell pro Million Token? Diese Zahl ist der kleinste Posten. Die eigentlichen Kosten liegen in vier anderen Bereichen.</p>
+<p><strong>Prompts sind nicht portabel.</strong> Ein Prompt, der bei einem Modell zuverlässig funktioniert, ist das Ergebnis von Wochen an Feinschliff — Formulierungen, Beispiele, Reihenfolge, Abbruchbedingungen. Bei einem anderen Modell derselben Leistungsklasse funktioniert er meistens auch, aber nicht gleich gut. Der Ausweichpfad, der im Ernstfall einspringt, ist damit ein Pfad, der schlechtere Ergebnisse liefert, und zwar in genau dem Moment, in dem niemand Zeit hat, das zu bemerken.</p>
+<p><strong>Die Prüfung verdoppelt sich.</strong> Wer zwei Modelle produktiv einsetzt, muss beide bewerten — vor der Einführung und nach jedem Modellwechsel des Anbieters. Wer eine automatisierte Bewertungsstrecke hat, zahlt die doppelten Laufkosten. Wer keine hat, merkt Qualitätsunterschiede erst an Kundenbeschwerden.</p>
+<p><strong>Die Schnittstellen sind ähnlich, aber nicht gleich.</strong> Werkzeugaufrufe, strukturierte Ausgaben, Bildverarbeitung, Zwischenspeicherung von Kontext, das Verhalten bei Überlast — an all diesen Stellen unterscheiden sich die Anbieter im Detail. Ein Gateway glättet vieles davon, aber nicht alles, und die Reste sind Sonderfälle im eigenen Code.</p>
+<p><strong>Das Gateway selbst wird zum Risiko.</strong> Damit ein Ausweichmechanismus greift, braucht es eine Stelle, die Fehler erkennt und umschaltet — ein LLM-Gateway. Verbreitete Optionen sind LiteLLM, Bifrost, das Kong AI Gateway, Cloudflare AI Gateway und OpenRouter; alle unterstützen anbieterübergreifende Ausweichketten. Für erste Versuche sind LiteLLM und OpenRouter die zugänglichsten Einstiege, und LiteLLM deckt mit über hundert Anbietern die breiteste Palette ab. Dabei sind zwei Dinge zu beachten. Erstens der Aufwand: Das in Python geschriebene LiteLLM fügt pro Anfrage Hunderte Mikrosekunden bis einige Millisekunden hinzu und verliert bei hoher Nebenläufigkeit spürbar an Leistung — eine Folge der Architektur von Python selbst. Bifrost kommt vergleichsweise auf elf Mikrosekunden bei 5.000 Anfragen pro Sekunde. Zweitens, und wichtiger: Ein selbst betriebenes Gateway ist eine neue zentrale Komponente, durch die jede Anfrage läuft. Man hat den Ausfall des Anbieters gegen den Ausfall der eigenen Umschaltschicht eingetauscht — ein guter Tausch nur dann, wenn diese Schicht auch tatsächlich mit derselben Sorgfalt betrieben wird wie das Produkt selbst.</p>
+<h2>Was die Verfügbarkeitszusagen wirklich abdecken</h2>
+<p>Ein Blick in die Verträge lohnt sich, weil er die Erwartung kalibriert. OpenAIs Scale Tier nennt 99,9 Prozent, Enterprise-Rahmenverträge liegen je nach Vereinbarung zwischen 99,9 und 99,99 Prozent. Der Azure OpenAI Service erbt das Azure-Versprechen von 99,9 Prozent im Monat mit den üblichen Gutschriftstufen: 10 Prozent Gutschrift unterhalb von 99,9 Prozent, 25 Prozent unterhalb von 99 Prozent, 100 Prozent unterhalb von 95 Prozent.</p>
+<p>Drei Einschränkungen sind entscheidend. Erstens fallen <strong>Latenz, Ausfälle der Inhaltsfilter und Änderungen am Tokenizer ausdrücklich nicht</strong> unter diesen Gutschriftrahmen — ein Modell, das noch antwortet, aber viermal so langsam, ist im Sinne des Vertrags verfügbar und im Sinne des Produkts nicht. Zweitens ist eine Gutschrift kein Schadenersatz: Zehn Prozent der Monatsrechnung erstatten die nicht erbrachte Leistung, nicht den entgangenen Umsatz. Drittens liegt die gemessene Wirklichkeit unter der Zusage. Für claude.ai wurde über einen jüngeren Dreißigtagezeitraum eine Verfügbarkeit von 99,32 Prozent ermittelt — knapp fünf Stunden im Monat.</p>
+<p>Fünf Stunden im Monat ist die Zahl, mit der man planen sollte. Nicht 99,9 Prozent.</p>
+<h2>Die Abstufung, die tatsächlich funktioniert</h2>
+<p>Die brauchbare Herangehensweise beginnt nicht bei der Anbieterauswahl, sondern bei einer Sortierung der eigenen Aufrufe. Fast jedes Produkt, das ein Sprachmodell einsetzt, hat drei Sorten davon, und sie verdienen völlig unterschiedliche Antworten.</p>
+<p><strong>Asynchrone Aufrufe</strong> — nächtliche Auswertungen, Anreicherung von Datensätzen, Zusammenfassungen, Klassifizierung im Hintergrund. Hier ist die richtige Antwort eine Warteschlange mit Wiederholungsversuchen und exponentiell wachsenden Wartezeiten. Ein neunzigminütiger Ausfall verschiebt die Verarbeitung um neunzig Minuten und ist damit erledigt. Diese Maßnahme ist die mit Abstand billigste und wirksamste, sie ist in jedem gängigen Aufgabensystem eingebaut, und sie deckt in den meisten Unternehmen den größten Teil des Verbrauchs ab.</p>
+<p><strong>Synchrone, aber unkritische Aufrufe</strong> — Vorschläge, Autovervollständigung, optionale Zusammenfassungen im Nutzerinterface. Hier gehört ein definierter eingeschränkter Betrieb hin: die Funktion sichtbar ausblenden statt eine Fehlermeldung zeigen, ein kleineres oder lokales Modell einsetzen, aus dem Zwischenspeicher antworten. Der Nutzer merkt, dass etwas fehlt, aber nichts ist kaputt.</p>
+<p><strong>Synchrone, kritische Aufrufe</strong> — der Pfad, ohne den das Produkt seinen Zweck verliert. Nur hier lohnt ein zweiter Anbieter, und nur hier rechtfertigen sich die oben beschriebenen Kosten für doppelte Prompts und doppelte Bewertung. In den meisten Produkten ist diese Kategorie deutlich kleiner, als die erste Schätzung im Raum vermuten lässt.</p>
+<p>Diese Reihenfolge ist wichtig, weil sie den Aufwand dorthin lenkt, wo er wirkt. Wer mit dem zweiten Anbieter anfängt, hat die teuerste Maßnahme zuerst ergriffen und die billigste — die Warteschlange — womöglich nie.</p>
+<h2>Drei Fragen für das nächste Quartal</h2>
+<p>Für die Führungsebene lässt sich der ganze Vorgang auf drei Fragen eindampfen, die sich ohne technische Tiefe stellen und beantworten lassen.</p>
+<p><strong>Erstens: Welche unserer Funktionen stehen still, wenn ein Modell neunzig Minuten nicht antwortet — und was sieht der Kunde in diesen neunzig Minuten?</strong> Wenn die Antwort „einen hängenden Ladebalken“ lautet, ist das die erste Baustelle, und sie hat mit Anbieterauswahl nichts zu tun.</p>
+<p><strong>Zweitens: Auf welcher Infrastruktur laufen unsere Anbieter?</strong> Ein Ausweichanbieter, der in derselben Cloud-Region liegt, ist gegen die teuerste Ausfallklasse wirkungslos. Diese Frage gehört in das nächste Anbietergespräch, und die Antwort gehört dokumentiert.</p>
+<p><strong>Drittens: Wann haben wir den Ausweichpfad zuletzt benutzt?</strong> Ein Ausweichmechanismus, der nie im Normalbetrieb läuft, ist kein Ausweichmechanismus, sondern eine Vermutung. Die Unternehmen, bei denen Umschaltung im Ernstfall funktioniert, sind ausnahmslos die, bei denen ein Teil des regulären Verkehrs dauerhaft über den zweiten Weg läuft.</p>
+<p>Der Donnerstag hat keine neue Erkenntnis geliefert. Er hat eine alte sichtbar gemacht: Sprachmodelle sind inzwischen Infrastruktur, und Infrastruktur bewertet man nicht nach dem Verhalten im Normalfall, sondern nach dem Verhalten im Fehlerfall. Der Unterschied zwischen einem Produkt, das einen Anbieterausfall übersteht, und einem, das dabei stehenbleibt, liegt fast nie im Vertrag. Er liegt in der Frage, ob jemand vorher aufgeschrieben hat, was passieren soll, wenn keine Antwort kommt.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.theverge.com/ai-artificial-intelligence/989503/chatgpt-grok-claude-outage-down" rel="noopener noreferrer external" target="_blank">The Verge — ChatGPT, Grok, and Claude all went down at the same time</a></li>
+            
+            <li><a href="https://www.theregister.com/ai-and-ml/2026/09/03/chatgpt-claude-and-grok-all-had-outages-at-the-same-time/5294322" rel="noopener noreferrer external" target="_blank">The Register — ChatGPT, Claude, and Grok all had outages at the same time</a></li>
+            
+            <li><a href="https://www.axios.com/2026/09/03/chatgpt-claude-grok-outages" rel="noopener noreferrer external" target="_blank">Axios — ChatGPT, Claude and Grok all simultaneously hit outages</a></li>
+            
+            <li><a href="https://status.openai.com/" rel="noopener noreferrer external" target="_blank">OpenAI Status</a></li>
+            
+            <li><a href="https://docs.litellm.ai/docs/routing-load-balancing" rel="noopener noreferrer external" target="_blank">LiteLLM — Routing &amp; Load Balancing (Dokumentation)</a></li>
+            
+            <li><a href="https://redresscompliance.com/azure-openai-sla-and-support" rel="noopener noreferrer external" target="_blank">Redress Compliance — Azure OpenAI SLA and Support</a></li>
+            
+            <li><a href="https://www.braintrust.dev/articles/best-llm-routers-2026" rel="noopener noreferrer external" target="_blank">Braintrust — Best LLM routers and model routing platforms in 2026</a></li>
+            
+            <li><a href="https://devopsboys.com/blog/llm-gateway-litellm-multi-provider-routing-production-2026" rel="noopener noreferrer external" target="_blank">DevOpsBoys — LLM Gateway in Production: Multi-Provider Routing + Fallbacks with LiteLLM</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
