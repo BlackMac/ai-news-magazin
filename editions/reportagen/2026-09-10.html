@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwei Jahre Vorwürfe, keine einzige Klage: Was das Distillation-Verbot in Ihrem KI-Vertrag wirklich wert ist</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-10.html">&larr; Zur&uuml;ck zur Ausgabe vom 10. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Zwei Jahre Vorwürfe, keine einzige Klage: Was das Distillation-Verbot in Ihrem KI-Vertrag wirklich wert ist</h1>
+    
+    <p class="reportage-teaser">Drei US-Behörden werfen chinesischen Firmen vor, amerikanische Modelle im industriellen Maßstab abgeschöpft zu haben. Sehr viele Unternehmen tun im Kleinen dasselbe: Sie lassen GPT oder Claude Trainingsdaten für ein eigenes, billigeres Modell erzeugen. Was dabei tatsächlich riskiert wird, steht nicht im Urheberrecht — sondern in einer Klausel, die ein Stanford-Professor für kaum durchsetzbar hält.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-10">10. September 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Was DeepSeek im Großen tut, machen viele Unternehmen im Kleinen</h2>
+<p>Am 8. September haben NSA, FBI und CISA ein gemeinsames Papier veröffentlicht, das sechs chinesische KI-Firmen beim Namen nennt und ihnen vorwirft, amerikanische Spitzenmodelle systematisch ausgelesen zu haben. Distillation sei bei diesen Unternehmen keine Ergänzung der Modellentwicklung, sondern deren „kritischer Kern&quot;.</p>
+<p>Dieser Satz beschreibt, ohne es zu wollen, auch einen gewöhnlichen Vorgang in vielen Produktteams. Ein Unternehmen hat einen funktionierenden Anwendungsfall — Support-Tickets klassifizieren, Verträge zusammenfassen — und stellt fest, dass ein Aufruf an ein Spitzenmodell dafür zu teuer ist. Also lässt man das teure Modell einige Zehntausend Beispielantworten erzeugen, trainiert damit ein kleines Open-Weight-Modell nach und betreibt fortan dieses: Kosten pro Anfrage eine Größenordnung niedriger, Qualität im engen Anwendungsfall nah am Original.</p>
+<p>Derselbe Vorgang, nur ohne gefälschte Konten und Proxy-Netze. Was also riskiert ein Unternehmen, das so etwas tut?</p>
+<h2>Erst die Technik: Warum „Distillation&quot; heute etwas anderes meint als früher</h2>
+<p>Der Begriff stammt aus einem Aufsatz von Geoffrey Hinton, Oriol Vinyals und Jeff Dean von 2015. Ihre Idee: Ein kleines „Schüler&quot;-Modell lernt nicht nur, welche Antwort richtig ist, sondern auch, wie sicher sich ein großes „Lehrer&quot;-Modell bei jeder falschen Alternative war — statt „das ist eine Katze&quot; bekommt es die volle Verteilung: 95 Prozent Katze, vier Prozent Fuchs, ein Prozent Hund. Es ist der Unterschied zwischen einem Code-Review, das „falsch&quot; sagt, und einem, das erklärt, welche Variante beinahe funktioniert hätte.</p>
+<p>Was heute geschieht, trägt denselben Namen und ist etwas anderes. Für echte Soft-Label-Distillation bräuchte man die internen Wahrscheinlichkeiten des Lehrermodells — und genau die geben OpenAI, Anthropic und Google nicht heraus. Stattdessen läuft es über die normale Schnittstelle: Man lässt das teure Modell massenhaft Frage-Antwort-Paare erzeugen und trainiert das eigene darauf. Verfeinert wird das durch Rejection Sampling — nur Antworten, die eine Prüfung bestehen, wandern in den Datensatz.</p>
+<p>Wie gut das funktioniert, zeigte 2023 der Gründungsfall Alpaca: Stanford-Forscher erzeugten aus einem OpenAI-Modell 52.000 Instruktionspaare für unter 500 Dollar und gewannen damit 90 von 179 Blindvergleichen gegen das weit größere Original. Als Faustregel für heute: Ein fünf- bis zwanzigmal kleineres Modell erreicht auf eng umrissenen Aufgaben typischerweise 80 bis 95 Prozent der Leistung seines Lehrers — nicht aber dessen allgemeine Robustheit.</p>
+<h2>Nachweisen lässt es sich kaum</h2>
+<p>Kann ein Anbieter überhaupt merken, dass jemand seine Ausgaben zum Training verwendet? Im Betrieb ja, vor Gericht kaum. Anthropic hat nach eigenen Angaben „mehrere Klassifikatoren und Verhaltens-Fingerabdrucksysteme&quot; gebaut: Massenhaftes Abfragen sieht anders aus als menschliche Nutzung — rund um die Uhr, ohne Pausen, neue Abonnements sofort am Limit. Das erkennt aber Muster im Verkehr, nicht die Herkunft eines fremden Modells.</p>
+<p>Für den Nachweis am fertigen Modell bleiben weiche Indizien. Dass sich Modelle selbst als „ChatGPT&quot; bezeichnen, taugt wenig — Sprachmodelle identifizieren sich unzuverlässig, und das Internet ist so voll KI-erzeugten Textes, dass Konvergenz auch ohne Absicht entsteht. Als Entwickler 2025 stilistische Ähnlichkeiten zwischen DeepSeeks Reasoning-Spuren und Gemini fanden, kommentierte der KI-Forscher Nathan Lambert trocken, an DeepSeeks Stelle würde er selbstverständlich synthetische Daten aus dem besten verfügbaren Modell erzeugen. Am ehesten trägt die Forschung zu „radioaktiven&quot; Wasserzeichen, die sich vom Lehrer auf den Schüler vererben — aber schon das Umformulieren der Ausgaben senkt die Erkennungsrate deutlich.</p>
+<h2>Die Klausel, die niemand liest</h2>
+<p>Wenn der Nachweis schwach ist, bleibt der Vertrag — und hier unterscheiden sich die Anbieter erheblich.</p>
+<p><strong>OpenAI</strong> führt als verbotene Verwendung auf: „Use Output to develop models that compete with OpenAI.&quot; Bemerkenswert ist die Weite: Die Klausel knüpft nicht an Vertrieb an, sondern an Konkurrenz — und was „konkurrierend&quot; heißt, ist nirgends definiert. Bei Verstoß drohen Sperrung und Kontolöschung, für Geschäftskunden zusätzlich eine Freistellungspflicht.</p>
+<p><strong>Anthropic</strong> ist in Abschnitt D.4 konkreter: Kunden dürfen die Dienste nicht nutzen, „to build a competing product or service, including to train competing AI models&quot;. Sanktion ist die Aussetzung des Zugangs.</p>
+<p><strong>Google</strong> formuliert allgemeiner: „You may not use the Services to develop models that compete with the Services.&quot; Eine ausdrückliche Klausel gegen das Trainieren auf Ausgaben als solches fehlt.</p>
+<p><strong>Meta</strong> ist der interessante Fall, weil sich die Lizenz umgekehrt hat. Llama 3 untersagte ausdrücklich, Llama-Ausgaben zur Verbesserung anderer großer Sprachmodelle zu verwenden. Die seit April 2025 geltende Llama-4-Lizenz hat diese Ausschlussklausel gestrichen; an ihre Stelle tritt eine Attributionspflicht — wer mit Llama-Ausgaben ein verbreitetes Modell trainiert, muss dessen Namen mit „Llama&quot; beginnen lassen. Das ist kein Verbot, sondern ein Preis, und er verrät das Geschäftsmodell: Meta verdient nicht am Schnittstellenzugriff, sondern an Verbreitung. Für ein Unternehmen, das unter eigener Marke verkaufen will, kann die Namenspflicht trotzdem unbrauchbar sein. Auch DeepSeeks R1 erlaubt unter MIT-Lizenz Distillation bedingungslos — ausgerechnet das Modell der Firma am Pranger ist einer der unkompliziertesten Lehrer.</p>
+<h2>Ausgaben ohne Urheberrecht: warum am Ende nur der Vertrag zählt</h2>
+<p>Nun die Frage, die in Vorstandssitzungen meist zuerst gestellt wird: Ist das Urheberrecht verletzt?</p>
+<p>Nein — aus einem Grund, der die ganze Debatte verschiebt. Das US Copyright Office hat in Teil 2 seines Berichts von Januar 2025 festgehalten, dass rein maschinell erzeugte Ausgaben ohne wesentlichen menschlichen Beitrag nicht schutzfähig sind. Das deutsche Recht kommt über § 2 Abs. 2 UrhG zum selben Ergebnis: Geschützt sind nur persönliche geistige Schöpfungen, und die bloße Eingabe eines Prompts reicht dafür nicht.</p>
+<p>Die Konsequenz ist für Anbieter unbequem: Wenn die Ausgaben ihrer eigenen Modelle nicht geschützt sind, können sie gegen einen Nachahmer nicht mit Urheberrecht vorgehen. Der Geheimnisschutz greift ebenfalls schwer, denn ein Geschäftsgeheimnis darf nicht öffentlich bekannt sein — schwer zu begründen bei Inhalten, die jeder zahlende Kunde über eine offene Schnittstelle abrufen kann.</p>
+<p>Bleibt der Vertragsbruch. Dazu gibt es eine deutliche Einschätzung von Mark Lemley, Professor an der Stanford Law School: DeepSeek habe nichts genommen, was OpenAI urheberrechtlich geschützt hätte, und Gerichte setzten Wettbewerbsverbote typischerweise nicht durch, wenn kein Schutzrecht besteht, das diesen Wettbewerb verhindern würde. Lemley hält OpenAIs Klausel gegenüber einer Partei wie DeepSeek für wahrscheinlich nicht durchsetzbar — auch, weil DeepSeek über Proxy-Konten möglicherweise nie selbst Vertragspartner wurde. Wer den Vertrag nie geschlossen hat, kann ihn auch nicht brechen.</p>
+<h2>Zwei Jahre Vorwürfe, keine Klage</h2>
+<p>Der aufschlussreichste Befund dieser Recherche ist eine Abwesenheit. Die Vorwürfe gegen DeepSeek laufen seit Anfang 2025; Anthropic legte im Februar 2026 eigene Zahlen vor — über 16 Millionen Anfragen über rund 24.000 betrügerische Konten. Nun kommt ein Papier dreier Sicherheitsbehörden dazu.</p>
+<p>In all dieser Zeit hat kein US-Anbieter Klage erhoben. Nicht OpenAI, nicht Anthropic, nicht Google. Die Reaktion bestand aus Kontosperrungen, Presseerklärungen und Lobbyarbeit. Anthropic fordert in seinem eigenen Beitrag eine „koordinierte Antwort&quot; von Industrie, Cloud-Anbietern und Politik — also gerade nicht den Rechtsweg.</p>
+<p>Das ist keine Nachlässigkeit. Lemley hat mit Peter Henderson von der Princeton University eine Arbeit mit dem programmatischen Titel „The Mirage of Artificial Intelligence Terms of Use Restrictions&quot; vorgelegt; ihr zentraler empirischer Befund lautet, kein Modellanbieter habe je versucht, diese Bedingungen mit Geldstrafen oder einer einstweiligen Verfügung durchzusetzen. Ein Verbot, das nie eingeklagt wird, ist ökonomisch etwas anderes als ein Verbot. Wie unklar das Terrain ist, zeigt zudem ein Nebensatz aus einem anderen Verfahren: Im Prozess Musk gegen Altman räumte Elon Musk im Kreuzverhör ein, xAI habe OpenAI-Modelle teilweise destilliert — und nannte das „standard practice&quot;.</p>
+<h2>Was das für Ihr Unternehmen heißt</h2>
+<p>Daraus folgt ein Risikoprofil, das an einer anderen Stelle wehtut als erwartet. Das reale Risiko ist nicht der Prozess, sondern der Verlust des Schnittstellenzugangs. Ein Unternehmen mit einem direkten, im eigenen Namen abgeschlossenen Vertrag ist identifizierbar, sein Verkehrsmuster ist auffällig, und die Sanktion steht wörtlich im Vertrag: Sperrung, bei OpenAI zusätzlich eine Freistellungspflicht. Wer sein Produkt auf einem Modell betreibt und gleichzeitig dessen Ausgaben abschöpft, kann an einem Dienstagmorgen ohne Vorwarnung ohne Produktion dastehen. Das ist ein Betriebsrisiko, kein Rechtsrisiko — und es trifft ausgerechnet die greifbaren, vertraglich gebundenen Kunden am härtesten.</p>
+<p>Vor einem Distillation-Projekt sollten vier Fragen geklärt sein. Erstens: Welche Bedingungen gelten für das genutzte Lehrermodell — und haben sie sich seit Vertragsschluss geändert? Der Sprung von Llama 3 zu Llama 4 zeigt, dass sich das Vorzeichen umkehren kann. Zweitens: Verbietet die Klausel das Training auf Ausgaben generell oder nur für „konkurrierende&quot; Modelle — und ist ein internes Werkzeug, das man nicht verkauft, überhaupt konkurrierend? Drittens: Läuft der Zugang über einen eigenen Vertrag oder über einen Wiederverkäufer, und wer haftet dann? Und viertens: Wird die Herkunft dokumentiert — welches Modell, welche Prompts, welcher Zeitraum?</p>
+<p>Beim EU AI Act lohnt eine Entwarnung. Er verpflichtet Anbieter von Universal-KI-Modellen seit August 2025, eine Zusammenfassung ihrer Trainingsdaten zu veröffentlichen; der Bußgeldrahmen reicht bis 15 Millionen Euro oder drei Prozent des Weltumsatzes. Die Pflicht trifft aber nur, wer selbst als Anbieter eines solchen Modells gilt — als Orientierung dient, ob die eigene Anpassung mehr als etwa ein Drittel der Rechenleistung des Basistrainings verbraucht. Die allermeisten Distillation-Projekte bleiben deutlich darunter.</p>
+<p>Die letzte Frage kostet Geld, wenn man sie zu spät stellt. In der technischen Due Diligence bei Finanzierungsrunden und Übernahmen ist die Herkunft der Trainingsdaten inzwischen ein eigener Prüfpunkt, und die Formulierung, die dort kursiert, ist eindeutig: „Wir haben öffentlich verfügbare Daten benutzt&quot; sei keine Antwort mehr, sondern ein Warnsignal. Wer die Herkunft belegen kann, verhandelt besser — unabhängig davon, ob je ein Gericht über Distillation entscheidet.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa26-251a" rel="noopener noreferrer external" target="_blank">CISA — China-Based Artificial Intelligence Companies Conducting Industrial-Scale Distillation Campaigns Against U.S. AI Companies (AA26-251A)</a></li>
+            
+            <li><a href="https://openai.com/policies/row-terms-of-use/" rel="noopener noreferrer external" target="_blank">OpenAI — Terms of Use (Klausel „Use Output to develop models that compete with OpenAI“)</a></li>
+            
+            <li><a href="https://www.anthropic.com/legal/commercial-terms" rel="noopener noreferrer external" target="_blank">Anthropic — Commercial Terms of Service (Abschnitt D.4, Use Restrictions)</a></li>
+            
+            <li><a href="https://ai.google.dev/gemini-api/terms" rel="noopener noreferrer external" target="_blank">Google — Gemini API Additional Terms of Service (Use Restrictions)</a></li>
+            
+            <li><a href="https://www.llama.com/llama4/license/" rel="noopener noreferrer external" target="_blank">Meta — Llama 4 Community License (Attributionspflicht statt Distillationsverbot)</a></li>
+            
+            <li><a href="https://www.llama.com/llama3/license/" rel="noopener noreferrer external" target="_blank">Meta — Llama 3 Community License (die frühere, strengere Fassung)</a></li>
+            
+            <li><a href="https://law.stanford.edu/press/openai-has-little-legal-recourse-against-deepseek-tech-law-experts-say/" rel="noopener noreferrer external" target="_blank">Stanford Law School — OpenAI Has Little Legal Recourse Against DeepSeek, Tech Law Experts Say (Mark Lemley)</a></li>
+            
+            <li><a href="https://www.anthropic.com/news/detecting-and-preventing-distillation-attacks" rel="noopener noreferrer external" target="_blank">Anthropic — Detecting and preventing distillation attacks (23.2.2026, 16 Mio. Anfragen über 24.000 Konten)</a></li>
+            
+            <li><a href="https://techcrunch.com/2025/06/03/deepseek-may-have-used-googles-gemini-to-train-its-latest-model/" rel="noopener noreferrer external" target="_blank">TechCrunch — DeepSeek may have used Google&#39;s Gemini to train its latest model (Grenzen des forensischen Nachweises)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/1503.02531" rel="noopener noreferrer external" target="_blank">Hinton, Vinyals, Dean — Distilling the Knowledge in a Neural Network (arXiv:1503.02531)</a></li>
+            
+            <li><a href="https://www.wilmerhale.com/en/insights/blogs/wilmerhale-privacy-and-cybersecurity-law/european-commission-releases-mandatory-template-for-public-disclosure-of-ai-training-data" rel="noopener noreferrer external" target="_blank">WilmerHale — European Commission Releases Mandatory Template for Public Disclosure of AI Training Data (Art. 53 AI Act, Kanzleianalyse)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
