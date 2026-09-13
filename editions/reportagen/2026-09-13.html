@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Datei, die alle anlegen, und der Hebel, der woanders liegt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-13.html">&larr; Zur&uuml;ck zur Ausgabe vom 13. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Die Datei, die alle anlegen, und der Hebel, der woanders liegt</h1>
+    
+    <p class="reportage-teaser">Fast jedes Team legt eine AGENTS.md ins Repository, weil die Anbieter es empfehlen. Eine Untersuchung der ETH Zürich hat nachgemessen: keine bessere Erfolgsquote, aber über 20 Prozent höhere Kosten. Was stattdessen wirkt, ist unbequemer — und stand schon vor der KI auf der Liste.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-13">13. September 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Es gibt einen Handgriff, der in fast jedem Team zum Standard geworden ist, das mit KI-Coding-Agenten arbeitet: Man legt eine Datei ins Repository, die dem Agenten erklärt, wo er ist. <code>AGENTS.md</code> heißt sie meistens, bei Anthropics Claude Code <code>CLAUDE.md</code>, bei anderen Werkzeugen <code>.cursorrules</code>. Darin steht, wie das Projekt aufgebaut ist, welche Befehle die Tests starten, welche Konventionen gelten. Die Anbieter empfehlen das ausdrücklich. Viele Werkzeuge erzeugen die Datei auf Knopfdruck.</p>
+<p>Die naheliegende Annahme dahinter ist, dass mehr Kontext zu besseren Ergebnissen führt. Eine Untersuchung der ETH Zürich hat das erstmals sauber nachgemessen — und findet die Annahme nicht bestätigt.</p>
+<h2>Was gemessen wurde</h2>
+<p>Die Arbeit trägt den Titel „Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?“ und stammt von Thibaud Gloaguen, Niels Mündler und Martin Vechev von der ETH Zürich, gemeinsam mit Mark Müller und Veselin Raychev vom ETH-Spin-off LogicStar.ai. <strong>Ein Hinweis zur Aktualität gehört vorweg:</strong> Die Arbeit erschien am 12. Februar 2026 und wurde am 23. Juni überarbeitet. Sie wird im deutschsprachigen Raum gerade erst breit diskutiert, neu ist sie nicht.</p>
+<p>Die Methodik ist bewusst zweigleisig. Zum einen nahmen die Autoren etablierte Aufgaben aus dem verbreiteten SWE-bench-Korpus — echte Fehlerberichte aus populären Python-Projekten — und legten maschinell erzeugte Kontextdateien dazu. Zum anderen stellten sie eine eigene Sammlung von Aufgaben aus Projekten zusammen, in denen Entwickler bereits von Hand geschriebene Kontextdateien hinterlegt hatten. Getestet wurden mehrere Agenten mit mehreren Modellen, darunter Claude Code, Codex und ein Agent auf Basis eines Qwen-Modells. Erfolg bedeutete: Der erzeugte Patch besteht alle Tests.</p>
+<p>Das Ergebnis steht so im Abstract: <em>„we find that providing context files does not generally improve task success rates, while increasing inference cost by over 20% on average. This observation holds across different LLMs, coding agents, and for both LLM-generated and developer-committed context files.“</em> Keine messbare Verbesserung der Erfolgsquote, aber über 20 Prozent höhere Kosten pro Aufgabe. Und zwar stabil über verschiedene Modelle, verschiedene Agenten und beide Arten von Kontextdateien.</p>
+<h2>Der Befund hinter dem Befund</h2>
+<p>Der eigentlich nützliche Teil ist nicht das Gesamturteil, sondern die Aufschlüsselung. Denn die Studie findet nicht, dass Kontextdateien wirkungslos sind. Sie findet, dass ein bestimmter Inhalt wirkungslos ist: <em>„while instructions in the context files are well followed by coding agents, repository overviews, although popular and recommended by model providers, are not helpful.“</em></p>
+<p>Anweisungen werden also befolgt. Was nicht hilft, ist die Repository-Übersicht — die Beschreibung der Architektur, die Aufzählung der Verzeichnisse, die Erklärung, was das Projekt tut. Genau das ist aber der Inhalt, den automatische Generatoren produzieren, wenn man sie auf ein Projekt richtet.</p>
+<p>Der Grund dafür ist plausibel, wenn man sich klarmacht, was ein Agent tatsächlich tut: Er liest den Code. Eine Beschreibung der Ordnerstruktur ist eine Zusammenfassung von Informationen, die er ohnehin abrufen kann — und sie kostet Platz im Kontextfenster, den sie mit der eigentlichen Aufgabe teilen muss. Die Autoren selbst formulieren die Konsequenz vorsichtig: Kontextdateien seien nützlich, um <em>„non-standard coding practices“</em> festzuhalten, aber <em>„any attempts to improve performance should be rigorously evaluated before deployment.“</em></p>
+<p>Dazu gehört eine Einschränkung, die die Autoren selbst benennen: Getestet wurde fast ausschließlich Python — eine Sprache, die in Trainingsdaten massiv vertreten ist. Bei einem hauseigenen Framework in einer Nischensprache könnte derselbe Text deutlich mehr wert sein.</p>
+<h2>Wo die Datenlage uneinheitlich ist</h2>
+<p>Hier wird es unbequem, und wer die Studie als Beweis zitieren will, sollte das wissen. Eine zweite, unabhängige Arbeit untersuchte dieselbe Frage an echten, bereits zusammengeführten Pull Requests aus zehn Projekten — und kam bei den Kosten zum umgekehrten Ergebnis: niedrigere Laufzeit und geringerer Token-Verbrauch bei vorhandener <code>AGENTS.md</code>. Beide Untersuchungen betrachten von Menschen geschriebene Dateien, kommen aber zu entgegengesetzten Kostenrichtungen. Die Erklärung liegt vermutlich im Aufgabentyp: ein konstruierter Fehlerbehebungs-Benchmark ist nicht dasselbe wie die Arbeit, die ein Team tatsächlich durch seinen Review schiebt.</p>
+<p>Eine Praktikerin der Agentic AI Foundation hat denselben Effekt noch kleiner vorgeführt: Ihr erster Einzeldurchlauf zeigte die Kontextdatei als deutlich langsamer und teurer; der Median aus fünf Durchläufen kehrte das Bild um. Ihr Fazit ist die methodische Lehre dieses ganzen Themas: Ein Durchlauf pro Bedingung <em>„told me the wrong thing“</em>. Agentenläufe sind verrauscht. Wer seine Konfiguration an einem Versuch bewertet, misst Zufall.</p>
+<p><strong>Die überraschendste Bestätigung kommt vom Hersteller.</strong> Anthropics eigene Dokumentation für Claude Code empfiehlt <code>CLAUDE.md</code> weiterhin — warnt aber fast deckungsgleich mit der ETH-Arbeit vor dem Gegenteil von Gründlichkeit: <em>„Keep it concise. For each line, ask: ‚Would removing this cause Claude to make mistakes?‘ If not, cut it. Bloated CLAUDE.md files cause Claude to ignore your actual instructions!“</em> Der vermeintliche Widerspruch zwischen Forschung und Anbieter ist also kleiner als die Schlagzeilen: Beide sagen, dass kurze, nicht ableitbare Anweisungen wirken und lange Erklärtexte schaden.</p>
+<h2>Der größere Zusammenhang: die Produktivitätsfrage</h2>
+<p>Die Kontextdatei ist nur ein Symptom. Dahinter steht die Frage, die in jedem Vorstandsgespräch über KI-Werkzeuge auftaucht — und deren Antwort 2026 schwächer belegt ist, als die Marketingfolien vermuten lassen.</p>
+<p>Die Organisation METR hat dazu die sorgfältigste Messung vorgelegt. Ihre Studie von Anfang 2025 fand, dass erfahrene Entwickler mit KI-Werkzeugen <strong>19 Prozent länger</strong> brauchten — ein Ergebnis, das damals breit zitiert wurde. Im Februar 2026 hat METR nachgelegt und das Vorzeichen gedreht: Für die ursprüngliche Gruppe schätzt man nun einen Zeitgewinn von 18 Prozent, bei neu angeworbenen Entwicklern 4 Prozent. Entscheidend ist aber, was dahinter steht: Die Konfidenzintervalle reichen von −38 bis +9 Prozent beziehungsweise −15 bis +9 Prozent. <strong>Beide schließen die Null ein.</strong> Es gibt also auch in der aktuellen Messung keinen statistisch gesicherten Produktivitätsgewinn — bei gleichzeitig deutlich besserem Punktschätzer als ein Jahr zuvor.</p>
+<p>METR selbst hält den Wert für eine Untergrenze und nennt den Grund: 30 bis 50 Prozent der Teilnehmer gaben an, bestimmte Aufgaben nicht eingereicht zu haben, weil sie sie ohne KI nicht machen wollten. Das Experiment verliert damit systematisch genau jene Aufgaben, bei denen der Gewinn am größten wäre. Wer also eine klare Zahl sucht, findet sie nicht — auch nicht bei denen, die am ehrlichsten messen.</p>
+<p>Zwei weitere Datenpunkte gehören ins Bild, bei beiden ist der Interessenkonflikt zu benennen, weil die Erheber Werkzeuge in diesem Markt verkaufen. Die Codeanalyse-Firma GitClear berichtet aus 623 Millionen untersuchten Codeänderungen über drei Jahre einen Anstieg duplizierter Codeblöcke um 81 Prozent und einen Rückgang verschobenen, also aufgeräumten Codes von 21 auf 3,8 Prozent. Der Anbieter CodeRabbit zählte in 470 Pull Requests bei KI-mitverfasstem Code 10,83 Befunde pro Änderung gegenüber 6,45 bei rein menschlichem, mit einem Schwerpunkt bei Sicherheitsthemen.</p>
+<p>Und selbst die Gegenmaßnahme hat eine Kehrseite: Eine Arbeit mit dem Titel „Building to the Test“ zeigt, dass Agenten auf das optimieren, was geprüft wird — bei einer Portierung erreichten Modelle nahezu perfekte Testergebnisse, obwohl zentrale Funktionalität fehlte.</p>
+<h2>Was daraus für Entscheidungen folgt</h2>
+<p>Drei Schlüsse lassen sich aus dieser Quellenlage ziehen, ohne sie zu überdehnen.</p>
+<p><strong>Erstens: Die Kontextdatei ist kein Hebel, sondern Hygiene.</strong> Wer Produktivitätsgewinne erwartet, weil eine <code>AGENTS.md</code> im Repository liegt, erwartet das Falsche — besonders, wenn die Datei automatisch erzeugt wurde. Sinnvoll ist sie für das, was ein Agent nicht aus dem Code ableiten kann: der ungewöhnliche Build-Befehl, die Konvention, die nirgends dokumentiert ist, die Bibliothek, die man bewusst nicht benutzt. Alles andere konkurriert mit der Aufgabe um Aufmerksamkeit.</p>
+<p><strong>Zweitens: Der eigentliche Hebel ist die Prüfbarkeit.</strong> Anthropics Dokumentation bringt es auf einen Satz, der weniger nach Werkzeug und mehr nach Organisation klingt: <em>„Claude stops when the work looks done. Without a check it can run, ‚looks done‘ is the only signal available.“</em> Ein Agent ohne ausführbaren Prüfer liefert etwas, das fertig aussieht. Ein Team, dessen Testsuite langsam, lückenhaft oder unzuverlässig ist, wird von Agenten nicht schneller — es wird nur schneller mit unklarem Ergebnis. Das ist die unromantische Nachricht an Tech Leads: Die Investition, die Agenten produktiv macht, ist oft die Testinfrastruktur, die schon vor der KI auf der Liste stand.</p>
+<p><strong>Drittens: Konfigurationsentscheidungen brauchen Messung, nicht Meinung.</strong> Die Kontextdatei ist das erste Beispiel einer neuen Klasse von Einstellungen — Prompts, Regelwerke, Subagenten-Zuschnitte —, die sich anfühlen wie Konfiguration, aber wirken wie Code. Wer sie ändert, ohne einen wiederholten Messlauf dagegen zu halten, trifft eine Entscheidung auf Basis eines Einzelversuchs. Genau davor warnen in dieser Recherche sowohl die Forschung als auch der Hersteller als auch die Praktikerin.</p>
+<p>Über eine andere Seite derselben Datei haben wir in unserer <a href="/editions/reportagen/2026-08-28.html">Reportage vom 28. August</a> geschrieben: dort ging es darum, dass eine Konvention für KI-Agenten zur Lieferkette für fremden Code werden kann. Beide Befunde zusammen ergeben ein nüchternes Bild. Die Datei, über die am meisten geredet wird, leistet für die Leistung am wenigsten — und trägt dabei ein Risiko, über das am wenigsten geredet wird.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://arxiv.org/abs/2602.11988" rel="noopener noreferrer external" target="_blank">arXiv:2602.11988 — Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents? (Gloaguen, Mündler, Müller, Raychev, Vechev; ETH Zürich und LogicStar.ai; v1 12.2.2026, v2 23.6.2026, Abstract selbst gelesen)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2601.20404" rel="noopener noreferrer external" target="_blank">arXiv:2601.20404 — On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents (Gegenbefund zur Kostenrichtung)</a></li>
+            
+            <li><a href="https://code.claude.com/docs/en/best-practices" rel="noopener noreferrer external" target="_blank">Anthropic — Best practices for Claude Code (Herstellerempfehlung, die der Studie in der Sache zustimmt)</a></li>
+            
+            <li><a href="https://metr.org/blog/2026-02-24-uplift-update/" rel="noopener noreferrer external" target="_blank">METR — We are Changing our Developer Productivity Experiment Design (24.2.2026, Quelle der Produktivitätszahlen und Konfidenzintervalle, selbst gelesen)</a></li>
+            
+            <li><a href="https://www.gitclear.com/the_ai_code_quality_maintainability_gap" rel="noopener noreferrer external" target="_blank">GitClear — The Maintainability Gap: 2026 AI Code Quality Research (kommerzieller Anbieter, Interessenkonflikt im Text benannt)</a></li>
+            
+            <li><a href="https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report" rel="noopener noreferrer external" target="_blank">CodeRabbit — State of AI vs Human Code Generation Report (kommerzieller Anbieter, Interessenkonflikt im Text benannt)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2606.28430" rel="noopener noreferrer external" target="_blank">arXiv:2606.28430 — Building to the Test: Coding Agents Deliver What You Check, Not What You Requested</a></li>
+            
+            <li><a href="https://aaif.io/blog/measuring-agents-md-what-five-runs-show-that-one-doesn-t" rel="noopener noreferrer external" target="_blank">Agentic AI Foundation — Measuring AGENTS.md: Five-Run Benchmark Results (Andrea Griffiths, Quelle der Median-Methodik)</a></li>
+            
+            <li><a href="https://t3n.de/news/kontextdateien-agents-md-ki-coding-studie-eth-zuerich-ineffizient-1760349/" rel="noopener noreferrer external" target="_blank">t3n — Studie widerlegt Coding-Mythos: Agents.md bringt keine Verbesserung (Noëlle Bölling, 12.9.2026, deutscher Aufgriff; im RSS-Feed unter abweichendem Titel)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
