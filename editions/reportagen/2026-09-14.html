@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Eingriff, der zwanzig Minuten dauert: Wie Abliteration Sicherheitsschranken aus offenen Modellen schneidet — und warum das Ihr Compliance-Problem werden kann</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-14.html">&larr; Zur&uuml;ck zur Ausgabe vom 14. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Eingriff, der zwanzig Minuten dauert: Wie Abliteration Sicherheitsschranken aus offenen Modellen schneidet — und warum das Ihr Compliance-Problem werden kann</h1>
+    
+    <p class="reportage-teaser">Ein Startup in Palo Alto verkauft ein Modell, das nie ablehnt. Die Technik dahinter ist seit 2024 bekannt, läuft auf einer Gaming-Grafikkarte und braucht keine halbe Stunde. Für Unternehmen, die offene Modelle feinjustieren, hängt an dieser Technik eine Frage, die im EU-Recht überraschend präzise beantwortet ist.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-14">14. September 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Während die Chefs der großen Labore diese Woche öffentlich darüber stritten, ob man die Entwicklung künstlicher Intelligenz drosseln müsse, verkauft ein Unternehmen in Palo Alto das genaue Gegenteil. Die Firma heißt Abliteration, und ihr Produkt ist ein Sprachmodell, das keine Anfrage ablehnt. Ende August hat sie die zweite Fassung veröffentlicht, aufgesetzt auf das offene chinesische Modell GLM-5.3. Gegenüber Gizmodo beschreibt das Startup seinen Zweck so: Es erledige die Arbeit in offensiver Cybersicherheit, im Red Teaming und beim Testen von Agenten, die andere Modelle verweigern.</p>
+<p>Das ist ein Geschäftsmodell, über das man streiten kann, und es wird gestritten. Interessanter für alle, die selbst mit offenen Modellen arbeiten, ist aber etwas anderes: Die Technik, die dieses Produkt möglich macht, ist weder neu noch teuer noch schwer. Sie ist zwei Jahre alt, quelloffen dokumentiert und läuft auf einer Grafikkarte, wie sie in besseren Spiele-PCs steckt.</p>
+<h2>Eine einzige Richtung</h2>
+<p>Der Ausgangspunkt ist eine Entdeckung aus dem Juni 2024. Eine Gruppe um Andy Arditi veröffentlichte eine Arbeit mit dem Titel „Refusal in Language Models Is Mediated by a Single Direction“. Die Kernaussage: Die Fähigkeit eines Modells, eine Anfrage abzulehnen, hängt nicht an tausend über das Netz verteilten Regeln. Sie lässt sich auf eine <strong>einzige Richtung</strong> im internen Zahlenraum des Modells zurückführen — geprüft an dreizehn offenen Modellen bis 72 Milliarden Parameter.</p>
+<p>Man kann sich das so vorstellen: Ein Sprachmodell übersetzt jede Eingabe in eine sehr lange Zahlenreihe, einen Punkt in einem Raum mit tausenden Dimensionen. Verschiedene Eigenschaften eines Textes entsprechen verschiedenen Richtungen in diesem Raum — es gibt eine Richtung, die grob mit „förmlich gegenüber salopp“ zu tun hat, und eben auch eine, die mit „das sollte ich ablehnen“ zu tun hat. Die Forscher fanden diese Richtung, indem sie verglichen, wie sich die internen Zahlen bei schädlichen gegenüber harmlosen Eingaben unterscheiden, und die Differenz bildeten.</p>
+<p>Und dann taten sie das Entscheidende: Sie rechneten diese Richtung aus den Gewichten des Modells <strong>heraus</strong>. Der Fachbegriff dafür ist Orthogonalisierung; das Kunstwort für das Verfahren, gebildet aus „ablation“ und „obliterate“, lautet Abliteration.</p>
+<h2>Warum das etwas anderes ist als ein Jailbreak</h2>
+<p>Für die Praxis ist die Abgrenzung zu zwei bekannteren Begriffen wichtig, weil sie die Risikolage völlig verändert.</p>
+<p>Ein <strong>Jailbreak</strong> ist ein Trick auf der Eingabeseite: Man formuliert die Anfrage so geschickt, dass das Modell die Ablehnung vergisst. Das Modell bleibt unverändert, der Anbieter kann den Trick morgen abstellen, und jede neue Modellversion macht die Mühe zunichte.</p>
+<p><strong>Feinjustierung</strong> (Fine-Tuning) ist Nachtraining: Man zeigt dem Modell neue Beispiele und ändert dadurch seine Gewichte. Das ist wirksam, aber aufwendig — man braucht Daten, Rechenzeit und Erfahrung.</p>
+<p>Abliteration liegt dazwischen und ist deshalb so folgenreich: Sie verändert die Gewichte dauerhaft wie eine Feinjustierung, braucht dafür aber fast keine Daten und fast keine Rechenzeit. Es wird nichts antrainiert, sondern etwas herausgerechnet. Das Ergebnis ist kein Modell, das zum Missbrauch überredet wurde, sondern eines, dem die Fähigkeit zur Ablehnung operativ fehlt.</p>
+<p>Wie niedrig die Schwelle inzwischen liegt, zeigt ein quelloffenes Werkzeug namens Heretic, das die Prozedur vollautomatisch ausführt und die nötigen Parameter selbst optimiert. Nach Angaben seiner Dokumentation dauert das Entfernen der Schranken bei einem Vier-Milliarden-Parameter-Modell auf einer einzelnen RTX 3090 rund zwanzig bis dreißig Minuten, ohne dass ein Mensch nachjustieren muss. Das Projekt hat über 31.000 Sterne auf GitHub gesammelt.</p>
+<h2>Der Preis, den das Modell zahlt</h2>
+<p>Kostenlos ist der Eingriff nicht, und die Belege dafür stammen von den Urhebern selbst. Maxime Labonne, der das Verfahren 2024 populär machte, schreibt in seiner Anleitung unumwunden, man beobachte beim abliterierten Modell einen Leistungsabfall über sämtliche Benchmarks hinweg. Um ihn auszugleichen, trainierte er anschließend noch einmal nach — knapp sieben Stunden auf sechs professionellen Grafikkarten. Die Reparatur ist also deutlich teurer als der Eingriff.</p>
+<p>Aufschlussreich ist auch, <em>wo</em> der Schaden entsteht. Die Arbeit von Arditi und Kollegen findet, dass die meisten Wissens- und Rechenaufgaben nach dem Eingriff praktisch unverändert gelöst werden — mit einer systematischen Ausnahme: Bei TruthfulQA, einem Test auf Wahrhaftigkeit und Resistenz gegen verbreitete Irrtümer, sinkt die Genauigkeit durchgängig. Die Autoren erklären das damit, dass die Fragen dort Themen wie Fehlinformation, Stereotype und Verschwörungserzählungen berühren — also nah an dem Gelände liegen, aus dem die Ablehnungsrichtung herausgeschnitten wurde. Wer Schranken entfernt, entfernt offenbar ein Stück Vorsicht mit, und zwar genau dort, wo Vorsicht inhaltlich nützlich wäre.</p>
+<p>Das Bild hat sich 2026 verfeinert. Eine Arbeit vom Februar zeigt, dass es nicht <em>die eine</em> Ablehnungsrichtung gibt, sondern geometrisch unterschiedliche für verschiedene Kategorien — die sich praktisch aber wie ein gemeinsamer Regler verhalten. Und eine Untersuchung vom Mai, die den Nutzen für legitime Sicherheitsarbeit misst, liefert ein ernüchterndes Ergebnis: Das grobe Herausrechnen der Ablehnungsrichtung hob den Sicherheitsnutzen nur von 0,46 auf 0,50, ließ aber das unsichere Befolgen problematischer Anweisungen von 0,10 auf 0,47 hochschnellen. Eine sorgfältige, aufgabenspezifische Feinjustierung erreichte im selben Test 0,87 bei nur 0,13. Für den erklärten Zweck — Sicherheitsforschung — ist Abliteration also nicht einmal die beste Methode. Sie ist nur die bequemste.</p>
+<h2>Was daraus geworden ist</h2>
+<p>Verbreitung lässt sich nur als Untergrenze angeben: Eine Abfrage der Hugging-Face-Schnittstelle nach dem Stichwort „abliterated“ läuft ins Ergebnislimit von 1.000 Treffern. Das meistgeladene Modell in dieser Stichprobe kommt auf über 2,6 Millionen Downloads. Eine systematische Untersuchung aus dem Jahr 2025 identifizierte über 11.000 solcher Modelle auf der Plattform, darunter eines mit mehr als 19 Millionen Installationen, und wies ihren Einsatz in Hunderten schädlicher Anwendungen nach.</p>
+<p>Dem steht ein Problem gegenüber, das man nicht wegdiskutieren sollte, weil es die Nachfrage überhaupt erst erzeugt: Kommerzielle Modelle lehnen zu viel ab. Ein Benchmark aus dem Jahr 2025 mit 1.855 sorgfältig konstruierten, harmlosen Testfällen misst über zehn verschiedene Modelle hinweg eine durchschnittliche Fehlablehnungsrate von rund 64 Prozent. Wer in einem Krankenhaus, einer Kanzlei oder einem Sicherheitsteam arbeitet, kennt das: Die Anfrage ist legitim, das Modell weigert sich trotzdem. Abliteration ist die falsche Antwort auf ein echtes Problem.</p>
+<h2>Der Punkt, an dem es Ihr Problem wird</h2>
+<p>Für Unternehmen in Europa stellt sich eine sehr konkrete Frage: Wer ein offenes Modell verändert und einsetzt — wird er dadurch selbst zum Anbieter im Sinne der KI-Verordnung, mit allen Dokumentations- und Transparenzpflichten?</p>
+<p>Die Antwort ist überraschend präzise, und sie steht nicht im Gesetz, sondern in den Leitlinien der EU-Kommission zum Anwendungsbereich der GPAI-Pflichten. Wir haben das Dokument im Volltext gelesen. Dort heißt es, ein nachgelagerter Bearbeiter werde nur dann zum Anbieter des veränderten Modells, wenn die Änderung zu einer „significant change in the model's generality, capabilities, or systemic risk“ führt. Und dann folgt ein Maßstab, mit dem man tatsächlich rechnen kann: Als Anhaltspunkt gilt, dass die für die Änderung aufgewendete Rechenleistung <strong>größer als ein Drittel der Trainingsrechenleistung des Originalmodells</strong> sein muss. Ist dieser Wert nicht bekannt, tritt an seine Stelle ein Drittel der einschlägigen Schwelle — bei einem Ausgangsmodell mit systemischem Risiko also ein Drittel von 10²⁵ FLOP.</p>
+<p>Was das praktisch bedeutet, ist bemerkenswert: Weder eine gewöhnliche Feinjustierung noch eine Abliteration kommt dieser Schwelle auch nur nahe. Zwanzig Minuten auf einer einzelnen Grafikkarte sind gegenüber dem Training eines Spitzenmodells keine messbare Größe. Wer ein offenes Modell anpasst, wird dadurch in aller Regel <strong>nicht</strong> zum Anbieter eines neuen Allzweckmodells.</p>
+<p>Die Entwarnung hat allerdings eine scharfe Kante, und sie liegt an anderer Stelle. Artikel 25 der Verordnung bestimmt, dass zum Anbieter eines <strong>Hochrisiko-Systems</strong> wird, wer seinen Namen oder seine Marke darauf setzt oder es wesentlich verändert. Das ist eine andere Vorschrift mit einem anderen Bezugspunkt: nicht das Modell, sondern das fertige System in einem der besonders regulierten Anwendungsfälle. Rechenleistung spielt dabei keine Rolle. Wer also ein angepasstes offenes Modell in eine Bewerbervorauswahl, eine Kreditwürdigkeitsprüfung oder eine Bildungsanwendung einbaut und sein Logo darüber setzt, ist Anbieter — unabhängig davon, wie billig die Anpassung war.</p>
+<h2>Was zu tun bleibt</h2>
+<p>Aus alldem folgen drei Dinge, die keine Vermutung sind.</p>
+<p>Erstens: Sicherheitsverhalten ist in offenen Modellen nicht fest verbaut, sondern eine dünne, gezielt entfernbare Schicht. Wer ein offenes Modell einsetzt, sollte seine Schranken deshalb nicht als Eigenschaft des Modells behandeln, sondern als etwas, das in der eigenen Anwendung noch einmal geprüft gehört. Das gilt auch ohne böse Absicht — denn wenn sich Ablehnungsverhalten in zwanzig Minuten gezielt entfernen lässt, ist plausibel, dass gewöhnliches Nachtraining es versehentlich beschädigt.</p>
+<p>Zweitens: Die Herkunftskette eines Modellgewichts ist eine Beschaffungsfrage. Zwischen „wir nutzen GLM-5.3“ und „wir nutzen eine Variante von GLM-5.3 aus einem Repository mit 300 Downloads“ liegt ein Unterschied, den man an der Modellkarte nicht immer sieht. Ein Prüfschritt, der die Quelle der Gewichte festhält, kostet wenig.</p>
+<p>Drittens: Die regulatorische Trennlinie verläuft nicht dort, wo die meisten sie vermuten. Nicht der Eingriff ins Modell macht Sie zum Anbieter, sondern der Anwendungsfall und das Logo auf dem Produkt. Die entscheidende Frage in Ihrem Haus lautet deshalb nicht „haben wir das Modell verändert?“, sondern „wofür setzen wir es ein, und steht unser Name darauf?“</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://arxiv.org/abs/2406.11717" rel="noopener noreferrer external" target="_blank">Arditi et al. — Refusal in Language Models Is Mediated by a Single Direction (arXiv 2406.11717)</a></li>
+            
+            <li><a href="https://huggingface.co/blog/mlabonne/abliteration" rel="noopener noreferrer external" target="_blank">Maxime Labonne — Uncensor any LLM with abliteration (Hugging Face, Juni 2024)</a></li>
+            
+            <li><a href="https://github.com/p-e-w/heretic" rel="noopener noreferrer external" target="_blank">Heretic — Fully automatic censorship removal for language models (GitHub, p-e-w)</a></li>
+            
+            <li><a href="https://ec.europa.eu/newsroom/dae/redirection/document/118340" rel="noopener noreferrer external" target="_blank">Europäische Kommission — Guidelines on the scope of the obligations for general-purpose AI models (PDF, Volltext gelesen)</a></li>
+            
+            <li><a href="https://artificialintelligenceact.eu/article/25/" rel="noopener noreferrer external" target="_blank">EU AI Act, Artikel 25 — Verantwortlichkeiten entlang der KI-Wertschöpfungskette</a></li>
+            
+            <li><a href="https://gizmodo.com/while-ai-industry-frets-over-safeguards-one-company-is-building-a-model-that-doesnt-say-no-2000806494" rel="noopener noreferrer external" target="_blank">Gizmodo — While AI Industry Frets Over Safeguards, One Company Is Building a Model That ‚Doesn’t Say No‘ (2.9.2026)</a></li>
+            
+            <li><a href="https://abliteration.ai/blog/introducing-abliterated-model-large-v2" rel="noopener noreferrer external" target="_blank">abliteration.ai — Introducing abliterated-model-large-v2 (29.8.2026)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2508.12622" rel="noopener noreferrer external" target="_blank">Consiglieres in the Shadow: Uncensored LLMs in Cybercrimes (arXiv 2508.12622)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2508.11222" rel="noopener noreferrer external" target="_blank">ORFuzz — Testing Over-Refusal in LLMs (arXiv 2508.11222)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2605.17413" rel="noopener noreferrer external" target="_blank">Ablating Safety: Mechanisms for Removing Alignment for Security Applications (arXiv 2605.17413)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2602.02132" rel="noopener noreferrer external" target="_blank">There Is More to Refusal in Large Language Models than a Single Direction (arXiv 2602.02132)</a></li>
+            
+            <li><a href="https://t3n.de/news/abliteration-ki-startup-1761286/" rel="noopener noreferrer external" target="_blank">t3n — Dieses neue KI-Modell macht möglich, was andere bewusst blockieren (13.9.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
