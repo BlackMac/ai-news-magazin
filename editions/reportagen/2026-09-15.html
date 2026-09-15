@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eine Million Token, und trotzdem vergisst es die Mitte: Warum das beworbene Kontextfenster nicht die nutzbare Kontextlänge ist</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-15.html">&larr; Zur&uuml;ck zur Ausgabe vom 15. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Eine Million Token, und trotzdem vergisst es die Mitte: Warum das beworbene Kontextfenster nicht die nutzbare Kontextlänge ist</h1>
+    
+    <p class="reportage-teaser">Alle großen Anbieter werben inzwischen mit einer Million Token. Ihre eigene Dokumentation räumt ein, dass die Qualität lange vorher nachlässt. Wer darauf ein Produkt baut, sollte den Unterschied zwischen beworbener und effektiver Kontextlänge kennen — und wissen, wie man ihn selbst misst.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-15">15. September 2026</time>
+         &middot; 9 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Eine Million Token sind ungefähr 750.000 Wörter. Das ist der gesamte „Herr der Ringe&quot; plus Anhänge, oder ein mittelgroßes Produkthandbuch samt allen Änderungsanträgen der letzten fünf Jahre. Genau damit werben inzwischen alle großen Anbieter, und genau so verkauft es sich intern: Wir müssen die Daten gar nicht mehr aufbereiten, wir werfen einfach alles rein.</p>
+<p>Die Rechnung geht nicht auf, und das Bemerkenswerte ist, dass die Anbieter das selbst dokumentieren. Man muss nur an der richtigen Stelle nachlesen.</p>
+<h2>Was das Kontextfenster eigentlich ist</h2>
+<p>Zwei Begriffe vorweg, damit der Rest klar wird.</p>
+<p>Ein <strong>Token</strong> ist die Einheit, in der ein Sprachmodell rechnet — im Deutschen grob ein halbes bis ganzes Wort. Das <strong>Kontextfenster</strong> ist alles, was das Modell bei einer einzelnen Anfrage gleichzeitig vor sich hat: die Systemanweisung, die bisherige Unterhaltung, die angehängten Dokumente und die Antwort, die gerade entsteht. Anthropic beschreibt es in der eigenen Dokumentation treffend als „Arbeitsgedächtnis&quot;.</p>
+<p>Und dann folgt im selben Absatz der Satz, um den es in dieser Reportage geht: „more context isn't automatically better. As token count grows, accuracy and recall degrade, a phenomenon known as <strong>context rot</strong>.&quot; Das steht nicht in einem kritischen Fachartikel, sondern in der Produktdokumentation des Anbieters, direkt neben der Angabe, dass eine Million Token die Voreinstellung sind.</p>
+<h2>Der Test, der zu leicht ist</h2>
+<p>Der Standardnachweis für lange Kontexte heißt „Needle in a Haystack&quot;: Man versteckt einen Satz in einem sehr langen Text und fragt danach. Fast alle aktuellen Modelle bestehen das nahezu perfekt — Google nennt in der eigenen Anleitung rund 99 Prozent.</p>
+<p>Das Problem ist, dass dieser Test wenig mit dem zu tun hat, was Anwendungen tatsächlich verlangen. Eine Analogie: Es ist der Unterschied zwischen „Finde in diesem Aktenordner die Seite, auf der das Wort <em>Kündigungsfrist</em> steht&quot; und „Lies den Ordner und sag mir, ob sich die Kündigungsfristen in den drei Nachträgen widersprechen&quot;. Das Erste ist Suchen. Das Zweite ist Arbeiten.</p>
+<p>Zwei Untersuchungen haben genau diese Lücke vermessen.</p>
+<p><strong>NoLiMa</strong> (ICML 2025) baute den Test so um, dass Frage und gesuchte Stelle möglichst <em>keine</em> wörtliche Überschneidung haben — das Modell muss die Verbindung also erschließen, statt sie zu finden. Getestet wurden 13 Modelle, die alle mindestens 128.000 Token beherrschen. Das Ergebnis: Bei kurzen Eingaben arbeiten sie gut, bei wachsender Länge bricht die Leistung ein. „At 32K, for instance, 11 models drop below 50% of their strong short-length baselines.&quot; Bei GPT-4o, einem der besten Modelle im Feld, fiel die Trefferquote von 99,3 auf 69,7 Prozent — bei einem Bruchteil des beworbenen Fensters.</p>
+<p><strong>HELMET</strong> (ICLR 2025) prüfte 59 Modelle über sieben anwendungsnahe Aufgabenkategorien und kam zu einem Befund, den man Anbieterangaben künftig entgegenhalten sollte: „synthetic tasks like NIAH do not reliably predict downstream performance&quot;. Und weiter: Während fast alle Modelle perfekte Needle-Werte erreichen, fallen offene Modelle deutlich zurück, sobald Aufgaben echtes Durchdenken des gesamten Kontexts oder das Befolgen komplexer Anweisungen verlangen — „the gap widens as length increases&quot;.</p>
+<p>Der dritte Baustein kommt von Chroma, das 18 Modelle — darunter GPT-4.1, Claude 4, Gemini 2.5 und Qwen3 — auf sehr einfache Aufgaben bei wachsender Eingabelänge losließ. Der Kernsatz: Modelle nutzen ihren Kontext nicht gleichmäßig, „their performance grows increasingly unreliable as input length grows&quot;. Besonders unangenehm ist ein Nebenbefund: Schon ein einzelner ablenkender, thematisch naher Falschtreffer senkt die Qualität messbar — und geordnete, logisch strukturierte Textsammlungen schnitten schlechter ab als zufällig gemischte. Reale Firmendokumente sind logisch strukturiert.</p>
+<h2>Warum das passiert</h2>
+<p>Anthropic benennt die Ursachen im eigenen Technikblog erfreulich unverblümt, und sie sind auch ohne Mathematik verständlich.</p>
+<p><strong>Erstens die Architektur.</strong> In einem Transformer darf jedes Token auf jedes andere achten. Bei <em>n</em> Token ergibt das <em>n²</em> Beziehungspaare. Anthropic schreibt: „As its context length increases, a model's ability to capture these pairwise relationships gets stretched thin, creating a natural tension between context size and attention focus.&quot; Bildlich: Die Aufmerksamkeit ist ein Budget fester Größe. Verdoppelt man die Textmenge, wird dasselbe Budget auf viermal so viele mögliche Bezüge verteilt.</p>
+<p><strong>Zweitens die Trainingsdaten.</strong> Modelle lernen überwiegend an kurzen Texten. Für sehr weit auseinanderliegende Bezüge gibt es schlicht weniger Übungsmaterial — die Fähigkeit ist deshalb schwächer ausgebildet als die Fensterangabe vermuten lässt.</p>
+<p><strong>Drittens die Positionskodierung.</strong> Die Verfahren, mit denen ein Modell überhaupt weiß, an welcher Stelle ein Token steht, lassen sich auf längere Sequenzen strecken. Das ermöglicht große Fenster, verschlechtert aber das Positionsgefühl. Der klassische Nebeneffekt ist seit 2023 als „Lost in the Middle&quot; bekannt: Was am Anfang und am Ende steht, wird zuverlässiger genutzt als das, was in der Mitte liegt.</p>
+<h2>Was die Anbieter selbst einräumen</h2>
+<p>Das Ehrlichste steht in der Gemini-Dokumentation. Nach der Feier der 99-Prozent-Werte folgt die Einschränkung: „In cases where you might have multiple ‚needles' or specific pieces of information you are looking for, the model does not perform with the same accuracy. Performance can vary to a wide degree depending on the context.&quot;</p>
+<p>Genau das ist der typische Unternehmensfall. Niemand sucht eine Zahl in einem Vertrag; man sucht alle Klauseln zu einem Thema über zwölf Dokumente hinweg und will wissen, ob sie zusammenpassen. Für diesen Fall sagt der Anbieter selbst keine verlässliche Qualität zu.</p>
+<h2>Die Rechnung daneben</h2>
+<p>Die Kostenseite hat sich 2026 entspannt — und das macht die Qualitätsfrage wichtiger, nicht unwichtiger. Anthropic hält in der Dokumentation fest, dass bei allen Modellen mit Millionen-Fenster diese Größe die Voreinstellung ist: kein Beta-Header, und „long-context requests are billed at standard pricing&quot;. Der frühere Aufschlag für lange Anfragen ist weg.</p>
+<p>Was bleibt, ist die Latenz. Bevor das erste Wort einer Antwort erscheint, muss das Modell die gesamte Eingabe verarbeiten (das sogenannte Prefill). Bei sehr langen Prompts dominiert dieser Schritt die wahrgenommene Wartezeit. Prompt-Caching hilft erheblich, aber nur, wenn der vordere Teil des Prompts zwischen Anfragen gleich bleibt.</p>
+<p>Die Branche arbeitet an dem Problem, und zwar an der Wurzel. DeepSeek beschreibt in der Veröffentlichung zu V4 vom 26. April 2026 eine hybride Aufmerksamkeitsarchitektur, die den Zwischenspeicher zusammenfasst statt ihn vollständig vorzuhalten. Die Zahl aus dem Papier: Bei einer Million Token benötigt die Pro-Variante nur noch 27 Prozent der Rechenoperationen pro Token und 10 Prozent des Zwischenspeichers verglichen mit dem Vorgänger V3.2. Die Begründung der Autoren ist die interessante Stelle — das mache es erst praktikabel, Millionen-Kontexte „routinely&quot; zu nutzen. Man darf das als Eingeständnis lesen, dass es das bis dahin nicht war.</p>
+<h2>Was das für Agenten bedeutet</h2>
+<p>Am härtesten trifft die Sache Systeme, die über viele Schritte laufen. Ein Agent sammelt mit jedem Werkzeugaufruf Kontext an: Suchergebnisse, Dateiinhalte, Fehlermeldungen. Das Fenster füllt sich, ohne dass jemand es beabsichtigt hätte.</p>
+<p>Anthropic hat dafür Zahlen veröffentlicht, die zu den nützlichsten der ganzen Debatte gehören. In einer Auswertung über 100 Schritte einer Websuche-Aufgabe senkte allein das automatische Entfernen veralteter Werkzeugergebnisse den Tokenverbrauch um <strong>84 Prozent</strong> — und verbesserte gleichzeitig die Aufgabenleistung um <strong>29 Prozent</strong>. Kombiniert mit einem externen Gedächtnis waren es <strong>39 Prozent</strong> gegenüber der Ausgangslage. Der entscheidende Nebensatz: Ohne dieses Aufräumen scheiterten die Abläufe schlicht an der Kontexterschöpfung.</p>
+<p>Weniger Kontext lieferte also <em>bessere</em> Ergebnisse. Das ist der Punkt, an dem die Intuition „mehr Fenster gleich mehr Können&quot; endgültig kippt.</p>
+<h2>Was ein Tech Lead konkret tun sollte</h2>
+<p>Vier Schritte, alle aus den oben zitierten Arbeiten ableitbar und in wenigen Tagen umsetzbar.</p>
+<p><strong>Die eigene effektive Länge bestimmen, statt die beworbene zu glauben.</strong> Das RULER-Verfahren von NVIDIA hat dafür eine brauchbare Konvention geprägt: Man definiert eine Qualitätsschwelle und nennt „effektiv&quot; die größte Länge, bei der das Modell sie noch hält. Übertragen heißt das: Testfälle aus echten Produktionsdaten bauen, bei 8K, 16K, 32K, 64K messen, eine Schwelle festlegen — und diese Zahl, nicht die Herstellerangabe, als Produktgrenze ins Design schreiben.</p>
+<p><strong>Richtig testen.</strong> Keine Einzelfakt-Suche. Die Testfälle müssen mehrere verstreute Informationen verknüpfen, die nicht wörtlich in der Frage vorkommen (das NoLiMa-Prinzip), und sie müssen thematisch nahe Falschinformationen enthalten (das Chroma-Prinzip). Ein Test, den das Modell zu 99 Prozent besteht, misst nichts.</p>
+<p><strong>Reihenfolge nutzen.</strong> Google empfiehlt in der eigenen Anleitung ausdrücklich, die Frage ans <em>Ende</em> des Prompts zu stellen, nach den Dokumenten. Das kostet nichts und wirkt gegen den Mitte-Effekt.</p>
+<p><strong>Bei Agenten das Aufräumen einplanen, bevor es weh tut.</strong> Alte Werkzeugergebnisse entfernen, Zwischenstände zusammenfassen und mit frischem Fenster weiterarbeiten, Teilaufgaben an spezialisierte Unteragenten geben, die nur ein verdichtetes Ergebnis zurückliefern statt ihres gesamten Arbeitskontexts.</p>
+<h2>Die Kurzfassung für die Vorstandssitzung</h2>
+<p>Das Millionen-Token-Fenster ist real, aber es ist eine Kapazitäts- und keine Qualitätsangabe — ungefähr so, wie die Höchstgeschwindigkeit im Fahrzeugschein nichts darüber sagt, wie schnell man auf einer bestimmten Straße fahren sollte.</p>
+<p>Praktisch folgt daraus zweierlei. Erstens: „Wir werfen einfach alles rein und sparen uns die Aufbereitung&quot; ist keine Architektur, sondern eine Wette — und die Anbieterdokumentation selbst sagt, dass sie bei mehreren gesuchten Informationen schlecht steht. Die Vorauswahl, gegen die das große Fenster angeblich immun macht, bleibt die wirksamste Maßnahme.</p>
+<p>Zweitens, und das ist die gute Nachricht: Die Frage ist messbar. Ein Team kann in wenigen Tagen die eigene effektive Kontextlänge bestimmen und hat danach eine Zahl, die in Architekturentscheidungen taugt. Das ist deutlich mehr, als die meisten Organisationen heute haben — die meisten haben die Zahl aus der Pressemitteilung.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" rel="noopener noreferrer external" target="_blank">Anthropic — Effective context engineering for AI agents (29.9.2025, Primärquelle, Volltext gelesen)</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/build-with-claude/context-windows" rel="noopener noreferrer external" target="_blank">Anthropic Docs — Context windows („context rot“, Abrechnung langer Anfragen, Stand September 2026)</a></li>
+            
+            <li><a href="https://claude.com/blog/context-management" rel="noopener noreferrer external" target="_blank">Anthropic — Managing context on the Claude Developer Platform (29.9.2025, Zahlen zur 100-Turn-Auswertung)</a></li>
+            
+            <li><a href="https://ai.google.dev/gemini-api/docs/long-context" rel="noopener noreferrer external" target="_blank">Google — Gemini API: Long context guide (Primärquelle, Einschränkung bei mehreren Zielinformationen)</a></li>
+            
+            <li><a href="https://www.trychroma.com/research/context-rot" rel="noopener noreferrer external" target="_blank">Chroma Research — Context Rot: How Increasing Input Tokens Impacts LLM Performance (Juli 2025, 18 Modelle)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2502.05167" rel="noopener noreferrer external" target="_blank">NoLiMa: Long-Context Evaluation Beyond Literal Matching (arXiv 2502.05167, ICML 2025)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2410.02694" rel="noopener noreferrer external" target="_blank">HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly (arXiv 2410.02694, ICLR 2025, 59 Modelle)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2404.06654" rel="noopener noreferrer external" target="_blank">RULER: What&#39;s the Real Context Size of Your Long-Context Language Models? (arXiv 2404.06654, NVIDIA)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2606.19348" rel="noopener noreferrer external" target="_blank">DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence (arXiv 2606.19348, 26.4.2026)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2307.03172" rel="noopener noreferrer external" target="_blank">Liu et al. — Lost in the Middle: How Language Models Use Long Contexts (arXiv 2307.03172, TACL 2024)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
