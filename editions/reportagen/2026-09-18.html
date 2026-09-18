@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Agent sitzt schon in der Sitzung: Warum KI-Browser für Ihre Web-App etwas anderes sind als ein Crawler</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-18.html">&larr; Zur&uuml;ck zur Ausgabe vom 18. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Agent sitzt schon in der Sitzung: Warum KI-Browser für Ihre Web-App etwas anderes sind als ein Crawler</h1>
+    
+    <p class="reportage-teaser">Ein Agent im Browser des Nutzers kommt mit gültigem Cookie, echter IP und allen Rechten, die der Nutzer hat. Bot-Erkennung greift nicht, die Analytics verrutschen, und ein US-Berufungsgericht hat im August entschieden, dass rechtlich der Nutzer zugreift, nicht der Agent. Was Betreiber daraus machen können — und was 2026 nachweislich noch nicht funktioniert.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-18">18. September 2026</time>
+         &middot; 10 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Seit Mozilla am Mittwoch Mistral in den Firefox-Assistenten geholt hat, bietet jeder große Browser irgendeine Form von KI-Unterstützung an. Für die meisten Unternehmen ist das eine Nachricht aus der Kategorie „interessant, betrifft uns nicht“. Das ist ein Irrtum, und er hat eine sehr konkrete technische Ursache.</p>
+<h2>Der Unterschied, der alles ändert</h2>
+<p>Ein klassischer Crawler kommt von außen. Er hat eine eigene IP-Adresse, einen eigenen User-Agent-String, kein Sitzungscookie und keine Anmeldung. Ihn zu erkennen, zu drosseln oder auszusperren ist gelöste Arbeit — dafür gibt es seit zwanzig Jahren Werkzeuge.</p>
+<p>Ein Agent, der im Browser des Nutzers läuft, ist etwas anderes. Er kommt mit dem gültigen Sitzungscookie, aus der echten Nutzer-IP, über denselben TLS-Stack und mit exakt den Rechten, die der angemeldete Nutzer hat. Er sieht Ihre Preisliste hinter dem Login, Ihre Kundendaten, Ihre internen Dashboards. Brave hat das in seiner Untersuchung zu Perplexitys Comet so formuliert: <em>„The AI operates with the user's full privileges across authenticated sessions, providing potential access to banking accounts, corporate systems, private emails, cloud storage, and other services.“</em></p>
+<p>Der entscheidende Satz daran ist <em>full privileges</em>. Es gibt keine eigene Berechtigungsschicht für den Agenten. Was der Nutzer darf, darf der Agent.</p>
+<h2>Was 2026 tatsächlich am Markt ist</h2>
+<p>Die Lage hat sich in den vergangenen zwölf Monaten mehrfach gedreht, und zwei prominente Produkte gibt es schlicht nicht mehr. Microsoft hat den <em>Copilot Mode</em> in Edge am 13. Mai 2026 eingestellt und die Funktionen in den Browser selbst verlegt; die agentischen Teile laufen als „Browse with Copilot“ weiter, in den USA und nur für Microsoft-365-Premium-Abonnenten. OpenAI hat seinen eigenen Browser <em>ChatGPT Atlas</em> am 9. August 2026 abgeschaltet, 292 Tage nach dem Start, und die Browsing-Fähigkeiten in die ChatGPT-Desktop-App und eine Chrome-Erweiterung verschoben.</p>
+<p>Aktiv sind: Perplexity Comet, seit Juli 2025 verfügbar, seit Oktober 2025 kostenlos, inzwischen auf Windows, macOS, Android und iOS. Gemini in Chrome, das Google seit Mitte 2026 schrittweise ausrollt. Opera Neon, seit Dezember 2025 ohne Warteliste, für 19,90 Dollar im Monat. Brave, wo KI-Browsing hinter einem Opt-in-Flag im frühen Test steht. Und Firefox Smart Window, Beta, bisher USA und Kanada, seit dieser Woche Frankreich, Deutschland „noch dieses Jahr“.</p>
+<p>Belastbare Nutzerzahlen gibt es für keines dieser Produkte. StatCounter führt sie nicht als eigene Kategorien; die kursierenden Zahlen für Comet schwanken für denselben Zeitraum zwischen drei und achtzehn Millionen monatlich aktiven Nutzern, jeweils vage „laut Similarweb“ zugeschrieben, ohne auffindbaren Originalbericht. Wer mit solchen Zahlen plant, plant mit Nichts.</p>
+<h2>Erkennen kann man ihn nicht — jedenfalls nicht zuverlässig</h2>
+<p>Die naheliegende Frage lautet: Kann ich einen Agenten in meinen Logs überhaupt sehen? Die ehrliche Antwort für 2026 ist: nicht verlässlich.</p>
+<p>Es gibt eine ernsthafte Standardisierungsbemühung. <em>Web Bot Auth</em> signiert Anfragen kryptografisch; der zugehörige Entwurf liegt als aktives Dokument einer IETF-Arbeitsgruppe vor, unter dem Titel „HTTP Message Signatures for automated traffic“. Ein RFC ist es nicht, die Arbeitsgruppe befindet sich in der Neu-Charterung. Cloudflare setzt das Verfahren produktiv ein und verifiziert seit Juli 2026 signierte Agenten. Die erste Kohorte, die Cloudflare dafür aufgenommen hat, bestand aus ChatGPT agent, Goose von Block, Browserbase und Anchor Browser — also aus server- beziehungsweise infrastrukturseitigen Agenten. Ein Consumer-Browser-Agent war nicht darunter.</p>
+<p>Das ist kein Versäumnis, sondern folgt aus der Architektur: Signaturverfahren funktionieren für Clients, die sich selbst deklarieren wollen. Ein Agent, der im Rendering-Pfad des Nutzer-Chromiums sitzt, sendet dieselben Header wie der Nutzer. Cloudflare hat im Juli 2026 eine eigene Traffic-Kategorie „Agent“ eingeführt und nennt darin ausdrücklich <em>„browser-use agents (e.g., Gemini or Claude driving Chrome)“</em> — aber die Einordnung beruht auf Selbstauskunft über bekannte Kennungen und IP-Bereiche, nicht auf einem harten technischen Nachweis.</p>
+<p>Eine Ausnahme mit praktischem Wert: Anthropics Chrome-Erweiterung nutzt die <code>chrome.debugger</code>-Schnittstelle, und aktive Debugger-Sitzungen hinterlassen messbare Spuren im Seitenkontext. Das ist allerdings generische Automatisierungserkennung, kein Agentensignal — und dieselbe Methode erzeugt reichlich Fehlalarme bei Entwicklerwerkzeugen und Testautomatisierung.</p>
+<h2>Das Gericht hat entschieden — und zwar gegen den Betreiber</h2>
+<p>Amazon verklagte Perplexity im November 2025 vor dem Bundesbezirksgericht für Nordkalifornien und stützte sich dabei auf den <em>Computer Fraud and Abuse Act</em>, das amerikanische Anti-Hacking-Gesetz. Im März 2026 bekam Amazon eine einstweilige Verfügung. Am 4. August 2026 hob das Bundesberufungsgericht für den neunten Bezirk sie wieder auf.</p>
+<p>Die Begründung ist für jeden Betreiber lesenswert, weil sie die technische Realität korrekt beschreibt: Perplexitys Server sprechen nie direkt mit Amazons Servern. Der Assistent wertet Bildschirminhalte auf dem Gerät des Nutzers aus und gibt Anweisungen zurück; abgerufen wird die Seite vom Browser des Nutzers. Da das Gesetz von einer Person spricht, die zugreift, kam das Gericht zu dem Schluss: <em>„However advanced the Assistant currently is, it is a tool, not a person for statutory purposes.“</em> Und weiter: <em>„It is the user who ‚accesses‘ Amazon's computers, with the help of the Assistant to carry out specific acts on Amazon.com.“</em></p>
+<p>Das Verfahren ist damit nicht beendet — die Sache ging zur weiteren Verhandlung zurück. Aber die praktische Lehre steht fest, und eine Kanzleianalyse formuliert sie präzise: Die Entscheidung lässt andere Ansprüche ausdrücklich offen, insbesondere Vertragsverletzung und Verstöße gegen die Nutzungsbedingungen. Wer agentischen Zugriff regeln will, regelt ihn also im Vertrag, nicht über das Strafrecht. Und eine AGB-Klausel, die „automatisierten Zugriff“ pauschal untersagt, trifft nach dieser Logik den eigenen Kunden — nicht den Anbieter des Agenten.</p>
+<h2>Was das mit Ihren Zahlen macht</h2>
+<p>Hier wird es unmittelbar operativ. Das Gesamtbild ist bekannt: Cloudflare hat Mitte 2026 erstmals mehr automatisierte als menschliche Anfragen im HTML-Verkehr gemessen, 57,5 zu 42,5 Prozent. Fastly beziffert das Wachstum automatisierter Anfragen auf das 6,5-fache des menschlichen und nennt eine Zahl, die jeden Betriebsleiter interessieren sollte: Während weniger als neun Prozent menschlicher Anfragen bis zum Ursprungsserver durchschlagen, sind es bei automatisierten mehr als 51 Prozent. Agentischer Verkehr ist also nicht nur mehr Verkehr, er ist teurerer Verkehr.</p>
+<p>Für Sitzungs-Agenten speziell gibt es diese Zahlen nicht. Keiner der großen Infrastrukturanbieter trennt in seinen Berichten zwischen klassischen Crawlern und Agenten, die in einer angemeldeten Sitzung arbeiten. Was es gibt, ist die Beschreibung des Messproblems: In Google Analytics 4 erscheinen Comet-Sitzungen mit <code>perplexity.ai</code> als Quelle und <code>referral</code> als Medium — bei Atlas geöffnete Links entfernten den Referrer häufig, sodass Sitzungen als „Direct“ oder gar nicht zugeordnet auftauchten. Die Folge ist eine still wachsende „Direct“-Spalte, die echte Entdeckungswege verdeckt.</p>
+<p>Die schärfste dokumentierte Konsequenz kommt aus dem Werbegeschäft. Verifikationsanbieter markieren agentischen Verkehr als <em>invalid traffic</em>; die branchenweite IVT-Quote stieg 2026 nach Marktbeobachtungen von 26 Prozent im Januar auf 40 Prozent im Juni. Ein mittelgroßer Werbekunde stellte laut einem Branchenbericht seine gesamten Ausgaben bei einem Publisher ein, nachdem dort agentischer Verkehr sprunghaft anstieg. Ein Hinweis zur Redlichkeit: Dass auch A/B-Tests dadurch verzerrt werden, ist plausibel, aber wir haben dafür keine belastbare Untersuchung gefunden — behandeln Sie es als begründete Vermutung, nicht als Befund.</p>
+<h2>Die Sicherheitslage, kurz und unerfreulich</h2>
+<p>Prompt Injection ist bei Browser-Agenten keine theoretische Gefahr, sondern eine dokumentierte Angriffsklasse mit mehreren Ausbaustufen. Brave zeigte im Oktober 2025, dass Anweisungen in einem Screenshot versteckt werden können, die für Menschen unsichtbar sind: <em>„Text recognition extracts text that's imperceptible to human users … This extracted text is then passed to the LLM without distinguishing it from the user's query.“</em> LayerX demonstrierte unter dem Namen CometJacking, dass <em>„a single weaponized URL, without any malicious page content“</em> ausreicht, um sensible Daten aus dem Browser abzuziehen.</p>
+<p>OpenAI hat im Dezember 2025 ein eigens gegenteiltrainiertes Modell für Atlas nachgeschoben und dazu geschrieben: <em>„While this does not eliminate risk, it makes attacks harder to carry out.“</em> Eine Randbemerkung zur verbreiteten Verkürzung: Die vielzitierte Aussage, Prompt Injection werde möglicherweise nie gelöst, stammt nicht von OpenAI, sondern vom britischen National Cyber Security Centre. Die praktische Gegenmaßnahme, die OpenAI selbst empfahl, ist bezeichnend: ein abgemeldeter Modus, in dem der Agent <em>„won't use any pre-existing cookies and won't be logged into any of your online accounts“</em>. Der Schutz besteht also darin, dem Agenten die Sitzung wegzunehmen.</p>
+<h2>Was Betreiber 2026 tatsächlich tun</h2>
+<p>Die Praxis ist weiter, als die Debatte vermuten lässt — aber schmaler, als die Ratgeberliteratur behauptet.</p>
+<p>Produktiv im Einsatz sind Bestätigungsschritte vor irreversiblen Aktionen. Amazons Einkaufsassistent kauft nur automatisch, wenn der Nutzer ein separates Kästchen aktiviert hat, und räumt danach 24 Stunden Stornofrist ein. Produktiv sind auch agentenfähige Endpunkte statt Blockade: Shopify betreibt einen MCP-Server für Produktsuche, Warenkorb und Kasse. Und agentische Bezahlprotokolle sind aus dem Entwurfsstadium heraus — der von OpenAI und Stripe entwickelte Weg läuft seit Herbst 2025 live bei ersten Händlern.</p>
+<p>Nicht belegt ist dagegen einiges, was gern empfohlen wird. <code>llms.txt</code> lag im Juni 2026 bei 8,7 Prozent der tausend größten Websites und bei 5,6 Prozent der zehntausend größten — eine Nische, kein Standard. Und für strukturierte Daten gibt es eine Untersuchung, die man kennen sollte: Vercel ließ zwischen Juni und August 2026 über tausend Agentendurchläufe auf 25 Websites laufen und hält im Ergebnis fest: <em>„This study did not measure an improvement in agent accuracy or task completion from JSON-LD. Repeat critical facts in visible text because some converters omit script blocks.“</em> Wer also seine Website „agentenfreundlich“ machen will, schreibt Preis, Verfügbarkeit und Vorgehen in sichtbaren Text — nicht in ein Auszeichnungsformat.</p>
+<h2>Was Sie diese Woche entscheiden können</h2>
+<p>Drei Dinge lassen sich ohne Projekt und ohne Budget klären.</p>
+<p>Erstens: Prüfen Sie, welche Aktionen in Ihrer Anwendung irreversibel sind und ohne erneute Bestätigung auskommen. Jede davon ist ab sofort eine Aktion, die ein Agent auslösen kann, während der Nutzer etwas anderes tut. Eine Wiederanmeldung vor Zahlung, Löschung oder Weitergabe ist die billigste Maßnahme in diesem ganzen Themenfeld.</p>
+<p>Zweitens: Verschieben Sie Ihre Drosselung von der IP auf das Konto. Ein Agent teilt sich die IP mit seinem Menschen; ein Limit pro IP trifft im Zweifel beide oder keinen.</p>
+<p>Drittens: Sehen Sie sich Ihre „Direct“-Spalte der letzten sechs Monate an. Wenn sie ohne erkennbaren Grund gewachsen ist, haben Sie die Antwort auf die Frage, ob Sie das Thema betrifft, bereits in den eigenen Daten stehen.</p>
+<p>Was Sie sich sparen können, ist der Versuch, Agenten technisch auszusperren. Die Signalen dafür existieren 2026 nicht, das Recht steht in den USA auf der anderen Seite, und der Agent kommt ohnehin im Namen Ihres zahlenden Kunden.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://brave.com/blog/comet-prompt-injection/" rel="noopener noreferrer external" target="_blank">Brave — Agentic Browser Security: Indirect Prompt Injection in Perplexity Comet (20.8.2025)</a></li>
+            
+            <li><a href="https://brave.com/blog/unseeable-prompt-injections/" rel="noopener noreferrer external" target="_blank">Brave — Unseeable prompt injections in screenshots: more vulnerabilities in Comet and other AI browsers (21.10.2025)</a></li>
+            
+            <li><a href="https://layerxsecurity.com/blog/cometjacking-how-one-click-can-turn-perplexitys-comet-ai-browser-against-you/" rel="noopener noreferrer external" target="_blank">LayerX — CometJacking: How One Click Can Turn Perplexity&#39;s Comet AI Browser Against You (4.10.2025, Aviad Gispan)</a></li>
+            
+            <li><a href="https://openai.com/index/hardening-atlas-against-prompt-injection/" rel="noopener noreferrer external" target="_blank">OpenAI — Continuously hardening ChatGPT Atlas against prompt injection attacks (22.12.2025, über Wayback gelesen)</a></li>
+            
+            <li><a href="https://cdn.ca9.uscourts.gov/datastore/opinions/2026/08/04/26-1444.pdf" rel="noopener noreferrer external" target="_blank">US Court of Appeals for the Ninth Circuit — Amazon.com Services, LLC v. Perplexity AI, Inc., No. 26-1444, Opinion vom 4.8.2026 (PDF, selbst gelesen)</a></li>
+            
+            <li><a href="https://www.cooley.com/news/insight/2026/2026-08-06-ninth-circuit-rules-on-ai-agent-access-to-third-party-websites-under-cfaa" rel="noopener noreferrer external" target="_blank">Cooley — Ninth Circuit Rules on AI Agent „Access“ to Third-Party Websites Under CFAA (6.8.2026)</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/" rel="noopener noreferrer external" target="_blank">Cloudflare — A deeper look at AI crawlers: breaking down traffic by purpose and industry</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/content-independence-day-ai-options/" rel="noopener noreferrer external" target="_blank">Cloudflare — Your site, your rules: new AI traffic options for all customers (18.7.2026, Definition der Kategorie „Agent“)</a></li>
+            
+            <li><a href="https://blog.cloudflare.com/signed-agents/" rel="noopener noreferrer external" target="_blank">Cloudflare — The age of agents: cryptographically recognizing agent traffic (Signed Agents, erste Kohorte)</a></li>
+            
+            <li><a href="https://www.fastly.com/blog/ai-traffic-grew-6-5x-faster-than-human-traffic-this-year" rel="noopener noreferrer external" target="_blank">Fastly — AI Traffic Grew 6.5x Faster Than Human Traffic This Year</a></li>
+            
+            <li><a href="https://martech.org/how-ga4-records-traffic-from-perplexity-comet-and-chatgpt-atlas/" rel="noopener noreferrer external" target="_blank">MarTech — How GA4 records traffic from Perplexity Comet and ChatGPT Atlas</a></li>
+            
+            <li><a href="https://digiday.com/media/when-bots-look-like-buyers-agentic-traffic-causing-new-publisher-headaches/" rel="noopener noreferrer external" target="_blank">Digiday — When bots look like buyers: agentic traffic causing new publisher headaches</a></li>
+            
+            <li><a href="https://vercel.com/kb/guide/agent-readability-spec" rel="noopener noreferrer external" target="_blank">Vercel — Make your site readable by AI agents (Agent Readability Spec, 1.033 Agentenläufe auf 25 Sites, Juni–August 2026)</a></li>
+            
+            <li><a href="https://datatracker.ietf.org/doc/draft-ietf-webbotauth-httpsig-protocol/" rel="noopener noreferrer external" target="_blank">IETF — HTTP Message Signatures for automated traffic (draft-ietf-webbotauth-httpsig-protocol, aktiver Working-Group-Draft)</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/07/09/openai-is-shutting-down-atlas-but-its-ai-browser-ambitions-are-still-growing/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI is shutting down Atlas, but its AI browser ambitions are still growing (9.7.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
