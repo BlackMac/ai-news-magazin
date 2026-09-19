@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Bericht sah amtlich aus: Warum 2026 kein Werkzeug den Weg vom Modell-Output ins fertige Dokument nachvollziehbar macht</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-19.html">&larr; Zur&uuml;ck zur Ausgabe vom 19. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Bericht sah amtlich aus: Warum 2026 kein Werkzeug den Weg vom Modell-Output ins fertige Dokument nachvollziehbar macht</h1>
+    
+    <p class="reportage-teaser">Ein Analyst ließ einen Chatbot Daten verknüpfen — und dann ein zweites Mal, um das Ergebnis in einen offiziell wirkenden Bericht zu gießen. Genau für diesen zweiten Schritt gibt es 2026 keinen funktionierenden Herkunftsnachweis. Weder Wasserzeichen noch C2PA noch Ihre Bürosoftware decken ihn ab, und die KI-Verordnung nimmt interne Dokumente ausdrücklich aus.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-19">19. September 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Moment, in dem eine Vermutung amtlich wird</h2>
+<p>CNN berichtete am Freitag über einen Vorfall, der im Frühjahr beinahe zu einer bewaffneten Operation geführt hätte. Ein Analyst des US Special Operations Command Pacific fragte einen Chatbot zu einem chinesischen Schiff; das Modell verknüpfte offene Informationen mit geheimen Fernmeldeaufklärungsdaten und schloss daraus, an Bord befänden sich Bestandteile eines Nuklearwaffenprogramms. Flugzeuge waren bereits in der Luft, bewaffnete Kräfte bereiteten ein Enter-Manöver vor. Erst kurz davor sah jemand genauer hin und stellte fest, dass der Bericht mit KI erzeugt und die Schlussfolgerung falsch war.</p>
+<p>Eine Einordnung gehört sofort dazu: Die Geschichte stützt sich auf vier anonyme Quellen gegenüber CNN. Das Pentagon hat sie weder bestätigt noch dementiert, ein Primärdokument gibt es nicht. Die scheinbar breite Berichterstattung besteht fast vollständig aus Übernahmen derselben Meldung.</p>
+<p>Was den Vorgang über den Einzelfall hinaus interessant macht, ist ein Detail in der Abfolge. Der Analyst nutzte das Werkzeug <strong>zweimal</strong>. Beim ersten Mal, um Daten zu verknüpfen — dabei entstand der Fehler. Beim zweiten Mal, um das Ergebnis in einen offiziell wirkenden Geheimdienstbericht zu formatieren. Und erst dieser zweite Schritt machte aus einer fragwürdigen Chatbot-Antwort ein Dokument, das durch die Befehlskette wanderte, ohne dass jemandem seine Herkunft anzusehen war.</p>
+<p>Wer in einem Unternehmen arbeitet, kennt diese Bewegung. Eine Modellantwort wird in eine Folie kopiert, die Folie in ein Board-Deck, das Deck in eine Entscheidungsvorlage. Irgendwann steht die Aussage in einem Dokument mit Logo und Freigabevermerk — und niemand kann mehr sagen, wo sie herkam. Die naheliegende Frage lautet deshalb: Welche Werkzeuge gibt es 2026, um genau diesen Weg nachvollziehbar zu machen?</p>
+<p>Die kurze Antwort ist unbequem. Es gibt drei Kandidaten, und keiner deckt den entscheidenden Schritt ab.</p>
+<h2>Wasserzeichen: vorhanden, aber nicht für Sie lesbar</h2>
+<p>Ein Wasserzeichen für Text funktioniert anders als eines für Bilder. Es wird nicht sichtbar aufgedruckt, sondern über die Wortwahl verteilt: Das Modell bevorzugt beim Generieren bestimmte, statistisch unauffällige Formulierungsvarianten, sodass ein Detektor später erkennen kann, dass dieser Text aus einer bestimmten Maschine stammt.</p>
+<p>Anthropic hat ein solches Verfahren am 11. August 2026 eingeführt und es ausdrücklich als Beitrag zur Erfüllung der europäischen KI-Verordnung deklariert, aber weltweit ausgerollt. Die Grenzen benennt das Unternehmen selbst: Es funktioniert schlecht bei kurzen Texten, schlecht bei faktischen Passagen mit wenig sprachlichem Spielraum — und eine vollständige Neuformulierung, bei der jedes Wort ersetzt wird, entfernt es.</p>
+<p>Entscheidender für die Praxis ist aber etwas anderes: Der Detektor ist nicht allgemein zugänglich. Er befindet sich in einer geschlossenen Vorschau und steht einem definierten Kreis offen — Regulierungsbehörden, Strafverfolgung, Medien, Faktenprüfern, Forschung. Ein Kontrollmechanismus, den das eigene Unternehmen nicht aufrufen kann, ist für dieses Unternehmen keine Kontrolle. Bei OpenAI ist die Lage noch eindeutiger: Ein intern entwickeltes Verfahren wurde nach Berichten aus dem Jahr 2024 nie veröffentlicht, unter anderem wegen der Umgehbarkeit durch Paraphrasierung und wegen Fehlklassifikationen bei Nicht-Muttersprachlern. Ausgaben von ChatGPT tragen bis heute kein Wasserzeichen.</p>
+<h2>C2PA: der Standard, der Text nicht kann</h2>
+<p>Die zweite Hoffnung heißt C2PA, oft als „Content Credentials&quot; vermarktet — ein Industriestandard, der Herkunftsinformationen kryptografisch signiert an eine Datei hängt. Bei Fotos funktioniert das gut: Kamera, Bearbeitungsschritte und Software stehen im Manifest.</p>
+<p>Für Text funktioniert es nicht. Die Leitlinien zur aktuellen Spezifikation 2.4 sagen es direkt: Ein Manifest lässt sich in Dateiformate, die das Einbetten nicht unterstützen — „i.e., text or XML&quot; — nicht hineinschreiben. Der empfohlene Ausweg sind externe Manifest-Speicher oder eine sogenannte weiche Bindung, also wiederum ein Wasserzeichen.</p>
+<p>Beides bricht an derselben Stelle. Wer eine Modellantwort markiert und in ein Word-Dokument kopiert, überträgt weder das externe Manifest noch zuverlässig die statistische Signatur — erst recht nicht, wenn der Text dabei umformuliert wird. Genau das war der zweite Schritt im CNN-Fall. Hinzu kommt eine grundsätzliche Einschränkung, die man bei C2PA oft überliest: Der Standard bezeugt Herkunft, nicht Richtigkeit. Ein sauber signierter Satz kann vollständig falsch sein.</p>
+<h2>Was Ihre Bürosoftware tatsächlich protokolliert</h2>
+<p>Bleibt die dritte Möglichkeit: Vielleicht weiß die Unternehmenssoftware ohnehin Bescheid. Sie weiß etwas — aber nicht das Richtige.</p>
+<p>Microsoft 365 erfasst jede Copilot-Interaktion im einheitlichen Audit-Protokoll: wer, wann, mit Zugriff auf welche Dateien. Standardmäßig 180 Tage aufbewahrt, mit der Premium-Variante bis zu zehn Jahre. Google Workspace bietet seit Juli 2025 granulare Protokolle für Gemini-Interaktionen, seit Anfang September 2026 auch umfassende Protokolle für Gemini Notebook.</p>
+<p>Der Unterschied, auf den es ankommt: Protokolliert wird die <strong>Interaktion</strong>, nicht die <strong>Provenienz einzelner Sätze</strong>. Sie können nachweisen, dass Ihre Mitarbeiterin am Dienstag eine Copilot-Sitzung mit Zugriff auf drei Dateien hatte. Sie können nicht nachweisen, welcher Absatz im fertigen Bericht daraus stammt. Und ein Wasserzeichen für von KI erzeugte oder veränderte Inhalte gibt es in Microsoft 365 seit Februar 2026 zwar als Richtlinienoption — aber nur für Video und Audio, und standardmäßig ausgeschaltet.</p>
+<h2>Warum die Regulierung diese Lücke nicht schließt</h2>
+<p>An dieser Stelle verweisen viele auf die KI-Verordnung. Artikel 50 verpflichtet Anbieter, synthetische Inhalte maschinenlesbar zu kennzeichnen, soweit technisch machbar; für bereits am Markt befindliche generative Systeme läuft die Frist bis zum 2. Dezember 2026.</p>
+<p>Für interne Dokumente hilft das nicht. Die Kennzeichnungspflicht für KI-generierten Text trifft nach der Darstellung der EU-Kommission nur Text, der veröffentlicht wird, um die Öffentlichkeit über Angelegenheiten von öffentlichem Interesse zu informieren, und der keine menschliche Redaktionskontrolle durchlaufen hat. Eine interne Entscheidungsvorlage, ein Strategie-Memo, ein internes Lagebild fallen nach dem Wortlaut nicht darunter.</p>
+<p>Für den Auslösefall dieser Reportage gilt das noch deutlicher: Artikel 2 der Verordnung nimmt Systeme, die ausschließlich militärischen, Verteidigungs- oder nationalen Sicherheitszwecken dienen, vollständig vom Anwendungsbereich aus. Der Rechtsrahmen, den man reflexhaft heranzieht, hätte den Vorfall nie erfasst.</p>
+<h2>Die zivile Entsprechung heißt zweimal Deloitte</h2>
+<p>Man muss nicht ins Militärische ausweichen, um dieselbe Mechanik zu sehen. Ein Bericht, den Deloitte für das australische Arbeitsministerium erstellte — Auftragswert knapp 440.000 australische Dollar —, enthielt Verweise auf einen nicht existierenden Bericht eines Rechtsprofessors, auf einen erfundenen schwedischen Professor und ein erfundenes Zitat eines falsch geschriebenen Richternamens. Deloitte räumte den Einsatz generativer KI ein und lieferte im Oktober 2025 eine korrigierte Fassung samt Teilrückerstattung.</p>
+<p>In Kanada wiederholte sich das Muster: Ein 526 Seiten starker Bericht zur Gesundheitspersonalplanung für Neufundland und Labrador, Auftragswert 1,6 Millionen kanadische Dollar, enthält mindestens vier Verweise auf Arbeiten, die es nicht gibt. Aufgefallen ist das einem Lokalmedium, nicht einer internen Prüfung. Die Provinz überarbeitete daraufhin ihren Vergabeprozess.</p>
+<p>Auch die Justiz liefert Material, wenn auch mit einer wichtigen Einschränkung. Im Verfahren Couvrette v. Wisnovsky verhängte ein Bundesgericht in Oregon Anfang 2026 Sanktionen und Kostenerstattungen von zusammen gut 110.000 Dollar, nachdem drei Schriftsätze 15 erfundene Fallzitate enthielten. Im Fall Whiting v. City of Athens sanktionierte das 6. US-Berufungsgericht am 13. März 2026 zwei Anwälte mit je 15.000 Dollar plus Kosten wegen über zwei Dutzend nicht existierender Präzedenzfälle. Bemerkenswert ist, wie das Gericht dabei argumentierte: Es stellte ausdrücklich <strong>nicht</strong> fest, dass generative KI die Ursache war. Maßgeblich war allein, dass niemand ein Zitat einreichen darf, das er nicht selbst geprüft hat — unabhängig davon, wie es entstanden ist.</p>
+<p>Das ist juristisch elegant und für Unternehmen die praktisch brauchbarste Formulierung des ganzen Problems.</p>
+<h2>Was daraus für Ihr Unternehmen folgt</h2>
+<p>Die ehrliche Bilanz lautet: Für den Schritt vom Modell-Output ins fertige Dokument existiert 2026 kein funktionierender technischer Herkunftsnachweis. Wasserzeichen sind vorhanden, aber nicht allgemein prüfbar und überleben Umformulierung nicht. C2PA kann Text nativ nicht. Audit-Protokolle sehen die Sitzung, nicht den Satz. Die Regulierung zielt auf veröffentlichte Inhalte. Und es ließ sich kein einziges dokumentiertes Beispiel einer Organisation finden, die intern verpflichtend kennzeichnet, welcher Satz in einem internen Bericht maschinell entstanden ist.</p>
+<p>Wer darauf wartet, dass ein Werkzeug diese Lücke schließt, wartet auf absehbare Zeit vergeblich. Die verfügbare Antwort ist organisatorisch, nicht technisch — und sie ist drei Fragen lang:</p>
+<p><strong>Erstens: An welchen Stellen entstehen bei uns Dokumente, die andere als geprüft behandeln?</strong> Entscheidungsvorlagen, Lageberichte, Gutachten, Angebotsunterlagen. Das sind die Punkte, an denen eine Modellausgabe institutionelle Autorität gewinnt.</p>
+<p><strong>Zweitens: Wer hat an diesen Stellen namentlich gegengezeichnet — und wofür genau?</strong> Die Formulierung des 6. Berufungsgerichts taugt als Vorlage: Verantwortlich ist, wer etwas einreicht, ohne es selbst geprüft zu haben. Nicht das Werkzeug.</p>
+<p><strong>Drittens: Was ist bei uns die Quellenangabe für eine Modellaussage?</strong> Solange niemand die Herkunft technisch rekonstruieren kann, muss sie beim Entstehen mitgeschrieben werden. Ein Feld „Grundlage&quot; in der Vorlage kostet nichts und ist derzeit das einzige, was zuverlässig funktioniert.</p>
+<p>Der Analyst im CNN-Bericht hat nichts Verbotenes getan. Er hat ein Werkzeug benutzt, um schneller zu sein — und dann ein zweites Mal, um das Ergebnis ordentlich aussehen zu lassen. Der zweite Schritt war der gefährliche, und er ist der einzige, für den es keine Kontrolle gab. Diese Kontrolle wird auf absehbare Zeit aus einem Prozess bestehen müssen, nicht aus einer Funktion.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship" rel="noopener noreferrer external" target="_blank">CNN — Exclusive: US military had close call after using AI for false intelligence report (18.9.2026, Katie Bo Lillis und Zachary Cohen)</a></li>
+            
+            <li><a href="https://spec.c2pa.org/specifications/specifications/2.4/guidance/Guidance.html" rel="noopener noreferrer external" target="_blank">C2PA Specification 2.4 — Guidance (Primärquelle zur fehlenden Einbettung in Text- und XML-Formate)</a></li>
+            
+            <li><a href="https://www.anthropic.com/news/claude-text-watermark" rel="noopener noreferrer external" target="_blank">Anthropic — Text-Wasserzeichen für Claude (11.8.2026, Primärquelle)</a></li>
+            
+            <li><a href="https://digital-strategy.ec.europa.eu/en/factpages/quick-facts-transparency-rules-ai-systems" rel="noopener noreferrer external" target="_blank">Europäische Kommission — Quick facts: Transparency rules for AI systems (Reichweite von Artikel 50)</a></li>
+            
+            <li><a href="https://artificialintelligenceact.eu/article/2/" rel="noopener noreferrer external" target="_blank">EU-Verordnung 2024/1689, Artikel 2 — Ausnahme für militärische Zwecke und nationale Sicherheit</a></li>
+            
+            <li><a href="https://learn.microsoft.com/en-us/purview/audit-copilot" rel="noopener noreferrer external" target="_blank">Microsoft Learn — Audit-Protokollierung für Microsoft 365 Copilot</a></li>
+            
+            <li><a href="https://ia.acs.org.au/article/2025/deloitte-to-refund-government-over-ai-errors.html" rel="noopener noreferrer external" target="_blank">ACS Information Age — Deloitte to refund government over AI errors (7.10.2025)</a></li>
+            
+            <li><a href="https://www.cbc.ca/news/canada/newfoundland-labrador/nl-deloitte-citations-9.6990216" rel="noopener noreferrer external" target="_blank">CBC News — Deloitte-Bericht für Neufundland und Labrador enthält nicht existierende Quellenangaben</a></li>
+            
+            <li><a href="https://reason.com/volokh/2026/03/14/lawyers-citing-nonexistent-cases-ordered-to-pay-opponents-attorney-fees-double-costs-15k-fine/" rel="noopener noreferrer external" target="_blank">Reason / Volokh Conspiracy — Whiting v. City of Athens, Sanktionen des 6. US-Berufungsgerichts (14.3.2026)</a></li>
+            
+            <li><a href="https://www.mondaq.com/unitedstates/professional-negligence/1774822/use-of-ai-hallucinated-cases-results-in-$100k-in-penalties-and-dismissal-of-action-couvrette-v-wisnovsky" rel="noopener noreferrer external" target="_blank">Mondaq — Couvrette v. Wisnovsky: über 110.000 Dollar Sanktionen wegen erfundener Fallzitate</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
