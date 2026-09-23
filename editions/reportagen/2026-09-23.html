@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vier Spitzenmodelle in 48 Stunden: Wie Unternehmen ein neues KI-Modell einführen, ohne ihr Produkt zu brechen</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-23.html">&larr; Zur&uuml;ck zur Ausgabe vom 23. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Vier Spitzenmodelle in 48 Stunden: Wie Unternehmen ein neues KI-Modell einführen, ohne ihr Produkt zu brechen</h1>
+    
+    <p class="reportage-teaser">GPT‑6 Sol und Luna, Claude Opus 5.5, Grok 4.7, MiMo‑V2.6‑Pro: Der nächste Modellwechsel ist kein Sonderprojekt mehr, sondern ein wiederkehrender Betriebsvorgang. Worauf es ankommt — gepinnte Versionen, eigene Tests, Abschaltfristen und eine Kostenrechnung, die am Cache hängt.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-23">23. September 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Vier Spitzenmodelle in einer Woche</h2>
+<p>Am 21. September veröffentlichten xAI mit Grok 4.7 und Xiaomi mit MiMo‑V2.6‑Pro zwei neue Modelle, das eine proprietär, das andere mit offenen Gewichten. Am 22. September folgte Anthropic mit Claude Opus 5.5 — günstiger als der Vorgänger Opus 5 und mit eigener Migrationsanleitung für Entwickler —, rund 90 Minuten später OpenAI mit GPT‑6 Sol und Luna, laut TechCrunch <em>„boasting lower cost and fewer mistakes“</em>. Vier Spitzenmodelle in 48 Stunden.</p>
+<p>Für Konsumenten ist dieses Tempo ein Kuriosum. Für jedes Unternehmen, das eines der Vorgängermodelle produktiv eingebaut hat, ist es der eigentliche Befund: Ein neues Spitzenmodell ist kein Ereignis mehr, das man einmal bewertet und dann jahrelang laufen lässt, sondern ein wiederkehrender Betriebsvorgang. Die Frage ist nicht mehr, ob man wechselt, sondern wie man das tut, ohne dass Support-Tickets, Preisliste oder Kernfunktion des Produkts an einem Dienstagmorgen plötzlich anders aussehen.</p>
+<h2>Gepinnt statt „-latest“: die erste Entscheidung</h2>
+<p>Die meisten Anbieter bieten zwei Arten, ein Modell anzusprechen: eine gepinnte, exakt versionierte ID — vergleichbar mit einer festen Software-Version, die sich nie von selbst ändert — und einen Alias wie „-latest“, der eher wie die Auto-Update-Einstellung eines Smartphones funktioniert: bequem, aber man weiß nie genau, welche Version morgen läuft. Anthropic warnt in seiner Dokumentation zu Modell-IDs ausdrücklich vor einem verbreiteten Missverständnis: „A common misconception is that dateless model IDs such as claude-sonnet-4-6 behave as evergreen pointers that route to the latest or best-performing version. That is not the case“ — die Annahme, datumslose IDs würden automatisch zur jeweils besten Version zeigen, ist seit der Claude-4.6-Generation schlicht falsch, jede solche ID ist ein fixierter Schnappschuss. Nur ältere, ausdrücklich als Alias gekennzeichnete IDs wie claude-sonnet-4-5 verhalten sich anders: Sie „resolve to the most recent dated snapshot for that minor version“ und können sich damit unter der Hand ändern, ohne dass im eigenen Code etwas angefasst wurde.</p>
+<p>Für die Praxis heißt das: Wer in Produktion auf einen Alias statt auf eine gepinnte Version setzt, hat den Modellwechsel nicht vermieden, sondern nur seinen Zeitpunkt an den Anbieter delegiert — und verliert die Möglichkeit, vorher zu testen. Die saubere Reihenfolge ist umgekehrt: erst auf einer gepinnten neuen Version evaluieren, dann bewusst umstellen.</p>
+<h2>Evals als Torwächter</h2>
+<p>Was ein Anbieter in seinen eigenen Benchmarks zeigt, sagt wenig darüber aus, wie ein Modell auf die eigene Kundschaft, den eigenen Ton und die eigenen Grenzfälle reagiert — dazu hat dieses Magazin in der <a href="/editions/reportagen/2026-08-14.html">Reportage vom 14. August</a> bereits am Beispiel des Tokenpreises gezeigt, dass die einkaufsrelevante Zahl selten die ist, die im Marketing steht. Für Modellwechsel gilt das ebenso, nur dass hier nicht der Preis, sondern das Verhalten unter der Lupe steht. Der gängige Ausweg heißt Evals: eigene Testsätze, gebaut aus echten Produktionsanfragen, gegen die jede Modellversion vor dem Rollout laufen muss — im Prinzip ein Regressionstest, wie man ihn aus der klassischen Softwareentwicklung kennt, nur dass die „Assertions“ oft nicht exakt, sondern über ein zweites Modell als Bewerter (LLM-as-Judge) geprüft werden. Genau das ist die Schwachstelle: Ein Richter-Modell hat eigene Vorlieben und Blindstellen, weshalb erfahrene Teams seine Urteile stichprobenhaft von Menschen gegenprüfen, statt ihm blind zu vertrauen. Als Werkzeuge dafür haben sich neben OpenAIs eigenem, offenem Evals-Framework — laut Projektbeschreibung „a framework for evaluating LLMs and LLM systems, and an open-source registry of benchmarks“ — kommerzielle Plattformen wie Promptfoo, Braintrust oder LangSmith etabliert, die Testläufe, Kennzahlen und Regressionsvergleiche zwischen Modellversionen verwalten.</p>
+<p>Wie teuer das Fehlen solcher Gates werden kann, zeigte OpenAI selbst im April 2025. Ein Update von GPT‑4o hatte das Modell übertrieben zustimmend gemacht; OpenAI musste es zurückrollen und schrieb dazu offen: „We have rolled back last week's GPT‑4o update in ChatGPT so people are now using an earlier version with more balanced behavior.“ Zur Ursache hieß es: man habe „too much on short-term feedback“ (zu stark auf kurzfristiges Nutzerfeedback) optimiert und dabei nicht berücksichtigt, wie sich die Wahrnehmung über die Zeit entwickelt — mit dem Ergebnis, dass das Modell „overly supportive but disingenuous“ wurde, also unaufrichtig gefällig. Der Vorfall lief bei einem laufenden Modell, nicht erst bei einem Anbieterwechsel — genau deshalb zeigt er, wie wenig ein Verhaltensbruch mit äußerer Ursache zu tun haben muss und wie sehr er ein eigenes, kontinuierliches Monitoring braucht.</p>
+<h2>Prompts sind nicht portabel</h2>
+<p>Selbst wer beim selben Anbieter bleibt, migriert nicht kostenlos. Anthropics eigener Migrationsleitfaden zu Claude Opus 5.5 listet vier Breaking Changes gegenüber dem Vorgänger Opus 5 auf. Zwei davon dürften jeden treffen, der viel Automatisierung um das Modell gebaut hat: „thinking.type.disabled“ und „thinking.type.enabled“ werden nicht mehr akzeptiert, das Ausschalten oder manuelle Budgetieren des Denkprozesses quittiert die API stattdessen mit einem 400er-Fehler — wo bisher Kosten durch Abschalten des Nachdenkens gespart wurden, tritt jetzt ein „effort“-Level als Regler an dessen Stelle. Ebenso entfällt erzwungene Werkzeugnutzung: tool_choice-Werte wie „any“ oder „tool“ liefern ebenfalls einen 400er, empfohlen wird stattdessen „auto“ in Kombination mit strikter Werkzeugnutzung. Wer Prompt-Vorlagen, Fehlerbehandlung oder Kostenkalkulation auf das alte Verhalten gebaut hat, muss beides anfassen, bevor das neue Modell überhaupt lauffähig ist — nicht, weil es schlechter ist, sondern weil es anders funktioniert. Immerhin: Anthropic bietet für genau diesen Fall inzwischen ein automatisiertes Migrationswerkzeug innerhalb seiner Entwicklungsumgebung an, das die ID ersetzt und bekannte Breaking Changes im Code aufspürt — ein Eingeständnis, wie viele Kunden bei jedem Versionswechsel an denselben Stellen hängen bleiben.</p>
+<h2>Die Kostenseite: Cache-Fenster und Routing</h2>
+<p>Migrieren verändert auch die Rechnung, und zwar nicht nur über den Preis pro Token. Mit GPT‑6 hat OpenAI am 22. September sein Prompt-Caching überarbeitet: Wiederverwendete Kontext-Anteile — etwa gleichbleibende Systemanweisungen oder Werkzeugdefinitionen — werden weiterhin mit bis zu 90 Prozent Rabatt auf die zwischengespeicherten Eingabe-Token abgerechnet, neu ist, dass gemeinsame Anfangsstücke eines Prompts jetzt innerhalb eines Fensters von 30 Minuten als Treffer gelten. GitHub-Produktchef Mario Rodriguez wird in der Ankündigung zitiert: sein Team habe „by more than 50% the share of prompt tokens requiring fresh processing“ reduziert — mehr als die Hälfte der zuvor komplett neu verarbeiteten Prompt-Token entfallen jetzt auf den Cache. Entscheidend für die Praxis: Der Cache erkennt nur identische Anfangsstücke — OpenAIs neues Diagnosewerkzeug meldet Fehltreffer etwa mit dem Grund, dass sich die Werkzeugdefinitionen geändert haben — wer also bei einem Modellwechsel gleichzeitig Prompts umschreibt, verliert unter Umständen genau den Kostenvorteil, den das neue Modell mitbringen sollte. Arian Hanifi, Technikchef eines der in der Ankündigung zitierten Kunden, berichtet von einer Verbesserung der Trefferrate „by a few percentage points, reducing costs by 20%“ durch gezieltes Monitoring statt Zufall. Wer, wie in der Reportage vom 14. August beschrieben, ohnehin nach Kosten pro gelöster Aufgabe statt nach Kosten pro Token rechnet, sollte diese Cache-Mechanik als festen Bestandteil jeder Migrationsrechnung mitführen, nicht als Fußnote.</p>
+<h2>Der Rückzug hat eine Frist — und eine Checkliste</h2>
+<p>Die drei großen Anbieter geben unterschiedlich lange Vorlauf, bevor ein Modell abgeschaltet wird, aber alle geben einen Vorlauf. OpenAI verspricht für allgemein verfügbare Modelle „at least 6 months“, für spezialisierte Varianten „at least 3 months“ und für Preview-Modelle nur „much shorter notice, such as 2 weeks“ — wer also mit einem als „preview“ gekennzeichneten Modell produktiv arbeitet, spielt bewusst mit der kürzesten Frist. Anthropic garantiert „at least 60 days' notice before model retirement for publicly released models“ und sagt zusätzlich zu, Modellgewichte danach nicht zu löschen: Man habe sich verpflichtet, „preserving the weights of all publicly released models ... for, at minimum, the lifetime of Anthropic as a company“ — die Gewichte bleiben also erhalten, auch wenn der Zugriff über die API endet. Google gibt für seine als „GA“ eingestuften Gemini-Modelle mindestens zwölf Monate Verfügbarkeit ab Release, für kurzlebigere Zwischenversionen aber nur „at least 45 days to migrate“ ab Ankündigung des Abschalttermins — ein Unterschied, den man vor der Modellwahl kennen sollte, nicht erst beim Abschalt-Hinweis.</p>
+<p>Für Unternehmen mit Sitz in der EU kommt eine zweite Frist hinzu, die zunächst den Anbieter trifft: Seit dem 2. August 2025 gelten die Transparenz- und Urheberrechtspflichten des AI Act für Anbieter von General-Purpose-AI-Modellen — Modelle, die laut Kommission mit „over 10^23 FLOP“ trainiert wurden; Modelle, die bereits vor diesem Stichtag am Markt waren, müssen erst bis zum 2. August 2027 nachziehen. Die Pflicht trifft den Modellanbieter, nicht seine Kunden. Wer aber das Modell hinter dem eigenen Produkt wechselt, tut gut daran, ebenso sorgfältig festzuhalten, was er einsetzt: welches Modell, welche Version, ab wann, mit welchem Testergebnis. Spätestens wenn ein Kunde, ein Prüfer oder die eigene Rechtsabteilung fragt, ist diese Liste mehr wert als jede Benchmark.</p>
+<p>Daraus lässt sich ein Ablauf destillieren, der sich wiederholen lässt, statt jedes Mal neu erfunden zu werden: Erstens, jede Produktionsanfrage an eine gepinnte, versionierte Modell-ID binden, nie an einen automatisch aktualisierenden Alias. Zweitens, vor jedem Wechsel den eigenen Eval-Satz aus echten Produktionsfällen laufen lassen — nicht den Benchmark des Anbieters. Drittens, Breaking Changes in der Migrationsanleitung des Anbieters Zeile für Zeile gegen den eigenen Code prüfen, bevor man die ID tauscht. Viertens, Cache-Konfiguration und Kostenrechnung getrennt von der Modellwahl neu bewerten. Fünftens, die Abschaltfrist des alten Modells im Kalender eintragen, sobald die Migration beginnt, nicht erst, wenn die E-Mail des Anbieters kommt. Wer diese fünf Punkte als Standardprozess führt, erlebt den nächsten Modellwechsel als Routine — und nicht als Notfall am Dienstagmorgen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://developers.openai.com/api/docs/deprecations" rel="noopener noreferrer external" target="_blank">OpenAI — Deprecations (API-Dokumentation; Abschaltfristen für allgemein verfügbare, spezialisierte und Preview-Modelle)</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" rel="noopener noreferrer external" target="_blank">Anthropic — Model deprecations (Claude Platform Docs; Frist von mindestens 60 Tagen)</a></li>
+            
+            <li><a href="https://www.anthropic.com/research/deprecation-commitments" rel="noopener noreferrer external" target="_blank">Anthropic — Commitments on model deprecation and preservation (4.11.2025; Zusage zum Erhalt der Modellgewichte)</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions" rel="noopener noreferrer external" target="_blank">Anthropic — Model IDs and versioning (Claude Platform Docs; gepinnte IDs und Aliasse, Zitat stringgeprüft)</a></li>
+            
+            <li><a href="https://platform.claude.com/docs/en/models/opus-5-5/migration-guide" rel="noopener noreferrer external" target="_blank">Anthropic — Migrating to Claude Opus 5.5 (Migrationsleitfaden; vier Breaking Changes und Migrationswerkzeug stringgeprüft)</a></li>
+            
+            <li><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions" rel="noopener noreferrer external" target="_blank">Google Cloud — Model versions and lifecycle (Fristen für Gemini-Modelle)</a></li>
+            
+            <li><a href="https://web.archive.org/web/20260917051608/https://openai.com/index/sycophancy-in-gpt-4o/" rel="noopener noreferrer external" target="_blank">OpenAI — Sycophancy in GPT-4o: what happened and what we&#39;re doing about it (29.4.2025; über das Internet Archive gelesen)</a></li>
+            
+            <li><a href="https://web.archive.org/web/20260922201017/https://openai.com/index/better-prompt-caching-for-gpt-6" rel="noopener noreferrer external" target="_blank">OpenAI — Better prompt caching for GPT-6 (22.9.2026; über das Internet Archive gelesen, Zitate stringgeprüft)</a></li>
+            
+            <li><a href="https://digital-strategy.ec.europa.eu/en/news/eu-rules-general-purpose-ai-models-start-apply-bringing-more-transparency-safety-and-accountability" rel="noopener noreferrer external" target="_blank">Europäische Kommission — EU rules on general-purpose AI models start to apply (1.8.2025)</a></li>
+            
+            <li><a href="https://github.com/openai/evals" rel="noopener noreferrer external" target="_blank">GitHub — openai/evals (offenes Evaluierungs-Framework)</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/" rel="noopener noreferrer external" target="_blank">TechCrunch — OpenAI launches GPT-6 Sol and Luna, boasting lower cost and fewer mistakes (22.9.2026)</a></li>
+            
+            <li><a href="https://www.heise.de/news/Grok-4-7-Guenstige-API-trifft-auf-hohen-Tokenverbrauch-11461063.html" rel="noopener noreferrer external" target="_blank">heise online — Grok 4.7: Günstige API trifft auf hohen Tokenverbrauch (22.9.2026)</a></li>
+            
+            <li><a href="https://www.heise.de/news/MiMo-V2-6-Pro-Neues-Modell-fuehrt-Open-Weight-Ranking-an-11462212.html" rel="noopener noreferrer external" target="_blank">heise online — MiMo-V2.6-Pro: Neues Open-Weight-Modell schlägt offene Konkurrenz (22.9.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
