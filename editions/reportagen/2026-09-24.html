@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kann ein KI-Anbieter beweisen, dass er nicht mitliest? Confidential Computing im Herbst 2026</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-09-24.html">&larr; Zur&uuml;ck zur Ausgabe vom 24. September 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Kann ein KI-Anbieter beweisen, dass er nicht mitliest? Confidential Computing im Herbst 2026</h1>
+    
+    <p class="reportage-teaser">Google, Apple und Meta versprechen KI-Verarbeitung in der Cloud, bei der selbst der Anbieter nicht hineinsehen kann. Was hinter Enklaven und Attestierung steckt, wo die Technik 2025 und 2026 Risse bekommen hat — und welche Fragen Unternehmen ihren KI-Anbietern stellen sollten.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-09-24">24. September 2026</time>
+         &middot; 8 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Das Versprechen</h2>
+<p>Am 23. September hat Google beschrieben, wie sein KI-Assistent sich künftig über Wochen an seine Nutzer erinnern soll, ohne dass Google diese Erinnerungen lesen kann. Die Schlüssel lägen <em>„exclusively on your personal devices — ensuring your data is inaccessible to anyone else, even Google“</em>, heißt es im <a href="https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory/">Beitrag von Google DeepMind</a>: ausschließlich auf den Geräten der Nutzer, sodass niemand sonst Zugriff hat, auch Google nicht. Am selben Tag veröffentlichte Meta einen <a href="https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/">technischen Beitrag</a>, wie seine KI-Brillen Anfragen in abgeschotteten Rechenzentren verarbeiten sollen, <em>„such that even Meta cannot access your data“</em>.</p>
+<p>Zwei Konzerne, deren Geschäft auf Daten beruht, versprechen am selben Tag, bestimmte Daten nicht sehen zu können. Die naheliegende Frage lautet: Ist das eine Vertragsklausel oder ein technisch nachprüfbarer Zustand? Die Antwort heißt Confidential Computing — und sie ist besser, als Skeptiker vermuten, aber schwächer, als die Werbetexte klingen.</p>
+<h2>Ein Schließfach, zu dem der Vermieter keinen Schlüssel hat</h2>
+<p>Normalerweise ist verschlüsselte Datenverarbeitung ein Widerspruch. Daten lassen sich auf der Festplatte und auf dem Transportweg verschlüsseln, aber um mit ihnen zu rechnen, muss ein Server sie entschlüsseln. In diesem Moment liegen sie im Klartext im Arbeitsspeicher, und wer den Server betreibt, kann im Prinzip hineinsehen. Metas Engineering-Team beschreibt das als den dritten, bisher ungeschützten Zustand: Daten <em>„in use“</em>.</p>
+<p>Confidential Computing schließt diese Lücke mit Hardware. Eine <strong>Trusted Execution Environment</strong>, kurz TEE oder Enklave, ist ein Bereich, dessen Arbeitsspeicher der Prozessor selbst verschlüsselt, mit einem Schlüssel, den weder Betriebssystem noch Administrator kennen. Man kann sich das als Schließfach in einem gemieteten Gebäude vorstellen, für das der Vermieter keinen Generalschlüssel besitzt.</p>
+<p>Das zweite Element ist die <strong>Remote Attestation</strong>, die Beglaubigung aus der Ferne. Bevor ein Gerät Daten schickt, verlangt es von der Enklave einen kryptografisch signierten Nachweis, welche Software darin läuft. Der Prozessorhersteller bürgt mit seiner Signatur dafür, dass der Nachweis echt ist. Stimmt die gemeldete Software mit einer veröffentlichten, geprüften Version überein, gibt das Gerät seine Daten frei; sonst nicht. Bei Googles neuem Gedächtnis ist das die Bedingung für den Schlüssel: Eine Enklave, die keinen gültigen Nachweis vorlegt, bekommt ihn laut Googles technischem Begleitpapier nicht.</p>
+<h2>Wie die Großen es bauen</h2>
+<p>Den Maßstab hat Apple 2024 mit <strong>Private Cloud Compute</strong> gesetzt. Apple verspricht unter anderem zustandslose Verarbeitung, also keine Speicherung nach der Anfrage, keinen privilegierten Zugriff für eigene Mitarbeitende, Schutz davor, dass ein Angreifer gezielt einzelne Nutzer treffen kann, und eine überprüfbare Transparenz: Die Software der Server wird in einem öffentlichen Protokoll veröffentlicht, Geräte schicken Anfragen nur an Server mit gelisteter Software (<a href="https://security.apple.com/blog/private-cloud-compute/">Apple Security Research</a>). Im Juni 2026 hat Apple angekündigt, mit Google und NVIDIA neue Apple-Intelligence-Aufgaben erstmals auch in Google-Rechenzentren auszuführen, unter denselben Zusagen (<a href="https://security.apple.com/blog/expanding-pcc/">Expanding Private Cloud Compute</a>).</p>
+<p>Google startete <strong>Private AI Compute</strong> im November 2025 nach demselben Muster. Neu ist nun das Gedächtnis, und an ihm zeigt sich ein Zielkonflikt, den Google in seinem <a href="https://services.google.com/fh/files/misc/private_ai_compute_technical_brief.pdf">Begleitpapier</a> offen benennt: Ein gespeichertes Profil muss auffindbar sein. Das Versprechen, dass niemand einen bestimmten Nutzer gezielt ansteuern kann, gibt Google für diesen Teil auf; stattdessen erhalte ein Angreifer nur Chiffretext. Der Schutz hängt damit ganz an Verschlüsselung und Schlüsselverwaltung. Und dass Geräte die Attestierung selbst prüfen, statt Googles Zusicherung zu vertrauen, steht dort noch im Kapitel über künftige Schritte.</p>
+<p>Meta führte <strong>Private Processing</strong> 2025 für WhatsApp und die Meta-AI-App ein und dehnt es jetzt auf die Brillen aus. Die Grundlage bilden vertrauliche virtuelle Maschinen auf AMD-Prozessoren und Grafikkarten von NVIDIA im vertraulichen Modus. NVIDIA unterstützt Confidential Computing auf den Generationen Hopper und Blackwell und gibt an, dabei <em>„up to 98% of the performance“</em> ungeschützter Systeme zu erreichen (<a href="https://www.nvidia.com/en-us/data-center/solutions/confidential-computing/">NVIDIA</a>). Ein <a href="https://arxiv.org/abs/2608.26575">Preprint vom August</a> kommt für B200-Grafikkarten zu einem ähnlichen Ergebnis: Richtig konfiguriert kostet vertrauliche Inferenz rund 1 bis 3 Prozent Durchsatz, mit Standardeinstellungen aber 30 bis 40 Prozent. Der Leistungsverlust ist also vor allem eine Frage der Konfiguration.</p>
+<h2>Wo die Beglaubigung an ihre Grenzen kommt</h2>
+<p>Die Attestierung ist nur so vertrauenswürdig wie die Hardware, die sie ausstellt. Im Herbst 2025 haben drei Forschungsgruppen gezeigt, dass diese Annahme bei physischem Zugang wackelt. Forscher der Georgia Tech und der Purdue University lasen mit <strong>WireTap</strong> über ein Zwischenstück am Speicherbus für rund 1.000 Dollar Schlüssel aus Intels SGX-Enklaven aus (<a href="https://thehackernews.com/2025/10/new-wiretap-attack-extracts-intel-sgx.html">The Hacker News</a>). Ein Team der KU Leuven und der University of Birmingham manipulierte mit <strong>Battering RAM</strong> für unter 50 Dollar verschlüsselten Speicher und brach damit sowohl Intels SGX als auch AMDs SEV-SNP (<a href="https://batteringram.eu/">batteringram.eu</a>). Und mit <strong>TEE.fail</strong>, das auf der Konferenz IEEE S&amp;P 2026 erscheint, extrahierten Forscher der Georgia Tech und Purdue über den neueren DDR5-Speicherbus Attestierungsschlüssel und konnten gefälschte Beglaubigungen erzeugen, die auch NVIDIAs vertrauliche Grafikkarten betreffen (<a href="https://tee.fail/">tee.fail</a>).</p>
+<p>Allen drei Angriffen ist gemeinsam, dass sie physischen Zugang zum Server voraussetzen. Das schließt Hacker aus dem Internet weitgehend aus — aber nicht Innentäter, manipulierte Lieferketten oder Behörden mit Zugriff auf ein Rechenzentrum. Genau diese Gruppen will Confidential Computing eigentlich abwehren.</p>
+<p>Auch externe Prüfungen setzen Grenzen. Die NCC Group hat Metas Private Processing für WhatsApp in 115 Personentagen untersucht und unter anderem eine überflüssige Netzwerkschnittstelle gefunden, über die Daten hätten abfließen können, sowie fehlende Frischeprüfungen bei Attestierungen. Meta hat die Befunde laut Bericht behoben. Grundsätzlich bleibt nach <a href="https://cyberinsider.com/whatsapps-ai-system-passes-security-audit-but-with-asterisks/">CyberInsider</a> aber die Abhängigkeit von <em>„Meta-controlled signing keys and proprietary TEE firmware from AMD and NVIDIA“</em> — von Signaturschlüsseln, die Meta kontrolliert, und Firmware, die sich nicht vollständig prüfen lässt. Die Attestierung beweist, dass ein bestimmtes Programm läuft. Sie beweist nicht, dass die Chips darunter fehlerfrei sind, dass außerhalb der Enklave nichts protokolliert wird, oder dass die nächste Softwareversion ebenso vertrauenswürdig ist.</p>
+<h2>Die API-Anbieter gehen andere Wege</h2>
+<p>Auffällig ist, dass die beiden großen Anbieter von Sprachmodell-Schnittstellen für Unternehmen das Problem bisher nicht mit Enklaven lösen. OpenAI hat im August „Private Safety Processing“ vorgestellt: Sicherheitssysteme sollen Missbrauchsmuster über mehrere Anfragen hinweg erkennen, <em>„without giving OpenAI personnel access to the underlying content“</em>, ohne dass OpenAI-Mitarbeitende die Inhalte sehen. Bei Kunden mit vereinbarter Nichtspeicherung bleiben die Inhalte auf deren eigener Infrastruktur; als Alternative entwickelt OpenAI eine verschlüsselte Speicherung bei sich (<a href="https://openai.com/index/offering-zero-data-retention-for-frontier-models/">OpenAI</a>). Anthropic speichert Anfragen an seine leistungsfähigsten Modelle seit Juni 30 Tage lang, auch bei Kunden mit bisheriger Nullspeicherungsvereinbarung, und hat nach Protesten angekündigt, Protokolle und Schlüssel künftig in Cloud-Konten der Kunden zu verlagern (<a href="https://winbuzzer.com/2026/09/03/anthropic-plans-customer-controlled-ai-monitoring-after-data-retention-pushback-xcxwbn/">Winbuzzer</a>).</p>
+<p>Beides sind Zugriffs- und Schlüsselregeln, keine hardwaregestützten Beweise. Sie können trotzdem sinnvoll sein. Aber sie verlangen Vertrauen in organisatorische Zusagen — genau das, was Confidential Computing durch Nachprüfbarkeit ersetzen will. Wie lange Anbieter Prompts überhaupt aufbewahren, haben wir in der Reportage <a href="/editions/reportagen/2026-08-20.html">„Wo die Prompts Ihres Unternehmens wirklich landen“</a> vom 20. August untersucht. Beide Fragen gehören zusammen: Eine kurze Speicherfrist beweist keine Enklave, und eine Enklave beweist keine kurze Speicherfrist.</p>
+<h2>Was Unternehmen fragen sollten</h2>
+<p>Für Unternehmen, die KI-Dienste in eigene Produkte einbauen oder Mitarbeitenden bereitstellen, lässt sich daraus eine kurze Prüfliste ableiten.</p>
+<p><strong>Nachweis statt Zusage.</strong> Die erste Frage an einen Anbieter lautet nicht „Speichern Sie unsere Daten?“, sondern „Können wir prüfen, welche Software unsere Daten verarbeitet?“ Bei Apple, Google und Meta gibt es dafür veröffentlichte Architekturen und Prüfberichte; bei den großen Schnittstellenanbietern für Unternehmen stützt man sich bislang auf Vertragsregeln.</p>
+<p><strong>Wer prüft die Beglaubigung?</strong> Bei Google ist die geräteseitige Prüfung noch ein Ziel, keine Tatsache. Wer in der Kette die Attestierung tatsächlich auswertet, entscheidet darüber, wie viel sie wert ist.</p>
+<p><strong>Wessen Hardware, wessen Schlüssel?</strong> Am Ende vertraut man dem Chiphersteller und dem, der die Signaturschlüssel hält. Physische Angriffe wie TEE.fail sind für normale Kriminelle kaum relevant, für Innentäter und staatliche Akteure schon.</p>
+<p><strong>Rechtliche Einordnung.</strong> Für Berufsgeheimnisträger, Gesundheits- oder Personaldaten kann eine technisch nachweisbare Abschottung ein stärkeres Argument bei der Auswahl technischer und organisatorischer Maßnahmen nach der DSGVO sein als eine Vertragsklausel. Einen Freibrief bedeutet sie nicht; die Bewertung gehört zu Datenschutzbeauftragten und Rechtsabteilung.</p>
+<p><strong>Selbst messen.</strong> Der Leistungsaufschlag vertraulicher Grafikkarten ist bei richtiger Konfiguration klein, bei falscher erheblich. Herstellerangaben ersetzen keine eigene Messung.</p>
+<p>Confidential Computing macht aus „Vertrauen Sie uns“ ein „Prüfen Sie uns“. Das ist ein echter Fortschritt. Wer ihn nutzen will, muss die Prüfung aber auch tatsächlich einfordern.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory/" rel="noopener noreferrer external" target="_blank">Google DeepMind — Advancing Private AI Compute with secure, server-side memory (23.9.2026)</a></li>
+            
+            <li><a href="https://services.google.com/fh/files/misc/private_ai_compute_technical_brief.pdf" rel="noopener noreferrer external" target="_blank">Google — Private AI Compute: Technical Brief (PDF, September 2026)</a></li>
+            
+            <li><a href="https://engineering.fb.com/2026/09/23/security/private-processing-meta-ai-glasses/" rel="noopener noreferrer external" target="_blank">Engineering at Meta — Bringing Private Processing to Meta AI Glasses (23.9.2026)</a></li>
+            
+            <li><a href="https://security.apple.com/blog/private-cloud-compute/" rel="noopener noreferrer external" target="_blank">Apple Security Research — Private Cloud Compute: A new frontier for AI privacy in the cloud</a></li>
+            
+            <li><a href="https://security.apple.com/blog/expanding-pcc/" rel="noopener noreferrer external" target="_blank">Apple Security Research — Expanding Private Cloud Compute (8.6.2026)</a></li>
+            
+            <li><a href="https://cyberinsider.com/whatsapps-ai-system-passes-security-audit-but-with-asterisks/" rel="noopener noreferrer external" target="_blank">CyberInsider — WhatsApp&#39;s AI System Passes Security Audit, But With Asterisks (NCC-Group-Prüfung)</a></li>
+            
+            <li><a href="https://thehackernews.com/2025/10/new-wiretap-attack-extracts-intel-sgx.html" rel="noopener noreferrer external" target="_blank">The Hacker News — New WireTap Attack Extracts Intel SGX ECDSA Key via DDR4 Memory-Bus Interposer (Oktober 2025)</a></li>
+            
+            <li><a href="https://batteringram.eu/" rel="noopener noreferrer external" target="_blank">KU Leuven / University of Birmingham — Battering RAM</a></li>
+            
+            <li><a href="https://tee.fail/" rel="noopener noreferrer external" target="_blank">Georgia Tech / Purdue University — TEE.fail: Breaking Trusted Execution Environments via DDR5 Memory Bus Interposition (IEEE S&amp;P &#39;26)</a></li>
+            
+            <li><a href="https://www.nvidia.com/en-us/data-center/solutions/confidential-computing/" rel="noopener noreferrer external" target="_blank">NVIDIA — AI Security with Confidential Computing</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2608.26575" rel="noopener noreferrer external" target="_blank">arXiv — Benchmarking Confidential Computing Performance on NVIDIA Blackwell GPUs (2608.26575)</a></li>
+            
+            <li><a href="https://openai.com/index/offering-zero-data-retention-for-frontier-models/" rel="noopener noreferrer external" target="_blank">OpenAI — Offering Zero Data Retention for frontier models (19.8.2026; über das Internet Archive gelesen)</a></li>
+            
+            <li><a href="https://winbuzzer.com/2026/09/03/anthropic-plans-customer-controlled-ai-monitoring-after-data-retention-pushback-xcxwbn/" rel="noopener noreferrer external" target="_blank">Winbuzzer — Anthropic Plans Customer-Controlled AI Monitoring After Data-Retention Pushback (3.9.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
