@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Justiz-Schock für KI-Chatbots: Was die EuGH-Schlussanträge zu Like Company für Verlage und Modelle bedeuten</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-04.html">&larr; Zur&uuml;ck zur Ausgabe vom 4. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Justiz-Schock für KI-Chatbots: Was die EuGH-Schlussanträge zu Like Company für Verlage und Modelle bedeuten</h1>
+    
+    <p class="reportage-teaser">Generalanwalt Maciej Szpunar legt in der Rechtssache C-250/25 (Like Company gegen Google) dar, warum KI-Chatbots wie Gemini das Leistungsschutzrecht der Presseverlage verletzen können — nicht beim Training, sondern bei Echtzeit-Antworten und RAG. Eine juristische und technische Tiefenanalyse über Paywall-Bypass, Substitute und die Neujustierung von Geschäftsmodellen.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-04">4. November 2026</time>
+         &middot; ca. 10 Minuten Lesezeit
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Das Ende der rechtlichen Grauzone für Echtzeit-Inferenz</h2>
+<p>Am 3. November 2026 hat in Luxemburg eine juristische Zeitenwende für die europäische KI-Industrie begonnen. In der Rechtssache C-250/25 (<em>Like Company gegen Google Ireland Limited</em>) legte der Erste Generalanwalt des Europäischen Gerichtshofs, Maciej Szpunar, seine lang erwarteten Schlussanträge vor. Es ist das allererste Verfahren zur generativen Künstlichen Intelligenz und zum europäischen Urheberrecht, das die Große Kammer des EuGH erreicht hat.</p>
+<p>Während sich die öffentliche Debatte der vergangenen drei Jahre fast manisch auf das Training von Foundation Models — also das massenhafte Scraping des offenen Internets zur Gewichtsanpassung — versteifte, zieht Szpunar die eigentliche rote Linie an einer ganz anderen, operativ viel akuteren Stelle: bei der Inferenz. Genauer gesagt: bei Retrieval-Augmented Generation (RAG) und dem automatisierten Abrufen von Webseiten in Echtzeit, um Nutzerfragen mit tagesaktuellen Nachrichten zu beantworten.</p>
+<p>Szpunars Botschaft an Big-Tech-Konzerne, KI-Startups und Presseverlage ist unmissverständlich: Wer einen KI-Chatbot betreibt, der fremde journalistische Inhalte abgreift und daraus Antworten synthetisiert, die das Original überflüssig machen, begeht unter dem europäischen Presseleistungsschutzrecht (Artikel 15 der DSM-Richtlinie 2019/790) eine Rechtsverletzung. Und haftet dafür vollumfänglich.</p>
+<h2>Die ungarische Vorlage: Der Streitfall Like Company</h2>
+<p>Der rechtliche Ausgangspunkt des Verfahrens liegt in Ungarn. Die Klägerin, die <em>Like Company</em>, betreibt mehrere reichweitenstarke digitale Nachrichtenportale. Sie stellte fest, dass Googles KI-Dienst Gemini zwischen Juni 2023 und Mai 2024 wiederholt detaillierte Auskünfte zu tagesaktuellen Ereignissen erteilte, deren Textbestandteile, Faktenreihungen und journalistische Aufbereitungen direkt aus Artikeln ihrer Portale stammten.</p>
+<p>Vor dem Stuhlgericht für das Umland von Budapest (<em>Budapest Környéki Törvényszék</em>) verklagte Like Company den Digitalkonzern auf Unterlassung und Schadenersatz. Das ungarische Gericht sah sich mit grundlegenden Auslegungsfragen des EU-Rechts konfrontiert und legte dem EuGH vier Vorabentscheidungsfragen vor:</p>
+<ol>
+<li>Fällt das Einspeisen von Presseartikeln in den Trainingskorpus eines Large Language Models (LLM) unter das ausschließliche Vervielfältigungsrecht der Verlage?</li>
+<li>Greift für dieses Modelltraining die Ausnahme für Text- und Data-Mining (TDM) gemäß Artikel 4 der DSM-Richtlinie, sofern Verlage keinen maschinenlesbaren Opt-Out erklärt haben?</li>
+<li>Stellt die Generierung einer Antwort durch einen Chatbot, der Presseinhalte zusammenfasst, eine Vervielfältigung oder öffentliche Wiedergabe dar?</li>
+<li>Wie ist die Haftung des Plattformbetreibers zu bewerten, wenn der Chatbot als Substitut für den Klick auf die Verlagswebsite dient?</li>
+</ol>
+<p>Die Antwort des Generalanwalts spaltet das Verfahren in einen prozeduralen Befreiungsschlag für das Training und einen Donnerschlag für die Inferenz.</p>
+<h2>Der juristische Kniff: Training als Phantomdebatte</h2>
+<p>Überraschend deutlich empfiehlt Generalanwalt Szpunar dem EuGH, die ersten beiden Fragen zum Modelltraining für unzulässig zu erklären. Seine Begründung ist von bestechender prozessualer Nüchternheit: Im ungarischen Ausgangsverfahren gebe es schlicht keinen substantiierten Beweis dafür, dass die spezifischen Artikel der Like Company jemals in den Trainingsdaten von Gemini enthalten waren. Ein Vorabentscheidungsersuchen dürfe keine theoretischen Gutachten anfordern, sondern müsse für den konkreten Rechtsstreit entscheidungserheblich sein.</p>
+<p>Darüber hinaus — und das ist der entscheidende dogmatische Hebel — stelle das reine Vorab-Training eines Modells keine „Online-Nutzung“ im Sinne von Artikel 15 der DSM-Richtlinie dar. Das Leistungsschutzrecht der Presseverleger schütze die öffentliche Verwertung und Verbreitung von Presseinhalten im digitalen Raum, nicht aber die interne mathematische Verarbeitung von Token-Mustern hinter geschlossenen Labortüren.</p>
+<p>Gleichwohl ließ es sich Szpunar nicht nehmen, dem Gerichtshof vorsorglich einen Pflock einzuschlagen: Sollte das Gericht die Trainingsfragen wider Erwarten doch beantworten wollen, sei das Training von Basismodellen auf öffentlich zugänglichen Daten durch die TDM-Schranke des Artikels 4 der DSM-Richtlinie grundsätzlich gedeckt — es sei denn, der Rechteinhaber habe einen rechtsgültigen Vorbehalt (Opt-Out) nachgewiesen. Für Entwickler von KI-Modellen bedeutet dies vorerst Aufatmen bei der Trainingsphase. Umso schärfer schlägt das Pendel jedoch bei der Auslieferung aus.</p>
+<h2>Der Kernkonflikt: Fakten vs. Ausdrucksform</h2>
+<p>Das Leistungsschutzrecht nach Artikel 15 DSM-Richtlinie gewährt Presseverlagen das ausschließliche Recht, die Vervielfältigung und die öffentliche Zugänglichmachung ihrer Veröffentlichungen für die Online-Nutzung durch Diensteanbieter der Informationsgesellschaft zu erlauben oder zu verbieten.</p>
+<p>Schon bei der Verabschiedung der Richtlinie 2019 stritten Juristen über die Reichweite: Schützt das Recht bloße Nachrichten? Die Antwort des Gesetzes war immer ein klares Nein: Bloße Fakten sind gemeinfrei. Jeder darf vermelden, dass ein Minister zurückgetreten ist oder ein Erdbeben stattgefunden hat.</p>
+<p>Generalanwalt Szpunar greift diese Unterscheidung auf, zieht sie aber im Zeitalter generativer KI mit mathematischer Präzision neu:</p>
+<ul>
+<li><strong>Gemeinfreie Information:</strong> Ein Chatbot darf Fakten aus Presseberichten extrahieren und in eigenen Worten wiedergeben.</li>
+<li><strong>Geschützte Ausdrucksform:</strong> Das Leistungsschutzrecht schützt jedoch die <em>Investition in die journalistische Aufbereitung</em> — die Auswahl, Strukturierung, Wertung, Syntax und Nuancierung der Sprache.</li>
+</ul>
+<p>Szpunar definiert zwei kumulative Kriterien, anhand derer nationale Gerichte künftig beurteilen müssen, ob eine Chatbot-Antwort die Grenze zur Rechtsverletzung überschreitet:</p>
+<h3>1. Die Art des Zugriffs: Scraping und Paywall-Umgehung</h3>
+<p>Hat der Bot unrechtmäßig auf den Inhalt zugegriffen? Wenn eine KI-Plattform technische Schutzmaßnahmen wie Paywalls, Authentifizierungsschranken oder explizite Scraping-Verbote umgeht — sei es durch unautorisierte Browser-Emulation, manipulierte Header oder den Zugriff über Caching-Proxys —, entfällt jegliche Privilegierung. Ein unbefugter Zugriff infiziert die gesamte nachfolgende Verwertung.</p>
+<h3>2. Der Substitutionsgrad: Macht die Antwort das Original überflüssig?</h3>
+<p>Übernimmt die generierte Antwort die spezifische Ausdrucksform des Presseartikels in einem solchen Maße, dass beim Nutzer kein praktisches Bedürfnis mehr besteht, den Originalartikel auf der Website des Verlags aufzurufen?</p>
+<p>Hier formuliert Szpunar ein wirtschaftliches Substitutionskriterium. Wenn ein Chatbot auf eine Frage wie „Was steht heute in der Zeitung X über den Skandal Y?“ eine synthetische Zusammenfassung liefert, die alle Details, Argumentationsstränge und Zitate so bündelt, dass der Leser vollständig bedient ist („Zero-Click“), liegt eine Verwertung der verlegerischen Leistung vor. Wird die Ausdrucksform systematisch reproduziert, greift das Vervielfältigungs- und Wiedergaberecht des Verlags.</p>
+<h2>Das Ende der Ausreden: Betreiber haften für ihr System</h2>
+<p>Besonders brisant für Konzerne wie Google, OpenAI, Microsoft oder Perplexity sind Szpunars Ausführungen zur zivilrechtlichen Haftung. In der Vergangenheit zogen sich Plattformbetreiber gerne darauf zurück, dass KI-Modelle probabilistische „Black Boxes“ seien: Man könne Halluzinationen oder wörtliche Zitate im Einzelfall weder vorhersehen noch steuern; der Nutzer sei für seinen Prompt selbst verantwortlich.</p>
+<p>Szpunar wischt diese Argumentation beiseite. Ein KI-Anbieter haftet dann vollumfänglich, wenn:</p>
+<ul>
+<li>das Abrufen und Aufbereiten tagesaktueller Presseinhalte <strong>fester Bestandteil seines Geschäftsmodells</strong> ist (was bei RAG-gestützten Such- und Chatbots explizit das beworbene Feature darstellt);</li>
+<li>oder der Betreiber es versäumt hat, <strong>wirksame und glaubwürdige technische Vorkehrungen</strong> zu treffen, um das unbefugte Abgreifen geschützter Presseinhalte deterministisch zu unterbinden.</li>
+</ul>
+<p>Wer seinen Bot mit einer Live-Websuche ausstattet, um News zu aggregieren, kann sich nicht mehr als neutraler Technologie-Provider deklarieren. Er ist Verleger einer synthetischen Publikation.</p>
+<h2>Was das Urteil für die Tech-Praxis bedeutet</h2>
+<p>Auch wenn die Schlussanträge für die Richter der Großen Kammer formal nicht bindend sind, folgt der EuGH den Gutachten seiner Generalanwälte erfahrungsgemäß in über 80 Prozent der Fälle. Ein endgültiges Urteil wird für das Frühjahr 2027 erwartet. Für Technologie- und Medienunternehmen stellen sich schon heute fundamentale strategische Fragen.</p>
+<h3>1. Für SaaS-Unternehmen und KI-Entwickler</h3>
+<p>Wer Enterprise-Agenten oder RAG-Pipelines betreibt, die externe Web-Quellen abgrasen, muss seine Ingestion-Architektur auditieren. Ein naiver HTTP-Crawler, der Webseiten parst und dem Kontextfenster zuführt, wird zum juristischen Minenfeld. Unternehmen müssen nachweisen können, dass ihre Bots <code>robots.txt</code>-Direktiven strikt respektieren, keine Paywalls tangieren und Inferenz-Outputs so konditionieren, dass sie Fakten abstrahieren statt Texte stilistisch zu spiegeln.</p>
+<h3>2. Für Presseverlage</h3>
+<p>Die Presseverlage erhalten durch Szpunars Vorstoß ein mächtiges Verhandlungsschwert zurück. Das europäische Leistungsschutzrecht von 2019 galt vielen bereits als zahnloser Papiertiger, der gegenüber Google und Meta kaum messbare Lizenzerträge einbrachte. Wenn der EuGH bestätigt, dass RAG-Inferenz lizenzpflichtig ist, verschiebt sich die Verhandlungsmacht drastisch. Tech-Konzerne werden gezwungen sein, umfassende Content-Lizenzverträge abzuschließen — ähnlich den jüngsten Vereinbarungen zwischen OpenAI und Verlagen wie Axel Springer, News Corp oder Le Monde —, anstatt sich auf das Fair-Use-Narrativ der US-Rechtsprechung zu berufen.</p>
+<h3>3. Für die europäische KI-Ökonomie</h3>
+<p>Es droht eine transatlantische Rechtsspaltung. Während US-Gerichte im Rahmen der Fair-Use-Doktrin prüfen, ob RAG-Synthesen „transformativ“ sind, etabliert Europa über Artikel 15 DSM-RL ein hartes Schutzrecht, das auf den Schutz der wirtschaftlichen Investition abstellt. US-Anbieter könnten versucht sein, europäische Presseinhalte in der EU-Inferenz schlicht zu geoblocken — was zu Informationslücken und minderwertigen Antworten bei regionalen Themen führen würde.</p>
+<h2>Ausblick: Die Verhandlung über den Inferenz-Token</h2>
+<p>Die Schlussanträge in der Rechtssache Like Company verdeutlichen, dass die Pionierzeit der unregulierten generativen Inferenz vorüber ist. KI-Modelle können nicht länger kostenlos als Parasiten journalistischer Recherche und Redaktionsarbeit operieren, während sie gleichzeitig die Werbeeinnahmen der Originalquellen durch Zero-Click-Schnittstellen austrocknen.</p>
+<p>Wenn der Gerichtshof der Argumentation von Maciej Szpunar folgt, wird der Wert von Inhalten künftig nicht mehr nur beim Datentraining taxiert, sondern an jedem einzelnen Inferenz-Token gemessen, der ein urheberrechtlich geschütztes Werk im Auslieferungsmoment substituiert. Für die Architektur moderner KI-Agenten ist das ein Weckruf: Die Zukunft gehört lizenzierten, auditierten und rechtssicheren Datenströmen.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://curia.europa.eu/site/upload/docs/application/pdf/2026-11/cp260155de.pdf" rel="noopener noreferrer external" target="_blank">Gerichtshof der Europäischen Union (3. November 2026) — Schlussanträge des Generalanwalts Maciej Szpunar in der Rechtssache C-250/25 Like Company (Pressemitteilung Nr. 155/26)</a></li>
+            
+            <li><a href="https://eur-lex.europa.eu/eli/dir/2019/790/oj" rel="noopener noreferrer external" target="_blank">EUR-Lex — Richtlinie (EU) 2019/790 über das Urheberrecht und die verwandten Schutzrechte im digitalen Binnenmarkt (DSM-Richtlinie, Art. 15 und Art. 4)</a></li>
+            
+            <li><a href="https://infocuria.curia.europa.eu/tabs/tout?publishedId=C-250/25" rel="noopener noreferrer external" target="_blank">Curia / InfoCuria — Vorabentscheidungsersuchen des Budapest Környéki Törvényszék in der Rechtssache C-250/25 Like Company gegen Google Ireland Limited</a></li>
+            
+            <li><a href="https://www.spiegel.de/wirtschaft/unternehmen/kuenstliche-intelligenz-ki-chatbots-koennen-rechte-von-presseverlagen-verletzen-a-97b10c58-0481-440d-afde-df5f5d31ad3c" rel="noopener noreferrer external" target="_blank">Spiegel Netzwelt (3. November 2026) — KI-Chatbots können Rechte von Presseverlagen verletzen</a></li>
+            
+            <li><a href="https://www.lto.de/recht/nachrichten/n/c25025eugh-generalanwalt-schlussantraege-ki-chatbots-rechte-von-presseverlagen-verletzt" rel="noopener noreferrer external" target="_blank">LTO Legal Tribune Online (3. November 2026) — EuGH-Generalanwalt zu KI-Antworten: Chatbots können Urheberrechte von Presseverlagen verletzen</a></li>
+            
+            <li><a href="https://legalblogs.wolterskluwer.com/copyright-blog/first-reflections-on-ag-szpunars-opinion-in-like-company" rel="noopener noreferrer external" target="_blank">Kluwer Copyright Blog (3. November 2026) — First Reflections on AG Szpunar’s Opinion in Like Company</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
