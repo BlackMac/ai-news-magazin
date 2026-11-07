@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Gerüst und das Gehirn: Wo die Intelligenz eines KI-Agenten wirklich sitzt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-07.html">&larr; Zur&uuml;ck zur Ausgabe vom 7. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Das Gerüst und das Gehirn: Wo die Intelligenz eines KI-Agenten wirklich sitzt</h1>
+    
+    <p class="reportage-teaser">Dasselbe Modell, drei Programme drumherum, bis zu 40-fach unterschiedliche Token-Kosten: Der Fall DeepSeek Harness zeigt, wie viel vom „Agenten“ gar nicht im Modell steckt. Und dann kommt AREX-2 und verlegt das Gerüst zurück ins Modell.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-07">7. November 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <p>Wer heute einen KI-Agenten für sein Team auswählt, vergleicht meist Modelle: Claude, GPT, DeepSeek. Doch ein Agent ist nicht nur ein Modell. Er besteht aus einem Modell und dem Programm, das es umgibt, und dieses Programm hat 2026 einen eigenen Namen bekommen: <strong>Harness</strong>, wörtlich „Geschirr“. Wie viel dieses Geschirr ausmacht, zeigt sich gerade an drei Stellen gleichzeitig: in Vergleichstests, in der Kostenrechnung und, seit dieser Woche, in einem Modell, das sein Geschirr gleich mitbringt.</p>
+<h2>Was ein Harness ist</h2>
+<p>Ein Sprachmodell kann im Kern nur eines: Es bekommt Text und eine Liste verfügbarer Werkzeuge und sagt voraus, was als Nächstes kommt, also entweder eine Antwort oder ein Werkzeugaufruf. Alles andere erledigt der Harness. Er baut den Prompt zusammen, führt die Werkzeugaufrufe aus (Dateien lesen, Befehle starten, Code ändern), hängt das Ergebnis wieder an und ruft das Modell erneut auf, so lange, bis die Aufgabe erledigt ist. Er entscheidet, was das Modell vom bisherigen Verlauf noch sieht, wenn der Platz knapp wird, und was es auf dem Rechner überhaupt anfassen darf. Der Entwickler Rudrendu Paul zerlegt ihn in einem Beitrag auf freeCodeCamp in fünf Teile: Werkzeug-Verteiler, Gedächtnis, Planung, Schutzzone (Sandbox) und die Schleife selbst.</p>
+<p>Die Analogie: Das Modell ist ein sehr guter Sachbearbeiter, der Harness sein Büro. Ob die Akten griffbereit liegen, ob er sich Notizen machen darf und ob jemand verhindert, dass er versehentlich die Archivtür aufbricht, entscheidet über das Ergebnis mindestens so stark wie sein Talent.</p>
+<h2>Dasselbe Modell, drei Ergebnisse</h2>
+<p>Wie sehr, zeigt ein Test, den die Plattform Composio durchgeführt hat und den der Blog BSWEN zusammenfasst. Composio ließ ein einziges Modell, DeepSeek V4 Pro, 30 Agenten-Aufgaben durch drei verschiedene Harnesses lösen. Das Ergebnis: 21 von 30 Aufgaben mit Pi (einem bewusst minimalistischen Agenten des österreichischen Entwicklers Mario Zechner), 20 mit DeepSeeks eigenem Harness, 19 mit Claude Code. Die Erfolgsquoten liegen also nah beieinander. Der Verbrauch liegt es nicht: Rund 88.000 Token pro Aufgabe beim DeepSeek-Harness standen etwa 650.000 bei Claude Code und 925.000 bei Pi gegenüber. Pro erfolgreich gelöster Aufgabe kostete das 0,028 Dollar beim DeepSeek-Harness, 0,031 bei Pi und 0,074 bei Claude Code. Claude Code war mit 181,8 Sekunden im Median am schnellsten, Pi mit 362,9 Sekunden am langsamsten. Der BSWEN-Autor betont selbst die Grenzen: ein Benchmark, ein Modell, bestimmte Versionen. Ein Sieger für alle Fälle lasse sich daraus nicht ableiten.</p>
+<p>Eine akademische Gegenprobe kommt in die gleiche Richtung. Laut der Zusammenfassung im Claude-Code-Guide verglich die Studie „The Scaffold Effect in Coding Agents“ zwei feste Modelle in drei Harnesses auf 50 Terminal-Bench-Pro-Aufgaben. Die Wahl des Harness änderte die Token pro gelöster Aufgabe um bis zu den Faktor 40, die Erfolgsquote dagegen nur um 0 bis 8 Prozentpunkte, überwiegend nicht statistisch signifikant. Der Harness bestimmt also vor allem, <strong>was</strong> es kostet und <strong>wie</strong> der Agent scheitert, weniger, <strong>ob</strong> er es schafft. Auch das ist laut dem Guide kein Gesetz: Modellqualität oder die Passung von Modell und Harness könne ebenso der Engpass sein, entscheidend sei das Paar, nicht die Einzelteile. Neu aufgesetzt ist dazu der Benchmark Harness-Bench der Peking-Universität mit 300 Aufgaben in sechs Kategorien, der Harnesses auf realistischen Büroarbeiten vergleicht, etwa dem Erstellen eines Berichts aus Tabellen und Quelldaten.</p>
+<h2>Warum das Entscheider betrifft</h2>
+<p>Für Technikverantwortliche ergibt sich daraus zunächst eine Kostenfrage. Wer nur Modellpreise vergleicht, übersieht einen Faktor, der ebenso groß sein kann. Dazu passt die Entwicklung, die wir diese Woche im Zusammenhang mit der Ramp-Auswertung beschrieben haben: Laut TechCrunch gehen Unternehmen immer routinierter mit KI-Kosten um, sie setzen Standardgrenzen für teure Modelle bei langen Aufgaben, vergeben Budgets und leiten Anfragen per Router an günstigere Modelle weiter. Genau solche Entscheidungen fallen im Harness, nicht im Modell.</p>
+<p>Die zweite Frage ist die der Abhängigkeit. Als DeepSeek am 13. August sein Harness als Open-Source-Repository veröffentlichte, überschritt es laut freeCodeCamp binnen zwei Tagen die Marke von 95.000 GitHub-Sternen, eine der schnellsten Wachstumskurven eines Entwicklerwerkzeugs in diesem Jahr. Pi brauchte für ähnlich viele Sterne rund ein Jahr organisches Wachstum. Beide Kurven stehen für verschiedene Philosophien: hier ein einsehbares, erweiterbares Laufzeitsystem mit Plug-ins und Websitzungsprotokoll, dort ein Agent mit vier eingebauten Werkzeugen, den Entwickler gerade wegen seiner Überschaubarkeit schätzen. Wer einen Harness wählt, wählt also auch, wie viel Kontrolle er behalten will.</p>
+<h2>AREX-2: Das Geschirr wandert ins Modell</h2>
+<p>Und nun kommt der Gegenentwurf. Am 6. November hat der Kanal von Sam Witteveen ein Video zu AREX-2 veröffentlicht. Laut der Zusammenfassung von AI/TLDR handelt es sich um ein offenes Modell (27 Milliarden Parameter, Apache-2.0-Lizenz) der Pekinger Akademie BAAI auf Basis von Qwen3.8-27B mit 262.144 Token Kontextfenster. Seine Besonderheit: Es führt die Schleife aus Versuchen, Prüfen und Wiederholen selbst aus, die sonst der Harness übernimmt. Die Idee, Reflexion und langfristige Wiederholungsversuche in die Modellgewichte hineinzutrainieren, trägt im Paper den Titel „AREX-2: Advancing Self-Improving Agents through Long-Horizon Reflective Tasks“. Die Ergebnisse in der Paper-Tabelle: 84,0 Punkte auf BrowseComp gegenüber 83,4 für DeepSeek-Pro; die Modellkarte nennt laut AI/TLDR zusätzlich 92,2 auf GAIA. Das sind Herstellerangaben, von uns nicht unabhängig geprüft.</p>
+<p>Falls sich der Ansatz bewährt, verschiebt er die Gewichte der Debatte. Ein Harness, der Fehlversuche abfängt, Pläne schreibt und Kontext sortiert, wäre dann weniger Ingenieursleistung drumherum und mehr Teil dessen, was man herunterlädt. Das hätte Folgen: Weniger Eigenbau, der gepflegt werden muss; aber auch weniger Einsicht, denn was im Modell steckt, lässt sich nicht so leicht protokollieren und nachsteuern wie ein Stück Programmcode. Witteveen fragt in dem Video laut AI/TLDR zudem, ob das schon als rekursive Selbstverbesserung gelten kann, ein Begriff, der durch Anthropics Börsenprospekt gerade neue Brisanz hat (siehe unseren Beitrag in dieser Ausgabe).</p>
+<h2>Was Teams jetzt tun sollten</h2>
+<p>Drei Dinge folgen aus dem bisherigen Stand, wobei wir betonen, dass die Belege dünn und teils herstellernah sind:</p>
+<ul>
+<li><strong>Das Paar bewerten, nicht das Modell.</strong> Wer Agenten evaluiert, sollte dasselbe Modell mit mindestens zwei Harnesses auf eigenen Aufgaben testen und Erfolgsquote, Token pro gelöster Aufgabe und Laufzeit getrennt erfassen. Die Studienlage legt nahe, dass vor allem Kosten und Fehlerverhalten variieren.</li>
+<li><strong>Kosten pro Erfolg messen, nicht pro Token.</strong> Laut Claude-Code-Guide sind Token pro gelöster Aufgabe kein Abrechnungsmultiplikator, denn Preise, Caching und menschliche Prüfung kommen hinzu. Die Messgröße gehört dennoch in jeden Pilotbericht.</li>
+<li><strong>Austauschbarkeit sichern.</strong> Wenn Funktionen wie Reflexion künftig teils im Modell, teils im Harness leben, lohnt es sich, Anweisungen, Projektregeln und Prüfschritte im Repository zu halten und nicht in einem einzelnen Produkt. Der Guide unterscheidet dafür ausdrücklich zwischen Laufzeit-Harness und „Repository-Harness“ aus Anweisungen, Setup und Prüfregeln, der beim Wechsel der Laufzeit erhalten bleiben kann.</li>
+</ul>
+<p>Am Ende bleibt die einfache Einsicht: Die Frage „Welches Modell?“ greift zu kurz. Ein Agent ist ein Paar, und wo dessen Intelligenz sitzt, im Gehirn oder im Gerüst, wird gerade neu verhandelt.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://www.freecodecamp.org/news/what-is-an-agent-harness/" rel="noopener noreferrer external" target="_blank">freeCodeCamp (11. September 2026) — What Is an Agent Harness? The Architecture Behind Claude Code, DeepSeek Harness, and Hermes Agent</a></li>
+            
+            <li><a href="https://docs.bswen.com/blog/2026-08-30-deepseek-harness-vs-claude-code-vs-codex-vs-pi/" rel="noopener noreferrer external" target="_blank">BSWEN (30. August 2026) — DeepSeek Harness vs Claude Code vs Codex vs Pi: Which Coding Agent Should You Use?</a></li>
+            
+            <li><a href="https://cc.bruniaux.com/guide/agent-harness" rel="noopener noreferrer external" target="_blank">Claude Code Guide (aktualisiert 4. Oktober 2026) — Agent Harness Engineering</a></li>
+            
+            <li><a href="https://arxiv.org/html/2605.27922v2" rel="noopener noreferrer external" target="_blank">arXiv — Harness-Bench: Evaluating Agent Harnesses across Models and Realistic Workflows</a></li>
+            
+            <li><a href="https://ai-tldr.dev/releases/sam-witteveen-arex-2-nov6/" rel="noopener noreferrer external" target="_blank">AI/TLDR (6. November 2026) — Sam Witteveen: AREX-2 – The Harness in the Model</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2609.38288" rel="noopener noreferrer external" target="_blank">arXiv — AREX-2: Advancing Self-Improving Agents through Long-Horizon Reflective Tasks</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/11/06/ramp-data-shows-ai-spending-stalling-just-as-anthropic-nears-its-ipo/" rel="noopener noreferrer external" target="_blank">TechCrunch (6. November 2026) — Ramp data shows AI spending stalling just as Anthropic nears its IPO</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
