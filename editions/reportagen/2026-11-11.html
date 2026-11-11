@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Schlüsselbund im Rucksack des Agenten: Wie Unternehmen Berechtigungen, Zugangsdaten und Not-Aus für KI-Agenten regeln</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-11.html">&larr; Zur&uuml;ck zur Ausgabe vom 11. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Schlüsselbund im Rucksack des Agenten: Wie Unternehmen Berechtigungen, Zugangsdaten und Not-Aus für KI-Agenten regeln</h1>
+    
+    <p class="reportage-teaser">Binnen einer Woche zeigen drei Befunde, wie Agenten Geheimnisse verstreuen: Claude Code speichert Passwörter im Klartext in Projektdateien, Grok Build macht Zehntausende Apps per Link zugänglich, und nur 11 Prozent der Unternehmen stoppen übergriffige Agenten automatisch. Was „Least Agency“, Agenten-Identität und ein Not-Aus-Schalter praktisch bedeuten, was Microsoft, CrowdStrike, Omnissa und NVIDIA anbieten – und welche sechs Entscheidungen CEOs, Produktverantwortliche und Tech Leads jetzt treffen können.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-11">11. November 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Generalschlüssel unter der Fußmatte</h2>
+<p>Ein Handwerker, der für Sie arbeitet, bekommt einen Schlüssel. Ein guter Betrieb gibt ihm nur den für die Baustelle, nur für die Woche, und notiert, wer wann aufgeschlossen hat. Genau das passiert bei KI-Agenten derzeit häufig nicht. Ein Agent ist ein Programm, das mit einem Sprachmodell selbstständig Schritte ausführt: Befehle starten, Dateien ändern, Datenbanken abfragen. Dafür braucht er Zugangsdaten – und was er mit ihnen anstellt, entscheidet nicht allein das Unternehmen, sondern auch die Software drumherum.</p>
+<p>Diese Woche liefert dafür zwei sehr anschauliche Fälle und eine Zahl, die erklärt, warum sie kein Zufall sind.</p>
+<h2>Fall 1: Claude Code schreibt Passwörter in eine Textdatei</h2>
+<p>Claude Code fragt standardmäßig nach, bevor es einen Shell-Befehl ausführt. Wählt man „Ja, und nicht mehr fragen“, speichert es eine Erlaubnisregel in der Datei <code>.claude/settings.local.json</code> im Projekt. Das Problem: Bei manchen Befehlen speichert es den Befehl wörtlich – samt Passwort oder Token, das man hineingetippt hat, im Klartext.</p>
+<p>Das Sicherheitsunternehmen Apiiro hat öffentliches GitHub durchsucht. Laut The Hacker News fanden die Forscher 104.185 Kopien dieser Datei, davon 1.122 mit mindestens einem Geheimnis, insgesamt 1.379 verschiedene. Mehr als ein Drittel öffnet direkt eine Datenbank, darunter 379 Datenbankpasswörter; dazu kommen 43 SSH-Zugänge, 42 Tokens für GitHub, GitLab und npm sowie 23 AWS-Schlüssel. 63 betroffene Organisationen wurden identifiziert, überwiegend Softwarefirmen. Unter Einbeziehung älterer Dateiversionen und gespeicherter Chat-Protokolle zählt Apiiro 2.539 Geheimnisse in 1.994 Repositories. Ob die Zugänge noch funktionieren, wurde nicht getestet; ein benachrichtigtes Unternehmen bestätigte aber, dass sein Schlüssel aktiv war.</p>
+<p>Zwei Details sind für Entscheider wichtig. Erstens: Gängige Scanner übersehen viele dieser Funde, weil ein Passwort hinter <code>PGPASSWORD=</code> aussieht wie ein normales Wort in einem normalen Befehl – gitleaks und TruffleHog markierten laut Apiiro nur 564 beziehungsweise 643 der 1.122 Dateien. Zweitens: Frühere Fehlermeldungen dazu, schon ab August 2025, wurden laut den Forschern automatisch geschlossen, ohne Antwort von Anthropic. Hier ist wichtig, genau zu bleiben: Das ist die Darstellung von Apiiro; eine Stellungnahme von Anthropic liegt in den von uns gelesenen Quellen nicht vor.</p>
+<h2>Fall 2: Grok Build und der „geheime“ Link</h2>
+<p>Der zweite Fall ist anders gelagert, zeigt aber dasselbe Muster. Grok Build, der Coding-Agent von SpaceXSI, erzeugt auf Zuruf kleine Anwendungen, die man per Link teilen kann. Die Adresse enthält zufällige Wörter – das Prinzip „Wer den Link kennt, darf rein“, vergleichbar mit einem Briefkasten, dessen Schlüssel in der Hausnummer steckt. Der Zufallsteil stand jedoch links vom Domainnamen. Dadurch tauchen die Adressen in öffentlichen DNS-Beobachtungsdatenbanken auf. Das Sicherheitsunternehmen Claroc fand laut Ars Technica 43.601 Links, von denen mehr als 35.000 öffentlich waren.</p>
+<p>Darunter: Personalverzeichnisse, ein Dashboard mit 3.784 Gesundheitsuntersuchungen von Arbeitern, vertrauliche Angebote – und 24 interne Apps von SpaceXSI selbst. Cursor, laut Ars von SpaceXSI übernommen, widersprach: Apps seien standardmäßig privat. Clarocs Tests ergaben das Gegenteil, nämlich die Voreinstellung „Jeder mit dem Link“. Auch Lovable, Bolt und Replit vergeben eigene Webadressen und sind laut Claroc prinzipiell ähnlich sichtbar, wenn auch weniger sensible Daten gefunden wurden.</p>
+<p>Die Lehre für Unternehmen: Das größere Risiko ist oft nicht der böswillige Agent, sondern die bequeme Voreinstellung. Fachabteilungen bauen mit KI in Minuten Tools, die ohne Anmeldung im Netz stehen – das, was früher ein eingekauftes Produkt hinter dem Firmen-Login gewesen wäre.</p>
+<h2>Die Zahl dahinter</h2>
+<p>Eine Umfrage der Cloud Security Alliance unter 418 IT- und Sicherheitsfachleuten, zitiert von PYMNTS: 65 Prozent hatten im vergangenen Jahr einen Vorfall mit einem Agenten, bei 43 Prozent davon wurde der Betrieb gestört, bei 35 Prozent entstand finanzieller Schaden. Nur 11 Prozent blocken einen übergriffigen Agenten automatisch; 38 Prozent warten auf die Freigabe durch einen Menschen, 24 Prozent protokollieren nur. Das Problem: Ein Agent handelt mit einem echten Mitarbeiter- oder Systemzugang. Für die Sicherheitstechnik sieht das aus wie ein befugter Nutzer bei einer befugten Aufgabe.</p>
+<h2>Was „Zero Trust“ für Agenten konkret heißt</h2>
+<p>„Zero Trust“ bedeutet: Kein Zugriff wird aus Gewohnheit gewährt, jeder wird geprüft. Neu bei Agenten sind drei Bausteine, die sich in den aktuellen Anbieterkonzepten ähneln.</p>
+<p><strong>Eigene Identität statt geliehenem Ausweis.</strong> Microsoft fordert in seinem Blog vom 19. Oktober, jeder Agent brauche eine eigene Identität, getrennt von der Person, die ihn nutzt – nur so lässt sich unterscheiden, was ein Mensch und was sein Agent getan hat. Auch OWASP, die Organisation hinter bekannten Sicherheitsranglisten, listet „Identitäts- und Rechtemissbrauch“ in ihrer Agenten-Top-10 vom Dezember 2025. Ein Auth0-Beitrag (Herstellerbeitrag, mit Verkaufsinteresse) fasst daraus eine praktische Regel zusammen: kurzlebige Tokens, die nur für den aktuellen Schritt gelten, und Entzug der Zugangsdaten eines einzelnen Agenten, ohne den Menschen zu sperren.</p>
+<p><strong>„Least Agency“ – so wenig Handlungsfreiheit wie nötig.</strong> Der klassische Grundsatz „Least Privilege“ begrenzt, worauf jemand zugreifen darf. Agenten brauchen zusätzlich eine Grenze dafür, wie selbstständig sie handeln. Microsoft nennt das „Dynamic Permissions“: Ein Agent startet ohne Rechte und bekommt nur, was die Aufgabe braucht, und nur so lange. Beispiel aus dem Blog: Ein Spesen-Agent darf lesen und Routine-Erstattungen freigeben, erbt aber nicht alle Rechte seines Auftraggebers. Stößt er auf eingeschleuste Anweisungen, kann das System erst Schreibrechte entziehen, dann menschliche Freigabe verlangen, am Ende ihn isolieren.</p>
+<p><strong>Kontrollen außerhalb des Modells.</strong> Microsoft zitiert Satya Nadella: Das vertrauenswürdigste System sei nicht das mit dem Modell, dem man am meisten vertraut, sondern das, bei dem man dem Modell am wenigsten vertrauen muss. Sprich: Berechtigungen dürfen nicht im Prompt stehen („bitte lösche nichts“), sondern gehören in Technik, die der Agent nicht umgehen kann.</p>
+<h2>Der Not-Aus: Was er kann und was noch nicht</h2>
+<p>CrowdStrike hat am 3. November einen „AI Kill Switch“ vorgestellt. Sein Prinzip, laut PYMNTS: Agenten schicken ihre Anfragen an das Sprachmodell über ein zentrales Gateway – eine Art Telefonzentrale. Wird der Schalter umgelegt, lehnt das Gateway die Anfragen ab. Der Agent läuft weiter, bekommt aber keine Anweisungen mehr und handelt nicht mehr. Ein Mensch muss auslösen, jede Nutzung wird protokolliert.</p>
+<p>Wichtig für die Planung: Nur diese erste Stufe ist laut PYMNTS verfügbar. Das direkte Beenden auf dem Rechner, in Cloud-Systemen und Geschäftsanwendungen sowie der Entzug von Berechtigungen sind „in Entwicklung“, ohne Termine. Die Anbieter wählen zudem unterschiedliche Strategien: Microsoft dreht Rechte stufenweise zurück, Cisco prüft jede einzelne Anfrage, CrowdStrike schaltet ab. Ein Gateway nützt außerdem nur, wenn der Modellverkehr wirklich dort durchläuft – ein lokal gestarteter Coding-Agent mit eigenem Zugang tut das nicht automatisch. Microsoft will deshalb lokale Agenten wie Claude Code, OpenAI Codex und GitHub Copilot – insgesamt 60 Typen – erkennen und in ein zentrales Register aufnehmen.</p>
+<h2>Wo Agenten laufen sollen: Schreibtisch oder Container</h2>
+<p>Die zweite Frage neben „Was darf der Agent?“ lautet „Wo läuft er?“. Zwei Antworten kamen diese Woche.</p>
+<p>Omnissa, die frühere Endgeräte-Sparte von VMware, will laut heise virtuelle Desktops zur Sicherheitszone machen: Der Agent „Horizon Delegate“ läuft in der virtuellen Maschine des Nutzers, mit dessen Rechten, auch wenn der Nutzer nicht verbunden ist. Die Governance-Schicht „Elara“, die Aktionen vor der Ausführung prüfen soll, ist erst als Beta mit Warteliste angekündigt; Preise und Termine nannte Omnissa nicht.</p>
+<p>Im Rechenzentrum setzt NVIDIA auf offene Standards: OpenShell, eine Laufzeitumgebung, die Regeln für Agenten technisch erzwingt, wurde an die CNCF gespendet, die Stiftung hinter Kubernetes. Dazu kommt Agent Substrate, ein Google-Projekt, das viele Agenten-Sitzungen auf wenige Arbeitsknoten verteilt und ruhende Sitzungen samt Zustand „einfriert“ – wie ein Hotel, das Zimmer nur belegt, solange jemand darin ist. NVIDIA schreibt selbst: Die Schnittstellen ändern sich noch, Teile der Integration sind experimentell. Für Pilotprojekte interessant, für den Produktivbetrieb noch nicht gesetzt.</p>
+<h2>Sechs Entscheidungen für die nächsten Wochen</h2>
+<ol>
+<li><strong>Behandeln Sie Agenten-Ordner wie Passwortlisten.</strong> Verzeichnisse wie <code>.claude/</code> oder <code>.cursor/</code> gehören in Ihre Secret-Scans und .gitignore-Vorlagen. Apiiro rät, zuerst alle jemals gespeicherten Schlüssel zu tauschen und erst dann aufzuräumen – gelöschte Dateien bleiben in der Git-Historie.</li>
+<li><strong>Keine Geheimnisse in Befehlen.</strong> Entwickler sollen Variablen aus einem Passwort-Tresor nutzen und Muster statt Einzelbefehle freigeben.</li>
+<li><strong>Inventarisieren Sie, welche Agenten bereits laufen.</strong> Ohne Register keine Kontrolle; Fachabteilungs-Tools wie Grok-Build-Apps zählen dazu. Prüfen Sie jeden geteilten Link auf „Nur eingeladene Nutzer“.</li>
+<li><strong>Geben Sie jedem Agenten eine eigene Identität</strong> mit kurzlebigen, aufgabenbezogenen Rechten – nicht den Zugang einer Person.</li>
+<li><strong>Legen Sie Freigabepflichten fest.</strong> Zahlungen, Löschungen, Rechtevergabe: Hier entscheidet ein Mensch, außerhalb des Chatfensters des Agenten.</li>
+<li><strong>Üben Sie den Not-Aus.</strong> Wer kann wann welchen Agenten stoppen? Ist der Modellverkehr über ein Gateway geführt? Klären Sie das, bevor ein Anbieter-Schalter vollständig verfügbar ist.</li>
+</ol>
+<h2>Offene Fragen</h2>
+<p>Viele Zahlen stammen von Sicherheitsfirmen, die ihre Produkte verkaufen oder mit Funden Aufmerksamkeit suchen; Apiiro testete nicht, ob die Schlüssel noch gültig waren, und SpaceXSI äußerte sich laut Ars nicht zu den Nachfragen. Unklar ist auch, wie viele der geleakten Zugänge tatsächlich missbraucht wurden. Und die Anbieterkonzepte von Microsoft, CrowdStrike und Omnissa sind zum Teil angekündigt, nicht ausgeliefert. Klar ist dagegen die Richtung: Berechtigungen, Schlüssel und Stoppschalter sind keine Fußnote der Agenten-Einführung, sondern ihre Voraussetzung.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html" rel="noopener noreferrer external" target="_blank">The Hacker News: Claude Code&#39;s „Don&#39;t Ask Again“ File Exposes Passwords and Keys in 1,122 Public Copies on GitHub (7.11.2026)</a></li>
+            
+            <li><a href="https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/" rel="noopener noreferrer external" target="_blank">Ars Technica: Grok Build coding agent leaks oodles of confidential info, some belonging to SpaceXSI (10.11.2026)</a></li>
+            
+            <li><a href="https://www.pymnts.com/cybersecurity/2026/crowdstrike-lets-security-teams-kill-rogue-ai-agents/" rel="noopener noreferrer external" target="_blank">PYMNTS: CrowdStrike Lets Security Teams Kill Rogue AI Agents (4.11.2026)</a></li>
+            
+            <li><a href="https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/" rel="noopener noreferrer external" target="_blank">Microsoft Security Blog: Agents are your newest insiders. Security must move at their speed. (19.10.2026)</a></li>
+            
+            <li><a href="https://www.heise.de/news/Omnissa-Virtuelle-Desktops-als-Sicherheitszone-fuer-KI-11518404.html" rel="noopener noreferrer external" target="_blank">heise online: Omnissa – Virtuelle Desktops als Sicherheitszone für KI (10.11.2026)</a></li>
+            
+            <li><a href="https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/" rel="noopener noreferrer external" target="_blank">NVIDIA Blog: NVIDIA Expands Open Source Commitment With OpenShell Donation and New AI Infrastructure (10.11.2026)</a></li>
+            
+            <li><a href="https://developer.nvidia.com/blog/agent-substrate-advancing-kubernetes-for-agents-at-scale/" rel="noopener noreferrer external" target="_blank">NVIDIA Technical Blog: Agent Substrate – Advancing Kubernetes for Agents at Scale (10.11.2026)</a></li>
+            
+            <li><a href="https://auth0.com/blog/owasp-top-10-agentic-applications-lessons" rel="noopener noreferrer external" target="_blank">Auth0: Why Your AI Agents Need an Identity Layer – Lessons from OWASP Top 10 for Agentic Applications (20.2.2026, Herstellerbeitrag)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
