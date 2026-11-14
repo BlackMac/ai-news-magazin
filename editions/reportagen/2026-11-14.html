@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi oder Dienstwagen? Wann sich selbst betriebene KI-Modelle gegenüber der API wirklich rechnen – und was auf keiner Kalkulation steht</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-14.html">&larr; Zur&uuml;ck zur Ausgabe vom 14. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Taxi oder Dienstwagen? Wann sich selbst betriebene KI-Modelle gegenüber der API wirklich rechnen – und was auf keiner Kalkulation steht</h1>
+    
+    <p class="reportage-teaser">Mit llama.cpp 1.0 wird lokale KI-Software erwachsener, und 42 Prozent von 200 befragten, überwiegend nordamerikanischen Unternehmen betreiben offene Modelle produktiv. Frische Rechnungen zeigen: Je nach Modell rechnet sich der Eigenbetrieb schon bei geringer Auslastung – oder selbst bei Volllast nicht. Wo die Break-even-Linie verläuft, welche Kosten fehlen und welche fünf Entscheidungen jetzt anstehen.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-14">14. November 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Die Frage, die jede Release-Meldung neu stellt</h2>
+<p>Wer einen Dienstwagen least, zahlt jeden Tag, ob das Auto fährt oder in der Garage steht. Wer Taxi fährt, zahlt nur für die gefahrenen Kilometer, dafür aber einen höheren Preis pro Kilometer. Ob sich das Leasing lohnt, hängt nicht vom Fahrzeug ab, sondern davon, wie oft man tatsächlich fährt. Genau diese Rechnung steht hinter einer Frage, die in vielen Vorständen derzeit auftaucht: Sollen wir KI-Modelle selbst betreiben, statt sie über eine Schnittstelle (API) zu mieten?</p>
+<p>Anlass liefert die Nachrichtenlage. Am Freitag haben die Entwickler von llama.cpp, der weitverbreiteten Software zum lokalen Ausführen von Sprachmodellen, die Version 1.0 veröffentlicht. Sie versprechen künftig sichtbare Versionssprünge, wenn sich Schnittstellen inkompatibel ändern, und sie unterstützen laut eigener Angabe mehr als 150 Modellarchitekturen. Die Marktbeobachtung dazu lieferte Hugging-Face-Chef Clem Delangue im Juli: Firmen starteten mit den Schnittstellen der großen Labore, und mit wachsendem Volumen drängten die Kosten sie zu offenen Modellen. Das ist die Sicht eines interessierten Anbieters, dessen Plattform laut TechCrunch von rund der Hälfte der Fortune 500 genutzt wird. Was sagen die Zahlen?</p>
+<h2>Die Formel: Auslastung entscheidet</h2>
+<p>Die aktuellste und transparenteste Rechnung stammt vom Modellvermittler OpenRouter, der selbst API-Zugänge verkauft, also nicht neutral ist, aber ihre Annahmen offenlegt. Das Prinzip: Man vergleicht die Miete für eine GPU-Stunde mit dem, was dieselbe Stunde Rechenleistung über die API kosten würde. Der Quotient ist die „Break-even-Auslastung“, also der Anteil der gemieteten Stunden, in denen die Grafikkarte tatsächlich arbeiten muss, damit sich der Eigenbetrieb gegenüber der API rechnet. Liegt der Wert über 100 Prozent, gewinnt die API selbst bei Volllast.</p>
+<p>Die Ergebnisse vom 8. Oktober fallen je nach Modellgröße gegensätzlich aus. Ein mittelgroßes Modell mit 27 Milliarden Parametern (Qwen3.8 27B) auf einer gemieteten RTX 3090 für 0,50 Dollar pro Stunde rechnet sich ab etwa 6 bis 12 Prozent Auslastung. Ein großes Modell, DeepSeek V4.1 Flash mit 552 Milliarden Parametern, braucht ein Mehrkartensystem. Auf vier gemieteten H200-Karten schlägt es die günstigste API-Variante mit garantierter Nicht-Speicherung der Daten („Zero Data Retention“) laut OpenRouter nie, selbst bei vollem Betrieb. Auf zwei B200-Karten braucht es zu den günstigsten Mietpreisen 76 Prozent Auslastung.</p>
+<p>Der Haken am kleinen Modell: Die Karte erreicht ihren Durchsatz, indem sie 64 Anfragen parallel bedient, und jeder Nutzer bekommt dann nur rund 15 Wörter-Bruchstücke („Tokens“) pro Sekunde. Für einen Chat ist das langsam. Und wer nur zu Bürozeiten Anfragen hat, 40 von 168 Wochenstunden, erreicht höchstens rund 24 Prozent Auslastung. Nach OpenRouters Rechnung schließt das alle DeepSeek-Varianten aus und lässt nur die RTX 3090 übrig, und die nur, solange der Preis vom 8. Oktober gilt.</p>
+<h2>Warum die Zahlen so stark schwanken</h2>
+<p>Drei Effekte erklären, warum Berichte mal „Faktor drei billiger“, mal „nie wirtschaftlich“ rufen. Erstens streuen die API-Preise für identische Modellgewichte enorm: Der teuerste Anbieter verlangt laut OpenRouter für Qwen3.8 27B das 3,5-Fache des günstigsten, für DeepSeek V4.1 Flash fast das 13-Fache. Wer gegen einen Listenpreis rechnet, kann weit danebenliegen.</p>
+<p>Zweitens ändern sich Preise schnell. Am 19. Oktober nahm ein neuer Anbieter für Qwen3.8 27B nur 0,50 Dollar pro Million Ausgabe-Tokens; der Break-even sprang damit für kurze Prompts auf rund 29 Prozent.</p>
+<p>Drittens führt die Messgröße in die Irre. Die oft zitierten Kosten von etwa einem Cent pro Million Tokens zählen laut OpenRouter überwiegend zwischengespeicherte Eingabe-Tokens. Das ist, als würde ein Kellner nur die Wiederholungen derselben Gruppenbestellung zählen, die er sich schon gemerkt hat. Solche Tokens sind über die API ebenfalls fast gratis. Rechnet man pro tatsächlich erzeugtem Ausgabe-Token, kostet dieselbe H200 bei 2,90 Dollar Miete 3,49 Dollar pro Million, die günstigste API-Variante dagegen 0,18 Dollar. Die Durchsatzwerte stammen aus der Benchmark-Plattform InferenceX von SemiAnalysis; OpenRouter selbst nennt die Selbsthosting-Seite eine Annahme.</p>
+<h2>Was auf keiner Rechnung steht</h2>
+<p>Die Kalkulation oben lässt Ingenieurzeit und Reservekapazität für Lastspitzen bewusst weg und ist daher, so OpenRouter, eine Untergrenze. Wie stark das ins Gewicht fällt, zeigt das Rechenbeispiel des Entwicklers Jedidiah Weller: 52.000 Dollar API-Kosten pro Jahr gegen einen 300.000-Dollar-Server mit 20.000 Dollar Betriebskosten. Selbst wenn der Server die komplette API-Rechnung ersetzt, dauert die Amortisation 9,4 Jahre. Vier Stunden Betreuung pro Woche zu 100 Dollar verlängern sie auf 26,8 Jahre. Das Szenario ist illustrativ, zeigt aber die Hebel.</p>
+<p>Der Gegenpol kommt von LLMDeploy, einem Dienstleister, der Eigenbetrieb verkauft: Bei schwerer, gleichmäßiger Nutzung liege der Break-even bei zwei bis vier Monaten. Der Unterschied zwischen 112 Monaten und drei Monaten ist die Auslastung, nicht die Technik.</p>
+<p>Die Umfragen bestätigen das Bild. Bei Futurum nennen 50 Prozent der Pilotprojekte Selbsthosting-Kosten als Bremse, bei 62 unvollständige Sicherheits- und Compliance-Prüfungen. Nur 10 Prozent der Unternehmen mit eigenem Aufbau berichten von nachhaltigem ROI im großen Maßstab, 25 Prozent von keinem Fortschritt; bei externen Lösungen sind es 17 Prozent. 52 Prozent der Nichtnutzer geben fehlende Kompetenz an. Futurums Schluss: Für die meisten Firmen sei es sinnvoller, offene Modelle über eine Plattform zu beziehen, als um sie herum zu bauen.</p>
+<h2>Qualität: Was Verkleinern kostet</h2>
+<p>Wer auf kleinere Hardware ausweicht, verkleinert Modelle per „Quantisierung“. Man speichert jede Zahl im Modell mit weniger Bits, ähnlich wie ein JPEG mit stärkerer Kompression: weniger Speicher, bei geschickter Methode kaum sichtbarer Verlust. Ein 27-Milliarden-Modell braucht bei 16 Bit rund 54 Gigabyte, bei 8 Bit 27 und bei 4 Bit 13,5. OpenRouter testete sechs Anbieter desselben Modells mit 240 Aufgaben mit exakter Lösung. Die Trefferquoten lagen zwischen 98,3 und 99,2 Prozent, ein Unterschied nach Genauigkeitsstufe war nicht erkennbar. Eine Teilaufgabe, Multiplikation ohne Rechenweg, fiel bei einem 4-Bit-Anbieter schwächer aus; das lässt sich laut OpenRouter nicht von Zufall trennen. Die Messung gilt für ein Modell an einem Tag. Wer quantisiert, testet also die eigenen Prompts.</p>
+<p>Wichtiger ist die Fähigkeitslücke. Futurum zufolge liegt das beste offene Modell im Artificial-Analysis-Index inzwischen rund 12 Punkte hinter der Spitze, nach etwa 4 Punkten im Juli. Die in Unternehmen verbreiteten offenen Familien schneiden schwächer ab: Nvidias Nemotron 3 Ultra erreicht 23 Punkte gegen 58 beim führenden proprietären Modell.</p>
+<h2>Wer wechselt wirklich – und was</h2>
+<p>Die Zahlen von Futurum (von Techstrong unter Berufung auf Enterprise Technology Research berichtet; Stichprobe 200 überwiegend nordamerikanische Unternehmen): 42 Prozent betreiben offene Modelle produktiv, im Juli waren es 31 Prozent. Sie tragen im Schnitt 34 Prozent der Tokens, binnen eines Jahres erwarten die Befragten 41 Prozent. In einer separaten Futurum-Umfrage (100 Unternehmen, Oktober) machen offene Modelle zugleich nur 5 Prozent der gemessenen KI-Ausgaben aus, weil Selbsthosting keine Rechnung eines Anbieters erzeugt: Die Kosten wandern vom Token-Preis in Server und Personal. 93 Prozent der Produktionsnutzer sagen, ihre Nutzung proprietärer Modelle wachse weiter. Typisch ist also Arbeitsteilung: Offene Modelle erledigen Routine (51 Prozent ihrer Nutzung sind einfache Aufgaben), proprietäre die schwersten Fälle.</p>
+<p>Aufschlussreich ist die Preisschwelle: Bei gleicher Leistung würden 66 Prozent der Produktionsnutzer eine Aufgabe schon für 25 Prozent Rabatt oder weniger verlagern.</p>
+<h2>Muss es der eigene Rechner sein?</h2>
+<p>Zwei Argumente werden oft vermischt. Datenschutz: OpenRouter hält die meisten Anforderungen auch ohne eigene Hardware für erfüllbar, über Anbieter mit garantierter Nicht-Speicherung und Regionsbindung. Zu beachten: Die Daten laufen weiter auf fremden GPUs. Wer verlangt, dass sie nie die eigene Hardware verlassen, muss selbst betreiben. Kontinuität: Laut XenoSpectrum setzte Anthropic im Juni nach einer US-Exportanweisung zwei Modelle für alle Kunden aus; eines war ab dem 1. Juli wieder verfügbar; offene Gewichte im eigenen Haus sind davor geschützt, nicht aber vor Lizenz- und Rechtspflichten. Mit der Hoheit kommt zudem Verantwortung: Sicherheitsupdates, Zugriffskontrolle und Missbrauchsüberwachung liegen beim Betreiber. Wie real das ist, zeigt llama.cpp 1.0 selbst: Laut Unite.AI geht das Release in seinem Server mehrere Sicherheitsprobleme an, darunter Server-Side Request Forgery und DNS-Rebinding. Ein lokaler Server ist nicht automatisch ein sicherer.</p>
+<h2>Fünf Entscheidungen für die kommende Woche</h2>
+<p><strong>Erstens: Messen statt schätzen.</strong> Eine repräsentative Woche Tokenvolumen, Spitzenlast und Aufgabenqualität protokollieren. Das Volumen schätzen Teams laut LLMDeploy am schlechtesten; eine Abweichung um den Faktor drei verschiebe den Break-even stärker als jede Hardwarefrage.</p>
+<p><strong>Zweitens: Erst die API-Rechnung senken.</strong> Günstigeres Modell, Caching, Batch-Verarbeitung. Mehr zur Kostenkontrolle steht in unserer <a href="/editions/reportagen/2026-11-06.html">Reportage vom 6. November</a>.</p>
+<p><strong>Drittens: Modell- und Hostingentscheidung trennen.</strong> Offene Gewichte lassen sich über eine API betreiben; um Modellwechsel und Abhängigkeit ging es in unserer <a href="/editions/reportagen/2026-11-13.html">gestrigen Reportage</a>.</p>
+<p><strong>Viertens: Hybrid denken.</strong> Eigene Hardware für die gleichmäßige Grundlast, die API für Spitzen, wie Netzstrom neben der eigenen Solaranlage. Achten Sie auf gleiche Präzision lokal und in der Cloud und halten Sie ein Gespräch auf einer Seite, sonst gehen Zwischenspeicher verloren.</p>
+<p><strong>Fünftens: Den Business Case separat prüfen.</strong> Ob Infrastruktur günstiger ist, sagt nichts darüber, ob das KI-Projekt Wert schafft.</p>
+<h2>Was offen bleibt</h2>
+<p>Die Preise stammen von einem Stichtag und veralten schnell. OpenRouter und LLMDeploy verkaufen Produkte; die Umfragezahlen beschreiben vor allem den US-Markt und das Spitzenfeld. Gartner erwartet laut XenoSpectrum, dass die Inferenzkosten der Anbieter bis 2030 um über 90 Prozent sinken – was nicht heißt, dass Kundenpreise im gleichen Maß fallen, und Agenten verbrauchen weit mehr Tokens. Der eigene Betrieb ist für die meisten Firmen weder Pflicht noch Fehler, sondern eine Rechenaufgabe mit der Auslastung als wichtigster Variable.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://openrouter.ai/blog/insights/self-hosted-llm-vs-api/" rel="noopener noreferrer external" target="_blank">OpenRouter: Self-Hosted LLM vs API – When Does Self-Hosting Pay Off (12.11.2026)</a></li>
+            
+            <li><a href="https://openrouter.ai/blog/insights/llm-quantization/" rel="noopener noreferrer external" target="_blank">OpenRouter: LLM Quantization – What fp8 and fp4 Do to Quality and Price (11.11.2026)</a></li>
+            
+            <li><a href="https://futurumgroup.com/wp-content/uploads/2026/10/Enterprises-Embrace-Open-Weights-but-Infrastructure-Sellers-Profit-Most_AIONP202610.pdf" rel="noopener noreferrer external" target="_blank">Futurum Group: Enterprises Embrace Open Weights but Infrastructure Sellers Profit Most (26.10.2026)</a></li>
+            
+            <li><a href="https://techstrong.ai/articles/open-weight-ai-models-expected-to-capture-41-of-enterprise-token-usage/" rel="noopener noreferrer external" target="_blank">Techstrong.ai: Open-Weight AI Models Expected to Capture 41% of Enterprise Token Usage (22.9.2026)</a></li>
+            
+            <li><a href="https://jedidiahweller.com/blog/ai-llm-cost-comparison" rel="noopener noreferrer external" target="_blank">Jedidiah Weller: The real cost of AI – API vs. local LLMs (2.11.2026)</a></li>
+            
+            <li><a href="https://llmdeploy.to/field-notes/on-prem-vs-cloud-tco-2026" rel="noopener noreferrer external" target="_blank">LLMDeploy: On-Prem LLM vs Cloud API – The 2026 TCO Breakdown (16.9.2026, Anbieterquelle)</a></li>
+            
+            <li><a href="https://xenospectrum.com/en/open-weight-responsibility-api-comparison" rel="noopener noreferrer external" target="_blank">XenoSpectrum: Open-Weight AI Models Bring Control, but Only 10% of Companies Report Sustained ROI (1.11.2026)</a></li>
+            
+            <li><a href="https://huggingface.co/blog/ggml-org/llama-cpp-v1" rel="noopener noreferrer external" target="_blank">ggml-org / Hugging Face: llama.cpp v1.0.0 – A stronger foundation for the local AI ecosystem (13.11.2026)</a></li>
+            
+            <li><a href="https://www.unite.ai/llama-cpp-v1-0-0-sets-api-stability-rules-for-local-ai-tools/" rel="noopener noreferrer external" target="_blank">Unite.AI: Llama.cpp V1.0.0 Sets API Stability Rules for Local AI Tools (13.11.2026, laut Autorenzeile KI-generiert und redaktionell geprüft)</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/07/10/hugging-faces-ceo-on-why-companies-are-done-renting-their-ai/" rel="noopener noreferrer external" target="_blank">TechCrunch: Hugging Face&#39;s CEO on why companies are done renting their AI (10.7.2026)</a></li>
+            
+            <li><a href="https://github.com/SemiAnalysisAI/InferenceX" rel="noopener noreferrer external" target="_blank">SemiAnalysis: InferenceX – Open Source Inference Research Platform (GitHub)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>

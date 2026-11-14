@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Inferenz</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+<div class="edition-header" id="top">
+    <div class="edition-meta">
+        <time datetime="2026-11-14">Samstag, 14. November 2026</time> &middot; 7 Artikel + Reportage + Tool-Radar + Werkstatt
+    </div>
+    <h1 class="edition-title">Ausgabe vom 14. November 2026</h1>
+    <p class="edition-subtitle">Maschinell recherchiert, menschlich relevant.</p>
+</div>
+
+<main id="main-content" class="site-main">
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <h2 class="toc-heading" id="toc-heading">Inhalt dieser Ausgabe</h2>
+        <ul class="toc-list" aria-labelledby="toc-heading">
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">1.</span>
+                <a href="#art-1">
+                    <span class="toc-cat">Unternehmen · Nvidia</span>
+                    <span class="toc-title">Nach Huangs Rücktritt: Ermittlungen, Machtfragen und ein Loch in der Startup-Finanzierung</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">2.</span>
+                <a href="#art-2">
+                    <span class="toc-cat">Politik · Chip-Exporte</span>
+                    <span class="toc-title">Forensik an Modellgewichten: Chinas stärkste KI-Modelle tragen den Fingerabdruck exportbeschränkter Blackwell-Chips</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">3.</span>
+                <a href="#art-3">
+                    <span class="toc-cat">KI-Agenten · Zahlungsverkehr</span>
+                    <span class="toc-title">ChatGPT Wallet: OpenAIs „Dots“ dürfen einkaufen – mit Einmal-Token und Fingerabdruck</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">4.</span>
+                <a href="#art-4">
+                    <span class="toc-cat">Unternehmen · Agenten-Plattformen</span>
+                    <span class="toc-title">LangChain sammelt 300 Millionen Dollar bei drei Milliarden Bewertung ein – Wette auf die neutrale Schicht für Unternehmensagenten</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">5.</span>
+                <a href="#art-5">
+                    <span class="toc-cat">Sicherheit · Vibe Coding</span>
+                    <span class="toc-title">Über 35.000 mit Grok gebaute Web-Apps standen offen – darunter Kundendaten, Patientenakten und Klartextpasswörter</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">6.</span>
+                <a href="#art-6">
+                    <span class="toc-cat">Politik · KI in der Verwaltung</span>
+                    <span class="toc-title">Chatbots überfluten das EU-Parlament: Halluzinierte Gesetze, 50 Prozent mehr Beschwerden</span>
+                </a>
+            </li>
+            
+            <li>
+                <span class="toc-num" aria-hidden="true">7.</span>
+                <a href="#art-7">
+                    <span class="toc-cat">Tools · Lokale Inferenz</span>
+                    <span class="toc-title">llama.cpp erreicht Version 1.0: Semantic Versioning für die Basis der lokalen KI</span>
+                </a>
+            </li>
+            
+            <li class="toc-separator" role="separator" aria-hidden="true"></li>
+            <ul class="toc-specials-row">
+                
+                <li class="toc-special">
+                    <a href="#reportage">
+                        <span class="toc-cat">Reportage</span>
+                        <span class="toc-title">Taxi oder Dienstwagen? Wann sich selbst betriebene KI-Modelle gegenüber der API wirklich rechnen – und was auf keiner Kalkulation steht</span>
+                    </a>
+                </li>
+                
+                <li class="toc-special">
+                    <a href="#tool-radar">
+                        <span class="toc-cat">Tool-Radar</span>
+                        <span class="toc-title">Neue KI-Tools im &Uuml;berblick</span>
+                    </a>
+                </li>
+                <li class="toc-special">
+                    <a href="#werkstatt">
+                        <span class="toc-cat">Werkstatt</span>
+                        <span class="toc-title">YouTube-Empfehlungen</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </ul>
+    </nav>
+
+    
+    <article class="article article--lead" id="art-1" aria-labelledby="art-1-h">
+        <p class="article-kicker">Unternehmen · Nvidia</p>
+        <h2 id="art-1-h">Nach Huangs Rücktritt: Ermittlungen, Machtfragen und ein Loch in der Startup-Finanzierung</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">Einen Tag nach dem Abgang des Nvidia-Gründers weitet sich die Affäre aus: Das US-Justizministerium ermittelt laut Berichten, die Belegschaft fordert Huangs Rückkehr, und Investoren rechnen mit weniger Nvidia-Kapital für KI-Startups. Bestätigt ist wenig – vieles beruht auf anonymen Quellen.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Einen Tag nach dem Rücktritt, über den wir in <a href="editions/2026-11-13.html#art-1">unserer Ausgabe vom 13. November</a> berichtet haben (und zuvor in <a href="editions/2026-11-12.html#art-1">der Ausgabe vom 12. November</a> als Bericht über eine vorbereitete Abberufung), ist die Affäre um <strong>Jensen Huang</strong> nicht beendet, sondern breiter geworden. Am Freitag haben sich drei Stränge herauskristallisiert: neue Details über Huangs letzte Stunden im Amt und sein Verhältnis zur Interimschefin, Ermittlungen der US-Justiz und – für die Branche am wichtigsten – die Frage, was Nvidias Führungskrise für die Finanzierung der KI-Startup-Szene bedeutet.</p>
+<h3>Was bestätigt ist</h3>
+<p>Gesichert sind die Eckdaten, die Nvidia selbst veröffentlicht hat. Huang ist nicht mehr CEO; Finanzchefin <strong>Colette Kress</strong> führt das Unternehmen kommissarisch, <strong>Harvey C. Jones</strong> ist erster Vorsitzender des Verwaltungsrats. Huang hat am 8. November in einem Brief an die Belegschaft, den Nvidia auch als Pressemitteilung veröffentlichte, eine Affäre eingeräumt: „Ich war meiner Frau untreu“, schrieb er, es gebe „keine Entschuldigung“. Er verwies dabei auf „die in Medienberichten geäußerten nationalen Sicherheitsbedenken“, ohne Alice Huang zu nennen. Der Verwaltungsrat hatte eine unabhängige Untersuchung eingeleitet. Außerdem hat Huang eine Aussage vor dem Kongress zugesagt, die vor Thanksgiving (26. November) stattfinden soll – nach Angaben des Ausschussvorsitzenden Brian Mast hinter verschlossenen Türen, aber protokolliert.</p>
+<h3>Was nur berichtet oder behauptet wird</h3>
+<p>Alles Weitere beruht auf Medienberichten und Regierungsquellen. Nach Berichten der New York Times halten US-Behörden Alice Huang, eine Führungskraft des Singapurer Nvidia-Kunden Megaspeed, für eine Agentin des chinesischen Staatssicherheitsministeriums; sie soll eine enge Beziehung zu Jensen Huang gehabt haben. Beide sind nicht verwandt, die Namensgleichheit ist Zufall. Peking weist den Spionagevorwurf zurück, wie heise berichtet. Nvidia erklärte Ende Oktober, Huangs Kontakte zu ihr seien „nicht ungewöhnlich“, und wies darauf hin, dass der Konzern von der US-Regierung informiert worden wäre, wenn sie eine Gefahr darstelle. Nach Berichten, die TechCrunch und die NYT wiedergeben, wurde auch Präsident Trump bereits im Herbst 2025 über die Überwachung informiert; belegt ist das nur durch die Berichterstattung, nicht durch eine offizielle Bestätigung. Die New York Times berichtet unter Berufung auf fünf frühere Nvidia-Beschäftigte zudem über eine Beziehung mit der Vizepräsidentin Kimberly Powell, die ihm direkt unterstellt war; Nvidia, Huang und Powell haben das nicht bestätigt. Reuters meldet unter Berufung auf zwei Personen eine weitere Beziehung mit einer nicht genannten Mitarbeiterin.</p>
+<h3>Die Justiz ermittelt – ohne Anklage in Sicht</h3>
+<p>Laut Semafor, zitiert von heise, haben mehrere Abteilungen des US-Justizministeriums Untersuchungen eingeleitet, die Nvidia, Supermicro und Megaspeed betreffen und sich um die Rolle von Alice Huang drehen. Es gebe bislang keine Anzeichen für eine Anklage gegen den Konzern oder gegen Jensen Huang. Parallel hat der republikanische Senator Tim Scott verlangt, dass Huang und Handelsminister Howard Lutnick vor dem Bankenausschuss des Senats aussagen.</p>
+<h3>Huangs letzte Stunden, Kress und die Belegschaft</h3>
+<p>Bloomberg schreibt, Huang sei beim Abschied „gebrochen und erschüttert“ gewesen. Das Wall Street Journal berichtet, er habe Kress im Sommer bei einem Treffen zu Nvidias geplanten Garantien für Rechenzentrumsbetreiber als „Reh im Scheinwerferlicht“ bezeichnet; beide Berichte stützen sich auf ungenannte Quellen. Laut WSJ hinterfragte Kress zudem kreditbasierte Deals, an denen Huangs Schwiegersohn beteiligt war, und stutzte die Zusage für OpenAIs Rechenzentrumsprojekt in Ohio von zunächst im Gespräch befindlichen 250 auf 105 Milliarden Dollar. Ein Teil der Belegschaft fordert unterdessen Huangs Rückkehr: Laut Wired, zitiert von t3n, sammelte ein interner Beitrag mehr als 1.600 Kommentare, viele davon zugunsten des Ex-Chefs. Das Wired-Essay von Lauren Goode sieht darin das Ende des „Gründermärchens“ und zitiert einen früheren Beschäftigten: Wer alles im Blick haben wolle, könne schwerlich Unwissenheit über den Verbleib von Chips behaupten.</p>
+<h3>Das Loch in der Startup-Finanzierung</h3>
+<p>Besonders konkret sind die Folgen für Venture Capital. Laut PitchBook, zitiert von TechCrunch, beteiligte sich Nvidia in diesem Jahr an 105 Finanzierungsrunden, oft als größter Geldgeber – von CoreWeave und Crusoe über Mistral AI und Lambda bis Black Forest Labs. Für den Kauf von Hugging Face hat Nvidia rund 13 Milliarden Dollar zugesagt; der Abschluss wird für 2027 erwartet. Investoren erwarten laut TechCrunch, dass Kress „viel konservativer“ agiert: kleinere Schecks, selektivere Neuinvestments, sinkende Bewertungen. „Wenn Nvidia in der Kapitaltabelle stand, fühlten sich alle sicher“, sagte Umesh Padval von Seligman Ventures. Die Aussagen sind Erwartungen einzelner Investoren, keine Nvidia-Ankündigung; The Information berichtet, Kress werde Veränderungen bei den Beteiligungen durchsetzen.</p>
+<p>Der Blick aus Israel, wo Nvidia rund 6.000 Menschen beschäftigt, fällt differenzierter aus. Yanai Oron von Vertex Ventures Israel hält es für möglich, dass langsamere Entscheidungen bei Nvidia Wettbewerbern eine Chance eröffnen. Adi Levanon von Selah Ventures betont, ein Führungswechsel allein gewinne Herausforderern keine Kunden.</p>
+<h3>Einordnung</h3>
+<p>Die Lage bleibt zweigeteilt: Der Führungswechsel ist Fakt, der Skandal ein Geflecht aus Eingeständnis, Berichten und Dementis. Für Praktiker zählt vor allem, dass Nvidias Finanzierungs- und Garantiemodell – ein Kernstück des Rechenzentrumsbooms – unter neuer Führung offenbar überprüft wird. Wer als Startup oder Betreiber von Nvidia-Kapital oder -Garantien abhängt, sollte Alternativen und Fristen prüfen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/" rel="noopener noreferrer external" target="_blank">TechCrunch – The unfolding Jensen Huang scandal: a timeline (13.11.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/jensen-huangs-departure-blasts-big-hole-in-ai-startup-funding-vcs-and-founders-say/" rel="noopener noreferrer external" target="_blank">TechCrunch – Jensen Huang’s departure blasts big hole in AI startup funding (13.11.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/israels-vcs-see-opportunity-for-challengers-in-nvidias-turmoil/" rel="noopener noreferrer external" target="_blank">TechCrunch – Israel’s VCs see opportunity for challengers in Nvidia’s turmoil (13.11.2026)</a></li>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/jensen-huang-didnt-show-confidence-in-his-successor-report-says/" rel="noopener noreferrer external" target="_blank">TechCrunch – Jensen Huang didn’t show confidence in his successor, report says (13.11.2026)</a></li>
+                
+                <li><a href="https://www.wired.com/story/jensen-huang-and-the-end-of-the-founder-fairy-tale/" rel="noopener noreferrer external" target="_blank">WIRED – Jensen Huang and the End of the Founder Fairy Tale (13.11.2026)</a></li>
+                
+                <li><a href="https://www.heise.de/news/Berichte-ueber-kartellrechtliche-Pruefung-Nvidias-und-weitere-Affaere-des-Ex-Chefs-11523636.html" rel="noopener noreferrer external" target="_blank">heise online – Berichte über kartellrechtliche Prüfung Nvidias und weitere Affäre des Ex-Chefs (13.11.2026)</a></li>
+                
+                <li><a href="https://t3n.de/news/nvidia-chef-mitarbeiter-unterstuetzung-1773403/" rel="noopener noreferrer external" target="_blank">t3n – Nvidia-Mitarbeiter fordern Rückkehr von Ex-Chef Jensen Huang (13.11.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-2" aria-labelledby="art-2-h">
+        <p class="article-kicker">Politik · Chip-Exporte</p>
+        <h2 id="art-2-h">Forensik an Modellgewichten: Chinas stärkste KI-Modelle tragen den Fingerabdruck exportbeschränkter Blackwell-Chips</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">Der frühere OpenAI-Forscher Will DePue will in sechs Modellen von DeepSeek, Moonshot, MiniMax und Ant Group Spuren von Nvidias Blackwell-Architektur nachgewiesen haben. Das stützt den Verdacht auf Zugang zu gesperrter Hardware, belegt aber weder einen Gesetzesverstoß noch den Standort der Chips.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die führenden offenen Sprachmodelle aus China sind laut einer neuen Untersuchung auf Nvidia-Chips entstanden, die die US-Regierung nicht nach China liefern lässt. <strong>TechCrunch</strong> (Autor: Tim Fernholz) greift am Freitag eine am 12. November veröffentlichte Analyse von <strong>Will DePue</strong> auf, einem früheren OpenAI-Forscher, der die gemeinnützige Gruppe Unemployment Labs leitet. Die Vorwürfe stammen damit aus einer einzelnen, bislang nicht unabhängig begutachteten Studie; die beteiligten Konzerne haben sich nach den uns vorliegenden Berichten (Crypto Briefing, Stand 12. November) noch nicht geäußert.</p>
+<h3>Was die Analyse gefunden hat</h3>
+<p>DePue wertet ausschließlich öffentlich freigegebene Modellgewichte aus – keine Leaks, keine Insiderquellen. Sein Ansatz: Vor dem Training werden die Gewichte mit Zufallszahlen initialisiert. In PyTorch verteilt die Zufallsfunktion (Philox) diese Arbeit auf Tausende parallele GPU-Threads; wie die Werte im Gewichtsfeld landen, hängt von der Anzahl der Recheneinheiten (Streaming Multiprocessors) des Chips ab. Hopper-Chips wie H100, H200 und H800 haben 132, Blackwell B200/B300 haben 148, GB200/GB300 haben 152. Weil Teile der Gewichte im Training unverändert bleiben oder die Startwerte schwach nachwirken, lässt sich rückwärts rechnen, auf welcher Hardware die Startgewichte erzeugt wurden.</p>
+<p>Nach dem Bericht passen sechs Modelle vierer Labore zu Blackwell: DeepSeek-V4-Flash und -V4-Pro (April 2026), Kimi K3 und K3.1-Pro von Moonshot AI (Juli bzw. November 2026), MiniMax-M3 (Juni 2026) und Ling-3.1-flash von Ant Group (Oktober 2026). Frühere Modelle derselben Labore lesen sich dagegen als Hopper-trainiert. Auf echter Hardware reproduzierte eine B300 die erhaltenen Startwerte von DeepSeek-V4-Flash zum Teil Bit für Bit, eine gemietete GB200 alle 13 geprüften Zeilen von Kimi K3; ein um eins verschobener Seed zerstörte jeden Treffer. Die statistische Signifikanz liegt je Modell zwischen 49 und 1.385 Sigma, die Schwelle für Zufallstreffer bei rund 8. Für DeepSeek-V4-Flash nennt die Studie die Evidenz „conclusive“, für die übrigen fünf „strong“.</p>
+<p>Die Größenordnung: Aus Modellgröße und Trainingsdaten schätzt DePue für Kimi K3 etwa 4.500 und für DeepSeek-V4-Pro etwa 3.000 Blackwell-GPUs über zwei bis drei Monate, insgesamt rund 12.000 für die fünf Läufe. Zu rund 70.000 Dollar je GPU wären das für die größten Cluster 200 bis 300 Millionen Dollar.</p>
+<h3>Was die Studie nicht belegt</h3>
+<p>Die Grenzen benennen sowohl DePue als auch TechCrunch deutlich. Die Methode identifiziert die Hardware, die die Startgewichte erzeugt hat – nicht jeden Chip, der später trainiert hat. Sie sagt nichts über Standort, Eigentümer oder Beschaffungsweg. Blackwell-Systeme lassen sich auch in Rechenzentren außerhalb Chinas mieten; DePue schreibt, die Befunde seien „not a finding that any law was broken“. Ob DePues Ergebnis von anderen Fachleuten bestätigt wird, ist offen: Crypto Briefing zufolge sagt er, leitende Forscher bei OpenAI und Anthropic hätten es unabhängig geprüft – das ist seine Aussage, der Bericht nennt keine Gutachter. Code und Daten stehen laut Studie öffentlich auf GitHub bereit.</p>
+<h3>Einordnung: Exportkontrolle und Schlupflöcher</h3>
+<p>Blackwell-Chips dürfen nicht an China oder chinesische Unternehmen geliefert werden. Die Trump-Regierung erlaubt den schwächeren H200, sofern die Lieferung über einen Umweg läuft, der den USA einen Zoll von 25 Prozent einbringt. TechCrunch verweist darauf, dass das Weiße Haus (Michael Kratsios) schon früher in diesem Jahr unter Berufung auf Geheimdienstquellen erklärt hatte, Moonshot habe gesperrte Nvidia-Chips genutzt. Epoch AI schätzt, dass 2024 und 2025 rund zwei Millionen fortgeschrittene Chips über Verschleierungsrouten nach China gelangten; allein nach Malaysia seien 275.000 Nvidia-Beschleuniger importiert worden. Das zeigt das zentrale Schlupfloch: Chinesische Firmen mieten Rechenleistung in Drittländern. Sam Bresnick vom Georgetown CSET argumentiert, es sei widersinnig, Zugriff in China zu verbieten, aber in Malaysia zu dulden. Falken fordern deshalb Kontrollen, die nicht nur Besitz und Standort, sondern die Nutzung der Chips betreffen.</p>
+<h3>Folgen für Nvidia und Washington</h3>
+<p>Der Befund trifft Nvidia in der ohnehin akuten Krise um Jensen Huang, über die wir <a href="editions/2026-11-13.html#art-1">in unserer Ausgabe vom 13. November</a> berichtet haben. Hier genügt die Verbindung: Megaspeed, die Firma von Alice Huang, steht im Zentrum von Schmuggelvorwürfen und wird von US-amerikanischen und singapurischen Behörden untersucht; Bloomberg meldet zudem, ein mit ihr verbundenes Unternehmen sei an der Lieferung gesperrter Chips an ein Rechenzentrum in Shanghai beteiligt gewesen. Nvidia und Huang hatten die Rechenzentren von Megaspeed nach TechCrunch öffentlich als legitim bezeichnet. Für Nvidia entsteht daraus ein mögliches Haftungsrisiko, falls Ermittler Schmuggel und Kenntnis im Management nachweisen. Heute haben US-Unternehmen nur begrenzte Pflichten, die Verwendung kontrollierter Güter durch Kunden zu verfolgen; über Chip-Tracking hatten wir <a href="editions/2026-11-13.html#art-2">am 13. November</a> berichtet.</p>
+<p>Politisch gerät auch das Handelsministerium unter Howard Lutnick unter Druck: Laut New York Times fanden seine Ermittler verdächtige Käufer nicht und standen Nvidia zu nah; Lutnick könnte laut Berichten sein Amt verlieren.</p>
+<h3>Was Unternehmen daraus ziehen sollten</h3>
+<p>Für europäische Unternehmen, die chinesische Open-Weight-Modelle wie DeepSeek V4 oder Kimi K3 einsetzen, ist die Lizenzlage der Modelle selbst unverändert; ein Rechtsverstoß ist nicht belegt. Wer solche Modelle in Produkte oder Lieferketten einbindet, sollte jedoch Compliance und Reputationsrisiken neu bewerten und prüfen, wie Rechenzentrumsanbieter in Drittländern ihre Kunden prüfen. Wer GPUs vermietet, muss mit schärferen Know-your-customer-Pflichten rechnen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/export-banned-nvidia-chips-are-behind-chinas-most-powerful-ai-models-uh-oh-jensen/" rel="noopener noreferrer external" target="_blank">TechCrunch: Export-banned Nvidia chips are behind China’s most powerful AI models — uh-oh, Jensen! (13.11.2026)</a></li>
+                
+                <li><a href="https://unemploymentlabs.com/checkpoint-forensics" rel="noopener noreferrer external" target="_blank">Unemployment Labs (Will DePue): Top Chinese Frontier AI Models Carry the Fingerprint of Export-Controlled NVIDIA Blackwell GPUs (12.11.2026)</a></li>
+                
+                <li><a href="https://cryptobriefing.com/chinese-ai-chip-usage-fingerprinting/" rel="noopener noreferrer external" target="_blank">Crypto Briefing: Former OpenAI researcher says six Chinese AI models were built on banned Nvidia chips (12.11.2026)</a></li>
+                
+                <li><a href="https://atlabyte.com/en/news/research-china-s-deepseek-and-moonshot-trained-on-banned-nvidia-blackwell-chips" rel="noopener noreferrer external" target="_blank">ATLABYTE: Research: China&#39;s DeepSeek and Moonshot trained on banned Nvidia Blackwell chips (13.11.2026)</a></li>
+                
+                <li><a href="https://www.bloomberg.com/news/articles/2026-11-13/banned-nvidia-chips-installed-at-china-data-center-linked-to-alice-huang" rel="noopener noreferrer external" target="_blank">Bloomberg: Banned Nvidia Chips Installed at China Data Center Linked to Alice Huang (13.11.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-3" aria-labelledby="art-3-h">
+        <p class="article-kicker">KI-Agenten · Zahlungsverkehr</p>
+        <h2 id="art-3-h">ChatGPT Wallet: OpenAIs „Dots“ dürfen einkaufen – mit Einmal-Token und Fingerabdruck</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">OpenAI hat mit American Express, Mastercard und Visa eine Bezahlfunktion für seine Agenten „Dots“ gestartet. Der Agent sieht die echte Kartennummer nie, jeder Kauf braucht eine biometrische Freigabe – zunächst nur für einen kleinen Kreis von US-Pro-Abonnenten.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>OpenAI hat am Freitag mit <strong>ChatGPT Wallet</strong> eine Zahlungsfunktion für seine Agenten, die „Dots“, vorgestellt. Laut OpenAI-Ankündigung, TechCrunch und CNBC sollen die Agenten künftig nicht mehr nur Produkte recherchieren, sondern den Kauf auch abschließen. Das ist der zweite Anlauf des Konzerns im Handel: Den 2025 eingeführten „Instant Checkout“ gab OpenAI laut CNBC rasch auf und stellte im März 2026 stattdessen eine überarbeitete Produktsuche vor. Die Dots hatte OpenAI Ende September auf seiner Entwicklerkonferenz eingeführt; Hintergründe zur Debatte um Vertrauen und Datenschutz bei Agenten lesen Sie in <a href="editions/2026-10-11.html#art-2">unserer Ausgabe vom 11. Oktober</a>.</p>
+<h3>So läuft ein Kauf ab</h3>
+<p>Nutzer hinterlegen ihre Karte einmalig in der Wallet und bitten dann ihren Dot, etwas zu besorgen. Vor dem Abschluss zeigt das System laut OpenAI die Artikel, den Gesamtbetrag und die gewählte Karte an. Der Nutzer bestätigt mit einer Sicherheitsabfrage wie Face ID oder Fingerabdruck; die Freigabe erzeugt zugleich einen Nachweis darüber, was genehmigt wurde. Ohne diese Bestätigung kann der Agent keinen Wallet-Kauf abschließen.</p>
+<p>Technisch zentral ist ein <strong>Zahlungs-Token</strong>: Das Zahlungsnetzwerk stellt dem Dot nach CNBC-Angaben einen Ersatz mit eigener Kartennummer, Sicherheitscode und Ablaufdatum aus, der auf die jeweilige Transaktion begrenzt ist. Weder der Agent noch der Händler erhalten die echten Kartendaten. Der Händler bekommt vom Dot nur, was er zur Erfüllung braucht, etwa Lieferadresse und Kontaktdaten. Preis, Lieferung, Retouren und Kundenservice bleiben beim Händler.</p>
+<h3>Wer mitmacht – und wer nicht</h3>
+<p>Als Partner nennt OpenAI American Express, Mastercard und Visa. Zum Start können nur ausgewählte US-Abonnenten von ChatGPT Pro ab 18 Jahren teilnehmen, die eine in den USA ausgegebene Karte dieser Netzwerke besitzen. Wie viele Nutzer zur ersten Gruppe gehören und wann die Funktion breiter verfügbar ist, hat OpenAI laut tbreak nicht mitgeteilt. Amex-Manager Luke Gebb sagte CNBC, ein kontrollierter Start sei „der richtige Ansatz“; OpenAI könne später „die Lautstärke aufdrehen“. Für Händler veröffentlichte OpenAI ein „Commerce Partner Playbook“ und arbeitet nach Angaben von TestingCatalog und tbreak mit den Betrugsabwehr-Anbietern Forter, Riskified, Sardine und Signifyd sowie den Zahlungsdienstleistern Adyen, Checkout.com und Stripe zusammen. Denn bestehende Risikosysteme könnten legitime Agentenkäufe als Betrug werten und ablehnen.</p>
+<h3>Schutzmechanismen und Datenschutz</h3>
+<p>Kunden behalten laut OpenAI die Kartenvorteile, etwa Bonuspunkte, und den Schutz bei Streitfällen, zum Beispiel bei defekter Ware. Banken und Netzwerke prüfen die Transaktionen weiter wie bisher. Ausgabenlimits, Kategorien oder Zeitfenster, mit denen Nutzer Käufe vorab freigeben und dem Agenten mehr Autonomie geben könnten, stehen auf der Roadmap, sind aber <em>nicht Teil des Starts</em>. OpenAI nimmt zunächst keine Provision. Offen bleibt, welche Daten OpenAI selbst über Einkäufe speichert; die Ankündigung beschreibt vor allem, was Agent und Händler nicht sehen – die Frage, was die Plattform sieht, beantworten die uns vorliegenden Berichte nicht.</p>
+<h3>Wettbewerb und Gegenwind</h3>
+<p>Mit dem Schritt reagiert OpenAI auf den Boom persönlicher Agenten. Laut TechCrunch bietet auch der Agent Instinct Käufe an, und Metas Muse (über 10 Millionen Nutzer) verzeichne Einkaufen als Top-Aktivität. Zugleich sind die Zahlen gedämpft: DoorDash und Uber melden bisher nur wenige Bestellungen durch Agenten. Amazon, laut TechCrunch der größte Händler, der Agenten ausschließt, will Kunden zu seinem eigenen Assistenten Alexa lenken; United Airlines kündigte an, Agenten beim Ticketkauf zu blockieren. Die Sperrwelle hatten wir in <a href="editions/2026-10-18.html#art-1">unserer Ausgabe vom 18. Oktober</a> beschrieben. Auf der anderen Seite erlaubt Walmart laut tbreak (unter Berufung auf The Next Web) Agenten den Einkauf mit eigenen Ausgabenlimits.</p>
+<h3>Einordnung und Risiken</h3>
+<p>Bestätigt ist das Konstruktionsprinzip: Das Zahlungsnetzwerk bleibt Vertrauensanker, der Mensch bleibt per Biometrie im Loop. Das schützt vor dem naheliegendsten Risiko, einem Agenten, der Kartendaten ausplaudert oder eigenmächtig Geld ausgibt. Es löst aber nicht alles: Ein Agent kann falsche Produkte wählen, Betrüger könnten ihn mit manipulierten Seiten täuschen – die Bestätigungsmaske ist hier die letzte Kontrollinstanz – und Händler könnten die Käufe schlicht blockieren. Der Komfortgewinn ist zudem begrenzt, solange jeder Kauf einzeln bestätigt werden muss. <strong>[INFERENCE]</strong> Der eigentliche Praxistest beginnt daher erst mit den angekündigten Limits, die Teilautonomie erlauben, und mit der Frage, wie viele Händler ihre Kassen für Agenten öffnen.</p>
+<p>Hinweis zur Quellenlage: Die Ankündigung von OpenAI selbst war uns nicht abrufbar (HTTP 403); die Beschreibung stützt sich auf TechCrunch, CNBC, TestingCatalog und tbreak, die übereinstimmend berichten. Die Angaben zu Walmart stammen aus Sekundärberichten und sind von uns nicht unabhängig geprüft.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/" rel="noopener noreferrer external" target="_blank">TechCrunch – ChatGPT’s new Wallet lets AI agents shop and check out for you (13.11.2026)</a></li>
+                
+                <li><a href="https://www.cnbc.com/2026/11/13/openai-chatgpt-wallet-dot-purchases.html" rel="noopener noreferrer external" target="_blank">CNBC – OpenAI launches ChatGPT Wallet, allowing its ‘dots’ AI agents to make purchases (13.11.2026)</a></li>
+                
+                <li><a href="https://www.testingcatalog.com/openai-launches-chatgpt-wallet-for-agent-purchases/" rel="noopener noreferrer external" target="_blank">TestingCatalog – OpenAI launches ChatGPT Wallet for agent purchases (13.11.2026)</a></li>
+                
+                <li><a href="https://tbreak.com/chatgpt-wallet-dots-agents-purchases/" rel="noopener noreferrer external" target="_blank">tbreak – ChatGPT Wallet lets OpenAI’s dots agents shop without seeing your card (13.11.2026)</a></li>
+                
+                <li><a href="https://openai.com/index/introducing-chatgpt-wallet/" rel="noopener noreferrer external" target="_blank">OpenAI – Introducing ChatGPT Wallet (Ankündigung, nicht abrufbar; in Suchtreffer gefunden)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-4" aria-labelledby="art-4-h">
+        <p class="article-kicker">Unternehmen · Agenten-Plattformen</p>
+        <h2 id="art-4-h">LangChain sammelt 300 Millionen Dollar bei drei Milliarden Bewertung ein – Wette auf die neutrale Schicht für Unternehmensagenten</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">Der Agenten-Spezialist LangChain hat eine Series C über 300 Millionen Dollar abgeschlossen, angeführt von Alphabets Wachstumsfonds CapitalG. Die Bewertung hat sich binnen eines Jahres mehr als verdoppelt; Umsatzzahlen nennt das Unternehmen allerdings nicht.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>LangChain hat nach eigenen Angaben eine <strong>Series C über 300 Millionen Dollar</strong> bei einer Bewertung von <strong>drei Milliarden Dollar</strong> abgeschlossen. Das Unternehmen hat die Runde am Freitag per Blogeintrag von Mitgründer und CEO Harrison Chase und einer Pressemitteilung verkündet; TechCrunch berichtete am selben Tag. Angeführt wird die Finanzierung vom Bestandsinvestor <strong>CapitalG</strong>, dem Wachstumsfonds von Alphabet. Neu dabei sind laut LangChain der Singapurer Staatsfonds GIC und DFJ Growth, die Bestandsinvestoren IVP und Sapphire Ventures beteiligten sich erneut. Außerdem steigen Salesforce Ventures, Insight Venture Partners, QuantumLight und MongoDB Ventures ein; Sequoia, Amplify und Benchmark haben ihr Engagement aufgestockt.</p>
+<p>Zum Vergleich: Im Oktober 2025 hatte LangChain laut TechCrunch 125 Millionen Dollar unter Führung von IVP bei einer Bewertung von 1,25 Milliarden Dollar eingesammelt. Die Bewertung hat sich somit in rund einem Jahr mehr als verdoppelt, wie auch das Wall Street Journal in der Überschrift seiner Exklusivmeldung festhält. Zu Umsatz, Wachstumsraten oder Profitabilität macht LangChain in der Ankündigung keine Angaben. Die Bewertung lässt sich daher nicht an einer Kennzahl messen; belastbar sind bislang nur Nutzungs- und Kundenzahlen aus Unternehmensmitteilungen.</p>
+<h3>Vom Open-Source-Baukasten zur Betriebsplattform</h3>
+<p>LangChain entstand Ende 2022 als Open-Source-Projekt von Chase und handelte damals jene Aufgaben ab, mit denen frühe Sprachmodelle haderten: Websuche, API-Aufrufe, Datenbankzugriffe. TechCrunch schreibt, dass die großen KI-Labore diese Fähigkeiten inzwischen selbst in ihre Werkzeugkästen („Harnesses“) einbauen und LangChain seinen Fokus deshalb auf die Verwaltung von Agenten verlagert habe. Kommerzielles Produkt ist <strong>LangSmith</strong>, nach Firmenangaben eine framework-unabhängige Plattform, um Agenten zu betreiben, zu verbessern und zu steuern. Sie gliedert sich in drei Säulen:</p>
+<p><strong>Agent Runtime</strong> umfasst die Open-Source-Bausteine Deep Agents, <strong>LangGraph</strong> und LangChain sowie Agent Server und Sandboxes für den Betrieb in der Cloud oder in der eigenen Umgebung, dazu vollständig verwaltete Angebote (Managed Agents, Fleet). <strong>Agent Improvement</strong> bündelt Observability, Evaluierung, Fine-Tuning auf Basis von Agenten-Traces und „LangSmith Engine“, einen Agenten, der Fehler in der Produktion sucht, Korrekturen für Code und Prompts schreibt und auf Regressionen achtet. <strong>Agent Governance</strong> schließlich meint zentrale Gateways für Modelle und Werkzeuge, mit denen sich Modellbudgets, Ausweichmodelle, Datenschutz und Zugriffsrechte steuern lassen. Am 20. November will LangChain weitere Funktionen vorstellen.</p>
+<h3>Zahlen: Kunden und Downloads – vom Unternehmen selbst</h3>
+<p>Mehr als <strong>7.000 Organisationen</strong> nutzen LangSmith nach LangChain-Angaben, genannt werden Start-ups wie Harvey, Rippling und Listen Labs sowie Konzerne wie Nvidia, Toyota und Salesforce. Clay überwache damit Hunderte Millionen Agentenläufe pro Monat; Workday habe die Zeit für die Bereitstellung eines neuen Agenten von fünf Monaten auf unter einen Tag gesenkt. CapitalG ergänzt in seinem Investment-Beitrag, die Open-Source-Projekte kämen auf mehr als 350 Millionen Downloads im Monat, nach rund 90 Millionen für LangChain und LangGraph zur Series B, und insgesamt auf über eine Milliarde Downloads. Alle diese Zahlen stammen von LangChain oder seinem Lead-Investor und sind unabhängig nicht überprüft. Downloads sagen zudem wenig über zahlende Nutzer aus, und „Kunde“ kann vom Einzelentwickler bis zum Konzernvertrag vieles bedeuten.</p>
+<h3>Wettbewerb: Labore, Clouds und Neulinge</h3>
+<p>LangChains Positionierung lautet „Own your intelligence“: Unternehmen sollen Modell, Daten und Infrastruktur selbst wählen und kontrollieren. Das richtet sich gegen die Bindung an einzelne Anbieter. Laut TechCrunch betonen die Firma, LangSmith binde Nutzer an kein Modell, keine Cloud und kein Ökosystem – anders als die großen Clouds oder Frontier-Labore. CapitalG räumt ein, dass Modellanbieter und Hyperscaler eigene Agentenwerkzeuge ausliefern, „much of it very good“; Unternehmen mit Hunderten Agenten über mehrere Anbieter hinweg brauchten aber eine neutrale Schicht. Das ist die Investorenthese, kein Beleg. TechCrunch weist zugleich darauf hin, dass viele andere Start-ups ähnliche Versprechen machen und ebenfalls gut laufen; als Beispiel dient der Neuling Mintive, der Identität für Agenten verwaltet. LangChains Vorteil sei der Vorsprung und die Verbreitung.</p>
+<h3>Einordnung für Unternehmen</h3>
+<p>Für IT-Entscheider zeigt die Runde vor allem, dass sich die Wertschöpfung von der Entwicklung einzelner Agenten zum <em>Betrieb</em> verschiebt: Beobachtbarkeit, Tests, Kostenkontrolle und Zugriffsrechte werden zur eigenen Disziplin. Wer mehrere Modelle und Clouds nutzt, hat gute Gründe, Orchestrierung und Auswertung nicht beim Modellanbieter zu belassen. Zugleich sollten Käufer nüchtern prüfen: Welche Bestandteile sind Open Source, welche nur im kommerziellen LangSmith verfügbar? Was kostet der Betrieb im eigenen Cloud-Konto (laut Anbieter auch bei AWS, Azure und Google Cloud möglich) gegenüber der Hosted-Variante? Und wie portabel sind Traces und Evaluierungen, falls man wechseln will? Ein Hype-Zyklus allein trägt eine Bewertung von drei Milliarden Dollar nicht; ob der Umsatz sie rechtfertigt, ist von außen nicht beurteilbar.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://techcrunch.com/2026/11/13/ai-agent-startup-langchain-hits-3b-valuation/" rel="noopener noreferrer external" target="_blank">TechCrunch – AI agent startup LangChain hits $3B valuation (13.11.2026)</a></li>
+                
+                <li><a href="https://www.langchain.com/blog/series-c" rel="noopener noreferrer external" target="_blank">LangChain Blog – LangChain Raises $300M to Enable Every Company to Own Its Intelligence (13.11.2026)</a></li>
+                
+                <li><a href="https://capitalg.com/insights/doubling-down-on-langchain/" rel="noopener noreferrer external" target="_blank">CapitalG – Doubling Down on LangChain (13.11.2026)</a></li>
+                
+                <li><a href="https://www.unite.ai/langchain-secures-300m-series-c-at-3b-valuation-for-agent-governance" rel="noopener noreferrer external" target="_blank">Unite.AI – LangChain Secures $300M Series C at $3B Valuation for Agent Governance (13.11.2026)</a></li>
+                
+                <li><a href="https://www.wsj.com/cio-journal/ai-startup-langchain-more-than-doubles-its-valuation-to-3-billion-f83377ad" rel="noopener noreferrer external" target="_blank">Wall Street Journal – AI Startup LangChain More Than Doubles Its Valuation to $3 Billion</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-5" aria-labelledby="art-5-h">
+        <p class="article-kicker">Sicherheit · Vibe Coding</p>
+        <h2 id="art-5-h">Über 35.000 mit Grok gebaute Web-Apps standen offen – darunter Kundendaten, Patientenakten und Klartextpasswörter</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-10">10. November 2026</time>
+        </p>
+        <p class="article-teaser">Das Sicherheitsunternehmen Claroc fand 35.578 öffentlich abrufbare Apps aus Grok Builds Entwicklermodus, rund 650 bis 800 davon mit privaten Daten. Ursache sind ein standardmäßig geöffneter Zugriff und eine Link-Konstruktion, die sich über DNS-Datenbanken auflisten lässt; SpaceXSI nahm nur die eigenen 24 Apps vom Netz.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Mehr als 35.000 Web-Apps, die Nutzer im „Build“-Modus von Grok per Chatbeschreibung haben schreiben lassen, waren für jedermann ohne Anmeldung abrufbar. Das ergibt eine Untersuchung des israelisch-amerikanischen Sicherheitsunternehmens Claroc, die am 10. November 2026 erschien und in den Folgetagen unter anderem von Ars Technica, heise online und – am 13. November – von Golem.de aufgegriffen wurde. Wir datieren das Ereignis daher auf die Veröffentlichung der Studie, nicht auf den Tag der deutschsprachigen Berichte. Anbieter von Grok ist SpaceXSI, der Zusammenschluss von SpaceX und xAI.</p>
+<p>Die Zahlen stammen aus der Studie selbst und sind in den Berichten übereinstimmend wiedergegeben: Claroc ermittelte über DNS-Daten 43.601 Namen unter der Domain grok.me, auf der Grok veröffentlichte Apps ausliefert. Von 43.551 abgefragten Adressen waren 37.571 noch online, 35.578 davon (94,7 Prozent) öffneten ohne Anmeldung. Nur 1.993 antworteten mit dem Fehler HTTP 401, wie ihn eine auf „Nur du“ oder „Eingeladene Nutzer“ gestellte App liefert. Die meisten offenen Apps waren harmlos – Spiele, Landingpages, Rechner. Laut Claroc enthielt etwa jede zehnte sensible Inhalte; eine Stichprobenhochrechnung ergibt 650 bis 800 Apps mit privaten Daten. Diese Hochrechnung ist eine Schätzung der Forscher, keine vollständige Prüfung.</p>
+<h3>Was offenlag</h3>
+<p>Zu den von Claroc beschriebenen Funden gehören die Dienstpläne eines Krankenhausverbunds mit mehr als 3.500 Mitarbeitern, das Intensivbriefing für einen einzelnen Patienten mit Laborwerten und Beatmungsstatus, eine Fahrerliste eines Speditionsunternehmens mit mehr als tausend Personen sowie eine Zeiterfassung, in deren Skriptdatei 18 Konten samt Klartextpasswort standen, Administratoren eingeschlossen. Außerdem fanden die Forscher interne Daten von 30 identifizierbaren Organisationen, 26 mit über 1.000 Beschäftigten, sechs aus den Fortune 500. Ars Technica nennt weitere Beispiele, die auf Angaben von Claroc beruhen, etwa die Belegung eines Sprengstofflagers bei einem Rüstungskonzern. Die Studie nennt keine Betroffenen beim Namen; wir geben solche Zuordnungen nicht wieder.</p>
+<p>Besonders heikel: 24 der offenen Apps stammten von SpaceXSI- und X-Mitarbeitern selbst, darunter ein als vertraulich markierter Einarbeitungsplan, eine Vertriebskarte mit 594 Kundenkonten und Werbeangebote von X, eines an eine US-Bundesbehörde.</p>
+<h3>Ursache: Standard und Link-Design</h3>
+<p>Laut Claroc kommen zwei Dinge zusammen. Erstens schlug die Oberfläche beim Veröffentlichen im von den Forschern genutzten Bezahlkonto „Jeder mit dem Link“ bereits vorausgewählt vor. Zweitens liegt der Zufallsanteil der Adresse (typischerweise vier Zufallswörter) <em>links</em> der Domain, also im Hostnamen. Jeder Aufruf löst eine DNS-Anfrage aus, und kommerzielle Passive-DNS-Dienste speichern solche Anfragen in durchsuchbaren Datenbanken. Ein Mustersuchlauf nach „*.grok.me“ liefert damit eine Liste aller Apps, deren Adresse jemals aufgerufen wurde. Bei Google Docs oder geteilten Chats von ChatGPT, Claude und Gemini steht das Geheimnis dagegen im Pfad, den DNS nie sieht. Ars Technica berichtet zudem, dass auch Lovable, Bolt und Replit jeder App einen eigenen Hostnamen geben; die Forscher fanden bei Grok aber „mit Abstand“ die meisten sensiblen Firmendaten. Vor wenigen Wochen hatte Meta ein Link-Sharing von Muse nach ähnlichen Funden ausgesetzt.</p>
+<p>Hinzu kommen Mängel im generierten Code. In zwei eigenen Testapps ließ Grok die erste ohne Anmeldung zu, sodass Fremde Datensätze hinzufügen konnten. In der zweiten, einer Teamkundenliste, wurde jeder, der sich mit Google anmeldete, erst dem Team hinzugefügt und dann geprüft – die Prüfung fiel also immer positiv aus. Schreibzugriffe testete Claroc nach eigener Aussage ausschließlich an den eigenen Apps; ob die fremden offenen Apps veränderbar waren, ist unbelegt.</p>
+<h3>Reaktion von SpaceXSI</h3>
+<p>Claroc meldete die Lücke am 8. November und die übrigen SpaceXSI-Apps am 9. November. Eine Antwort blieb zunächst aus. Auf Anfrage von Ars Technica ließ ein Vertreter von Cursor, das SpaceXSI übernommen hat, erklären, Apps seien standardmäßig privat und nichts werde ohne Zutun des Erstellers öffentlich. Laut SpaceXSI sind Mitarbeiterkonten standardmäßig auf „Nur du“ gestellt, und das Veröffentlichen erfordere mehrere ausdrückliche Schritte. Claroc bestätigt die Schritte, hält aber dagegen, dass am Ende der Zugriff für jeden voreingestellt sei, und verweist darauf, dass die Betreiber der 35.578 Apps alle Schritte durchlaufen hätten. Wenige Stunden nach der Presseanfrage nahm SpaceXSI die 24 eigenen Apps vom Netz. Die Apps fremder Nutzer blieben zunächst offen; ob SpaceXSI deren Betreiber informiert oder den Standard ändert, ist nach dem Stand der Berichte unbeantwortet. Claroc benachrichtigt betroffene Organisationen nach eigener Angabe selbst.</p>
+<h3>Was Unternehmen jetzt tun sollten</h3>
+<p>Die Studie ist zugleich Werbung für Claroc-Produkte, was bei der Bewertung der Empfehlungen zu bedenken ist; die Hinweise sind aber ohne Produkt umsetzbar. Erstens: klären, welche KI-App-Builder Beschäftigte nutzen – sie brauchen weder Admin-Freigabe noch Firmenkonto. Zweitens: eigene Apps aufspüren, etwa über Passive-DNS-Suchen nach den Builder-Domains, und die Fundstellen im Inkognitofenster öffnen. Drittens: bei allem Internen den Zugriff auf „Nur du“ oder „Eingeladene Nutzer“ setzen; wer nicht eingeladen ist, muss einen Fehler sehen. Viertens: Anmeldung von außen testen – kommt ein fremdes Google-Konto hinein, fehlt eine Zugriffsliste. Fünftens: Skriptdateien nach Namen, Mail-Adressen und Passwörtern durchsuchen, denn deren Inhalt lädt jeder Browser mit, und herrenlose Apps abschalten. Wer Personen- oder Gesundheitsdaten betroffen sieht, muss zudem die Meldepflichten nach DSGVO prüfen.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://blog.claroc.io/ghostshares-grok-build-apps/" rel="noopener noreferrer external" target="_blank">Claroc – GhostShares 2: Grok Apps Exposed xAI’s Business Secrets and People’s Private Data (Originalstudie)</a></li>
+                
+                <li><a href="https://arstechnica.com/security/2026/11/grok-build-coding-agent-leaks-oodles-of-confidential-info-some-belonging-to-spacexsi/" rel="noopener noreferrer external" target="_blank">Ars Technica – Grok Build coding agent leaks oodles of confidential info, some belonging to SpaceXSI</a></li>
+                
+                <li><a href="https://www.heise.de/en/news/Grok-Build-AI-apps-expose-trade-secrets-and-personal-data-11521047.html" rel="noopener noreferrer external" target="_blank">heise online – Grok Build: AI apps expose trade secrets and personal data</a></li>
+                
+                <li><a href="https://www.radardigital.ai/en/articles/grok-35000-apps-accessible-without-login/" rel="noopener noreferrer external" target="_blank">Radar Digital – More than 35,000 apps created with Grok were accessible without login</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-6" aria-labelledby="art-6-h">
+        <p class="article-kicker">Politik · KI in der Verwaltung</p>
+        <h2 id="art-6-h">Chatbots überfluten das EU-Parlament: Halluzinierte Gesetze, 50 Prozent mehr Beschwerden</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">Die EU reguliert KI weltweit am striktesten – und kämpft nun selbst mit der Flut maschinell erzeugter Änderungsanträge, Anfragen und Beschwerden. Das Parlament verabschiedete eine Entschließung, neue Leitlinien sollen folgen.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Die EU versteht sich als globale Regulierungsmacht für künstliche Intelligenz. Im eigenen Haus zeigt sich nun die Kehrseite: Wie heise online am 13. November 2026 berichtet, werden die Institutionen in Brüssel und Straßburg von automatisiert erzeugten Texten überrollt. Heise stützt sich dabei auf das Portal Rapporteur, dessen Originaltext wir nicht einsehen konnten. Die Kernaussagen lassen sich jedoch zum Teil durch Politico Europe und das Europäische Parlament belegen.</p>
+<p><strong>Was belegt ist.</strong> Parlamentspräsidentin Roberta Metsola warnte am 4. November bei einer Veranstaltung zum KI-Einsatz im Parlament, KI-gestützte Änderungsanträge könnten „fundamental nicht die konstruktive Debatte mit einem Kollegen“ ersetzen. Wo KI genutzt werde, „sollten die Menschen das wissen“. Generalsekretär Alessandro Chiocchetti erklärte laut Politico, Beamte warnten vor einer Welle KI-geschriebener Änderungsanträge, einige davon mit Verweisen auf nicht existierende Gesetze. Er nannte den Fall eines Abgeordneten, der sich von einer KI juristisch beraten ließ und eine falsche Antwort erhielt: „Unsere Juristen brauchten zwei Tage, um ChatGPT zu widerlegen.“</p>
+<p><strong>Die Zahlen.</strong> Belastbare Gesamtzahlen nennt keine der Quellen. Heise zitiert einen hochrangigen EU-Beamten gegenüber Rapporteur, wonach die Beschwerden bei der Europäischen Bürgerbeauftragten infolge von KI um 50 Prozent gestiegen seien; diese Angabe ist bislang nur berichtet und nicht unabhängig bestätigt. Der konservative schwedische Abgeordnete Jörgen Warborn verweist laut heise darauf, dass der Industrial Accelerator Act über 5000 Änderungsanträge erhalten habe. Ob und wie viele davon KI-generiert sind, bleibt offen. Chiocchetti selbst spricht laut Politico von „Tausenden“ Änderungsanträgen, die man mit KI sortieren wolle.</p>
+<p><strong>Die institutionelle Antwort.</strong> Die Verwaltung will ihre Leitlinien für den KI-Einsatz „sehr bald“ der Parlamentsspitze vorlegen; die bestehenden Regeln für Mitarbeitende stammen von 2024. Chiocchetti fasst sie in drei Punkten zusammen: offenlegen, wenn KI genutzt wird; keine sensiblen Inhalte in öffentliche Werkzeuge eingeben; alles prüfen, bevor es den Schreibtisch verlässt, denn „es ist Ihr Name, der darauf steht“. Parallel baut das Parlament ein eigenes KI-Werkzeug auf eigener Infrastruktur für sensible Arbeiten. Kommerzielle Modelle dürfen laut Politico weiter für weniger sensible Aufgaben dienen. Am Donnerstag, dem 12. November, verabschiedete das Plenum zudem mit 405 zu 133 Stimmen bei 60 Enthaltungen eine Entschließung zu den institutionellen Aspekten von KI. Sie fordert menschliche Aufsicht, schließt rein automatisierte politische Entscheidungen aus und schlägt eine haushaltsneutrale „KI-Beobachtungsstelle“ des Parlaments vor.</p>
+<p><strong>Individuelle Gegenmaßnahmen.</strong> Der irische Liberale Barry Andrews hat sich laut heise eine eigene Richtlinie gegeben, die KI bei Abstimmungen, Plenarreden, Pressemitteilungen und Anfragen an die Kommission ausschließt. Das Papier trägt selbst den Hinweis, mit KI-Unterstützung entstanden zu sein. Warborn hält dagegen: KI dürfe nicht allein zur Überlastung des Systems dienen, steigere aber die Produktivität.</p>
+<p><strong>Unbestätigtes.</strong> Ausschließlich berichtet sind weitere Details. Abgeordnete sollen KI teils nutzen, um mit minimalem Aufwand Aktivität vorzutäuschen und in internen Ranglisten besser dazustehen. Unter Beamten wachse die Vermutung, die Kommission beantworte Anfragen ihrerseits mit KI; ein Parlamentsassistent sieht darin die Gefahr einer weitgehend menschenfreien Kommunikation zwischen den Institutionen. Belege dafür nennt heise nicht.</p>
+<p><strong>Einordnung.</strong> Der Fall zeigt ein Asymmetrieproblem: Die Kosten, einen Text zu erzeugen, sinken gegen null, die Kosten, ihn zu prüfen, bleiben hoch. Juristische Dienste und Dolmetscher, die in 24 Amtssprachen arbeiten, fangen die Fehler am Ende der Kette ab. Interessant ist zudem, dass die Maßnahmen auf Transparenz und Verantwortlichkeit setzen, nicht auf Verbote, ähnlich wie der AI Act für KI-generierte Inhalte. Das Muster passt dazu, dass Gerichte im Rechtsverkehr Anwälte bereits für halluzinierte Zitate rügen.</p>
+<p><strong>Was Organisationen daraus lernen können.</strong> Wer Eingaben von Bürgern, Kunden oder Mitarbeitenden entgegennimmt, sollte mit mehr und formal glatter, inhaltlich schwächerer Post rechnen. Sinnvoll sind Kennzeichnungspflichten für KI-Hilfe, Pflicht zu Quellenangaben, die sich stichprobenartig prüfen lassen, und eine klare Zuständigkeit: Wer unterschreibt, haftet. Vorsicht ist auch bei der Gegenmaßnahme geboten. Wer die Flut mit eigener KI beantwortet, erzeugt womöglich genau den Kreislauf, vor dem Chiocchetti warnt: Delegation der Debatte an einen Chatbot.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://www.heise.de/news/KI-ueberflutet-EU-Institutionen-mit-Antraegen-und-Halluzinationen-11525079.html" rel="noopener noreferrer external" target="_blank">heise online – Generative KI stiftet Chaos in Brüssel und Straßburg</a></li>
+                
+                <li><a href="https://www.politico.eu/article/roberta-metsola-tells-meps-not-to-rely-on-ai-when-drafting-laws/" rel="noopener noreferrer external" target="_blank">POLITICO Europe – Metsola tells MEPs not to rely on AI when drafting laws</a></li>
+                
+                <li><a href="https://www.europarl.europa.eu/news/en/press-room/20261110IPR48745/ai-in-democracy-ensuring-oversight-and-compliance-with-eu-values" rel="noopener noreferrer external" target="_blank">Europäisches Parlament – AI in democracy: ensuring oversight and compliance with EU values</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+    <article class="article" id="art-7" aria-labelledby="art-7-h">
+        <p class="article-kicker">Tools · Lokale Inferenz</p>
+        <h2 id="art-7-h">llama.cpp erreicht Version 1.0: Semantic Versioning für die Basis der lokalen KI</h2>
+        <p class="article-meta">
+            <time datetime="2026-11-13">13. November 2026</time>
+        </p>
+        <p class="article-teaser">Dreieinhalb Jahre nach dem ersten Commit haben die Maintainer von llama.cpp und ggml jeweils Version 1.0.0 veröffentlicht. Die Zahl ist vor allem ein Versprechen: Brüche in der öffentlichen C-Schnittstelle werden künftig über die Hauptversionsnummer sichtbar.</p>
+        <div class="analysis-label">Hintergrund &amp; Analyse</div>
+        <div class="analysis-body"><p>Das Team hinter <strong>llama.cpp</strong> hat am Freitag Version 1.0.0 der Inferenz-Bibliothek <code>libllama</code> und der darunterliegenden Tensor-Bibliothek <code>libggml</code> veröffentlicht. Das geht aus dem Blogbeitrag „llama.cpp v1.0.0: A stronger foundation for the local AI ecosystem“ auf Hugging Face und den Release-Notes auf GitHub hervor. Autoren des Beitrags sind unter anderem Projektgründer Georgi Gerganov, Daniel Bevenius und Merve Noyan. Der Beitrag verweist auf rund dreieinhalb Jahre seit dem ersten Commit und darauf, dass „viele nachgelagerte Anwendungen“ bereits von der Arbeit abhängen.</p>
+<h3>Was 1.0 bedeutet: eine Zusage zur Schnittstelle</h3>
+<p>Der Kern der Ankündigung ist keine neue Funktion, sondern ein Versionierungsvertrag. Künftig spiegeln llama.cpp und ggml Inkompatibilitäten bei API und ABI über Hauptversionen wider. Die Regeln gelten laut Blog für alle ggml-org-Projekte: Ein <strong>MAJOR</strong>-Sprung steht für einen Bruch in der öffentlichen C-API unter <code>./include</code>, ein <strong>MINOR</strong>-Sprung für abwärtskompatible Funktionen, Backend-Updates, neue Modellunterstützung oder API-Erweiterungen, ein <strong>PATCH</strong> für Fehlerbehebungen ohne API-Änderung. Die Maintainer schreiben, man werde „strenger“ darin sein, diese Grenzen für nachgelagerte Entwickler sichtbar zu machen. Das ist für ein Projekt, dessen Master-Branch bisher in schneller Folge fortlaufend nummerierte Builds („b12374“ ist der aktuelle Stand vom Samstagmorgen) ausgespielt hat, ein Einschnitt in der Kommunikation – ein Nachweis, dass die Schnittstelle in der Praxis stabil bleibt, kann erst die Zukunft liefern.</p>
+<p>Auffällig ist, dass 1.0 zugleich aufräumt: Laut Release-Notes entfernt die Version die als veraltet markierte öffentliche API, darunter 35 Funktionen, <code>llama_set_warmup</code> sowie den Parameter <code>defrag_thold</code>. Die NextN-API für spekulatives Decoding wandert aus <code>llama-ext.h</code> in den Haupt-Header <code>llama.h</code>, und <code>clip.h</code> entfällt zugunsten von <code>mtmd</code>. Wer eigene Anwendungen gegen die Bibliothek baut, sollte vor dem Umstieg also den Abschnitt „API changes“ der Release-Notes prüfen; die Zusage gilt ab jetzt, nicht rückwirkend.</p>
+<h3>Neue Funktionen und gehärteter Server</h3>
+<p>Daneben enthält der Release ein Bündel an Neuerungen. Neu sind FP8-Key-Value-Caches (<code>-ctk/-ctv f8_e4m3</code>), ein Host-Speicher-Cache für Experten von Mixture-of-Experts-Modellen mit einstellbarem CPU-Anteil sowie das Laden externer PLE-Gewichte aus getrennten GGUF-Dateien. Als neue Architekturen nennen die Notes Kimi-K3.1-Pro, Ripple-65B-Preview und „xing4_0“, dazu das Sprachsynthese-Modell drama-3 und Bildverarbeitung für MageVL-Cowork und Kimi-K3.1. Der <code>llama-server</code> erhält einen OpenAI-kompatiblen Endpunkt <code>/v1/audio/speech</code> und eine überarbeitete Weboberfläche. Für Betreiber wichtig sind die Sicherheitskorrekturen: Die Notes nennen Fixes gegen SSRF, fehlerhafte CORS-Behandlung und DNS-Rebinding, ein Opt-in für nicht authentifizierte Tools sowie die Beschränkung des <code>HF_TOKEN</code> auf Hosts von huggingface.co. Ergänzend erwähnt der Blog mehr als 150 unterstützte Architekturvarianten.</p>
+<h3>Verteilung und Infrastruktur</h3>
+<p>Der Blog listet Distributionskanäle: Release-Artefakte für Linux, macOS, Windows, Android und iOS sowie Docker, Debian, Homebrew, conda-forge, MacPorts, Winget und ein XCFramework für Apple-Plattformen. Hinweise für Packager sammelt das Projekt in einer GitHub-Diskussion. Für die Qualitätssicherung nutzt das Team nach eigenen Angaben HF Buckets und HF Jobs von Hugging Face; Hardware-Unterstützung für selbst gehostete Test-Runner kommt von Nvidia, AMD, Qualcomm, Arm, IBM und Intel. Außerdem betont der Beitrag, man setze LLMs in der Entwicklung „durchdacht“ ein, behalte aber die Kontrolle über Architektur und Implementierungsdetails.</p>
+<h3>Die Rolle von Hugging Face</h3>
+<p>Der Blog spricht vom „llama.cpp team at Hugging Face“. Hintergrund: Gerganovs Firma ggml.ai hat sich im Februar 2026 Hugging Face angeschlossen; das Projekt blieb offen. Simon Willison zitiert aus der damaligen Ankündigung die Ziele einer „Single-Click“-Integration mit <code>transformers</code> und besserer Paketierung ggml-basierter Software. Der Release liest sich als erste größere Etappe auf diesem zweiten Ziel. Auch das im Blog beworbene Desktop-Programm „Llama“ (llama.app) für macOS und Windows stammt vom Team hinter llama.cpp und Hugging Face.</p>
+<h3>Einordnung</h3>
+<p>Für Unternehmen, die llama.cpp einbetten, ist die Versionierung vermutlich wichtiger als jede einzelne Funktion: Wer die Bibliothek in Produkte oder interne Plattformen einbaut, kann Abhängigkeiten nun auf eine Hauptversion festlegen und Brüche an der Versionsnummer erkennen. Das ist unsere Einschätzung; ob und wie lange das Projekt ältere Hauptversionen mit Patches versorgt, nennen weder Blog noch Release-Notes. Auch Betreiber des <code>llama-server</code> im Netzwerk sollten die Sicherheitskorrekturen einplanen. Verbreitung und Stabilität dürften die lokale Inferenz als Alternative zur Cloud stärken – Hugging Face und Maintainer argumentieren genau so, mit Privatsphäre als Treiber.</p>
+</div>
+        
+        <div class="sources">
+            <div class="sources-label">Quellen</div>
+            <ul>
+                
+                <li><a href="https://huggingface.co/blog/ggml-org/llama-cpp-v1" rel="noopener noreferrer external" target="_blank">Hugging Face Blog (ggml-org): llama.cpp v1.0.0 – A stronger foundation for the local AI ecosystem (13.11.2026)</a></li>
+                
+                <li><a href="https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0" rel="noopener noreferrer external" target="_blank">GitHub: ggml-org/llama.cpp – Release v1.0.0 (13.11.2026)</a></li>
+                
+                <li><a href="https://mlq.ai/news/llamacpp-reaches-version-10-and-promises-a-stable-api-for-local-ai-apps/" rel="noopener noreferrer external" target="_blank">MLQ.ai: llama.cpp reaches version 1.0 and promises a stable API for local AI apps (13.11.2026)</a></li>
+                
+                <li><a href="https://simonwillison.net/2026/Feb/20/ggmlai-joins-hugging-face/" rel="noopener noreferrer external" target="_blank">Simon Willison: ggml.ai joins Hugging Face to ensure the long-term progress of Local AI (20.02.2026)</a></li>
+                
+            </ul>
+        </div>
+        
+    </article>
+    
+
+    
+    <section class="section-break" id="reportage" aria-labelledby="reportage-h">
+        <div class="reportage-teaser-card">
+            <p class="article-kicker">Reportage</p>
+            <h2 id="reportage-h">Taxi oder Dienstwagen? Wann sich selbst betriebene KI-Modelle gegenüber der API wirklich rechnen – und was auf keiner Kalkulation steht</h2>
+            <p class="article-teaser">Mit llama.cpp 1.0 wird lokale KI-Software erwachsener, und 42 Prozent von 200 befragten, überwiegend nordamerikanischen Unternehmen betreiben offene Modelle produktiv. Frische Rechnungen zeigen: Je nach Modell rechnet sich der Eigenbetrieb schon bei geringer Auslastung – oder selbst bei Volllast nicht. Wo die Break-even-Linie verläuft, welche Kosten fehlen und welche fünf Entscheidungen jetzt anstehen.</p>
+            <a href="/editions/reportagen/2026-11-14.html" class="reportage-link">Weiterlesen &rarr;</a>
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="tool-radar" aria-labelledby="tool-radar-h">
+        <h2 class="section-heading" id="tool-radar-h">Tool-Radar</h2>
+        <p class="section-subheading">Neue und trendende KI-Tools des Tages</p>
+        <div class="tool-grid">
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/elevenlabs.io.png" width="40" height="40" alt="ElevenAI Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://elevenlabs.io/" rel="noopener noreferrer external" target="_blank">ElevenAI</a></div>
+                    <div class="tool-card-desc">Experimentelle Team-App von ElevenLabs, die Meeting-Mitschriften, Diktierfunktion und Agenten-Anbindung in einem Werkzeug vereint.</div>
+                    <div class="tool-card-desc">ElevenAI wurde laut TechCrunch auf dem „11/11 Summit“ in New York vorgestellt und ist noch in der Vorschau; der Zugang läuft über eine Early-Access-Anmeldung. Die App protokolliert Meetings und weist die Teilnehmer auf die Aufnahme hin, erlaubt Fragen über mehrere Gespräche hinweg und diktiert in jeder Anwendung in mehr als 90 Sprachen. Über ElevenAgent lassen sich Folgeaktionen wie ein E-Mail-Entwurf aus den Notizen auslösen. ElevenLabs, nach TechCrunch-Angaben mit 22 Milliarden Dollar bewertet, zielt damit auf Unternehmensteams statt auf Einzelnutzer.</div>
+                    <div class="tool-card-meta">Produktivität &middot; November 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/yogurt.so.png" width="40" height="40" alt="Yogurt Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://yogurt.so/" rel="noopener noreferrer external" target="_blank">Yogurt</a></div>
+                    <div class="tool-card-desc">Quelloffene (MIT) Meeting-Notiz-App von Frigade, die Gespräche lokal transkribiert und zusammenfasst – ohne Bot im Call und ohne Konto.</div>
+                    <div class="tool-card-desc">Yogurt läuft auf Mac, Windows und Linux und nutzt whisper.cpp für die Transkription sowie ein lokales Open-Weight-Modell (Gemma 4, gpt-oss oder Qwen3 über llama.cpp) für Zusammenfassungen und Antworten über mehrere Meetings hinweg. Ein lokaler MCP-Server lässt andere Assistenten die Notizen lesen, der Zugriff ist standardmäßig aus. Das Projekt wurde am 11. November als „Show HN“ als kostenlose Alternative zu Granola vorgestellt und kam am 12. November auf Product Hunt; das GitHub-Repository zählt inzwischen über 1.200 Sterne. Die Modelle sind je nach Rechner mehrere Gigabyte groß.</div>
+                    <div class="tool-card-meta">Produktivität &middot; November 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/omnigraph.dev.png" width="40" height="40" alt="Omnigraph Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.omnigraph.dev/" rel="noopener noreferrer external" target="_blank">Omnigraph</a></div>
+                    <div class="tool-card-desc">Quelloffene (MIT) Graphdatenbank in Rust von Modern Relay, die Agenten ein gemeinsames, typisiertes Weltmodell mit Git-artigen Branches bietet.</div>
+                    <div class="tool-card-desc">Omnigraph kombiniert Graph-Traversierung, Vektorsuche und Volltextsuche in einer Abfrage und speichert Daten im offenen Lance-Format auf lokalem Speicher oder S3-kompatiblen Objektspeichern. Jeder Agent kann auf einem eigenen Branch arbeiten, Änderungen werden per Drei-Wege-Merge geprüft; Cedar-Richtlinien setzen Rechte serverseitig durch. Das Projekt startete am 12. November auf Product Hunt (Platz 3 des Tages), eine Cloud-Version ist in privater Vorschau. Installation per Skript oder Homebrew, dazu eine Desktop-App „Studio“ und ein Agent-Skill für die Einrichtung.</div>
+                    <div class="tool-card-meta">Dev-Tools &middot; November 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/spacefast.com.png" width="40" height="40" alt="Spacefast Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://spacefast.com/" rel="noopener noreferrer external" target="_blank">Spacefast</a></div>
+                    <div class="tool-card-desc">Hosting-Dienst von Automattic, bei dem KI-Agenten wie Claude, ChatGPT oder Cursor selbst gebaute Apps und Websites veröffentlichen, mit Datenbank und eigener Domain.</div>
+                    <div class="tool-card-desc">Automattic stellte Spacefast am 9. November als eigenständige Firma unter Gründer Batuhan İçöz vor; ein Soft-Launch hatte im September stattgefunden. Der Agent verbindet sich per MCP, API oder CLI (npx spacefast publish), jede Veröffentlichung erhält eine eigene dauerhafte Adresse samt Rollback. Freigaben laufen standardmäßig privat, per Passwort, Einladung oder Link; für sensible Aktionen wie DNS-Änderungen verlangt der Dienst eine Bestätigung. Abgerechnet wird laut Automattic die Infrastruktur, nicht KI-Guthaben; es gibt einen kostenlosen Privatplan.</div>
+                    <div class="tool-card-meta">Dev-Tools &middot; November 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/nameshot.app.png" width="40" height="40" alt="Nameshot Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://nameshot.app/" rel="noopener noreferrer external" target="_blank">Nameshot</a></div>
+                    <div class="tool-card-desc">Mac-Menüleisten-App, die jedem neuen Screenshot per Apple Intelligence auf dem Gerät einen sprechenden Dateinamen gibt.</div>
+                    <div class="tool-card-desc">Entwickelt vom unabhängigen Entwickler Ryan McLeod (Amsterdam), erschien Nameshot am 10. November im Mac App Store und kam am 12. November auf Product Hunt. Die App hat laut Hersteller keine Netzwerkberechtigung, braucht kein Konto und sendet keine Analysedaten; „Tidy Up“ benennt ganze Ordner alter Screenshots. Nameshot ist kostenlos mit siebentägiger Testphase, Pro kostet einmalig 4,99 Dollar zum Start, danach 9,99 Dollar. Voraussetzung sind ein Mac mit Apple Silicon und macOS 27.</div>
+                    <div class="tool-card-meta">Produktivität &middot; November 2026</div>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <img src="/assets/images/icons/domoai.app.png" width="40" height="40" alt="InkoAI Agent Logo" loading="lazy">
+                <div class="tool-card-body">
+                    <div class="tool-card-name"><a href="https://www.domoai.app/agent" rel="noopener noreferrer external" target="_blank">InkoAI Agent</a></div>
+                    <div class="tool-card-desc">Kreativ-Assistent der Singapurer Plattform DomoAI, der aus einem Satz fertige Bild- und Video-Clips für Social Media erzeugt und dabei jeden Schritt zur Freigabe vorlegt.</div>
+                    <div class="tool-card-desc">DomoAI kündigte den InkoAI Agent am 13. November an; er ist laut Pressemitteilung ab sofort verfügbar. Der Agent schreibt Prompts, wählt Format und Länge und greift auf 15 Bild- und Videomodelle zu, darunter GPT Image 2.5, Nano Banana Pro, Seedance 2.5 und MiniMax H3. Per Klick starten „Skills“ wie Short Drama oder Anime Video, die Skript, Figuren und Einstellungen vorab zur Freigabe zeigen. DomoAI nennt mehr als 5 Millionen Nutzer; die Angaben stammen vom Hersteller und sind unabhängig nicht überprüft.</div>
+                    <div class="tool-card-meta">Kreativ &middot; November 2026</div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+
+    
+    <section class="section-break" id="werkstatt" aria-labelledby="werkstatt-h">
+        <h2 class="section-heading" id="werkstatt-h">Aus der Werkstatt</h2>
+        <p class="section-subheading">YouTube-Empfehlungen: Tutorials, Erkl&auml;rungen und Werkzeuge</p>
+        <div class="yt-grid">
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=hWe-j78vNpc" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/hWe-j78vNpc.jpg" alt="The Home Repo: The effortless multi-repo agent setup" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=hWe-j78vNpc" rel="noopener noreferrer external" target="_blank">The Home Repo: The effortless multi-repo agent setup</a></div>
+                    <div class="yt-card-channel">Matt Pocock &middot; 08:53</div>
+                    <div class="yt-card-desc">Matt Pocock stellt das „Home-Repo“-Muster vor: Ein zentrales Repository bündelt gemeinsame Agent-Skills, Steuerdateien und eigene Werkzeuge, damit Coding-Agenten über mehrere Repositories hinweg konsistent arbeiten. Das Video erklärt das Multi-Repo-Problem, führt durch sein eigenes Home-Repo und begründet, warum er statt eines Monorepos diesen Ansatz wählt. Zum Schluss geht es um ein persönliches Wiki und eigenes Tooling. Englisch, Upload am 12. November 2026.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card">
+                <a href="https://www.youtube.com/watch?v=fpnKkmfApIg" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/fpnKkmfApIg.jpg" alt="Python Voice Agent Tutorial: Clone Your Voice &amp; Talk to AI" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">Tutorial</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=fpnKkmfApIg" rel="noopener noreferrer external" target="_blank">Python Voice Agent Tutorial: Clone Your Voice &amp; Talk to AI</a></div>
+                    <div class="yt-card-channel">Tech With Tim &middot; 15:44</div>
+                    <div class="yt-card-desc">Tech With Tim baut in unter 100 Zeilen Python einen Sprach-Agenten, der mit der geklonten eigenen Stimme antwortet. Das Video zeigt zunächst die Architektur, dann das Klonen der Stimme, das Projekt-Setup und den Code Schritt für Schritt; der Quellcode steht zum Download bereit. Hinweis: Das Video wird von AssemblyAI gesponsert. Englisch, Upload am 13. November 2026.</div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="yt-card yt-card--trending yt-card--full">
+                <a href="https://www.youtube.com/watch?v=yeuZGdzNJdg" rel="noopener noreferrer external" target="_blank">
+                    <img src="/assets/images/thumbs/yeuZGdzNJdg.jpg" alt="Claude Fable 5.2 - лучшая нейросеть для вайбкодинга игр?" loading="lazy">
+                </a>
+                <div class="yt-card-body">
+                    <div class="yt-card-label">&#128200; Trending Topic</div>
+                    <div class="yt-card-title"><a href="https://www.youtube.com/watch?v=yeuZGdzNJdg" rel="noopener noreferrer external" target="_blank">Claude Fable 5.2 - лучшая нейросеть для вайбкодинга игр?</a></div>
+                    <div class="yt-card-channel">Студия Игор &middot; 38:25</div>
+                    <div class="yt-card-desc">Der Creator baut mit Claude Fable 5.2 und Claude Code ein 2D-Metroidvania im Ori-Stil auf Phaser-Basis: Hintergründe, Animationen, Musik, Sprachausgabe, Kampfsystem und ein Endboss entstehen Schritt für Schritt. Er vergleicht die Level mit Ergebnissen von Opus 5.5 und bewertet Fable 5.2 als erstes Modell, das ein 2D-Spiel überzeugend im gewünschten Stil umsetze – eine subjektive Einschätzung. Russisch; Kapitelmarken und ein kostenloser Guide liegen bei. Das Video lief am 13. November 2026 mit rund 68.800 Aufrufen bei etwa 21.800 Abonnenten.</div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+    
+
+    
+
+</main>
+
+<script>
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+    var tocLinks = document.querySelectorAll('.toc-list a[href^="#"]');
+    if (!tocLinks.length) return;
+    var activeLink = null;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var link = document.querySelector('.toc-list a[href="#' + entry.target.id + '"]');
+            if (!link || link === activeLink) return;
+            if (activeLink) activeLink.classList.remove('toc-active');
+            link.classList.add('toc-active');
+            activeLink = link;
+        });
+    }, { rootMargin: '-8% 0px -85% 0px', threshold: 0 });
+    document.querySelectorAll('article[id], section[id]').forEach(function (el) { observer.observe(el); });
+})();
+</script>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
