@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Fahrtenschreiber für den Agenten: Warum Coding-Agenten für Unternehmen zur Token-Kostenfrage werden – und wie man ihnen ein Budget setzt</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-16.html">&larr; Zur&uuml;ck zur Ausgabe vom 16. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Der Fahrtenschreiber für den Agenten: Warum Coding-Agenten für Unternehmen zur Token-Kostenfrage werden – und wie man ihnen ein Budget setzt</h1>
+    
+    <p class="reportage-teaser">Goldman Sachs nimmt den meisten Bankern und Tradern Claude Code und die GitHub-Tools weg, JPMorgan schiebt einfache Aufgaben auf billigere Modelle, und Zahlen aus der Praxis zeigen: Ein Agent verbraucht pro Aufgabe leicht das Hundert- bis Tausendfache eines Chats. Warum das so ist, was Caching und Modell-Routing tatsächlich bringen und wie Sie Budgets setzen, ohne Ihre Entwickler auszubremsen.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-16">16. November 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Der Rückruf an der Wall Street</h2>
+<p>Bis zum Sommer galt bei Goldman Sachs: Auch Trader und Banker sollen KI-Agenten nutzen. Noch im Juli lobte der Technikchef der Bank, Marco Argenti, das „Vibe Coding“ von Nicht-Entwicklern ausdrücklich, also das Bauen eigener Werkzeuge per Zuruf an eine KI. Seit einer Richtlinie vom Oktober ist das vorbei: Claude Code von Anthropic und die GitHub-Coding-Tools von Microsoft bleiben den rund 12.000 Entwicklern der Bank und den sogenannten „Strats“ vorbehalten, die an der Schnittstelle von Handel, Quantitativer Forschung und Softwareentwicklung arbeiten. Bloomberg berichtete am 2. November, t3n griff die Meldung am 15. November auf.</p>
+<p>Wichtig für die Einordnung: Goldman nennt als Begründung ein „Bündel von Faktoren“, darunter Produktivitätsmessung und Risikomanagement. Die Kosten hat die Bank nach den vorliegenden Berichten nicht ausdrücklich als Grund genannt; die t3n-Überschrift „Zu teuer“ ist eine Lesart des Autors. Sicher ist: Der Fall fällt in eine Phase, in der Banken ihre KI-Ausgaben auf Rendite prüfen. Laut t3n kann nur ein Viertel der 50 größten von Evident beobachteten Banken (zwölf) KI-Erträge öffentlich beziffern, und JPMorgans Finanzchef kündigte im Juli an, einfache Aufgaben auf günstigere Modelle zu verlagern, weil man deutlich steigende Tokenkosten erwarte.</p>
+<p>Dazu passt ein Datenpunkt des Zahlungsdienstleisters Ramp, den TIKR zitiert: In dessen Index (Transaktionsdaten von mehr als 85.000 US-Unternehmen) wuchsen die gesamten KI-Ausgaben im Oktober nur noch um unter zwei Prozent, die Ausgaben für Anthropic-Tokens um 0,5 Prozent. Ramps Chefökonom erklärt das damit, dass gerade die Engineering-Teams, der größte Ausgabenblock, nun Anreize hätten, effizienter zu werden. Das ist die Interpretation eines Beobachters, kein Beweis, und ein Monat ist kein Trend.</p>
+<h2>Was ein Token ist – und warum Agenten ihn verschlingen</h2>
+<p>Ein <strong>Token</strong> ist die Abrechnungseinheit der Sprachmodelle, grob ein Wortbaustein, drei bis vier Buchstaben. Abgerechnet wird, was hineingeht (Eingabe), und, teurer, was herauskommt (Ausgabe). Beim Chat ist das übersichtlich: Sie fragen, die KI antwortet.</p>
+<p>Ein <strong>Coding-Agent</strong> arbeitet anders. Er liest Dateien, plant, ändert Code, startet Tests, liest die Fehlermeldung, versucht einen neuen Ansatz. Jeder dieser Schritte ist ein eigener Aufruf, und bei jedem Aufruf wird der gesamte bisherige Verlauf erneut mitgeschickt. Stellen Sie sich einen Taxifahrer vor, der bei jeder Kreuzung die komplette Fahrt von Anfang an neu vorgelesen bekommt, bevor er abbiegt. Der Anfang der Fahrt ist dann schnell der teuerste Teil.</p>
+<p>Anbieter Vantage rechnet das für eine typische Sitzung mit 50 Schritten vor (illustrative Werte, keine Messung): Rund eine Million Eingabe-Tokens stehen gegen rund 40.000 Ausgabe-Tokens, also etwa 25 zu 1. Der Eingabepreis, nicht der oft zitierte Ausgabepreis, bestimmt deshalb die Rechnung. Anthropic warnt in der eigenen Dokumentation, dass eine einzige Debugging-Sitzung mehr verbrauchen kann als ein ganzer Tag Chat.</p>
+<p>Zwei Eigenheiten machen die Kosten schwer planbar. Erstens wächst der Verlauf mit jedem Schritt, daher kostet eine doppelt so lange Sitzung eher das Drei- bis Vierfache. Zweitens verstärken Wiederholungsschleifen: Scheitert ein Test dreimal bei Schritt 40, zahlen Sie dreimal den Preis eines Schritts mit vollem Verlauf. Und Kosten verteilen sich ungleich: Zwei Entwickler im selben Team können sich um den Faktor zehn unterscheiden.</p>
+<h2>Seat oder Zähler: Die Preismodelle</h2>
+<p>Für Unternehmen gibt es 2026 im Kern drei Abrechnungsarten, und der Trend geht eindeutig zum Zähler:</p>
+<ul>
+<li><strong>Reiner Token-Preis (API):</strong> Sie zahlen exakt, was verbraucht wird, etwa über Anthropics Console oder über Cloud-Anbieter wie Amazon Bedrock. Maximal flexibel, maximal schwankend.</li>
+<li><strong>Seat plus Verbrauch:</strong> Eine Lizenz pro Kopf, der eigentliche Verbrauch wird zusätzlich nach Tokens abgerechnet. Bei Claude Enterprise nennen Preisvergleichsportale 20 Dollar pro Platz plus Nutzung zu API-Preisen. Das ist Sekundärliteratur; maßgeblich ist die Preisseite des Anbieters.</li>
+<li><strong>Seat mit Kontingent:</strong> Im Team-Tarif ist Nutzung bis zu einem Limit im Platz enthalten. Laut Anthropic-Dokumentation laufen die Kontingente über ein rollierendes Fünf-Stunden- und ein Wochenfenster; wer mehr will, braucht Zusatzguthaben mit einstellbaren Ausgabelimits.</li>
+</ul>
+<p>Auch GitHub hat umgestellt: Seit dem 1. Juni 2026 rechnen alle Copilot-Pläne nach „AI Credits“ ab, also nach Verbrauch. Jeder Plan enthält ein monatliches Kontingent, darüber hinaus gibt es nur mit zusätzlich gesetztem Budget Nachschlag. Neu sind Budgets auf Ebene einzelner Nutzer, bei denen Administratoren per E-Mail gewarnt werden, wenn jemand sich dem Limit nähert. Die Pauschale „Flatrate für Entwickler“ verschwindet also genau dort, wo Agenten die Nutzung vervielfachen.</p>
+<p>Wie groß die Spanne ist, zeigt Anthropic selbst: Über Unternehmensinstallationen hinweg liegen die Kosten im Mittel bei etwa 13 Dollar pro Entwickler und aktivem Tag, 150 bis 250 Dollar im Monat; 90 Prozent bleiben unter 30 Dollar am Tag. Das ist der Durchschnitt. Der lange Schwanz, etwa ein Entwickler, der ganztägig das teuerste Modell auf mehreren Repositories laufen lässt, kann ein Vielfaches davon verursachen.</p>
+<h2>Die drei Hebel: Caching, Modellwahl, Disziplin</h2>
+<p><strong>Caching</strong> ist der größte Sparhebel. Wiederkehrende Teile des Verlaufs, etwa Systemanweisungen, speichern Anbieter zwischen und berechnen sie beim erneuten Lesen nur zu einem Bruchteil. Das ist, als läge der Reiseführer schon auf dem Beifahrersitz, statt ihn bei jeder Kreuzung neu zu drucken. Eine Einzelfallstudie (ein Entwickler, 28 Tage, ein Produktions-Repository; arXiv, Juli 2026) maß eine Cache-Trefferquote von 99,3 Prozent. Der reale API-Preis sank dadurch um 88,6 Prozent auf effektiv 0,57 Dollar pro Million Tokens. Die Autoren sagen selbst, dass es nur ein Fall ist; auf Ihr Team übertragbar ist der Befund nicht automatisch. Praktisch heißt das: Tools, die ihren Cache sauber halten, sparen viel, und wer ständig Werkzeuge oder Einstellungen mitten in der Sitzung ändert, entwertet ihn. Claude Code zeigt inzwischen die Cache-Quote pro Sitzung an.</p>
+<p><strong>Modell-Routing</strong> bedeutet, nicht jede Aufgabe an das stärkste Modell zu schicken, sondern an das billigste, das sie noch zuverlässig löst. Zwischen Spitzen- und Mittelklassemodell liegt in den Vantage-Beispielrechnungen etwa der Faktor zehn, also grob 72.000 gegenüber 7.200 Dollar im Jahr für ein 25-köpfiges Team bei zwei größeren Agentensitzungen pro Kopf und Tag. Die Preise sind Stand April; die Relation zählt. Anthropic empfiehlt entsprechend, das große Modell für Architekturentscheidungen zu reservieren und für einfache Teilaufgaben kleine Modelle zu nehmen. Ein Gegengewicht liefert dieselbe arXiv-Studie: Ein lokales Open-Weights-Modell senkte die Gesamtkosten (unter bestimmten Annahmen um gut 40 Prozent), erzeugte aber messbar mehr Nacharbeit. Der Anteil von Korrektur-Commits stieg von 45,9 auf 74,9 Prozent. Billiger pro Token heißt nicht billiger pro funktionierender Änderung.</p>
+<p><strong>Sitzungsdisziplin</strong> ist der unterschätzte Hebel: Nach jeder abgeschlossenen Aufgabe frisch starten, statt alten Ballast mitzuschleppen, ungenutzte Zusatzwerkzeuge abschalten, laufende Schleifen und parallele Agenten im Blick behalten. Bei Agenten-Teams multipliziert sich der Verbrauch ungefähr mit der Zahl der Mitglieder.</p>
+<h2>Governance: FinOps für Agenten</h2>
+<p>FinOps, die aus der Cloud bekannte Kostensteuerung, überträgt sich fast eins zu eins. Der Anbieter Vantage fasst es in vier Schritten zusammen, die auch ohne dessen Produkt tragen:</p>
+<ol>
+<li><strong>Sichtbarkeit:</strong> Ohne Aufschlüsselung nach Team, Modell und Nutzer haben Sie eine Summe und keine Stellschraube. Claude Code und Copilot liefern Reports und Schnittstellen; für Cloud-Bezug bieten sich Telemetrie (OpenTelemetry) oder ein vorgeschaltetes Gateway an.</li>
+<li><strong>Zuordnung:</strong> Jeder Dollar braucht eine Kostenstelle. Geteilte API-Schlüssel sind der Feind.</li>
+<li><strong>Wert messen:</strong> Kein einzelner Wert genügt, jede Kennzahl lässt sich manipulieren. Kleinere Pull Requests senken Tokens pro Änderung, ohne Geld zu sparen. Sinnvoll ist ein Bündel: Kosten pro Entwickler, Modellmix, Cache-Quote, Kosten pro ausgelieferter Funktion.</li>
+<li><strong>Budgets:</strong> Erst nach den ersten drei Schritten sinnvoll. Vantage rät für interne Werkzeuge von harten Sperren ab: Wer wegen eines gekappten Budgets nicht liefern kann, findet einen Umweg. Besser sind Warnstufen, Rückfall auf ein günstigeres Modell und eine Ausnahmeregel mit kurzem Dienstweg.</li>
+</ol>
+<p>Der Fall Goldman liefert dazu eine zweite Lehre, die nichts mit Tokens zu tun hat: Von Nicht-Entwicklern per Agent gebaute Werkzeuge laufen ohne Review, Tests und Freigabeprozesse. Ob das bei Goldman den Ausschlag gab, wissen wir nicht; die Bank nennt Produktivität und Risikomanagement. Als Governance-Frage taugt es trotzdem.</p>
+<h2>Was Sie jetzt tun sollten</h2>
+<ul>
+<li><strong>Pilotieren und messen, bevor Sie skalieren.</strong> Anthropic selbst empfiehlt, mit einer kleinen Gruppe eine Baseline zu erheben. Rechnen Sie mit 150 bis 250 Dollar pro aktivem Entwickler und Monat als Anhaltspunkt, mit einem Puffer nach oben.</li>
+<li><strong>Kosten pro Ergebnis statt Tokens pro Kopf.</strong> Belohnen Sie nicht Verbrauch (das „Tokenmaxxing“ der letzten Jahre), sondern ausgelieferte, geprüfte Änderungen.</li>
+<li><strong>Modell-Standard bewusst setzen.</strong> Das Mittelklassemodell als Default, das Spitzenmodell als Ausnahme mit Begründung.</li>
+<li><strong>Limits stufenweise einführen:</strong> Transparenz an jeden Entwickler, Warnung bei 80 Prozent des Budgets, Eskalationspfad statt Sperre.</li>
+<li><strong>Rollen klären.</strong> Wer darf Agenten nutzen, wer reviewt, was sie gebaut haben? Ein Werkzeug von einem Trader oder Produktmanager braucht einen benannten Verantwortlichen, bevor es an echte Daten kommt.</li>
+<li><strong>Verträge im Blick behalten.</strong> Preismodelle ändern sich schneller als Jahresbudgets, wie die Copilot-Umstellung zeigt. Planen Sie Reserve ein und prüfen Sie, ob Sie Modelle wechseln können.</li>
+</ul>
+<h2>Fazit</h2>
+<p>Die Frage ist nicht mehr, ob Coding-Agenten Geld sparen oder kosten, sondern wer den Taxameter sieht. Agenten sind ein Verbrauchsgut mit stark streuender Rechnung, kein Software-Abo. Wer Sichtbarkeit, Zuordnung und sinnvolle Standards früh etabliert, muss später nicht pauschal Zugänge streichen. Ob die Preise pro Token weiter schnell fallen, lässt sich aus den Quellen nicht belastbar beantworten. Bauen Sie Ihr Budget deshalb auf Messung, nicht auf Hoffnung.</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://t3n.de/news/goldman-sachs-zugang-ki-1771271/" rel="noopener noreferrer external" target="_blank">t3n: Zu teuer: Warum Goldman Sachs den Zugang zu Claude Code und GitHub jetzt drastisch einschränkt (15.11.2026)</a></li>
+            
+            <li><a href="https://www.tikr.com/blog/goldman-pulls-claude-code-from-its-traders-as-ais-biggest-spend-category-is-starting-to-plateau" rel="noopener noreferrer external" target="_blank">TIKR: Goldman Pulls Claude Code From Its Traders as AI&#39;s Biggest Spend Category Is “Starting to Plateau” (12.11.2026)</a></li>
+            
+            <li><a href="https://cellcog.ai/blog/goldman-sachs-claude-code-engineers-only/" rel="noopener noreferrer external" target="_blank">CellCog: Goldman Sachs Limits Claude Code to Engineers (9.11.2026)</a></li>
+            
+            <li><a href="https://code.claude.com/docs/en/costs" rel="noopener noreferrer external" target="_blank">Anthropic: Claude Code – Manage costs effectively (Dokumentation, abgerufen 16.11.2026)</a></li>
+            
+            <li><a href="https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/" rel="noopener noreferrer external" target="_blank">GitHub Changelog: Updates to GitHub Copilot billing and plans (1.6.2026)</a></li>
+            
+            <li><a href="https://www.vantage.sh/blog/agentic-coding-costs" rel="noopener noreferrer external" target="_blank">Vantage: The Hidden Cost Driver in Agentic Coding Sessions in 2026 (15.4.2026)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2607.13080" rel="noopener noreferrer external" target="_blank">arXiv:2607.13080: Inference Economics of Enterprise Coding Agents – Cloud vs. On-Premise LLMs (13.7.2026)</a></li>
+            
+            <li><a href="https://www.vantage.sh/blog/how-to-manage-ai-budgets-tokenmaxxing" rel="noopener noreferrer external" target="_blank">Vantage: How to Manage AI Budgets in the Age of Tokenmaxxing (14.8.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
