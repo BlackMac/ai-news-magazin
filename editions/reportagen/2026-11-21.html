@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechenzentren im Orbit: Warum Google, SpaceX und Starcloud Server ins All schicken wollen – und warum Unternehmen trotzdem noch keinen Cent in ihre Planung stecken müssen</title>
+    <meta name="description" content="Das KI-Nachrichtenmagazin. Maschinell recherchiert, menschlich relevant.">
+    <link rel="stylesheet" href="/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="alternate" type="application/atom+xml" title="Die Inferenz" href="/feed.xml">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Direkt zum Inhalt springen</a>
+
+<header class="site-header" role="banner">
+    <div class="site-header-inner">
+        <a href="/index.html" class="site-title">Die Inferenz</a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+            
+            <a href="/index.html">Alle Ausgaben</a>
+            <a href="/hardware-guide.html">Hardware-Guide</a>
+            <a href="/about.html">Über uns</a>
+            
+            <button class="theme-toggle" id="theme-toggle" aria-label="Farbschema wechseln">&#9790;</button>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+<div class="back-nav">
+    <a href="/editions/2026-11-21.html">&larr; Zur&uuml;ck zur Ausgabe vom 21. November 2026</a>
+</div>
+
+<div class="reportage-header" id="top">
+    <p class="reportage-kicker">Reportage</p>
+    <h1 class="reportage-title">Rechenzentren im Orbit: Warum Google, SpaceX und Starcloud Server ins All schicken wollen – und warum Unternehmen trotzdem noch keinen Cent in ihre Planung stecken müssen</h1>
+    
+    <p class="reportage-teaser">Google hat diese Woche Blue Origin als Startpartner für Project Suncatcher gewählt, SpaceX peilt Orbit-Rechenzentren ab 2028 an, Starcloud sammelt Hunderte Millionen ein. Wir haben die Quellen gelesen: Was heute tatsächlich im All rechnet, warum Kühlung im Vakuum, Strahlung und Startkosten die Rechnung bestimmen, weshalb sogar die Finanzierung der Chips hakt und für welche Workloads Orbit-Rechenleistung in den 2030ern relevant werden könnte.</p>
+    
+    <p class="reportage-meta">
+        Von Stefan Lange-Hegermann &middot;
+        <time datetime="2026-11-21">21. November 2026</time>
+         &middot; 7 Minuten
+    </p>
+</div>
+
+<main id="main-content" class="reportage-body">
+    <div class="text-body">
+        <h2>Ein Prototyp, der ein Haiku dichtet</h2>
+<p>Am 30. Oktober meldete Google, was man ein „Hello World“ im Orbit nennen kann: Der am 1. Oktober gestartete Prototyp von Project Suncatcher hatte auf eine Anfrage vom Boden mit einem Haiku geantwortet. An Bord läuft laut Google das offene Modell Gemma 4 auf Googles eigenen KI-Chips, den TPUs. Das klingt nach Spielerei, ist aber der erste öffentlich belegte Betrieb eines Rechenzentrums-Chips dieser Klasse im All. Google schreibt selbst, die Chips hätten sich „ihre Weltraumflügel verdient“; als Nächstes sollen Tests unter Hitze- und Strahlungsstress folgen, danach zwei vernetzte Satelliten im Jahr 2027.</p>
+<p>Diese Woche kam der nächste Schritt: Am 19. November kündigte Google an, dass Blue Origin, das Raumfahrtunternehmen von Jeff Bezos, mit seiner Schwerlastrakete New Glenn den ersten eigenen Start für Suncatcher übernimmt. Zielzeit: erstes Quartal 2029. Jeder Satellit soll laut Google ungefähr die Rechenkapazität eines Serverschranks („Rack“) haben und in eine sonnensynchrone Umlaufbahn gebracht werden – also eine Bahn, auf der der Satellit praktisch dauernd Sonnenlicht sieht. Wie viele Satelliten fliegen sollen, nennen weder Google noch Blue Origin; t3n und Orbit Economics bestätigen das übereinstimmend.</p>
+<p>Zur Einordnung: Das ist eine Absichtserklärung für einen Start in gut zwei Jahren, kein Produkt. Aber sie zeigt, dass Google von Forschung in Richtung Serienstart denkt.</p>
+<h2>Wer außer Google mitspielt</h2>
+<p>Der Markt ist laut dem Tracker Orbit Economics (Stand 19. November) noch winzig: 32 „Rechensatelliten“ aus vier Programmen kreisen derzeit um die Erde, darunter Starcloud-1 mit einer einzelnen Nvidia-H100-GPU (gestartet November 2025), zehn Relaissatelliten von Kepler mit Nvidia-Jetson-Modulen, Googles Prototyp und zwanzig chinesische Satelliten. Keiner der Betreiber hat laut dem Tracker eine Leistungszahl der bereits fliegenden Hardware veröffentlicht.</p>
+<p>Die Ankündigungen sind dagegen gigantisch. SpaceX schreibt in seinem Börsenprospekt, orbitale KI-Satelliten könnten „frühestens 2028“ beginnen. Nvidia bestätigte im August, dass der erste „Starmind“-Satellit von SpaceXAI auf einem für den Orbit angepassten Vera-Rubin-NVL72-System basiert, also dem Serverschrank-System der aktuellen Nvidia-Generation. Starcloud, von Nvidia mitfinanziert, will bis 2027 Starcloud-2 mit einem Blackwell-Chip fliegen lassen und hat laut Orbit Economics zuletzt 250 Millionen Dollar bei 2,3 Milliarden Dollar Bewertung eingesammelt (Presseberichte, nicht unabhängig geprüft). Bei der US-Funkbehörde FCC liegen Anträge für zusammen bis zu 1.159.600 Satelliten. Ein Antrag ist aber, wie Orbit Economics betont, kein Start.</p>
+<h2>Warum Kühlen im All schwerer ist als auf der Erde</h2>
+<p>Der verbreitetste Irrtum lautet: Im Weltall ist es kalt, also kühlt es sich von selbst. Das Gegenteil trifft zu. Stellen Sie sich eine Thermoskanne vor: Das Vakuum zwischen den Wänden isoliert hervorragend, deshalb bleibt der Kaffee heiß. Genauso hat ein Satellit keine Luft, die Wärme wegträgt, kein Gebläse, kein Wasser. Hitze kann nur abgestrahlt werden, und zwar proportional zur Fläche des Kühlers.</p>
+<p>Der Raumfahrtanalyst Andrew Cavalier rechnet in IEEE Spectrum vor: Ein Rack mit rund 32 H100-GPUs und etwa 40 Kilowatt Leistung bräuchte rund 80 Quadratmeter Kühlfläche, grob ein Pickleball-Feld. Nach fünf Jahren Strahlung und UV-Licht steigt die benötigte Fläche um etwa 40 Prozent. BCG nennt für einen 100-Kilowatt-Satelliten rund 400 Quadratmeter Radiatorfläche und sieht Kühlung und Wartung im Orbit als die größten Engpässe; SpaceX habe zuletzt 110-Quadratmeter-Radiatoren vorgestellt, was auf schnellere Fortschritte hindeute. Googles eigenes Papier nennt thermisches Management ausdrücklich als ungelöst.</p>
+<h2>Strahlung, Latenz und Reparatur</h2>
+<p>Strahlung ist das zweite Problem: Teilchen können Bits im Speicher kippen oder Chips beschädigen. Google testete seine TPU-Generation Trillium im Protonenstrahl. Laut Google-Papier traten erste Auffälligkeiten im Speicher bei 2 krad auf, rund dem Dreifachen der erwarteten Dosis einer fünfjährigen, abgeschirmten Mission; bis 15 krad gab es keine bleibenden Ausfälle. Das ist ein Laborergebnis, kein Dauerbetrieb im All. Cavalier weist darauf hin, dass man Rechenleistung für Redundanz opfern muss: dieselbe Rechnung dreifach ausführen und Ergebnisse vergleichen.</p>
+<p>Hinzu kommt die Latenz, die Antwortverzögerung. Daten müssen per Funk oder Laser zur Erde und zurück; BCG hält interaktive Anwendungen wie Assistenten deshalb für besser am Boden aufgehoben. Das Training großer Modelle bleibe ebenfalls auf der Erde, weil es eng gekoppelte Rechner und hohe Leistungsdichte braucht. Und repariert wird nicht: Fällt ein Bauteil aus, kann im Zweifel der ganze Satellit verloren sein. BCG stuft die Wartung im Orbit als am wenigsten ausgereift ein (technische Reife 4 bis 5 von 9).</p>
+<h2>Die Rechnung: Startkosten, Chips, Finanzierung</h2>
+<p>Googles Papier rechnet vor: Fällt der Preis für einen Start in niedrige Umlaufbahnen auf höchstens 200 Dollar pro Kilogramm, was Google bis Mitte der 2030er erwartet, könnten Start und Betrieb eines Orbit-Rechenzentrums pro Kilowatt und Jahr ungefähr so viel kosten wie der Strom eines irdischen. BCG geht heute von etwa 1.500 Dollar pro Kilogramm aus und von einer Zukunft bei etwa 100 Dollar, getragen von wiederverwendbaren Raketen wie SpaceX’ Starship. Starship ist aber laut TechCrunch noch nicht voll wiederverwendbar: Beim jüngsten Test landete die Oberstufe, die Erststufe wurde nicht geborgen.</p>
+<p>Die Gesamtrechnung fällt nüchtern aus. BCG beziffert die Mehrkosten über 20 Jahre heute auf das 2,5- bis 3-Fache gegenüber einem irdischen Rechenzentrum, in zehn Jahren realistisch noch auf etwa das 1,5-Fache. Cavalier kommt in einer groben Eigenrechnung auf mindestens eine Größenordnung Mehrkosten. Google-Energiechefin Amanda Peterson Corio sprach laut The Information (Bezahlschranke, über Orbit Economics zitiert) von bis zu dem Hundertfachen. Elon Musk dagegen sagt, in zwei bis drei Jahren sei der Weltraum der billigste Ort für Rechenzentren, was TechCrunch als unwahrscheinlich bezeichnet, solange Starship nicht voll wiederverwendbar fliegt.</p>
+<p>Die TechCrunch-Analyse von Tim Fernholz liefert eine unterschätzte Hürde: die Finanzierung. Rechenzentren werden meist mit Krediten bezahlt, die Chips dienen als Sicherheit. Fällt der Kreditnehmer aus, holt sich der Geldgeber die Chips zurück und verkauft sie. Aus einer Umlaufbahn lässt sich nichts pfänden. Laut Financial Times verlangten die Geldgeber hinter SpaceX’ 40-Milliarden-Dollar-Chipfinanzierung, dass keiner der Chips für die Orbit-Pläne genutzt wird; ob SpaceX zustimmte, ist laut TechCrunch unklar. Vorteil für Google: Es setzt auf eigene TPUs.</p>
+<h2>Einordnung: Was heißt das für Ihr Unternehmen?</h2>
+<p><strong>Planen Sie 2027 nichts davon ein.</strong> Nach heutigem Stand kann niemand Rechenzeit im Orbit zu einem veröffentlichten Preis kaufen, wie Orbit Economics festhält. Googles Kapazität startet frühestens 2029, SpaceX peilt ab 2028 an. Alle Zeitpläne sind Ziele der Anbieter, keine Zusagen.</p>
+<p><strong>Beobachten Sie es für die 2030er.</strong> BCG sieht Orbit-Rechenleistung nicht als Ersatz, sondern als Ergänzung, die bis 2040 10 bis 15 Prozent des globalen KI-Rechenzentrumsmarkts erreichen könnte (Schätzung der Berater). Interessant wäre sie für Aufgaben, die nicht in Echtzeit antworten müssen, etwa Stapelverarbeitung von Dokumenten, Bildern oder Verträgen, für souveräne Daten, die Landesgrenzen nicht verlassen dürfen, und für Daten, die ohnehin im All entstehen, etwa Erdbeobachtung. Unternehmen mit solchen Anforderungen können Gespräche mit Anbietern führen, solange der Markt klein ist. Alle anderen sollten ihre Cloud- und Rechenzentrumsstrategie auf der Erde weiterführen.</p>
+<p><strong>Fragen an Anbieter, wenn es soweit ist:</strong> Wer haftet bei Totalausfall eines Satelliten? Wo liegen die Daten rechtlich? Welche Latenz ist vertraglich zugesichert? Und was kostet eine Rechenstunde im Vergleich zur Erde, nachgewiesen statt prognostiziert?</p>
+
+    </div>
+
+    
+    <div class="sources">
+        <div class="sources-label">Quellen</div>
+        <ul>
+            
+            <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-research/blue-origin-project-suncatcher-partnership/" rel="noopener noreferrer external" target="_blank">Google (Blog): We’re partnering with Blue Origin on our first heavy-lift Project Suncatcher launch (19.11.2026)</a></li>
+            
+            <li><a href="https://t3n.de/news/ki-rechenzentrun-all-google-bezos-blue-origin-1774626/" rel="noopener noreferrer external" target="_blank">t3n: KI-Rechenzentrum im All: Google kooperiert mit Jeff Bezos’ Blue Origin (20.11.2026)</a></li>
+            
+            <li><a href="https://techcrunch.com/2026/11/20/chips-can-survive-the-space-environment-can-their-financing/" rel="noopener noreferrer external" target="_blank">TechCrunch: Chips can survive the space environment — can their financing? (20.11.2026)</a></li>
+            
+            <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-satellite-response/" rel="noopener noreferrer external" target="_blank">Google (Blog): We’ve received our first response from the Project Suncatcher prototype satellite (30.10.2026)</a></li>
+            
+            <li><a href="https://research.google/blog/exploring-a-space-based-scalable-ai-infrastructure-system-design/" rel="noopener noreferrer external" target="_blank">Google Research: Exploring a space-based, scalable AI infrastructure system design (4.11.2025)</a></li>
+            
+            <li><a href="https://arxiv.org/abs/2511.19468" rel="noopener noreferrer external" target="_blank">arXiv: Towards a future space-based, highly scalable AI infrastructure system design (Version 2 vom 17.6.2026)</a></li>
+            
+            <li><a href="https://spectrum.ieee.org/orbital-data-centers-heat" rel="noopener noreferrer external" target="_blank">IEEE Spectrum: Why Orbital Data Centers Are Harder Than Silicon Valley Thinks (11.6.2026)</a></li>
+            
+            <li><a href="https://www.bcg.com/publications/2026/space-based-data-centers-cost-outlook" rel="noopener noreferrer external" target="_blank">BCG: Space-Based Data Centers: More Than Hype, but Not a Revolution (27.8.2026)</a></li>
+            
+            <li><a href="https://orbiteconomics.com/orbital-data-centers" rel="noopener noreferrer external" target="_blank">Orbit Economics: Orbital data centers: what is actually in orbit, and what is only announced (aktualisiert 19.11.2026)</a></li>
+            
+            <li><a href="https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale" rel="noopener noreferrer external" target="_blank">NVIDIA: SpaceXAI Adopts NVIDIA Vera CPU to Accelerate Agentic AI at Massive Scale (24.8.2026)</a></li>
+            
+            <li><a href="https://www.starcloud.com/starcloud-1" rel="noopener noreferrer external" target="_blank">Starcloud: Starcloud-1 (abgerufen 21.11.2026)</a></li>
+            
+        </ul>
+    </div>
+    
+</main>
+
+
+<footer class="site-footer">
+    <span>&copy; 2026 Die Inferenz</span>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="#top">&uarr; Nach oben</a>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var toggle = document.getElementById('theme-toggle');
+    var root = document.documentElement;
+    function setTheme(t) {
+        root.setAttribute('data-theme', t);
+        localStorage.setItem('theme', t);
+        toggle.textContent = t === 'dark' ? '☀' : '☾';
+        toggle.setAttribute('aria-label', t === 'dark' ? 'Zu hellem Modus wechseln' : 'Zu dunklem Modus wechseln');
+    }
+    var stored = localStorage.getItem('theme');
+    if (stored) {
+        setTheme(stored);
+    } else {
+        toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '☀' : '☾';
+    }
+    toggle.addEventListener('click', function() {
+        var current = root.getAttribute('data-theme');
+        if (!current) { current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+})();
+</script>
+
+</body>
+</html>
